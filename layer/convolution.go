@@ -4,34 +4,43 @@ import (
 	"math"
 
 	"github.com/rai-project/dlperf"
+	"github.com/rai-project/onnx"
 )
 
-type Convolution struct {
-	Base      `json:",inline,flatten",omitempty"`
-	NumOutput uint32 `json:"num_output,omitempty"`
-	PadH      uint32 `json:"pad_h,omitempty"`
-	PadW      uint32 `json:"pad_w,omitempty"`
-	KernelH   uint32 `json:"kernel_h,omitempty"`
-	KernelW   uint32 `json:"kernel_w,omitempty"`
-	StrideH   uint32 `json:"stride_h,omitempty"`
-	StrideW   uint32 `json:"stride_w,omitempty"`
-	Dilation  uint32 `json:"dilation,omitempty"`
-	Group     uint32 `json:"group,omitempty"`
+// https://github.com/onnx/onnx/blob/master/docs/Operators.md#Conv
+// NCHW tensor layout for passing inputs and outputs
+
+type Conv struct {
+	Base        `json:",inline,flatten",omitempty"`
+	AutoPad     string   `json:"auto_pad,omitempty"`
+	Dilations   []uint32 `json:"dilation,omitempty"`
+	Group       uint32   `json:"group,omitempty"`
+	KernelShape []uint32 `json:"kernel_shape,omitempty"`
+	Pads        []uint32 `json:"pad_h,omitempty"`
+	Strides     []uint32 `json:"stride_h,omitempty"`
 }
 
-func (Convolution) Type() string {
-	return "Convolution"
+func NewConv(node *onnx.NodeProto) (*Conv, error) {
+
+  autoPad, err := getNodeAttributeFromName(node)
+
+	return &Conv{
+		AutoPad:      node.,
+		nodes:            nodes,
+		initializers:     initializers,
+		layerInformation: make(map[string]dlperf.LayerInfo),
+	}, nil
 }
 
-func (Convolution) Aliases() []string {
-	return []string{"conv", "SpatialConvolution"}
+func (Conv) Type() string {
+	return "Conv"
 }
 
-func (Convolution) Description() string {
+func (Conv) Description() string {
 	return ``
 }
 
-func (c *Convolution) LayerInformation(inputDimensions []int64) dlperf.LayerInfo {
+func (c *Conv) LayerInformation() dlperf.LayerInfo {
 	/*
 	  ## Add Input/Output Dimensions + Channels to each Node / Layer
 	  # shape.dim: (    N   x   K   x   W   x   H   )
@@ -66,5 +75,5 @@ func (c *Convolution) LayerInformation(inputDimensions []int64) dlperf.LayerInfo
 }
 
 func init() {
-	dlperf.Register(&Convolution{})
+	dlperf.Register(&Conv{})
 }

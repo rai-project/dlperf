@@ -1,4 +1,4 @@
-package dlperf
+package onnx
 
 import (
 	"fmt"
@@ -7,8 +7,8 @@ import (
 	"github.com/spf13/cast"
 )
 
-// ToIntSliceE casts an interface to a []int32 type.
-func ToInt32SliceE(i interface{}) ([]int32, error) {
+// toIntSliceE casts an interface to a []int32 type.
+func toInt32SliceE(i interface{}) ([]int32, error) {
 	if i == nil {
 		return []int32{}, fmt.Errorf("unable to cast %#v of type %T to []int32", i, i)
 	}
@@ -24,7 +24,7 @@ func ToInt32SliceE(i interface{}) ([]int32, error) {
 		s := reflect.ValueOf(i)
 		a := make([]int32, s.Len())
 		for j := 0; j < s.Len(); j++ {
-			val, err := cast.ToInt32E(s.Index(j).Interface())
+			val, err := cast.toInt32E(s.Index(j).Interface())
 			if err != nil {
 				return []int32{}, fmt.Errorf("unable to cast %#v of type %T to []int32", i, i)
 			}
@@ -36,13 +36,13 @@ func ToInt32SliceE(i interface{}) ([]int32, error) {
 	}
 }
 
-func ToInt32Slice(i interface{}) []int32 {
-	v, _ := ToInt32SliceE(i)
+func toInt32Slice(i interface{}) []int32 {
+	v, _ := toInt32SliceE(i)
 	return v
 }
 
-// ToIntSliceE casts an interface to a []int64 type.
-func ToInt64SliceE(i interface{}) ([]int64, error) {
+// toIntSliceE casts an interface to a []int64 type.
+func toInt64SliceE(i interface{}) ([]int64, error) {
 	if i == nil {
 		return []int64{}, fmt.Errorf("unable to cast %#v of type %T to []int64", i, i)
 	}
@@ -58,7 +58,7 @@ func ToInt64SliceE(i interface{}) ([]int64, error) {
 		s := reflect.ValueOf(i)
 		a := make([]int64, s.Len())
 		for j := 0; j < s.Len(); j++ {
-			val, err := cast.ToInt64E(s.Index(j).Interface())
+			val, err := cast.toInt64E(s.Index(j).Interface())
 			if err != nil {
 				return []int64{}, fmt.Errorf("unable to cast %#v of type %T to []int64", i, i)
 			}
@@ -70,7 +70,7 @@ func ToInt64SliceE(i interface{}) ([]int64, error) {
 	}
 }
 
-func ToInt64Slice(i interface{}) []int64 {
-	v, _ := ToInt64SliceE(i)
+func toInt64Slice(i interface{}) []int64 {
+	v, _ := toInt64SliceE(i)
 	return v
 }

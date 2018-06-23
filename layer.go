@@ -8,20 +8,17 @@ import (
 )
 
 type Layer interface {
-	Type() string
-	Aliases() []string
 	Name() string
+	OperatorType() string
 	SetName(string)
 	LayerInformation() LayerInfo
 }
 
 type LayerInfo interface {
 	Name() string
-	Type() string
+	OperatorType() string
 	Flops() FlopsInformation
 	Memory() MemoryInformation
-	InputDimensions() []int64
-	OutputDimensions() []int64
 }
 
 type FlopsInformation struct {

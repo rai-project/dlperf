@@ -6,18 +6,18 @@ type Base struct {
 	name string `json:"name,omitempty"`
 }
 
-func (c Base) Name() string {
-	return c.name
+func (b Base) Name() string {
+	return b.name
 }
 
-func (c *Base) SetName(s string) {
-	c.name = s
+func (b *Base) SetName(s string) {
+	b.name = s
 }
 
-func (d *Base) UnmarshalJSON(b []byte) error {
-	return json.Unmarshal(b, &d.name)
+func (b *Base) UnmarshalJSON(d []byte) error {
+	return json.Unmarshal(d, &b.name)
 }
 
-func (d Base) MarshalJSON() ([]byte, error) {
-	return []byte(d.Name()), nil
+func (b Base) MarshalJSON() ([]byte, error) {
+	return []byte(b.Name()), nil
 }

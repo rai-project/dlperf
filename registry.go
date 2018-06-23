@@ -13,17 +13,17 @@ func FromName(s string) (Layer, error) {
 	s = strings.ToLower(s)
 	val, ok := layers.Load(s)
 	if !ok {
-		log.WithField("layers", s).
-			Warn("cannot find layers")
-		return nil, errors.New("cannot find layers")
+		log.WithField("layer", s).
+			Warn("cannot find layer")
+		return nil, errors.New("cannot find layer")
 	}
-	layers, ok := val.(Layer)
+	layer, ok := val.(Layer)
 	if !ok {
-		log.WithField("layers", s).
-			Warn("invalid layers")
-		return nil, errors.New("invalid layers")
+		log.WithField("layer", s).
+			Warn("invalid layer")
+		return nil, errors.New("invalid layer")
 	}
-	return layers, nil
+	return layer, nil
 }
 
 func Register(s Layer) {
