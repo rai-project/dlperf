@@ -6,6 +6,8 @@ import (
 
 type Concat struct {
 	Base               `json:",inline,flatten",omitempty"`
+	InputDimensions    []int64            `json:"input_dimensions,omitempty"`
+	OutputDimensions   []int64            `json:"output_dimensions,omitempty"`
 	ParentsInformation []dlperf.LayerInfo `json:"parents_information,omitempty"`
 }
 
@@ -21,17 +23,19 @@ func (Concat) Description() string {
 	return ``
 }
 
-func (c *Concat) LayerInformation(inputDimensions []int64) dlperf.LayerInfo {
-	nIn := inputDimensions[0]
-	cIn := inputDimensions[1]
-	wIn := inputDimensions[2]
-	hIn := inputDimensions[3]
+func (c *Concat) LayerInformation() dlperf.LayerInfo {
+	nIn := c.InputDimensions[0]
+	cIn := c.InputDimensions[1]
+	hIn := c.InputDimensions[2]
+	wIn := c.InputDimensions[3]
 
 	wOut := wIn
 	hOut := hIn
 	cIn = 0
 	for _, parent := range c.ParentsInformation {
-		outputDimensions := parent.OutputDimensions()
+		// outputDimensions := parent.OutputDimensions()
+		_ = parent
+		outputDimensions := c.OutputDimensions
 		cIn += outputDimensions[1]
 	}
 	cOut := cIn
@@ -42,7 +46,7 @@ func (c *Concat) LayerInformation(inputDimensions []int64) dlperf.LayerInfo {
 		name:             c.name,
 		typ:              c.Type(),
 		flops:            flops,
-		inputDimensions:  inputDimensions,
+		inputDimensions:  c.InputDimensions,
 		outputDimensions: []int64{nIn, cOut, hOut, wOut},
 	}
 }

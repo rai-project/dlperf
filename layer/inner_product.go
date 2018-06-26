@@ -5,8 +5,10 @@ import (
 )
 
 type InnerProduct struct {
-	Base      `json:",inline,flatten",omitempty"`
-	NumOutput uint32 `json:"num_output,omitempty"`
+	Base             `json:",inline,flatten",omitempty"`
+	NumOutput        uint32  `json:"num_output,omitempty"`
+	InputDimensions  []int64 `json:"input_dimensions,omitempty"`
+	OutputDimensions []int64 `json:"output_dimensions,omitempty"`
 }
 
 func (InnerProduct) Type() string {
@@ -21,11 +23,11 @@ func (InnerProduct) Description() string {
 	return ``
 }
 
-func (c *InnerProduct) LayerInformation(inputDimensions []int64) dlperf.LayerInfo {
-	nIn := inputDimensions[0]
-	cIn := inputDimensions[1]
-	wIn := inputDimensions[2]
-	hIn := inputDimensions[3]
+func (c *InnerProduct) LayerInformation() dlperf.LayerInfo {
+	nIn := c.InputDimensions[0]
+	cIn := c.InputDimensions[1]
+	hIn := c.InputDimensions[2]
+	wIn := c.InputDimensions[3]
 
 	batchOut := nIn
 
@@ -41,7 +43,7 @@ func (c *InnerProduct) LayerInformation(inputDimensions []int64) dlperf.LayerInf
 		name:             c.name,
 		typ:              c.Type(),
 		flops:            flops,
-		inputDimensions:  inputDimensions,
+		inputDimensions:  c.InputDimensions,
 		outputDimensions: []int64{nIn, cOut, hOut, wOut},
 	}
 }

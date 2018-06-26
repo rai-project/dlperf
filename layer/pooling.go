@@ -8,15 +8,17 @@ import (
 )
 
 type Pooling struct {
-	Base     `json:",inline,flatten",omitempty"`
-	Operator string `json:"operator,omitempty"`
-	PadH     uint32 `json:"pad_h,omitempty"`
-	PadW     uint32 `json:"pad_w,omitempty"`
-	KernelH  uint32 `json:"kernel_h,omitempty"`
-	KernelW  uint32 `json:"kernel_w,omitempty"`
-	StrideH  uint32 `json:"stride_h,omitempty"`
-	StrideW  uint32 `json:"stride_w,omitempty"`
-	Global   bool   `json:"global,omitempty"`
+	Base             `json:",inline,flatten",omitempty"`
+	Operator         string  `json:"operator,omitempty"`
+	PadH             uint32  `json:"pad_h,omitempty"`
+	PadW             uint32  `json:"pad_w,omitempty"`
+	KernelH          uint32  `json:"kernel_h,omitempty"`
+	KernelW          uint32  `json:"kernel_w,omitempty"`
+	StrideH          uint32  `json:"stride_h,omitempty"`
+	StrideW          uint32  `json:"stride_w,omitempty"`
+	Global           bool    `json:"global,omitempty"`
+	InputDimensions  []int64 `json:"input_dimensions,omitempty"`
+	OutputDimensions []int64 `json:"output_dimensions,omitempty"`
 }
 
 func (Pooling) Type() string {
@@ -31,11 +33,11 @@ func (Pooling) Description() string {
 	return ``
 }
 
-func (c *Pooling) LayerInformation(inputDimensions []int64) dlperf.LayerInfo {
-	nIn := inputDimensions[0]
-	cIn := inputDimensions[1]
-	wIn := inputDimensions[2]
-	hIn := inputDimensions[3]
+func (c *Pooling) LayerInformation() dlperf.LayerInfo {
+	nIn := c.InputDimensions[0]
+	cIn := c.InputDimensions[1]
+	hIn := c.InputDimensions[2]
+	wIn := c.InputDimensions[3]
 
 	batchOut := nIn
 
@@ -67,7 +69,7 @@ func (c *Pooling) LayerInformation(inputDimensions []int64) dlperf.LayerInfo {
 		name:             c.name,
 		typ:              c.Type(),
 		flops:            flops,
-		inputDimensions:  inputDimensions,
+		inputDimensions:  c.InputDimensions,
 		outputDimensions: []int64{nIn, cOut, hOut, wOut},
 	}
 }

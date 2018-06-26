@@ -5,7 +5,9 @@ import (
 )
 
 type ReLU struct {
-	Base `json:",inline,flatten""`
+	Base             `json:",inline,flatten""`
+	InputDimensions  []int64 `json:"input_dimensions,omitempty"`
+	OutputDimensions []int64 `json:"output_dimensions,omitempty"`
 }
 
 func (ReLU) Type() string {
@@ -20,11 +22,11 @@ func (ReLU) Description() string {
 	return ``
 }
 
-func (c *ReLU) LayerInformation(inputDimensions []int64) dlperf.LayerInfo {
-	nIn := inputDimensions[0]
-	cIn := inputDimensions[1]
-	wIn := inputDimensions[2]
-	hIn := inputDimensions[3]
+func (c *ReLU) LayerInformation() dlperf.LayerInfo {
+	nIn := c.InputDimensions[0]
+	cIn := c.InputDimensions[1]
+	hIn := c.InputDimensions[2]
+	wIn := c.InputDimensions[3]
 
 	flops := dlperf.FlopsInformation{
 		Comparisons: wIn * hIn * cIn * nIn,
@@ -34,8 +36,8 @@ func (c *ReLU) LayerInformation(inputDimensions []int64) dlperf.LayerInfo {
 		name:             c.name,
 		typ:              c.Type(),
 		flops:            flops,
-		inputDimensions:  inputDimensions,
-		outputDimensions: inputDimensions,
+		inputDimensions:  c.InputDimensions,
+		outputDimensions: c.OutputDimensions,
 	}
 }
 

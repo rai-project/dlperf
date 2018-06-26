@@ -10,10 +10,23 @@ import (
 
 func TestOnnxReader(t *testing.T) {
 	cwd := sourcepath.MustAbsoluteDir()
-	mnistProtoTxtPath := filepath.Join(cwd, "..", "assets", "onnx_models", "mnist.onnx")
-	model, err := NewOnnx(mnistProtoTxtPath)
+	onnxModelFile := filepath.Join(cwd, "..", "assets", "onnx_models", "mnist.onnx")
+
+	// model, err := onnx.ReadModelShapeInfer(onnxModelFile)
+	// assert.NoError(t, err)
+	// assert.NotEmpty(t, model)
+
+	model, err := NewOnnx(onnxModelFile)
 	assert.NoError(t, err)
 	assert.NotEmpty(t, model)
+
+	graph := model.GetGraph()
+	nodes := graph.Node
+	for _, n := range nodes {
+		if n.GetOpType() == "Conv" {
+			model.GetNodeInputDimensions(n)
+		}
+	}
 
 	// info := model.FlopsInformation()
 	// pp.Println(info)

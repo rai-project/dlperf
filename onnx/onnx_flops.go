@@ -5,6 +5,7 @@ import (
 
 	"github.com/k0kubun/pp"
 	"github.com/rai-project/dlperf"
+	"github.com/rai-project/dlperf/layer"
 	"github.com/rai-project/onnx"
 )
 
@@ -27,27 +28,6 @@ func (o Onnx) FlopsInformation() dlperf.FlopsInformation {
 func (o Onnx) MemoryInformation() dlperf.MemoryInformation {
 	_, mem := o.Information()
 	return mem
-}
-
-func getDimValues(dims []*onnx.TensorShapeProto_Dimension) []int64 {
-	ret := []int64{}
-	for _, dim := range dims {
-		ret = append(ret, dim.GetDimValue())
-	}
-
-	return ret
-}
-
-func (o Onnx) GetNodeInputs(node *onnx.NodeProto) []*onnx.ValueInfoProto {
-	ret := []*onnx.ValueInfoProto{}
-	for _, name := range node.GetInput() {
-		val, ok := o.values[name]
-		if ok {
-			ret = append(ret, val)
-		}
-	}
-
-	return ret
 }
 
 func (o Onnx) LayerInformations() []dlperf.LayerInfo {
@@ -80,13 +60,37 @@ func (o Onnx) LayerInformations() []dlperf.LayerInfo {
 	return ret
 }
 
-func (o Onnx) mkLayer(node *onnx.NodeProto) dlperf.Layer {
-	var layer dlperf.Layer
-	operatorType := strings.ToLower(node.GetOpType())
+func (o Onnx) GetNodeInputDimensions(node *onnx.NodeProto) []int64 {
+	inputs := []*onnx.ValueInfoProto{}
 
-	switch operatorType {
+	for _, name := range node.GetInput() {
+		val, ok := o.values[name]
+		if ok {
+			inputs = append(inputs, val)
+		}
+	}
+
+	pp.Println(inputs)
+
+	for _, input := range inputs {
+		_ = input
+	}
+
+	return nil
+}
+
+func (o Onnx) GetNodeOutputDimensions(node *onnx.NodeProto) []int64 {
+
+	return nil
+}
+
+func (o Onnx) mkLayer(node *onnx.NodeProto) dlperf.Layer {
+	var ret dlperf.Layer
+	layerType := strings.ToLower(node.GetOpType())
+
+	switch layerType {
 	case "conv":
-		layer = &layer.Convolution{Node: node}
+		ret = o.mkConv(node)
 	// case "reshape":
 	// 	layer = mkReshape(node)
 	// case "relu":
@@ -111,19 +115,39 @@ func (o Onnx) mkLayer(node *onnx.NodeProto) dlperf.Layer {
 	// case "gemm":
 	// 	layer = mkGemm(node)
 	case "globalaveragepool":
-		pp.Println("unhandeled", operatorType)
+		pp.Println("unhandeled", layerType)
 	default:
-		pp.Println("unhandeled", operatorType)
+		pp.Println("unhandeled", layerType)
 	}
 
-	if layer == nil {
+	if ret == nil {
 		pp.Println(node)
 		return nil
 	}
 
-	layer.SetName(node.Name)
+	ret.SetName(node.Name)
 
-	return layer
+	return ret
+}
+
+func (o Onnx) mkConv(node *onnx.NodeProto) dlperf.Layer {
+	autoPad := getNodeAttributeFromName(node, "auto_pad")
+	dilations := getNodeAttributeFromName(node, "dilations")
+	group := getNodeAttributeFromName(node, "group")
+	kernelShape := getNodeAttributeFromName(node, "kernel_shape")
+	pads := getNodeAttributeFromName(node, "pads")
+	strides := getNodeAttributeFromName(node, "strides")
+
+	return &layer.Conv{
+		AutoPad:          string(autoPad.GetStrings()[0]),
+		Dilations:        dilations.GetInts(),
+		Group:            group.GetInts()[0],
+		KernelShape:      kernelShape.GetInts(),
+		Pads:             pads.GetInts(),
+		Strides:          strides.GetInts(),
+		InputDimensions:  o.GetNodeInputDimensions(node),
+		OutputDimensions: o.GetNodeOutputDimensions(node),
+	}
 }
 
 // func mkReLU(node *onnx.NodeProto) dllayer.Layer {

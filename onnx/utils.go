@@ -4,8 +4,28 @@ import (
 	"fmt"
 	"reflect"
 
+	"github.com/rai-project/onnx"
 	"github.com/spf13/cast"
 )
+
+func getNodeAttributeFromName(node *onnx.NodeProto, attrName string) *onnx.AttributeProto {
+	for _, attr := range node.GetAttribute() {
+		if attr.GetName() == attrName {
+			return attr
+		}
+	}
+
+	return nil
+}
+
+func getTensorShapeDimValues(dims []*onnx.TensorShapeProto_Dimension) []int64 {
+	ret := []int64{}
+	for _, dim := range dims {
+		ret = append(ret, dim.GetDimValue())
+	}
+
+	return ret
+}
 
 // toIntSliceE casts an interface to a []int32 type.
 func toInt32SliceE(i interface{}) ([]int32, error) {
@@ -24,7 +44,7 @@ func toInt32SliceE(i interface{}) ([]int32, error) {
 		s := reflect.ValueOf(i)
 		a := make([]int32, s.Len())
 		for j := 0; j < s.Len(); j++ {
-			val, err := cast.toInt32E(s.Index(j).Interface())
+			val, err := cast.ToInt32E(s.Index(j).Interface())
 			if err != nil {
 				return []int32{}, fmt.Errorf("unable to cast %#v of type %T to []int32", i, i)
 			}
@@ -58,7 +78,7 @@ func toInt64SliceE(i interface{}) ([]int64, error) {
 		s := reflect.ValueOf(i)
 		a := make([]int64, s.Len())
 		for j := 0; j < s.Len(); j++ {
-			val, err := cast.toInt64E(s.Index(j).Interface())
+			val, err := cast.ToInt64E(s.Index(j).Interface())
 			if err != nil {
 				return []int64{}, fmt.Errorf("unable to cast %#v of type %T to []int64", i, i)
 			}

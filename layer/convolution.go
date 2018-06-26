@@ -4,32 +4,21 @@ import (
 	"math"
 
 	"github.com/rai-project/dlperf"
-	"github.com/rai-project/onnx"
 )
 
 // https://github.com/onnx/onnx/blob/master/docs/Operators.md#Conv
 // NCHW tensor layout for passing inputs and outputs
 
 type Conv struct {
-	Base        `json:",inline,flatten",omitempty"`
-	AutoPad     string   `json:"auto_pad,omitempty"`
-	Dilations   []uint32 `json:"dilation,omitempty"`
-	Group       uint32   `json:"group,omitempty"`
-	KernelShape []uint32 `json:"kernel_shape,omitempty"`
-	Pads        []uint32 `json:"pad_h,omitempty"`
-	Strides     []uint32 `json:"stride_h,omitempty"`
-}
-
-func NewConv(node *onnx.NodeProto) (*Conv, error) {
-
-  autoPad, err := getNodeAttributeFromName(node)
-
-	return &Conv{
-		AutoPad:      node.,
-		nodes:            nodes,
-		initializers:     initializers,
-		layerInformation: make(map[string]dlperf.LayerInfo),
-	}, nil
+	Base             `json:",inline,flatten",omitempty"`
+	InputDimensions  []int64 `json:"input_dimensions,omitempty"`
+	OutputDimensions []int64 `json:"output_dimensions,omitempty"`
+	AutoPad          string  `json:"auto_pad,omitempty"`
+	Dilations        []int64 `json:"dilation,omitempty"`
+	Group            int64   `json:"group,omitempty"`
+	KernelShape      []int64 `json:"kernel_shape,omitempty"`
+	Pads             []int64 `json:"pad_h,omitempty"`
+	Strides          []int64 `json:"stride_h,omitempty"`
 }
 
 func (Conv) Type() string {
@@ -41,33 +30,26 @@ func (Conv) Description() string {
 }
 
 func (c *Conv) LayerInformation() dlperf.LayerInfo {
-	/*
-	  ## Add Input/Output Dimensions + Channels to each Node / Layer
-	  # shape.dim: (    N   x   K   x   W   x   H   )
-	  #              batch   channel  width   height
-	  #               nIn      cIn     wIn     wOut
-	*/
+	nIn := c.InputDimensions[0]
+	cIn := c.InputDimensions[1]
+	hIn := c.InputDimensions[2]
+	wIn := c.InputDimensions[3]
 
-	nIn := inputDimensions[0]
-	cIn := inputDimensions[1]
-	wIn := inputDimensions[2]
-	hIn := inputDimensions[3]
-
-	kernelW := int64(c.Dilation*(c.KernelW-1) + 1)
-	wOut := int64(math.Floor(float64(wIn+int64(2*c.PadW)-kernelW)/float64(c.StrideW))) + 1
-	kernelH := int64(c.Dilation*(c.KernelH-1) + 1)
-	hOut := int64(math.Floor(float64(hIn+int64(2*c.PadH)-kernelH)/float64(c.StrideH))) + 1
-	cOut := int64(c.NumOutput)
+	kernelW := int64(c.Dilations[1]*(c.KernelShape[1]-1) + 1)
+	wOut := int64(math.Floor(float64(wIn+int64(2*c.Pads[1])-kernelW)/float64(c.Strides[1]))) + 1
+	kernelH := int64(c.Dilations[0]*(c.KernelShape[0]-1) + 1)
+	hOut := int64(math.Floor(float64(hIn+int64(2*c.Pads[0])-kernelH)/float64(c.Strides[0]))) + 1
+	cOut := c.OutputDimensions[0] * c.OutputDimensions[1] * c.OutputDimensions[2] * c.OutputDimensions[3]
 
 	flops := dlperf.FlopsInformation{
-		MultiplyAdds: (int64(c.KernelW*c.KernelH) * (wOut * hOut) * cIn * cOut * nIn) / int64(c.Group),
+		MultiplyAdds: (int64(c.KernelShape[1]*c.KernelShape[0]) * (wOut * hOut) * cIn * cOut * nIn) / int64(c.Group),
 	}
 
 	info := &Information{
 		name:             c.name,
 		typ:              c.Type(),
 		flops:            flops,
-		inputDimensions:  inputDimensions,
+		inputDimensions:  c.InputDimensions,
 		outputDimensions: []int64{nIn, cOut, hOut, wOut},
 	}
 

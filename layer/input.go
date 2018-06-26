@@ -5,11 +5,13 @@ import (
 )
 
 type Input struct {
-	Base `json:",inline,flatten",omitempty"`
-	N    int64 `json:"n,omitempty"`
-	C    int64 `json:"c,omitempty"`
-	W    int64 `json:"w,omitempty"`
-	H    int64 `json:"h,omitempty"`
+	Base             `json:",inline,flatten",omitempty"`
+	N                int64   `json:"n,omitempty"`
+	C                int64   `json:"c,omitempty"`
+	W                int64   `json:"w,omitempty"`
+	H                int64   `json:"h,omitempty"`
+	InputDimensions  []int64 `json:"input_dimensions,omitempty"`
+	OutputDimensions []int64 `json:"output_dimensions,omitempty"`
 }
 
 func (Input) Type() string {
@@ -24,7 +26,7 @@ func (Input) Description() string {
 	return ``
 }
 
-func (c *Input) LayerInformation(inputDimensions []int64) dlperf.LayerInfo {
+func (c *Input) LayerInformation() dlperf.LayerInfo {
 	batchSize := c.N
 	batchSize = 1
 	return &Information{

@@ -5,26 +5,28 @@ import (
 )
 
 type Constant struct {
-	Base `json:",inline,flatten",omitempty"`
-	N    int64 `json:"n,omitempty"`
-	C    int64 `json:"c,omitempty"`
-	W    int64 `json:"w,omitempty"`
-	H    int64 `json:"h,omitempty"`
+	Base             `json:",inline,flatten",omitempty"`
+	N                int64   `json:"n,omitempty"`
+	C                int64   `json:"c,omitempty"`
+	W                int64   `json:"w,omitempty"`
+	H                int64   `json:"h,omitempty"`
+	InputDimensions  []int64 `json:"input_dimensions,omitempty"`
+	OutputDimensions []int64 `json:"output_dimensions,omitempty"`
 }
 
-func (Data) Type() string {
-	return "Data"
+func (Constant) Type() string {
+	return "Constant"
 }
 
-func (Data) Aliases() []string {
-	return []string{"Data"}
+func (Constant) Aliases() []string {
+	return []string{"Constant"}
 }
 
-func (Data) Description() string {
+func (Constant) Description() string {
 	return ``
 }
 
-func (c *Data) LayerInformation(inputDimensions []int64) dlperf.LayerInfo {
+func (c *Constant) LayerInformation() dlperf.LayerInfo {
 	batchSize := c.N
 	batchSize = 1
 	return &Information{
@@ -36,5 +38,5 @@ func (c *Data) LayerInformation(inputDimensions []int64) dlperf.LayerInfo {
 }
 
 func init() {
-	dlperf.Register(&Data{})
+	dlperf.Register(&Constant{})
 }
