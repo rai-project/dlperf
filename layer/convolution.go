@@ -10,15 +10,15 @@ import (
 // NCHW tensor layout for passing inputs and outputs
 
 type Conv struct {
-	Base             `json:",inline,flatten",omitempty"`
-	InputDimensions  []int64 `json:"input_dimensions,omitempty"`
-	OutputDimensions []int64 `json:"output_dimensions,omitempty"`
-	AutoPad          string  `json:"auto_pad,omitempty"`
-	Dilations        []int64 `json:"dilation,omitempty"`
-	Group            int64   `json:"group,omitempty"`
-	KernelShape      []int64 `json:"kernel_shape,omitempty"`
-	Pads             []int64 `json:"pad_h,omitempty"`
-	Strides          []int64 `json:"stride_h,omitempty"`
+	Base              `json:",inline,flatten",omitempty"`
+	InputsDimensions  [][]int64 `json:"inputs_dimensions,omitempty"`
+	OutputsDimensions [][]int64 `json:"outputs_dimensions,omitempty"`
+	AutoPad           string    `json:"auto_pad,omitempty"`
+	Dilations         []int64   `json:"dilation,omitempty"`
+	Group             int64     `json:"group,omitempty"`
+	KernelShape       []int64   `json:"kernel_shape,omitempty"`
+	Pads              []int64   `json:"pad_h,omitempty"`
+	Strides           []int64   `json:"stride_h,omitempty"`
 }
 
 func (Conv) Type() string {
@@ -30,27 +30,48 @@ func (Conv) Description() string {
 }
 
 func (c *Conv) LayerInformation() dlperf.LayerInfo {
-	nIn := c.InputDimensions[0]
-	cIn := c.InputDimensions[1]
-	hIn := c.InputDimensions[2]
-	wIn := c.InputDimensions[3]
+	inputCnt := len(c.InputsDimensions)
+	if inputCnt != 2 && inputCnt != 3 {
+		log.WithField("layer", c.Type()).WithField("number of inputs ", inputCnt).Error("Conv must have 2 or 3 inputs")
+		return nil
+	}
 
-	kernelW := int64(c.Dilations[1]*(c.KernelShape[1]-1) + 1)
-	wOut := int64(math.Floor(float64(wIn+int64(2*c.Pads[1])-kernelW)/float64(c.Strides[1]))) + 1
-	kernelH := int64(c.Dilations[0]*(c.KernelShape[0]-1) + 1)
-	hOut := int64(math.Floor(float64(hIn+int64(2*c.Pads[0])-kernelH)/float64(c.Strides[0]))) + 1
-	cOut := c.OutputDimensions[0] * c.OutputDimensions[1] * c.OutputDimensions[2] * c.OutputDimensions[3]
+	outputCnt := len(c.OutputsDimensions)
+	if outputCnt != 1 {
+		log.WithField("layer", c.Type()).WithField("number of outputs ", outputCnt).Error("Conv must have 1 output")
+		return nil
+	}
+
+	inputDimensions := c.InputsDimensions[0]  // (N x C x H x W)
+	weightDimensions := c.InputsDimensions[1] // (M x C x kH x kW)
+	if weightDimensions[2] != c.KernelShape[0] || weightDimensions[3] != c.KernelShape[1] {
+		log.WithField("layer", c.Type()).WithField("weightDimensions", weightDimensions).Error("weightDimensions do not match kernel_shape")
+		return nil
+	}
+
+	outputDimensions := c.OutputsDimensions[0]
+
+	nIn := inputDimensions[0]
+	cIn := inputDimensions[1]
+	hIn := inputDimensions[2]
+	wIn := inputDimensions[3]
+
+	kernelW := c.Dilations[1]*(c.KernelShape[1]-1) + 1
+	wOut := int64(math.Floor(float64(wIn+2*c.Pads[1]-kernelW)/float64(c.Strides[1]))) + 1
+	kernelH := c.Dilations[0]*(c.KernelShape[0]-1) + 1
+	hOut := int64(math.Floor(float64(hIn+2*c.Pads[0]-kernelH)/float64(c.Strides[0]))) + 1
+	cOut := outputDimensions[0] * outputDimensions[1] * outputDimensions[2] * outputDimensions[3]
 
 	flops := dlperf.FlopsInformation{
-		MultiplyAdds: (int64(c.KernelShape[1]*c.KernelShape[0]) * (wOut * hOut) * cIn * cOut * nIn) / int64(c.Group),
+		MultiplyAdds: int64(c.KernelShape[1]*c.KernelShape[0]*wOut*hOut*cIn*cOut*nIn) / c.Group,
 	}
 
 	info := &Information{
 		name:             c.name,
 		typ:              c.Type(),
 		flops:            flops,
-		inputDimensions:  c.InputDimensions,
-		outputDimensions: []int64{nIn, cOut, hOut, wOut},
+		inputDimensions:  inputDimensions,
+		outputDimensions: outputDimensions,
 	}
 
 	return info

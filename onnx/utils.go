@@ -18,9 +18,10 @@ func getNodeAttributeFromName(node *onnx.NodeProto, attrName string) *onnx.Attri
 	return nil
 }
 
-func getTensorShapeDimValues(dims []*onnx.TensorShapeProto_Dimension) []int64 {
+func getValueInfoDimensions(valueInfo *onnx.ValueInfoProto) []int64 {
 	ret := []int64{}
-	for _, dim := range dims {
+
+	for _, dim := range valueInfo.GetType().GetTensorType().GetShape().GetDim() {
 		ret = append(ret, dim.GetDimValue())
 	}
 

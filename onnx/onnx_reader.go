@@ -9,7 +9,7 @@ type Onnx struct {
 	*onnx.ModelProto
 	*onnx.GraphProto
 	nodes            map[string]*onnx.NodeProto
-	values           map[string]*onnx.ValueInfoProto
+	valueInfo        map[string]*onnx.ValueInfoProto
 	initializers     map[string]*onnx.TensorProto
 	layerInformation map[string]dlperf.LayerInfo
 }
@@ -26,9 +26,10 @@ func NewOnnx(protoFileName string) (*Onnx, error) {
 		nodes[n.Name] = n
 	}
 
-	values := map[string]*onnx.ValueInfoProto{}
+	valueInfo := map[string]*onnx.ValueInfoProto{}
 	for _, v := range graph.ValueInfo {
-		values[v.Name] = v
+
+		valueInfo[v.Name] = v
 	}
 
 	initializers := map[string]*onnx.TensorProto{}
@@ -39,6 +40,7 @@ func NewOnnx(protoFileName string) (*Onnx, error) {
 	return &Onnx{
 		ModelProto:       model,
 		nodes:            nodes,
+		valueInfo:        valueInfo,
 		initializers:     initializers,
 		layerInformation: make(map[string]dlperf.LayerInfo),
 	}, nil

@@ -31,20 +31,12 @@ func (o Onnx) MemoryInformation() dlperf.MemoryInformation {
 }
 
 func (o Onnx) LayerInformations() []dlperf.LayerInfo {
-	// use the first input
-	// inputs := o.Graph.GetInput()
-	// inputDims := inputs[0].GetType().GetTensorType().GetShape().GetDim()
-
-	// if len(inputs) == 0 || inputs[0] == nil || len(inputDims) == 0 {
-	// 	log.Info("no input info for graph", o.Graph.GetName())
-	// 	return nil
-	// }
-
 	ret := []dlperf.LayerInfo{}
 
 	// the nodes in the graph are sorted topologically
-	for _, node := range o.Graph.GetNode() {
+	for _, node := range o.nodes {
 		name := node.GetName()
+		pp.Println("processing node = ", name)
 		layer := o.mkLayer(node)
 
 		if layer == nil {
@@ -60,28 +52,16 @@ func (o Onnx) LayerInformations() []dlperf.LayerInfo {
 	return ret
 }
 
-func (o Onnx) GetNodeInputDimensions(node *onnx.NodeProto) []int64 {
-	inputs := []*onnx.ValueInfoProto{}
-
-	for _, name := range node.GetInput() {
-		val, ok := o.values[name]
+func (o Onnx) GetValueInfoDimensions(names []string) [][]int64 {
+	ret := [][]int64{}
+	for _, name := range names {
+		val, ok := o.valueInfo[name]
 		if ok {
-			inputs = append(inputs, val)
+			ret = append(ret, getValueInfoDimensions(val))
 		}
 	}
 
-	pp.Println(inputs)
-
-	for _, input := range inputs {
-		_ = input
-	}
-
-	return nil
-}
-
-func (o Onnx) GetNodeOutputDimensions(node *onnx.NodeProto) []int64 {
-
-	return nil
+	return ret
 }
 
 func (o Onnx) mkLayer(node *onnx.NodeProto) dlperf.Layer {
@@ -114,23 +94,22 @@ func (o Onnx) mkLayer(node *onnx.NodeProto) dlperf.Layer {
 	// 	layer = mkSoftMax(node)
 	// case "gemm":
 	// 	layer = mkGemm(node)
-	case "globalaveragepool":
-		pp.Println("unhandeled", layerType)
+	// case "globalaveragepool":
+	// 	layer = mkGlobalAveragePool(node)
 	default:
 		pp.Println("unhandeled", layerType)
 	}
 
-	if ret == nil {
-		pp.Println(node)
-		return nil
+	if ret != nil {
+		ret.SetName(node.Name)
 	}
-
-	ret.SetName(node.Name)
 
 	return ret
 }
 
 func (o Onnx) mkConv(node *onnx.NodeProto) dlperf.Layer {
+
+	pp.Println("creating Conv")
 	autoPad := getNodeAttributeFromName(node, "auto_pad")
 	dilations := getNodeAttributeFromName(node, "dilations")
 	group := getNodeAttributeFromName(node, "group")
@@ -139,14 +118,14 @@ func (o Onnx) mkConv(node *onnx.NodeProto) dlperf.Layer {
 	strides := getNodeAttributeFromName(node, "strides")
 
 	return &layer.Conv{
-		AutoPad:          string(autoPad.GetStrings()[0]),
-		Dilations:        dilations.GetInts(),
-		Group:            group.GetInts()[0],
-		KernelShape:      kernelShape.GetInts(),
-		Pads:             pads.GetInts(),
-		Strides:          strides.GetInts(),
-		InputDimensions:  o.GetNodeInputDimensions(node),
-		OutputDimensions: o.GetNodeOutputDimensions(node),
+		AutoPad:           string(autoPad.GetStrings()[0]),
+		Dilations:         dilations.GetInts(),
+		Group:             group.GetInts()[0],
+		KernelShape:       kernelShape.GetInts(),
+		Pads:              pads.GetInts(),
+		Strides:           strides.GetInts(),
+		InputsDimensions:  o.GetValueInfoDimensions(node.GetInput()),
+		OutputsDimensions: o.GetValueInfoDimensions(node.GetOutput()),
 	}
 }
 
