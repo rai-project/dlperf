@@ -36,12 +36,11 @@ func (o Onnx) LayerInformations() []dlperf.LayerInfo {
 	// the nodes in the graph are sorted topologically
 	for _, node := range o.nodes {
 		name := node.GetName()
-		pp.Println("processing node = ", name)
 		layer := o.mkLayer(node)
 
 		if layer == nil {
-			pp.Println("failed to create ", name)
-			return nil
+			pp.Println("failed to create layer ", name)
+			continue
 		}
 
 		info := layer.LayerInformation()
@@ -108,22 +107,50 @@ func (o Onnx) mkLayer(node *onnx.NodeProto) dlperf.Layer {
 }
 
 func (o Onnx) mkConv(node *onnx.NodeProto) dlperf.Layer {
+	autoPad := "VALID"
+	autoPadAttr := getNodeAttributeFromName(node, "auto_pad")
+	if autoPadAttr.GetStrings() != nil {
+		autoPad = string(autoPadAttr.GetStrings()[0])
+	}
 
-	pp.Println("creating Conv")
-	autoPad := getNodeAttributeFromName(node, "auto_pad")
-	dilations := getNodeAttributeFromName(node, "dilations")
-	group := getNodeAttributeFromName(node, "group")
-	kernelShape := getNodeAttributeFromName(node, "kernel_shape")
-	pads := getNodeAttributeFromName(node, "pads")
-	strides := getNodeAttributeFromName(node, "strides")
+	dilations := []int64{1, 1}
+	dilationsAttr := getNodeAttributeFromName(node, "dilations")
+	if dilationsAttr.GetInts() != nil {
+		dilations = dilationsAttr.GetInts()
+	}
+
+	group := int64(1)
+	groupAttr := getNodeAttributeFromName(node, "group")
+	if groupAttr.GetInts() != nil {
+		group = groupAttr.GetInts()[0]
+	}
+
+	kernelShapeAttr := getNodeAttributeFromName(node, "kernel_shape")
+	if kernelShapeAttr.GetInts() == nil {
+		log.WithField("layer", "conv").Error("unknown kernel_shapel, model must be shape inferred")
+
+		return nil
+	}
+
+	pads := []int64{0, 0}
+	padsAttr := getNodeAttributeFromName(node, "pads")
+	if padsAttr.GetInts() != nil {
+		pads = padsAttr.GetInts()
+	}
+
+	strides := []int64{0, 0}
+	stridesAttr := getNodeAttributeFromName(node, "strides")
+	if stridesAttr.GetInts() != nil {
+		strides = stridesAttr.GetInts()
+	}
 
 	return &layer.Conv{
-		AutoPad:           string(autoPad.GetStrings()[0]),
-		Dilations:         dilations.GetInts(),
-		Group:             group.GetInts()[0],
-		KernelShape:       kernelShape.GetInts(),
-		Pads:              pads.GetInts(),
-		Strides:           strides.GetInts(),
+		AutoPad:           autoPad,
+		Dilations:         dilations,
+		Group:             group,
+		KernelShape:       kernelShapeAttr.GetInts(),
+		Pads:              pads,
+		Strides:           strides,
 		InputsDimensions:  o.GetValueInfoDimensions(node.GetInput()),
 		OutputsDimensions: o.GetValueInfoDimensions(node.GetOutput()),
 	}

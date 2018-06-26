@@ -45,10 +45,9 @@ func (c *Conv) LayerInformation() dlperf.LayerInfo {
 	inputDimensions := c.InputsDimensions[0]  // (N x C x H x W)
 	weightDimensions := c.InputsDimensions[1] // (M x C x kH x kW)
 	if weightDimensions[2] != c.KernelShape[0] || weightDimensions[3] != c.KernelShape[1] {
-		log.WithField("layer", c.Type()).WithField("weightDimensions", weightDimensions).Error("weightDimensions do not match kernel_shape")
+		log.WithField("layer", c.Type()).WithField("weight dimensions", weightDimensions).Error("weight dimensions do not match kernel_shape")
 		return nil
 	}
-
 	outputDimensions := c.OutputsDimensions[0]
 
 	nIn := inputDimensions[0]
@@ -56,10 +55,24 @@ func (c *Conv) LayerInformation() dlperf.LayerInfo {
 	hIn := inputDimensions[2]
 	wIn := inputDimensions[3]
 
-	kernelW := c.Dilations[1]*(c.KernelShape[1]-1) + 1
-	wOut := int64(math.Floor(float64(wIn+2*c.Pads[1]-kernelW)/float64(c.Strides[1]))) + 1
 	kernelH := c.Dilations[0]*(c.KernelShape[0]-1) + 1
-	hOut := int64(math.Floor(float64(hIn+2*c.Pads[0]-kernelH)/float64(c.Strides[0]))) + 1
+	kernelW := c.Dilations[1]*(c.KernelShape[1]-1) + 1
+
+	padH := c.Pads[0]
+	padW := c.Pads[1]
+
+	// if autoPad == "SAME_UPPER" {
+
+	//   } else if autoPad == "SAME_LOWER" {
+
+	//   } else if autoPad != "VALID" {
+	//     log.WithField("layer", "conv").Error("unknown auto_pad, auto_pad must be either SAME_UPPER, SAME_LOWER or VALID")
+	//   }
+	// }
+
+	hOut := int64(math.Floor(float64(hIn+2*padH-kernelH)/float64(c.Strides[0]))) + 1
+	wOut := int64(math.Floor(float64(wIn+2*padW-kernelW)/float64(c.Strides[1]))) + 1
+
 	cOut := outputDimensions[0] * outputDimensions[1] * outputDimensions[2] * outputDimensions[3]
 
 	flops := dlperf.FlopsInformation{
