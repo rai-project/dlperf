@@ -4,8 +4,6 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/k0kubun/pp"
-
 	sourcepath "github.com/GeertJohan/go-sourcepath"
 	"github.com/Unknwon/com"
 	"github.com/pkg/errors"
@@ -56,21 +54,21 @@ var FlopsInfoCmd = &cobra.Command{
 	},
 	RunE: func(c *cobra.Command, args []string) error {
 		run := func() error {
-			modelFile := filepath.Join(sourcepath.MustAbsoluteDir(), "..", "assets", "onnx_models", "mnist.onnx")
-			pp.Println(filepath.Abs(modelPath))
 
-			if modelPath != "" {
+			if modelPath == "" {
+				modelPath = filepath.Join(sourcepath.MustAbsoluteDir(), "..", "assets", "onnx_models", "mnist.onnx")
+			} else {
 				s, err := filepath.Abs(modelPath)
 				if err == nil {
-					modelFile = s
+					modelPath = s
 				}
 			}
 
-			if !com.IsFile(modelFile) {
-				return errors.Errorf("file %v does not exist", modelFile)
+			if !com.IsFile(modelPath) {
+				return errors.Errorf("file %v does not exist", modelPath)
 			}
 
-			net, err := onnx.NewOnnx(modelFile)
+			net, err := onnx.NewOnnx(modelPath)
 			if err != nil {
 				return err
 			}
