@@ -14,7 +14,7 @@ type Input struct {
 	OutputDimensions []int64 `json:"output_dimensions,omitempty"`
 }
 
-func (Input) Type() string {
+func (Input) OperatorType() string {
 	return "Input"
 }
 
@@ -31,7 +31,7 @@ func (c *Input) LayerInformation() dlperf.LayerInfo {
 	batchSize = 1
 	return &Information{
 		name:             c.name,
-		typ:              c.Type(),
+		operatorType:     c.OperatorType(),
 		inputDimensions:  []int64{batchSize, c.C, c.W, c.H},
 		outputDimensions: []int64{batchSize, c.C, c.W, c.H},
 	}

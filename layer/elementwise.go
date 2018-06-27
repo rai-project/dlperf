@@ -14,7 +14,7 @@ type ElementWise struct {
 	OutputDimensions   []int64            `json:"output_dimensions,omitempty"`
 }
 
-func (ElementWise) Type() string {
+func (ElementWise) OperatorType() string {
 	return "ElementWise"
 }
 
@@ -43,12 +43,12 @@ func (c *ElementWise) LayerInformation() dlperf.LayerInfo {
 	case "max":
 		flops.Comparisons = numOps
 	default:
-		log.WithField("layer", c.Type()).WithField("operation", c.Operation).Error("invalid layer operation")
+		log.WithField("layer", c.OperatorType()).WithField("operation", c.Operation).Error("invalid layer operation")
 	}
 
 	return &Information{
 		name:             c.name,
-		typ:              c.Type(),
+		operatorType:     c.OperatorType(),
 		flops:            flops,
 		inputDimensions:  c.InputDimensions,
 		outputDimensions: c.OutputDimensions,

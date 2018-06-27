@@ -12,7 +12,7 @@ type LRN struct {
 	OutputDimensions []int64 `json:"output_dimensions,omitempty"`
 }
 
-func (LRN) Type() string {
+func (LRN) OperatorType() string {
 	return "LRN"
 }
 
@@ -46,7 +46,7 @@ func (c *LRN) LayerInformation() dlperf.LayerInfo {
 
 	return &Information{
 		name:             c.name,
-		typ:              c.Type(),
+		operatorType:     c.OperatorType(),
 		flops:            flops,
 		inputDimensions:  c.InputDimensions,
 		outputDimensions: c.OutputDimensions,

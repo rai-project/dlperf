@@ -9,16 +9,16 @@ import (
 )
 
 type Information struct {
-	typ              string                    `json:"typ,omitempty"`
-	name             string                    `json:"name,omitempty"`
+	operatorType     string                   `json:"operatorType,omitempty"`
+	name             string                   `json:"name,omitempty"`
 	flops            dlperf.FlopsInformation  `json:"flops,omitempty"`
 	memory           dlperf.MemoryInformation `json:"memory,omitempty"`
-	inputDimensions  []int64                   `json:"input_dimensions,omitempty"`
-	outputDimensions []int64                   `json:"output_dimensions,omitempty"`
+	inputDimensions  []int64                  `json:"input_dimensions,omitempty"`
+	outputDimensions []int64                  `json:"output_dimensions,omitempty"`
 }
 
-func (layer *Information) Type() string {
-	return layer.typ
+func (layer *Information) OperatorType() string {
+	return layer.operatorType
 }
 
 func (layer *Information) Name() string {

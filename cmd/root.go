@@ -115,7 +115,7 @@ var FlopsInfoCmd = &cobra.Command{
 					writer.Row(
 						layer{
 							Name:             info.Name(),
-							Type:             info.Type(),
+							Type:             info.OperatorType(),
 							FlopsInformation: info.Flops(),
 							Total:            info.Flops().Total(),
 						},

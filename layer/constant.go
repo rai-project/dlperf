@@ -14,7 +14,7 @@ type Constant struct {
 	OutputDimensions []int64 `json:"output_dimensions,omitempty"`
 }
 
-func (Constant) Type() string {
+func (Constant) OperatorType() string {
 	return "Constant"
 }
 
@@ -31,7 +31,7 @@ func (c *Constant) LayerInformation() dlperf.LayerInfo {
 	batchSize = 1
 	return &Information{
 		name:             c.name,
-		typ:              c.Type(),
+		operatorType:     c.OperatorType(),
 		inputDimensions:  []int64{batchSize, c.C, c.W, c.H},
 		outputDimensions: []int64{batchSize, c.C, c.W, c.H},
 	}

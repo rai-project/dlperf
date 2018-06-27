@@ -10,7 +10,7 @@ type SoftMax struct {
 	OutputDimensions []int64 `json:"output_dimensions,omitempty"`
 }
 
-func (SoftMax) Type() string {
+func (SoftMax) OperatorType() string {
 	return "SoftMax"
 }
 
@@ -37,7 +37,7 @@ func (c *SoftMax) LayerInformation() dlperf.LayerInfo {
 
 	return &Information{
 		name:             c.name,
-		typ:              c.Type(),
+		operatorType:     c.OperatorType(),
 		flops:            flops,
 		inputDimensions:  c.InputDimensions,
 		outputDimensions: c.OutputDimensions,

@@ -10,7 +10,7 @@ type Scale struct {
 	OutputDimensions []int64 `json:"output_dimensions,omitempty"`
 }
 
-func (Scale) Type() string {
+func (Scale) OperatorType() string {
 	return "Scale"
 }
 
@@ -34,7 +34,7 @@ func (c *Scale) LayerInformation() dlperf.LayerInfo {
 
 	return &Information{
 		name:             c.name,
-		typ:              c.Type(),
+		operatorType:     c.OperatorType(),
 		flops:            flops,
 		inputDimensions:  c.InputDimensions,
 		outputDimensions: c.OutputDimensions,

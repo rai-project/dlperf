@@ -10,7 +10,7 @@ type BatchNorm struct {
 	OutputDimensions []int64 `json:"output_dimensions,omitempty"`
 }
 
-func (BatchNorm) Type() string {
+func (BatchNorm) OperatorType() string {
 	return "BatchNorm"
 }
 
@@ -36,7 +36,7 @@ func (c *BatchNorm) LayerInformation() dlperf.LayerInfo {
 
 	return &Information{
 		name:             c.name,
-		typ:              c.Type(),
+		operatorType:     c.OperatorType(),
 		flops:            flops,
 		inputDimensions:  c.InputDimensions,
 		outputDimensions: c.OutputDimensions,

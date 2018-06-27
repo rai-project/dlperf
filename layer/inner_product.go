@@ -11,7 +11,7 @@ type InnerProduct struct {
 	OutputDimensions []int64 `json:"output_dimensions,omitempty"`
 }
 
-func (InnerProduct) Type() string {
+func (InnerProduct) OperatorType() string {
 	return "InnerProduct"
 }
 
@@ -41,7 +41,7 @@ func (c *InnerProduct) LayerInformation() dlperf.LayerInfo {
 
 	return &Information{
 		name:             c.name,
-		typ:              c.Type(),
+		operatorType:     c.OperatorType(),
 		flops:            flops,
 		inputDimensions:  c.InputDimensions,
 		outputDimensions: []int64{nIn, cOut, hOut, wOut},

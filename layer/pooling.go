@@ -21,7 +21,7 @@ type Pooling struct {
 	OutputDimensions []int64 `json:"output_dimensions,omitempty"`
 }
 
-func (Pooling) Type() string {
+func (Pooling) OperatorType() string {
 	return "Pooling"
 }
 
@@ -67,7 +67,7 @@ func (c *Pooling) LayerInformation() dlperf.LayerInfo {
 
 	return &Information{
 		name:             c.name,
-		typ:              c.Type(),
+		operatorType:     c.OperatorType(),
 		flops:            flops,
 		inputDimensions:  c.InputDimensions,
 		outputDimensions: []int64{nIn, cOut, hOut, wOut},

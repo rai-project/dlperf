@@ -9,14 +9,14 @@ import (
 
 type Layer interface {
 	Name() string
-	Type() string
+	OperatorType() string
 	SetName(string)
 	LayerInformation() LayerInfo
 }
 
 type LayerInfo interface {
 	Name() string
-	Type() string
+	OperatorType() string
 	Flops() FlopsInformation
 	Memory() MemoryInformation
 }

@@ -10,7 +10,7 @@ type Dropout struct {
 	OutputDimensions []int64 `json:"output_dimensions,omitempty"`
 }
 
-func (Dropout) Type() string {
+func (Dropout) OperatorType() string {
 	return "Dropout"
 }
 
@@ -34,7 +34,7 @@ func (c *Dropout) LayerInformation() dlperf.LayerInfo {
 
 	return &Information{
 		name:             c.name,
-		typ:              c.Type(),
+		operatorType:     c.OperatorType(),
 		flops:            flops,
 		inputDimensions:  c.InputDimensions,
 		outputDimensions: c.OutputDimensions,
