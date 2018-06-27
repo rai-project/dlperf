@@ -6,51 +6,30 @@ import (
 
 	"github.com/Unknwon/com"
 	"github.com/pkg/errors"
-	"github.com/rai-project/dlframework"
-	"github.com/rai-project/dlperf/caffe"
+	"github.com/rai-project/dlperf/onnx"
 	"github.com/spf13/cobra"
 )
 
 var (
-	modelName           string
-	modelVersion        string
-	modelPath           string
-	fullFlops           bool
-	humanFlops          bool
-	outputFormat        string
-	outputFileName      string
-	outputFileExtension string
-	noHeader            bool
-	appendOutput        bool
-	goPath              string
-	raiSrcPath          string
-	mlArcWebAssetsPath  string
+	modelPath      string
+	fullFlops      bool
+	humanFlops     bool
+	outputFormat   string
+	outputFileName string
+	outputPath     string
+	noHeader       bool
+	appendOutput   bool
+	goPath         string
+	raiSrcPath     string
 )
-
-func cleanPath(path string) string {
-	path = strings.Replace(path, ":", "_", -1)
-	path = strings.Replace(path, " ", "_", -1)
-	path = strings.Replace(path, "-", "_", -1)
-	return strings.ToLower(path)
-}
-
-func getGraphPath(model *dlframework.ModelManifest) string {
-	graphPath := filepath.Base(model.GetModel().GetGraphPath())
-	wd, _ := model.WorkDir()
-	return cleanPath(filepath.Join(wd, graphPath))
-}
 
 var FlopsInfoCmd = &cobra.Command{
 	Use: "flops",
 	Aliases: []string{
-		"model",
 		"theoretical_flops",
 	},
 	Short: "Get flops information about the model",
 	PreRunE: func(cmd *cobra.Command, args []string) error {
-		if Framework.Name == "" || Framework.Version == "" {
-			return errors.New("Framework is not set.")
-		}
 		if outputFormat == "automatic" {
 			outputFormat = ""
 		}
@@ -63,44 +42,24 @@ var FlopsInfoCmd = &cobra.Command{
 			outputFormat = "table"
 		}
 
-		if modelName != "all" {
-			outputFileExtension = filepath.Ext(outputFileName)
-		} else {
-			outputFileExtension = outputFormat
-		}
-
-		if modelName == "all" && outputFormat == "json" {
+		if outputFormat == "json" {
 			dir := "theoretical_flops"
 			if fullFlops {
 				dir += "_full"
 			}
-			outputFileName = filepath.Join(mlArcWebAssetsPath, dir)
+			outputFileName = filepath.Join(outputPath, dir)
 		}
 		return nil
 	},
 	RunE: func(c *cobra.Command, args []string) error {
 		run := func() error {
-			var graphPath string
-			if modelPath == "" {
-				model, err := Framework.FindModel(modelName + ":" + modelVersion)
-				if err != nil {
-					return err
-				}
+			var modelPath string
 
-				graphPath = getGraphPath(model)
-			} else {
-				if s, err := filepath.Abs(modelPath); err == nil {
-					graphPath = s
-				} else {
-					graphPath = modelPath
-				}
+			if !com.IsFile(modelPath) {
+				return errors.Errorf("file %v does not exist", modelPath)
 			}
 
-			if !com.IsFile(graphPath) {
-				return errors.Errorf("file %v does not exist", graphPath)
-			}
-
-			net, err := caffe.NewCaffe(graphPath)
+			net, err := onnx.NewOnnx(modelPath)
 			if err != nil {
 				return err
 			}
@@ -125,12 +84,6 @@ var FlopsInfoCmd = &cobra.Command{
 				return nil
 			}
 
-			// if outputFormat == "json" {
-			// 	err := errors.New("json output is not currently supported for full flop information")
-			// 	log.WithError(err).Error("unable to output json")
-			// 	return err
-			// }
-
 			info := net.FlopsInformation()
 
 			writer := NewWriter(netSummary{}, humanFlops)
@@ -147,13 +100,11 @@ var FlopsInfoCmd = &cobra.Command{
 			return nil
 		}
 
-		return forallmodels(run)
+		return run()
 	},
 }
 
 func init() {
-	FlopsInfoCmd.PersistentFlags().StringVar(&modelName, "model_name", "BVLC-AlexNet", "modelName")
-	FlopsInfoCmd.PersistentFlags().StringVar(&modelVersion, "model_version", "1.0", "modelVersion")
 	FlopsInfoCmd.PersistentFlags().StringVar(&modelPath, "model_path", "", "path to the model prototxt file")
 	FlopsInfoCmd.PersistentFlags().BoolVar(&humanFlops, "human", false, "print flops in human form")
 	FlopsInfoCmd.PersistentFlags().BoolVar(&fullFlops, "full", false, "print all information about flops")
@@ -164,5 +115,4 @@ func init() {
 
 	goPath = com.GetGOPATHs()[0]
 	raiSrcPath = getSrcPath("github.com/rai-project")
-	mlArcWebAssetsPath = filepath.Join(raiSrcPath, "ml-arc-web", "src", "assets", "data")
 }

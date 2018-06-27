@@ -5,10 +5,10 @@ import (
 )
 
 type layer struct {
-	Name                     string `json:"name"`
-	Type                     string `json:"type"`
+	Name                    string `json:"name"`
+	Type                    string `json:"type"`
 	dlperf.FlopsInformation `json:",inline,flatten""`
-	Total                    int64 `json:"total"`
+	Total                   int64 `json:"total"`
 }
 
 func (layer) Header() []string {

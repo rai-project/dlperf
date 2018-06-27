@@ -14,10 +14,6 @@ func TestOnnxReader(t *testing.T) {
 	cwd := sourcepath.MustAbsoluteDir()
 	onnxModelFile := filepath.Join(cwd, "..", "assets", "onnx_models", "mnist.onnx")
 
-	// model, err := onnx.ReadModelShapeInfer(onnxModelFile)
-	// assert.NoError(t, err)
-	// assert.NotEmpty(t, model)
-
 	model, err := NewOnnx(onnxModelFile)
 	assert.NoError(t, err)
 	assert.NotEmpty(t, model)
@@ -36,8 +32,4 @@ func TestOnnxReader(t *testing.T) {
 	info := model.FlopsInformation()
 	pp.Println(info)
 	pp.Println(model.LayerInformations())
-
-	// net.Layer = nil
-	// net.Layers = nil
-	// pp.Println(net)
 }
