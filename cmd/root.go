@@ -4,6 +4,9 @@ import (
 	"path/filepath"
 	"strings"
 
+	"github.com/k0kubun/pp"
+
+	sourcepath "github.com/GeertJohan/go-sourcepath"
 	"github.com/Unknwon/com"
 	"github.com/pkg/errors"
 	"github.com/rai-project/dlperf/onnx"
@@ -53,13 +56,21 @@ var FlopsInfoCmd = &cobra.Command{
 	},
 	RunE: func(c *cobra.Command, args []string) error {
 		run := func() error {
-			var modelPath string
+			modelFile := filepath.Join(sourcepath.MustAbsoluteDir(), "..", "assets", "onnx_models", "mnist.onnx")
+			pp.Println(filepath.Abs(modelPath))
 
-			if !com.IsFile(modelPath) {
-				return errors.Errorf("file %v does not exist", modelPath)
+			if modelPath != "" {
+				s, err := filepath.Abs(modelPath)
+				if err == nil {
+					modelFile = s
+				}
 			}
 
-			net, err := onnx.NewOnnx(modelPath)
+			if !com.IsFile(modelFile) {
+				return errors.Errorf("file %v does not exist", modelFile)
+			}
+
+			net, err := onnx.NewOnnx(modelFile)
 			if err != nil {
 				return err
 			}
@@ -107,7 +118,7 @@ var FlopsInfoCmd = &cobra.Command{
 func init() {
 	FlopsInfoCmd.PersistentFlags().StringVar(&modelPath, "model_path", "", "path to the model prototxt file")
 	FlopsInfoCmd.PersistentFlags().BoolVar(&humanFlops, "human", false, "print flops in human form")
-	FlopsInfoCmd.PersistentFlags().BoolVar(&fullFlops, "full", false, "print all information about flops")
+	FlopsInfoCmd.PersistentFlags().BoolVar(&fullFlops, "full", true, "print all information about flops")
 
 	FlopsInfoCmd.PersistentFlags().BoolVar(&noHeader, "no_header", false, "show header labels for output")
 	FlopsInfoCmd.PersistentFlags().StringVarP(&outputFileName, "output", "o", "", "output file name")
