@@ -7,19 +7,12 @@ import (
 )
 
 type ElementWise struct {
-	Base               `json:",inline,flatten",omitempty"`
-	Operation          string             `json:"operation,omitempty"`
-	ParentsInformation []dlperf.LayerInfo `json:"parents_information,omitempty"`
-	InputDimensions    []int64            `json:"input_dimensions,omitempty"`
-	OutputDimensions   []int64            `json:"output_dimensions,omitempty"`
+	Base     `json:",inline,flatten,omitempty"`
+	Operator string `json:"operation,omitempty"`
 }
 
-func (ElementWise) OperatorType() string {
-	return "ElementWise"
-}
-
-func (ElementWise) Aliases() []string {
-	return []string{"eltwise"}
+func (c *ElementWise) OperatorType() string {
+	return c.Operator
 }
 
 func (ElementWise) Description() string {
@@ -27,31 +20,37 @@ func (ElementWise) Description() string {
 }
 
 func (c *ElementWise) LayerInformation() dlperf.LayerInfo {
-	nIn := c.InputDimensions[0]
-	cIn := c.InputDimensions[1]
-	hIn := c.InputDimensions[2]
-	wIn := c.InputDimensions[3]
+	checkNumber(c.InputsDimensions, []int{1, 2}, c.OperatorType(), "number of inputs")
+	checkNumber(c.OutputsDimensions, []int{1}, c.OperatorType(), "number of outputs")
+
+	inputDimensions := c.InputsDimensions[0]   // (N x C x H x W)
+	outputDimensions := c.OutputsDimensions[0] // (N x C x H x W)
+
+	nIn := inputDimensions[0]
+	cIn := inputDimensions[1]
+	hIn := inputDimensions[2]
+	wIn := inputDimensions[3]
 
 	numOps := wIn * hIn * cIn * nIn
 
 	flops := dlperf.FlopsInformation{}
-	switch strings.ToLower(c.Operation) {
-	case "sum":
+	switch strings.ToLower(c.Operator) {
+	case "add", "sum", "sub":
 		flops.Additions = numOps
-	case "prod":
+	case "mul", "div":
 		flops.MultiplyAdds = numOps
-	case "max":
+	case "max,", "min":
 		flops.Comparisons = numOps
 	default:
-		log.WithField("layer", c.OperatorType()).WithField("operation", c.Operation).Error("invalid layer operation")
+		log.WithField("layer", c.OperatorType()).WithField("operator", c.Operator).Error("invalid layer operation")
 	}
 
 	return &Information{
 		name:             c.name,
 		operatorType:     c.OperatorType(),
 		flops:            flops,
-		inputDimensions:  c.InputDimensions,
-		outputDimensions: c.OutputDimensions,
+		inputDimensions:  inputDimensions,
+		outputDimensions: outputDimensions,
 	}
 }
 

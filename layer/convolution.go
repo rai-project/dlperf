@@ -8,15 +8,13 @@ import (
 // NCHW tensor layout for passing inputs and outputs
 
 type Conv struct {
-	Base              `json:",inline,flatten",omitempty"`
-	InputsDimensions  [][]int64 `json:"inputs_dimensions,omitempty"`
-	OutputsDimensions [][]int64 `json:"outputs_dimensions,omitempty"`
-	AutoPad           string    `json:"auto_pad,omitempty"`
-	Dilations         []int64   `json:"dilation,omitempty"`
-	Group             int64     `json:"group,omitempty"`
-	KernelShape       []int64   `json:"kernel_shape,omitempty"`
-	Pads              []int64   `json:"pad_h,omitempty"`
-	Strides           []int64   `json:"stride_h,omitempty"`
+	Base        `json:",inline,flatten,omitempty"`
+	AutoPad     string  `json:"auto_pad,omitempty"`
+	Dilations   []int64 `json:"dilation,omitempty"`
+	Group       int64   `json:"group,omitempty"`
+	KernelShape []int64 `json:"kernel_shape,omitempty"`
+	Pads        []int64 `json:"pad_h,omitempty"`
+	Strides     []int64 `json:"stride_h,omitempty"`
 }
 
 func (Conv) OperatorType() string {
@@ -28,21 +26,12 @@ func (Conv) Description() string {
 }
 
 func (c *Conv) LayerInformation() dlperf.LayerInfo {
-	inputCnt := len(c.InputsDimensions)
-	if inputCnt != 2 && inputCnt != 3 {
-		log.WithField("layer", c.OperatorType()).WithField("number of inputs ", inputCnt).Error("Conv must have 2 or 3 inputs")
-		return nil
-	}
-
-	outputCnt := len(c.OutputsDimensions)
-	if outputCnt != 1 {
-		log.WithField("layer", c.OperatorType()).WithField("number of outputs ", outputCnt).Error("Conv must have 1 output")
-		return nil
-	}
+	checkNumber(c.InputsDimensions, []int{2, 3}, c.OperatorType(), "number of inputs")
+	checkNumber(c.OutputsDimensions, []int{1}, c.OperatorType(), "number of outputs")
 
 	inputDimensions := c.InputsDimensions[0]   // (N x C x H x W)
-	weightDimensions := c.InputsDimensions[1]  // (C x M x kH x kW)
 	outputDimensions := c.OutputsDimensions[0] // (N x C x H x W)
+	weightDimensions := c.InputsDimensions[1]  // (C x M x kH x kW)
 
 	nIn := inputDimensions[0]
 	cIn := inputDimensions[1]
@@ -57,8 +46,8 @@ func (c *Conv) LayerInformation() dlperf.LayerInfo {
 		return nil
 	}
 
-	kernelH := c.KernelShape[0]
-	kernelW := c.KernelShape[1]
+	kernelH := c.Dilations[0]*(c.KernelShape[0]-1) + 1
+	kernelW := c.Dilations[1]*(c.KernelShape[1]-1) + 1
 
 	flops := dlperf.FlopsInformation{
 		MultiplyAdds: int64(kernelH*kernelW*hOut*wOut*cIn*cOut*nIn) / c.Group,

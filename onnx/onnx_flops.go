@@ -68,33 +68,32 @@ func (o Onnx) mkLayer(node *onnx.NodeProto) dlperf.Layer {
 	layerType := strings.ToLower(node.GetOpType())
 
 	switch layerType {
+	case "batchnorm":
+		ret = o.mkBatchNorm(node)
+	case "concat":
+		ret = o.mkConcat(node)
 	case "conv":
 		ret = o.mkConv(node)
-	// case "reshape":
-	// 	layer = mkReshape(node)
-	// case "relu":
-	// 	layer = mkReLU(node)
-	// case "dropout":
-	// 	layer = mkDropout(node)
-	// case "add", "mul":
-	// 	layer = mkElementWise(node)
-	// case "maxpool":
-	// 	layer = mkMaxPool(node)
-	// case "averagepool":
-	// 	layer = mkAveragePool(node)
-	// case "batchnorm":
-	// 	layer = mkBatchNorm(node)
-	// case "lrn":
-	// 	layer = mkLRN(node)
-	// case "concat":
-	// 	parentsInfo := c.getParentsInfo(node)
-	// 	layer = mkConcat(parentsInfo, node)
-	// case "softmax":
-	// 	layer = mkSoftMax(node)
-	// case "gemm":
-	// 	layer = mkGemm(node)
-	// case "globalaveragepool":
-	// 	layer = mkGlobalAveragePool(node)
+	case "dropout":
+		ret = o.mkDropout(node)
+	case "add", "sum", "sub", "mul", "div", "max,", "min":
+		ret = o.mkElementWise(node)
+	case "gemm":
+		ret = o.mkGemm(node)
+	case "lrn":
+		ret = o.mkLRN(node)
+	case "matmul":
+		ret = o.mkMatMul(node)
+	case "maxpool", "averagepool", "globalmaxpool", "globalaveragepool":
+		ret = o.mkPooling(node)
+	case "relu":
+		ret = o.mkReLU(node)
+	case "reshape":
+		ret = o.mkReshape(node)
+	case "scale":
+		ret = o.mkScale(node)
+	case "softmax":
+		ret = o.mkSoftMax(node)
 	default:
 		pp.Println("unhandeled", layerType)
 	}
@@ -104,6 +103,14 @@ func (o Onnx) mkLayer(node *onnx.NodeProto) dlperf.Layer {
 	}
 
 	return ret
+}
+
+func (o Onnx) mkBatchNorm(node *onnx.NodeProto) dlperf.Layer {
+	return &layer.BatchNorm{}
+}
+
+func (o Onnx) mkConcat(node *onnx.NodeProto) dlperf.Layer {
+	return &layer.Concat{}
 }
 
 func (o Onnx) mkConv(node *onnx.NodeProto) dlperf.Layer {
@@ -156,78 +163,57 @@ func (o Onnx) mkConv(node *onnx.NodeProto) dlperf.Layer {
 	}
 }
 
-// func mkReLU(node *onnx.NodeProto) dllayer.Layer {
-// 	return &layer.ReLU{}
-// }
+func (o Onnx) mkDropout(node *onnx.NodeProto) dlperf.Layer {
+	return &layer.Dropout{}
+}
 
-// func mkDropout(node *onnx.NodeProto) dllayer.Layer {
-// 	return &layer.Dropout{}
-// }
+func (o Onnx) mkElementWise(node *onnx.NodeProto) dlperf.Layer {
+	return &layer.ElementWise{
+		Operator: node.GetOpType(),
+	}
+}
 
-// func mkSoftMax(node *onnx.NodeProto) dllayer.Layer {
-// 	return &layer.SoftMax{}
-// }
+func (o Onnx) mkGemm(node *onnx.NodeProto) dlperf.Layer {
+	return &layer.Gemm{}
+}
 
-// func mkBatchNorm(node *onnx.NodeProto) dllayer.Layer {
-// 	return &layer.BatchNorm{}
-// }
+func (o Onnx) mkMatMul(node *onnx.NodeProto) dlperf.Layer {
+	return &layer.MatMul{}
+}
 
-// func mkLRN(param *caffe.LRNParameter) dllayer.Layer {
-// 	size := uint32(1)
-// 	if param != nil && param.LocalSize != nil && *param.LocalSize != 0 {
-// 		size = *param.LocalSize
-// 	}
-// 	region := "ACROSS_CHANNELS"
-// 	if param != nil && param.NormRegion != nil && *param.NormRegion != 0 {
-// 		region = "WITHIN_CHANNEL"
-// 	}
+func (o Onnx) mkPooling(node *onnx.NodeProto) dlperf.Layer {
+	kernelShapeAttr := getNodeAttributeFromName(node, "kernel_shape")
 
-// 	return &layer.LRN{
-// 		Region: region,
-// 		Size:   size,
-// 	}
-// }
+	return &layer.Pooling{
+		Operator:    node.GetOpType(),
+		KernelShape: kernelShapeAttr.GetInts(),
+	}
+}
 
-// func mkPooling(param *caffe.PoolingParameter) dllayer.Layer {
-// 	operator := "max"
-// 	if param.Pool != nil && *param.Pool != 0 {
-// 		operator = param.Pool.String()
-// 	}
-// 	global := false
-// 	if param.GlobalPooling != nil {
-// 		global = *param.GlobalPooling
-// 	}
-// 	return &layer.Pooling{
-// 		Operator: strings.ToUpper(operator),
-// 		PadH:     padSizeOfPtr(zeroIfNilUint32(param.PadH), param.Pad),
-// 		PadW:     padSizeOfPtr(zeroIfNilUint32(param.PadW), param.Pad),
-// 		KernelH:  kernelSizeOfPtr(param.KernelH, &param.KernelSize),
-// 		KernelW:  kernelSizeOfPtr(param.KernelW, &param.KernelSize),
-// 		StrideH:  zeroToOne(strideSizeOfPtr(param.StrideH, param.Stride)),
-// 		StrideW:  zeroToOne(strideSizeOfPtr(param.StrideW, param.Stride)),
-// 		Global:   global,
-// 	}
-// }
+func (o Onnx) mkLRN(node *onnx.NodeProto) dlperf.Layer {
+	size := int64(1)
+	sizeAttr := getNodeAttributeFromName(node, "size")
+	if sizeAttr.GetInts() != nil {
+		size = sizeAttr.GetInts()[0]
+	}
 
-// func mkInnerProduct(param *caffe.InnerProductParameter) dllayer.Layer {
-// 	return &layer.InnerProduct{
-// 		NumOutput: param.NumOutput,
-// 	}
-// }
+	return &layer.LRN{
+		Size: size,
+	}
+}
 
-// func mkConcat(parentsInfo []dllayer.LayerInfo, param *caffe.ConcatParameter) dllayer.Layer {
-// 	return &layer.Concat{
-// 		ParentsInformation: parentsInfo,
-// 	}
-// }
+func (o Onnx) mkReLU(node *onnx.NodeProto) dlperf.Layer {
+	return &layer.ReLU{}
+}
 
-// func mkElementWise(parentsInfo []dllayer.LayerInfo, param *caffe.EltwiseParameter) dllayer.Layer {
-// 	op := "SUM"
-// 	if param != nil && param.Operation != nil && param.Operation.String() != "" {
-// 		op = param.Operation.String()
-// 	}
-// 	return &layer.ElementWise{
-// 		Operation:          op,
-// 		ParentsInformation: parentsInfo,
-// 	}
-// }
+func (o Onnx) mkReshape(node *onnx.NodeProto) dlperf.Layer {
+	return &layer.Reshape{}
+}
+
+func (o Onnx) mkScale(node *onnx.NodeProto) dlperf.Layer {
+	return &layer.Scale{}
+}
+
+func (o Onnx) mkSoftMax(node *onnx.NodeProto) dlperf.Layer {
+	return &layer.SoftMax{}
+}

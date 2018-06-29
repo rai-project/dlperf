@@ -1,32 +1,19 @@
 package layer
 
 import (
-	"math"
 	"strings"
 
 	"github.com/rai-project/dlperf"
 )
 
 type Pooling struct {
-	Base             `json:",inline,flatten",omitempty"`
-	Operator         string  `json:"operator,omitempty"`
-	PadH             uint32  `json:"pad_h,omitempty"`
-	PadW             uint32  `json:"pad_w,omitempty"`
-	KernelH          uint32  `json:"kernel_h,omitempty"`
-	KernelW          uint32  `json:"kernel_w,omitempty"`
-	StrideH          uint32  `json:"stride_h,omitempty"`
-	StrideW          uint32  `json:"stride_w,omitempty"`
-	Global           bool    `json:"global,omitempty"`
-	InputDimensions  []int64 `json:"input_dimensions,omitempty"`
-	OutputDimensions []int64 `json:"output_dimensions,omitempty"`
+	Base        `json:",inline,flatten,omitempty"`
+	Operator    string  `json:"operator,omitempty"`
+	KernelShape []int64 `json:"kernel_shape,omitempty"`
 }
 
-func (Pooling) OperatorType() string {
-	return "Pooling"
-}
-
-func (Pooling) Aliases() []string {
-	return []string{"pooling"}
+func (c *Pooling) OperatorType() string {
+	return c.Operator
 }
 
 func (Pooling) Description() string {
@@ -34,43 +21,45 @@ func (Pooling) Description() string {
 }
 
 func (c *Pooling) LayerInformation() dlperf.LayerInfo {
-	nIn := c.InputDimensions[0]
-	cIn := c.InputDimensions[1]
-	hIn := c.InputDimensions[2]
-	wIn := c.InputDimensions[3]
+	checkNumber(c.InputsDimensions, []int{1}, c.OperatorType(), "number of inputs")
+	checkNumber(c.OutputsDimensions, []int{1}, c.OperatorType(), "number of outputs")
 
-	batchOut := nIn
+	inputDimensions := c.InputsDimensions[0]   // (N x C x H x W)
+	outputDimensions := c.OutputsDimensions[0] // (N x C x H x W)
 
-	wOut := int64(math.Ceil(float64(wIn+2*int64(c.PadW)-int64(c.KernelW))/float64(c.StrideW))) + 1
-	hOut := int64(math.Ceil(float64(hIn+2*int64(c.PadH)-int64(c.KernelH))/float64(c.StrideH))) + 1
-	cOut := cIn
+	nIn := inputDimensions[0]
+	cIn := inputDimensions[1]
+	hIn := inputDimensions[2]
+	wIn := inputDimensions[3]
 
-	if c.Global {
-		wOut = 1
-		hOut = 1
-	}
+	cOut := outputDimensions[1]
+	hOut := outputDimensions[2]
+	wOut := outputDimensions[3]
 
-	var numOps int64
-	if c.Global {
-		numOps = wIn * hIn * cIn * batchOut
-	} else {
-		numOps = wOut * hOut * int64(c.KernelH) * int64(c.KernelW) * cIn * batchOut
+	var kernelH, kernelW int64
+	if c.KernelShape != nil {
+		kernelH = c.KernelShape[0]
+		kernelW = c.KernelShape[1]
 	}
 
 	flops := dlperf.FlopsInformation{}
 	switch strings.ToLower(c.Operator) {
-	case "max":
-		flops.Comparisons = numOps
-	case "ave":
-		flops.Additions = numOps
+	case "maxpool":
+		flops.Comparisons = hOut * wOut * cIn * cOut * kernelH * kernelW
+	case "globalmaxpool":
+		flops.Comparisons = wIn * hIn * cIn * nIn
+	case "averagepool":
+		flops.Additions = hOut * wOut * cIn * cOut * kernelH * kernelW
+	case "globalaveragepool":
+		flops.Additions = wIn * hIn * cIn * nIn
 	}
 
 	return &Information{
 		name:             c.name,
 		operatorType:     c.OperatorType(),
 		flops:            flops,
-		inputDimensions:  c.InputDimensions,
-		outputDimensions: []int64{nIn, cOut, hOut, wOut},
+		inputDimensions:  inputDimensions,
+		outputDimensions: outputDimensions,
 	}
 }
 

@@ -4,36 +4,29 @@ import (
 	"github.com/rai-project/dlperf"
 )
 
-type SoftMax struct {
+// https://github.com/onnx/onnx/blob/master/docs/Operators.md#Reshape
+
+type Reshape struct {
 	Base `json:",inline,flatten,omitempty"`
 }
 
-func (SoftMax) OperatorType() string {
-	return "SoftMax"
+func (Reshape) OperatorType() string {
+	return "Reshape"
 }
 
-func (SoftMax) Description() string {
+func (Reshape) Description() string {
 	return ``
 }
 
-func (c *SoftMax) LayerInformation() dlperf.LayerInfo {
-	checkNumber(c.InputsDimensions, []int{1}, c.OperatorType(), "number of inputs")
+func (c *Reshape) LayerInformation() dlperf.LayerInfo {
+	checkNumber(c.InputsDimensions, []int{1, 2}, c.OperatorType(), "number of inputs")
 	checkNumber(c.OutputsDimensions, []int{1}, c.OperatorType(), "number of outputs")
 
 	inputDimensions := c.InputsDimensions[0]   // (N x C x H x W)
 	outputDimensions := c.OutputsDimensions[0] // (N x C x H x W)
 
-	nIn := inputDimensions[0]
-	cIn := inputDimensions[1]
-	hIn := inputDimensions[2]
-	wIn := inputDimensions[3]
-
-	numOps := wIn * hIn * cIn * nIn
-	flops := dlperf.FlopsInformation{
-		Exponentiations: numOps,
-		Additions:       numOps,
-		Divisions:       numOps,
-	}
+	// this is for inference
+	flops := dlperf.FlopsInformation{}
 
 	return &Information{
 		name:             c.name,
@@ -45,5 +38,5 @@ func (c *SoftMax) LayerInformation() dlperf.LayerInfo {
 }
 
 func init() {
-	dlperf.Register(&SoftMax{})
+	dlperf.Register(&Reshape{})
 }

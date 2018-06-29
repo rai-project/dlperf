@@ -4,20 +4,16 @@ import (
 	"github.com/rai-project/dlperf"
 )
 
+// https://github.com/onnx/onnx/blob/master/docs/Operators.md#LRN
+// https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks.pdf
+
 type LRN struct {
-	Base             `json:",inline,flatten",omitempty"`
-	Region           string  `json:"region,omitempty"`
-	Size             uint32  `json:"size,omitempty"`
-	InputDimensions  []int64 `json:"input_dimensions,omitempty"`
-	OutputDimensions []int64 `json:"output_dimensions,omitempty"`
+	Base `json:",inline,flatten,omitempty"`
+	Size int64 `json:"size,omitempty"`
 }
 
 func (LRN) OperatorType() string {
 	return "LRN"
-}
-
-func (LRN) Aliases() []string {
-	return []string{"lrn"}
 }
 
 func (LRN) Description() string {
@@ -25,21 +21,25 @@ func (LRN) Description() string {
 }
 
 func (c *LRN) LayerInformation() dlperf.LayerInfo {
-	nIn := c.InputDimensions[0]
-	cIn := c.InputDimensions[1]
-	hIn := c.InputDimensions[2]
-	wIn := c.InputDimensions[3]
+	checkNumber(c.InputsDimensions, []int{1}, c.OperatorType(), "number of inputs")
+	checkNumber(c.OutputsDimensions, []int{1}, c.OperatorType(), "number of outputs")
 
-	//  Each input value is divided by (1+(α/n)∑xi^2)^β
+	inputDimensions := c.InputsDimensions[0]   // (N x C x H x W)
+	outputDimensions := c.OutputsDimensions[0] // (N x C x H x W)
+
+	nIn := inputDimensions[0]
+	cIn := inputDimensions[1]
+	hIn := inputDimensions[2]
+	wIn := inputDimensions[3]
+
+	// Each input value is divided by (1+(α/n)∑xi^2)^β
 	numInputs := wIn * hIn * cIn * nIn
 	size := int64(c.Size)
-	if c.Region == "WITHIN_CHANNEL" {
-		size = size * size
-	}
 
+	// TODO
 	flops := dlperf.FlopsInformation{
 		MultiplyAdds:    numInputs * size, // (∑xi^2)
-		Additions:       numInputs,        //  (1+...)
+		Additions:       numInputs,        // (1+...)
 		Exponentiations: numInputs,        // (...)^β
 		Divisions:       numInputs * 2,    // (α/n)*... + divide by sum
 	}
@@ -48,8 +48,8 @@ func (c *LRN) LayerInformation() dlperf.LayerInfo {
 		name:             c.name,
 		operatorType:     c.OperatorType(),
 		flops:            flops,
-		inputDimensions:  c.InputDimensions,
-		outputDimensions: c.OutputDimensions,
+		inputDimensions:  inputDimensions,
+		outputDimensions: outputDimensions,
 	}
 }
 

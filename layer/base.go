@@ -3,7 +3,9 @@ package layer
 import "encoding/json"
 
 type Base struct {
-	name string `json:"name,omitempty"`
+	name              string    `json:"name,omitempty"`
+	InputsDimensions  [][]int64 `json:"inputs_dimensions,omitempty"`
+	OutputsDimensions [][]int64 `json:"outputs_dimensions,omitempty"`
 }
 
 func (b Base) Name() string {
