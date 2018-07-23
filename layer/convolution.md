@@ -1,5 +1,7 @@
 ### SpatialConvolution ###
 
+From cuDNN, outputDim = 1 + ( inputDim + 2*pad - (((filterDim-1)*dilation)+1) )/convolutionStride;
+
 ```lua
 module = nn.SpatialConvolution(nInputPlane, nOutputPlane, kW, kH, [dW], [dH], [padW], [padH])
 ```
