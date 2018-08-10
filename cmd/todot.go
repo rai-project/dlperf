@@ -19,7 +19,6 @@ import (
 
 	sourcepath "github.com/GeertJohan/go-sourcepath"
 	"github.com/Unknwon/com"
-	"github.com/k0kubun/pp"
 	"github.com/pkg/errors"
 	"github.com/rai-project/onnx"
 	"github.com/spf13/cobra"
@@ -64,13 +63,21 @@ var todotCmd = &cobra.Command{
 		visit := func(graphNode *onnx.NodeProto) {
 			inId := graphIds[graphNode.GetName()]
 			inNd := grph.Node(inId)
+			for _, inputNode := range graphNode.GetInput() {
+				in2Id := graphIds[inputNode]
+				if inId == in2Id {
+					continue
+				}
+				itNd := grph.Node(in2Id)
+				edge := grph.NewEdge(itNd, inNd)
+				grph.SetEdge(edge)
+			}
+
 			for _, outputNode := range graphNode.GetOutput() {
 				outId := graphIds[outputNode]
 				if inId == outId {
 					continue
 				}
-				pp.Println(inId)
-				pp.Println(outId)
 				outNd := grph.Node(outId)
 				edge := grph.NewEdge(inNd, outNd)
 				grph.SetEdge(edge)
@@ -78,6 +85,7 @@ var todotCmd = &cobra.Command{
 		}
 
 		for _, nd := range onnxGraph.GetNode() {
+			// pp.Println(nd.GetName())
 			visit(nd)
 		}
 
