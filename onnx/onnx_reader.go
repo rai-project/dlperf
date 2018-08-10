@@ -1,6 +1,7 @@
 package onnx
 
 import (
+	"github.com/cevaris/ordered_map"
 	"github.com/rai-project/dlperf"
 	"github.com/rai-project/onnx"
 )
@@ -8,7 +9,7 @@ import (
 type Onnx struct {
 	*onnx.ModelProto
 	*onnx.GraphProto
-	nodes            map[string]*onnx.NodeProto
+	nodes            *ordered_map.OrderedMap // map[string]*onnx.NodeProto
 	valueInfo        map[string]*onnx.ValueInfoProto
 	inputs           map[string]*onnx.ValueInfoProto
 	outputs          map[string]*onnx.ValueInfoProto
@@ -17,15 +18,16 @@ type Onnx struct {
 }
 
 func NewOnnx(protoFileName string) (*Onnx, error) {
+
 	model, err := onnx.ReadModel(protoFileName)
 	if err != nil {
 		return nil, err
 	}
 
 	graph := model.GetGraph()
-	nodes := map[string]*onnx.NodeProto{}
+	nodes := ordered_map.NewOrderedMap()
 	for _, n := range graph.Node {
-		nodes[n.Name] = n
+		nodes.Set(n.Name, n)
 	}
 
 	valueInfo := map[string]*onnx.ValueInfoProto{}

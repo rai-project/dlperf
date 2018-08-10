@@ -34,11 +34,13 @@ func (o Onnx) LayerInformations() []dlperf.LayerInfo {
 	ret := []dlperf.LayerInfo{}
 
 	// the nodes in the graph are sorted topologically
-	for _, node := range o.nodes {
+	iter := o.nodes.IterFunc()
+	for kv, ok := iter(); ok; kv, ok = iter() {
+		node := kv.Value.(*onnx.NodeProto)
 		name := node.GetName()
 		layer := o.mkLayer(node)
 
-		// pp.Println("layer ", name)
+		pp.Println("layer ", name)
 
 		if layer == nil {
 			// pp.Println("failed to create layer ", name)
@@ -109,7 +111,7 @@ func (o Onnx) mkLayer(node *onnx.NodeProto) dlperf.Layer {
 	case "softmax":
 		ret = o.mkSoftMax(node)
 	default:
-		pp.Println("unhandeled", layerType)
+		// pp.Println("unhandeled", layerType)
 	}
 
 	if ret != nil {
