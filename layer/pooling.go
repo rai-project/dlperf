@@ -7,9 +7,11 @@ import (
 )
 
 type Pooling struct {
-	Base        `json:",inline,flatten,omitempty"`
-	Operator    string  `json:"operator,omitempty"`
-	KernelShape []int64 `json:"kernel_shape,omitempty"`
+	Base              `json:",inline,flatten,omitempty"`
+	Operator          string    `json:"operator,omitempty"`
+	KernelShape       []int64   `json:"kernel_shape,omitempty"`
+	InputsDimensions  [][]int64 `json:"inputs_dimensions,omitempty"`
+	OutputsDimensions [][]int64 `json:"outputs_dimensions,omitempty"`
 }
 
 func (c *Pooling) OperatorType() string {

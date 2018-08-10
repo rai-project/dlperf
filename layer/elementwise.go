@@ -3,12 +3,15 @@ package layer
 import (
 	"strings"
 
+	"github.com/k0kubun/pp"
 	"github.com/rai-project/dlperf"
 )
 
 type ElementWise struct {
-	Base     `json:",inline,flatten,omitempty"`
-	Operator string `json:"operation,omitempty"`
+	Base              `json:",inline,flatten,omitempty"`
+	Operator          string    `json:"operation,omitempty"`
+	InputsDimensions  [][]int64 `json:"inputs_dimensions,omitempty"`
+	OutputsDimensions [][]int64 `json:"outputs_dimensions,omitempty"`
 }
 
 func (c *ElementWise) OperatorType() string {
@@ -25,6 +28,8 @@ func (c *ElementWise) LayerInformation() dlperf.LayerInfo {
 
 	inputDimensions := c.InputsDimensions[0]   // (N x C x H x W)
 	outputDimensions := c.OutputsDimensions[0] // (N x C x H x W)
+
+	pp.Println(c.InputsDimensions)
 
 	nIn := inputDimensions[0]
 	cIn := inputDimensions[1]

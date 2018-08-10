@@ -7,7 +7,9 @@ import (
 // https://github.com/onnx/onnx/blob/master/docs/Operators.md#Reshape
 
 type Reshape struct {
-	Base `json:",inline,flatten,omitempty"`
+	Base              `json:",inline,flatten,omitempty"`
+	InputsDimensions  [][]int64 `json:"inputs_dimensions,omitempty"`
+	OutputsDimensions [][]int64 `json:"outputs_dimensions,omitempty"`
 }
 
 func (Reshape) OperatorType() string {

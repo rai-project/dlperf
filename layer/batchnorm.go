@@ -8,7 +8,9 @@ import (
 // https://arxiv.org/pdf/1502.03167.pdf
 
 type BatchNorm struct {
-	Base `json:",inline,flatten,omitempty"`
+	Base              `json:",inline,flatten,omitempty"`
+	InputsDimensions  [][]int64 `json:"inputs_dimensions,omitempty"`
+	OutputsDimensions [][]int64 `json:"outputs_dimensions,omitempty"`
 }
 
 func (BatchNorm) OperatorType() string {

@@ -8,13 +8,15 @@ import (
 // NCHW tensor layout for passing inputs and outputs
 
 type Conv struct {
-	Base        `json:",inline,flatten,omitempty"`
-	AutoPad     string  `json:"auto_pad,omitempty"`
-	Dilations   []int64 `json:"dilation,omitempty"`
-	Group       int64   `json:"group,omitempty"`
-	KernelShape []int64 `json:"kernel_shape,omitempty"`
-	Pads        []int64 `json:"pad_h,omitempty"`
-	Strides     []int64 `json:"stride_h,omitempty"`
+	Base              `json:",inline,flatten,omitempty"`
+	AutoPad           string    `json:"auto_pad,omitempty"`
+	Dilations         []int64   `json:"dilation,omitempty"`
+	Group             int64     `json:"group,omitempty"`
+	KernelShape       []int64   `json:"kernel_shape,omitempty"`
+	Pads              []int64   `json:"pad_h,omitempty"`
+	Strides           []int64   `json:"stride_h,omitempty"`
+	InputsDimensions  [][]int64 `json:"inputs_dimensions,omitempty"`
+	OutputsDimensions [][]int64 `json:"outputs_dimensions,omitempty"`
 }
 
 func (Conv) OperatorType() string {

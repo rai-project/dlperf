@@ -5,9 +5,9 @@ import (
 )
 
 type ReLU struct {
-	Base             `json:",inline,flatten""`
-	InputDimensions  []int64 `json:"input_dimensions,omitempty"`
-	OutputDimensions []int64 `json:"output_dimensions,omitempty"`
+	Base              `json:",inline,flatten""`
+	InputsDimensions  [][]int64 `json:"inputs_dimensions,omitempty"`
+	OutputsDimensions [][]int64 `json:"outputs_dimensions,omitempty"`
 }
 
 func (ReLU) OperatorType() string {
@@ -23,10 +23,17 @@ func (ReLU) Description() string {
 }
 
 func (c *ReLU) LayerInformation() dlperf.LayerInfo {
-	nIn := c.InputDimensions[0]
-	cIn := c.InputDimensions[1]
-	hIn := c.InputDimensions[2]
-	wIn := c.InputDimensions[3]
+
+	checkNumber(c.InputsDimensions, []int{1, 2}, c.OperatorType(), "number of inputs")
+	checkNumber(c.OutputsDimensions, []int{1}, c.OperatorType(), "number of outputs")
+
+	inputDimensions := c.InputsDimensions[0]   // (N x C x H x W)
+	outputDimensions := c.OutputsDimensions[0] // (N x C x H x W)
+
+	nIn := inputDimensions[0]
+	cIn := inputDimensions[1]
+	hIn := inputDimensions[2]
+	wIn := inputDimensions[3]
 
 	flops := dlperf.FlopsInformation{
 		Comparisons: wIn * hIn * cIn * nIn,
@@ -36,8 +43,8 @@ func (c *ReLU) LayerInformation() dlperf.LayerInfo {
 		name:             c.name,
 		operatorType:     c.OperatorType(),
 		flops:            flops,
-		inputDimensions:  c.InputDimensions,
-		outputDimensions: c.OutputDimensions,
+		inputDimensions:  inputDimensions,
+		outputDimensions: outputDimensions,
 	}
 }
 
