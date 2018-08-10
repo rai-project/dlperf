@@ -25,7 +25,7 @@ var (
 
 var rootCmd = &cobra.Command{
 	Use:   "dlperf",
-	Short: "dlperf",
+	Short: "Compute dlperf",
 	Run: func(cmd *cobra.Command, args []string) {
 		if outputFormat == "automatic" {
 			outputFormat = ""
