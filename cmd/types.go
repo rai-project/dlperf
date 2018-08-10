@@ -4,6 +4,22 @@ import (
 	"github.com/rai-project/dlperf"
 )
 
+type stat struct {
+	Name                    string `json:"name"`
+	Type                    string `json:"type"`
+	dlperf.ShapeInformation `json:",inline,flatten""`
+}
+
+func (stat) Header() []string {
+	base := dlperf.ShapeInformation{}.Header()
+	return append([]string{"LayerName", "LayerType"}, base...)
+}
+
+func (l stat) Row(humanFlops bool) []string {
+	base := l.ShapeInformation.Row(humanFlops)
+	return append([]string{l.Name, l.Type}, base...)
+}
+
 type layer struct {
 	Name                    string `json:"name"`
 	Type                    string `json:"type"`

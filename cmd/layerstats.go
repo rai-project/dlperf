@@ -15,23 +15,60 @@
 package cmd
 
 import (
-	"fmt"
+	"path/filepath"
 
+	sourcepath "github.com/GeertJohan/go-sourcepath"
+	"github.com/Unknwon/com"
+	"github.com/pkg/errors"
+	"github.com/rai-project/dlperf/onnx"
 	"github.com/spf13/cobra"
 )
 
 // layerstatsCmd represents the layerstats command
 var layerstatsCmd = &cobra.Command{
 	Use:   "layerstats",
-	Short: "A brief description of your command",
+	Short: "Get layer statistics about the model",
 	Long: `A longer description that spans multiple lines and likely contains examples
 and usage of using your command. For example:
 
 Cobra is a CLI library for Go that empowers applications.
 This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
-	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("layerstats called")
+	RunE: func(cmd *cobra.Command, args []string) error {
+		if modelPath == "" {
+			modelPath = filepath.Join(sourcepath.MustAbsoluteDir(), "..", "assets", "onnx_models", "mnist.onnx")
+		} else {
+			s, err := filepath.Abs(modelPath)
+			if err == nil {
+				modelPath = s
+			}
+		}
+
+		if !com.IsFile(modelPath) {
+			return errors.Errorf("file %v does not exist", modelPath)
+		}
+
+		net, err := onnx.NewOnnx(modelPath)
+		if err != nil {
+			return err
+		}
+
+		infos := net.LayerInformations()
+
+		writer := NewWriter(stat{}, humanFlops)
+		defer writer.Close()
+
+		for _, info := range infos {
+			writer.Row(
+				stat{
+					Name:             info.Name(),
+					Type:             info.OperatorType(),
+					ShapeInformation: info.Flops().ShapeInformation,
+				},
+			)
+		}
+
+		return nil
 	},
 }
 

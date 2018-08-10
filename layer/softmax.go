@@ -25,12 +25,16 @@ func (c *SoftMax) LayerInformation() dlperf.LayerInfo {
 	inputDimensions := c.InputsDimensions[0]   // (N x C x H x W)
 	outputDimensions := c.OutputsDimensions[0] // (N x C x H x W)
 
-	nIn := inputDimensions[0]
-	cIn := inputDimensions[1]
-	hIn := inputDimensions[2]
-	wIn := inputDimensions[3]
+	var shape []int64
+	for _, s := range inputDimensions {
+		shape = append(shape, s)
+	}
 
-	numOps := wIn * hIn * cIn * nIn
+	numOps := int64(1)
+	for _, s := range shape {
+		numOps *= s
+	}
+
 	flops := dlperf.FlopsInformation{
 		Exponentiations: numOps,
 		Additions:       numOps,

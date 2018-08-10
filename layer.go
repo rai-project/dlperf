@@ -17,29 +17,21 @@ type Layer interface {
 type LayerInfo interface {
 	Name() string
 	OperatorType() string
+	Shape() ShapeInformation
 	Flops() FlopsInformation
 	Memory() MemoryInformation
 }
 
-type FlopsInformation struct {
+type ShapeInformation struct {
 	InputDimensions  []int64 `json:"input_dimensions,omitempty"`
 	OutputDimensions []int64 `json:"output_dimensions,omitempty"`
-	MultiplyAdds     int64   `json:"multiply_adds"`
-	Additions        int64   `json:"additions"`
-	Divisions        int64   `json:"divisions"`
-	Exponentiations  int64   `json:"exponentiations"`
-	Comparisons      int64   `json:"comparisons"`
-	General          int64   `json:"general"`
 }
 
-func (FlopsInformation) Header() []string {
-	return []string{"InputDimensions", "OutputDimensions", "MultiplyAdds", "Additions", "Divisions", "Exponentiations", "Comparisons", "General"}
+func (ShapeInformation) Header() []string {
+	return []string{"InputDimensions", "OutputDimensions"}
 }
 
-func (flops FlopsInformation) Row(humanFlops bool) []string {
-	flopsToString := func(e int64) string {
-		return fmt.Sprintf("%v", e)
-	}
+func (flops ShapeInformation) Row(humanFlops bool) []string {
 	dimsToString := func(e []int64) string {
 		if len(e) == 0 {
 			return ""
@@ -50,21 +42,57 @@ func (flops FlopsInformation) Row(humanFlops bool) []string {
 		}
 		return string(bts)
 	}
+	return []string{
+		dimsToString(flops.InputDimensions),
+		dimsToString(flops.OutputDimensions),
+	}
+}
+
+type FlopsInformation struct {
+	ShapeInformation `json:",inline,flatten""`
+	MultiplyAdds     int64 `json:"multiply_adds"`
+	Additions        int64 `json:"additions"`
+	Divisions        int64 `json:"divisions"`
+	Exponentiations  int64 `json:"exponentiations"`
+	Comparisons      int64 `json:"comparisons"`
+	General          int64 `json:"general"`
+}
+
+func (FlopsInformation) Header() []string {
+	header := ShapeInformation{}.Header()
+	return append(
+		header,
+		[]string{
+			"MultiplyAdds",
+			"Additions",
+			"Divisions",
+			"Exponentiations",
+			"Comparisons",
+			"General",
+		}...,
+	)
+}
+
+func (flops FlopsInformation) Row(humanFlops bool) []string {
+	flopsToString := func(e int64) string {
+		return fmt.Sprintf("%v", e)
+	}
 	if humanFlops {
 		flopsToString = func(e int64) string {
 			return utils.Flops(uint64(e))
 		}
 	}
-	return []string{
-		dimsToString(flops.InputDimensions),
-		dimsToString(flops.OutputDimensions),
-		flopsToString(flops.MultiplyAdds),
-		flopsToString(flops.Additions),
-		flopsToString(flops.Divisions),
-		flopsToString(flops.Exponentiations),
-		flopsToString(flops.Comparisons),
-		flopsToString(flops.General),
-	}
+	return append(
+		flops.ShapeInformation.Row(humanFlops),
+		[]string{
+			flopsToString(flops.MultiplyAdds),
+			flopsToString(flops.Additions),
+			flopsToString(flops.Divisions),
+			flopsToString(flops.Exponentiations),
+			flopsToString(flops.Comparisons),
+			flopsToString(flops.General),
+		}...,
+	)
 }
 
 func (this FlopsInformation) Total() int64 {

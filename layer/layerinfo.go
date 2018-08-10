@@ -11,6 +11,7 @@ import (
 type Information struct {
 	operatorType     string                   `json:"operatorType,omitempty"`
 	name             string                   `json:"name,omitempty"`
+	shape            dlperf.ShapeInformation  `json:"shape,omitempty"`
 	flops            dlperf.FlopsInformation  `json:"flops,omitempty"`
 	memory           dlperf.MemoryInformation `json:"memory,omitempty"`
 	inputDimensions  []int64                  `json:"input_dimensions,omitempty"`
@@ -23,6 +24,12 @@ func (layer *Information) OperatorType() string {
 
 func (layer *Information) Name() string {
 	return layer.name
+}
+
+func (layer *Information) Shape() dlperf.ShapeInformation {
+	layer.shape.InputDimensions = layer.inputDimensions
+	layer.shape.OutputDimensions = layer.outputDimensions
+	return layer.shape
 }
 
 func (layer *Information) Flops() dlperf.FlopsInformation {
