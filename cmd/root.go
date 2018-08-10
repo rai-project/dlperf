@@ -26,7 +26,7 @@ var (
 var rootCmd = &cobra.Command{
 	Use:   "dlperf",
 	Short: "Compute dlperf",
-	Run: func(cmd *cobra.Command, args []string) {
+	PersistentPreRun: func(cmd *cobra.Command, args []string) {
 		if outputFormat == "automatic" {
 			outputFormat = ""
 		}
