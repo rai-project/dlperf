@@ -1,6 +1,7 @@
 package layer
 
 import (
+	"github.com/k0kubun/pp"
 	"github.com/rai-project/dlperf"
 )
 
@@ -37,6 +38,10 @@ func (c *Conv) LayerInformation() dlperf.LayerInfo {
 
 	nIn := inputDimensions[0]
 	cIn := inputDimensions[1]
+
+	if len(outputDimensions) == 0 {
+		pp.Println(c)
+	}
 
 	cOut := outputDimensions[1]
 	hOut := outputDimensions[2]
