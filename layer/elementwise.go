@@ -3,7 +3,6 @@ package layer
 import (
 	"strings"
 
-	"github.com/k0kubun/pp"
 	"github.com/rai-project/dlperf"
 )
 
@@ -23,20 +22,21 @@ func (ElementWise) Description() string {
 }
 
 func (c *ElementWise) LayerInformation() dlperf.LayerInfo {
-	checkNumber(c.InputsDimensions, []int{1, 2}, c.OperatorType(), "number of inputs")
+	checkNumber(c.InputsDimensions, []int{2}, c.OperatorType(), "number of inputs")
 	checkNumber(c.OutputsDimensions, []int{1}, c.OperatorType(), "number of outputs")
 
 	inputDimensions := c.InputsDimensions[0]   // (N x C x H x W)
 	outputDimensions := c.OutputsDimensions[0] // (N x C x H x W)
 
-	pp.Println(c.InputsDimensions)
+	var shape []int64
+	for _, s := range inputDimensions {
+		shape = append(shape, s)
+	}
 
-	nIn := inputDimensions[0]
-	cIn := inputDimensions[1]
-	hIn := inputDimensions[2]
-	wIn := inputDimensions[3]
-
-	numOps := wIn * hIn * cIn * nIn
+	numOps := int64(1)
+	for _, s := range shape {
+		numOps *= s
+	}
 
 	flops := dlperf.FlopsInformation{}
 	switch strings.ToLower(c.Operator) {

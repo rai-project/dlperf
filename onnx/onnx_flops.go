@@ -38,8 +38,10 @@ func (o Onnx) LayerInformations() []dlperf.LayerInfo {
 		name := node.GetName()
 		layer := o.mkLayer(node)
 
+		// pp.Println("layer ", name)
+
 		if layer == nil {
-			pp.Println("failed to create layer ", name)
+			// pp.Println("failed to create layer ", name)
 			continue
 		}
 
@@ -55,6 +57,18 @@ func (o Onnx) GetValueInfoDimensions(names []string) [][]int64 {
 	ret := [][]int64{}
 	for _, name := range names {
 		val, ok := o.valueInfo[name]
+		if ok {
+			ret = append(ret, getValueInfoDimensions(val))
+			continue
+		}
+
+		val, ok = o.inputs[name]
+		if ok {
+			ret = append(ret, getValueInfoDimensions(val))
+			continue
+		}
+
+		val, ok = o.outputs[name]
 		if ok {
 			ret = append(ret, getValueInfoDimensions(val))
 		}
@@ -77,7 +91,7 @@ func (o Onnx) mkLayer(node *onnx.NodeProto) dlperf.Layer {
 	case "dropout":
 		ret = o.mkDropout(node)
 	case "add", "sum", "sub", "mul", "div", "max,", "min":
-		// ret = o.mkElementWise(node)
+		ret = o.mkElementWise(node)
 	case "gemm":
 		ret = o.mkGemm(node)
 	case "lrn":
@@ -177,6 +191,7 @@ func (o Onnx) mkDropout(node *onnx.NodeProto) dlperf.Layer {
 }
 
 func (o Onnx) mkElementWise(node *onnx.NodeProto) dlperf.Layer {
+
 	return &layer.ElementWise{
 		Operator:          node.GetOpType(),
 		InputsDimensions:  o.GetValueInfoDimensions(node.GetInput()),
