@@ -40,10 +40,9 @@ func (o Onnx) LayerInformations() []dlperf.LayerInfo {
 		name := node.GetName()
 		layer := o.mkLayer(node)
 
-		pp.Println("layer ", name)
+		// pp.Println("layer ", name)
 
 		if layer == nil {
-			// pp.Println("failed to create layer ", name)
 			continue
 		}
 
@@ -110,8 +109,10 @@ func (o Onnx) mkLayer(node *onnx.NodeProto) dlperf.Layer {
 		ret = o.mkScale(node)
 	case "softmax":
 		ret = o.mkSoftMax(node)
+	case "constant":
+		ret = o.mkConstant(node)
 	default:
-		// pp.Println("unhandeled", layerType)
+		pp.Println("unhandeled", layerType)
 	}
 
 	if ret != nil {
@@ -263,6 +264,13 @@ func (o Onnx) mkScale(node *onnx.NodeProto) dlperf.Layer {
 
 func (o Onnx) mkSoftMax(node *onnx.NodeProto) dlperf.Layer {
 	return &layer.SoftMax{
+		InputsDimensions:  o.GetValueInfoDimensions(node.GetInput()),
+		OutputsDimensions: o.GetValueInfoDimensions(node.GetOutput()),
+	}
+}
+
+func (o Onnx) mkConstant(node *onnx.NodeProto) dlperf.Layer {
+	return &layer.Constant{
 		InputsDimensions:  o.GetValueInfoDimensions(node.GetInput()),
 		OutputsDimensions: o.GetValueInfoDimensions(node.GetOutput()),
 	}
