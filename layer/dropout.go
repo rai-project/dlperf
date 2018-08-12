@@ -23,7 +23,7 @@ func (c Dropout) Information() dlperf.LayerInformation {
 		Base: c.Base,
 	}
 
-	if len(c.OutputsDimensions()) == 0 {
+	if isAnyEmpty(c.outputsDimensions) {
 		log.WithField("layer", c.OperatorType()).Info("len(OutputsDimensions) is 0")
 		return info
 	}
@@ -34,13 +34,13 @@ func (c Dropout) Information() dlperf.LayerInformation {
 	inputDimensions := c.InputsDimensions()[0]   // (N x C x H x W)
 	outputDimensions := c.OutputsDimensions()[0] // (N x C x H x W)
 
-	nIn := inputDimensions[0]
-	cIn := inputDimensions[1]
-	hIn := inputDimensions[2]
-	wIn := inputDimensions[3]
+	numOps := int64(1)
+	for _, s := range inputDimensions {
+		numOps *= s
+	}
 
 	info.flops = dlperf.FlopsInformation{
-		Comparisons: wIn * hIn * cIn * nIn,
+		Comparisons: numOps,
 	}
 
 	info.shape = dlperf.ShapeInformation{

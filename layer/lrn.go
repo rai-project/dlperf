@@ -21,7 +21,7 @@ func (c LRN) Information() dlperf.LayerInformation {
 		Base: c.Base,
 	}
 
-	if len(c.OutputsDimensions()) == 0 {
+	if isAnyEmpty(c.outputsDimensions) {
 		log.WithField("layer", c.OperatorType()).Info("len(OutputsDimensions) is 0")
 		return info
 	}

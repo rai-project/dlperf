@@ -26,7 +26,12 @@ func (c Conv) Information() dlperf.LayerInformation {
 		Base: c.Base,
 	}
 
-	if len(c.OutputsDimensions()) == 0 {
+	if isAnyEmpty(c.inputsDimensions) {
+		log.WithField("layer", c.OperatorType()).Info("len(InputsDimensions) is 0")
+		return info
+	}
+
+	if isAnyEmpty(c.outputsDimensions) {
 		log.WithField("layer", c.OperatorType()).Info("len(OutputsDimensions) is 0")
 		return info
 	}
@@ -36,7 +41,7 @@ func (c Conv) Information() dlperf.LayerInformation {
 
 	inputDimensions := c.InputsDimensions()[0]   // (N x C x H x W)
 	outputDimensions := c.OutputsDimensions()[0] // (N x C x H x W)
-	weightDimensions := c.InputsDimensions()[1]  // (C x M x kH x kW)
+	// weightDimensions := c.InputsDimensions()[1]  // (C x M x kH x kW)
 
 	nIn := inputDimensions[0]
 	cIn := inputDimensions[1]
@@ -45,11 +50,11 @@ func (c Conv) Information() dlperf.LayerInformation {
 	hOut := outputDimensions[2]
 	wOut := outputDimensions[3]
 
-	if weightDimensions[2] != c.KernelShape[0] || weightDimensions[3] != c.KernelShape[1] {
-		log.WithField("layer", c.OperatorType()).WithField("weight dimensions", weightDimensions).Error("weight dimensions do not match kernel_shape")
+	// if weightDimensions[2] != c.KernelShape[0] || weightDimensions[3] != c.KernelShape[1] {
+	// 	log.WithField("layer", c.OperatorType()).WithField("weight dimensions", weightDimensions).Error("weight dimensions do not match kernel_shape")
 
-		return info
-	}
+	// 	return info
+	// }
 
 	kernelH := c.Dilations[0]*(c.KernelShape[0]-1) + 1
 	kernelW := c.Dilations[1]*(c.KernelShape[1]-1) + 1

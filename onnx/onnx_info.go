@@ -79,7 +79,7 @@ func (o Onnx) mkLayer(node *onnx.NodeProto) dlperf.Layer {
 	operatorType := strings.ToLower(node.GetOpType())
 
 	switch operatorType {
-	case "batchnorm":
+	case "batchnorm", "batchnormalization":
 		ret = o.mkBatchNorm(node)
 	case "concat":
 		ret = o.mkConcat(node)
@@ -97,11 +97,11 @@ func (o Onnx) mkLayer(node *onnx.NodeProto) dlperf.Layer {
 		ret = o.mkMatMul(node)
 	case "maxpool", "averagepool", "globalmaxpool", "globalaveragepool":
 		ret = o.mkPooling(node)
-	case "relu":
+	case "relu", "leakyrelu":
 		ret = o.mkReLU(node)
-	case "reshape":
+	case "reshape", "transpose":
 		ret = o.mkReshape(node)
-	case "scale":
+	case "scale", "imagescaler":
 		ret = o.mkScale(node)
 	case "softmax":
 		ret = o.mkSoftMax(node)

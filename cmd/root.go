@@ -40,13 +40,6 @@ var rootCmd = &cobra.Command{
 			}
 		}
 
-		if outputFormat == "json" {
-			dir := "theoretical_flops"
-			if fullFlops {
-				dir += "_full"
-			}
-			outputFileName = filepath.Join(outputPath, dir)
-		}
 	},
 }
 

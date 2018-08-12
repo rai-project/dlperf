@@ -15,56 +15,81 @@
 package cmd
 
 import (
+	"os"
 	"path/filepath"
 
 	sourcepath "github.com/GeertJohan/go-sourcepath"
 	"github.com/Unknwon/com"
+	"github.com/k0kubun/pp"
+	zglob "github.com/mattn/go-zglob"
 	"github.com/pkg/errors"
 	"github.com/rai-project/dlperf/onnx"
 	"github.com/spf13/cobra"
 )
 
+func runLayerStats(cmd *cobra.Command, args []string) error {
+
+	if com.IsDir(modelPath) {
+		baseOutputFileName := outputFileName
+		if !com.IsDir(baseOutputFileName) {
+			os.MkdirAll(baseOutputFileName, os.ModePerm)
+		}
+		modelPaths, err := zglob.Glob(filepath.Join(modelPath, "**", "*.onnx"))
+		if err != nil {
+			return errors.Wrapf(err, "unable to glob %s", modelPath)
+		}
+		for _, path := range modelPaths {
+			modelPath = path
+			modelName := getModelName(modelPath)
+			outputFileName = filepath.Join(baseOutputFileName, modelName+"."+outputFormat)
+			pp.Println("processing " + modelName + " from " + modelPath + " to " + outputFileName)
+			runLayerStats(cmd, args)
+		}
+		return nil
+	}
+
+	if modelPath == "" {
+		modelPath = filepath.Join(sourcepath.MustAbsoluteDir(), "..", "assets", "onnx_models", "mnist.onnx")
+	} else {
+		s, err := filepath.Abs(modelPath)
+		if err == nil {
+			modelPath = s
+		}
+	}
+
+	if !com.IsFile(modelPath) {
+		return errors.Errorf("file %v does not exist", modelPath)
+	}
+
+	net, err := onnx.New(modelPath)
+	if err != nil {
+		return err
+	}
+
+	infos := net.ModelInformation()
+
+	writer := NewWriter(stat{}, humanFlops)
+	defer writer.Close()
+
+	for _, info := range infos {
+		writer.Row(
+			stat{
+				Name:    info.Name(),
+				Type:    info.OperatorType(),
+				Inputs:  info.Inputs(),
+				Outputs: info.Outputs(),
+			},
+		)
+	}
+
+	return nil
+}
+
 // layerstatsCmd represents the layerstats command
 var layerstatsCmd = &cobra.Command{
 	Use:     "layerstats",
 	Aliases: []string{"stats"},
-	RunE: func(cmd *cobra.Command, args []string) error {
-		if modelPath == "" {
-			modelPath = filepath.Join(sourcepath.MustAbsoluteDir(), "..", "assets", "onnx_models", "mnist.onnx")
-		} else {
-			s, err := filepath.Abs(modelPath)
-			if err == nil {
-				modelPath = s
-			}
-		}
-
-		if !com.IsFile(modelPath) {
-			return errors.Errorf("file %v does not exist", modelPath)
-		}
-
-		net, err := onnx.New(modelPath)
-		if err != nil {
-			return err
-		}
-
-		infos := net.ModelInformation()
-
-		writer := NewWriter(stat{}, humanFlops)
-		defer writer.Close()
-
-		for _, info := range infos {
-			writer.Row(
-				stat{
-					Name:    info.Name(),
-					Type:    info.OperatorType(),
-					Inputs:  info.Inputs(),
-					Outputs: info.Outputs(),
-				},
-			)
-		}
-
-		return nil
-	},
+	RunE:    runLayerStats,
 }
 
 func init() {

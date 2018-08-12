@@ -2,7 +2,9 @@ package cmd
 
 import (
 	"fmt"
+	"path"
 	"path/filepath"
+	"strings"
 
 	"github.com/Unknwon/com"
 	"github.com/rai-project/utils"
@@ -30,4 +32,19 @@ func flopsToString(e int64, humanFlops bool) string {
 		return utils.Flops(uint64(e))
 	}
 	return fmt.Sprintf("%v", e)
+}
+
+func getModelName(modelPath string) string {
+	return iGetModelName(modelPath, "")
+}
+
+func iGetModelName(modelPath, suffix string) string {
+	name := strings.TrimSuffix(filepath.Base(modelPath), ".onnx")
+	if name != "model" && name != "model_inferred" {
+		return name + suffix
+	}
+	if suffix == "" && name == "model_inferred" {
+		suffix = "_inferred"
+	}
+	return iGetModelName(path.Dir(modelPath), suffix)
 }
