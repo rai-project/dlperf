@@ -48,7 +48,7 @@ to quickly create a Cobra application.`,
 			return errors.Errorf("file %v does not exist", modelPath)
 		}
 
-		net, err := onnx.NewOnnx(modelPath)
+		net, err := onnx.New(modelPath)
 		if err != nil {
 			return err
 		}

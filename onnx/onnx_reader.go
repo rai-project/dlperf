@@ -15,9 +15,10 @@ type Onnx struct {
 	initializers map[string]*onnx.TensorProto
 }
 
-func NewOnnx(protoFileName string) (*Onnx, error) {
+func New(protoFileName string) (*Onnx, error) {
 
-	model, err := onnx.ReadModel(protoFileName)
+	model, err := onnx.New(protoFileName, onnx.Steps([]string{}))
+
 	if err != nil {
 		return nil, err
 	}
