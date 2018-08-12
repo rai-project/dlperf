@@ -97,9 +97,9 @@ func (o Onnx) mkLayer(node *onnx.NodeProto) dlperf.Layer {
 		ret = o.mkMatMul(node)
 	case "maxpool", "averagepool", "globalmaxpool", "globalaveragepool":
 		ret = o.mkPooling(node)
-	case "relu", "leakyrelu":
+	case "relu", "leakyrelu", "prelu":
 		ret = o.mkReLU(node)
-	case "reshape", "transpose":
+	case "reshape", "transpose", "unsqueeze", "identity":
 		ret = o.mkReshape(node)
 	case "scale", "imagescaler":
 		ret = o.mkScale(node)

@@ -31,12 +31,10 @@ func (c BatchNorm) Information() dlperf.LayerInformation {
 	inputDimensions := c.inputsDimensions[0]   // (N x C x H x W)
 	outputDimensions := c.outputsDimensions[0] // (N x C x H x W)
 
-	nIn := inputDimensions[0]
-	cIn := inputDimensions[1]
-	hIn := inputDimensions[2]
-	wIn := inputDimensions[3]
-
-	numOps := wIn * hIn * cIn * nIn
+	numOps := int64(1)
+	for _, s := range inputDimensions {
+		numOps *= s
+	}
 
 	// this is for inference
 	info.flops = dlperf.FlopsInformation{
