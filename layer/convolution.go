@@ -29,7 +29,7 @@ func (Conv) Description() string {
 	return ``
 }
 
-func (c *Conv) LayerInformation() dlperf.LayerInfo {
+func (c *Conv) Information() dlperf.LayerInformation {
 	info := &Information{
 		name:         c.name,
 		operatorType: c.OperatorType(),

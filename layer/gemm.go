@@ -20,7 +20,7 @@ func (Gemm) Description() string {
 	return ``
 }
 
-func (c *Gemm) LayerInformation() dlperf.LayerInfo {
+func (c *Gemm) Information() dlperf.LayerInformation {
 	checkNumber(c.InputsDimensions, []int{3}, c.OperatorType(), "number of inputs")
 	checkNumber(c.OutputsDimensions, []int{1}, c.OperatorType(), "number of outputs")
 

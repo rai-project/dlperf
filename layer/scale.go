@@ -20,7 +20,7 @@ func (Scale) Description() string {
 	return ``
 }
 
-func (c *Scale) LayerInformation() dlperf.LayerInfo {
+func (c *Scale) Information() dlperf.LayerInformation {
 	checkNumber(c.InputsDimensions, []int{1}, c.OperatorType(), "number of inputs")
 	checkNumber(c.OutputsDimensions, []int{1}, c.OperatorType(), "number of outputs")
 

@@ -20,7 +20,7 @@ func (MatMul) Description() string {
 	return ``
 }
 
-func (c *MatMul) LayerInformation() dlperf.LayerInfo {
+func (c *MatMul) Information() dlperf.LayerInformation {
 	checkNumber(c.InputsDimensions, []int{1, 2}, c.OperatorType(), "number of inputs")
 	checkNumber(c.OutputsDimensions, []int{1}, c.OperatorType(), "number of outputs")
 

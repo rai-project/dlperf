@@ -24,7 +24,7 @@ func (LRN) Description() string {
 	return ``
 }
 
-func (c *LRN) LayerInformation() dlperf.LayerInfo {
+func (c *LRN) Information() dlperf.LayerInformation {
 	checkNumber(c.InputsDimensions, []int{1}, c.OperatorType(), "number of inputs")
 	checkNumber(c.OutputsDimensions, []int{1}, c.OperatorType(), "number of outputs")
 

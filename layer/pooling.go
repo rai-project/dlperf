@@ -24,7 +24,7 @@ func (Pooling) Description() string {
 	return ``
 }
 
-func (c *Pooling) LayerInformation() dlperf.LayerInfo {
+func (c *Pooling) Information() dlperf.LayerInformation {
 	checkNumber(c.InputsDimensions, []int{1}, c.OperatorType(), "number of inputs")
 	checkNumber(c.OutputsDimensions, []int{1}, c.OperatorType(), "number of outputs")
 

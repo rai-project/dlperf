@@ -23,7 +23,7 @@ func (BatchNorm) Description() string {
 	return ``
 }
 
-func (c *BatchNorm) LayerInformation() dlperf.LayerInfo {
+func (c *BatchNorm) Information() dlperf.LayerInformation {
 	info := &Information{
 		name:         c.name,
 		operatorType: c.OperatorType(),

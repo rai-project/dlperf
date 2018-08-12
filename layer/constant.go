@@ -20,7 +20,7 @@ func (Constant) Description() string {
 	return ``
 }
 
-func (c *Constant) LayerInformation() dlperf.LayerInfo {
+func (c *Constant) Information() dlperf.LayerInformation {
 	return &Information{
 		name:         c.name,
 		operatorType: c.OperatorType(),

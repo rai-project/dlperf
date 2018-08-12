@@ -24,7 +24,7 @@ func (ReLU) Description() string {
 	return ``
 }
 
-func (c *ReLU) LayerInformation() dlperf.LayerInfo {
+func (c *ReLU) Information() dlperf.LayerInformation {
 
 	checkNumber(c.InputsDimensions, []int{1, 2}, c.OperatorType(), "number of inputs")
 	checkNumber(c.OutputsDimensions, []int{1}, c.OperatorType(), "number of outputs")

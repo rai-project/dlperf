@@ -23,7 +23,7 @@ func (ElementWise) Description() string {
 	return ``
 }
 
-func (c *ElementWise) LayerInformation() dlperf.LayerInfo {
+func (c *ElementWise) Information() dlperf.LayerInformation {
 	checkNumber(c.InputsDimensions, []int{2}, c.OperatorType(), "number of inputs")
 	checkNumber(c.OutputsDimensions, []int{1}, c.OperatorType(), "number of outputs")
 

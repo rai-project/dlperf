@@ -20,7 +20,7 @@ func (Concat) Description() string {
 	return ``
 }
 
-func (c *Concat) LayerInformation() dlperf.LayerInfo {
+func (c *Concat) Information() dlperf.LayerInformation {
 	checkNumber(c.OutputsDimensions, []int{1}, c.OperatorType(), "number of outputs")
 
 	inputDimensions := c.InputsDimensions[0]   // (N x C x H x W)
