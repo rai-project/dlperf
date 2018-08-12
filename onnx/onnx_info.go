@@ -9,35 +9,29 @@ import (
 	"github.com/rai-project/onnx"
 )
 
-func (o Onnx) Information() (dlperf.ShapesInformation, dlperf.FlopsInformation, dlperf.MemoryInformation) {
-	layerinfo := o.LayerInformation()
-	shapes := dlperf.ShapesInformation{}
+func (o Onnx) Information() (dlperf.FlopsInformation, dlperf.MemoryInformation) {
+	modelinfo := o.ModelInformation()
 	flops := dlperf.FlopsInformation{}
 	memory := dlperf.MemoryInformation{}
-	for _, info := range layerinfo {
-		shapes = shapes.Add(info.Shapes())
+	for _, info := range modelinfo {
 		flops = flops.Add(info.Flops())
 		memory = memory.Add(info.Memory())
 	}
-	return shapes, flops, memory
-}
 
-func (o Onnx) ShapesInformation() dlperf.FlopsInformation {
-	shapes, _, _ := o.Information()
-	return shapes
+	return flops, memory
 }
 
 func (o Onnx) FlopsInformation() dlperf.FlopsInformation {
-	_, flops, _ := o.Information()
+	flops, _ := o.Information()
 	return flops
 }
 
 func (o Onnx) MemoryInformation() dlperf.MemoryInformation {
-	_, _, memory := o.Information()
+	_, memory := o.Information()
 	return memory
 }
 
-func (o Onnx) LayerInformation() []dlperf.LayerInformation {
+func (o Onnx) ModelInformation() []dlperf.LayerInformation {
 	ret := []dlperf.LayerInformation{}
 
 	// the nodes in the graph are sorted topologically
@@ -54,7 +48,7 @@ func (o Onnx) LayerInformation() []dlperf.LayerInformation {
 		}
 
 		info := layer.Information()
-		o.layerInformation[name] = info
+		o.modelInformation[name] = info
 		ret = append(ret, info)
 	}
 
