@@ -8,17 +8,13 @@ import (
 // NCHW tensor layout for passing inputs and outputs
 
 type Conv struct {
-	Base              `json:",inline,flatten,omitempty"`
-	inputs            []string  `json:",inputs,omitempty"`
-	outputs           []string  `json:",outputs,omitempty"`
-	AutoPad           string    `json:"auto_pad,omitempty"`
-	Dilations         []int64   `json:"dilation,omitempty"`
-	Group             int64     `json:"group,omitempty"`
-	KernelShape       []int64   `json:"kernel_shape,omitempty"`
-	Pads              []int64   `json:"pad_h,omitempty"`
-	Strides           []int64   `json:"stride_h,omitempty"`
-	InputsDimensions  [][]int64 `json:"inputs_dimensions,omitempty"`
-	OutputsDimensions [][]int64 `json:"outputs_dimensions,omitempty"`
+	Base        `json:",inline,flatten,omitempty"`
+	AutoPad     string  `json:"auto_pad,omitempty"`
+	Dilations   []int64 `json:"dilation,omitempty"`
+	Group       int64   `json:"group,omitempty"`
+	KernelShape []int64 `json:"kernel_shape,omitempty"`
+	Pads        []int64 `json:"pad_h,omitempty"`
+	Strides     []int64 `json:"stride_h,omitempty"`
 }
 
 func (Conv) OperatorType() string {
@@ -31,13 +27,16 @@ func (Conv) Description() string {
 
 func (c *Conv) Information() dlperf.LayerInformation {
 	info := &Information{
-		name:         c.name,
-		operatorType: c.OperatorType(),
+		name:              c.Name,
+		operatorType:      c.OperatorType(),
+		inputs:            c.Inputs(),
+		outputs:           c.Outputs(),
+		inputsDimensions:  c.InputsDimensions,
+		outputsDimensions: c.OutputsDimensions,
 	}
 
 	if len(c.OutputsDimensions) == 0 {
 		log.WithField("layer", c.OperatorType()).Info("len(OutputsDimensions) is 0")
-
 		return info
 	}
 
@@ -67,9 +66,6 @@ func (c *Conv) Information() dlperf.LayerInformation {
 	info.flops = dlperf.FlopsInformation{
 		MultiplyAdds: int64(kernelH*kernelW*hOut*wOut*cIn*cOut*nIn) / c.Group,
 	}
-
-	info.inputDimensions = inputDimensions
-	info.outputDimensions = outputDimensions
 
 	return info
 }
