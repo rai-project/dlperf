@@ -74,9 +74,9 @@ func (o Onnx) GetValueInfoDimensions(names []string) [][]int64 {
 
 func (o Onnx) mkLayer(node *onnx.NodeProto) dlperf.Layer {
 	var ret dlperf.Layer
-	layerType := strings.ToLower(node.GetOpType())
+	operatorType := strings.ToLower(node.GetOpType())
 
-	switch layerType {
+	switch operatorType {
 	case "batchnorm":
 		ret = o.mkBatchNorm(node)
 	case "concat":
@@ -106,7 +106,7 @@ func (o Onnx) mkLayer(node *onnx.NodeProto) dlperf.Layer {
 	case "constant":
 		ret = o.mkConstant(node)
 	default:
-		pp.Println("unhandeled", layerType)
+		pp.Println("unhandeled", operatorType)
 	}
 
 	if ret != nil {
