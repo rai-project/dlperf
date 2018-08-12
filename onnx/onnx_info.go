@@ -9,28 +9,6 @@ import (
 	"github.com/rai-project/onnx"
 )
 
-func (o Onnx) Information() (dlperf.FlopsInformation, dlperf.MemoryInformation) {
-	modelinfo := o.ModelInformation()
-	flops := dlperf.FlopsInformation{}
-	memory := dlperf.MemoryInformation{}
-	for _, info := range modelinfo {
-		flops = flops.Add(info.Flops())
-		memory = memory.Add(info.Memory())
-	}
-
-	return flops, memory
-}
-
-func (o Onnx) FlopsInformation() dlperf.FlopsInformation {
-	flops, _ := o.Information()
-	return flops
-}
-
-func (o Onnx) MemoryInformation() dlperf.MemoryInformation {
-	_, memory := o.Information()
-	return memory
-}
-
 func (o Onnx) ModelInformation() []dlperf.LayerInformation {
 	ret := []dlperf.LayerInformation{}
 
@@ -52,6 +30,22 @@ func (o Onnx) ModelInformation() []dlperf.LayerInformation {
 	}
 
 	return ret
+}
+
+func (o Onnx) FlopsInformation() dlperf.FlopsInformation {
+	flops := dlperf.FlopsInformation{}
+	for _, info := range o.ModelInformation() {
+		flops = flops.Add(info.Flops())
+	}
+	return flops
+}
+
+func (o Onnx) MemoryInformation() dlperf.MemoryInformation {
+	memory := dlperf.FlopsInformation{}
+	for _, info := range o.ModelInformation() {
+		memory = memory.Add(info.Memory())
+	}
+	return memory
 }
 
 func (o Onnx) GetValueInfoDimensions(names []string) [][]int64 {
@@ -123,22 +117,33 @@ func (o Onnx) mkLayer(node *onnx.NodeProto) dlperf.Layer {
 }
 
 func (o Onnx) mkBatchNorm(node *onnx.NodeProto) dlperf.Layer {
+	inputs := node.GetInput()
+	outputs := node.GetOutput()
+
 	return &layer.BatchNorm{
-		inputs:            node.GetInput(),
-		outputs:           node.GetOutput(),
-		InputsDimensions:  o.GetValueInfoDimensions(node.GetInput()),
-		OutputsDimensions: o.GetValueInfoDimensions(node.GetOutput()),
+		inputs:            inputs,
+		outputs:           outputs,
+		InputsDimensions:  o.GetValueInfoDimensions(inputs),
+		OutputsDimensions: o.GetValueInfoDimensions(outputs),
 	}
 }
 
 func (o Onnx) mkConcat(node *onnx.NodeProto) dlperf.Layer {
+	inputs := node.GetInput()
+	outputs := node.GetOutput()
+
 	return &layer.Concat{
-		InputsDimensions:  o.GetValueInfoDimensions(node.GetInput()),
-		OutputsDimensions: o.GetValueInfoDimensions(node.GetOutput()),
+		inputs:            inputs,
+		outputs:           outputs,
+		InputsDimensions:  o.GetValueInfoDimensions(inputs),
+		OutputsDimensions: o.GetValueInfoDimensions(outputs),
 	}
 }
 
 func (o Onnx) mkConv(node *onnx.NodeProto) dlperf.Layer {
+	inputs := node.GetInput()
+	outputs := node.GetOutput()
+
 	autoPad := "VALID"
 	autoPadAttr := getNodeAttributeFromName(node, "auto_pad")
 	if autoPadAttr.GetStrings() != nil {
@@ -177,59 +182,87 @@ func (o Onnx) mkConv(node *onnx.NodeProto) dlperf.Layer {
 	}
 
 	return &layer.Conv{
+		inputs:            inputs,
+		outputs:           outputs,
+		InputsDimensions:  o.GetValueInfoDimensions(inputs),
+		OutputsDimensions: o.GetValueInfoDimensions(outputs),
 		AutoPad:           autoPad,
 		Dilations:         dilations,
 		Group:             group,
 		KernelShape:       kernelShapeAttr.GetInts(),
 		Pads:              pads,
 		Strides:           strides,
-		InputsDimensions:  o.GetValueInfoDimensions(node.GetInput()),
-		OutputsDimensions: o.GetValueInfoDimensions(node.GetOutput()),
 	}
 }
 
 func (o Onnx) mkDropout(node *onnx.NodeProto) dlperf.Layer {
+	inputs := node.GetInput()
+	outputs := node.GetOutput()
+
 	return &layer.Dropout{
-		InputsDimensions:  o.GetValueInfoDimensions(node.GetInput()),
-		OutputsDimensions: o.GetValueInfoDimensions(node.GetOutput()),
+		inputs:            inputs,
+		outputs:           outputs,
+		InputsDimensions:  o.GetValueInfoDimensions(inputs),
+		OutputsDimensions: o.GetValueInfoDimensions(outputs),
 	}
 }
 
 func (o Onnx) mkElementWise(node *onnx.NodeProto) dlperf.Layer {
+	inputs := node.GetInput()
+	outputs := node.GetOutput()
 
 	return &layer.ElementWise{
 		Operator:          node.GetOpType(),
-		InputsDimensions:  o.GetValueInfoDimensions(node.GetInput()),
-		OutputsDimensions: o.GetValueInfoDimensions(node.GetOutput()),
+		inputs:            inputs,
+		outputs:           outputs,
+		InputsDimensions:  o.GetValueInfoDimensions(inputs),
+		OutputsDimensions: o.GetValueInfoDimensions(outputs),
 	}
 }
 
 func (o Onnx) mkGemm(node *onnx.NodeProto) dlperf.Layer {
+	inputs := node.GetInput()
+	outputs := node.GetOutput()
+
 	return &layer.Gemm{
-		InputsDimensions:  o.GetValueInfoDimensions(node.GetInput()),
-		OutputsDimensions: o.GetValueInfoDimensions(node.GetOutput()),
+		inputs:            inputs,
+		outputs:           outputs,
+		InputsDimensions:  o.GetValueInfoDimensions(inputs),
+		OutputsDimensions: o.GetValueInfoDimensions(outputs),
 	}
 }
 
 func (o Onnx) mkMatMul(node *onnx.NodeProto) dlperf.Layer {
+	inputs := node.GetInput()
+	outputs := node.GetOutput()
+
 	return &layer.MatMul{
-		InputsDimensions:  o.GetValueInfoDimensions(node.GetInput()),
-		OutputsDimensions: o.GetValueInfoDimensions(node.GetOutput()),
+		inputs:            inputs,
+		outputs:           outputs,
+		InputsDimensions:  o.GetValueInfoDimensions(inputs),
+		OutputsDimensions: o.GetValueInfoDimensions(outputs),
 	}
 }
 
 func (o Onnx) mkPooling(node *onnx.NodeProto) dlperf.Layer {
+	inputs := node.GetInput()
+	outputs := node.GetOutput()
 	kernelShapeAttr := getNodeAttributeFromName(node, "kernel_shape")
 
 	return &layer.Pooling{
 		Operator:          node.GetOpType(),
+		inputs:            inputs,
+		outputs:           outputs,
+		InputsDimensions:  o.GetValueInfoDimensions(inputs),
+		OutputsDimensions: o.GetValueInfoDimensions(outputs),
 		KernelShape:       kernelShapeAttr.GetInts(),
-		InputsDimensions:  o.GetValueInfoDimensions(node.GetInput()),
-		OutputsDimensions: o.GetValueInfoDimensions(node.GetOutput()),
 	}
 }
 
 func (o Onnx) mkLRN(node *onnx.NodeProto) dlperf.Layer {
+	inputs := node.GetInput()
+	outputs := node.GetOutput()
+
 	size := int64(1)
 	sizeAttr := getNodeAttributeFromName(node, "size")
 	if sizeAttr.GetInts() != nil {
@@ -237,43 +270,70 @@ func (o Onnx) mkLRN(node *onnx.NodeProto) dlperf.Layer {
 	}
 
 	return &layer.LRN{
+		inputs:            inputs,
+		outputs:           outputs,
+		InputsDimensions:  o.GetValueInfoDimensions(inputs),
+		OutputsDimensions: o.GetValueInfoDimensions(outputs),
 		Size:              size,
-		InputsDimensions:  o.GetValueInfoDimensions(node.GetInput()),
-		OutputsDimensions: o.GetValueInfoDimensions(node.GetOutput()),
 	}
 }
 
 func (o Onnx) mkReLU(node *onnx.NodeProto) dlperf.Layer {
+	inputs := node.GetInput()
+	outputs := node.GetOutput()
+
 	return &layer.ReLU{
-		InputsDimensions:  o.GetValueInfoDimensions(node.GetInput()),
-		OutputsDimensions: o.GetValueInfoDimensions(node.GetOutput()),
+		inputs:            inputs,
+		outputs:           outputs,
+		InputsDimensions:  o.GetValueInfoDimensions(inputs),
+		OutputsDimensions: o.GetValueInfoDimensions(outputs),
 	}
 }
 
 func (o Onnx) mkReshape(node *onnx.NodeProto) dlperf.Layer {
+	inputs := node.GetInput()
+	outputs := node.GetOutput()
+
 	return &layer.Reshape{
-		InputsDimensions:  o.GetValueInfoDimensions(node.GetInput()),
-		OutputsDimensions: o.GetValueInfoDimensions(node.GetOutput()),
+		inputs:            inputs,
+		outputs:           outputs,
+		InputsDimensions:  o.GetValueInfoDimensions(inputs),
+		OutputsDimensions: o.GetValueInfoDimensions(outputs),
 	}
 }
 
 func (o Onnx) mkScale(node *onnx.NodeProto) dlperf.Layer {
+	inputs := node.GetInput()
+	outputs := node.GetOutput()
+
 	return &layer.Scale{
-		InputsDimensions:  o.GetValueInfoDimensions(node.GetInput()),
-		OutputsDimensions: o.GetValueInfoDimensions(node.GetOutput()),
+		inputs:            inputs,
+		outputs:           outputs,
+		InputsDimensions:  o.GetValueInfoDimensions(inputs),
+		OutputsDimensions: o.GetValueInfoDimensions(outputs),
 	}
 }
 
 func (o Onnx) mkSoftMax(node *onnx.NodeProto) dlperf.Layer {
+	inputs := node.GetInput()
+	outputs := node.GetOutput()
+
 	return &layer.SoftMax{
-		InputsDimensions:  o.GetValueInfoDimensions(node.GetInput()),
-		OutputsDimensions: o.GetValueInfoDimensions(node.GetOutput()),
+		inputs:            inputs,
+		outputs:           outputs,
+		InputsDimensions:  o.GetValueInfoDimensions(inputs),
+		OutputsDimensions: o.GetValueInfoDimensions(outputs),
 	}
 }
 
 func (o Onnx) mkConstant(node *onnx.NodeProto) dlperf.Layer {
+	inputs := node.GetInput()
+	outputs := node.GetOutput()
+
 	return &layer.Constant{
-		InputsDimensions:  o.GetValueInfoDimensions(node.GetInput()),
-		OutputsDimensions: o.GetValueInfoDimensions(node.GetOutput()),
+		inputs:            inputs,
+		outputs:           outputs,
+		InputsDimensions:  o.GetValueInfoDimensions(inputs),
+		OutputsDimensions: o.GetValueInfoDimensions(outputs),
 	}
 }
