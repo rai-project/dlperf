@@ -9,12 +9,11 @@ import (
 type Onnx struct {
 	*onnx.ModelProto
 	*onnx.GraphProto
-	nodes            *ordered_map.OrderedMap // map[string]*onnx.NodeProto
-	valueInfo        map[string]*onnx.ValueInfoProto
-	inputs           map[string]*onnx.ValueInfoProto
-	outputs          map[string]*onnx.ValueInfoProto
-	initializers     map[string]*onnx.TensorProto
-	modelInformation map[string]dlperf.layerInformation
+	nodes        *ordered_map.OrderedMap // map[string]*onnx.NodeProto
+	valueInfo    map[string]*onnx.ValueInfoProto
+	inputs       map[string]*onnx.ValueInfoProto
+	outputs      map[string]*onnx.ValueInfoProto
+	initializers map[string]*onnx.TensorProto
 }
 
 func NewOnnx(protoFileName string) (*Onnx, error) {

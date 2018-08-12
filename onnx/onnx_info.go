@@ -48,7 +48,6 @@ func (o Onnx) ModelInformation() []dlperf.LayerInformation {
 		}
 
 		info := layer.Information()
-		o.modelInformation[name] = info
 		ret = append(ret, info)
 	}
 
