@@ -9,16 +9,18 @@ import (
 type stat struct {
 	Name    string   `json:"name"`
 	Type    string   `json:"type"`
+	Inputs  []string `json:"inputs"`
 	Outputs []string `json:"outputs"`
 }
 
 func (stat) Header() []string {
-	return []string{"LayerName", "LayerType", "Outputs"}
+	return []string{"LayerName", "LayerType", "Inputs", "Outputs"}
 }
 
 func (l stat) Row(humanFlops bool) []string {
+	inputs := strings.Join(l.Inputs, ";")
 	outputs := strings.Join(l.Outputs, ";")
-	return []string{l.Name, l.Type, outputs}
+	return []string{l.Name, l.Type, inputs, outputs}
 }
 
 type layer struct {

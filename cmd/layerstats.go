@@ -26,14 +26,8 @@ import (
 
 // layerstatsCmd represents the layerstats command
 var layerstatsCmd = &cobra.Command{
-	Use:   "layerstats",
-	Short: "Get layer statistics about the model",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Use:     "layerstats",
+	Aliases: []string{"stats"},
 	RunE: func(cmd *cobra.Command, args []string) error {
 		if modelPath == "" {
 			modelPath = filepath.Join(sourcepath.MustAbsoluteDir(), "..", "assets", "onnx_models", "mnist.onnx")
@@ -63,6 +57,7 @@ to quickly create a Cobra application.`,
 				stat{
 					Name:    info.Name(),
 					Type:    info.OperatorType(),
+					Inputs:  info.Inputs(),
 					Outputs: info.Outputs(),
 				},
 			)
