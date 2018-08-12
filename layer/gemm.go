@@ -4,23 +4,27 @@ import (
 	"github.com/rai-project/dlperf"
 )
 
-type Gemm struct {
-	Base              `json:",inline,flatten,omitempty"`
-	inputs            []string  `json:",inputs,omitempty"`
-	outputs           []string  `json:",outputs,omitempty"`
-	InputsDimensions  [][]int64 `json:"inputs_dimensions,omitempty"`
-	OutputsDimensions [][]int64 `json:"outputs_dimensions,omitempty"`
-}
-
-func (Gemm) OperatorType() string {
-	return "Gemm"
-}
+type Gemm Base
 
 func (Gemm) Description() string {
 	return ``
 }
 
 func (c *Gemm) Information() dlperf.LayerInformation {
+	info := &Information{
+		name:              c.Name,
+		operatorType:      c.OperatorType(),
+		inputs:            c.Inputs(),
+		outputs:           c.Outputs(),
+		inputsDimensions:  c.InputsDimensions,
+		outputsDimensions: c.OutputsDimensions,
+	}
+
+	if len(c.OutputsDimensions) == 0 {
+		log.WithField("layer", c.OperatorType()).Info("len(OutputsDimensions) is 0")
+		return info
+	}
+
 	checkNumber(c.InputsDimensions, []int{3}, c.OperatorType(), "number of inputs")
 	checkNumber(c.OutputsDimensions, []int{1}, c.OperatorType(), "number of outputs")
 
@@ -34,18 +38,12 @@ func (c *Gemm) Information() dlperf.LayerInformation {
 
 	numOuts := outputDimensions[0] * outputDimensions[1]
 
-	flops := dlperf.FlopsInformation{
+	info.flops = dlperf.FlopsInformation{
 		MultiplyAdds: numOuts * K,
 		Additions:    numOuts,
 	}
 
-	return &Information{
-		name:             c.name,
-		operatorType:     c.OperatorType(),
-		flops:            flops,
-		inputDimensions:  inputADimensions,
-		outputDimensions: outputDimensions,
-	}
+	return info
 }
 
 func init() {

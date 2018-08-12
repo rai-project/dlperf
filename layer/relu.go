@@ -4,27 +4,26 @@ import (
 	"github.com/rai-project/dlperf"
 )
 
-type ReLU struct {
-	Base              `json:",inline,flatten""`
-	inputs            []string  `json:",inputs,omitempty"`
-	outputs           []string  `json:",outputs,omitempty"`
-	InputsDimensions  [][]int64 `json:"inputs_dimensions,omitempty"`
-	OutputsDimensions [][]int64 `json:"outputs_dimensions,omitempty"`
-}
-
-func (ReLU) OperatorType() string {
-	return "ReLU"
-}
-
-func (ReLU) Aliases() []string {
-	return []string{"relu"}
-}
+type ReLU Base
 
 func (ReLU) Description() string {
 	return ``
 }
 
 func (c *ReLU) Information() dlperf.LayerInformation {
+	info := &Information{
+		name:              c.Name,
+		operatorType:      c.OperatorType(),
+		inputs:            c.Inputs(),
+		outputs:           c.Outputs(),
+		inputsDimensions:  c.InputsDimensions,
+		outputsDimensions: c.OutputsDimensions,
+	}
+
+	if len(c.OutputsDimensions) == 0 {
+		log.WithField("layer", c.OperatorType()).Info("len(OutputsDimensions) is 0")
+		return info
+	}
 
 	checkNumber(c.InputsDimensions, []int{1, 2}, c.OperatorType(), "number of inputs")
 	checkNumber(c.OutputsDimensions, []int{1}, c.OperatorType(), "number of outputs")
@@ -37,17 +36,11 @@ func (c *ReLU) Information() dlperf.LayerInformation {
 	hIn := inputDimensions[2]
 	wIn := inputDimensions[3]
 
-	flops := dlperf.FlopsInformation{
+	info.flops = dlperf.FlopsInformation{
 		Comparisons: wIn * hIn * cIn * nIn,
 	}
 
-	return &Information{
-		name:             c.name,
-		operatorType:     c.OperatorType(),
-		flops:            flops,
-		inputDimensions:  inputDimensions,
-		outputDimensions: outputDimensions,
-	}
+	return info
 }
 
 func init() {

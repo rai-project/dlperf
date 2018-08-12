@@ -4,23 +4,27 @@ import (
 	"github.com/rai-project/dlperf"
 )
 
-type Scale struct {
-	Base              `json:",inline,flatten,omitempty"`
-	inputs            []string  `json:",inputs,omitempty"`
-	outputs           []string  `json:",outputs,omitempty"`
-	InputsDimensions  [][]int64 `json:"inputs_dimensions,omitempty"`
-	OutputsDimensions [][]int64 `json:"outputs_dimensions,omitempty"`
-}
-
-func (Scale) OperatorType() string {
-	return "Scale"
-}
+type Scale Base
 
 func (Scale) Description() string {
 	return ``
 }
 
 func (c *Scale) Information() dlperf.LayerInformation {
+	info := &Information{
+		name:              c.Name,
+		operatorType:      c.OperatorType(),
+		inputs:            c.Inputs(),
+		outputs:           c.Outputs(),
+		inputsDimensions:  c.InputsDimensions,
+		outputsDimensions: c.OutputsDimensions,
+	}
+
+	if len(c.OutputsDimensions) == 0 {
+		log.WithField("layer", c.OperatorType()).Info("len(OutputsDimensions) is 0")
+		return info
+	}
+
 	checkNumber(c.InputsDimensions, []int{1}, c.OperatorType(), "number of inputs")
 	checkNumber(c.OutputsDimensions, []int{1}, c.OperatorType(), "number of outputs")
 
@@ -32,17 +36,11 @@ func (c *Scale) Information() dlperf.LayerInformation {
 	hIn := inputDimensions[2]
 	wIn := inputDimensions[3]
 
-	flops := dlperf.FlopsInformation{
+	info.flops = dlperf.FlopsInformation{
 		MultiplyAdds: wIn * hIn * cIn * nIn,
 	}
 
-	return &Information{
-		name:             c.name,
-		operatorType:     c.OperatorType(),
-		flops:            flops,
-		inputDimensions:  inputDimensions,
-		outputDimensions: outputDimensions,
-	}
+	return info
 }
 
 func init() {

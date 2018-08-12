@@ -6,17 +6,7 @@ import (
 
 // https://github.com/onnx/onnx/blob/master/docs/Operators.md#Reshape
 
-type Reshape struct {
-	Base              `json:",inline,flatten,omitempty"`
-	inputs            []string  `json:",inputs,omitempty"`
-	outputs           []string  `json:",outputs,omitempty"`
-	InputsDimensions  [][]int64 `json:"inputs_dimensions,omitempty"`
-	OutputsDimensions [][]int64 `json:"outputs_dimensions,omitempty"`
-}
-
-func (Reshape) OperatorType() string {
-	return "Reshape"
-}
+type Reshape Base
 
 func (Reshape) Description() string {
 	return ``
@@ -29,16 +19,9 @@ func (c *Reshape) Information() dlperf.LayerInformation {
 	inputDimensions := c.InputsDimensions[0]   // (N x C x H x W)
 	outputDimensions := c.OutputsDimensions[0] // (N x C x H x W)
 
-	// this is for inference
-	flops := dlperf.FlopsInformation{}
+	info.flops = dlperf.FlopsInformation{}
 
-	return &Information{
-		name:             c.name,
-		operatorType:     c.OperatorType(),
-		flops:            flops,
-		inputDimensions:  inputDimensions,
-		outputDimensions: outputDimensions,
-	}
+	return info
 }
 
 func init() {

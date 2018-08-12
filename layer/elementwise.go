@@ -6,14 +6,7 @@ import (
 	"github.com/rai-project/dlperf"
 )
 
-type ElementWise struct {
-	Base     `json:",inline,flatten,omitempty"`
-	Operator string `json:"operation,omitempty"`
-}
-
-func (c *ElementWise) OperatorType() string {
-	return c.Operator
-}
+type ElementWise Base
 
 func (ElementWise) Description() string {
 	return ``
@@ -50,8 +43,8 @@ func (c *ElementWise) Information() dlperf.LayerInformation {
 		numOps *= s
 	}
 
-	flops := dlperf.FlopsInformation{}
-	switch strings.ToLower(c.Operator) {
+	info.flops = dlperf.FlopsInformation{}
+	switch strings.ToLower(c.operatorType) {
 	case "add", "sum", "sub":
 		flops.Additions = numOps
 	case "mul", "div":
@@ -62,13 +55,7 @@ func (c *ElementWise) Information() dlperf.LayerInformation {
 		log.WithField("layer", c.OperatorType()).WithField("operator", c.Operator).Error("invalid layer operation")
 	}
 
-	return &Information{
-		name:             c.name,
-		operatorType:     c.OperatorType(),
-		flops:            flops,
-		inputDimensions:  inputDimensions,
-		outputDimensions: outputDimensions,
-	}
+	return info
 }
 
 func init() {

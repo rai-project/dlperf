@@ -122,7 +122,7 @@ func (o Onnx) mkBase(node *onnx.NodeProto) dlperf.Layer {
 
 	return &layer.Base{
 		name:              node.GetName(),
-		operatorType:      node.GetOpType(),
+		operatorType:      strings.ToLower(node.GetOpType()),
 		inputs:            inputs,
 		outputs:           outputs,
 		inputsDimensions:  o.GetValueInfoDimensions(inputs),
@@ -137,23 +137,12 @@ func (o Onnx) mkBatchNorm(node *onnx.NodeProto) dlperf.Layer {
 }
 
 func (o Onnx) mkConcat(node *onnx.NodeProto) dlperf.Layer {
-	inputs := node.GetInput()
-	outputs := node.GetOutput()
-
 	return &layer.Concat{
-		name:              node.GetName(),
-		operatorType:      node.GetOpType(),
-		inputs:            inputs,
-		outputs:           outputs,
-		inputsDimensions:  o.GetValueInfoDimensions(inputs),
-		outputsDimensions: o.GetValueInfoDimensions(outputs),
+		Base: mkBase(node),
 	}
 }
 
 func (o Onnx) mkConv(node *onnx.NodeProto) dlperf.Layer {
-	inputs := node.GetInput()
-	outputs := node.GetOutput()
-
 	autoPad := "VALID"
 	autoPadAttr := getNodeAttributeFromName(node, "auto_pad")
 	if autoPadAttr.GetStrings() != nil {
@@ -192,37 +181,26 @@ func (o Onnx) mkConv(node *onnx.NodeProto) dlperf.Layer {
 	}
 
 	return &layer.Conv{
-		name:              node.GetName(),
-		operatorType:      node.GetOpType(),
-		inputs:            inputs,
-		outputs:           outputs,
-		inputsDimensions:  o.GetValueInfoDimensions(inputs),
-		outputsDimensions: o.GetValueInfoDimensions(outputs),
-		AutoPad:           autoPad,
-		Dilations:         dilations,
-		Group:             group,
-		KernelShape:       kernelShapeAttr.GetInts(),
-		Pads:              pads,
-		Strides:           strides,
+		Base:        mkBase(node),
+		AutoPad:     autoPad,
+		Dilations:   dilations,
+		Group:       group,
+		KernelShape: kernelShapeAttr.GetInts(),
+		Pads:        pads,
+		Strides:     strides,
 	}
 }
 
 func (o Onnx) mkDropout(node *onnx.NodeProto) dlperf.Layer {
-	inputs := node.GetInput()
-	outputs := node.GetOutput()
-
 	return &layer.Dropout{
-		inputs:            inputs,
-		outputs:           outputs,
-		inputsDimensions:  o.GetValueInfoDimensions(inputs),
-		outputsDimensions: o.GetValueInfoDimensions(outputs),
+		Base: mkBase(node),
 	}
 }
 
 func (o Onnx) mkElementWise(node *onnx.NodeProto) dlperf.Layer {
 	return &layer.ElementWise{
 		base:     mkBase(node),
-		Operator: strings.ToLower(c.Operator),
+		Operator: c.Operator,
 	}
 }
 

@@ -17,10 +17,6 @@ type Conv struct {
 	Strides     []int64 `json:"stride_h,omitempty"`
 }
 
-func (Conv) OperatorType() string {
-	return "Conv"
-}
-
 func (Conv) Description() string {
 	return ``
 }

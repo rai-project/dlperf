@@ -8,16 +8,8 @@ import (
 // https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks.pdf
 
 type LRN struct {
-	Base              `json:",inline,flatten,omitempty"`
-	inputs            []string  `json:",inputs,omitempty"`
-	outputs           []string  `json:",outputs,omitempty"`
-	Size              int64     `json:"size,omitempty"`
-	InputsDimensions  [][]int64 `json:"inputs_dimensions,omitempty"`
-	OutputsDimensions [][]int64 `json:"outputs_dimensions,omitempty"`
-}
-
-func (LRN) OperatorType() string {
-	return "LRN"
+	Base `json:",inline,flatten,omitempty"`
+	Size int64 `json:"size,omitempty"`
 }
 
 func (LRN) Description() string {
@@ -25,6 +17,20 @@ func (LRN) Description() string {
 }
 
 func (c *LRN) Information() dlperf.LayerInformation {
+	info := &Information{
+		name:              c.Name,
+		operatorType:      c.OperatorType(),
+		inputs:            c.Inputs(),
+		outputs:           c.Outputs(),
+		inputsDimensions:  c.InputsDimensions,
+		outputsDimensions: c.OutputsDimensions,
+	}
+
+	if len(c.OutputsDimensions) == 0 {
+		log.WithField("layer", c.OperatorType()).Info("len(OutputsDimensions) is 0")
+		return info
+	}
+
 	checkNumber(c.InputsDimensions, []int{1}, c.OperatorType(), "number of inputs")
 	checkNumber(c.OutputsDimensions, []int{1}, c.OperatorType(), "number of outputs")
 
@@ -41,20 +47,14 @@ func (c *LRN) Information() dlperf.LayerInformation {
 	size := int64(c.Size)
 
 	// TODO
-	flops := dlperf.FlopsInformation{
+	info.flops = dlperf.FlopsInformation{
 		MultiplyAdds:    numInputs * size, // (∑xi^2)
 		Additions:       numInputs,        // (1+...)
 		Exponentiations: numInputs,        // (...)^β
 		Divisions:       numInputs * 2,    // (α/n)*... + divide by sum
 	}
 
-	return &Information{
-		name:             c.name,
-		operatorType:     c.OperatorType(),
-		flops:            flops,
-		inputDimensions:  inputDimensions,
-		outputDimensions: outputDimensions,
-	}
+	return info
 }
 
 func init() {

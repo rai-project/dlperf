@@ -4,23 +4,27 @@ import (
 	"github.com/rai-project/dlperf"
 )
 
-type SoftMax struct {
-  Base              `json:",inline,flatten,omitempty"`
-  inputs            []string  `json:",inputs,omitempty"`
-	outputs           []string  `json:",outputs,omitempty"`s
-	InputsDimensions  [][]int64 `json:"inputs_dimensions,omitempty"`
-	OutputsDimensions [][]int64 `json:"outputs_dimensions,omitempty"`
-}
-
-func (SoftMax) OperatorType() string {
-	return "SoftMax"
-}
+type SoftMax Base
 
 func (SoftMax) Description() string {
 	return ``
 }
 
 func (c *SoftMax) Information() dlperf.LayerInformation {
+	info := &Information{
+		name:              c.Name,
+		operatorType:      c.OperatorType(),
+		inputs:            c.Inputs(),
+		outputs:           c.Outputs(),
+		inputsDimensions:  c.InputsDimensions,
+		outputsDimensions: c.OutputsDimensions,
+	}
+
+	if len(c.OutputsDimensions) == 0 {
+		log.WithField("layer", c.OperatorType()).Info("len(OutputsDimensions) is 0")
+		return info
+	}
+
 	checkNumber(c.InputsDimensions, []int{1}, c.OperatorType(), "number of inputs")
 	checkNumber(c.OutputsDimensions, []int{1}, c.OperatorType(), "number of outputs")
 
@@ -37,19 +41,13 @@ func (c *SoftMax) Information() dlperf.LayerInformation {
 		numOps *= s
 	}
 
-	flops := dlperf.FlopsInformation{
+	info.flops = dlperf.FlopsInformation{
 		Exponentiations: numOps,
 		Additions:       numOps,
 		Divisions:       numOps,
 	}
 
-	return &Information{
-		name:             c.name,
-		operatorType:     c.OperatorType(),
-		flops:            flops,
-		inputDimensions:  inputDimensions,
-		outputDimensions: outputDimensions,
-	}
+	return info
 }
 
 func init() {
