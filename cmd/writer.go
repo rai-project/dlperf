@@ -68,7 +68,7 @@ func (w *Writer) Row(rower Rower) error {
 		w.tbl.Append(rower.Row(w.humanFlops))
 	case "csv":
 		w.csv.Write(rower.Row(w.humanFlops))
-	case "json":
+	case "json", "js":
 		buf, err := json.Marshal(rower)
 		if err != nil {
 			log.WithError(err).Error("failed to marshal json data...")

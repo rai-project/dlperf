@@ -35,9 +35,9 @@ var rootCmd = &cobra.Command{
 			outputFormat = strings.TrimLeft(filepath.Ext(outputFileName), ".")
 			if outputFormat == "js" {
 				outputFormat = "json"
+			} else {
+				outputFormat = "table"
 			}
-		} else {
-			outputFormat = "table"
 		}
 
 		if outputFormat == "json" {
