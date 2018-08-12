@@ -14,7 +14,7 @@ type Onnx struct {
 	inputs           map[string]*onnx.ValueInfoProto
 	outputs          map[string]*onnx.ValueInfoProto
 	initializers     map[string]*onnx.TensorProto
-	layerInformation map[string]dlperf.LayerInfo
+	layerInformation map[string]dlperf.layerInformation
 }
 
 func NewOnnx(protoFileName string) (*Onnx, error) {
@@ -57,6 +57,6 @@ func NewOnnx(protoFileName string) (*Onnx, error) {
 		inputs:           inputs,
 		outputs:          outputs,
 		initializers:     initializers,
-		layerInformation: make(map[string]dlperf.LayerInfo),
+		layerInformation: make(map[string]dlperf.layerInformation),
 	}, nil
 }

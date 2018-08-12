@@ -9,6 +9,8 @@ import (
 
 type LRN struct {
 	Base              `json:",inline,flatten,omitempty"`
+	inputs            []string  `json:",inputs,omitempty"`
+	outputs           []string  `json:",outputs,omitempty"`
 	Size              int64     `json:"size,omitempty"`
 	InputsDimensions  [][]int64 `json:"inputs_dimensions,omitempty"`
 	OutputsDimensions [][]int64 `json:"outputs_dimensions,omitempty"`

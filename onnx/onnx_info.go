@@ -9,29 +9,36 @@ import (
 	"github.com/rai-project/onnx"
 )
 
-func (o Onnx) Information() (dlperf.FlopsInformation, dlperf.MemoryInformation) {
-	infos := o.LayerInformations()
+func (o Onnx) Information() (dlperf.ShapesInformation, dlperf.FlopsInformation, dlperf.MemoryInformation) {
+	layerinfo := o.LayerInformation()
+	shapes := dlperf.ShapesInformation{}
 	flops := dlperf.FlopsInformation{}
 	memory := dlperf.MemoryInformation{}
-	for _, info := range infos {
+	for _, info := range layerinfo {
+		shapes = shapes.Add(info.Shapes())
 		flops = flops.Add(info.Flops())
 		memory = memory.Add(info.Memory())
 	}
-	return flops, memory
+	return shapes, flops, memory
+}
+
+func (o Onnx) ShapesInformation() dlperf.FlopsInformation {
+	shapes, _, _ := o.Information()
+	return shapes
 }
 
 func (o Onnx) FlopsInformation() dlperf.FlopsInformation {
-	flops, _ := o.Information()
+	_, flops, _ := o.Information()
 	return flops
 }
 
 func (o Onnx) MemoryInformation() dlperf.MemoryInformation {
-	_, mem := o.Information()
-	return mem
+	_, _, memory := o.Information()
+	return memory
 }
 
-func (o Onnx) LayerInformations() []dlperf.LayerInfo {
-	ret := []dlperf.LayerInfo{}
+func (o Onnx) LayerInformation() []dlperf.LayerInformation {
+	ret := []dlperf.LayerInformation{}
 
 	// the nodes in the graph are sorted topologically
 	iter := o.nodes.IterFunc()
@@ -46,7 +53,7 @@ func (o Onnx) LayerInformations() []dlperf.LayerInfo {
 			continue
 		}
 
-		info := layer.LayerInformation()
+		info := layer.Information()
 		o.layerInformation[name] = info
 		ret = append(ret, info)
 	}
@@ -124,6 +131,8 @@ func (o Onnx) mkLayer(node *onnx.NodeProto) dlperf.Layer {
 
 func (o Onnx) mkBatchNorm(node *onnx.NodeProto) dlperf.Layer {
 	return &layer.BatchNorm{
+		inputs:            node.GetInput(),
+		outputs:           node.GetOutput(),
 		InputsDimensions:  o.GetValueInfoDimensions(node.GetInput()),
 		OutputsDimensions: o.GetValueInfoDimensions(node.GetOutput()),
 	}

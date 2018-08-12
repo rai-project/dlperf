@@ -11,12 +11,14 @@ type Layer interface {
 	Name() string
 	OperatorType() string
 	SetName(string)
-	LayerInformation() LayerInfo
+	Information() LayerInformation
 }
 
-type LayerInfo interface {
+type LayerInformation interface {
 	Name() string
 	OperatorType() string
+	Inputs() []string
+	Outpus() []string
 	Shape() ShapeInformation
 	Flops() FlopsInformation
 	Memory() MemoryInformation
@@ -31,7 +33,7 @@ func (ShapeInformation) Header() []string {
 	return []string{"InputDimensions", "OutputDimensions"}
 }
 
-func (flops ShapeInformation) Row(humanFlops bool) []string {
+func (shape ShapeInformation) Row(humanFlops bool) []string {
 	dimsToString := func(e []int64) string {
 		if len(e) == 0 {
 			return ""
@@ -43,8 +45,8 @@ func (flops ShapeInformation) Row(humanFlops bool) []string {
 		return string(bts)
 	}
 	return []string{
-		dimsToString(flops.InputDimensions),
-		dimsToString(flops.OutputDimensions),
+		dimsToString(shape.InputDimensions),
+		dimsToString(shape.OutputDimensions),
 	}
 }
 

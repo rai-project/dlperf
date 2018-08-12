@@ -9,6 +9,8 @@ import (
 
 type BatchNorm struct {
 	Base              `json:",inline,flatten,omitempty"`
+	inputs            []string  `json:",inputs,omitempty"`
+	outputs           []string  `json:",outputs,omitempty"`
 	InputsDimensions  [][]int64 `json:"inputs_dimensions,omitempty"`
 	OutputsDimensions [][]int64 `json:"outputs_dimensions,omitempty"`
 }
@@ -22,6 +24,17 @@ func (BatchNorm) Description() string {
 }
 
 func (c *BatchNorm) LayerInformation() dlperf.LayerInfo {
+	info := &Information{
+		name:         c.name,
+		operatorType: c.OperatorType(),
+	}
+
+	if len(c.OutputsDimensions) == 0 {
+		log.WithField("layer", c.OperatorType()).Info("len(OutputsDimensions) is 0")
+
+		return info
+	}
+
 	checkNumber(c.InputsDimensions, []int{1, 2, 3, 4, 5}, c.OperatorType(), "number of inputs")
 	checkNumber(c.OutputsDimensions, []int{1, 2, 3, 4, 5}, c.OperatorType(), "number of outputs")
 

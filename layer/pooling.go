@@ -8,6 +8,8 @@ import (
 
 type Pooling struct {
 	Base              `json:",inline,flatten,omitempty"`
+	inputs            []string  `json:",inputs,omitempty"`
+	outputs           []string  `json:",outputs,omitempty"`
 	Operator          string    `json:"operator,omitempty"`
 	KernelShape       []int64   `json:"kernel_shape,omitempty"`
 	InputsDimensions  [][]int64 `json:"inputs_dimensions,omitempty"`

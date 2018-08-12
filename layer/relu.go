@@ -6,6 +6,8 @@ import (
 
 type ReLU struct {
 	Base              `json:",inline,flatten""`
+	inputs            []string  `json:",inputs,omitempty"`
+	outputs           []string  `json:",outputs,omitempty"`
 	InputsDimensions  [][]int64 `json:"inputs_dimensions,omitempty"`
 	OutputsDimensions [][]int64 `json:"outputs_dimensions,omitempty"`
 }

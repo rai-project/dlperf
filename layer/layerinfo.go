@@ -9,42 +9,43 @@ import (
 )
 
 type Information struct {
-	operatorType     string                   `json:"operatorType,omitempty"`
-	name             string                   `json:"name,omitempty"`
-	shape            dlperf.ShapeInformation  `json:"shape,omitempty"`
-	flops            dlperf.FlopsInformation  `json:"flops,omitempty"`
-	memory           dlperf.MemoryInformation `json:"memory,omitempty"`
-	inputDimensions  []int64                  `json:"input_dimensions,omitempty"`
-	outputDimensions []int64                  `json:"output_dimensions,omitempty"`
-}
-
-func (layer *Information) OperatorType() string {
-	return layer.operatorType
+	name         string                   `json:"name,omitempty"`
+	operatorType string                   `json:"operatorType,omitempty"`
+	inputs       []string                 `json:"inputs,omitempty"`
+	outputs      []string                 `json:"outputs,omitempty"`
+	shape        dlperf.ShapeInformation  `json:"shape,omitempty"`
+	flops        dlperf.FlopsInformation  `json:"flops,omitempty"`
+	memory       dlperf.MemoryInformation `json:"memory,omitempty"`
 }
 
 func (layer *Information) Name() string {
 	return layer.name
 }
 
+func (layer *Information) OperatorType() string {
+	return layer.operatorType
+}
+
+func (layer *Information) Inputs() []string {
+	return layer.inputs
+}
+
+func (layer *Information) Outputs() []string {
+	return layer.outputs
+}
+
 func (layer *Information) Shape() dlperf.ShapeInformation {
-	layer.shape.InputDimensions = layer.inputDimensions
-	layer.shape.OutputDimensions = layer.outputDimensions
 	return layer.shape
 }
 
 func (layer *Information) Flops() dlperf.FlopsInformation {
-	layer.flops.InputDimensions = layer.inputDimensions
-	layer.flops.OutputDimensions = layer.outputDimensions
+	layer.flops.InputDimensions = layer.shape.InputDimensions
+	layer.flops.OutputDimensions = layer.shape.utputDimensions
 	return layer.flops
 }
+
 func (layer *Information) Memory() dlperf.MemoryInformation {
 	return layer.memory
-}
-func (layer *Information) InputDimensions() []int64 {
-	return layer.inputDimensions
-}
-func (layer *Information) OutputDimensions() []int64 {
-	return layer.outputDimensions
 }
 
 func (layer Information) MarshalJSON() ([]byte, error) {
@@ -76,11 +77,6 @@ func (layer *Information) UnmarshalJSON(b []byte) error {
 	if err != nil {
 		return err
 	}
-	if len(layer.inputDimensions) == 0 {
-		layer.inputDimensions = layer.flops.InputDimensions
-	}
-	if len(layer.outputDimensions) == 0 {
-		layer.outputDimensions = layer.flops.OutputDimensions
-	}
+
 	return nil
 }

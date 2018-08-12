@@ -5,7 +5,9 @@ import (
 )
 
 type SoftMax struct {
-	Base              `json:",inline,flatten,omitempty"`
+  Base              `json:",inline,flatten,omitempty"`
+  inputs            []string  `json:",inputs,omitempty"`
+	outputs           []string  `json:",outputs,omitempty"`s
 	InputsDimensions  [][]int64 `json:"inputs_dimensions,omitempty"`
 	OutputsDimensions [][]int64 `json:"outputs_dimensions,omitempty"`
 }
