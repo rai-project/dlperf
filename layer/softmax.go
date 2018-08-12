@@ -4,32 +4,34 @@ import (
 	"github.com/rai-project/dlperf"
 )
 
-type SoftMax Base
+type SoftMax struct {
+	Base `json:",inline,flatten,omitempty"`
+}
 
 func (SoftMax) Description() string {
 	return ``
 }
 
-func (c *SoftMax) Information() dlperf.LayerInformation {
+func (c SoftMax) Information() dlperf.LayerInformation {
 	info := &Information{
-		name:              c.Name,
-		operatorType:      c.OperatorType(),
-		inputs:            c.Inputs(),
-		outputs:           c.Outputs(),
-		inputsDimensions:  c.InputsDimensions,
-		outputsDimensions: c.OutputsDimensions,
+		Base: c.Base,
 	}
 
-	if len(c.OutputsDimensions) == 0 {
+	if len(c.OutputsDimensions()) == 0 {
 		log.WithField("layer", c.OperatorType()).Info("len(OutputsDimensions) is 0")
+		return info
+	}
+
+	if len(c.InputsDimensions()) == 0 {
+		log.WithField("layer", c.OperatorType()).Info("len(InputDimensions) is 0")
 		return info
 	}
 
 	checkNumber(c.InputsDimensions, []int{1}, c.OperatorType(), "number of inputs")
 	checkNumber(c.OutputsDimensions, []int{1}, c.OperatorType(), "number of outputs")
 
-	inputDimensions := c.InputsDimensions[0]   // (N x C x H x W)
-	outputDimensions := c.OutputsDimensions[0] // (N x C x H x W)
+	inputDimensions := c.InputsDimensions()[0]   // (N x C x H x W)
+	outputDimensions := c.OutputsDimensions()[0] // (N x C x H x W)
 
 	var shape []int64
 	for _, s := range inputDimensions {
@@ -45,6 +47,11 @@ func (c *SoftMax) Information() dlperf.LayerInformation {
 		Exponentiations: numOps,
 		Additions:       numOps,
 		Divisions:       numOps,
+	}
+
+	info.shape = dlperf.ShapeInformation{
+		InputDimensions:  inputDimensions,
+		OutputDimensions: outputDimensions,
 	}
 
 	return info

@@ -4,7 +4,9 @@ import (
 	"github.com/rai-project/dlperf"
 )
 
-type Constant Base
+type Constant struct {
+	Base `json:",inline,flatten,omitempty"`
+}
 
 func (Constant) OperatorType() string {
 	return "Constant"
@@ -14,22 +16,19 @@ func (Constant) Description() string {
 	return ``
 }
 
-func (c *Constant) Information() dlperf.LayerInformation {
+func (c Constant) Information() dlperf.LayerInformation {
 	info := &Information{
-		name:              c.Name,
-		operatorType:      c.OperatorType(),
-		inputs:            c.Inputs(),
-		outputs:           c.Outputs(),
-		inputsDimensions:  c.InputsDimensions,
-		outputsDimensions: c.OutputsDimensions,
+		Base: c.Base,
 	}
 
-	if len(c.OutputsDimensions) == 0 {
+	if len(c.OutputsDimensions()) == 0 {
 		log.WithField("layer", c.OperatorType()).Info("len(OutputsDimensions) is 0")
 		return info
 	}
 
 	info.flops = dlperf.FlopsInformation{}
+
+	info.shape = dlperf.ShapeInformation{}
 
 	return info
 }

@@ -1,6 +1,8 @@
 package layer
 
-import "encoding/json"
+import (
+	"encoding/json"
+)
 
 type Base struct {
 	name              string    `json:"name,omitempty"`
@@ -26,20 +28,40 @@ func (b Base) OperatorType() string {
 	return b.operatorType
 }
 
+func (b *Base) SetOperatorType(op string) {
+	b.operatorType = op
+}
+
 func (b Base) Inputs() []string {
 	return b.inputs
+}
+
+func (b *Base) SetInputs(in []string) {
+	b.inputs = in
 }
 
 func (b Base) Outputs() []string {
 	return b.outputs
 }
 
-func (b Base) InputsDimensions() []string {
+func (b *Base) SetOutputs(out []string) {
+	b.outputs = out
+}
+
+func (b Base) InputsDimensions() [][]int64 {
 	return b.inputsDimensions
 }
 
-func (b Base) OutputsDimensions() []string {
+func (b *Base) SetInputsDimensions(in [][]int64) {
+	b.inputsDimensions = in
+}
+
+func (b Base) OutputsDimensions() [][]int64 {
 	return b.outputsDimensions
+}
+
+func (b *Base) SetOutputsDimensions(out [][]int64) {
+	b.outputsDimensions = out
 }
 
 func (b *Base) UnmarshalJSON(d []byte) error {

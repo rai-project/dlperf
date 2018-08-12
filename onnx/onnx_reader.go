@@ -2,7 +2,6 @@ package onnx
 
 import (
 	"github.com/cevaris/ordered_map"
-	"github.com/rai-project/dlperf"
 	"github.com/rai-project/onnx"
 )
 
@@ -50,12 +49,11 @@ func NewOnnx(protoFileName string) (*Onnx, error) {
 	}
 
 	return &Onnx{
-		ModelProto:       model,
-		nodes:            nodes,
-		valueInfo:        valueInfo,
-		inputs:           inputs,
-		outputs:          outputs,
-		initializers:     initializers,
-		layerInformation: make(map[string]dlperf.layerInformation),
+		ModelProto:   model,
+		nodes:        nodes,
+		valueInfo:    valueInfo,
+		inputs:       inputs,
+		outputs:      outputs,
+		initializers: initializers,
 	}, nil
 }

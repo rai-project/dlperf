@@ -10,6 +10,7 @@ import (
 
 type Information struct {
 	Base   `json:",inline,flatten,omitempty"`
+	shape  dlperf.ShapeInformation  `json:"shape,omitempty"`
 	flops  dlperf.FlopsInformation  `json:"flops,omitempty"`
 	memory dlperf.MemoryInformation `json:"memory,omitempty"`
 }
@@ -31,12 +32,13 @@ func (layer *Information) Outputs() []string {
 }
 
 func (layer *Information) Shape() dlperf.ShapeInformation {
-	return layer.shape
+	return dlperf.ShapeInformation{
+		InputDimensions:  layer.inputsDimensions[0],
+		OutputDimensions: []int64{},
+	}
 }
 
 func (layer *Information) Flops() dlperf.FlopsInformation {
-	layer.flops.InputDimensions = layer.shape.InputDimensions
-	layer.flops.OutputDimensions = layer.shape.OutputDimensions
 	return layer.flops
 }
 

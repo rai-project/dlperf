@@ -18,7 +18,7 @@ type LayerInformation interface {
 	Name() string
 	OperatorType() string
 	Inputs() []string
-	Outpus() []string
+	Outputs() []string
 	Shape() ShapeInformation
 	Flops() FlopsInformation
 	Memory() MemoryInformation
@@ -51,28 +51,23 @@ func (shape ShapeInformation) Row(humanFlops bool) []string {
 }
 
 type FlopsInformation struct {
-	ShapeInformation `json:",inline,flatten""`
-	MultiplyAdds     int64 `json:"multiply_adds"`
-	Additions        int64 `json:"additions"`
-	Divisions        int64 `json:"divisions"`
-	Exponentiations  int64 `json:"exponentiations"`
-	Comparisons      int64 `json:"comparisons"`
-	General          int64 `json:"general"`
+	MultiplyAdds    int64 `json:"multiply_adds"`
+	Additions       int64 `json:"additions"`
+	Divisions       int64 `json:"divisions"`
+	Exponentiations int64 `json:"exponentiations"`
+	Comparisons     int64 `json:"comparisons"`
+	General         int64 `json:"general"`
 }
 
 func (FlopsInformation) Header() []string {
-	header := ShapeInformation{}.Header()
-	return append(
-		header,
-		[]string{
-			"MultiplyAdds",
-			"Additions",
-			"Divisions",
-			"Exponentiations",
-			"Comparisons",
-			"General",
-		}...,
-	)
+	return []string{
+		"MultiplyAdds",
+		"Additions",
+		"Divisions",
+		"Exponentiations",
+		"Comparisons",
+		"General",
+	}
 }
 
 func (flops FlopsInformation) Row(humanFlops bool) []string {
@@ -84,17 +79,14 @@ func (flops FlopsInformation) Row(humanFlops bool) []string {
 			return utils.Flops(uint64(e))
 		}
 	}
-	return append(
-		flops.ShapeInformation.Row(humanFlops),
-		[]string{
-			flopsToString(flops.MultiplyAdds),
-			flopsToString(flops.Additions),
-			flopsToString(flops.Divisions),
-			flopsToString(flops.Exponentiations),
-			flopsToString(flops.Comparisons),
-			flopsToString(flops.General),
-		}...,
-	)
+	return []string{
+		flopsToString(flops.MultiplyAdds),
+		flopsToString(flops.Additions),
+		flopsToString(flops.Divisions),
+		flopsToString(flops.Exponentiations),
+		flopsToString(flops.Comparisons),
+		flopsToString(flops.General),
+	}
 }
 
 func (this FlopsInformation) Total() int64 {

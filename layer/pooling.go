@@ -1,8 +1,6 @@
 package layer
 
 import (
-	"strings"
-
 	"github.com/rai-project/dlperf"
 )
 
@@ -15,17 +13,12 @@ func (Pooling) Description() string {
 	return ``
 }
 
-func (c *Pooling) Information() dlperf.LayerInformation {
+func (c Pooling) Information() dlperf.LayerInformation {
 	info := &Information{
-		name:              c.Name,
-		operatorType:      c.OperatorType(),
-		inputs:            c.Inputs(),
-		outputs:           c.Outputs(),
-		inputsDimensions:  c.InputsDimensions,
-		outputsDimensions: c.OutputsDimensions,
+		Base: c.Base,
 	}
 
-	if len(c.OutputsDimensions) == 0 {
+	if len(c.OutputsDimensions()) == 0 {
 		log.WithField("layer", c.OperatorType()).Info("len(OutputsDimensions) is 0")
 		return info
 	}
@@ -33,8 +26,8 @@ func (c *Pooling) Information() dlperf.LayerInformation {
 	checkNumber(c.InputsDimensions, []int{1}, c.OperatorType(), "number of inputs")
 	checkNumber(c.OutputsDimensions, []int{1}, c.OperatorType(), "number of outputs")
 
-	inputDimensions := c.InputsDimensions[0]   // (N x C x H x W)
-	outputDimensions := c.OutputsDimensions[0] // (N x C x H x W)
+	inputDimensions := c.InputsDimensions()[0]   // (N x C x H x W)
+	outputDimensions := c.OutputsDimensions()[0] // (N x C x H x W)
 
 	nIn := inputDimensions[0]
 	cIn := inputDimensions[1]
@@ -52,7 +45,7 @@ func (c *Pooling) Information() dlperf.LayerInformation {
 	}
 
 	flops := dlperf.FlopsInformation{}
-	switch strings.ToLower(c.Operator) {
+	switch c.operatorType {
 	case "maxpool":
 		flops.Comparisons = hOut * wOut * cIn * cOut * kernelH * kernelW
 	case "globalmaxpool":
@@ -64,6 +57,11 @@ func (c *Pooling) Information() dlperf.LayerInformation {
 	}
 
 	info.flops = flops
+
+	info.shape = dlperf.ShapeInformation{
+		InputDimensions:  inputDimensions,
+		OutputDimensions: outputDimensions,
+	}
 
 	return info
 }

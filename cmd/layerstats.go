@@ -53,7 +53,7 @@ to quickly create a Cobra application.`,
 			return err
 		}
 
-		infos := net.LayerInformations()
+		infos := net.ModelInformation()
 
 		writer := NewWriter(stat{}, humanFlops)
 		defer writer.Close()
@@ -61,9 +61,9 @@ to quickly create a Cobra application.`,
 		for _, info := range infos {
 			writer.Row(
 				stat{
-					Name:             info.Name(),
-					Type:             info.OperatorType(),
-					ShapeInformation: info.Flops().ShapeInformation,
+					Name:    info.Name(),
+					Type:    info.OperatorType(),
+					Outputs: info.Outputs(),
 				},
 			)
 		}

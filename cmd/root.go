@@ -61,6 +61,8 @@ func init() {
 
 	goPath = com.GetGOPATHs()[0]
 	raiSrcPath = getSrcPath("github.com/rai-project")
+
+	Init()
 }
 
 func Execute() {

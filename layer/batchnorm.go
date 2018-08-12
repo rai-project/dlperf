@@ -7,23 +7,20 @@ import (
 // https://github.com/onnx/onnx/blob/master/docs/Operators.md#BatchNormalization
 // https://arxiv.org/pdf/1502.03167.pdf
 
-type BatchNorm Base
+type BatchNorm struct {
+	Base `json:",inline,flatten,omitempty"`
+}
 
 func (BatchNorm) Description() string {
 	return ``
 }
 
-func (c *BatchNorm) Information() dlperf.LayerInformation {
+func (c BatchNorm) Information() dlperf.LayerInformation {
 	info := &Information{
-		name:              c.Name,
-		operatorType:      c.OperatorType(),
-		inputs:            c.Inputs(),
-		outputs:           c.Outputs(),
-		inputsDimensions:  c.InputsDimensions,
-		outputsDimensions: c.OutputsDimensions,
+		Base: c.Base,
 	}
 
-	if len(c.OutputsDimensions) == 0 {
+	if len(c.OutputsDimensions()) == 0 {
 		log.WithField("layer", c.OperatorType()).Info("len(OutputsDimensions) is 0")
 		return info
 	}
@@ -31,8 +28,8 @@ func (c *BatchNorm) Information() dlperf.LayerInformation {
 	checkNumber(c.InputsDimensions, []int{1, 2, 3, 4, 5}, c.OperatorType(), "number of inputs")
 	checkNumber(c.OutputsDimensions, []int{1, 2, 3, 4, 5}, c.OperatorType(), "number of outputs")
 
-	inputDimensions := c.InputsDimensions[0]   // (N x C x H x W)
-	outputDimensions := c.OutputsDimensions[0] // (N x C x H x W)
+	inputDimensions := c.inputsDimensions[0]   // (N x C x H x W)
+	outputDimensions := c.outputsDimensions[0] // (N x C x H x W)
 
 	nIn := inputDimensions[0]
 	cIn := inputDimensions[1]
@@ -45,6 +42,11 @@ func (c *BatchNorm) Information() dlperf.LayerInformation {
 	info.flops = dlperf.FlopsInformation{
 		Additions: numOps,
 		Divisions: numOps,
+	}
+
+	info.shape = dlperf.ShapeInformation{
+		InputDimensions:  inputDimensions,
+		OutputDimensions: outputDimensions,
 	}
 
 	return info

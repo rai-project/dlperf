@@ -21,17 +21,12 @@ func (Conv) Description() string {
 	return ``
 }
 
-func (c *Conv) Information() dlperf.LayerInformation {
+func (c Conv) Information() dlperf.LayerInformation {
 	info := &Information{
-		name:              c.Name,
-		operatorType:      c.OperatorType(),
-		inputs:            c.Inputs(),
-		outputs:           c.Outputs(),
-		inputsDimensions:  c.InputsDimensions,
-		outputsDimensions: c.OutputsDimensions,
+		Base: c.Base,
 	}
 
-	if len(c.OutputsDimensions) == 0 {
+	if len(c.OutputsDimensions()) == 0 {
 		log.WithField("layer", c.OperatorType()).Info("len(OutputsDimensions) is 0")
 		return info
 	}
@@ -39,9 +34,9 @@ func (c *Conv) Information() dlperf.LayerInformation {
 	checkNumber(c.InputsDimensions, []int{2, 3}, c.OperatorType(), "number of inputs")
 	checkNumber(c.OutputsDimensions, []int{1}, c.OperatorType(), "number of outputs")
 
-	inputDimensions := c.InputsDimensions[0]   // (N x C x H x W)
-	outputDimensions := c.OutputsDimensions[0] // (N x C x H x W)
-	weightDimensions := c.InputsDimensions[1]  // (C x M x kH x kW)
+	inputDimensions := c.InputsDimensions()[0]   // (N x C x H x W)
+	outputDimensions := c.OutputsDimensions()[0] // (N x C x H x W)
+	weightDimensions := c.InputsDimensions()[1]  // (C x M x kH x kW)
 
 	nIn := inputDimensions[0]
 	cIn := inputDimensions[1]
@@ -61,6 +56,11 @@ func (c *Conv) Information() dlperf.LayerInformation {
 
 	info.flops = dlperf.FlopsInformation{
 		MultiplyAdds: int64(kernelH*kernelW*hOut*wOut*cIn*cOut*nIn) / c.Group,
+	}
+
+	info.shape = dlperf.ShapeInformation{
+		InputDimensions:  inputDimensions,
+		OutputDimensions: outputDimensions,
 	}
 
 	return info

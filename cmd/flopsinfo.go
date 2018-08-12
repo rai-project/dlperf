@@ -26,14 +26,9 @@ import (
 
 // flopsinfoCmd represents the flopsinfo command
 var flopsinfoCmd = &cobra.Command{
-	Use:   "flopsinfo",
-	Short: "Get flops information about the model",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Use:     "flopsinfo",
+	Aliases: []string{"flops"},
+	Short:   "Get flops information about the model",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		if modelPath == "" {
 			modelPath = filepath.Join(sourcepath.MustAbsoluteDir(), "..", "assets", "onnx_models", "mnist.onnx")
@@ -54,7 +49,7 @@ to quickly create a Cobra application.`,
 		}
 
 		if fullFlops {
-			infos := net.LayerInformations()
+			infos := net.ModelInformation()
 
 			writer := NewWriter(layer{}, humanFlops)
 			defer writer.Close()

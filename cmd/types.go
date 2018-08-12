@@ -1,23 +1,24 @@
 package cmd
 
 import (
+	"strings"
+
 	"github.com/rai-project/dlperf"
 )
 
 type stat struct {
-	Name                    string `json:"name"`
-	Type                    string `json:"type"`
-	dlperf.ShapeInformation `json:",inline,flatten""`
+	Name    string   `json:"name"`
+	Type    string   `json:"type"`
+	Outputs []string `json:"outputs"`
 }
 
 func (stat) Header() []string {
-	base := dlperf.ShapeInformation{}.Header()
-	return append([]string{"LayerName", "LayerType"}, base...)
+	return []string{"LayerName", "LayerType", "Outputs"}
 }
 
 func (l stat) Row(humanFlops bool) []string {
-	base := l.ShapeInformation.Row(humanFlops)
-	return append([]string{l.Name, l.Type}, base...)
+	outputs := strings.Join(l.Outputs, ";")
+	return []string{l.Name, l.Type, outputs}
 }
 
 type layer struct {
