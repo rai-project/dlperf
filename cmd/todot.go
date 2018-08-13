@@ -3,7 +3,6 @@ package cmd
 import (
 	"bytes"
 	"fmt"
-	"os"
 	"os/exec"
 	"path/filepath"
 
@@ -28,7 +27,8 @@ func dotToImage(dot []byte) (string, error) {
 		dotExe = dot
 	}
 
-	img := filepath.Join(os.TempDir(), fmt.Sprintf("dlperf.png"))
+	// img := filepath.Join(os.TempDir(), fmt.Sprintf("dlperf.png"))
+	img := filepath.Join("/tmp", fmt.Sprintf("dlperf.png"))
 	cmd := exec.Command(dotExe, "-Tpng", "-o", img)
 	cmd.Stdin = bytes.NewReader(dot)
 	if err := cmd.Run(); err != nil {
@@ -62,7 +62,9 @@ var todotCmd = &cobra.Command{
 			return err
 		}
 
-		grph := model.ToGraph()
+		grph := model.ToGraph().(onnx.Graph)
+		prunedGrph := grph.Prune(nil)
+		_ = prunedGrph
 
 		dotEnc, err := dot.Marshal(grph, model.GetName(), "", "  ", true)
 		if err != nil {
@@ -75,8 +77,8 @@ var todotCmd = &cobra.Command{
 
 		// pp.Println(dominators)
 
-		subgrphs, err := model.FindGraphGroups()
-		dotEnc, err = dot.Marshal(subgrphs[1], model.GetName(), "", "  ", true)
+		// subgrphs, err := model.FindGraphGroups()
+		// dotEnc, err = dot.Marshal(subgrphs[1], model.GetName(), "", "  ", true)
 
 		img, err := dotToImage(dotEnc)
 		if err != nil {
