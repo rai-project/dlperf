@@ -66,6 +66,7 @@ var todotCmd = &cobra.Command{
 		prunedGrph := grph.Prune(nil)
 		_ = prunedGrph
 
+		println(len(prunedGrph.Nodes()))
 		dotEnc, err := dot.Marshal(grph, model.GetName(), "", "  ", true)
 		if err != nil {
 			return err

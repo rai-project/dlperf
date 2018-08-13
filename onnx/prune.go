@@ -10,6 +10,7 @@ import (
 
 var DefaultPrunedLayerTypes = []string{
 	"identity",
+	"relu",
 	"mul",
 	"concat",
 	"maxpool",
