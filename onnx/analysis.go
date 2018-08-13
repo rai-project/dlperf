@@ -1,8 +1,13 @@
 package onnx
 
 import (
+	"sort"
+
+	"github.com/pkg/errors"
 	"gonum.org/v1/gonum/graph"
 	"gonum.org/v1/gonum/graph/path"
+	"gonum.org/v1/gonum/graph/simple"
+	"gonum.org/v1/gonum/graph/topo"
 )
 
 // A DominatorTree represents a dominator tree.
@@ -19,53 +24,90 @@ func (o Onnx) Dominators() DominatorTree {
 
 // Dominates reports whether A dominates B.
 func (dt DominatorTree) Dominates(a, b graph.Node) bool {
-	return a == dt.DominatorTree.DominatorOf(b)
+	return a.ID() == dt.DominatorOf(b).ID()
 }
 
-// Algorithm in Fig. 10 from Cytron's classic paper:
-//
-// Cytron R., Ferrante J., Rosen B. K., and Wegman M. N. "Efficiently Computing
-// Static Single Assignment Form and the Control Dependence Graph." ACM TOPLAS.
-// https://doi.org/10.1145/115372.1
-// func (t *DominatorTree) Frontier() *DominatorFrontier {
-// 	if t.frontier != nil {
-// 		return t.frontier
-// 	}
-// 	frontier := make(map[*Block]map[*Block]bool)
-// 	var postfix func(*Block)
-// 	postfix = func(blk *Block) {
-// 		for _, kid := range t.Children(blk) {
-// 			postfix(kid)
-// 		}
-// 		frontier[blk] = make(map[*Block]bool)
-// 		for _, y := range t.succ(blk) {
-// 			if t.IDom(y) != blk {
-// 				frontier[blk][y] = true
-// 			}
-// 		}
-// 		for _, kid := range t.Children(blk) {
-// 			for y := range frontier[kid] {
-// 				if t.IDom(y) != blk {
-// 					frontier[blk][y] = true
-// 				}
-// 			}
-// 		}
-// 	}
-// 	for _, r := range t.roots {
-// 		postfix(r)
-// 	}
-// 	t.frontier = &DominatorFrontier{frontier}
-// 	return t.frontier
-// }
+func (dt DominatorTree) Dominated(a, b graph.Node) bool {
+	doms := dt.DominatedBy(a)
+	for _, dom := range doms {
+		if dom.ID() == b.ID() {
+			return true
+		}
+	}
+	return false
+}
 
-// func (t *DominatorTree) ImmediateDominators() []int {
-// 	idom := make([]int, len(t.parent))
-// 	for child, parent := range t.parent {
-// 		if parent != nil {
-// 			idom[child.Id] = parent.Id
-// 		} else {
-// 			idom[child.Id] = child.Id
-// 		}
-// 	}
-// 	return idom
-// }
+// byID implements the sort.Interface sorting a slice of graph.Node by reverse ID.
+type byID []graph.Node
+
+func (n byID) Len() int           { return len(n) }
+func (n byID) Less(i, j int) bool { return n[i].ID() < n[j].ID() }
+func (n byID) Swap(i, j int)      { n[i], n[j] = n[j], n[i] }
+
+// byReverseID implements the sort.Interface sorting a slice of graph.Node by reverse ID.
+type byReverseID []graph.Node
+
+func (n byReverseID) Len() int           { return len(n) }
+func (n byReverseID) Less(i, j int) bool { return n[i].ID() > n[j].ID() }
+func (n byReverseID) Swap(i, j int)      { n[i], n[j] = n[j], n[i] }
+
+func (o Onnx) FindGraphGroups() ([]graph.Directed, error) {
+	visited := map[int64]bool{}
+	res := []graph.Directed{}
+	grph := o.ToGraph()
+	dt := o.Dominators()
+	nds, err := topo.SortStabilized(grph, func(nodes []graph.Node) { sort.Sort(byID(nodes)) })
+	if err != nil {
+		return nil, errors.Wrap(err, "failed to topologically sort graph")
+	}
+
+	captureGroup := func(root graph.Node) {
+		var visit func(graph.Node)
+
+		subgrph := simple.NewDirectedGraph()
+		// visited[root.ID()] = true
+
+		visit = func(nd graph.Node) {
+			if _, ok := visited[nd.ID()]; ok {
+				return
+			}
+			visited[nd.ID()] = true
+			subgrph.AddNode(nd)
+
+			for _, succ := range grph.From(nd.ID()) {
+				if dt.Dominates(nd, succ) {
+					visit(succ)
+					edge := subgrph.NewEdge(nd, succ)
+					subgrph.SetEdge(edge)
+				}
+			}
+		}
+
+		visit(root)
+
+		succs := grph.From(root.ID())
+		for _, succ := range succs {
+			visit(succ)
+		}
+
+		if len(subgrph.Nodes()) != 0 {
+			res = append(res, subgrph)
+		}
+	}
+
+	for _, nd := range nds {
+		// if _, ok := visited[nd.ID()]; ok {
+		// 	continue
+		// }
+		preds := grph.To(nd.ID())
+		for _, pred := range preds {
+			if dt.Dominates(pred, nd) {
+				continue
+			}
+			// pp.Println(pred, "   ", nd)
+			captureGroup(nd)
+			break
+		}
+	}
+	return res, nil
+}

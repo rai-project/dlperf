@@ -1,8 +1,11 @@
 package onnx
 
 import (
+	"fmt"
+
 	"github.com/rai-project/onnx"
 	"gonum.org/v1/gonum/graph"
+	"gonum.org/v1/gonum/graph/encoding"
 	"gonum.org/v1/gonum/graph/simple"
 )
 
@@ -19,6 +22,31 @@ type GraphNode struct {
 
 func (nd GraphNode) ID() int64 {
 	return nd.id
+}
+
+func (nd GraphNode) DOTID() string {
+	return nd.Name
+}
+
+func (nd GraphNode) Attributes() []encoding.Attribute {
+	return []encoding.Attribute{
+		encoding.Attribute{
+			Key:   "id",
+			Value: fmt.Sprintf("%v", nd.ID()),
+		},
+		encoding.Attribute{
+			Key:   "type",
+			Value: nd.OpType,
+		},
+		encoding.Attribute{
+			Key:   "shape",
+			Value: "record",
+		},
+		encoding.Attribute{
+			Key:   "label",
+			Value: fmt.Sprintf("\"{ %s  | %s }\"", nd.Name, nd.OpType),
+		},
+	}
 }
 
 func (o Onnx) ToGraph() graph.Directed {

@@ -43,11 +43,15 @@ var todotCmd = &cobra.Command{
 			return err
 		}
 
-		println(string(dotEnc))
+		// println(string(dotEnc))
 
 		// dominators := model.Dominators()
 
 		// pp.Println(dominators)
+
+		subgrphs, err := model.FindGraphGroups()
+		dotEnc, err = dot.Marshal(subgrphs[0], model.GetName(), "", "  ", true)
+		println(string(dotEnc))
 
 		return nil
 	},
