@@ -74,10 +74,10 @@ func (o Onnx) FindGraphGroups() ([]graph.Directed, error) {
 			visited[nd.ID()] = true
 			subgrph.AddNode(nd)
 
-			for _, succ := range grph.From(nd.ID()) {
-				if dt.Dominates(nd, succ) {
-					visit(succ)
-					edge := subgrph.NewEdge(nd, succ)
+			for _, pred := range grph.To(nd.ID()) {
+				if dt.Dominates(pred, nd) {
+					visit(pred)
+					edge := subgrph.NewEdge(nd, pred)
 					subgrph.SetEdge(edge)
 				}
 			}
