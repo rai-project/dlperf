@@ -1,17 +1,3 @@
-// Copyright © 2018 NAME HERE <EMAIL ADDRESS>
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
 package cmd
 
 import (
@@ -19,11 +5,11 @@ import (
 
 	sourcepath "github.com/GeertJohan/go-sourcepath"
 	"github.com/Unknwon/com"
+	"github.com/k0kubun/pp"
 	"github.com/pkg/errors"
-	"github.com/rai-project/onnx"
+	"github.com/rai-project/dlperf/onnx"
 	"github.com/spf13/cobra"
 	"gonum.org/v1/gonum/graph/encoding/dot"
-	"gonum.org/v1/gonum/graph/simple"
 )
 
 // todotCmd represents the todot command
@@ -46,54 +32,24 @@ var todotCmd = &cobra.Command{
 			return errors.Errorf("file %v does not exist", modelPath)
 		}
 
-		model, err := onnx.ReadModelShapeInfer(modelPath)
+		model, err := onnx.New(modelPath)
 		if err != nil {
 			return err
 		}
 
-		onnxGraph := model.GetGraph()
-		graphIds := map[string]int64{}
+		grph := model.ToGraph()
 
-		grph := simple.NewDirectedGraph()
-		for _, graphNode := range onnxGraph.Node {
-			nd := grph.NewNode()
-			grph.AddNode(nd)
-			graphIds[graphNode.GetName()] = nd.ID()
-		}
-		visit := func(graphNode *onnx.NodeProto) {
-			inId := graphIds[graphNode.GetName()]
-			inNd := grph.Node(inId)
-			for _, inputNode := range graphNode.GetInput() {
-				in2Id := graphIds[inputNode]
-				if inId == in2Id {
-					continue
-				}
-				itNd := grph.Node(in2Id)
-				edge := grph.NewEdge(itNd, inNd)
-				grph.SetEdge(edge)
-			}
-
-			for _, outputNode := range graphNode.GetOutput() {
-				outId := graphIds[outputNode]
-				if inId == outId {
-					continue
-				}
-				outNd := grph.Node(outId)
-				edge := grph.NewEdge(inNd, outNd)
-				grph.SetEdge(edge)
-			}
-		}
-
-		for _, nd := range onnxGraph.GetNode() {
-			// pp.Println(nd.GetName())
-			visit(nd)
-		}
-
-		dotEnc, err := dot.Marshal(grph, onnxGraph.GetName(), "", "  ", true)
+		dotEnc, err := dot.Marshal(grph, model.GetName(), "", "  ", true)
 		if err != nil {
 			return err
 		}
+
 		println(string(dotEnc))
+
+		dominators := model.Dominators()
+
+		pp.Println(dominators)
+
 		return nil
 	},
 }
