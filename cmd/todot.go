@@ -50,7 +50,7 @@ var todotCmd = &cobra.Command{
 		// pp.Println(dominators)
 
 		subgrphs, err := model.FindGraphGroups()
-		dotEnc, err = dot.Marshal(subgrphs[0], model.GetName(), "", "  ", true)
+		dotEnc, err = dot.Marshal(subgrphs[1], model.GetName(), "", "  ", true)
 		println(string(dotEnc))
 
 		return nil

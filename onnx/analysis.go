@@ -61,23 +61,33 @@ func (o Onnx) FindGraphGroups() ([]graph.Directed, error) {
 		return nil, errors.Wrap(err, "failed to topologically sort graph")
 	}
 
-	captureGroup := func(root graph.Node) {
+	captureGroup := func(root, sink graph.Node) {
 		var visit func(graph.Node)
+
+		if root == nil {
+			return
+		}
 
 		subgrph := simple.NewDirectedGraph()
 		// visited[root.ID()] = true
 
 		visit = func(nd graph.Node) {
+			if nd == nil {
+				return
+			}
 			if _, ok := visited[nd.ID()]; ok {
+				return
+			}
+			if nd.ID() == sink.ID() {
 				return
 			}
 			visited[nd.ID()] = true
 			subgrph.AddNode(nd)
 
-			for _, pred := range grph.To(nd.ID()) {
-				if dt.Dominates(pred, nd) {
-					visit(pred)
-					edge := subgrph.NewEdge(nd, pred)
+			for _, succ := range grph.From(nd.ID()) {
+				if dt.Dominates(nd, succ) {
+					visit(succ)
+					edge := subgrph.NewEdge(nd, succ)
 					subgrph.SetEdge(edge)
 				}
 			}
@@ -96,17 +106,27 @@ func (o Onnx) FindGraphGroups() ([]graph.Directed, error) {
 	}
 
 	for _, nd := range nds {
-		// if _, ok := visited[nd.ID()]; ok {
-		// 	continue
-		// }
-		preds := grph.To(nd.ID())
-		for _, pred := range preds {
-			if dt.Dominates(pred, nd) {
+		if _, ok := visited[nd.ID()]; ok {
+			continue
+		}
+		var start, elem graph.Node
+		wrkgrp := grph.To(nd.ID())
+		for len(wrkgrp) > 0 {
+			elem, wrkgrp = wrkgrp[0], wrkgrp[1:]
+			if _, ok := visited[elem.ID()]; ok {
 				continue
 			}
-			// pp.Println(pred, "   ", nd)
-			captureGroup(nd)
-			break
+			if dt.Dominates(elem, nd) {
+				start = elem
+				break
+			}
+			wrkgrp = append(wrkgrp, grph.To(elem.ID())...)
+		}
+		if start == nil {
+			continue
+		}
+		if len(grph.From(start.ID())) > 1 {
+			captureGroup(start, nd)
 		}
 	}
 	return res, nil

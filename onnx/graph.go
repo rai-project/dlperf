@@ -2,6 +2,7 @@ package onnx
 
 import (
 	"fmt"
+	"strings"
 
 	"github.com/rai-project/onnx"
 	"gonum.org/v1/gonum/graph"
@@ -25,7 +26,7 @@ func (nd GraphNode) ID() int64 {
 }
 
 func (nd GraphNode) DOTID() string {
-	return nd.Name
+	return fmt.Sprintf("\"%s\"", nd.name)
 }
 
 func (nd GraphNode) Attributes() []encoding.Attribute {
@@ -33,6 +34,10 @@ func (nd GraphNode) Attributes() []encoding.Attribute {
 		encoding.Attribute{
 			Key:   "id",
 			Value: fmt.Sprintf("%v", nd.ID()),
+		},
+		encoding.Attribute{
+			Key:   "name",
+			Value: fmt.Sprintf("\"%s\"", nd.name),
 		},
 		encoding.Attribute{
 			Key:   "type",
@@ -45,6 +50,14 @@ func (nd GraphNode) Attributes() []encoding.Attribute {
 		encoding.Attribute{
 			Key:   "label",
 			Value: fmt.Sprintf("\"{ %s  | %s }\"", nd.Name, nd.OpType),
+		},
+		encoding.Attribute{
+			Key:   "inputs",
+			Value: fmt.Sprintf("\"%s\"", strings.Join(nd.GetInput(), ";")),
+		},
+		encoding.Attribute{
+			Key:   "outputs",
+			Value: fmt.Sprintf("\"%s\"", strings.Join(nd.GetOutput(), ";")),
 		},
 	}
 }
