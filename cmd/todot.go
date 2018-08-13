@@ -78,8 +78,8 @@ var todotCmd = &cobra.Command{
 
 		// pp.Println(dominators)
 
-		// subgrphs, err := model.FindGraphGroups()
-		// dotEnc, err = dot.Marshal(subgrphs[1], model.GetName(), "", "  ", true)
+		subgrphs, err := model.FindGraphGroups()
+		dotEnc, err = dot.Marshal(subgrphs[0], model.GetName(), "", "  ", true)
 
 		img, err := dotToImage(dotEnc)
 		if err != nil {

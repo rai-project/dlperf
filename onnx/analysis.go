@@ -78,9 +78,9 @@ func (o Onnx) FindGraphGroups() ([]graph.Directed, error) {
 			if _, ok := visited[nd.ID()]; ok {
 				return
 			}
-			if nd.ID() == sink.ID() {
-				return
-			}
+			// if nd.ID() == sink.ID() {
+			// 	return
+			// }
 			visited[nd.ID()] = true
 			subgrph.AddNode(nd)
 
