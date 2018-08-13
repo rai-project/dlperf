@@ -5,7 +5,6 @@ import (
 
 	sourcepath "github.com/GeertJohan/go-sourcepath"
 	"github.com/Unknwon/com"
-	"github.com/k0kubun/pp"
 	"github.com/pkg/errors"
 	"github.com/rai-project/dlperf/onnx"
 	"github.com/spf13/cobra"
@@ -46,9 +45,9 @@ var todotCmd = &cobra.Command{
 
 		println(string(dotEnc))
 
-		dominators := model.Dominators()
+		// dominators := model.Dominators()
 
-		pp.Println(dominators)
+		// pp.Println(dominators)
 
 		return nil
 	},

@@ -29,7 +29,6 @@ func (o Onnx) ToGraph() graph.Directed {
 
 	skipNode := func(name string) bool {
 		inputs := onnxGraph.GetInput()
-		println(len(inputs))
 		if len(inputs) <= 1 {
 			return false
 		}
