@@ -21,21 +21,20 @@ func (Conv) Description() string {
 	return ``
 }
 
-
 func (c Conv) FwdBenchmarkName() string {
-  return ""
+	return ""
 }
 
 func (c Conv) FwdBenchmarkArgs() []string {
-  return ""
+	return []string{""}
 }
 
 func (c Conv) FwdCUDNNName() string {
-  return ""
+	return ""
 }
 
 func (c Conv) FwdTiming(system string /* hardware/software struct */) string {
-  return ""
+	return ""
 }
 
 func (c *Conv) InferShape() {
