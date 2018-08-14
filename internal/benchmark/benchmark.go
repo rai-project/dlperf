@@ -15,8 +15,10 @@ type Suite struct {
 		CPUScalingEnabled bool   `json:"cpu_scaling_enabled"`
 		LibraryBuildType  string `json:"library_build_type"`
 	} `json:"context"`
-	Benchmarks []Benchmark `json:"benchmarks"`
+	Benchmarks Benchmarks `json:"benchmarks"`
 }
+
+type Benchmarks []Benchmark
 
 type Benchmark struct {
 	Name       string                 `json:"name"`
@@ -25,6 +27,10 @@ type Benchmark struct {
 	CPUTime    float64                `json:"cpu_time"`
 	TimeUnit   string                 `json:"time_unit"`
 	Attributes map[string]interface{} `json:"-"`
+}
+
+func (s *Suite) Merge(other Suite) {
+	s.Benchmarks = s.Benchmarks.Merge(other.Benchmarks)
 }
 
 func (w *Benchmark) UnmarshalJSON(data []byte) error {
