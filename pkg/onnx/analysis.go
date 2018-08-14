@@ -51,12 +51,16 @@ func (n byReverseID) Len() int           { return len(n) }
 func (n byReverseID) Less(i, j int) bool { return n[i].ID() > n[j].ID() }
 func (n byReverseID) Swap(i, j int)      { n[i], n[j] = n[j], n[i] }
 
+func sortById(nodes []graph.Node) {
+	sort.Sort(byID(nodes))
+}
+
 func (o Onnx) FindGraphGroups() ([]graph.Directed, error) {
 	visited := map[int64]bool{}
 	res := []graph.Directed{}
 	grph := o.ToGraph()
 	dt := o.Dominators()
-	nds, err := topo.SortStabilized(grph, func(nodes []graph.Node) { sort.Sort(byID(nodes)) })
+	nds, err := topo.SortStabilized(grph, sortById)
 	if err != nil {
 		return nil, errors.Wrap(err, "failed to topologically sort graph")
 	}

@@ -21,6 +21,8 @@ type GraphNode struct {
 	*onnx.NodeProto
 }
 
+type GraphNodes []GraphNode
+
 func (nd GraphNode) ID() int64 {
 	return nd.id
 }
