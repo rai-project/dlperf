@@ -21,6 +21,10 @@ func (Conv) Description() string {
 	return ``
 }
 
+func (c Conv) Shape() dlperf.ShapeInformation {
+	return dlperf.ShapeInformation{}
+}
+
 func (c Conv) Information() dlperf.LayerInformation {
 	info := &Information{
 		Base: c.Base,
