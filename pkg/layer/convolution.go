@@ -2,6 +2,7 @@ package layer
 
 import (
 	"github.com/rai-project/dlperf/pkg"
+	"github.com/rai-project/dlperf/pkg/benchmark"
 )
 
 // https://github.com/onnx/onnx/blob/master/docs/Operators.md#Conv
@@ -35,6 +36,9 @@ func (c Conv) FwdCUDNNName() string {
 
 func (c Conv) FwdTiming(system string /* hardware/software struct */) string {
 	return ""
+}
+
+func (c *Conv) BenchmarkFilter() benchmark.Benchmark {
 }
 
 func (c *Conv) InferShape() {

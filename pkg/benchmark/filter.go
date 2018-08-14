@@ -4,6 +4,7 @@ import (
 	"regexp"
 
 	"github.com/google/go-cmp/cmp"
+	"github.com/spf13/cast"
 )
 
 func (bs Benchmarks) Merge(other Benchmarks) Benchmarks {
@@ -29,6 +30,28 @@ func (bs Benchmarks) FilterByName(rx string) (Benchmarks, error) {
 
 func (bs Benchmarks) Filter(filter Benchmark) (Benchmarks, error) {
 	benches := []Benchmark{}
+
+	isSame := func(a, b interface{}) bool {
+		if cmp.Equal(a, b) {
+			return true
+		}
+
+		a0, err := cast.ToFloat64E(a)
+		if err != nil {
+			return false
+		}
+
+		b0, err := cast.ToFloat64E(b)
+		if err != nil {
+			return false
+		}
+
+		floatEquals := func(a, b float64) bool {
+			const EPSILON float64 = 0.0001
+			return (a-b) < EPSILON && (b-a) < EPSILON
+		}
+		return floatEquals(a0, b0)
+	}
 
 	if filter.Name != "" {
 		var err error
@@ -56,7 +79,7 @@ func (bs Benchmarks) Filter(filter Benchmark) (Benchmarks, error) {
 			if !ok {
 				continue
 			}
-			if !cmp.Equal(filterVal, val) {
+			if !isSame(filterVal, val) {
 				continue
 			}
 		}
