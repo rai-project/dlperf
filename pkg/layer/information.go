@@ -5,7 +5,7 @@ import (
 
 	"github.com/fatih/structs"
 	"github.com/mitchellh/mapstructure"
-	"github.com/rai-project/dlperf"
+	"github.com/rai-project/dlperf/pkg"
 )
 
 type Information struct {

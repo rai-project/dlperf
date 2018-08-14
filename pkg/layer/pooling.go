@@ -1,7 +1,7 @@
 package layer
 
 import (
-	"github.com/rai-project/dlperf"
+	"github.com/rai-project/dlperf/pkg"
 )
 
 type Pooling struct {

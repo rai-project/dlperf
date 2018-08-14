@@ -4,7 +4,7 @@ import (
 	"strings"
 
 	"github.com/k0kubun/pp"
-	"github.com/rai-project/dlperf"
+	"github.com/rai-project/dlperf/pkg"
 	"github.com/rai-project/dlperf/pkg/layer"
 	"github.com/rai-project/onnx"
 )

@@ -1,7 +1,7 @@
 package layer
 
 import (
-	"github.com/rai-project/dlperf"
+	"github.com/rai-project/dlperf/pkg"
 )
 
 // https://github.com/onnx/onnx/blob/master/docs/Operators.md#BatchNormalization

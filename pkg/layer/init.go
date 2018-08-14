@@ -7,11 +7,11 @@ import (
 )
 
 var (
-	log *logrus.Entry = logger.New().WithField("pkg", "dlperf/layer")
+	log *logrus.Entry = logger.New().WithField("pkg", "dlperf/pkg/layer")
 )
 
 func init() {
 	config.AfterInit(func() {
-		log = logger.New().WithField("pkg", "dlperf/layer")
+		log = logger.New().WithField("pkg", "dlperf/pkg/layer")
 	})
 }

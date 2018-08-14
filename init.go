@@ -1,4 +1,4 @@
-package dlperf
+package main
 
 import (
 	"github.com/rai-project/config"
@@ -7,7 +7,7 @@ import (
 )
 
 var (
-	log *logrus.Entry
+	log *logrus.Entry = logger.New().WithField("pkg", "dlperf")
 )
 
 func init() {

@@ -3,7 +3,7 @@ package layer
 import (
 	"strings"
 
-	"github.com/rai-project/dlperf"
+	"github.com/rai-project/dlperf/pkg"
 )
 
 type ElementWise struct {

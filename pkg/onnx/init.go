@@ -12,6 +12,6 @@ var (
 
 func init() {
 	config.AfterInit(func() {
-		log = logger.New().WithField("pkg", "dlperf/onnx")
+		log = logger.New().WithField("pkg", "dlperf/pkg/onnx")
 	})
 }

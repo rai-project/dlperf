@@ -3,7 +3,7 @@ package cmd
 import (
 	"strings"
 
-	"github.com/rai-project/dlperf"
+	"github.com/rai-project/dlperf/pkg"
 )
 
 type stat struct {
