@@ -23,7 +23,7 @@ import (
 	"github.com/k0kubun/pp"
 	zglob "github.com/mattn/go-zglob"
 	"github.com/pkg/errors"
-	"github.com/rai-project/dlperf/onnx"
+	"github.com/rai-project/dlperf/pkg/onnx"
 	"github.com/spf13/cobra"
 )
 

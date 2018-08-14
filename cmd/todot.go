@@ -9,7 +9,7 @@ import (
 	sourcepath "github.com/GeertJohan/go-sourcepath"
 	"github.com/Unknwon/com"
 	"github.com/pkg/errors"
-	"github.com/rai-project/dlperf/onnx"
+	"github.com/rai-project/dlperf/pkg/onnx"
 	"github.com/spf13/cobra"
 	"gonum.org/v1/gonum/graph/encoding/dot"
 )

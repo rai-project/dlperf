@@ -1,4 +1,4 @@
-package: github.com/rai-project/dlperf
+package: github.com/rai-project/dlperf/pkg
 import:
 - package: github.com/k0kubun/pp
   version: ~2.3.0
