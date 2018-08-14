@@ -21,6 +21,27 @@ func (Conv) Description() string {
 	return ``
 }
 
+
+func (c Conv) FwdBenchmarkName() string {
+  return ""
+}
+
+func (c Conv) FwdBenchmarkArgs() []string {
+  return ""
+}
+
+func (c Conv) FwdCUDNNName() string {
+  return ""
+}
+
+func (c Conv) FwdTiming(system string /* hardware/software struct */) string {
+  return ""
+}
+
+func (c *Conv) InferShape() {
+	//c.inputdimensions =  dlperf.ShapeInformation{}
+}
+
 func (c Conv) Shape() dlperf.ShapeInformation {
 	return dlperf.ShapeInformation{}
 }
