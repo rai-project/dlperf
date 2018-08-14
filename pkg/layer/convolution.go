@@ -38,11 +38,36 @@ func (c Conv) FwdTiming(system string /* hardware/software struct */) string {
 	return ""
 }
 
-func (c *Conv) BenchmarkFilter() benchmark.Benchmark {
+func (c *Conv) FwdBenchmarkFilter() benchmark.Benchmark {
+	return benchmark.Benchmark{
+		Name: "^" + c.FwdBenchmarkName() + ".*",
+		Attributes: map[string]interface{}{
+			"N": c.W(),
+			"C": c.C(),
+			"H": c.H(),
+			"W": c.W(),
+		},
+	}
 }
 
 func (c *Conv) InferShape() {
 	//c.inputdimensions =  dlperf.ShapeInformation{}
+}
+
+func (c *Conv) N() int {
+	return 0
+}
+
+func (c *Conv) C() int {
+	return 0
+}
+
+func (c *Conv) H() int {
+	return 0
+}
+
+func (c *Conv) W() int {
+	return 0
 }
 
 func (c Conv) Shape() dlperf.ShapeInformation {
