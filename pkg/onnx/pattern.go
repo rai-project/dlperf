@@ -5,14 +5,14 @@ import (
 	"gonum.org/v1/gonum/graph/topo"
 )
 
-type GraphPattern struct {
+type Pattern struct {
 	Nodes       GraphNodes
 	Occurrences int64
 }
 
-type GraphPatterns []GraphPattern
+type Patterns []Pattern
 
-func (o Onnx) NodeSubsequences(length int) (GraphPatterns, error) {
+func (o Onnx) NodeSubsequences(length int) (Patterns, error) {
 	grph := o.ToGraph()
 	nds, err := topo.SortStabilized(grph, sortById)
 	if err != nil {
@@ -20,13 +20,13 @@ func (o Onnx) NodeSubsequences(length int) (GraphPatterns, error) {
 	}
 
 	subsetsLength := len(nds) - length + 1
-	result := make([]GraphPattern, subsetsLength)
+	result := make([]Pattern, subsetsLength)
 	for ii := 0; ii < subsetsLength; ii++ {
 		inds := make([]GraphNode, length)
 		for jj, nd := range nds[ii : ii+length] {
 			inds[jj] = nd.(GraphNode)
 		}
-		result[ii] = GraphPattern{
+		result[ii] = Pattern{
 			Nodes:       inds,
 			Occurrences: 1,
 		}
@@ -34,8 +34,8 @@ func (o Onnx) NodeSubsequences(length int) (GraphPatterns, error) {
 	return result, nil
 }
 
-func NodeSubsequences(length int, models ...Onnx) ([]GraphPattern, error) {
-	pats := GraphPatterns{}
+func NodeSubsequences(length int, models ...Onnx) ([]Pattern, error) {
+	pats := Patterns{}
 	for _, o := range models {
 		ipats, err := o.NodeSubsequences(length)
 		if err != nil {
