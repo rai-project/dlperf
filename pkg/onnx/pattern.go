@@ -1,6 +1,8 @@
 package onnx
 
 import (
+	"strings"
+
 	"github.com/pkg/errors"
 	"gonum.org/v1/gonum/graph/topo"
 )
@@ -11,6 +13,30 @@ type Pattern struct {
 }
 
 type Patterns []Pattern
+
+func (p Pattern) HashKey() string {
+	nodeNames := make([]string, len(p.Nodes))
+	for ii, nd := range p.Nodes {
+		nodeNames[ii] = nd.GetOpType()
+	}
+	return strings.Join(nodeNames, ">")
+}
+
+func (pats Patterns) Counts() Patterns {
+	patMap := map[string]*Pattern{}
+	for _, pat := range pats {
+		if _, ok := patMap[pat.HashKey()]; !ok {
+			patMap[pat.HashKey()] = &pat
+			continue
+		}
+		patMap[pat.HashKey()].Occurrences += pat.Occurrences
+	}
+	res := []Pattern{}
+	for _, pat := range pats {
+		res = append(res, pat)
+	}
+	return res
+}
 
 func (o Onnx) NodeSubsequences(length int) (Patterns, error) {
 	grph := o.ToGraph()
