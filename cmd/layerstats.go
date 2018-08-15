@@ -66,7 +66,10 @@ func runLayerStats(cmd *cobra.Command, args []string) error {
 		return err
 	}
 
-	infos := net.ModelInformation()
+	infos, err := net.ModelInformation()
+	if err != nil {
+		return err
+	}
 
 	writer := NewWriter(stat{}, humanFlops)
 	defer writer.Close()

@@ -67,7 +67,10 @@ func runFlopsCmd(cmd *cobra.Command, args []string) error {
 	}
 
 	if fullFlops {
-		infos := net.ModelInformation()
+		infos, err := net.ModelInformation()
+		if err != nil {
+			return err
+		}
 
 		writer := NewWriter(layer{}, humanFlops)
 		defer writer.Close()

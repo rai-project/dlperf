@@ -50,7 +50,7 @@ func (nd GraphNode) Attributes() []encoding.Attribute {
 		},
 		encoding.Attribute{
 			Key:   "label",
-			Value: fmt.Sprintf("\"{ %s | %s  | %s }\"", nd.name, nd.Name, nd.OpType),
+			Value: fmt.Sprintf("\"{  %s  | %s }\"", nd.Name, nd.OpType),
 		},
 		encoding.Attribute{
 			Key:   "inputs",
@@ -70,10 +70,7 @@ func (o Onnx) ToGraph(oo ...GraphOption) Graph {
 
 	grph := simple.NewDirectedGraph()
 
-	skipNode := func(name string) bool {
-		if !opts.PruneInputs {
-			return false
-		}
+	isInputNode := func(name string) bool {
 		inputs := onnxGraph.GetInput()
 		if len(inputs) <= 1 {
 			return false
@@ -86,6 +83,21 @@ func (o Onnx) ToGraph(oo ...GraphOption) Graph {
 		return false
 	}
 
+	mkOnnxInputNode := func(name string, src *onnx.NodeProto) *onnx.NodeProto {
+		return &onnx.NodeProto{
+			Input:  []string{},
+			Name:   name,
+			OpType: "constant",
+		}
+	}
+
+	skipNode := func(name string) bool {
+		if !opts.PruneInputs {
+			return false
+		}
+		return isInputNode(name)
+	}
+
 	addNode := func(onnxNode *onnx.NodeProto, name string) {
 		if _, ok := graphIds[name]; ok {
 			return
@@ -94,6 +106,9 @@ func (o Onnx) ToGraph(oo ...GraphOption) Graph {
 			return
 		}
 		id := grph.NewNode().ID()
+		if opts.InputsAsConstantNodes && isInputNode(name) {
+			onnxNode = mkOnnxInputNode(name, onnxNode)
+		}
 		nd := GraphNode{
 			id:        id,
 			name:      name,

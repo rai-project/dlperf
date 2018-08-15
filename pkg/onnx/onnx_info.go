@@ -8,39 +8,22 @@ import (
 	"github.com/rai-project/dlperf/pkg"
 	"github.com/rai-project/dlperf/pkg/layer"
 	"github.com/rai-project/onnx"
+	"gonum.org/v1/gonum/graph/topo"
 )
 
-func (o Onnx) ModelInformation() []dlperf.LayerInformation {
+func (o Onnx) ModelInformation() ([]dlperf.LayerInformation, error) {
 	ret := []dlperf.LayerInformation{}
 
-	layers := ordered_map.NewOrderedMap()
-
-	// the nodes in the graph are sorted topologically by default
-	iter := o.nodes.IterFunc()
-	for kv, ok := iter(); ok; kv, ok = iter() {
-		node, ok := kv.Value.(*onnx.NodeProto)
-		if !ok {
-			log.Info("skipping onnx model layer")
-			continue
-		}
-
-		layer := o.mkLayer(node)
-
-		if layer == nil {
-			pp.Println(layer)
-			continue
-		}
-
-		layers.Set(layer.Name(), layer)
+	grph := o.ToGraph(GraphPruneInputs(false), GraphInputsAsConstantNodes(true))
+	nds, err := topo.SortStabilized(grph, sortById)
+	if err != nil {
+		return nil, err
 	}
-
-	grph := o.ToGraph(GraphPruneInputs(false))
-	nds := grph.Nodes()
 
 	findNode := func(name string) *GraphNode {
 		for _, n0 := range nds {
 			n := n0.(GraphNode)
-			if n.GetName() == name {
+			if n.name == name {
 				return &n
 			}
 		}
@@ -49,9 +32,27 @@ func (o Onnx) ModelInformation() []dlperf.LayerInformation {
 		return nil
 	}
 
+	layers := ordered_map.NewOrderedMap()
+
+	for _, nd0 := range nds {
+		nd, ok := nd0.(GraphNode)
+		if !ok {
+			panic("invalid type for " + pp.Sprint(nd0))
+		}
+
+		layer := o.mkLayer(nd.NodeProto)
+
+		if layer == nil {
+			pp.Println(layer)
+			continue
+		}
+
+		layers.Set(nd.name, layer)
+	}
+
 	ii := 0
 
-	iter = layers.IterFunc()
+	iter := layers.IterFunc()
 	for kv, ok := iter(); ok; kv, ok = iter() {
 		layer, ok := kv.Value.(dlperf.Layer)
 		if !ok {
@@ -66,7 +67,7 @@ func (o Onnx) ModelInformation() []dlperf.LayerInformation {
 				panic("invalid type for " + pp.Sprint(input0))
 			}
 
-			inputLayer, ok := layers.Get(input.GetName())
+			inputLayer, ok := layers.Get(input.name)
 			if !ok {
 				panic("unable to find input layer " + pp.Sprint(input))
 			}
@@ -74,7 +75,7 @@ func (o Onnx) ModelInformation() []dlperf.LayerInformation {
 			inputLayers = append(inputLayers, inputLayer.(dlperf.Layer))
 		}
 
-		if ii == 1 {
+		if ii == 3 {
 			// pp.Println(layer)
 			pp.Println(inputLayers)
 			pp.Println(len(inputLayers))
@@ -91,12 +92,16 @@ func (o Onnx) ModelInformation() []dlperf.LayerInformation {
 	// 	println(string(dotEnc))
 	// }
 
-	return ret
+	return ret, nil
 }
 
 func (o Onnx) FlopsInformation() dlperf.FlopsInformation {
 	flops := dlperf.FlopsInformation{}
-	for _, info := range o.ModelInformation() {
+	infos, err := o.ModelInformation()
+	if err != nil {
+		panic(err)
+	}
+	for _, info := range infos {
 		flops = flops.Add(info.Flops())
 	}
 	return flops
@@ -104,7 +109,11 @@ func (o Onnx) FlopsInformation() dlperf.FlopsInformation {
 
 func (o Onnx) MemoryInformation() dlperf.MemoryInformation {
 	memory := dlperf.MemoryInformation{}
-	for _, info := range o.ModelInformation() {
+	infos, err := o.ModelInformation()
+	if err != nil {
+		panic(err)
+	}
+	for _, info := range infos {
 		memory = memory.Add(info.Memory())
 	}
 	return memory
