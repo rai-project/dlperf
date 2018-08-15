@@ -1,8 +1,10 @@
 package onnx
 
 import (
+	"sort"
 	"strings"
 
+	"github.com/cevaris/ordered_map"
 	"github.com/pkg/errors"
 	"gonum.org/v1/gonum/graph/topo"
 )
@@ -23,18 +25,29 @@ func (p Pattern) HashKey() string {
 }
 
 func (pats Patterns) Counts() Patterns {
-	patMap := map[string]*Pattern{}
+	patMap := ordered_map.NewOrderedMap()
 	for _, pat := range pats {
-		if _, ok := patMap[pat.HashKey()]; !ok {
-			patMap[pat.HashKey()] = &pat
+		pp0, ok := patMap.Get(pat.HashKey())
+		if !ok {
+			patMap.Set(pat.HashKey(), pat)
 			continue
 		}
-		patMap[pat.HashKey()].Occurrences += pat.Occurrences
+		pp, ok := pp0.(Pattern)
+		if !ok {
+			panic("expecting a pattern when finding counts")
+		}
+		pp.Occurrences += pat.Occurrences
+		patMap.Set(pat.HashKey(), pp)
 	}
+
 	res := []Pattern{}
-	for _, pat := range pats {
-		res = append(res, pat)
+	iter := patMap.IterFunc()
+	for kv, ok := iter(); ok; kv, ok = iter() {
+		res = append(res, kv.Value.(Pattern))
 	}
+	sort.SliceStable(res, func(ii, jj int) bool {
+		return res[ii].Occurrences < res[jj].Occurrences
+	})
 	return res
 }
 
