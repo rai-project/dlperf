@@ -18,7 +18,7 @@ type DominatorTree struct {
 func (o Onnx) Dominators() DominatorTree {
 	grph := o.ToGraph()
 	return DominatorTree{
-		path.DominatorsSLT(grph.(Graph).Root, grph),
+		path.DominatorsSLT(grph.Root, grph),
 	}
 }
 

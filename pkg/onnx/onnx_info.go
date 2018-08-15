@@ -54,7 +54,7 @@ func (o Onnx) ModelInformation() []dlperf.LayerInformation {
 			panic("invalid layer type for " + pp.Sprint(kv.Value))
 		}
 
-		nd := findNode(kv.Value.(string))
+		nd := findNode(kv.Key.(string))
 		inputLayers := []dlperf.Layer{}
 		for _, input0 := range grph.To(nd.ID()) {
 			input, ok := input0.(GraphNode)

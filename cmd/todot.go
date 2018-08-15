@@ -62,7 +62,7 @@ var todotCmd = &cobra.Command{
 			return err
 		}
 
-		grph := model.ToGraph().(onnx.Graph)
+		grph := model.ToGraph()
 		prunedGrph := grph.Prune(nil)
 		_ = prunedGrph
 
