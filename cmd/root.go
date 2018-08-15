@@ -31,10 +31,14 @@ var rootCmd = &cobra.Command{
 			outputFormat = ""
 		}
 
-		if outputFormat == "" && outputFileName != "" {
-			outputFormat = strings.TrimLeft(filepath.Ext(outputFileName), ".")
-			if outputFormat == "js" {
-				outputFormat = "json"
+		if outputFormat == "" {
+			if outputFileName != "" {
+				outputFormat = strings.TrimLeft(filepath.Ext(outputFileName), ".")
+				if outputFormat == "js" {
+					outputFormat = "json"
+				} else {
+					outputFormat = "table"
+				}
 			} else {
 				outputFormat = "table"
 			}

@@ -46,7 +46,7 @@ func (pats Patterns) Counts() Patterns {
 		res = append(res, kv.Value.(Pattern))
 	}
 	sort.SliceStable(res, func(ii, jj int) bool {
-		return res[ii].Occurrences < res[jj].Occurrences
+		return res[ii].Occurrences > res[jj].Occurrences
 	})
 	return res
 }
@@ -73,7 +73,7 @@ func (o Onnx) NodeSubsequences(length int) (Patterns, error) {
 	return result, nil
 }
 
-func NodeSubsequences(length int, models ...Onnx) ([]Pattern, error) {
+func NodeSubsequences(length int, models ...*Onnx) (Patterns, error) {
 	pats := Patterns{}
 	for _, o := range models {
 		ipats, err := o.NodeSubsequences(length)

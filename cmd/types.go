@@ -5,7 +5,25 @@ import (
 	"strings"
 
 	"github.com/rai-project/dlperf/pkg"
+	"github.com/rai-project/dlperf/pkg/onnx"
 )
+
+type pattern struct {
+	onnx.Pattern
+}
+
+func (pattern) Header() []string {
+	return []string{"Pattern", "Occurrences"}
+}
+
+func (l pattern) Row(humanFlops bool) []string {
+	opTypes := []string{}
+	for _, nd := range l.Nodes {
+		opTypes = append(opTypes, nd.GetOpType())
+	}
+	pattern := strings.Join(opTypes, ">")
+	return []string{pattern, fmt.Sprint(l.Occurrences)}
+}
 
 type stat struct {
 	Name             string   `json:"name"`

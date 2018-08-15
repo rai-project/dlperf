@@ -175,8 +175,6 @@ func (o Onnx) mkLayer(node *onnx.NodeProto) dlperf.Layer {
 		ret = o.mkSoftMax(node)
 	case "constant":
 		ret = o.mkConstant(node)
-	case "constant_input":
-		ret = o.mkConstantInput(node)
 	default:
 		pp.Println("unhandeled", operatorType)
 	}
