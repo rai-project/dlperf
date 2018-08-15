@@ -31,7 +31,7 @@ var DefaultPrunedLayerTypes = []string{
 	"identity",
 }
 
-func (g Graph) Prune(layerTypes []string) graph.Directed {
+func (g Graph) Prune(layerTypes []string) Graph {
 
 	isSameGraph := func(a, b graph.Directed) bool {
 		if a == nil {

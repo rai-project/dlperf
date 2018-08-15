@@ -1,8 +1,11 @@
 package cmd
 
 import (
+	"bytes"
 	"context"
 	"fmt"
+	"os"
+	"os/exec"
 	"path"
 	"path/filepath"
 	"strings"
@@ -14,6 +17,33 @@ import (
 	"github.com/rai-project/utils"
 	"golang.org/x/sync/errgroup"
 )
+
+// location of dot executable for converting from .dot to .svg
+// it's usually at: /usr/bin/dot
+var (
+	dotExe         string
+	dotOutputCount int = 0
+)
+
+func dotToImage(dot []byte) (string, error) {
+	if dotExe == "" {
+		dot, err := exec.LookPath("dot")
+		if err != nil {
+			log.Fatalln("unable to find program 'dot', please install it or check your PATH")
+		}
+		dotExe = dot
+	}
+	dotOutputCount++
+
+	img := filepath.Join(os.TempDir(), fmt.Sprintf("dlperf_%d.png", dotOutputCount))
+	// img := filepath.Join("/tmp", fmt.Sprintf("dlperf.png"))
+	cmd := exec.Command(dotExe, "-Tpng", "-o", img)
+	cmd.Stdin = bytes.NewReader(dot)
+	if err := cmd.Run(); err != nil {
+		return "", err
+	}
+	return img, nil
+}
 
 func readModels(modelPath string) ([]*onnx.Onnx, error) {
 

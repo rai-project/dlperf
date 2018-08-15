@@ -31,7 +31,11 @@ var patternCmd = &cobra.Command{
 			return err
 		}
 
-		subseqs, err := onnx.NodeSubsequences(patternLength, models...)
+		subseqs, err := onnx.NodeSubsequences(
+			models,
+			onnx.PatternPruneGraph(pruneGraph),
+			onnx.PatternLength(patternLength),
+		)
 		if err != nil {
 			return err
 		}
@@ -51,5 +55,6 @@ var patternCmd = &cobra.Command{
 
 func init() {
 	patternCmd.PersistentFlags().IntVar(&patternLength, "length", 2, "length of the pattern sequence")
+	patternCmd.PersistentFlags().BoolVar(&pruneGraph, "prune", false, "prune graph before finding patterns")
 	rootCmd.AddCommand(patternCmd)
 }

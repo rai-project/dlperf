@@ -21,6 +21,7 @@ var (
 	appendOutput   bool
 	goPath         string
 	raiSrcPath     string
+	pruneGraph     bool
 )
 
 var rootCmd = &cobra.Command{

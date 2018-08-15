@@ -29,3 +29,41 @@ func NewGraphOptions(oo ...GraphOption) GraphOptions {
 	}
 	return *opts
 }
+
+type PatternOptions struct {
+	PruneGraph       bool
+	PruneGraphLayers []string
+	Length           int
+}
+
+type PatternOption func(*PatternOptions)
+
+func PatternPruneGraph(b bool) PatternOption {
+	return func(o *PatternOptions) {
+		o.PruneGraph = b
+	}
+}
+
+func PatternPruneGraphLayers(s []string) PatternOption {
+	return func(o *PatternOptions) {
+		o.PruneGraphLayers = s
+	}
+}
+
+func PatternLength(i int) PatternOption {
+	return func(o *PatternOptions) {
+		o.Length = i
+	}
+}
+
+func NewPatternOptions(oo ...PatternOption) PatternOptions {
+	opts := &PatternOptions{
+		PruneGraph:       false,
+		PruneGraphLayers: nil,
+		Length:           2,
+	}
+	for _, o := range oo {
+		o(opts)
+	}
+	return *opts
+}

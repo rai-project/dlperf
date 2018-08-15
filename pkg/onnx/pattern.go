@@ -51,13 +51,18 @@ func (pats Patterns) Counts() Patterns {
 	return res
 }
 
-func (o Onnx) NodeSubsequences(length int) (Patterns, error) {
+func (o Onnx) NodeSubsequences(oo ...PatternOption) (Patterns, error) {
+	opts := NewPatternOptions(oo...)
 	grph := o.ToGraph()
+	if opts.PruneGraph {
+		grph = grph.Prune(opts.PruneGraphLayers)
+	}
 	nds, err := topo.SortStabilized(grph, sortById)
 	if err != nil {
 		return nil, errors.Wrap(err, "failed to topologically sort graph when finding subsequences")
 	}
 
+	length := opts.Length
 	subsetsLength := len(nds) - length + 1
 	result := make([]Pattern, subsetsLength)
 	for ii := 0; ii < subsetsLength; ii++ {
@@ -73,10 +78,10 @@ func (o Onnx) NodeSubsequences(length int) (Patterns, error) {
 	return result, nil
 }
 
-func NodeSubsequences(length int, models ...*Onnx) (Patterns, error) {
+func NodeSubsequences(models []*Onnx, oo ...PatternOption) (Patterns, error) {
 	pats := Patterns{}
 	for _, o := range models {
-		ipats, err := o.NodeSubsequences(length)
+		ipats, err := o.NodeSubsequences(oo...)
 		if err != nil {
 			return nil, errors.Wrap(err, "failed to get Node subsequence for onnx model")
 		}

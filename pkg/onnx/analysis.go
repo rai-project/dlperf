@@ -15,11 +15,15 @@ type DominatorTree struct {
 	path.DominatorTree
 }
 
-func (o Onnx) Dominators() DominatorTree {
-	grph := o.ToGraph()
+func (grph Graph) Dominators() DominatorTree {
 	return DominatorTree{
 		path.DominatorsSLT(grph.Root, grph),
 	}
+}
+
+func (o Onnx) Dominators() DominatorTree {
+	grph := o.ToGraph()
+	return grph.Dominators()
 }
 
 // Dominates reports whether A dominates B.
@@ -55,11 +59,15 @@ func sortById(nodes []graph.Node) {
 	sort.Sort(byID(nodes))
 }
 
-func (o Onnx) FindGraphGroups() ([]graph.Directed, error) {
-	visited := map[int64]bool{}
-	res := []graph.Directed{}
+func (o Onnx) FindSubGraphs() ([]Graph, error) {
 	grph := o.ToGraph()
-	dt := o.Dominators()
+	return grph.FindSubGraphs()
+}
+
+func (grph Graph) FindSubGraphs() ([]Graph, error) {
+	visited := map[int64]bool{}
+	res := []Graph{}
+	dt := grph.Dominators()
 	nds, err := topo.SortStabilized(grph, sortById)
 	if err != nil {
 		return nil, errors.Wrap(err, "failed to topologically sort graph")
@@ -73,7 +81,6 @@ func (o Onnx) FindGraphGroups() ([]graph.Directed, error) {
 		}
 
 		subgrph := simple.NewDirectedGraph()
-		// visited[root.ID()] = true
 
 		visit = func(nd graph.Node) {
 			if nd == nil {
@@ -82,9 +89,6 @@ func (o Onnx) FindGraphGroups() ([]graph.Directed, error) {
 			if _, ok := visited[nd.ID()]; ok {
 				return
 			}
-			// if nd.ID() == sink.ID() {
-			// 	return
-			// }
 			visited[nd.ID()] = true
 			subgrph.AddNode(nd)
 
@@ -105,7 +109,10 @@ func (o Onnx) FindGraphGroups() ([]graph.Directed, error) {
 		}
 
 		if len(subgrph.Nodes()) != 0 {
-			res = append(res, subgrph)
+			res = append(res, Graph{
+				Root:          root.(GraphNode),
+				DirectedGraph: subgrph,
+			})
 		}
 	}
 
