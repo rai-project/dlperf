@@ -58,16 +58,16 @@
   version = "0.8.0"
 
 [[constraint]]
+  branch = "master"
   name = "github.com/rai-project/caffe"
-  version = "0.2.22"
 
 [[constraint]]
   branch = "master"
   name = "github.com/rai-project/config"
 
 [[constraint]]
+  branch = "master"
   name = "github.com/rai-project/dlframework"
-  version = "0.2.18"
 
 [[constraint]]
   branch = "master"
