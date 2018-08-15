@@ -190,8 +190,8 @@ func (o Onnx) mkBase(node *onnx.NodeProto) layer.Base {
 	base.SetOperatorType(strings.ToLower(node.GetOpType()))
 	base.SetInputs(inputs)
 	base.SetOutputs(outputs)
-	base.SetInputsDimensions(o.GetValueInfoDimensions(inputs))
-	// base.SetOutputsDimensions(o.GetValueInfoDimensions(outputs))
+	base.SetInputShapes(o.GetValueInfoDimensions(inputs))
+	// base.SetOutputShapes(o.GetValueInfoDimensions(outputs))
 
 	return *base
 }
@@ -340,8 +340,8 @@ func (o Onnx) mkConstantInput(node *onnx.NodeProto) dlperf.Layer {
 	if !ok {
 		return nil
 	}
-	base.SetInputsDimensions([][]int64{getValueInfoDimensions(val)})
-	base.SetOutputsDimensions([][]int64{getValueInfoDimensions(val)})
+	base.SetInputShapes([][]int64{getValueInfoDimensions(val)})
+	base.SetOutputShapes([][]int64{getValueInfoDimensions(val)})
 
 	return &layer.ConstantInput{
 		Base: base,

@@ -21,17 +21,17 @@ func (c MatMul) Information() dlperf.LayerInformation {
 		Base: c.Base,
 	}
 
-	if isAnyEmpty(c.outputsDimensions) {
-		log.WithField("layer", c.OperatorType()).Info("len(OutputsDimensions) is 0")
+	if isAnyEmpty(c.outputShapes) {
+		log.WithField("layer", c.OperatorType()).Info("len(OutputShapes) is 0")
 		return info
 	}
 
-	checkNumber(c.InputsDimensions, []int{1, 2}, c.OperatorType(), "number of inputs")
-	checkNumber(c.OutputsDimensions, []int{1}, c.OperatorType(), "number of outputs")
+	checkNumber(c.InputShapes, []int{1, 2}, c.OperatorType(), "number of inputs")
+	checkNumber(c.OutputShapes, []int{1}, c.OperatorType(), "number of outputs")
 
-	inputADimensions := c.inputsDimensions[0]  // (N x C x H x W)
-	inputBDimensions := c.inputsDimensions[1]  // (N x C x H x W)
-	outputDimensions := c.outputsDimensions[0] // (N x C x H x W)
+	inputADimensions := c.inputShapes[0]  // (N x C x H x W)
+	inputBDimensions := c.inputShapes[1]  // (N x C x H x W)
+	outputDimensions := c.outputShapes[0] // (N x C x H x W)
 
 	var numOps int64
 	dimLen := len(inputADimensions)

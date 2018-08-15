@@ -23,16 +23,16 @@ func (c ElementWise) Information() dlperf.LayerInformation {
 		Base: c.Base,
 	}
 
-	if isAnyEmpty(c.outputsDimensions) {
-		log.WithField("layer", c.OperatorType()).Info("len(OutputsDimensions) is 0")
+	if isAnyEmpty(c.outputShapes) {
+		log.WithField("layer", c.OperatorType()).Info("len(OutputShapes) is 0")
 		return info
 	}
 
-	checkNumber(c.InputsDimensions, []int{2}, c.OperatorType(), "number of inputs")
-	checkNumber(c.OutputsDimensions, []int{1}, c.OperatorType(), "number of outputs")
+	checkNumber(c.InputShapes, []int{2}, c.OperatorType(), "number of inputs")
+	checkNumber(c.OutputShapes, []int{1}, c.OperatorType(), "number of outputs")
 
-	inputDimensions := c.InputsDimensions()[0]   // (N x C x H x W)
-	outputDimensions := c.OutputsDimensions()[0] // (N x C x H x W)
+	inputDimensions := c.InputShapes()[0]   // (N x C x H x W)
+	outputDimensions := c.OutputShapes()[0] // (N x C x H x W)
 
 	var shape []int64
 	for _, s := range inputDimensions {

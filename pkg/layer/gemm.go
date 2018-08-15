@@ -21,21 +21,21 @@ func (c Gemm) Information() dlperf.LayerInformation {
 		Base: c.Base,
 	}
 
-	if isAnyEmpty(c.inputsDimensions) {
-		log.WithField("layer", c.OperatorType()).Info("len(InputsDimensions) is 0")
+	if isAnyEmpty(c.inputShapes) {
+		log.WithField("layer", c.OperatorType()).Info("len(InputShapes) is 0")
 		return info
 	}
 
-	if isAnyEmpty(c.outputsDimensions) {
-		log.WithField("layer", c.OperatorType()).Info("len(OutputsDimensions) is 0")
+	if isAnyEmpty(c.outputShapes) {
+		log.WithField("layer", c.OperatorType()).Info("len(OutputShapes) is 0")
 		return info
 	}
 
-	checkNumber(c.InputsDimensions, []int{3}, c.OperatorType(), "number of inputs")
-	checkNumber(c.OutputsDimensions, []int{1}, c.OperatorType(), "number of outputs")
+	checkNumber(c.InputShapes, []int{3}, c.OperatorType(), "number of inputs")
+	checkNumber(c.OutputShapes, []int{1}, c.OperatorType(), "number of outputs")
 
-	inputADimensions := c.InputsDimensions()[0]  // (M, K) or (K, M)
-	outputDimensions := c.OutputsDimensions()[0] // (M, N)
+	inputADimensions := c.InputShapes()[0]  // (M, K) or (K, M)
+	outputDimensions := c.OutputShapes()[0] // (M, N)
 
 	K := inputADimensions[1]
 	if K == outputDimensions[0] {

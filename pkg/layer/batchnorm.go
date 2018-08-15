@@ -24,16 +24,16 @@ func (c BatchNorm) Information() dlperf.LayerInformation {
 		Base: c.Base,
 	}
 
-	if isAnyEmpty(c.outputsDimensions) {
-		log.WithField("layer", c.OperatorType()).Info("len(OutputsDimensions) is 0")
+	if isAnyEmpty(c.outputShapes) {
+		log.WithField("layer", c.OperatorType()).Info("len(OutputShapes) is 0")
 		return info
 	}
 
-	checkNumber(c.InputsDimensions, []int{1, 2, 3, 4, 5}, c.OperatorType(), "number of inputs")
-	checkNumber(c.OutputsDimensions, []int{1, 2, 3, 4, 5}, c.OperatorType(), "number of outputs")
+	checkNumber(c.InputShapes, []int{1, 2, 3, 4, 5}, c.OperatorType(), "number of inputs")
+	checkNumber(c.OutputShapes, []int{1, 2, 3, 4, 5}, c.OperatorType(), "number of outputs")
 
-	inputDimensions := c.inputsDimensions[0]   // (N x C x H x W)
-	outputDimensions := c.outputsDimensions[0] // (N x C x H x W)
+	inputDimensions := c.inputShapes[0]   // (N x C x H x W)
+	outputDimensions := c.outputShapes[0] // (N x C x H x W)
 
 	numOps := int64(1)
 	for _, s := range inputDimensions {

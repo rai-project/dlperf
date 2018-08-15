@@ -8,16 +8,17 @@ import (
 	"github.com/rai-project/utils"
 )
 
+type Shape []int64
+
 type Layer interface {
 	Name() string
-	SetName(string)
 	Node() *onnx.NodeProto
 	OperatorType() string
 	InferShape(...Layer)
 	Inputs() []Layer
 	Outputs() []Layer
-	InputsDimensions() [][]int64
-	OutputsDimensions() [][]int64
+	InputShapes() []Shape
+	OutputShapes() []Shape
 	Information() LayerInformation
 }
 
@@ -32,16 +33,16 @@ type LayerInformation interface {
 }
 
 type ShapeInformation struct {
-	InputDimensions  [][]int64 `json:"input_dimensions,omitempty"`
-	OutputDimensions [][]int64 `json:"output_dimensions,omitempty"`
+	InputShapes  []Shape `json:"input_shapes,omitempty"`
+	OutputShapes []Shape `json:"output_shapes,omitempty"`
 }
 
 func (ShapeInformation) Header() []string {
-	return []string{"InputDimensions", "OutputDimensions"}
+	return []string{"InputShapes", "OutputShapes"}
 }
 
-func (shape ShapeInformation) Row(humanFlops bool) []string {
-	dimsToString := func(e [][]int64) string {
+func (this ShapeInformation) Row(humanFlops bool) []string {
+	dimsToString := func(e []Shape) string {
 		if len(e) == 0 {
 			return ""
 		}
@@ -52,8 +53,8 @@ func (shape ShapeInformation) Row(humanFlops bool) []string {
 		return string(bts)
 	}
 	return []string{
-		dimsToString(shape.InputDimensions),
-		dimsToString(shape.OutputDimensions),
+		dimsToString(this.InputShapes),
+		dimsToString(this.OutputShapes),
 	}
 }
 

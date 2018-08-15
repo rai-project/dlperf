@@ -23,14 +23,14 @@ func (Conv) Description() string {
 }
 
 func (c *Conv) InferShape(inputLayers ...dlperf.Layer) {
-	inputsDimensions := [][]int64{}
-	outputsDimensions := [][]int64{}
+	inputShapes := [][]int64{}
+	outputShapes := [][]int64{}
 	for _, input := range inputLayers {
-		inputsDimensions = append(inputsDimensions, input.OutputsDimensions()[0])
+		inputShapes = append(inputShapes, input.OutputShapes()[0])
 	}
-	c.SetInputsDimensions(inputsDimensions)
+	c.SetInputShapes(inputShapes)
 
-	c.SetOutputsDimensions(outputsDimensions)
+	c.SetOutputShapes(outputShapes)
 }
 
 func (c Conv) FwdBenchmarkName() string {
@@ -86,22 +86,22 @@ func (c Conv) Information() dlperf.LayerInformation {
 		Base: c.Base,
 	}
 
-	if isAnyEmpty(c.inputsDimensions) {
-		log.WithField("layer", c.OperatorType()).Info("len(InputsDimensions) is 0")
+	if isAnyEmpty(c.inputShapes) {
+		log.WithField("layer", c.OperatorType()).Info("len(InputShapes) is 0")
 		return info
 	}
 
-	if isAnyEmpty(c.outputsDimensions) {
-		log.WithField("layer", c.OperatorType()).Info("len(OutputsDimensions) is 0")
+	if isAnyEmpty(c.outputShapes) {
+		log.WithField("layer", c.OperatorType()).Info("len(OutputShapes) is 0")
 		return info
 	}
 
-	checkNumber(c.InputsDimensions, []int{2, 3}, c.OperatorType(), "number of inputs")
-	checkNumber(c.OutputsDimensions, []int{1}, c.OperatorType(), "number of outputs")
+	checkNumber(c.InputShapes, []int{2, 3}, c.OperatorType(), "number of inputs")
+	checkNumber(c.OutputShapes, []int{1}, c.OperatorType(), "number of outputs")
 
-	inputDimensions := c.InputsDimensions()[0]   // (N x C x H x W)
-	outputDimensions := c.OutputsDimensions()[0] // (N x C x H x W)
-	// weightDimensions := c.InputsDimensions()[1]  // (C x M x kH x kW)
+	inputDimensions := c.InputShapes()[0]   // (N x C x H x W)
+	outputDimensions := c.OutputShapes()[0] // (N x C x H x W)
+	// weightDimensions := c.InputShapes()[1]  // (C x M x kH x kW)
 
 	nIn := inputDimensions[0]
 	cIn := inputDimensions[1]
