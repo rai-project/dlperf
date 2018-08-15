@@ -2,19 +2,26 @@ package layer
 
 import (
 	"encoding/json"
+
+	"github.com/rai-project/onnx"
 )
 
 type Base struct {
-	name              string    `json:"name,omitempty"`
-	operatorType      string    `json:"operator_type,omitempty"`
-	inputs            []string  `json:",inputs,omitempty"`
-	outputs           []string  `json:",outputs,omitempty"`
-	inputsDimensions  [][]int64 `json:"inputs_dimensions,omitempty"`
-	outputsDimensions [][]int64 `json:"outputs_dimensions,omitempty"`
+	node              *onnx.NodeProto `json:"-"`
+	name              string          `json:"name,omitempty"`
+	operatorType      string          `json:"operator_type,omitempty"`
+	inputs            []string        `json:",inputs,omitempty"`
+	outputs           []string        `json:",outputs,omitempty"`
+	inputsDimensions  [][]int64       `json:"inputs_dimensions,omitempty"`
+	outputsDimensions [][]int64       `json:"outputs_dimensions,omitempty"`
 }
 
 func (b Base) Name() string {
 	return b.name
+}
+
+func (b *Base) SetNode(node *onnx.NodeProto) {
+	b.node = node
 }
 
 func (b *Base) SetName(s string) {

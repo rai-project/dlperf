@@ -123,6 +123,7 @@ func (o Onnx) mkBase(node *onnx.NodeProto) layer.Base {
 	outputs := node.GetOutput()
 
 	base := &layer.Base{}
+	base.SetNode(node)
 	base.SetName(node.GetName())
 	base.SetOperatorType(strings.ToLower(node.GetOpType()))
 	base.SetInputs(inputs)
