@@ -75,7 +75,7 @@ func (o Onnx) ModelInformation() ([]dlperf.LayerInformation, error) {
 			inputLayers = append(inputLayers, inputLayer.(dlperf.Layer))
 		}
 
-		if ii == 3 {
+		if ii == 0 {
 			// pp.Println(layer)
 			pp.Println(inputLayers)
 			pp.Println(len(inputLayers))
