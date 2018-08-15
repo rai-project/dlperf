@@ -39,8 +39,8 @@ func (pats Patterns) Counts() Patterns {
 		pp.Occurrences += pat.Occurrences
 		patMap.Set(pat.HashKey(), pp)
 	}
-	res := []Pattern{}
 
+	res := []Pattern{}
 	iter := patMap.IterFunc()
 	for kv, ok := iter(); ok; kv, ok = iter() {
 		res = append(res, kv.Value.(Pattern))
