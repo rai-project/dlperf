@@ -10,6 +10,14 @@
   revision = "83e8b8723a9bf39481216e80575f4854c63ece4a"
 
 [[projects]]
+  digest = "1:adbfc2db750d6fbe0c165ad801ba2d730883a3bc40bc8fe829516eb42ed17771"
+  name = "github.com/Microsoft/go-winio"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "a6d595ae73cf27a1b8fc32930668708f45ce1c85"
+  version = "v0.4.9"
+
+[[projects]]
   digest = "1:f033a81755b461d605dd88a4eaaf35542db9b425ee504ef44cef810ff2b0f9d2"
   name = "github.com/Unknwon/com"
   packages = ["."]
@@ -32,6 +40,14 @@
   packages = ["."]
   pruneopts = "UT"
   revision = "0efaee1733e3399a3cb88fc7d2ce340bf2e863d7"
+
+[[projects]]
+  branch = "master"
+  digest = "1:fc8dbcc2a5de7c093e167828ebbdf551641761d2ad75431d3a167d467a264115"
+  name = "github.com/containerd/continuity"
+  packages = ["pathdriver"]
+  pruneopts = "UT"
+  revision = "c7c5070e6f6e090ab93b0a61eb921f2196fc3383"
 
 [[projects]]
   digest = "1:ece8cff953ed3dbbbf5d5aa41e24f61ac4c1b601004aea9d56d572af363b71e7"
@@ -62,6 +78,31 @@
   pruneopts = "UT"
   revision = "346938d642f2ec3594ed81d874461961cd0faa76"
   version = "v1.1.0"
+
+[[projects]]
+  branch = "master"
+  digest = "1:f3a36b518193e8bc8b1333f89af0b928e5643e952e647886b94e68dbd0ca5510"
+  name = "github.com/docker/docker"
+  packages = [
+    "pkg/archive",
+    "pkg/fileutils",
+    "pkg/idtools",
+    "pkg/ioutils",
+    "pkg/longpath",
+    "pkg/mount",
+    "pkg/pools",
+    "pkg/system",
+  ]
+  pruneopts = "UT"
+  revision = "678d4b3a6d4cd7824d26592090b4dec507ce4bc2"
+
+[[projects]]
+  digest = "1:6f82cacd0af5921e99bf3f46748705239b36489464f4529a1589bc895764fb18"
+  name = "github.com/docker/go-units"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "47565b4f722fb6ceae66b95f853feed578a4a51c"
+  version = "v0.3.3"
 
 [[projects]]
   branch = "master"
@@ -116,6 +157,19 @@
   version = "v1.1.0"
 
 [[projects]]
+  digest = "1:2e3c336fc7fde5c984d2841455a658a6d626450b1754a854b3b32e7a8f49a07a"
+  name = "github.com/google/go-cmp"
+  packages = [
+    "cmp",
+    "cmp/internal/diff",
+    "cmp/internal/function",
+    "cmp/internal/value",
+  ]
+  pruneopts = "UT"
+  revision = "3af367b6b30c263d47e8895973edcca9a49cf029"
+  version = "v0.2.0"
+
+[[projects]]
   branch = "master"
   digest = "1:a361611b8c8c75a1091f00027767f7779b29cb37c456a71b8f2604c88057ab40"
   name = "github.com/hashicorp/hcl"
@@ -151,6 +205,14 @@
   version = "v2.3.0"
 
 [[projects]]
+  branch = "master"
+  digest = "1:e46d65f9f587fdc342c86135ac46449ab1302717a68ee0336568ed35ce945722"
+  name = "github.com/linkosmos/mapop"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "30336b2a6179ae763465b95e561c99eb87cba942"
+
+[[projects]]
   digest = "1:c568d7727aa262c32bdf8a3f7db83614f7af0ed661474b24588de635c20024c7"
   name = "github.com/magiconair/properties"
   packages = ["."]
@@ -175,12 +237,12 @@
   version = "v0.0.3"
 
 [[projects]]
-  digest = "1:e2d1d410fb367567c2b53ed9e2d719d3c1f0891397bb2fa49afd747cfbf1e8e4"
+  digest = "1:cdb899c199f907ac9fb50495ec71212c95cb5b0e0a8ee0800da0238036091033"
   name = "github.com/mattn/go-runewidth"
   packages = ["."]
   pruneopts = "UT"
-  revision = "9e777a8366cce605130a531d2cd6363d07ad7317"
-  version = "v0.0.2"
+  revision = "ce7b0b5c7b45a81508558cd1dba6bb1e4ddb51bb"
+  version = "v0.0.3"
 
 [[projects]]
   branch = "master"
@@ -218,6 +280,36 @@
   revision = "d4647c9c7a84d847478d890b816b7d8b62b0b279"
 
 [[projects]]
+  digest = "1:ee4d4af67d93cc7644157882329023ce9a7bcfce956a079069a9405521c7cc8d"
+  name = "github.com/opencontainers/go-digest"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "279bed98673dd5bef374d3b6e4b09e2af76183bf"
+  version = "v1.0.0-rc1"
+
+[[projects]]
+  digest = "1:11db38d694c130c800d0aefb502fb02519e514dc53d9804ce51d1ad25ec27db6"
+  name = "github.com/opencontainers/image-spec"
+  packages = [
+    "specs-go",
+    "specs-go/v1",
+  ]
+  pruneopts = "UT"
+  revision = "d60099175f88c47cd379c4738d158884749ed235"
+  version = "v1.0.1"
+
+[[projects]]
+  digest = "1:1869683e323ebff2bdf8adcb560f82bf6f8d94019d35099e3403f7df12e9c07e"
+  name = "github.com/opencontainers/runc"
+  packages = [
+    "libcontainer/system",
+    "libcontainer/user",
+  ]
+  pruneopts = "UT"
+  revision = "baf6536d6259209c3edfa2b22237af82942d3dfa"
+  version = "v0.1.1"
+
+[[projects]]
   digest = "1:95741de3af260a92cc5c7f3f3061e85273f5a81b5db20d4bd68da74bd521675e"
   name = "github.com/pelletier/go-toml"
   packages = ["."]
@@ -240,6 +332,14 @@
   pruneopts = "UT"
   revision = "792786c7400a136282c1664665ae0a8db921c6c2"
   version = "v1.0.0"
+
+[[projects]]
+  branch = "master"
+  digest = "1:547a0310f47a5301115026778f8b84f20d36a659cae81455642463e29929c62e"
+  name = "github.com/rai-project/archive"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "66938d516e6c1e2918f5f008fe53ab80663787ff"
 
 [[projects]]
   branch = "master"
@@ -267,11 +367,11 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:5003fe379520c8c3164d8bccdde2fde2d175f1bc6ea89f2c0bf9d655e18f4f37"
+  digest = "1:41829ee5aea7d66dda5b1c9306ac57f2fe933dd7fd34b98c20816fcb2b026452"
   name = "github.com/rai-project/onnx"
   packages = ["."]
   pruneopts = "UT"
-  revision = "bb0ea54eb5ec3f42e8f7bc967abca41e78d10c75"
+  revision = "6b5176deb0308ee2cab7dd74815248ac129bbd38"
 
 [[projects]]
   branch = "master"
@@ -326,11 +426,11 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:080e5f630945ad754f4b920e60b4d3095ba0237ebf88dc462eb28002932e3805"
+  digest = "1:8a020f916b23ff574845789daee6818daf8d25a4852419aae3f0b12378ba432a"
   name = "github.com/spf13/jwalterweatherman"
   packages = ["."]
   pruneopts = "UT"
-  revision = "7c0cea34c8ece3fbeb2b27ab9b59511d360fb394"
+  revision = "14d3d4c518341bea657dd8a226f5121c0ff8c9f2"
 
 [[projects]]
   digest = "1:dab83a1bbc7ad3d7a6ba1a1cc1760f25ac38cdf7d96a5cdd55cd915a4f5ceaf9"
@@ -400,22 +500,41 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:9f303486d623f840492bfeb48eb906a94e9d3fe638a761639b72ce64bf7bfcc3"
+  digest = "1:47bcbdf2a60a0bdd142f07f60771078857310fd1ededeb03956add7c7f6bef33"
+  name = "golang.org/x/exp"
+  packages = ["rand"]
+  pruneopts = "UT"
+  revision = "3d87b88a115fa4e65fadcbf34e6a60e8040cec41"
+
+[[projects]]
+  branch = "master"
+  digest = "1:76ee51c3f468493aff39dbacc401e8831fbb765104cbf613b89bef01cf4bad70"
+  name = "golang.org/x/net"
+  packages = ["context"]
+  pruneopts = "UT"
+  revision = "c39426892332e1bb5ec0a434a079bf82f5d30c54"
+
+[[projects]]
+  branch = "master"
+  digest = "1:39485a034b89a9f2892b9c0cc24e2330e1c9981794c35281c2febfcc55b90a34"
   name = "golang.org/x/sync"
-  packages = ["syncmap"]
+  packages = [
+    "errgroup",
+    "syncmap",
+  ]
   pruneopts = "UT"
   revision = "1d60e4601c6fd243af51cc01ddf169918a5407ca"
 
 [[projects]]
   branch = "master"
-  digest = "1:a60cae5be8993938498243605b120290533a5208fd5cac81c932afbad3642fb0"
+  digest = "1:d756534cd4124a2c7f9b349b2a70a63e53d4e32befae47d6a4bd938a64b92e14"
   name = "golang.org/x/sys"
   packages = [
     "unix",
     "windows",
   ]
   pruneopts = "UT"
-  revision = "98c5dad5d1a0e8a73845ecc8897d0bd56586511d"
+  revision = "4e1fef5609515ec7a2cee7b5de30ba6d9b438cbf"
 
 [[projects]]
   digest = "1:8029e9743749d4be5bc9f7d42ea1659471767860f0cdc34d37c3111bd308a295"
@@ -434,7 +553,7 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:1ee570fbf361a478b77cf0ab384aaa70cbb3514e38515590922d56df6d286a52"
+  digest = "1:1931ac37a62394ded600cc0e61bbb8d9f2dfb0a591bc4948680444b8c2bfe562"
   name = "gonum.org/v1/gonum"
   packages = [
     "blas",
@@ -451,10 +570,14 @@
     "graph/formats/dot/internal/lexer",
     "graph/formats/dot/internal/parser",
     "graph/formats/dot/internal/token",
+    "graph/internal/linear",
     "graph/internal/ordered",
     "graph/internal/set",
     "graph/internal/uid",
+    "graph/path",
     "graph/simple",
+    "graph/topo",
+    "graph/traverse",
     "internal/asm/c128",
     "internal/asm/f32",
     "internal/asm/f64",
@@ -465,7 +588,7 @@
     "mat",
   ]
   pruneopts = "UT"
-  revision = "73ea1e732937f96d723d31dc5263d214a275d204"
+  revision = "f4b55da7eefa5a4b5c8521a05c554392f71816f6"
 
 [[projects]]
   digest = "1:342378ac4dcb378a5448dd723f0784ae519383532f5e70ade24132c4c8693202"
@@ -484,12 +607,15 @@
     "github.com/cevaris/ordered_map",
     "github.com/fatih/color",
     "github.com/fatih/structs",
+    "github.com/google/go-cmp/cmp",
     "github.com/k0kubun/pp",
+    "github.com/linkosmos/mapop",
     "github.com/mattn/go-zglob",
     "github.com/mitchellh/go-homedir",
     "github.com/mitchellh/mapstructure",
     "github.com/olekukonko/tablewriter",
     "github.com/pkg/errors",
+    "github.com/rai-project/archive",
     "github.com/rai-project/config",
     "github.com/rai-project/logger",
     "github.com/rai-project/onnx",
@@ -498,9 +624,14 @@
     "github.com/spf13/cast",
     "github.com/spf13/cobra",
     "github.com/stretchr/testify/assert",
+    "golang.org/x/sync/errgroup",
     "golang.org/x/sync/syncmap",
+    "gonum.org/v1/gonum/graph",
+    "gonum.org/v1/gonum/graph/encoding",
     "gonum.org/v1/gonum/graph/encoding/dot",
+    "gonum.org/v1/gonum/graph/path",
     "gonum.org/v1/gonum/graph/simple",
+    "gonum.org/v1/gonum/graph/topo",
   ]
   solver-name = "gps-cdcl"
   solver-version = 1

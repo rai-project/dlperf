@@ -50,24 +50,12 @@
   name = "github.com/olekukonko/tablewriter"
 
 [[constraint]]
-  branch = "master"
-  name = "github.com/philopon/go-toposort"
-
-[[constraint]]
   name = "github.com/pkg/errors"
   version = "0.8.0"
 
 [[constraint]]
   branch = "master"
-  name = "github.com/rai-project/caffe"
-
-[[constraint]]
-  branch = "master"
   name = "github.com/rai-project/config"
-
-[[constraint]]
-  branch = "master"
-  name = "github.com/rai-project/dlframework"
 
 [[constraint]]
   branch = "master"
@@ -79,7 +67,7 @@
 
 [[constraint]]
   branch = "master"
-  name = "github.com/rai-project/tracer"
+  name = "gonum.org/v1/gonum"
 
 [[constraint]]
   branch = "master"
