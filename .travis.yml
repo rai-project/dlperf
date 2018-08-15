@@ -18,3 +18,6 @@ script:
   - echo "Skip tests..."
 after_script:
   - go test -race -v $(glide novendor)
+env:
+  global:
+    - CGO_ENABLED=0
