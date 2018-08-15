@@ -23,7 +23,14 @@ func (Conv) Description() string {
 }
 
 func (c *Conv) InferShape(inputLayers ...dlperf.Layer) {
-	//c.inputdimensions =  dlperf.ShapeInformation{}
+	inputsDimensions := [][]int64{}
+	outputsDimensions := [][]int64{}
+	for _, input := range inputLayers {
+		inputsDimensions = append(inputsDimensions, input.OutputsDimensions()[0])
+	}
+	c.SetInputsDimensions(inputsDimensions)
+
+	c.SetOutputsDimensions(outputsDimensions)
 }
 
 func (c Conv) FwdBenchmarkName() string {

@@ -72,10 +72,6 @@ func (o Onnx) ModelInformation() ([]dlperf.LayerInformation, error) {
 			inputLayers = append(inputLayers, inputLayer.(dlperf.Layer))
 		}
 
-		pp.Println(layer)
-		// pp.Println(inputLayers)
-		// pp.Println(len(inputLayers))
-
 		layer.InferShape(inputLayers...)
 
 		info := layer.Information()
@@ -344,6 +340,7 @@ func (o Onnx) mkConstantInput(node *onnx.NodeProto) dlperf.Layer {
 	if !ok {
 		return nil
 	}
+	base.SetInputsDimensions([][]int64{getValueInfoDimensions(val)})
 	base.SetOutputsDimensions([][]int64{getValueInfoDimensions(val)})
 
 	return &layer.ConstantInput{

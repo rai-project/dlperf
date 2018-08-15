@@ -10,28 +10,30 @@ import (
 
 type Layer interface {
 	Name() string
+	SetName(string)
 	Node() *onnx.NodeProto
 	OperatorType() string
-	SetName(string)
 	InferShape(...Layer)
-	Inputs() []string
-	Outputs() []string
+	Inputs() []Layer
+	Outputs() []Layer
+	InputsDimensions() [][]int64
+	OutputsDimensions() [][]int64
 	Information() LayerInformation
 }
 
 type LayerInformation interface {
 	Name() string
 	OperatorType() string
-	Inputs() []string
-	Outputs() []string
+	Inputs() []Layer
+	Outputs() []Layer
 	Shape() ShapeInformation
 	Flops() FlopsInformation
 	Memory() MemoryInformation
 }
 
 type ShapeInformation struct {
-	InputDimensions  []int64 `json:"input_dimensions,omitempty"`
-	OutputDimensions []int64 `json:"output_dimensions,omitempty"`
+	InputDimensions  [][]int64 `json:"input_dimensions,omitempty"`
+	OutputDimensions [][]int64 `json:"output_dimensions,omitempty"`
 }
 
 func (ShapeInformation) Header() []string {
@@ -39,7 +41,7 @@ func (ShapeInformation) Header() []string {
 }
 
 func (shape ShapeInformation) Row(humanFlops bool) []string {
-	dimsToString := func(e []int64) string {
+	dimsToString := func(e [][]int64) string {
 		if len(e) == 0 {
 			return ""
 		}
