@@ -43,7 +43,6 @@ func (o Onnx) ModelInformation() ([]dlperf.LayerInformation, error) {
 		layer := o.mkLayer(nd.NodeProto)
 
 		if layer == nil {
-			pp.Println(layer)
 			continue
 		}
 
@@ -76,7 +75,7 @@ func (o Onnx) ModelInformation() ([]dlperf.LayerInformation, error) {
 		}
 
 		if ii == 0 {
-			// pp.Println(layer)
+			pp.Println(layer)
 			pp.Println(inputLayers)
 			pp.Println(len(inputLayers))
 		}
@@ -176,6 +175,8 @@ func (o Onnx) mkLayer(node *onnx.NodeProto) dlperf.Layer {
 		ret = o.mkSoftMax(node)
 	case "constant":
 		ret = o.mkConstant(node)
+	case "constant_input":
+		ret = o.mkConstantInput(node)
 	default:
 		pp.Println("unhandeled", operatorType)
 	}

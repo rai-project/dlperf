@@ -75,7 +75,10 @@ func (o Onnx) ToGraph(oo ...GraphOption) Graph {
 		if len(inputs) <= 1 {
 			return false
 		}
-		for _, input := range inputs[1:] {
+		if !opts.InputsAsConstantNodes {
+			inputs = inputs[1:]
+		}
+		for _, input := range inputs {
 			if input.GetName() == name {
 				return true
 			}
