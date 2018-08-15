@@ -33,8 +33,8 @@ func (layer *Information) Outputs() []string {
 
 func (layer *Information) Shape() dlperf.ShapeInformation {
 	return dlperf.ShapeInformation{
-		InputDimensions:  layer.inputsDimensions[0],
-		OutputDimensions: layer.outputsDimensions[0],
+		// InputDimensions:  layer.inputsDimensions[0],
+		// OutputDimensions: layer.outputsDimensions[0],
 	}
 }
 

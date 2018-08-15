@@ -15,7 +15,7 @@ func (o Onnx) ModelInformation() []dlperf.LayerInformation {
 
 	layers := ordered_map.NewOrderedMap()
 
-	// the nodes in the graph are sorted topologically
+	// the nodes in the graph are sorted topologically by default
 	iter := o.nodes.IterFunc()
 	for kv, ok := iter(); ok; kv, ok = iter() {
 		node, ok := kv.Value.(*onnx.NodeProto)
@@ -27,13 +27,14 @@ func (o Onnx) ModelInformation() []dlperf.LayerInformation {
 		layer := o.mkLayer(node)
 
 		if layer == nil {
+			pp.Println(layer)
 			continue
 		}
 
 		layers.Set(layer.Name(), layer)
 	}
 
-	grph := o.ToGraph()
+	grph := o.ToGraph(GraphPruneInputs(false))
 	nds := grph.Nodes()
 
 	findNode := func(name string) *GraphNode {
@@ -44,8 +45,11 @@ func (o Onnx) ModelInformation() []dlperf.LayerInformation {
 			}
 		}
 		panic("unable to find node " + name)
+
 		return nil
 	}
+
+	ii := 0
 
 	iter = layers.IterFunc()
 	for kv, ok := iter(); ok; kv, ok = iter() {
@@ -61,18 +65,31 @@ func (o Onnx) ModelInformation() []dlperf.LayerInformation {
 			if !ok {
 				panic("invalid type for " + pp.Sprint(input0))
 			}
+
 			inputLayer, ok := layers.Get(input.GetName())
 			if !ok {
 				panic("unable to find input layer " + pp.Sprint(input))
 			}
+
 			inputLayers = append(inputLayers, inputLayer.(dlperf.Layer))
 		}
 
+		if ii == 1 {
+			// pp.Println(layer)
+			pp.Println(inputLayers)
+			pp.Println(len(inputLayers))
+		}
+		ii++
 		layer.InferShape(inputLayers...)
 
 		info := layer.Information()
 		ret = append(ret, info)
 	}
+
+	// dotEnc, err := dot.Marshal(grph, "", "", "  ", true)
+	// if err == nil {
+	// 	println(string(dotEnc))
+	// }
 
 	return ret
 }

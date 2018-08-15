@@ -50,7 +50,7 @@ func (nd GraphNode) Attributes() []encoding.Attribute {
 		},
 		encoding.Attribute{
 			Key:   "label",
-			Value: fmt.Sprintf("\"{ %s  | %s }\"", nd.Name, nd.OpType),
+			Value: fmt.Sprintf("\"{ %s | %s  | %s }\"", nd.name, nd.Name, nd.OpType),
 		},
 		encoding.Attribute{
 			Key:   "inputs",
@@ -63,13 +63,17 @@ func (nd GraphNode) Attributes() []encoding.Attribute {
 	}
 }
 
-func (o Onnx) ToGraph() Graph {
+func (o Onnx) ToGraph(oo ...GraphOption) Graph {
+	opts := NewGraphOptions(oo...)
 	onnxGraph := o.GetGraph()
 	graphIds := map[string]int64{}
 
 	grph := simple.NewDirectedGraph()
 
 	skipNode := func(name string) bool {
+		if !opts.PruneInputs {
+			return false
+		}
 		inputs := onnxGraph.GetInput()
 		if len(inputs) <= 1 {
 			return false
