@@ -50,7 +50,7 @@ func (c *Conv) FwdBenchmarkFilter() benchmark.Benchmark {
 	}
 }
 
-func (c *Conv) InferShape() {
+func (c *Conv) InferShape(inputs ...dlperf.Layer) {
 	//c.inputdimensions =  dlperf.ShapeInformation{}
 }
 

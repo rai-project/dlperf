@@ -1,26 +1,32 @@
 package cmd
 
 import (
+	"fmt"
 	"strings"
 
 	"github.com/rai-project/dlperf/pkg"
 )
 
 type stat struct {
-	Name    string   `json:"name"`
-	Type    string   `json:"type"`
-	Inputs  []string `json:"inputs"`
-	Outputs []string `json:"outputs"`
+	Name             string   `json:"name"`
+	Type             string   `json:"type"`
+	Inputs           []string `json:"inputs"`
+	Outputs          []string `json:"outputs"`
+	InputDimensions  []int64  `json:"input_dimensions"`
+	OutputDimensions []int64  `json:"output_dimensions"`
 }
 
 func (stat) Header() []string {
-	return []string{"LayerName", "LayerType", "Inputs", "Outputs"}
+	return []string{"LayerName", "LayerType", "Inputs", "Outputs", "InputDimension", "OutputDimension"}
 }
 
 func (l stat) Row(humanFlops bool) []string {
 	inputs := strings.Join(l.Inputs, ";")
 	outputs := strings.Join(l.Outputs, ";")
-	return []string{l.Name, l.Type, inputs, outputs}
+	inputDimensions := strings.Trim(strings.Replace(fmt.Sprint(l.InputDimensions), " ", ";", -1), "[]")
+	outputDimensions := strings.Trim(strings.Replace(fmt.Sprint(l.OutputDimensions), " ", ";", -1), "[]")
+
+	return []string{l.Name, l.Type, inputs, outputs, inputDimensions, outputDimensions}
 }
 
 type layer struct {

@@ -74,10 +74,12 @@ func runLayerStats(cmd *cobra.Command, args []string) error {
 	for _, info := range infos {
 		writer.Row(
 			stat{
-				Name:    info.Name(),
-				Type:    info.OperatorType(),
-				Inputs:  info.Inputs(),
-				Outputs: info.Outputs(),
+				Name:             info.Name(),
+				Type:             info.OperatorType(),
+				Inputs:           info.Inputs(),
+				Outputs:          info.Outputs(),
+				InputDimensions:  info.Shape().InputDimensions,
+				OutputDimensions: info.Shape().OutputDimensions,
 			},
 		)
 	}
