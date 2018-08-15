@@ -1,4 +1,5 @@
-# DLPerf [![Build Status](https://travis-ci.org/rai-project/dlperf.svg?branch=master)](https://travis-ci.org/rai-project/dlperf)
+# DLPerf
+[![Build Status](https://travis-ci.org/rai-project/dlperf.svg?branch=master)](https://travis-ci.org/rai-project/dlperf)
 
 
 ## Layer Stats
