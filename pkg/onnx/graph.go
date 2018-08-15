@@ -86,11 +86,11 @@ func (o Onnx) ToGraph(oo ...GraphOption) Graph {
 		return false
 	}
 
-	mkOnnxInputNode := func(name string, src *onnx.NodeProto) *onnx.NodeProto {
+	mkOnnxConstantInputNode := func(name string, src *onnx.NodeProto) *onnx.NodeProto {
 		return &onnx.NodeProto{
 			Input:  []string{},
 			Name:   name,
-			OpType: "constant",
+			OpType: "constant_input",
 		}
 	}
 
@@ -110,7 +110,7 @@ func (o Onnx) ToGraph(oo ...GraphOption) Graph {
 		}
 		id := grph.NewNode().ID()
 		if opts.InputsAsConstantNodes && isInputNode(name) {
-			onnxNode = mkOnnxInputNode(name, onnxNode)
+			onnxNode = mkOnnxConstantInputNode(name, onnxNode)
 		}
 		nd := GraphNode{
 			id:        id,

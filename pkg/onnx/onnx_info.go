@@ -49,8 +49,6 @@ func (o Onnx) ModelInformation() ([]dlperf.LayerInformation, error) {
 		layers.Set(nd.name, layer)
 	}
 
-	ii := 0
-
 	iter := layers.IterFunc()
 	for kv, ok := iter(); ok; kv, ok = iter() {
 		layer, ok := kv.Value.(dlperf.Layer)
@@ -74,12 +72,10 @@ func (o Onnx) ModelInformation() ([]dlperf.LayerInformation, error) {
 			inputLayers = append(inputLayers, inputLayer.(dlperf.Layer))
 		}
 
-		if ii == 0 {
-			pp.Println(layer)
-			pp.Println(inputLayers)
-			pp.Println(len(inputLayers))
-		}
-		ii++
+		pp.Println(layer)
+		// pp.Println(inputLayers)
+		// pp.Println(len(inputLayers))
+
 		layer.InferShape(inputLayers...)
 
 		info := layer.Information()
@@ -175,6 +171,8 @@ func (o Onnx) mkLayer(node *onnx.NodeProto) dlperf.Layer {
 		ret = o.mkSoftMax(node)
 	case "constant":
 		ret = o.mkConstant(node)
+	case "constant_input":
+		ret = o.mkConstantInput(node)
 	default:
 		pp.Println("unhandeled", operatorType)
 	}
@@ -337,5 +335,18 @@ func (o Onnx) mkSoftMax(node *onnx.NodeProto) dlperf.Layer {
 func (o Onnx) mkConstant(node *onnx.NodeProto) dlperf.Layer {
 	return &layer.Constant{
 		Base: o.mkBase(node),
+	}
+}
+
+func (o Onnx) mkConstantInput(node *onnx.NodeProto) dlperf.Layer {
+	base := o.mkBase(node)
+	val, ok := o.inputs[node.Name]
+	if !ok {
+		return nil
+	}
+	base.SetOutputsDimensions([][]int64{getValueInfoDimensions(val)})
+
+	return &layer.ConstantInput{
+		Base: base,
 	}
 }
