@@ -12,6 +12,10 @@ func (SoftMax) Description() string {
 	return ``
 }
 
+func (c *SoftMax) InferShape(inputLayers []dlperf.Layer) {
+	//c.inputdimensions =  dlperf.ShapeInformation{}
+}
+
 func (c SoftMax) Information() dlperf.LayerInformation {
 	info := &Information{
 		Base: c.Base,

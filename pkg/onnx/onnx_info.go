@@ -27,6 +27,24 @@ func (o Onnx) ModelInformation() []dlperf.LayerInformation {
 			continue
 		}
 
+		getInputLayers := func(node *onnx.NodeProto) []dlperf.Layer {
+			var layers []dlperf.Layer
+			inputs := node.GetInput()
+
+			for _, input := range inputs {
+				layer, err := dlperf.FromName(input)
+				if err != nil {
+					return nil
+				}
+
+				layers = append(layers, layer)
+			}
+
+			return layers
+		}
+
+		layer.InferShape(getInputLayers(node))
+
 		info := layer.Information()
 		ret = append(ret, info)
 	}
@@ -129,7 +147,7 @@ func (o Onnx) mkBase(node *onnx.NodeProto) layer.Base {
 	base.SetInputs(inputs)
 	base.SetOutputs(outputs)
 	base.SetInputsDimensions(o.GetValueInfoDimensions(inputs))
-	base.SetOutputsDimensions(o.GetValueInfoDimensions(outputs))
+	// base.SetOutputsDimensions(o.GetValueInfoDimensions(outputs))
 
 	return *base
 }

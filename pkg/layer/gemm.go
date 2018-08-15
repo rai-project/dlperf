@@ -12,6 +12,10 @@ func (Gemm) Description() string {
 	return ``
 }
 
+func (c *Gemm) InferShape(inputLayers []dlperf.Layer) {
+	//c.inputdimensions =  dlperf.ShapeInformation{}
+}
+
 func (c Gemm) Information() dlperf.LayerInformation {
 	info := &Information{
 		Base: c.Base,

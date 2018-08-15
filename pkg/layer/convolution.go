@@ -22,6 +22,10 @@ func (Conv) Description() string {
 	return ``
 }
 
+func (c *Conv) InferShape(inputLayers []dlperf.Layer) {
+	//c.inputdimensions =  dlperf.ShapeInformation{}
+}
+
 func (c Conv) FwdBenchmarkName() string {
 	return ""
 }
@@ -48,10 +52,6 @@ func (c *Conv) FwdBenchmarkFilter() benchmark.Benchmark {
 			"W": c.W(),
 		},
 	}
-}
-
-func (c *Conv) InferShape(inputs ...dlperf.Layer) {
-	//c.inputdimensions =  dlperf.ShapeInformation{}
 }
 
 func (c *Conv) N() int {

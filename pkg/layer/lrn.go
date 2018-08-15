@@ -16,6 +16,10 @@ func (LRN) Description() string {
 	return ``
 }
 
+func (c *LRN) InferShape(inputLayers []dlperf.Layer) {
+	//c.inputdimensions =  dlperf.ShapeInformation{}
+}
+
 func (c LRN) Information() dlperf.LayerInformation {
 	info := &Information{
 		Base: c.Base,

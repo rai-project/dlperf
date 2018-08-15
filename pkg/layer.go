@@ -11,6 +11,7 @@ type Layer interface {
 	Name() string
 	OperatorType() string
 	SetName(string)
+	InferShape([]Layer)
 	Information() LayerInformation
 }
 

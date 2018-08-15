@@ -34,7 +34,7 @@ func (layer *Information) Outputs() []string {
 func (layer *Information) Shape() dlperf.ShapeInformation {
 	return dlperf.ShapeInformation{
 		InputDimensions:  layer.inputsDimensions[0],
-		OutputDimensions: []int64{},
+		OutputDimensions: layer.outputsDimensions[0],
 	}
 }
 

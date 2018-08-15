@@ -13,6 +13,10 @@ func (Pooling) Description() string {
 	return ``
 }
 
+func (c *Pooling) InferShape(inputLayers []dlperf.Layer) {
+	//c.inputdimensions =  dlperf.ShapeInformation{}
+}
+
 func (c Pooling) Information() dlperf.LayerInformation {
 	info := &Information{
 		Base: c.Base,

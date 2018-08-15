@@ -14,6 +14,10 @@ func (ElementWise) Description() string {
 	return ``
 }
 
+func (c *ElementWise) InferShape(inputLayers []dlperf.Layer) {
+	//c.inputdimensions =  dlperf.ShapeInformation{}
+}
+
 func (c ElementWise) Information() dlperf.LayerInformation {
 	info := &Information{
 		Base: c.Base,
