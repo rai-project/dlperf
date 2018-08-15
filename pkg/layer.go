@@ -4,14 +4,18 @@ import (
 	"encoding/json"
 	"fmt"
 
+	"github.com/rai-project/onnx"
 	"github.com/rai-project/utils"
 )
 
 type Layer interface {
 	Name() string
+	Node() *onnx.NodeProto
 	OperatorType() string
 	SetName(string)
-	InferShape([]Layer)
+	InferShape(...Layer)
+	Inputs() []string
+	Outputs() []string
 	Information() LayerInformation
 }
 

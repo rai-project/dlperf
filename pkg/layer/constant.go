@@ -16,7 +16,7 @@ func (Constant) Description() string {
 	return ``
 }
 
-func (c *Constant) InferShape(inputLayers []dlperf.Layer) {
+func (c *Constant) InferShape(inputLayers ...dlperf.Layer) {
 	//c.inputdimensions =  dlperf.ShapeInformation{}
 }
 

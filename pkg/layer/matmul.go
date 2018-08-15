@@ -12,7 +12,7 @@ func (MatMul) Description() string {
 	return ``
 }
 
-func (c *MatMul) InferShape(inputLayers []dlperf.Layer) {
+func (c *MatMul) InferShape(inputLayers ...dlperf.Layer) {
 	//c.inputdimensions =  dlperf.ShapeInformation{}
 }
 

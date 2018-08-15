@@ -5,7 +5,6 @@ import (
 	"strings"
 
 	"github.com/rai-project/onnx"
-	"gonum.org/v1/gonum/graph"
 	"gonum.org/v1/gonum/graph/encoding"
 	"gonum.org/v1/gonum/graph/simple"
 )
@@ -64,7 +63,7 @@ func (nd GraphNode) Attributes() []encoding.Attribute {
 	}
 }
 
-func (o Onnx) ToGraph() graph.Directed {
+func (o Onnx) ToGraph() Graph {
 	onnxGraph := o.GetGraph()
 	graphIds := map[string]int64{}
 

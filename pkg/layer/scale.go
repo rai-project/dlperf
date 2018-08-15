@@ -12,7 +12,7 @@ func (Scale) Description() string {
 	return ``
 }
 
-func (c *Scale) InferShape(inputLayers []dlperf.Layer) {
+func (c *Scale) InferShape(inputLayers ...dlperf.Layer) {
 	//c.inputdimensions =  dlperf.ShapeInformation{}
 }
 

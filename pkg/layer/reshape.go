@@ -14,7 +14,7 @@ func (Reshape) Description() string {
 	return ``
 }
 
-func (c *Reshape) InferShape(inputLayers []dlperf.Layer) {
+func (c *Reshape) InferShape(inputLayers ...dlperf.Layer) {
 	//c.inputdimensions =  dlperf.ShapeInformation{}
 }
 

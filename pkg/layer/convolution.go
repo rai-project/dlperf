@@ -22,7 +22,7 @@ func (Conv) Description() string {
 	return ``
 }
 
-func (c *Conv) InferShape(inputLayers []dlperf.Layer) {
+func (c *Conv) InferShape(inputLayers ...dlperf.Layer) {
 	//c.inputdimensions =  dlperf.ShapeInformation{}
 }
 

@@ -15,7 +15,7 @@ func (BatchNorm) Description() string {
 	return ``
 }
 
-func (c *BatchNorm) InferShape(inputLayers []dlperf.Layer) {
+func (c *BatchNorm) InferShape(inputLayers ...dlperf.Layer) {
 	//c.inputdimensions =  dlperf.ShapeInformation{}
 }
 

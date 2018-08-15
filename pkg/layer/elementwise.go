@@ -14,7 +14,7 @@ func (ElementWise) Description() string {
 	return ``
 }
 
-func (c *ElementWise) InferShape(inputLayers []dlperf.Layer) {
+func (c *ElementWise) InferShape(inputLayers ...dlperf.Layer) {
 	//c.inputdimensions =  dlperf.ShapeInformation{}
 }
 

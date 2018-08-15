@@ -3,6 +3,7 @@ package onnx
 import (
 	"strings"
 
+	"github.com/cevaris/ordered_map"
 	"github.com/k0kubun/pp"
 	"github.com/rai-project/dlperf/pkg"
 	"github.com/rai-project/dlperf/pkg/layer"
@@ -11,6 +12,8 @@ import (
 
 func (o Onnx) ModelInformation() []dlperf.LayerInformation {
 	ret := []dlperf.LayerInformation{}
+
+	layers := ordered_map.NewOrderedMap()
 
 	// the nodes in the graph are sorted topologically
 	iter := o.nodes.IterFunc()
@@ -27,23 +30,45 @@ func (o Onnx) ModelInformation() []dlperf.LayerInformation {
 			continue
 		}
 
-		getInputLayers := func(node *onnx.NodeProto) []dlperf.Layer {
-			var layers []dlperf.Layer
-			inputs := node.GetInput()
+		layers.Set(layer.Name(), layer)
+	}
 
-			for _, input := range inputs {
-				layer, err := dlperf.FromName(input)
-				if err != nil {
-					return nil
-				}
+	grph := o.ToGraph()
+	nds := grph.Nodes()
 
-				layers = append(layers, layer)
+	findNode := func(name string) *GraphNode {
+		for _, n0 := range nds {
+			n := n0.(GraphNode)
+			if n.GetName() == name {
+				return &n
 			}
+		}
+		panic("unable to find node " + name)
+		return nil
+	}
 
-			return layers
+	iter = layers.IterFunc()
+	for kv, ok := iter(); ok; kv, ok = iter() {
+		layer, ok := kv.Value.(dlperf.Layer)
+		if !ok {
+			panic("invalid layer type for " + pp.Sprint(kv.Value))
 		}
 
-		layer.InferShape(getInputLayers(node))
+		nd := findNode(kv.Value.(string))
+		inputLayers := []dlperf.Layer{}
+		for _, input0 := range grph.To(nd.ID()) {
+			input, ok := input0.(GraphNode)
+			if !ok {
+				panic("invalid type for " + pp.Sprint(input0))
+			}
+			inputLayer, ok := layers.Get(input.GetName())
+			if !ok {
+				panic("unable to find input layer " + pp.Sprint(input))
+			}
+			inputLayers = append(inputLayers, inputLayer.(dlperf.Layer))
+		}
+
+		layer.InferShape(inputLayers...)
 
 		info := layer.Information()
 		ret = append(ret, info)

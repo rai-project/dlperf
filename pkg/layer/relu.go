@@ -12,7 +12,7 @@ func (ReLU) Description() string {
 	return ``
 }
 
-func (c *ReLU) InferShape(inputLayers []dlperf.Layer) {
+func (c *ReLU) InferShape(inputLayers ...dlperf.Layer) {
 	//c.inputdimensions =  dlperf.ShapeInformation{}
 }
 

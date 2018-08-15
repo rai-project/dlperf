@@ -20,6 +20,10 @@ func (b Base) Name() string {
 	return b.name
 }
 
+func (b *Base) Node() *onnx.NodeProto {
+	return b.node
+}
+
 func (b *Base) SetNode(node *onnx.NodeProto) {
 	b.node = node
 }
