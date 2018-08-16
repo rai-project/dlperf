@@ -17,9 +17,16 @@ func (Pooling) Description() string {
 
 func (c *Pooling) InferShape(inputLayers []dlperf.Layer) {
 	inputShapes := getOutputShapes(inputLayers)
+	xShape := c.inputShapes[0]
+
+	yShape := dlperf.Shape{xShape[0], xShape[1]}
+	for ii, xs := range xShape[2:] {
+		ys := (xs + c.Pads[ii] + c.Pads[ii+1] - c.KernelShape[ii]) / c.Strides[ii]
+		yShape = append(yShape, ys)
+	}
 
 	c.SetInputShapes(inputShapes)
-	c.SetOutputShapes(inputShapes)
+	c.SetOutputShapes([]dlperf.Shape{yShape})
 }
 
 func (c Pooling) Information() dlperf.LayerInformation {
@@ -39,30 +46,19 @@ func (c Pooling) Information() dlperf.LayerInformation {
 	checkNumber(c.InputShapes, []int{1}, c.OperatorType(), "number of inputs")
 	checkNumber(c.OutputShapes, []int{1}, c.OperatorType(), "number of outputs")
 
-	inputShapes := c.InputShapes()[0]   // (N x C x H x W)
-	outputShapes := c.OutputShapes()[0] // (N x C x H x W)
+	outputShape := c.OutputShapes()[0] // (N x C x ...)
 
-	nIn := inputShapes[0]
-	cIn := inputShapes[1]
-	hIn := inputShapes[2]
-	wIn := inputShapes[3]
-
-	cOut := outputShapes[1]
-	hOut := outputShapes[2]
-	wOut := outputShapes[3]
-
-	var kernelH, kernelW int64
-	if c.KernelShape != nil {
-		kernelH = c.KernelShape[0]
-		kernelW = c.KernelShape[1]
-	}
+	nOut := outputShape[0]
+	cOut := outputShape[1]
+	hOut := outputShape[2]
+	wOut := outputShape[3]
 
 	flops := dlperf.FlopsInformation{}
 	switch c.operatorType {
 	case "maxpool":
-		flops.Comparisons = hOut * wOut * cIn * cOut * kernelH * kernelW
+		flops.Comparisons = hOut * wOut * nOut * cOut * c.KernelShape[0] * c.KernelShape[1]
 	case "averagepool":
-		flops.Additions = hOut * wOut * cIn * cOut * kernelH * kernelW
+		flops.Additions = hOut * wOut * nOut * cOut * c.KernelShape[0] * c.KernelShape[1]
 	}
 
 	info.flops = flops
