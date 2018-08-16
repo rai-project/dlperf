@@ -13,7 +13,9 @@ func (SoftMax) Description() string {
 }
 
 func (c *SoftMax) InferShape(inputLayers []dlperf.Layer) {
-	//c.inputdimensions =  dlperf.ShapeInformation{}
+	inputShapes := getOutputShapes(inputLayers)
+	c.SetInputShapes(inputShapes)
+	c.SetOutputShapes(inputShapes)
 }
 
 func (c SoftMax) Information() dlperf.LayerInformation {
@@ -33,15 +35,10 @@ func (c SoftMax) Information() dlperf.LayerInformation {
 	checkNumber(c.InputShapes, []int{1}, c.OperatorType(), "number of inputs")
 	checkNumber(c.OutputShapes, []int{1}, c.OperatorType(), "number of outputs")
 
-	inputShapes := c.InputShapes()[0] // (N x C x H x W)
-
-	var shape []int64
-	for _, s := range inputShapes {
-		shape = append(shape, s)
-	}
+	inputShapes := c.InputShapes()[0]
 
 	numOps := int64(1)
-	for _, s := range shape {
+	for _, s := range inputShapes {
 		numOps *= s
 	}
 

@@ -4,8 +4,14 @@ import (
 	"github.com/rai-project/dlperf/pkg"
 )
 
+// https://github.com/onnx/onnx/blob/master/docs/Operators.md#Gemm
+
 type Gemm struct {
-	Base `json:",inline,flatten,omitempty"`
+	Base   `json:",inline,flatten,omitempty"`
+	Alpha  float64
+	Beta   float64
+	TransA int
+	TransB int
 }
 
 func (Gemm) Description() string {
@@ -13,7 +19,26 @@ func (Gemm) Description() string {
 }
 
 func (c *Gemm) InferShape(inputLayers []dlperf.Layer) {
-	//c.inputdimensions =  dlperf.ShapeInformation{}
+	c.SetInputShapes(getOutputShapes(inputLayers))
+
+	aShape := c.inputShapes[0]
+	var am int64
+	if c.TransA == 0 {
+		am = aShape[0]
+	} else {
+		am = aShape[1]
+	}
+
+	bShape := c.inputShapes[1]
+	var bn int64
+	if c.TransB == 0 {
+		bn = bShape[1]
+	} else {
+		bn = bShape[0]
+	}
+
+	yShape := dlperf.Shape{am, bn}
+	c.SetOutputShapes([]dlperf.Shape{yShape})
 }
 
 func (c Gemm) Information() dlperf.LayerInformation {
@@ -33,18 +58,28 @@ func (c Gemm) Information() dlperf.LayerInformation {
 	checkNumber(c.InputShapes, []int{3}, c.OperatorType(), "number of inputs")
 	checkNumber(c.OutputShapes, []int{1}, c.OperatorType(), "number of outputs")
 
-	inputADimensions := c.InputShapes()[0] // (M, K) or (K, M)
-	outputShapes := c.OutputShapes()[0]    // (M, N)
-
-	K := inputADimensions[1]
-	if K == outputShapes[0] {
-		K = inputADimensions[0]
+	aShape := c.inputShapes[0]
+	var am, ak int64
+	if c.TransA == 0 {
+		am = aShape[0]
+		ak = aShape[1]
+	} else {
+		am = aShape[1]
+		ak = aShape[0]
 	}
 
-	numOuts := outputShapes[0] * outputShapes[1]
+	bShape := c.inputShapes[1]
+	var bn int64
+	if c.TransB == 0 {
+		bn = bShape[1]
+	} else {
+		bn = bShape[0]
+	}
+
+	numOuts := am * bn
 
 	info.flops = dlperf.FlopsInformation{
-		MultiplyAdds: numOuts * K,
+		MultiplyAdds: numOuts * ak,
 		Additions:    numOuts,
 	}
 

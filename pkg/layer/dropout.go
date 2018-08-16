@@ -41,7 +41,7 @@ func (c Dropout) Information() dlperf.LayerInformation {
 	checkNumber(c.InputShapes, []int{1}, c.OperatorType(), "number of inputs")
 	checkNumber(c.OutputShapes, []int{1, 2}, c.OperatorType(), "number of outputs")
 
-	inputShapes := c.InputShapes()[0] // (N x C x H x W)
+	inputShapes := c.InputShapes()[0] // (N x C x ...)
 
 	numOps := int64(1)
 	for _, s := range inputShapes {
