@@ -74,7 +74,9 @@ func (o Onnx) ModelInformation() ([]dlperf.LayerInformation, error) {
 
 		layer.InferShape(inputLayers)
 
-		if layer.OperatorType() == "conv" {
+		pp.Println(layer)
+
+		if layer.Name() == "" {
 			pp.Println(layer)
 		}
 
@@ -159,8 +161,10 @@ func (o Onnx) mkLayer(node *onnx.NodeProto) dlperf.Layer {
 		ret = o.mkLRN(node)
 	case "matmul":
 		ret = o.mkMatMul(node)
-	case "maxpool", "averagepool", "globalmaxpool", "globalaveragepool":
+	case "maxpool", "averagepool":
 		ret = o.mkPooling(node)
+	case "globalmaxpool", "globalaveragepool":
+		ret = o.mkGlobalPooling(node)
 	case "relu", "leakyrelu", "prelu":
 		ret = o.mkReLU(node)
 	case "reshape", "transpose", "unsqueeze", "identity":
@@ -284,10 +288,20 @@ func (o Onnx) mkMatMul(node *onnx.NodeProto) dlperf.Layer {
 
 func (o Onnx) mkPooling(node *onnx.NodeProto) dlperf.Layer {
 	kernelShapeAttr := getNodeAttributeFromName(node, "kernel_shape")
+	padsShapeAttr := getNodeAttributeFromName(node, "pads")
+	stridesShapeAttr := getNodeAttributeFromName(node, "strides")
 
 	return &layer.Pooling{
 		Base:        o.mkBase(node),
 		KernelShape: kernelShapeAttr.GetInts(),
+		Pads:        padsShapeAttr.GetInts(),
+		Strides:     stridesShapeAttr.GetInts(),
+	}
+}
+
+func (o Onnx) mkGlobalPooling(node *onnx.NodeProto) dlperf.Layer {
+	return &layer.GlobalPooling{
+		Base: o.mkBase(node),
 	}
 }
 

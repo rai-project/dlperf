@@ -4,11 +4,11 @@ import (
 	"errors"
 	"reflect"
 
-	"github.com/k0kubun/pp"
 	dlperf "github.com/rai-project/dlperf/pkg"
 )
 
 func checkNumber(val interface{}, expected []int, layer string, name string) error {
+
 	var len int
 	v := reflect.ValueOf(val)
 
@@ -103,7 +103,6 @@ func isAnyEmpty(object interface{}) bool {
 func getOutputShapes(layers []dlperf.Layer) []dlperf.Shape {
 	outputShapes := []dlperf.Shape{}
 	for _, layer := range layers {
-		pp.Println(layer)
 		if isAnyEmpty(layer.OutputShapes()) {
 			log.WithField("layer", layer.Name()).Error(" has empty OutputShapes")
 		}

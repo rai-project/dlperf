@@ -13,7 +13,9 @@ func (Scale) Description() string {
 }
 
 func (c *Scale) InferShape(inputLayers []dlperf.Layer) {
-	//c.inputdimensions =  dlperf.ShapeInformation{}
+	inputShapes := getOutputShapes(inputLayers)
+	c.SetInputShapes(inputShapes)
+	c.SetOutputShapes(inputShapes)
 }
 
 func (c Scale) Information() dlperf.LayerInformation {

@@ -13,7 +13,9 @@ func (ReLU) Description() string {
 }
 
 func (c *ReLU) InferShape(inputLayers []dlperf.Layer) {
-	//c.inputdimensions =  dlperf.ShapeInformation{}
+	inputShapes := getOutputShapes(inputLayers)
+	c.SetInputShapes(inputShapes)
+	c.SetOutputShapes(inputShapes)
 }
 
 func (c ReLU) Information() dlperf.LayerInformation {
@@ -23,11 +25,6 @@ func (c ReLU) Information() dlperf.LayerInformation {
 			InputShapes:  c.inputShapes,
 			OutputShapes: c.outputShapes,
 		},
-	}
-
-	if isAnyEmpty(c.inputShapes) {
-		log.WithField("layer", c.OperatorType()).Info("len(InputShapes) is 0")
-		return info
 	}
 
 	if isAnyEmpty(c.outputShapes) {

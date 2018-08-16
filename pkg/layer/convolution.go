@@ -14,8 +14,8 @@ type Conv struct {
 	Dilations   dlperf.Shape `json:"dilation,omitempty"`
 	Group       int64        `json:"group,omitempty"`
 	KernelShape dlperf.Shape `json:"kernel_shape,omitempty"`
-	Pads        dlperf.Shape `json:"pad_h,omitempty"`
-	Strides     dlperf.Shape `json:"stride_h,omitempty"`
+	Pads        dlperf.Shape `json:"pads,omitempty"`
+	Strides     dlperf.Shape `json:"strides,omitempty"`
 }
 
 func (Conv) Description() string {
@@ -99,11 +99,6 @@ func (c Conv) Information() dlperf.LayerInformation {
 			InputShapes:  c.inputShapes,
 			OutputShapes: c.outputShapes,
 		},
-	}
-
-	if isAnyEmpty(c.inputShapes) {
-		log.WithField("layer", c.OperatorType()).Info("len(InputShapes) is 0")
-		return info
 	}
 
 	if isAnyEmpty(c.outputShapes) {

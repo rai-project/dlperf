@@ -6,7 +6,9 @@ import (
 
 type Pooling struct {
 	Base        `json:",inline,flatten,omitempty"`
-	KernelShape []int64 `json:"kernel_shape,omitempty"`
+	KernelShape dlperf.Shape `json:"kernel_shape,omitempty"`
+	Pads        dlperf.Shape `json:"pads,omitempty"`
+	Strides     dlperf.Shape `json:"strides,omitempty"`
 }
 
 func (Pooling) Description() string {
@@ -14,7 +16,10 @@ func (Pooling) Description() string {
 }
 
 func (c *Pooling) InferShape(inputLayers []dlperf.Layer) {
-	//c.inputdimensions =  dlperf.ShapeInformation{}
+	inputShapes := getOutputShapes(inputLayers)
+
+	c.SetInputShapes(inputShapes)
+	c.SetOutputShapes(inputShapes)
 }
 
 func (c Pooling) Information() dlperf.LayerInformation {
@@ -56,12 +61,8 @@ func (c Pooling) Information() dlperf.LayerInformation {
 	switch c.operatorType {
 	case "maxpool":
 		flops.Comparisons = hOut * wOut * cIn * cOut * kernelH * kernelW
-	case "globalmaxpool":
-		flops.Comparisons = wIn * hIn * cIn * nIn
 	case "averagepool":
 		flops.Additions = hOut * wOut * cIn * cOut * kernelH * kernelW
-	case "globalaveragepool":
-		flops.Additions = wIn * hIn * cIn * nIn
 	}
 
 	info.flops = flops

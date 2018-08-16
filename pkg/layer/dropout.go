@@ -19,7 +19,9 @@ func (Dropout) Description() string {
 }
 
 func (c *Dropout) InferShape(inputLayers []dlperf.Layer) {
-	//c.inputdimensions =  dlperf.ShapeInformation{}
+	inputShapes := getOutputShapes(inputLayers)
+	c.SetInputShapes(inputShapes)
+	c.SetOutputShapes(inputShapes)
 }
 
 func (c Dropout) Information() dlperf.LayerInformation {

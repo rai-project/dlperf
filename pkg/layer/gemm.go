@@ -25,11 +25,6 @@ func (c Gemm) Information() dlperf.LayerInformation {
 		},
 	}
 
-	if isAnyEmpty(c.inputShapes) {
-		log.WithField("layer", c.OperatorType()).Info("len(InputShapes) is 0")
-		return info
-	}
-
 	if isAnyEmpty(c.outputShapes) {
 		log.WithField("layer", c.OperatorType()).Info("len(OutputShapes) is 0")
 		return info
