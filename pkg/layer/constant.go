@@ -23,6 +23,10 @@ func (c *Constant) InferShape(inputLayers ...dlperf.Layer) {
 func (c Constant) Information() dlperf.LayerInformation {
 	info := &Information{
 		Base: c.Base,
+		shape: dlperf.ShapeInformation{
+			InputShapes:  c.inputShapes,
+			OutputShapes: c.outputShapes,
+		},
 	}
 
 	if isAnyEmpty(c.outputShapes) {
@@ -31,8 +35,6 @@ func (c Constant) Information() dlperf.LayerInformation {
 	}
 
 	info.flops = dlperf.FlopsInformation{}
-
-	info.shape = dlperf.ShapeInformation{}
 
 	return info
 }

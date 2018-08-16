@@ -110,8 +110,8 @@ func (o Onnx) MemoryInformation() dlperf.MemoryInformation {
 	return memory
 }
 
-func (o Onnx) GetValueInfoDimensions(names []string) [][]int64 {
-	ret := [][]int64{}
+func (o Onnx) GetValueInfoDimensions(names []string) []dlperf.Shape {
+	var ret []dlperf.Shape
 	for _, name := range names {
 		val, ok := o.valueInfo[name]
 		if ok {
@@ -173,10 +173,6 @@ func (o Onnx) mkLayer(node *onnx.NodeProto) dlperf.Layer {
 		pp.Println("unhandeled", operatorType)
 	}
 
-	if ret != nil {
-		ret.SetName(node.Name)
-	}
-
 	return ret
 }
 
@@ -188,8 +184,8 @@ func (o Onnx) mkBase(node *onnx.NodeProto) layer.Base {
 	base.SetNode(node)
 	base.SetName(node.GetName())
 	base.SetOperatorType(strings.ToLower(node.GetOpType()))
-	base.SetInputs(inputs)
-	base.SetOutputs(outputs)
+	base.SetInputNames(inputs)
+	base.SetOutputNames(outputs)
 	base.SetInputShapes(o.GetValueInfoDimensions(inputs))
 	// base.SetOutputShapes(o.GetValueInfoDimensions(outputs))
 
@@ -340,8 +336,8 @@ func (o Onnx) mkConstantInput(node *onnx.NodeProto) dlperf.Layer {
 	if !ok {
 		return nil
 	}
-	base.SetInputShapes([][]int64{getValueInfoDimensions(val)})
-	base.SetOutputShapes([][]int64{getValueInfoDimensions(val)})
+	base.SetInputShapes([]dlperf.Shape{getValueInfoDimensions(val)})
+	base.SetOutputShapes([]dlperf.Shape{getValueInfoDimensions(val)})
 
 	return &layer.ConstantInput{
 		Base: base,

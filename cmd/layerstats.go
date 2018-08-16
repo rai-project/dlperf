@@ -79,10 +79,9 @@ func runLayerStats(cmd *cobra.Command, args []string) error {
 			stat{
 				Name:             info.Name(),
 				Type:             info.OperatorType(),
-				Inputs:           info.Inputs(),
-				Outputs:          info.Outputs(),
-				InputDimensions:  info.Shape().InputDimensions,
-				OutputDimensions: info.Shape().OutputDimensions,
+				InputNames:       info.InputNames(),
+				OutputNames:      info.OutputNames(),
+				ShapeInformation: info.Shape(),
 			},
 		)
 	}

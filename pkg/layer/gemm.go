@@ -19,6 +19,10 @@ func (c *Gemm) InferShape(inputLayers ...dlperf.Layer) {
 func (c Gemm) Information() dlperf.LayerInformation {
 	info := &Information{
 		Base: c.Base,
+		shape: dlperf.ShapeInformation{
+			InputShapes:  c.inputShapes,
+			OutputShapes: c.outputShapes,
+		},
 	}
 
 	if isAnyEmpty(c.inputShapes) {
@@ -34,24 +38,19 @@ func (c Gemm) Information() dlperf.LayerInformation {
 	checkNumber(c.InputShapes, []int{3}, c.OperatorType(), "number of inputs")
 	checkNumber(c.OutputShapes, []int{1}, c.OperatorType(), "number of outputs")
 
-	inputADimensions := c.InputShapes()[0]  // (M, K) or (K, M)
-	outputDimensions := c.OutputShapes()[0] // (M, N)
+	inputADimensions := c.InputShapes()[0] // (M, K) or (K, M)
+	outputShapes := c.OutputShapes()[0]    // (M, N)
 
 	K := inputADimensions[1]
-	if K == outputDimensions[0] {
+	if K == outputShapes[0] {
 		K = inputADimensions[0]
 	}
 
-	numOuts := outputDimensions[0] * outputDimensions[1]
+	numOuts := outputShapes[0] * outputShapes[1]
 
 	info.flops = dlperf.FlopsInformation{
 		MultiplyAdds: numOuts * K,
 		Additions:    numOuts,
-	}
-
-	info.shape = dlperf.ShapeInformation{
-		InputDimensions:  inputADimensions,
-		OutputDimensions: outputDimensions,
 	}
 
 	return info

@@ -19,6 +19,10 @@ func (c *MatMul) InferShape(inputLayers ...dlperf.Layer) {
 func (c MatMul) Information() dlperf.LayerInformation {
 	info := &Information{
 		Base: c.Base,
+		shape: dlperf.ShapeInformation{
+			InputShapes:  c.inputShapes,
+			OutputShapes: c.outputShapes,
+		},
 	}
 
 	if isAnyEmpty(c.outputShapes) {
@@ -29,9 +33,8 @@ func (c MatMul) Information() dlperf.LayerInformation {
 	checkNumber(c.InputShapes, []int{1, 2}, c.OperatorType(), "number of inputs")
 	checkNumber(c.OutputShapes, []int{1}, c.OperatorType(), "number of outputs")
 
-	inputADimensions := c.inputShapes[0]  // (N x C x H x W)
-	inputBDimensions := c.inputShapes[1]  // (N x C x H x W)
-	outputDimensions := c.outputShapes[0] // (N x C x H x W)
+	inputADimensions := c.inputShapes[0] // (N x C x H x W)
+	inputBDimensions := c.inputShapes[1] // (N x C x H x W)
 
 	var numOps int64
 	dimLen := len(inputADimensions)
@@ -46,11 +49,6 @@ func (c MatMul) Information() dlperf.LayerInformation {
 
 	info.flops = dlperf.FlopsInformation{
 		MultiplyAdds: numOps,
-	}
-
-	info.shape = dlperf.ShapeInformation{
-		InputDimensions:  inputADimensions,
-		OutputDimensions: outputDimensions,
 	}
 
 	return info

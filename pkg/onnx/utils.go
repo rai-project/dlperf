@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"reflect"
 
+	dlperf "github.com/rai-project/dlperf/pkg"
 	"github.com/rai-project/onnx"
 	"github.com/spf13/cast"
 )
@@ -18,9 +19,8 @@ func getNodeAttributeFromName(node *onnx.NodeProto, attrName string) *onnx.Attri
 	return nil
 }
 
-func getValueInfoDimensions(valueInfo *onnx.ValueInfoProto) []int64 {
-	ret := []int64{}
-
+func getValueInfoDimensions(valueInfo *onnx.ValueInfoProto) dlperf.Shape {
+	var ret dlperf.Shape
 	for _, dim := range valueInfo.GetType().GetTensorType().GetShape().GetDim() {
 		ret = append(ret, dim.GetDimValue())
 	}

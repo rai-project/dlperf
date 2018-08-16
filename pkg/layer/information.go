@@ -15,35 +15,32 @@ type Information struct {
 	memory dlperf.MemoryInformation `json:"memory,omitempty"`
 }
 
-func (layer *Information) Name() string {
-	return layer.name
+func (info *Information) Name() string {
+	return info.name
 }
 
-func (layer *Information) OperatorType() string {
-	return layer.operatorType
+func (info *Information) OperatorType() string {
+	return info.operatorType
 }
 
-func (layer *Information) Inputs() []string {
-	return layer.inputs
+func (info *Information) InputNames() []string {
+	return info.inputNames
 }
 
-func (layer *Information) Outputs() []string {
-	return layer.outputs
+func (info *Information) OutputNames() []string {
+	return info.outputNames
 }
 
-func (layer *Information) Shape() dlperf.ShapeInformation {
-	return dlperf.ShapeInformation{
-		// InputDimensions:  layer.inputShapes[0],
-		// OutputDimensions: layer.outputShapes[0],
-	}
+func (info *Information) Shape() dlperf.ShapeInformation {
+	return info.shape
 }
 
-func (layer *Information) Flops() dlperf.FlopsInformation {
-	return layer.flops
+func (info *Information) Flops() dlperf.FlopsInformation {
+	return info.flops
 }
 
-func (layer *Information) Memory() dlperf.MemoryInformation {
-	return layer.memory
+func (info *Information) Memory() dlperf.MemoryInformation {
+	return info.memory
 }
 
 func (layer Information) MarshalJSON() ([]byte, error) {
@@ -53,7 +50,7 @@ func (layer Information) MarshalJSON() ([]byte, error) {
 	return json.Marshal(data)
 }
 
-func (layer *Information) UnmarshalJSON(b []byte) error {
+func (info *Information) UnmarshalJSON(b []byte) error {
 	data := map[string]interface{}{}
 	err := json.Unmarshal(b, &data)
 	if err != nil {
@@ -63,7 +60,7 @@ func (layer *Information) UnmarshalJSON(b []byte) error {
 	config := &mapstructure.DecoderConfig{
 		Metadata: nil,
 		TagName:  "json",
-		Result:   layer,
+		Result:   info,
 	}
 
 	decoder, err := mapstructure.NewDecoder(config)

@@ -58,7 +58,7 @@ func (b Base) Outputs() []dlperf.Layer {
 	return b.outputs
 }
 
-func (b *Base) SetOutputs(out dlperf.Layer) {
+func (b *Base) SetOutputs(out []dlperf.Layer) {
 	b.outputs = out
 }
 
@@ -72,7 +72,7 @@ func (b Base) InputNames() []string {
 }
 
 func (b Base) SetInputNames(names []string) {
-	b.inputNamesm = names
+	b.inputNames = names
 }
 
 func (b Base) OutputNames() []string {

@@ -25,6 +25,10 @@ func (c *Dropout) InferShape(inputLayers ...dlperf.Layer) {
 func (c Dropout) Information() dlperf.LayerInformation {
 	info := &Information{
 		Base: c.Base,
+		shape: dlperf.ShapeInformation{
+			InputShapes:  c.inputShapes,
+			OutputShapes: c.outputShapes,
+		},
 	}
 
 	if isAnyEmpty(c.outputShapes) {
@@ -35,21 +39,15 @@ func (c Dropout) Information() dlperf.LayerInformation {
 	checkNumber(c.InputShapes, []int{1}, c.OperatorType(), "number of inputs")
 	checkNumber(c.OutputShapes, []int{1, 2}, c.OperatorType(), "number of outputs")
 
-	inputDimensions := c.InputShapes()[0]   // (N x C x H x W)
-	outputDimensions := c.OutputShapes()[0] // (N x C x H x W)
+	inputShapes := c.InputShapes()[0] // (N x C x H x W)
 
 	numOps := int64(1)
-	for _, s := range inputDimensions {
+	for _, s := range inputShapes {
 		numOps *= s
 	}
 
 	info.flops = dlperf.FlopsInformation{
 		Comparisons: numOps,
-	}
-
-	info.shape = dlperf.ShapeInformation{
-		InputDimensions:  inputDimensions,
-		OutputDimensions: outputDimensions,
 	}
 
 	return info

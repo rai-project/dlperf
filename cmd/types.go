@@ -26,25 +26,21 @@ func (l pattern) Row(humanFlops bool) []string {
 }
 
 type stat struct {
-	Name             string   `json:"name"`
-	Type             string   `json:"type"`
-	Inputs           []string `json:"inputs"`
-	Outputs          []string `json:"outputs"`
-	InputDimensions  []int64  `json:"input_dimensions"`
-	OutputDimensions []int64  `json:"output_dimensions"`
+	Name                    string   `json:"name"`
+	Type                    string   `json:"type"`
+	InputNames              []string `json:"inputs"`
+	OutputNames             []string `json:"outputs"`
+	dlperf.ShapeInformation `json:"input_dimensions"`
 }
 
 func (stat) Header() []string {
-	return []string{"LayerName", "LayerType", "Inputs", "Outputs", "InputDimension", "OutputDimension"}
+	base := dlperf.ShapeInformation{}.Header()
+	return append([]string{"LayerName", "LayerType", "InputNames", "OutputNames"}, base...)
 }
 
 func (l stat) Row(humanFlops bool) []string {
-	inputs := strings.Join(l.Inputs, ";")
-	outputs := strings.Join(l.Outputs, ";")
-	inputDimensions := strings.Trim(strings.Replace(fmt.Sprint(l.InputDimensions), " ", ";", -1), "[]")
-	outputDimensions := strings.Trim(strings.Replace(fmt.Sprint(l.OutputDimensions), " ", ";", -1), "[]")
-
-	return []string{l.Name, l.Type, inputs, outputs, inputDimensions, outputDimensions}
+	base := l.ShapeInformation.Row()
+	return append([]string{l.Name, l.Type, strings.Join(l.InputNames, ";"), strings.Join(l.OutputNames, ";")}, base...)
 }
 
 type layer struct {

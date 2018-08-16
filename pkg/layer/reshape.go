@@ -21,6 +21,10 @@ func (c *Reshape) InferShape(inputLayers ...dlperf.Layer) {
 func (c Reshape) Information() dlperf.LayerInformation {
 	info := &Information{
 		Base: c.Base,
+		shape: dlperf.ShapeInformation{
+			InputShapes:  c.inputShapes,
+			OutputShapes: c.outputShapes,
+		},
 	}
 
 	if isAnyEmpty(c.outputShapes) {
@@ -31,15 +35,7 @@ func (c Reshape) Information() dlperf.LayerInformation {
 	checkNumber(c.InputShapes, []int{1, 2}, c.OperatorType(), "number of inputs")
 	checkNumber(c.OutputShapes, []int{1}, c.OperatorType(), "number of outputs")
 
-	inputDimensions := c.InputShapes()[0]   // (N x C x H x W)
-	outputDimensions := c.OutputShapes()[0] // (N x C x H x W)
-
 	info.flops = dlperf.FlopsInformation{}
-
-	info.shape = dlperf.ShapeInformation{
-		InputDimensions:  inputDimensions,
-		OutputDimensions: outputDimensions,
-	}
 
 	return info
 }

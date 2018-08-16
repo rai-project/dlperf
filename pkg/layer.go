@@ -25,8 +25,8 @@ type Layer interface {
 type LayerInformation interface {
 	Name() string
 	OperatorType() string
-	Inputs() []Layer
-	Outputs() []Layer
+	InputNames() []string
+	OutputNames() []string
 	Shape() ShapeInformation
 	Flops() FlopsInformation
 	Memory() MemoryInformation
@@ -41,7 +41,7 @@ func (ShapeInformation) Header() []string {
 	return []string{"InputShapes", "OutputShapes"}
 }
 
-func (this ShapeInformation) Row(humanFlops bool) []string {
+func (this ShapeInformation) Row() []string {
 	dimsToString := func(e []Shape) string {
 		if len(e) == 0 {
 			return ""
@@ -78,7 +78,7 @@ func (FlopsInformation) Header() []string {
 	}
 }
 
-func (flops FlopsInformation) Row(humanFlops bool) []string {
+func (this FlopsInformation) Row(humanFlops bool) []string {
 	flopsToString := func(e int64) string {
 		return fmt.Sprintf("%v", e)
 	}
@@ -88,12 +88,12 @@ func (flops FlopsInformation) Row(humanFlops bool) []string {
 		}
 	}
 	return []string{
-		flopsToString(flops.MultiplyAdds),
-		flopsToString(flops.Additions),
-		flopsToString(flops.Divisions),
-		flopsToString(flops.Exponentiations),
-		flopsToString(flops.Comparisons),
-		flopsToString(flops.General),
+		flopsToString(this.MultiplyAdds),
+		flopsToString(this.Additions),
+		flopsToString(this.Divisions),
+		flopsToString(this.Exponentiations),
+		flopsToString(this.Comparisons),
+		flopsToString(this.General),
 	}
 }
 

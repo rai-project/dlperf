@@ -19,6 +19,10 @@ func (c *Scale) InferShape(inputLayers ...dlperf.Layer) {
 func (c Scale) Information() dlperf.LayerInformation {
 	info := &Information{
 		Base: c.Base,
+		shape: dlperf.ShapeInformation{
+			InputShapes:  c.inputShapes,
+			OutputShapes: c.outputShapes,
+		},
 	}
 
 	if isAnyEmpty(c.outputShapes) {
@@ -29,21 +33,15 @@ func (c Scale) Information() dlperf.LayerInformation {
 	checkNumber(c.InputShapes, []int{1}, c.OperatorType(), "number of inputs")
 	checkNumber(c.OutputShapes, []int{1}, c.OperatorType(), "number of outputs")
 
-	inputDimensions := c.InputShapes()[0]   // (N x C x H x W)
-	outputDimensions := c.OutputShapes()[0] // (N x C x H x W)
+	inputShapes := c.InputShapes()[0] // (N x C x H x W)
 
-	nIn := inputDimensions[0]
-	cIn := inputDimensions[1]
-	hIn := inputDimensions[2]
-	wIn := inputDimensions[3]
+	nIn := inputShapes[0]
+	cIn := inputShapes[1]
+	hIn := inputShapes[2]
+	wIn := inputShapes[3]
 
 	info.flops = dlperf.FlopsInformation{
 		MultiplyAdds: wIn * hIn * cIn * nIn,
-	}
-
-	info.shape = dlperf.ShapeInformation{
-		InputDimensions:  inputDimensions,
-		OutputDimensions: outputDimensions,
 	}
 
 	return info

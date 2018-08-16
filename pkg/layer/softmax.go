@@ -19,6 +19,10 @@ func (c *SoftMax) InferShape(inputLayers ...dlperf.Layer) {
 func (c SoftMax) Information() dlperf.LayerInformation {
 	info := &Information{
 		Base: c.Base,
+		shape: dlperf.ShapeInformation{
+			InputShapes:  c.inputShapes,
+			OutputShapes: c.outputShapes,
+		},
 	}
 
 	if isAnyEmpty(c.outputShapes) {
@@ -27,18 +31,17 @@ func (c SoftMax) Information() dlperf.LayerInformation {
 	}
 
 	if isAnyEmpty(c.inputShapes) {
-		log.WithField("layer", c.OperatorType()).Info("len(InputDimensions) is 0")
+		log.WithField("layer", c.OperatorType()).Info("len(InputShapes) is 0")
 		return info
 	}
 
 	checkNumber(c.InputShapes, []int{1}, c.OperatorType(), "number of inputs")
 	checkNumber(c.OutputShapes, []int{1}, c.OperatorType(), "number of outputs")
 
-	inputDimensions := c.InputShapes()[0]   // (N x C x H x W)
-	outputDimensions := c.OutputShapes()[0] // (N x C x H x W)
+	inputShapes := c.InputShapes()[0] // (N x C x H x W)
 
 	var shape []int64
-	for _, s := range inputDimensions {
+	for _, s := range inputShapes {
 		shape = append(shape, s)
 	}
 
@@ -51,11 +54,6 @@ func (c SoftMax) Information() dlperf.LayerInformation {
 		Exponentiations: numOps,
 		Additions:       numOps,
 		Divisions:       numOps,
-	}
-
-	info.shape = dlperf.ShapeInformation{
-		InputDimensions:  inputDimensions,
-		OutputDimensions: outputDimensions,
 	}
 
 	return info

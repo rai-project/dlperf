@@ -20,6 +20,10 @@ func (c *Pooling) InferShape(inputLayers ...dlperf.Layer) {
 func (c Pooling) Information() dlperf.LayerInformation {
 	info := &Information{
 		Base: c.Base,
+		shape: dlperf.ShapeInformation{
+			InputShapes:  c.inputShapes,
+			OutputShapes: c.outputShapes,
+		},
 	}
 
 	if isAnyEmpty(c.outputShapes) {
@@ -30,17 +34,17 @@ func (c Pooling) Information() dlperf.LayerInformation {
 	checkNumber(c.InputShapes, []int{1}, c.OperatorType(), "number of inputs")
 	checkNumber(c.OutputShapes, []int{1}, c.OperatorType(), "number of outputs")
 
-	inputDimensions := c.InputShapes()[0]   // (N x C x H x W)
-	outputDimensions := c.OutputShapes()[0] // (N x C x H x W)
+	inputShapes := c.InputShapes()[0]   // (N x C x H x W)
+	outputShapes := c.OutputShapes()[0] // (N x C x H x W)
 
-	nIn := inputDimensions[0]
-	cIn := inputDimensions[1]
-	hIn := inputDimensions[2]
-	wIn := inputDimensions[3]
+	nIn := inputShapes[0]
+	cIn := inputShapes[1]
+	hIn := inputShapes[2]
+	wIn := inputShapes[3]
 
-	cOut := outputDimensions[1]
-	hOut := outputDimensions[2]
-	wOut := outputDimensions[3]
+	cOut := outputShapes[1]
+	hOut := outputShapes[2]
+	wOut := outputShapes[3]
 
 	var kernelH, kernelW int64
 	if c.KernelShape != nil {
@@ -61,11 +65,6 @@ func (c Pooling) Information() dlperf.LayerInformation {
 	}
 
 	info.flops = flops
-
-	info.shape = dlperf.ShapeInformation{
-		InputDimensions:  inputDimensions,
-		OutputDimensions: outputDimensions,
-	}
 
 	return info
 }

@@ -22,6 +22,10 @@ func (c *BatchNorm) InferShape(inputLayers ...dlperf.Layer) {
 func (c BatchNorm) Information() dlperf.LayerInformation {
 	info := &Information{
 		Base: c.Base,
+		shape: dlperf.ShapeInformation{
+			InputShapes:  c.inputShapes,
+			OutputShapes: c.outputShapes,
+		},
 	}
 
 	if isAnyEmpty(c.outputShapes) {
@@ -32,11 +36,10 @@ func (c BatchNorm) Information() dlperf.LayerInformation {
 	checkNumber(c.InputShapes, []int{1, 2, 3, 4, 5}, c.OperatorType(), "number of inputs")
 	checkNumber(c.OutputShapes, []int{1, 2, 3, 4, 5}, c.OperatorType(), "number of outputs")
 
-	inputDimensions := c.inputShapes[0]   // (N x C x H x W)
-	outputDimensions := c.outputShapes[0] // (N x C x H x W)
+	inputShapes := c.inputShapes[0] // (N x C x H x W)
 
 	numOps := int64(1)
-	for _, s := range inputDimensions {
+	for _, s := range inputShapes {
 		numOps *= s
 	}
 
@@ -44,11 +47,6 @@ func (c BatchNorm) Information() dlperf.LayerInformation {
 	info.flops = dlperf.FlopsInformation{
 		Additions: numOps,
 		Divisions: numOps,
-	}
-
-	info.shape = dlperf.ShapeInformation{
-		InputDimensions:  inputDimensions,
-		OutputDimensions: outputDimensions,
 	}
 
 	return info
