@@ -14,7 +14,7 @@ type Layer interface {
 	Name() string
 	Node() *onnx.NodeProto
 	OperatorType() string
-	InferShape(...Layer)
+	InferShape([]Layer)
 	Inputs() []Layer
 	Outputs() []Layer
 	InputShapes() []Shape
@@ -42,6 +42,9 @@ func (ShapeInformation) Header() []string {
 }
 
 func (this ShapeInformation) Row() []string {
+	// inputShapes := strings.Trim(strings.Replace(fmt.Sprint(l.Shape.InputShapes), " ", ";", -1), "[]")
+	// outputShapes := strings.Trim(strings.Replace(fmt.Sprint(l.Shape.OutputShapes), " ", ";", -1), "[]")
+
 	dimsToString := func(e []Shape) string {
 		if len(e) == 0 {
 			return ""

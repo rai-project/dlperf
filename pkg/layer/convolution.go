@@ -22,15 +22,26 @@ func (Conv) Description() string {
 	return ``
 }
 
-func (c *Conv) InferShape(inputLayers ...dlperf.Layer) {
-	inputShapes := []dlperf.Shape{}
-	outputShapes := []dlperf.Shape{}
-	for _, input := range inputLayers {
-		inputShapes = append(inputShapes, input.OutputShapes()[0])
-	}
-	c.SetInputShapes(inputShapes)
+func (c *Conv) InferShape(inputLayers []dlperf.Layer) {
+	c.SetInputShapes(getOutputShapes(inputLayers))
 
-	c.SetOutputShapes(outputShapes)
+	xShape := c.inputShapes[0]
+	xn := xShape[0]
+	xh := xShape[2]
+	xw := xShape[3]
+
+	wShape := c.inputShapes[1]
+	wn := wShape[0]
+	wh := wShape[2]
+	ww := wShape[3]
+
+	yn := xn
+	yc := wn
+	yh := (xh+2*c.Pads[0]-(c.Dilations[0]*(wh-1)+1))/c.Strides[0] + 1
+	yw := (xw+2*c.Pads[1]-(c.Dilations[1]*(ww-1)+1))/c.Strides[1] + 1
+
+	yShape := dlperf.Shape{yn, yc, yh, yw}
+	c.SetOutputShapes([]dlperf.Shape{yShape})
 }
 
 func (c Conv) FwdBenchmarkName() string {
@@ -105,7 +116,6 @@ func (c Conv) Information() dlperf.LayerInformation {
 
 	inputShapes := c.InputShapes()[0]
 	outputShapes := c.OutputShapes()[0]
-	// weightDimensions := c.InputShapes()[1]  // (C x M x kH x kW)
 
 	nIn := inputShapes[0]
 	cIn := inputShapes[1]

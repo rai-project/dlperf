@@ -72,7 +72,11 @@ func (o Onnx) ModelInformation() ([]dlperf.LayerInformation, error) {
 			inputLayers = append(inputLayers, inputLayer.(dlperf.Layer))
 		}
 
-		layer.InferShape(inputLayers...)
+		layer.InferShape(inputLayers)
+
+		if layer.OperatorType() == "conv" {
+			pp.Println(layer)
+		}
 
 		info := layer.Information()
 		ret = append(ret, info)
