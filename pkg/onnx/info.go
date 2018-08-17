@@ -69,7 +69,7 @@ func sortByDimension(layers []dlperf.Layer) []dlperf.Layer {
 	return append([]dlperf.Layer{layers[0]}, rest...)
 }
 
-func (o *Onnx) Analyze() ([]dlperf.LayerInformation, error) {
+func (o *Onnx) Information() ([]dlperf.LayerInformation, error) {
 	ret := []dlperf.LayerInformation{}
 
 	grph := o.ToGraph(GraphPruneInputs(false), GraphInputsAsConstantNodes(true))
@@ -189,7 +189,7 @@ func (o *Onnx) Analyze() ([]dlperf.LayerInformation, error) {
 
 func (o Onnx) FlopsInformation() dlperf.FlopsInformation {
 	flops := dlperf.FlopsInformation{}
-	infos, err := o.Analyze()
+	infos, err := o.Information()
 	if err != nil {
 		panic(err)
 	}
@@ -201,7 +201,7 @@ func (o Onnx) FlopsInformation() dlperf.FlopsInformation {
 
 func (o Onnx) MemoryInformation() dlperf.MemoryInformation {
 	memory := dlperf.MemoryInformation{}
-	infos, err := o.Analyze()
+	infos, err := o.Information()
 	if err != nil {
 		panic(err)
 	}

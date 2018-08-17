@@ -599,8 +599,8 @@
   version = "v2.2.1"
 
 [solve-meta]
-  analyzer-name = "dep"
-  analyzer-version = 1
+  Informationr-name = "dep"
+  Informationr-version = 1
   input-imports = [
     "github.com/GeertJohan/go-sourcepath",
     "github.com/Unknwon/com",

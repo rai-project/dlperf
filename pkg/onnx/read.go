@@ -59,14 +59,18 @@ func New(protoFileName string) (*Onnx, error) {
 		initializers[i.Name] = i
 	}
 
-	return &Onnx{
+	o := &Onnx{
 		ModelProto:   model,
 		nodes:        nodes,
 		valueInfo:    valueInfo,
 		inputs:       inputs,
 		outputs:      outputs,
 		initializers: initializers,
-	}, nil
+	}
+
+	o.Information()
+
+	return o, nil
 }
 
 func (o Onnx) Network() *Graph {
