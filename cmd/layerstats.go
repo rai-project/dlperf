@@ -25,7 +25,6 @@ import (
 	"github.com/pkg/errors"
 	"github.com/rai-project/dlperf/pkg/onnx"
 	"github.com/spf13/cobra"
-	"gonum.org/v1/gonum/graph/encoding/dot"
 )
 
 func runLayerStats(cmd *cobra.Command, args []string) error {
@@ -67,25 +66,9 @@ func runLayerStats(cmd *cobra.Command, args []string) error {
 		return err
 	}
 
-	infos, err := net.Analyze()
+	infos, err := net.Information()
 	if err != nil {
 		return err
-	}
-
-	if outputFormat == "dot" {
-		dotEnc, err := dot.Marshal(net.Network(), "", "", "  ", true)
-		if err != nil {
-			return err
-		}
-
-		img, err := dotToImage(dotEnc)
-		if err != nil {
-			return err
-		}
-
-		println(img)
-
-		return nil
 	}
 
 	writer := NewWriter(stat{}, humanFlops)
@@ -96,9 +79,10 @@ func runLayerStats(cmd *cobra.Command, args []string) error {
 			stat{
 				Name:             info.Name(),
 				Type:             info.OperatorType(),
-				InputNames:       info.InputNames(),
-				OutputNames:      info.OutputNames(),
-				ShapeInformation: info.Shape(),
+				Inputs:           info.Inputs(),
+				Outputs:          info.Outputs(),
+				InputDimensions:  info.Shape().InputDimensions,
+				OutputDimensions: info.Shape().OutputDimensions,
 			},
 		)
 	}
