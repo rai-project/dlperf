@@ -17,6 +17,7 @@ type Graph struct {
 type GraphNode struct {
 	id   int64
 	name string
+	// layer dl.Layer
 	*onnx.NodeProto
 }
 

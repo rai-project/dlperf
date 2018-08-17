@@ -4,21 +4,33 @@ import (
 	"github.com/rai-project/dlperf/pkg"
 )
 
-type Relu struct {
+type Unsqueeze struct {
 	*Base `json:",inline,flatten,omitempty"`
+	Axes  []int64 `json:"axes,omitempty"`
 }
 
-func (Relu) Description() string {
+func (Unsqueeze) Description() string {
 	return ``
 }
 
-func (c *Relu) InferShape(inputLayers []dlperf.Layer) {
+func (c *Unsqueeze) InferShape(inputLayers []dlperf.Layer) {
 	inputShapes := getOutputShapes(inputLayers)
-	c.SetInputShapes(inputShapes)
+	for ii, inputShape := range inputShapes {
+		for _, ax := range c.Axes {
+			if int64(len(inputShape)) >= ax {
+				inputShapes[ii] = append(inputShape[:ax], append([]int64{1}, inputShape[ax:]...)...)
+			} else {
+				if ax != int64(len(inputShape))+1 {
+					panic("expecting next axis to be inputShape + 1")
+				}
+				inputShapes[ii] = append(inputShape, int64(1))
+			}
+		}
+	}
 	c.SetOutputShapes(inputShapes)
 }
 
-func (c Relu) Information() dlperf.LayerInformation {
+func (c Unsqueeze) Information() dlperf.LayerInformation {
 	info := &Information{
 		Base: c.Base,
 		shape: dlperf.ShapeInformation{
@@ -50,5 +62,5 @@ func (c Relu) Information() dlperf.LayerInformation {
 }
 
 func init() {
-	dlperf.Register(&Relu{})
+	dlperf.Register(&Unsqueeze{})
 }

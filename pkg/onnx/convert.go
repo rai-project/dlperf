@@ -35,9 +35,11 @@ func (o Onnx) mkLayer(node *onnx.NodeProto) dlperf.Layer {
 	case "globalmaxpool", "globalaveragepool":
 		ret = o.mkGlobalPooling(node)
 	case "relu", "leakyrelu", "prelu":
-		ret = o.mkReLU(node)
-	case "reshape", "transpose", "unsqueeze":
+		ret = o.mkRelu(node)
+	case "reshape", "transpose":
 		ret = o.mkReshape(node)
+	case "unsqueeze":
+		ret = o.mkUnsqueeze(node)
 	case "scale", "imagescaler":
 		ret = o.mkScale(node)
 	case "softmax":
@@ -192,8 +194,8 @@ func (o Onnx) mkLRN(node *onnx.NodeProto) dlperf.Layer {
 	}
 }
 
-func (o Onnx) mkReLU(node *onnx.NodeProto) dlperf.Layer {
-	return &layer.ReLU{
+func (o Onnx) mkRelu(node *onnx.NodeProto) dlperf.Layer {
+	return &layer.Relu{
 		Base: o.mkBase(node),
 	}
 }
@@ -213,6 +215,14 @@ func (o Onnx) mkScale(node *onnx.NodeProto) dlperf.Layer {
 func (o Onnx) mkSoftMax(node *onnx.NodeProto) dlperf.Layer {
 	return &layer.SoftMax{
 		Base: o.mkBase(node),
+	}
+}
+
+func (o Onnx) mkUnsqueeze(node *onnx.NodeProto) dlperf.Layer {
+	axesAttr := getNodeAttributeFromName(node, "axes")
+	return &layer.Unsqueeze{
+		Base: o.mkBase(node),
+		Axes: axesAttr.GetInts(),
 	}
 }
 
