@@ -3,7 +3,6 @@ package layer
 import (
 	"math"
 
-	"github.com/k0kubun/pp"
 	"github.com/rai-project/dlperf/pkg"
 	"github.com/rai-project/dlperf/pkg/benchmark"
 )
@@ -26,17 +25,6 @@ func (Conv) Description() string {
 }
 
 func (c *Conv) InferShape(inputLayers []dlperf.Layer) {
-
-	defer func() {
-		if r := recover(); r != nil {
-			c.node = nil
-			pp.Println(c.Name())
-			pp.Println(c.inputShapes)
-			// pp.Println(c)
-			panic(r)
-		}
-
-	}()
 
 	xShape := c.inputShapes[0]
 	xn := xShape[0]

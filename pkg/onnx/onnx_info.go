@@ -218,6 +218,9 @@ func (o Onnx) MemoryInformation() dlperf.MemoryInformation {
 
 func (o Onnx) GetValueInfoDimensions(names []string) []dlperf.Shape {
 	var ret []dlperf.Shape
+	// for k, _ := range o.initializers {
+	// 	pp.Println(k)
+	// }
 	for _, name := range names {
 		init, ok := o.initializers[name]
 		if ok {

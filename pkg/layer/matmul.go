@@ -1,6 +1,8 @@
 package layer
 
 import (
+	"fmt"
+
 	"github.com/rai-project/dlperf/pkg"
 )
 
@@ -14,6 +16,7 @@ func (MatMul) Description() string {
 
 func (c *MatMul) InferShape(inputLayers []dlperf.Layer) {
 	//c.inputdimensions =  dlperf.ShapeInformation{}
+	panic(fmt.Sprintf("the shape inference for %s is not implemented", c.OperatorType()))
 }
 
 func (c MatMul) Information() dlperf.LayerInformation {

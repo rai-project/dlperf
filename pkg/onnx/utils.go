@@ -22,6 +22,24 @@ func getNodeAttributeFromName(node *onnx.NodeProto, attrName string) *onnx.Attri
 
 func getTensorProtoDimensions(tensor *onnx.TensorProto) dlperf.Shape {
 	var ret dlperf.Shape
+	// if tensor.Name == "Parameter1367_reshape1_shape" {
+	// 	pp.Println(tensor)
+	// }
+	if tensor.DataType == onnx.TensorProto_INT32 && len(tensor.GetInt32Data()) > 0 {
+		return toInt64Slice(tensor.GetInt32Data())
+	}
+	if tensor.DataType == onnx.TensorProto_INT64 && len(tensor.GetInt64Data()) > 0 {
+		return tensor.GetInt64Data()
+	}
+	if tensor.DataType == onnx.TensorProto_INT32 && len(tensor.GetRawData()) > 0 {
+		dim := tensor.Dims[0]
+		rawdata := tensor.GetRawData()
+		for ii := int64(0); ii < dim; ii++ {
+			val := int64(binary.LittleEndian.Uint32(rawdata[ii*4 : (ii+1)*4]))
+			ret = append(ret, val)
+		}
+		return ret
+	}
 	if tensor.DataType == onnx.TensorProto_INT64 && len(tensor.GetRawData()) > 0 {
 		dim := tensor.Dims[0]
 		rawdata := tensor.GetRawData()
@@ -113,6 +131,9 @@ func toInt64Slice(i interface{}) []int64 {
 func getOutputShapes(layers []dlperf.Layer) []dlperf.Shape {
 	outputShapes := []dlperf.Shape{}
 	for _, layer := range layers {
+		// pp.Println(layer.Name())
+		// pp.Println(layer.OperatorType())
+		// pp.Println(layer.InputShapes())
 		outputShapes = append(outputShapes, layer.OutputShapes()[0])
 	}
 
