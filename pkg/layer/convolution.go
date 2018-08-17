@@ -2,6 +2,7 @@ package layer
 
 import (
 	"math"
+	"strings"
 
 	"github.com/rai-project/dlperf/pkg"
 	"github.com/rai-project/dlperf/pkg/benchmark"
@@ -39,9 +40,18 @@ func (c *Conv) InferShape(inputLayers []dlperf.Layer) {
 
 	yn := xn
 	yc := wn
-	yh := int64(math.Ceil(float64(xh+c.Pads[0]+c.Pads[1]-(c.Dilations[0]*(wh-1)+1))/float64(c.Strides[0]))) + 1
-	yw := int64(math.Ceil(float64(xw+c.Pads[2]+c.Pads[3]-(c.Dilations[1]*(ww-1)+1))/float64(c.Strides[1]))) + 1
 
+	var yh, yw int64
+	switch strings.ToLower(c.AutoPad) {
+	case "notset", "valid":
+		yh = int64(math.Ceil(float64(xh+c.Pads[0]+c.Pads[1]-(c.Dilations[0]*(wh-1)+1))/float64(c.Strides[0]))) + 1
+		yw = int64(math.Ceil(float64(xw+c.Pads[2]+c.Pads[3]-(c.Dilations[1]*(ww-1)+1))/float64(c.Strides[1]))) + 1
+	case "same_upper", "same_lower":
+		yh = int64(math.Ceil(float64(xh) / float64(c.Strides[0])))
+		yw = int64(math.Ceil(float64(xw) / float64(c.Strides[1])))
+	default:
+		panic("invalid pad form " + c.AutoPad)
+	}
 	yShape := dlperf.Shape{yn, yc, yh, yw}
 	c.SetOutputShapes([]dlperf.Shape{yShape})
 }

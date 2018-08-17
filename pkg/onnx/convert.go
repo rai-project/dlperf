@@ -86,8 +86,8 @@ func (o Onnx) mkConcat(node *onnx.NodeProto) dlperf.Layer {
 func (o Onnx) mkConv(node *onnx.NodeProto) dlperf.Layer {
 	autoPad := "VALID"
 	autoPadAttr := getNodeAttributeFromName(node, "auto_pad")
-	if autoPadAttr.GetStrings() != nil {
-		autoPad = string(autoPadAttr.GetStrings()[0])
+	if autoPadAttr.GetS() != nil {
+		autoPad = string(autoPadAttr.GetS())
 	}
 
 	dilations := []int64{1, 1}
