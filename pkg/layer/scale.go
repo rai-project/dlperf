@@ -5,7 +5,7 @@ import (
 )
 
 type Scale struct {
-	Base `json:",inline,flatten,omitempty"`
+	*Base `json:",inline,flatten,omitempty"`
 }
 
 func (Scale) Description() string {

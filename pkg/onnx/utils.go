@@ -1,6 +1,7 @@
 package onnx
 
 import (
+	"encoding/binary"
 	"fmt"
 	"reflect"
 
@@ -19,12 +20,25 @@ func getNodeAttributeFromName(node *onnx.NodeProto, attrName string) *onnx.Attri
 	return nil
 }
 
+func getTensorProtoDimensions(tensor *onnx.TensorProto) dlperf.Shape {
+	var ret dlperf.Shape
+	if tensor.DataType == onnx.TensorProto_INT64 && len(tensor.GetRawData()) > 0 {
+		dim := tensor.Dims[0]
+		rawdata := tensor.GetRawData()
+		for ii := int64(0); ii < dim; ii++ {
+			val := int64(binary.LittleEndian.Uint64(rawdata[ii*8 : (ii+1)*8]))
+			ret = append(ret, val)
+		}
+		return ret
+	}
+	return tensor.Dims
+}
+
 func getValueInfoDimensions(valueInfo *onnx.ValueInfoProto) dlperf.Shape {
 	var ret dlperf.Shape
 	for _, dim := range valueInfo.GetType().GetTensorType().GetShape().GetDim() {
 		ret = append(ret, dim.GetDimValue())
 	}
-
 	return ret
 }
 
@@ -94,4 +108,13 @@ func toInt64SliceE(i interface{}) ([]int64, error) {
 func toInt64Slice(i interface{}) []int64 {
 	v, _ := toInt64SliceE(i)
 	return v
+}
+
+func getOutputShapes(layers []dlperf.Layer) []dlperf.Shape {
+	outputShapes := []dlperf.Shape{}
+	for _, layer := range layers {
+		outputShapes = append(outputShapes, layer.OutputShapes()[0])
+	}
+
+	return outputShapes
 }

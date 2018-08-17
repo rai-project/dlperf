@@ -7,7 +7,7 @@ import (
 )
 
 type ElementWise struct {
-	Base `json:",inline,flatten,omitempty"`
+	*Base `json:",inline,flatten,omitempty"`
 }
 
 func (ElementWise) Description() string {

@@ -1,6 +1,7 @@
 package onnx
 
 import (
+	"sort"
 	"strings"
 
 	"github.com/cevaris/ordered_map"
@@ -8,8 +9,68 @@ import (
 	"github.com/rai-project/dlperf/pkg"
 	"github.com/rai-project/dlperf/pkg/layer"
 	"github.com/rai-project/onnx"
+	"gonum.org/v1/gonum/graph"
 	"gonum.org/v1/gonum/graph/topo"
 )
+
+func sortByOrder(nds []graph.Node, layers []dlperf.Layer) []dlperf.Layer {
+
+	if len(layers) == 1 {
+		return layers
+	}
+
+	findNodePosition := func(name string) int {
+		for ii, n0 := range nds {
+			n := n0.(GraphNode)
+			if n.name == name || n.Name == name {
+				return ii
+			}
+		}
+		panic("unable to find node " + name)
+
+		return 0
+	}
+
+	order := func(ii, jj int) bool {
+		a := layers[ii]
+		b := layers[jj]
+		apos := findNodePosition(a.Name())
+		bpos := findNodePosition(b.Name())
+		return apos < bpos
+	}
+
+	sort.Slice(layers, order)
+
+	return layers
+}
+
+func sortByDimension(layers []dlperf.Layer) []dlperf.Layer {
+	if len(layers) == 1 {
+		return layers
+	}
+
+	rest := layers[1:]
+
+	isGreater := func(ii, jj int) bool {
+		a := rest[ii]
+		b := rest[jj]
+		sa := a.OutputShapes()[0]
+		sb := b.OutputShapes()[0]
+		if len(sa) > len(sb) {
+			return true
+		}
+		for ii := range sa {
+			if sa[ii] > sb[ii] {
+				return true
+			}
+		}
+		return false
+	}
+
+	sort.Slice(rest, isGreater)
+
+	return append([]dlperf.Layer{layers[0]}, rest...)
+}
 
 func (o Onnx) ModelInformation() ([]dlperf.LayerInformation, error) {
 	ret := []dlperf.LayerInformation{}
@@ -39,7 +100,9 @@ func (o Onnx) ModelInformation() ([]dlperf.LayerInformation, error) {
 		if !ok {
 			panic("invalid type for " + pp.Sprint(nd0))
 		}
-
+		if nd.name == "OC2_DUMMY_1" {
+			// pp.Println(nd.Attribute)
+		}
 		layer := o.mkLayer(nd.NodeProto)
 
 		if layer == nil {
@@ -55,6 +118,10 @@ func (o Onnx) ModelInformation() ([]dlperf.LayerInformation, error) {
 		if !ok {
 			panic("invalid layer type for " + pp.Sprint(kv.Value))
 		}
+
+		// if layer.OperatorType() == "ConstantInput" {
+		// 	continue
+		// }
 
 		nd := findNode(kv.Key.(string))
 		inputLayers := []dlperf.Layer{}
@@ -72,13 +139,46 @@ func (o Onnx) ModelInformation() ([]dlperf.LayerInformation, error) {
 			inputLayers = append(inputLayers, inputLayer.(dlperf.Layer))
 		}
 
+		inputLayers = sortByOrder(nds, inputLayers)
+		layer.SetInputs(inputLayers)
+
+		// pp.Println(inputLayers)
+
+		outputLayers := []dlperf.Layer{}
+		for _, output0 := range grph.From(nd.ID()) {
+			output, ok := output0.(GraphNode)
+			if !ok {
+				panic("invalid type for " + pp.Sprint(output0))
+			}
+
+			outputLayer, ok := layers.Get(output.name)
+			if !ok {
+				panic("unable to find input layer " + pp.Sprint(output))
+			}
+
+			outputLayers = append(outputLayers, outputLayer.(dlperf.Layer))
+		}
+		outputLayers = sortByOrder(nds, outputLayers)
+		layer.SetOutputs(outputLayers)
+
+		// if layer.Name() == "conv_1" {
+		// 	pp.Println("Infering Shape on ", layer.Name())
+		// 	pp.Println(inputLayers)
+		// }
+
+		// defer func() {
+		// 	if r := recover(); r != nil {
+		// 		// pp.Println(layer.Name())
+		// 		panic(r)
+		// 	}
+
+		// }()
+
+		layer.SetInputShapes(getOutputShapes(inputLayers))
 		layer.InferShape(inputLayers)
 
-		pp.Println(layer)
-
-		if layer.Name() == "" {
-			pp.Println(layer)
-		}
+		// pp.Println(layer.Name())
+		// pp.Println(layer.OutputShapes())
 
 		info := layer.Information()
 		ret = append(ret, info)
@@ -119,6 +219,13 @@ func (o Onnx) MemoryInformation() dlperf.MemoryInformation {
 func (o Onnx) GetValueInfoDimensions(names []string) []dlperf.Shape {
 	var ret []dlperf.Shape
 	for _, name := range names {
+		init, ok := o.initializers[name]
+		if ok {
+			shp := getTensorProtoDimensions(init)
+			ret = append(ret, shp)
+			continue
+		}
+
 		val, ok := o.valueInfo[name]
 		if ok {
 			ret = append(ret, getValueInfoDimensions(val))
@@ -167,7 +274,7 @@ func (o Onnx) mkLayer(node *onnx.NodeProto) dlperf.Layer {
 		ret = o.mkGlobalPooling(node)
 	case "relu", "leakyrelu", "prelu":
 		ret = o.mkReLU(node)
-	case "reshape", "transpose", "unsqueeze", "identity":
+	case "reshape", "transpose", "unsqueeze":
 		ret = o.mkReshape(node)
 	case "scale", "imagescaler":
 		ret = o.mkScale(node)
@@ -184,7 +291,7 @@ func (o Onnx) mkLayer(node *onnx.NodeProto) dlperf.Layer {
 	return ret
 }
 
-func (o Onnx) mkBase(node *onnx.NodeProto) layer.Base {
+func (o Onnx) mkBase(node *onnx.NodeProto) *layer.Base {
 	inputs := node.GetInput()
 	outputs := node.GetOutput()
 
@@ -197,7 +304,7 @@ func (o Onnx) mkBase(node *onnx.NodeProto) layer.Base {
 	base.SetInputShapes(o.GetValueInfoDimensions(inputs))
 	// base.SetOutputShapes(o.GetValueInfoDimensions(outputs))
 
-	return *base
+	return base
 }
 
 func (o Onnx) mkBatchNorm(node *onnx.NodeProto) dlperf.Layer {
@@ -238,7 +345,7 @@ func (o Onnx) mkConv(node *onnx.NodeProto) dlperf.Layer {
 		return nil
 	}
 
-	pads := []int64{0, 0}
+	pads := []int64{0, 0, 0, 0}
 	padsAttr := getNodeAttributeFromName(node, "pads")
 	if padsAttr.GetInts() != nil {
 		pads = padsAttr.GetInts()
@@ -350,12 +457,9 @@ func (o Onnx) mkConstant(node *onnx.NodeProto) dlperf.Layer {
 
 func (o Onnx) mkConstantInput(node *onnx.NodeProto) dlperf.Layer {
 	base := o.mkBase(node)
-	val, ok := o.inputs[node.Name]
-	if !ok {
-		return nil
-	}
-	base.SetInputShapes([]dlperf.Shape{getValueInfoDimensions(val)})
-	base.SetOutputShapes([]dlperf.Shape{getValueInfoDimensions(val)})
+
+	base.SetInputShapes(o.GetValueInfoDimensions([]string{node.Name}))
+	base.SetOutputShapes(o.GetValueInfoDimensions([]string{node.Name}))
 
 	return &layer.ConstantInput{
 		Base: base,

@@ -86,6 +86,20 @@ func (o Onnx) ToGraph(oo ...GraphOption) Graph {
 		return false
 	}
 
+	isOutputNode := func(name string) bool {
+		outputs := onnxGraph.GetOutput()
+		if len(outputs) <= 1 {
+			return false
+		}
+		for _, output := range outputs {
+			if output.GetName() == name {
+				return true
+			}
+		}
+		return false
+	}
+	_ = isOutputNode
+
 	mkOnnxConstantInputNode := func(name string, src *onnx.NodeProto) *onnx.NodeProto {
 		return &onnx.NodeProto{
 			Input:  []string{},
@@ -94,7 +108,20 @@ func (o Onnx) ToGraph(oo ...GraphOption) Graph {
 		}
 	}
 
+	mkOnnxConstantOutputNode := func(name string, src *onnx.NodeProto) *onnx.NodeProto {
+		return &onnx.NodeProto{
+			Input:  []string{src.Name},
+			Name:   name,
+			OpType: "constant_output",
+		}
+	}
+
+	_ = mkOnnxConstantOutputNode
+
 	skipNode := func(name string) bool {
+		if strings.HasPrefix(name, "_") {
+			return true
+		}
 		if !opts.PruneInputs {
 			return false
 		}
@@ -111,6 +138,11 @@ func (o Onnx) ToGraph(oo ...GraphOption) Graph {
 		id := grph.NewNode().ID()
 		if opts.InputsAsConstantNodes && isInputNode(name) {
 			onnxNode = mkOnnxConstantInputNode(name, onnxNode)
+		} else {
+			onnxNode.Attribute = append(onnxNode.Attribute, &onnx.AttributeProto{
+				Name: "edge_name",
+				S:    []byte(name),
+			})
 		}
 		nd := GraphNode{
 			id:        id,

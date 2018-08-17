@@ -5,7 +5,7 @@ import (
 )
 
 type ConstantInput struct {
-	Base `json:",inline,flatten,omitempty"`
+	*Base `json:",inline,flatten,omitempty"`
 }
 
 func (ConstantInput) OperatorType() string {

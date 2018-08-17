@@ -8,7 +8,7 @@ import (
 // https://arxiv.org/pdf/1502.03167.pdf
 
 type BatchNorm struct {
-	Base `json:",inline,flatten,omitempty"`
+	*Base `json:",inline,flatten,omitempty"`
 }
 
 func (BatchNorm) Description() string {

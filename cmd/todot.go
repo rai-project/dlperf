@@ -36,7 +36,7 @@ var todotCmd = &cobra.Command{
 			return err
 		}
 
-		grph := model.ToGraph()
+		grph := model.ToGraph(onnx.GraphPruneInputs(false), onnx.GraphInputsAsConstantNodes(true))
 		if pruneGraph {
 			grph = grph.Prune(nil)
 		}

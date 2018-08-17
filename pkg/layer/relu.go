@@ -5,7 +5,7 @@ import (
 )
 
 type ReLU struct {
-	Base `json:",inline,flatten,omitempty"`
+	*Base `json:",inline,flatten,omitempty"`
 }
 
 func (ReLU) Description() string {

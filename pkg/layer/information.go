@@ -9,7 +9,7 @@ import (
 )
 
 type Information struct {
-	Base   `json:",inline,flatten,omitempty"`
+	*Base  `json:",inline,flatten,omitempty"`
 	shape  dlperf.ShapeInformation  `json:"shape,omitempty"`
 	flops  dlperf.FlopsInformation  `json:"flops,omitempty"`
 	memory dlperf.MemoryInformation `json:"memory,omitempty"`

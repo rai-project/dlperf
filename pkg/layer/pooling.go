@@ -1,11 +1,13 @@
 package layer
 
 import (
+	"math"
+
 	"github.com/rai-project/dlperf/pkg"
 )
 
 type Pooling struct {
-	Base        `json:",inline,flatten,omitempty"`
+	*Base       `json:",inline,flatten,omitempty"`
 	KernelShape dlperf.Shape `json:"kernel_shape,omitempty"`
 	Pads        dlperf.Shape `json:"pads,omitempty"`
 	Strides     dlperf.Shape `json:"strides,omitempty"`
@@ -21,8 +23,9 @@ func (c *Pooling) InferShape(inputLayers []dlperf.Layer) {
 
 	yShape := dlperf.Shape{xShape[0], xShape[1]}
 	for ii, xs := range xShape[2:] {
-		ys := (xs + c.Pads[ii] + c.Pads[ii+1] - c.KernelShape[ii]) / c.Strides[ii]
+		ys := int64(math.Floor(float64(xs+c.Pads[ii]+c.Pads[ii+1]-c.KernelShape[ii])/float64(c.Strides[ii]))) + 1
 		yShape = append(yShape, ys)
+
 	}
 
 	c.SetInputShapes(inputShapes)

@@ -1,6 +1,9 @@
 package layer
 
 import (
+	"math"
+
+	"github.com/k0kubun/pp"
 	"github.com/rai-project/dlperf/pkg"
 	"github.com/rai-project/dlperf/pkg/benchmark"
 )
@@ -9,7 +12,7 @@ import (
 // NCHW tensor layout for passing inputs and outputs
 
 type Conv struct {
-	Base        `json:",inline,flatten,omitempty"`
+	*Base       `json:",inline,flatten,omitempty"`
 	AutoPad     string       `json:"auto_pad,omitempty"`
 	Dilations   dlperf.Shape `json:"dilation,omitempty"`
 	Group       int64        `json:"group,omitempty"`
@@ -23,7 +26,17 @@ func (Conv) Description() string {
 }
 
 func (c *Conv) InferShape(inputLayers []dlperf.Layer) {
-	c.SetInputShapes(getOutputShapes(inputLayers))
+
+	defer func() {
+		if r := recover(); r != nil {
+			c.node = nil
+			pp.Println(c.Name())
+			pp.Println(c.inputShapes)
+			// pp.Println(c)
+			panic(r)
+		}
+
+	}()
 
 	xShape := c.inputShapes[0]
 	xn := xShape[0]
@@ -32,13 +45,14 @@ func (c *Conv) InferShape(inputLayers []dlperf.Layer) {
 
 	wShape := c.inputShapes[1]
 	wn := wShape[0]
+
 	wh := wShape[2]
 	ww := wShape[3]
 
 	yn := xn
 	yc := wn
-	yh := (xh+2*c.Pads[0]-(c.Dilations[0]*(wh-1)+1))/c.Strides[0] + 1
-	yw := (xw+2*c.Pads[1]-(c.Dilations[1]*(ww-1)+1))/c.Strides[1] + 1
+	yh := int64(math.Ceil(float64(xh+c.Pads[0]+c.Pads[1]-(c.Dilations[0]*(wh-1)+1))/float64(c.Strides[0]))) + 1
+	yw := int64(math.Ceil(float64(xw+c.Pads[2]+c.Pads[3]-(c.Dilations[1]*(ww-1)+1))/float64(c.Strides[1]))) + 1
 
 	yShape := dlperf.Shape{yn, yc, yh, yw}
 	c.SetOutputShapes([]dlperf.Shape{yShape})

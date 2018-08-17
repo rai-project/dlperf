@@ -5,7 +5,7 @@ import (
 )
 
 type SoftMax struct {
-	Base `json:",inline,flatten,omitempty"`
+	*Base `json:",inline,flatten,omitempty"`
 }
 
 func (SoftMax) Description() string {

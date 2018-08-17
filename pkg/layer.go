@@ -16,8 +16,11 @@ type Layer interface {
 	OperatorType() string
 	InferShape([]Layer)
 	Inputs() []Layer
+	SetInputs([]Layer)
 	Outputs() []Layer
+	SetOutputs([]Layer)
 	InputShapes() []Shape
+	SetInputShapes([]Shape)
 	OutputShapes() []Shape
 	Information() LayerInformation
 }

@@ -7,7 +7,7 @@ import (
 // https://github.com/onnx/onnx/blob/master/docs/Operators.md#Dropout
 
 type Dropout struct {
-	Base `json:",inline,flatten,omitempty"`
+	*Base `json:",inline,flatten,omitempty"`
 }
 
 func (Dropout) OperatorType() string {

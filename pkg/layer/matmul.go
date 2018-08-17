@@ -5,7 +5,7 @@ import (
 )
 
 type MatMul struct {
-	Base `json:",inline,flatten,omitempty"`
+	*Base `json:",inline,flatten,omitempty"`
 }
 
 func (MatMul) Description() string {

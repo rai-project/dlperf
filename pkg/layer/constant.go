@@ -5,7 +5,7 @@ import (
 )
 
 type Constant struct {
-	Base `json:",inline,flatten,omitempty"`
+	*Base `json:",inline,flatten,omitempty"`
 }
 
 func (Constant) OperatorType() string {

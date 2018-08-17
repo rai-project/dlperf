@@ -19,7 +19,10 @@ type Base struct {
 	outputShapes []dlperf.Shape  `json:"output_shapes,omitempty"`
 }
 
-func (b Base) Name() string {
+func (b *Base) Name() string {
+	if b == nil {
+		return ""
+	}
 	return b.name
 }
 
@@ -27,7 +30,7 @@ func (b *Base) SetName(s string) {
 	b.name = s
 }
 
-func (b *Base) Node() *onnx.NodeProto {
+func (b Base) Node() *onnx.NodeProto {
 	return b.node
 }
 

@@ -5,7 +5,7 @@ import (
 )
 
 type GlobalPooling struct {
-	Base `json:",inline,flatten,omitempty"`
+	*Base `json:",inline,flatten,omitempty"`
 }
 
 func (GlobalPooling) Description() string {

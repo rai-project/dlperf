@@ -8,8 +8,8 @@ import (
 // https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks.pdf
 
 type LRN struct {
-	Base `json:",inline,flatten,omitempty"`
-	Size int64 `json:"size,omitempty"`
+	*Base `json:",inline,flatten,omitempty"`
+	Size  int64 `json:"size,omitempty"`
 }
 
 func (LRN) Description() string {

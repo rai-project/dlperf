@@ -7,7 +7,7 @@ import (
 // https://github.com/onnx/onnx/blob/master/docs/Operators.md#Gemm
 
 type Gemm struct {
-	Base   `json:",inline,flatten,omitempty"`
+	*Base  `json:",inline,flatten,omitempty"`
 	Alpha  float64
 	Beta   float64
 	TransA int

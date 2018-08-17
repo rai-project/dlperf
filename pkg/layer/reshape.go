@@ -7,7 +7,7 @@ import (
 // https://github.com/onnx/onnx/blob/master/docs/Operators.md#Reshape
 
 type Reshape struct {
-	Base `json:",inline,flatten,omitempty"`
+	*Base `json:",inline,flatten,omitempty"`
 }
 
 func (Reshape) Description() string {
@@ -16,6 +16,10 @@ func (Reshape) Description() string {
 
 func (c *Reshape) InferShape(inputLayers []dlperf.Layer) {
 	inputShapes := getOutputShapes(inputLayers)
+	// if c.OperatorType() == "reshape" {
+	// 	pp.Println(inputLayers[1].Name())
+	// 	pp.Println(inputLayers[1].OutputShapes())
+	// }
 	c.SetInputShapes(inputShapes)
 	c.SetOutputShapes([]dlperf.Shape{inputShapes[1]})
 }

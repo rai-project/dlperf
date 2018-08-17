@@ -5,7 +5,7 @@ import (
 )
 
 type Concat struct {
-	Base `json:",inline,flatten,omitempty"`
+	*Base `json:",inline,flatten,omitempty"`
 }
 
 func (Concat) Description() string {
