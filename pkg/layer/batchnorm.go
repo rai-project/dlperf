@@ -1,8 +1,6 @@
 package layer
 
 import (
-	"fmt"
-
 	"github.com/rai-project/dlperf/pkg"
 )
 
@@ -18,8 +16,9 @@ func (BatchNorm) Description() string {
 }
 
 func (c *BatchNorm) InferShape(inputLayers []dlperf.Layer) {
-	//c.inputdimensions =  dlperf.ShapeInformation{}
-	panic(fmt.Sprintf("the shape inference for %s is not implemented", c.OperatorType()))
+	inputShapes := getOutputShapes(inputLayers)
+	c.SetInputShapes(inputShapes)
+	c.SetOutputShapes(inputShapes)
 }
 
 func (c BatchNorm) Information() dlperf.LayerInformation {
@@ -36,10 +35,10 @@ func (c BatchNorm) Information() dlperf.LayerInformation {
 		return info
 	}
 
-	checkNumber(c.InputShapes, []int{1, 2, 3, 4, 5}, c.OperatorType(), "number of inputs")
+	checkNumber(c.InputShapes, []int{5}, c.OperatorType(), "number of inputs")
 	checkNumber(c.OutputShapes, []int{1, 2, 3, 4, 5}, c.OperatorType(), "number of outputs")
 
-	inputShapes := c.inputShapes[0] // (N x C x H x W)
+	inputShapes := c.inputShapes[0]
 
 	numOps := int64(1)
 	for _, s := range inputShapes {

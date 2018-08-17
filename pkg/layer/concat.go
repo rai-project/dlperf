@@ -1,13 +1,12 @@
 package layer
 
 import (
-	"fmt"
-
 	"github.com/rai-project/dlperf/pkg"
 )
 
 type Concat struct {
 	*Base `json:",inline,flatten,omitempty"`
+	Axis  int `json:"axis,omitempty"`
 }
 
 func (Concat) Description() string {
@@ -15,8 +14,15 @@ func (Concat) Description() string {
 }
 
 func (c *Concat) InferShape(inputLayers []dlperf.Layer) {
-	//c.inputdimensions =  dlperf.ShapeInformation{}
-	panic(fmt.Sprintf("the shape inference for %s is not implemented", c.OperatorType()))
+	inputShapes := getOutputShapes(inputLayers)
+	yShape := c.inputShapes[0]
+
+	for _, input := range inputShapes[1:] {
+		yShape[c.Axis] += input[c.Axis]
+	}
+
+	c.SetInputShapes(inputShapes)
+	c.SetOutputShapes([]dlperf.Shape{yShape})
 }
 
 func (c Concat) Information() dlperf.LayerInformation {

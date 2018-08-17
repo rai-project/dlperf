@@ -1,8 +1,6 @@
 package layer
 
 import (
-	"fmt"
-
 	"github.com/rai-project/dlperf/pkg"
 )
 
@@ -19,7 +17,9 @@ func (Constant) Description() string {
 }
 
 func (c *Constant) InferShape(inputLayers []dlperf.Layer) {
-	panic(fmt.Sprintf("the shape inference for %s is not implemented", c.OperatorType()))
+	inputShapes := getOutputShapes(inputLayers)
+	c.SetInputShapes(inputShapes)
+	c.SetOutputShapes(inputShapes)
 }
 
 func (c Constant) Information() dlperf.LayerInformation {
