@@ -17,7 +17,8 @@ func (ElementWise) Description() string {
 func (c *ElementWise) InferShape(inputLayers []dlperf.Layer) {
 	inputShapes := getOutputShapes(inputLayers)
 	c.SetInputShapes(inputShapes)
-	c.SetOutputShapes(inputShapes)
+	outputShapes := []dlperf.Shape{inputShapes[0]}
+	c.SetOutputShapes(outputShapes)
 }
 
 func (c ElementWise) Information() dlperf.LayerInformation {
@@ -34,10 +35,11 @@ func (c ElementWise) Information() dlperf.LayerInformation {
 		return info
 	}
 
-	checkNumber(c.InputShapes, []int{2}, c.OperatorType(), "number of inputs")
+	checkNumber(c.InputShapes, nil, c.OperatorType(), "number of inputs")
 	checkNumber(c.OutputShapes, []int{1}, c.OperatorType(), "number of outputs")
 
-	inputShapes := c.InputShapes()[0] // (N x C x H x W)
+	numInputs := int64(len(c.InputShapes()))
+	inputShapes := c.InputShapes()[0]
 
 	var shape []int64
 	for _, s := range inputShapes {
@@ -52,11 +54,11 @@ func (c ElementWise) Information() dlperf.LayerInformation {
 	flops := dlperf.FlopsInformation{}
 	switch strings.ToLower(c.operatorType) {
 	case "add", "sum", "sub":
-		flops.Additions = numOps
+		flops.Additions = numOps * (numInputs - 1)
 	case "mul", "div":
 		flops.MultiplyAdds = numOps
 	case "max,", "min":
-		flops.Comparisons = numOps
+		flops.Comparisons = numOps * (numInputs - 1)
 	default:
 		log.WithField("layer", c.OperatorType()).WithField("operator", c.OperatorType()).Error("invalid layer operation")
 	}

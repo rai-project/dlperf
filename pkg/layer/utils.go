@@ -9,23 +9,32 @@ import (
 
 func checkNumber(val interface{}, expected []int, layer string, name string) error {
 
-	var len int
+	var valLen int
 	v := reflect.ValueOf(val)
 
 	switch v.Kind() {
 	case reflect.Slice:
-		len = v.Len()
+		valLen = v.Len()
 	default:
 		return errors.New("checkNumber takes a slice")
 	}
 
+	if valLen == 0 {
+		log.WithField("layer", layer).WithField("name", name).Error("has zero input")
+		return errors.New("checkNumber failed")
+	}
+
+	if expected == nil {
+		return nil
+	}
+
 	for _, e := range expected {
-		if len == e {
+		if valLen == e {
 			return nil
 		}
 	}
 
-	log.WithField("layer", layer).WithField(name, len).Errorf("should be in", expected)
+	log.WithField("layer", layer).WithField(name, valLen).Errorf("should be in", expected)
 
 	return errors.New("checkNumber failed")
 }
