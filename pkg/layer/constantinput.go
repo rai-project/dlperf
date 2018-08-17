@@ -16,7 +16,9 @@ func (ConstantInput) Description() string {
 	return ``
 }
 
-func (c *ConstantInput) InferShape(inputLayers []dlperf.Layer) {}
+func (c *ConstantInput) InferShape(inputLayers []dlperf.Layer) {
+	// intentionally blank, set in mkConstantInput
+}
 
 func (c ConstantInput) Information() dlperf.LayerInformation {
 	info := &Information{
