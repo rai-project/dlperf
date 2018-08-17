@@ -18,7 +18,7 @@ func sortByOrder(nds []graph.Node, layers []dlperf.Layer) []dlperf.Layer {
 
 	findNodePosition := func(name string) int {
 		for ii, n0 := range nds {
-			n := n0.(GraphNode)
+			n := n0.(*GraphNode)
 			if n.name == name || n.Name == name {
 				return ii
 			}
@@ -69,7 +69,7 @@ func sortByDimension(layers []dlperf.Layer) []dlperf.Layer {
 	return append([]dlperf.Layer{layers[0]}, rest...)
 }
 
-func (o Onnx) ModelInformation() ([]dlperf.LayerInformation, error) {
+func (o *Onnx) Analyze() ([]dlperf.LayerInformation, error) {
 	ret := []dlperf.LayerInformation{}
 
 	grph := o.ToGraph(GraphPruneInputs(false), GraphInputsAsConstantNodes(true))
@@ -80,9 +80,9 @@ func (o Onnx) ModelInformation() ([]dlperf.LayerInformation, error) {
 
 	findNode := func(name string) *GraphNode {
 		for _, n0 := range nds {
-			n := n0.(GraphNode)
+			n := n0.(*GraphNode)
 			if n.name == name {
-				return &n
+				return n
 			}
 		}
 		panic("unable to find node " + name)
@@ -93,7 +93,7 @@ func (o Onnx) ModelInformation() ([]dlperf.LayerInformation, error) {
 	layers := ordered_map.NewOrderedMap()
 
 	for _, nd0 := range nds {
-		nd, ok := nd0.(GraphNode)
+		nd, ok := nd0.(*GraphNode)
 		if !ok {
 			panic("invalid type for " + pp.Sprint(nd0))
 		}
@@ -116,7 +116,7 @@ func (o Onnx) ModelInformation() ([]dlperf.LayerInformation, error) {
 		nd := findNode(kv.Key.(string))
 		inputLayers := []dlperf.Layer{}
 		for _, input0 := range grph.To(nd.ID()) {
-			input, ok := input0.(GraphNode)
+			input, ok := input0.(*GraphNode)
 			if !ok {
 				panic("invalid type for " + pp.Sprint(input0))
 			}
@@ -136,7 +136,7 @@ func (o Onnx) ModelInformation() ([]dlperf.LayerInformation, error) {
 
 		outputLayers := []dlperf.Layer{}
 		for _, output0 := range grph.From(nd.ID()) {
-			output, ok := output0.(GraphNode)
+			output, ok := output0.(*GraphNode)
 			if !ok {
 				panic("invalid type for " + pp.Sprint(output0))
 			}
@@ -170,6 +170,8 @@ func (o Onnx) ModelInformation() ([]dlperf.LayerInformation, error) {
 
 		layer.InferShape(inputLayers)
 
+		nd.layer = layer
+
 		// pp.Println(layer.Name())
 		// pp.Println(layer.OutputShapes())
 
@@ -187,7 +189,7 @@ func (o Onnx) ModelInformation() ([]dlperf.LayerInformation, error) {
 
 func (o Onnx) FlopsInformation() dlperf.FlopsInformation {
 	flops := dlperf.FlopsInformation{}
-	infos, err := o.ModelInformation()
+	infos, err := o.Analyze()
 	if err != nil {
 		panic(err)
 	}
@@ -199,7 +201,7 @@ func (o Onnx) FlopsInformation() dlperf.FlopsInformation {
 
 func (o Onnx) MemoryInformation() dlperf.MemoryInformation {
 	memory := dlperf.MemoryInformation{}
-	infos, err := o.ModelInformation()
+	infos, err := o.Analyze()
 	if err != nil {
 		panic(err)
 	}

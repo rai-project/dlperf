@@ -8,6 +8,7 @@ import (
 type Onnx struct {
 	*onnx.ModelProto
 	*onnx.GraphProto
+	network      *Graph
 	nodes        *ordered_map.OrderedMap // map[string]*onnx.NodeProto
 	valueInfo    map[string]*onnx.ValueInfoProto
 	inputs       map[string]*onnx.ValueInfoProto
@@ -66,4 +67,8 @@ func New(protoFileName string) (*Onnx, error) {
 		outputs:      outputs,
 		initializers: initializers,
 	}, nil
+}
+
+func (o Onnx) Network() *Graph {
+	return o.network
 }

@@ -31,7 +31,7 @@ var DefaultPrunedLayerTypes = []string{
 	"identity",
 }
 
-func (g Graph) Prune(layerTypes []string) Graph {
+func (g Graph) Prune(layerTypes []string) *Graph {
 
 	isSameGraph := func(a, b graph.Directed) bool {
 		if a == nil {
@@ -61,11 +61,11 @@ func (g Graph) Prune(layerTypes []string) Graph {
 		return true
 	}
 
-	var new Graph
-	old := g.doPrune(layerTypes).(Graph)
+	var new *Graph
+	old := g.doPrune(layerTypes)
 
 	for {
-		new = old.doPrune(layerTypes).(Graph)
+		new = old.doPrune(layerTypes)
 		if isSameGraph(new, old) {
 			break
 		}
@@ -74,7 +74,7 @@ func (g Graph) Prune(layerTypes []string) Graph {
 	return new
 }
 
-func (g Graph) doPrune(layerTypes []string) graph.Directed {
+func (g Graph) doPrune(layerTypes []string) *Graph {
 	var edgeContract func(start, end graph.Node)
 
 	if len(layerTypes) == 0 {
@@ -82,7 +82,7 @@ func (g Graph) doPrune(layerTypes []string) graph.Directed {
 	}
 
 	toPrune := func(nd0 graph.Node) bool {
-		nd, ok := nd0.(GraphNode)
+		nd, ok := nd0.(*GraphNode)
 		if !ok {
 			return false
 		}
@@ -154,7 +154,7 @@ func (g Graph) doPrune(layerTypes []string) graph.Directed {
 			}
 		}
 	}
-	return Graph{
+	return &Graph{
 		Root:          g.Root,
 		DirectedGraph: newgrph,
 	}

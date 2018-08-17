@@ -67,7 +67,7 @@ func runFlopsCmd(cmd *cobra.Command, args []string) error {
 	}
 
 	if fullFlops {
-		infos, err := net.ModelInformation()
+		infos, err := net.Analyze()
 		if err != nil {
 			return err
 		}

@@ -110,7 +110,7 @@ func (grph Graph) FindSubGraphs() ([]Graph, error) {
 
 		if len(subgrph.Nodes()) != 0 {
 			res = append(res, Graph{
-				Root:          root.(GraphNode),
+				Root:          root.(*GraphNode),
 				DirectedGraph: subgrph,
 			})
 		}

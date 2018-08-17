@@ -1,23 +1,25 @@
 package onnx
 
 import (
+	"encoding/json"
 	"fmt"
 	"strings"
 
+	dlperf "github.com/rai-project/dlperf/pkg"
 	"github.com/rai-project/onnx"
 	"gonum.org/v1/gonum/graph/encoding"
 	"gonum.org/v1/gonum/graph/simple"
 )
 
 type Graph struct {
-	Root GraphNode
+	Root *GraphNode
 	*simple.DirectedGraph
 }
 
 type GraphNode struct {
-	id   int64
-	name string
-	// layer dl.Layer
+	id    int64
+	name  string
+	layer dlperf.Layer
 	*onnx.NodeProto
 }
 
@@ -32,6 +34,13 @@ func (nd GraphNode) DOTID() string {
 }
 
 func (nd GraphNode) Attributes() []encoding.Attribute {
+	lbl := fmt.Sprintf("\"{  %s  | %s }\"", nd.Name, nd.OpType)
+	if nd.layer != nil {
+		outputShapes, err := json.Marshal(nd.layer.OutputShapes())
+		if err == nil {
+			lbl = fmt.Sprintf("\"{  %s  | %s | %s }\"", nd.Name, nd.OpType, string(outputShapes))
+		}
+	}
 	return []encoding.Attribute{
 		encoding.Attribute{
 			Key:   "id",
@@ -51,7 +60,7 @@ func (nd GraphNode) Attributes() []encoding.Attribute {
 		},
 		encoding.Attribute{
 			Key:   "label",
-			Value: fmt.Sprintf("\"{  %s  | %s }\"", nd.Name, nd.OpType),
+			Value: lbl,
 		},
 		encoding.Attribute{
 			Key:   "inputs",
@@ -64,7 +73,7 @@ func (nd GraphNode) Attributes() []encoding.Attribute {
 	}
 }
 
-func (o Onnx) ToGraph(oo ...GraphOption) Graph {
+func (o *Onnx) ToGraph(oo ...GraphOption) *Graph {
 	opts := NewGraphOptions(oo...)
 	onnxGraph := o.GetGraph()
 	graphIds := map[string]int64{}
@@ -145,7 +154,7 @@ func (o Onnx) ToGraph(oo ...GraphOption) Graph {
 				S:    []byte(name),
 			})
 		}
-		nd := GraphNode{
+		nd := &GraphNode{
 			id:        id,
 			name:      name,
 			NodeProto: onnxNode,
@@ -188,8 +197,12 @@ func (o Onnx) ToGraph(oo ...GraphOption) Graph {
 	input := onnxGraph.GetInput()[0]
 	inId := graphIds[input.GetName()]
 
-	return Graph{
-		Root:          grph.Node(inId).(GraphNode),
+	network := &Graph{
+		Root:          grph.Node(inId).(*GraphNode),
 		DirectedGraph: grph,
 	}
+
+	o.network = network
+
+	return network
 }
