@@ -151,9 +151,11 @@ func (o *Onnx) Information() ([]dlperf.LayerInformation, error) {
 		outputLayers = sortByOrder(nds, outputLayers)
 		layer.SetOutputs(outputLayers)
 
-		// if layer.Name() == "conv_1" {
+		// if layer.Name() == "conv0" {
 		// 	pp.Println("Infering Shape on ", layer.Name())
-		// 	pp.Println(inputLayers)
+		// 	for _, input := range inputLayers {
+		// 		pp.Println(input.Name())
+		// 	}
 		// }
 
 		// defer func() {

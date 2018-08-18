@@ -3,7 +3,6 @@ package onnx
 import (
 	"strings"
 
-	"github.com/k0kubun/pp"
 	dlperf "github.com/rai-project/dlperf/pkg"
 	"github.com/rai-project/dlperf/pkg/layer"
 	"github.com/rai-project/onnx"
@@ -14,6 +13,8 @@ func (o Onnx) mkLayer(node *onnx.NodeProto) dlperf.Layer {
 	operatorType := strings.ToLower(node.GetOpType())
 
 	switch operatorType {
+	case "identity":
+		ret = o.mkIdentity(node)
 	case "batchnorm", "batchnormalization":
 		ret = o.mkBatchNorm(node)
 	case "concat":
@@ -51,7 +52,7 @@ func (o Onnx) mkLayer(node *onnx.NodeProto) dlperf.Layer {
 	case "constant_input":
 		ret = o.mkConstantInput(node)
 	default:
-		pp.Println("unhandeled", operatorType)
+		panic("unhandeled layer = " + operatorType)
 	}
 
 	return ret
@@ -229,6 +230,12 @@ func (o Onnx) mkTranspose(node *onnx.NodeProto) dlperf.Layer {
 	return &layer.Transpose{
 		Base:        o.mkBase(node),
 		Permutation: perm,
+	}
+}
+
+func (o Onnx) mkIdentity(node *onnx.NodeProto) dlperf.Layer {
+	return &layer.Scale{
+		Base: o.mkBase(node),
 	}
 }
 

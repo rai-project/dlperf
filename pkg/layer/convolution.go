@@ -26,7 +26,6 @@ func (Conv) Description() string {
 }
 
 func (c *Conv) InferShape(inputLayers []dlperf.Layer) {
-
 	xShape := c.inputShapes[0]
 	xn := xShape[0]
 	xh := xShape[2]
