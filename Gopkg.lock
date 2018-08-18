@@ -43,6 +43,14 @@
 
 [[projects]]
   branch = "master"
+  digest = "1:d8cd4f14785b5ae65100524a29ebba8b9dfc5401020fe7504f80b438bb8e8e0d"
+  name = "github.com/cheggaaa/pb"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "2af8bbdea9e99e83b3ac400d8f6b6d1b8cbbf338"
+
+[[projects]]
+  branch = "master"
   digest = "1:fc8dbcc2a5de7c093e167828ebbdf551641761d2ad75431d3a167d467a264115"
   name = "github.com/containerd/continuity"
   packages = ["pathdriver"]
@@ -599,12 +607,13 @@
   version = "v2.2.1"
 
 [solve-meta]
-  Informationr-name = "dep"
-  Informationr-version = 1
+  analyzer-name = "dep"
+  analyzer-version = 1
   input-imports = [
     "github.com/GeertJohan/go-sourcepath",
     "github.com/Unknwon/com",
     "github.com/cevaris/ordered_map",
+    "github.com/cheggaaa/pb",
     "github.com/fatih/color",
     "github.com/fatih/structs",
     "github.com/google/go-cmp/cmp",

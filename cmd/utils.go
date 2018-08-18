@@ -76,7 +76,7 @@ func readModels(modelPath string) ([]*onnx.Onnx, error) {
 	}
 	models := make([]*onnx.Onnx, len(modelPaths))
 
-	modelReadProgress := newProgress("reading models", len(modelPaths))
+	modelReadProgress := newProgress("> Reading models", len(modelPaths))
 
 	g, _ := errgroup.WithContext(context.Background())
 	for ii := range modelPaths {
