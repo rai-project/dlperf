@@ -16,7 +16,6 @@ func (ElementWise) Description() string {
 
 func (c *ElementWise) InferShape(inputLayers []dlperf.Layer) {
 	inputShapes := getOutputShapes(inputLayers)
-	c.SetInputShapes(inputShapes)
 	outputShapes := []dlperf.Shape{inputShapes[0]}
 	c.SetOutputShapes(outputShapes)
 }

@@ -8,10 +8,12 @@ import (
 	"os/exec"
 	"path"
 	"path/filepath"
+	"runtime"
 	"strings"
+	"time"
 
 	"github.com/Unknwon/com"
-	"github.com/k0kubun/pp"
+	"github.com/cheggaaa/pb"
 	zglob "github.com/mattn/go-zglob"
 	"github.com/pkg/errors"
 	"github.com/rai-project/dlperf/pkg/onnx"
@@ -46,6 +48,32 @@ func dotToImage(dot []byte) (string, error) {
 	return img, nil
 }
 
+func newProgress(prefix string, count int) *pb.ProgressBar {
+	// get the new original progress bar.
+	//bar := pb.New(count).Prefix(prefix)
+	// TODO: set prefix of bar
+	bar := pb.New(count)
+	//bar.Set("prefix", prefix)
+
+	// Refresh rate for progress bar is set to 100 milliseconds.
+	bar.SetRefreshRate(time.Millisecond * 100)
+
+	// Use different unicodes for Linux, OS X and Windows.
+	switch runtime.GOOS {
+	case "linux":
+		// Need to add '\x00' as delimiter for unicode characters.
+		bar.Format("┃\x00▓\x00█\x00░\x00┃")
+	case "darwin":
+		// Need to add '\x00' as delimiter for unicode characters.
+		bar.Format(" \x00▓\x00 \x00░\x00 ")
+	default:
+		// Default to non unicode characters.
+		bar.Format("[=> ]")
+	}
+	bar.Start()
+	return bar
+}
+
 func readModels(modelPath string) ([]*onnx.Onnx, error) {
 
 	if !com.IsFile(modelPath) && !com.IsDir(modelPath) {
@@ -67,23 +95,28 @@ func readModels(modelPath string) ([]*onnx.Onnx, error) {
 		return nil, err
 	}
 	models := make([]*onnx.Onnx, len(modelPaths))
+
+	modelReadProgress := newProgress("reading models", len(modelPaths))
+
 	g, _ := errgroup.WithContext(context.Background())
 	for ii := range modelPaths {
 		idx := ii
-		// g.Go(func() error {
-		path := modelPaths[idx]
-		pp.Println(path)
-		model, err := onnx.New(path)
-		if err != nil {
-			return nil, err
-		}
-		models[idx] = model
-		// 	return nil
-		// })
+		g.Go(func() error {
+			defer modelReadProgress.Increment()
+			path := modelPaths[idx]
+			// pp.Println(path)
+			model, err := onnx.New(path)
+			if err != nil {
+				return err
+			}
+			models[idx] = model
+			return nil
+		})
 	}
 	if err := g.Wait(); err != nil {
 		return nil, err
 	}
+	modelReadProgress.Finish()
 	return models, nil
 
 }

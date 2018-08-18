@@ -12,9 +12,9 @@ import (
 
 func TestOnnxReader(t *testing.T) {
 	cwd := sourcepath.MustAbsoluteDir()
-	onnxModelFile := filepath.Join(cwd, "..", "assets", "onnx_models", "mnist.onnx")
+	onnxModelFile := filepath.Join(cwd, "..", "..", "assets", "onnx_models", "mnist.onnx")
 
-	model, err := NewOnnx(onnxModelFile)
+	model, err := New(onnxModelFile)
 	assert.NoError(t, err)
 	assert.NotEmpty(t, model)
 
@@ -31,5 +31,5 @@ func TestOnnxReader(t *testing.T) {
 
 	info := model.FlopsInformation()
 	pp.Println(info)
-	pp.Println(model.LayerInformations())
+	// pp.Println(model.Information())
 }
