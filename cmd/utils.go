@@ -11,6 +11,7 @@ import (
 	"strings"
 
 	"github.com/Unknwon/com"
+	"github.com/k0kubun/pp"
 	zglob "github.com/mattn/go-zglob"
 	"github.com/pkg/errors"
 	"github.com/rai-project/dlperf/pkg/onnx"
@@ -69,15 +70,16 @@ func readModels(modelPath string) ([]*onnx.Onnx, error) {
 	g, _ := errgroup.WithContext(context.Background())
 	for ii := range modelPaths {
 		idx := ii
-		g.Go(func() error {
-			path := modelPaths[idx]
-			model, err := onnx.New(path)
-			if err != nil {
-				return err
-			}
-			models[idx] = model
-			return nil
-		})
+		// g.Go(func() error {
+		path := modelPaths[idx]
+		pp.Println(path)
+		model, err := onnx.New(path)
+		if err != nil {
+			return nil, err
+		}
+		models[idx] = model
+		// 	return nil
+		// })
 	}
 	if err := g.Wait(); err != nil {
 		return nil, err

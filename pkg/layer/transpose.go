@@ -4,29 +4,35 @@ import (
 	"github.com/rai-project/dlperf/pkg"
 )
 
-// https://github.com/onnx/onnx/blob/master/docs/Operators.md#Reshape
+// https://github.com/onnx/onnx/blob/master/docs/Operators.md#Transpose
 
-type Reshape struct {
-	*Base `json:",inline,flatten,omitempty"`
+type Transpose struct {
+	*Base       `json:",inline,flatten,omitempty"`
+	Permutation []int64 `json:"perm,omitempty"`
 }
 
-func (Reshape) Description() string {
+func (Transpose) Description() string {
 	return ``
 }
 
-func (c *Reshape) InferShape(inputLayers []dlperf.Layer) {
+func (c *Transpose) InferShape(inputLayers []dlperf.Layer) {
 	inputShapes := getOutputShapes(inputLayers)
-	// if c.OperatorType() == "reshape" {
+	// if c.OperatorType() == "Transpose" {
 	// 	pp.Println(inputLayers[1].Name())
 	// 	pp.Println(inputLayers[1].OutputShapes())
 	// }
-	// pp.Println(c.name)
-	// pp.Println(inputShapes)
-	c.SetInputShapes(inputShapes)
-	c.SetOutputShapes([]dlperf.Shape{inputShapes[1]})
+
+	outputShapes := make([]dlperf.Shape, len(inputShapes))
+	for ii, inputShape := range inputShapes {
+		outputShapes[ii] = inputShape
+		for jj, perm := range c.Permutation {
+			outputShapes[ii][jj] = inputShape[perm]
+		}
+	}
+	c.SetOutputShapes(outputShapes)
 }
 
-func (c Reshape) Information() dlperf.LayerInformation {
+func (c Transpose) Information() dlperf.LayerInformation {
 	info := &Information{
 		Base: c.Base,
 		shape: dlperf.ShapeInformation{
@@ -49,5 +55,5 @@ func (c Reshape) Information() dlperf.LayerInformation {
 }
 
 func init() {
-	dlperf.Register(&Reshape{})
+	dlperf.Register(&Transpose{})
 }

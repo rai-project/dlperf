@@ -8,10 +8,10 @@ import (
 
 type Gemm struct {
 	*Base  `json:",inline,flatten,omitempty"`
-	Alpha  float64
-	Beta   float64
-	TransA int
-	TransB int
+	Alpha  float64 `json:"alpha,omitempty"`
+	Beta   float64 `json:"beta,omitempty"`
+	TransA int     `json:"transa,omitempty"`
+	TransB int     `json:"transb,omitempty"`
 }
 
 func (Gemm) Description() string {

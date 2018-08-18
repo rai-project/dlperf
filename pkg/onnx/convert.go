@@ -36,8 +36,10 @@ func (o Onnx) mkLayer(node *onnx.NodeProto) dlperf.Layer {
 		ret = o.mkGlobalPooling(node)
 	case "relu", "leakyrelu", "prelu":
 		ret = o.mkRelu(node)
-	case "reshape", "transpose":
+	case "reshape":
 		ret = o.mkReshape(node)
+	case "transpose":
+		ret = o.mkTranspose(node)
 	case "unsqueeze":
 		ret = o.mkUnsqueeze(node)
 	case "scale", "imagescaler":
@@ -164,13 +166,28 @@ func (o Onnx) mkMatMul(node *onnx.NodeProto) dlperf.Layer {
 
 func (o Onnx) mkPooling(node *onnx.NodeProto) dlperf.Layer {
 	kernelShapeAttr := getNodeAttributeFromName(node, "kernel_shape")
-	padsShapeAttr := getNodeAttributeFromName(node, "pads")
 	stridesShapeAttr := getNodeAttributeFromName(node, "strides")
+
+	autoPadAttrVal := getNodeAttributeFromName(node, "auto_pad").GetS()
+	autoPadAttr := ""
+	if autoPadAttrVal != nil {
+		autoPadAttr = string(autoPadAttrVal)
+	}
+	if autoPadAttr != "" && autoPadAttr != "SAME_UPPER" && autoPadAttr != "SAME_LOWER" && autoPadAttr != "NOTSET" {
+		panic("autopad " + autoPadAttr + " is depricated for the maxpooling layer. " +
+			"see https://github.com/onnx/onnx/blob/master/docs/Operators.md#maxpool")
+	}
+
+	pads := []int64{0, 0, 0, 0}
+	padsAttr := getNodeAttributeFromName(node, "pads")
+	if padsAttr.GetInts() != nil {
+		pads = padsAttr.GetInts()
+	}
 
 	return &layer.Pooling{
 		Base:        o.mkBase(node),
 		KernelShape: kernelShapeAttr.GetInts(),
-		Pads:        padsShapeAttr.GetInts(),
+		Pads:        pads,
 		Strides:     stridesShapeAttr.GetInts(),
 	}
 }
@@ -203,6 +220,15 @@ func (o Onnx) mkRelu(node *onnx.NodeProto) dlperf.Layer {
 func (o Onnx) mkReshape(node *onnx.NodeProto) dlperf.Layer {
 	return &layer.Reshape{
 		Base: o.mkBase(node),
+	}
+}
+
+func (o Onnx) mkTranspose(node *onnx.NodeProto) dlperf.Layer {
+	permAttr := getNodeAttributeFromName(node, "perm")
+	perm := permAttr.GetInts()
+	return &layer.Transpose{
+		Base:        o.mkBase(node),
+		Permutation: perm,
 	}
 }
 
