@@ -75,8 +75,10 @@ func (o Onnx) mkBase(node *onnx.NodeProto) *layer.Base {
 }
 
 func (o Onnx) mkBatchNorm(node *onnx.NodeProto) dlperf.Layer {
+	base := o.mkBase(node)
+	base.SetOperatorType("bn")
 	return &layer.BatchNorm{
-		Base: o.mkBase(node),
+		Base: base,
 	}
 }
 
@@ -234,7 +236,7 @@ func (o Onnx) mkTranspose(node *onnx.NodeProto) dlperf.Layer {
 }
 
 func (o Onnx) mkIdentity(node *onnx.NodeProto) dlperf.Layer {
-	return &layer.Scale{
+	return &layer.Identity{
 		Base: o.mkBase(node),
 	}
 }

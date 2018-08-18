@@ -76,6 +76,9 @@ func runFlopsCmd(cmd *cobra.Command, args []string) error {
 		defer writer.Close()
 
 		for _, info := range infos {
+			if info.OperatorType() == "constant_input" || info.OperatorType() == "constant" {
+				continue
+			}
 			writer.Row(
 				layer{
 					Name:             info.Name(),

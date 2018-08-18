@@ -21,5 +21,19 @@ go run main.go layerstats --model_path ~/onnx_models/emotion_ferplus/model.onnx 
 Find the patterns of length 4
 
 ```bash
-go run main.go patterns --model_path ~/onnx_models/ --length=4
+go run main.go patterns --model_path ~/onnx_models/ --length 4
+```
+
+## Get Flops
+
+To get the flops information for alexnet use
+
+```
+go run main.go flopsinfo --model_path ~/onnx_models/bvlc_alexnet/model.onnx
+```
+
+to get information per layer use
+
+```
+go run main.go flopsinfo --model_path ~/onnx_models/bvlc_alexnet/model.onnx --full
 ```
