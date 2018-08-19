@@ -8,6 +8,10 @@ type GlobalPooling struct {
 	*Base `json:",inline,flatten,omitempty"`
 }
 
+func (GlobalPooling) OperatorType() string {
+	return "GlobalPooling"
+}
+
 func (GlobalPooling) Description() string {
 	return ``
 }
@@ -48,7 +52,7 @@ func (c GlobalPooling) Information() dlperf.LayerInformation {
 	wIn := inputShapes[3]
 
 	flops := dlperf.FlopsInformation{}
-	switch c.operatorType {
+	switch c.onnxOperatorType {
 	case "globalmaxpool":
 		flops.Comparisons = wIn * hIn * cIn * nIn
 	case "globalaveragepool":

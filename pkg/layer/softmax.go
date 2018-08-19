@@ -8,6 +8,10 @@ type SoftMax struct {
 	*Base `json:",inline,flatten,omitempty"`
 }
 
+func (SoftMax) OperatorType() string {
+	return "SoftMax"
+}
+
 func (SoftMax) Description() string {
 	return ``
 }

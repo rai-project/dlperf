@@ -4,6 +4,7 @@ import (
 	"math"
 	"strings"
 
+	"github.com/k0kubun/pp"
 	"github.com/rai-project/dlperf/pkg"
 	"github.com/rai-project/dlperf/pkg/benchmark"
 )
@@ -23,6 +24,10 @@ type Conv struct {
 
 func (Conv) Description() string {
 	return ``
+}
+
+func (Conv) OperatorType() string {
+	return "Conv"
 }
 
 func (c *Conv) InferShape(inputLayers []dlperf.Layer) {
@@ -56,7 +61,7 @@ func (c *Conv) InferShape(inputLayers []dlperf.Layer) {
 }
 
 func (c Conv) FwdBenchmarkName() string {
-	return ""
+	return "LAYER_CUDNN_CONV_FWD_FLOAT"
 }
 
 func (c Conv) FwdBenchmarkArgs() []string {
@@ -72,31 +77,18 @@ func (c Conv) FwdTiming(system string /* hardware/software struct */) string {
 }
 
 func (c *Conv) FwdBenchmarkFilter() benchmark.Benchmark {
+	pp.Println(c.KernelShape)
 	return benchmark.Benchmark{
 		Name: "^" + c.FwdBenchmarkName() + ".*",
 		Attributes: map[string]interface{}{
-			"N": c.W(),
-			"C": c.C(),
-			"H": c.H(),
-			"W": c.W(),
+			"input_batch_size": c.inputShapes[0][0],
+			"input_channels":   c.inputShapes[0][1],
+			"input_width":      c.inputShapes[0][2],
+			"input_height":     c.inputShapes[0][3],
+			"filter_height":    c.KernelShape[0],
+			// "filter_width":     c.KernelShape[1],
 		},
 	}
-}
-
-func (c *Conv) N() int {
-	return 0
-}
-
-func (c *Conv) C() int {
-	return 0
-}
-
-func (c *Conv) H() int {
-	return 0
-}
-
-func (c *Conv) W() int {
-	return 0
 }
 
 func (c Conv) Shape() dlperf.ShapeInformation {

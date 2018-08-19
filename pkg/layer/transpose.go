@@ -11,6 +11,10 @@ type Transpose struct {
 	Permutation []int64 `json:"perm,omitempty"`
 }
 
+func (Transpose) OperatorType() string {
+	return "Transpose"
+}
+
 func (Transpose) Description() string {
 	return ``
 }

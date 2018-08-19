@@ -13,6 +13,10 @@ func (Concat) Description() string {
 	return ``
 }
 
+func (Concat) OperatorType() string {
+	return "Concat"
+}
+
 func (c *Concat) InferShape(inputLayers []dlperf.Layer) {
 	inputShapes := getOutputShapes(inputLayers)
 	yShape := c.inputShapes[0]

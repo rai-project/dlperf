@@ -8,6 +8,10 @@ type Relu struct {
 	*Base `json:",inline,flatten,omitempty"`
 }
 
+func (Relu) OperatorType() string {
+	return "Relu"
+}
+
 func (Relu) Description() string {
 	return ``
 }

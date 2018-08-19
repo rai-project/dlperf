@@ -17,7 +17,7 @@ func readDir(path string) (Suite, error) {
 	}
 	var suite *Suite
 	for _, file := range benchmarkFiles {
-		s, err := Read(file)
+		s, err := New(file)
 		if err != nil {
 			continue
 		}
@@ -30,7 +30,7 @@ func readDir(path string) (Suite, error) {
 	return *suite, nil
 }
 
-func Read(path string) (Suite, error) {
+func New(path string) (Suite, error) {
 	if com.IsDir(path) {
 		return readDir(path)
 	}

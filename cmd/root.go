@@ -19,9 +19,9 @@ var (
 	outputPath     string
 	noHeader       bool
 	appendOutput   bool
-	goPath         string
-	raiSrcPath     string
 	pruneGraph     bool
+	goPath         = com.GetGOPATHs()[0]
+	raiSrcPath     = getSrcPath("github.com/rai-project")
 )
 
 var rootCmd = &cobra.Command{
@@ -49,6 +49,7 @@ var rootCmd = &cobra.Command{
 }
 
 func init() {
+
 	rootCmd.PersistentFlags().StringVar(&modelPath, "model_path", "", "path to the model prototxt file")
 	rootCmd.PersistentFlags().BoolVar(&humanFlops, "human", false, "print flops in human form")
 	rootCmd.PersistentFlags().BoolVar(&fullFlops, "full", false, "print all information about flops")
@@ -56,9 +57,6 @@ func init() {
 	rootCmd.PersistentFlags().BoolVar(&noHeader, "no_header", false, "show header labels for output")
 	rootCmd.PersistentFlags().StringVarP(&outputFileName, "output", "o", "", "output file name")
 	rootCmd.PersistentFlags().StringVarP(&outputFormat, "format", "f", "automatic", "print format to use")
-
-	goPath = com.GetGOPATHs()[0]
-	raiSrcPath = getSrcPath("github.com/rai-project")
 
 	Init()
 }

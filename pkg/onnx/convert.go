@@ -65,7 +65,7 @@ func (o Onnx) mkBase(node *onnx.NodeProto) *layer.Base {
 	base := &layer.Base{}
 	base.SetNode(node)
 	base.SetName(node.GetName())
-	base.SetOperatorType(strings.ToLower(node.GetOpType()))
+	base.SetOnnxOperatorType(node.GetOpType())
 	base.SetInputNames(inputs)
 	base.SetOutputNames(outputs)
 	base.SetInputShapes(o.GetValueInfoDimensions(inputs))
@@ -76,7 +76,6 @@ func (o Onnx) mkBase(node *onnx.NodeProto) *layer.Base {
 
 func (o Onnx) mkBatchNorm(node *onnx.NodeProto) dlperf.Layer {
 	base := o.mkBase(node)
-	base.SetOperatorType("bn")
 	return &layer.BatchNorm{
 		Base: base,
 	}

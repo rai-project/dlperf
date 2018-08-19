@@ -15,6 +15,10 @@ func (BatchNorm) Description() string {
 	return ``
 }
 
+func (BatchNorm) OperatorType() string {
+	return "BatchNorm"
+}
+
 func (c *BatchNorm) InferShape(inputLayers []dlperf.Layer) {
 	inputShapes := getOutputShapes(inputLayers)
 	c.SetInputShapes(inputShapes)

@@ -8,6 +8,10 @@ type Scale struct {
 	*Base `json:",inline,flatten,omitempty"`
 }
 
+func (Scale) OperatorType() string {
+	return "Scale"
+}
+
 func (Scale) Description() string {
 	return ``
 }

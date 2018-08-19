@@ -10,6 +10,10 @@ type ElementWise struct {
 	*Base `json:",inline,flatten,omitempty"`
 }
 
+func (ElementWise) OperatorType() string {
+	return "ElementWise"
+}
+
 func (ElementWise) Description() string {
 	return ``
 }
@@ -51,7 +55,7 @@ func (c ElementWise) Information() dlperf.LayerInformation {
 	}
 
 	flops := dlperf.FlopsInformation{}
-	switch strings.ToLower(c.operatorType) {
+	switch strings.ToLower(c.onnxOperatorType) {
 	case "add", "sum", "sub":
 		flops.Additions = numOps * (numInputs - 1)
 	case "mul", "div":

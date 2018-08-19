@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 
+	"github.com/rai-project/dlperf/pkg/benchmark"
 	"github.com/rai-project/onnx"
 	"github.com/rai-project/utils"
 )
@@ -23,6 +24,7 @@ type Layer interface {
 	SetInputShapes([]Shape)
 	OutputShapes() []Shape
 	Information() LayerInformation
+	FwdBenchmarkFilter() benchmark.Benchmark
 }
 
 type LayerInformation interface {

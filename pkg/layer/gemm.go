@@ -14,6 +14,10 @@ type Gemm struct {
 	TransB int     `json:"transb,omitempty"`
 }
 
+func (Gemm) OperatorType() string {
+	return "Gemm"
+}
+
 func (Gemm) Description() string {
 	return ``
 }

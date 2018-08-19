@@ -10,6 +10,10 @@ type Reshape struct {
 	*Base `json:",inline,flatten,omitempty"`
 }
 
+func (Reshape) OperatorType() string {
+	return "Reshape"
+}
+
 func (Reshape) Description() string {
 	return ``
 }

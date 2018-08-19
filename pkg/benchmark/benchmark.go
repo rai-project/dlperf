@@ -2,19 +2,26 @@ package benchmark
 
 import (
 	"encoding/json"
+	"time"
 
 	"github.com/fatih/structs"
 	"github.com/linkosmos/mapop"
 )
 
+type Machine struct {
+}
+
+type Context struct {
+	Date              string  `json:"date"`
+	NumCpus           int     `json:"num_cpus"`
+	MhzPerCPU         int     `json:"mhz_per_cpu"`
+	CPUScalingEnabled bool    `json:"cpu_scaling_enabled"`
+	LibraryBuildType  string  `json:"library_build_type"`
+	Machine           Machine `json:"machine,omitempty"`
+}
+
 type Suite struct {
-	Context struct {
-		Date              string `json:"date"`
-		NumCpus           int    `json:"num_cpus"`
-		MhzPerCPU         int    `json:"mhz_per_cpu"`
-		CPUScalingEnabled bool   `json:"cpu_scaling_enabled"`
-		LibraryBuildType  string `json:"library_build_type"`
-	} `json:"context"`
+	Context    Context    `json:"context"`
 	Benchmarks Benchmarks `json:"benchmarks"`
 }
 
@@ -23,8 +30,8 @@ type Benchmarks []Benchmark
 type Benchmark struct {
 	Name       string                 `json:"name"`
 	Iterations float64                `json:"iterations"`
-	RealTime   float64                `json:"real_time"`
-	CPUTime    float64                `json:"cpu_time"`
+	RealTime   time.Duration          `json:"real_time"`
+	CPUTime    time.Duration          `json:"cpu_time"`
 	TimeUnit   string                 `json:"time_unit"`
 	Attributes map[string]interface{} `json:"-"`
 }

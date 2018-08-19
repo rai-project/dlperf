@@ -19,8 +19,8 @@ func (info *Information) Name() string {
 	return info.name
 }
 
-func (info *Information) OperatorType() string {
-	return info.operatorType
+func (info *Information) OnnxOperatorType() string {
+	return info.onnxOperatorType
 }
 
 func (info *Information) InputNames() []string {

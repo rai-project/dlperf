@@ -5,10 +5,12 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/pkg/errors"
 	dlperf "github.com/rai-project/dlperf/pkg"
 	"github.com/rai-project/onnx"
 	"gonum.org/v1/gonum/graph/encoding"
 	"gonum.org/v1/gonum/graph/simple"
+	"gonum.org/v1/gonum/graph/topo"
 )
 
 type Graph struct {
@@ -23,10 +25,14 @@ type GraphNode struct {
 	*onnx.NodeProto
 }
 
-type GraphNodes []GraphNode
+type GraphNodes []*GraphNode
 
 func (nd GraphNode) ID() int64 {
 	return nd.id
+}
+
+func (nd GraphNode) Layer() dlperf.Layer {
+	return nd.layer
 }
 
 func (nd GraphNode) DOTID() string {
@@ -205,4 +211,20 @@ func (o *Onnx) ToGraph(oo ...GraphOption) *Graph {
 	o.network = network
 
 	return network
+}
+
+func (g Graph) ToplologicallyOrderedNodes() (GraphNodes, error) {
+	nds, err := topo.SortStabilized(g, sortById)
+	if err != nil {
+		return nil, errors.Wrap(err, "failed to topologically sort graph")
+	}
+	res := make([]*GraphNode, len(nds))
+	for ii, nd := range nds {
+		e, ok := nd.(*GraphNode)
+		if !ok {
+			panic("expecting a *GraphNode")
+		}
+		res[ii] = e
+	}
+	return res, nil
 }

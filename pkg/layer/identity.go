@@ -10,6 +10,10 @@ type Identity struct {
 	*Base `json:",inline,flatten,omitempty"`
 }
 
+func (Identity) OperatorType() string {
+	return "Identity"
+}
+
 func (Identity) Description() string {
 	return ``
 }

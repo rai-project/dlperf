@@ -11,6 +11,10 @@ func (bs Benchmarks) Merge(other Benchmarks) Benchmarks {
 	return append(bs, other...)
 }
 
+func (s Suite) FilterByName(rx string) (Benchmarks, error) {
+	return s.Benchmarks.FilterByName(rx)
+}
+
 func (bs Benchmarks) FilterByName(rx string) (Benchmarks, error) {
 	benches := []Benchmark{}
 
@@ -26,6 +30,10 @@ func (bs Benchmarks) FilterByName(rx string) (Benchmarks, error) {
 	}
 
 	return benches, nil
+}
+
+func (s Suite) Filter(filter Benchmark) (Benchmarks, error) {
+	return s.Benchmarks.Filter(filter)
 }
 
 func (bs Benchmarks) Filter(filter Benchmark) (Benchmarks, error) {
@@ -74,16 +82,21 @@ func (bs Benchmarks) Filter(filter Benchmark) (Benchmarks, error) {
 		if filter.TimeUnit != "" && b.TimeUnit != filter.TimeUnit {
 			continue
 		}
+		toAdd := true
 		for k, filterVal := range filter.Attributes {
 			val, ok := b.Attributes[k]
 			if !ok {
-				continue
+				toAdd = false
+				break
 			}
 			if !isSame(filterVal, val) {
-				continue
+				toAdd = false
+				break
 			}
 		}
-		benches = append(benches, b)
+		if toAdd {
+			benches = append(benches, b)
+		}
 	}
 
 	return benches, nil

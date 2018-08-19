@@ -5,6 +5,7 @@ import (
 	"strings"
 
 	"github.com/rai-project/dlperf/pkg"
+	"github.com/rai-project/dlperf/pkg/benchmark"
 	"github.com/rai-project/dlperf/pkg/onnx"
 )
 
@@ -23,6 +24,33 @@ func (l pattern) Row(humanFlops bool) []string {
 	}
 	pattern := strings.Join(opTypes, ">")
 	return []string{pattern, fmt.Sprint(l.Occurrences)}
+}
+
+type bench struct {
+	layer     dlperf.Layer            `json:"layer"`
+	benchmark benchmark.Benchmark     `json:"benchmark"`
+	flops     dlperf.FlopsInformation `json:"flops_information"`
+}
+
+func (bench) Header() []string {
+	base := []string{"LayerName", "LayerType", "BenchmarkName", "RealTime"}
+	return base
+	// flopsInfo := dlperf.FlopsInformation{}.Header()
+	// for ii, f := range flopsInfo {
+	// 	flopsInfo[ii] = "Flops" + f
+	// }
+	// flopsInfo = append(flopsInfo, "FlopsTotal")
+	// return append(base, flopsInfo...)
+}
+
+func (l bench) Row(humanFlops bool) []string {
+	realTime := fmt.Sprintf("%v", l.benchmark.RealTime)
+	base := []string{l.layer.Name(), l.layer.OperatorType(), l.benchmark.Name, realTime}
+	return base
+	// flops := l.flops.Row(humanFlops)
+	// flops = append(flops, flopsToString(l.flops.Total(), humanFlops))
+
+	// return append(base, flops...)
 }
 
 type stat struct {

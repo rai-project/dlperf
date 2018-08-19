@@ -66,10 +66,10 @@ func (o Onnx) NodeSubsequences(oo ...PatternOption) (Patterns, error) {
 	subsetsLength := len(nds) - length + 1
 	result := make([]Pattern, subsetsLength)
 	for ii := 0; ii < subsetsLength; ii++ {
-		inds := make([]GraphNode, length)
+		inds := make([]*GraphNode, length)
 		for jj, nd0 := range nds[ii : ii+length] {
 			nd := nd0.(*GraphNode)
-			inds[jj] = *nd
+			inds[jj] = nd
 		}
 		result[ii] = Pattern{
 			Nodes:       inds,

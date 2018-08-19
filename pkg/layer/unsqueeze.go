@@ -9,6 +9,10 @@ type Unsqueeze struct {
 	Axes  []int64 `json:"axes,omitempty"`
 }
 
+func (Unsqueeze) OperatorType() string {
+	return "Unsqueeze"
+}
+
 func (Unsqueeze) Description() string {
 	return ``
 }

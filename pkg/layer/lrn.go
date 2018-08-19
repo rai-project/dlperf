@@ -12,6 +12,10 @@ type LRN struct {
 	Size  int64 `json:"size,omitempty"`
 }
 
+func (LRN) OperatorType() string {
+	return "LRN"
+}
+
 func (LRN) Description() string {
 	return ``
 }

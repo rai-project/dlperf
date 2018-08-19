@@ -8,6 +8,10 @@ type MatMul struct {
 	*Base `json:",inline,flatten,omitempty"`
 }
 
+func (MatMul) OperatorType() string {
+	return "MatMul"
+}
+
 func (MatMul) Description() string {
 	return ``
 }

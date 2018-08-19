@@ -13,6 +13,10 @@ type Pooling struct {
 	Strides     dlperf.Shape `json:"strides,omitempty"`
 }
 
+func (Pooling) OperatorType() string {
+	return "Pooling"
+}
+
 func (Pooling) Description() string {
 	return ``
 }
@@ -56,7 +60,7 @@ func (c Pooling) Information() dlperf.LayerInformation {
 	wOut := outputShape[3]
 
 	flops := dlperf.FlopsInformation{}
-	switch c.operatorType {
+	switch c.onnxOperatorType {
 	case "maxpool":
 		flops.Comparisons = hOut * wOut * nOut * cOut * c.KernelShape[0] * c.KernelShape[1]
 	case "averagepool":

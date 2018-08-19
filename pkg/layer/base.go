@@ -4,19 +4,20 @@ import (
 	"encoding/json"
 
 	dlperf "github.com/rai-project/dlperf/pkg"
+	"github.com/rai-project/dlperf/pkg/benchmark"
 	"github.com/rai-project/onnx"
 )
 
 type Base struct {
-	node         *onnx.NodeProto `json:"-"`
-	name         string          `json:"name,omitempty"`
-	operatorType string          `json:"operator_type,omitempty"`
-	inputs       []dlperf.Layer  `json:-,omitempty"`
-	outputs      []dlperf.Layer  `json:-,omitempty"`
-	inputNames   []string        `json:"inputNames,omitempty"`
-	outputNames  []string        `json:"outputNames,omitempty"`
-	inputShapes  []dlperf.Shape  `json:"input_shapes,omitempty"`
-	outputShapes []dlperf.Shape  `json:"output_shapes,omitempty"`
+	node             *onnx.NodeProto `json:"-"`
+	name             string          `json:"name,omitempty"`
+	onnxOperatorType string          `json:"onnx_operator_type,omitempty"`
+	inputs           []dlperf.Layer  `json:-,omitempty"`
+	outputs          []dlperf.Layer  `json:-,omitempty"`
+	inputNames       []string        `json:"inputNames,omitempty"`
+	outputNames      []string        `json:"outputNames,omitempty"`
+	inputShapes      []dlperf.Shape  `json:"input_shapes,omitempty"`
+	outputShapes     []dlperf.Shape  `json:"output_shapes,omitempty"`
 }
 
 func (b *Base) Name() string {
@@ -39,14 +40,18 @@ func (b *Base) SetNode(node *onnx.NodeProto) {
 }
 
 func (b Base) OperatorType() string {
-	if b.operatorType == "" {
-		return "unkown operator"
-	}
-	return b.operatorType
+	panic("invalid operator type")
 }
 
-func (b *Base) SetOperatorType(op string) {
-	b.operatorType = op
+func (b Base) OnnxOperatorType() string {
+	if b.onnxOperatorType == "" {
+		return "unkown onnx operator"
+	}
+	return b.onnxOperatorType
+}
+
+func (b *Base) SetOnnxOperatorType(op string) {
+	b.onnxOperatorType = op
 }
 
 func (b Base) Inputs() []dlperf.Layer {
@@ -113,4 +118,8 @@ func (b *Base) UnmarshalJSON(d []byte) error {
 
 func (b Base) MarshalJSON() ([]byte, error) {
 	return []byte(b.Name()), nil
+}
+
+func (b Base) FwdBenchmarkFilter() benchmark.Benchmark {
+	panic("unimplemented FwdBenchmarkFilter")
 }
