@@ -53,7 +53,7 @@ var benchinfoCmd = &cobra.Command{
 			if layer.OperatorType() != "Conv" {
 				continue
 			}
-			filter := layer.FwdBenchmarkFilter()
+			filter := layer.FwdBenchmarkFilter("float", "")
 			bs, err := benchSuite.Filter(filter)
 			if err != nil {
 				log.WithError(err).WithField("filter", spew.Sprint(filter)).Error("unable to find benchmark within benchmark suite")

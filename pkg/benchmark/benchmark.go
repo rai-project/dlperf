@@ -6,6 +6,7 @@ import (
 
 	"github.com/fatih/structs"
 	"github.com/linkosmos/mapop"
+	"github.com/spf13/cast"
 )
 
 type Machine struct {
@@ -51,6 +52,14 @@ func (w *Benchmark) UnmarshalJSON(data []byte) error {
 		return err
 	}
 
+	if e, ok := elems["error_occurred"]; ok {
+		if eok, ok := e.(bool); ok && eok {
+			w = &Benchmark{}
+			return nil
+			// return errors.New(elems["error_message"].(string))
+		}
+	}
+
 	jsonTagMap := map[string]string{}
 	for _, field := range structs.New(Benchmark{}).Fields() {
 		fieldName := field.Name()
@@ -74,6 +83,18 @@ func (w *Benchmark) UnmarshalJSON(data []byte) error {
 		w.Attributes[k] = v
 	}
 
+	// if strings.HasPrefix(w.Name, "LAYER_CUDNN_CONV_FWD_FLOAT<CUDNN_CONVOLUTION_FWD_ALGO_IMPLICIT_PRECOMP_GEMM>/W:14/H:14/C:5") {
+	// 	pp.Println(elems)
+	// }
+
+	if e, err := cast.ToDurationE(elems["real_time"]); err == nil {
+		w.RealTime = e
+	}
+
+	if e, err := cast.ToDurationE(elems["cpu_time"]); err == nil {
+		w.CPUTime = e
+	}
+
 	return nil
 }
 
@@ -84,5 +105,7 @@ func (w Benchmark) MarshalJSON() ([]byte, error) {
 		m = mapop.Reject(m, "Attributes")
 		m = mapop.Merge(m, attrs)
 	}
+	// w.RealTime = w.RealTime / time.Microsecond
+	// w.CPUTime = w.CPUTime / time.Microsecond
 	return json.Marshal(m)
 }

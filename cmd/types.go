@@ -3,6 +3,7 @@ package cmd
 import (
 	"fmt"
 	"strings"
+	"time"
 
 	"github.com/rai-project/dlperf/pkg"
 	"github.com/rai-project/dlperf/pkg/benchmark"
@@ -33,7 +34,7 @@ type bench struct {
 }
 
 func (bench) Header() []string {
-	base := []string{"LayerName", "LayerType", "BenchmarkName", "RealTime"}
+	base := []string{"LayerName", "LayerType", "BenchmarkName", "RealTime(ms)"}
 	return base
 	// flopsInfo := dlperf.FlopsInformation{}.Header()
 	// for ii, f := range flopsInfo {
@@ -44,7 +45,8 @@ func (bench) Header() []string {
 }
 
 func (l bench) Row(humanFlops bool) []string {
-	realTime := fmt.Sprintf("%v", l.benchmark.RealTime)
+	ms := float64(l.benchmark.RealTime.Nanoseconds()) / float64(time.Millisecond)
+	realTime := fmt.Sprintf("%f", ms)
 	base := []string{l.layer.Name(), l.layer.OperatorType(), l.benchmark.Name, realTime}
 	return base
 	// flops := l.flops.Row(humanFlops)

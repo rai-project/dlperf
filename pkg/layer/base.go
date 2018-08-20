@@ -120,6 +120,6 @@ func (b Base) MarshalJSON() ([]byte, error) {
 	return []byte(b.Name()), nil
 }
 
-func (b Base) FwdBenchmarkFilter() benchmark.Benchmark {
+func (b Base) FwdBenchmarkFilter(datatype, algorithm string) benchmark.Benchmark {
 	panic("unimplemented FwdBenchmarkFilter")
 }

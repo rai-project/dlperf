@@ -4,7 +4,6 @@ import (
 	"math"
 	"strings"
 
-	"github.com/k0kubun/pp"
 	"github.com/rai-project/dlperf/pkg"
 	"github.com/rai-project/dlperf/pkg/benchmark"
 )
@@ -61,7 +60,7 @@ func (c *Conv) InferShape(inputLayers []dlperf.Layer) {
 }
 
 func (c Conv) FwdBenchmarkName() string {
-	return "LAYER_CUDNN_CONV_FWD_FLOAT"
+	return "LAYER_CUDNN_CONV_FWD"
 }
 
 func (c Conv) FwdBenchmarkArgs() []string {
@@ -76,17 +75,41 @@ func (c Conv) FwdTiming(system string /* hardware/software struct */) string {
 	return ""
 }
 
-func (c *Conv) FwdBenchmarkFilter() benchmark.Benchmark {
-	pp.Println(c.KernelShape)
+func (c Conv) FwdBenchmarkAlgorithms() []string {
+	return []string{
+		"CUDNN_CONVOLUTION_FWD_ALGO_IMPLICIT_GEMM",
+		"CUDNN_CONVOLUTION_FWD_ALGO_IMPLICIT_​PRECOMP_GEMM",
+		"CUDNN_CONVOLUTION_FWD_ALGO_GEMM",
+		"CUDNN_CONVOLUTION_FWD_ALGO_DIRECT",
+		"CUDNN_CONVOLUTION_FWD_ALGO_FFT",
+		"CUDNN_CONVOLUTION_FWD_ALGO_FFT_TILING",
+		"CUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD",
+		"CUDNN_CONVOLUTION_FWD_ALGO_​WINOGRAD_NONFUSED",
+	}
+}
+
+func (c *Conv) FwdBenchmarkFilter(datatype, algorithm string) benchmark.Benchmark {
+	// pp.Println(c.InputShapes()[0])
+	// pp.Println(c.KernelShape)
+	if algorithm == "" {
+		algorithm = c.FwdBenchmarkAlgorithms()[0]
+	}
 	return benchmark.Benchmark{
-		Name: "^" + c.FwdBenchmarkName() + ".*",
+		Name: "^" + c.FwdBenchmarkName() + "_" + strings.ToUpper(datatype) +
+			"<" + strings.ToUpper(algorithm) + ">" + ".*",
 		Attributes: map[string]interface{}{
 			"input_batch_size": c.inputShapes[0][0],
 			"input_channels":   c.inputShapes[0][1],
 			"input_width":      c.inputShapes[0][2],
 			"input_height":     c.inputShapes[0][3],
 			"filter_height":    c.KernelShape[0],
-			// "filter_width":     c.KernelShape[1],
+			"filter_width":     c.KernelShape[1],
+			"pad_height":       c.Pads[0],
+			"pad_width":        c.Pads[1],
+			"stride_height":    c.Strides[0],
+			"stride_width":     c.Strides[1],
+			// "dilation_height":  c.Dilations[0],
+			// "dilation_width":   c.Dilations[1],
 		},
 	}
 }

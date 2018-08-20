@@ -46,5 +46,15 @@ func New(path string) (Suite, error) {
 	if err != nil {
 		return Suite{}, errors.Wrapf(err, "unable to parse benchmark file %s", path)
 	}
-	return suite, nil
+	resBenchs := []Benchmark{}
+	for _, b := range suite.Benchmarks {
+		if b.Name == "" {
+			continue
+		}
+		resBenchs = append(resBenchs, b)
+	}
+	var res Suite
+	res.Context = suite.Context
+	res.Benchmarks = resBenchs
+	return res, nil
 }
