@@ -3,6 +3,7 @@ package layer
 import (
 	"errors"
 	"reflect"
+	"strings"
 
 	dlperf "github.com/rai-project/dlperf/pkg"
 )
@@ -119,4 +120,9 @@ func getOutputShapes(layers []dlperf.Layer) []dlperf.Shape {
 	}
 
 	return outputShapes
+}
+
+func mkBenchmarkFilterName(layer dlperf.Layer, datatype, algorithm string) string {
+	return "^" + layer.FwdBenchmarkName() + "_" + strings.ToUpper(datatype) +
+		"<" + strings.ToUpper(algorithm) + ">" + ".*"
 }

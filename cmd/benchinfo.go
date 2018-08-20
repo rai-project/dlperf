@@ -4,7 +4,7 @@ import (
 	"path/filepath"
 
 	sourcepath "github.com/GeertJohan/go-sourcepath"
-	"github.com/davecgh/go-spew/spew"
+	"github.com/k0kubun/pp"
 	"github.com/rai-project/dlperf/pkg/benchmark"
 	"github.com/rai-project/dlperf/pkg/onnx"
 	"github.com/spf13/cobra"
@@ -50,13 +50,25 @@ var benchinfoCmd = &cobra.Command{
 
 		for _, nd := range nds {
 			layer := nd.Layer()
-			if layer.OperatorType() != "Conv" {
+			if layer.OperatorType() == "ConstantInput" {
+				continue
+			}
+			if layer.OperatorType() != "Conv" && layer.OperatorType() != "Relu" {
+				pp.Println(layer.OperatorType())
 				continue
 			}
 			filter := layer.FwdBenchmarkFilter("float", "")
 			bs, err := benchSuite.Filter(filter)
 			if err != nil {
-				log.WithError(err).WithField("filter", spew.Sprint(filter)).Error("unable to find benchmark within benchmark suite")
+				pp.ColoringEnabled = false
+				log.WithError(err).WithField("filter", pp.Sprint(filter)).Error("failed to find benchmark within benchmark suite")
+				pp.ColoringEnabled = true
+				continue
+			}
+			if len(bs) == 0 {
+				pp.ColoringEnabled = false
+				log.WithField("filter", pp.Sprint(filter)).Error("unable to find benchmark within benchmark suite")
+				pp.ColoringEnabled = true
 				continue
 			}
 			info := layer.Information()

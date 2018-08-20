@@ -88,15 +88,14 @@ func (c Conv) FwdBenchmarkAlgorithms() []string {
 	}
 }
 
-func (c *Conv) FwdBenchmarkFilter(datatype, algorithm string) benchmark.Benchmark {
+func (c Conv) FwdBenchmarkFilter(datatype, algorithm string) benchmark.Benchmark {
 	// pp.Println(c.InputShapes()[0])
 	// pp.Println(c.KernelShape)
 	if algorithm == "" {
 		algorithm = c.FwdBenchmarkAlgorithms()[0]
 	}
 	return benchmark.Benchmark{
-		Name: "^" + c.FwdBenchmarkName() + "_" + strings.ToUpper(datatype) +
-			"<" + strings.ToUpper(algorithm) + ">" + ".*",
+		Name: mkBenchmarkFilterName(&c, datatype, algorithm),
 		Attributes: map[string]interface{}{
 			"input_batch_size": c.inputShapes[0][0],
 			"input_channels":   c.inputShapes[0][1],
@@ -115,7 +114,7 @@ func (c *Conv) FwdBenchmarkFilter(datatype, algorithm string) benchmark.Benchmar
 }
 
 func (c Conv) Shape() dlperf.ShapeInformation {
-	return dlperf.ShapeInformation{}
+	return c.Information().Shape()
 }
 
 func (c Conv) Information() dlperf.LayerInformation {

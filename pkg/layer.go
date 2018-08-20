@@ -24,6 +24,7 @@ type Layer interface {
 	SetInputShapes([]Shape)
 	OutputShapes() []Shape
 	Information() LayerInformation
+	FwdBenchmarkName() string
 	FwdBenchmarkFilter(string, string) benchmark.Benchmark
 }
 
