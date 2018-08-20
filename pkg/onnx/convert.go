@@ -75,9 +75,15 @@ func (o Onnx) mkBase(node *onnx.NodeProto) *layer.Base {
 }
 
 func (o Onnx) mkBatchNorm(node *onnx.NodeProto) dlperf.Layer {
+
+	spatial := int64(1)
+	spatialAttr := getNodeAttributeFromName(node, "spatial")
+	spatial = spatialAttr.GetI()
+
 	base := o.mkBase(node)
 	return &layer.BatchNorm{
-		Base: base,
+		Base:    base,
+		Spatial: spatial,
 	}
 }
 
@@ -154,8 +160,8 @@ func (o Onnx) mkGemm(node *onnx.NodeProto) dlperf.Layer {
 
 	return &layer.Gemm{
 		Base:   o.mkBase(node),
-		TransA: int(transAAttr.GetI()),
-		TransB: int(transBAttr.GetI()),
+		TransA: transAAttr.GetI(),
+		TransB: transBAttr.GetI(),
 	}
 }
 

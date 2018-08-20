@@ -10,8 +10,8 @@ type Gemm struct {
 	*Base  `json:",inline,flatten,omitempty"`
 	Alpha  float64 `json:"alpha,omitempty"`
 	Beta   float64 `json:"beta,omitempty"`
-	TransA int     `json:"transa,omitempty"`
-	TransB int     `json:"transb,omitempty"`
+	TransA int64   `json:"transa,omitempty"`
+	TransB int64   `json:"transb,omitempty"`
 }
 
 func (Gemm) OperatorType() string {
