@@ -9,6 +9,10 @@ import (
 )
 
 type Machine struct {
+	Architecture    string            `json:"architecture"`
+	Hostname        string            `json:"hostname"`
+	GPUArchitecture string            `json:"gpu_architecture"`
+	Attributes      map[string]string `json:"attributes"`
 }
 
 type Context struct {
