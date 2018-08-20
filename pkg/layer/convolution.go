@@ -89,8 +89,6 @@ func (c Conv) FwdBenchmarkAlgorithms() []string {
 }
 
 func (c Conv) FwdBenchmarkFilter(datatype, algorithm string) benchmark.Benchmark {
-	// pp.Println(c.InputShapes()[0])
-	// pp.Println(c.KernelShape)
 	if algorithm == "" {
 		algorithm = c.FwdBenchmarkAlgorithms()[0]
 	}
@@ -104,7 +102,7 @@ func (c Conv) FwdBenchmarkFilter(datatype, algorithm string) benchmark.Benchmark
 			"filter_height":    c.KernelShape[0],
 			"filter_width":     c.KernelShape[1],
 			"pad_height":       c.Pads[0],
-			"pad_width":        c.Pads[1],
+			"pad_width":        c.Pads[2],
 			"stride_height":    c.Strides[0],
 			"stride_width":     c.Strides[1],
 			// "dilation_height":  c.Dilations[0],

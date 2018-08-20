@@ -1,9 +1,11 @@
 package layer
 
 import (
+	"fmt"
 	"math"
 
 	"github.com/rai-project/dlperf/pkg"
+	"github.com/rai-project/dlperf/pkg/benchmark"
 )
 
 type Pooling struct {
@@ -33,6 +35,56 @@ func (c *Pooling) InferShape(inputLayers []dlperf.Layer) {
 
 	c.SetInputShapes(inputShapes)
 	c.SetOutputShapes([]dlperf.Shape{yShape})
+}
+
+func (c Pooling) FwdBenchmarkName() string {
+	return "CUDNN_POOLING_FWD"
+}
+
+func (c Pooling) FwdBenchmarkArgs() []string {
+	return []string{""}
+}
+
+func (c Pooling) FwdCUDNNName() string {
+	return ""
+}
+
+func (c Pooling) FwdTiming(system string /* hardware/software struct */) string {
+	return ""
+}
+
+func (c Pooling) FwdBenchmarkAlgorithms() []string {
+	if c.onnxOperatorType == "maxpool" {
+		return []string{
+			"CUDNN_POOLING_MAX",
+			"CUDNN_POOLING_MAX_DETERMINISTIC",
+		}
+	} else if c.onnxOperatorType == "averagepool" {
+		return []string{
+			"CUDNN_POOLING_AVERAGE_COUNT_INCLUDE_PADDING",
+			"CUDNN_POOLING_AVERAGE_COUNT_EXCLUDE_PADDING",
+		}
+	}
+
+	return nil
+}
+
+func (c Pooling) FwdBenchmarkFilter(datatype, algorithm string) benchmark.Benchmark {
+	if algorithm == "" {
+		algorithm = c.FwdBenchmarkAlgorithms()[0]
+	}
+	attrs := map[string]interface{}{}
+	for ii, dim := range c.InputShapes()[0] {
+		attrs[fmt.Sprintf("input[%d]", ii)] = dim
+	}
+	return benchmark.Benchmark{
+		Name:       mkBenchmarkFilterName(&c, datatype, algorithm),
+		Attributes: attrs,
+	}
+}
+
+func (c Pooling) Shape() dlperf.ShapeInformation {
+	return c.Information().Shape()
 }
 
 func (c Pooling) Information() dlperf.LayerInformation {

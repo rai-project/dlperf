@@ -2,6 +2,7 @@ package layer
 
 import (
 	"fmt"
+	"strings"
 
 	"github.com/rai-project/dlperf/pkg"
 	"github.com/rai-project/dlperf/pkg/benchmark"
@@ -42,19 +43,36 @@ func (c Relu) FwdTiming(system string /* hardware/software struct */) string {
 }
 
 func (c Relu) FwdBenchmarkAlgorithms() []string {
-	return []string{
-		"CUDNN_ACTIVATION_SIGMOID",
-		"CUDNN_ACTIVATION_RELU",
-		"CUDNN_ACTIVATION_TANH",
-		"CUDNN_ACTIVATION_CLIPPED_RELU",
-		"CUDNN_ACTIVATION_ELU",
-		"CUDNN_ACTIVATION_IDENTITY",
+	switch strings.ToLower(c.onnxOperatorType) {
+	case "sigmoid":
+		return []string{
+			"CUDNN_ACTIVATION_SIGMOID",
+		}
+	case "tanh":
+		return []string{
+			"CUDNN_ACTIVATION_TANH",
+		}
+	case "relu":
+		return []string{
+			"CUDNN_ACTIVATION_RELU",
+			"CUDNN_ACTIVATION_CLIPPED_RELU",
+		}
+	case "elu":
+		return []string{
+			"CUDNN_ACTIVATION_ELU",
+		}
+	case "identity":
+		return []string{
+			"CUDNN_ACTIVATION_IDENTITY",
+		}
 	}
+
+	return nil
 }
 
 func (c Relu) FwdBenchmarkFilter(datatype, algorithm string) benchmark.Benchmark {
 	if algorithm == "" {
-		algorithm = c.FwdBenchmarkAlgorithms()[1]
+		algorithm = c.FwdBenchmarkAlgorithms()[0]
 	}
 	attrs := map[string]interface{}{}
 	for ii, dim := range c.InputShapes()[0] {
@@ -87,7 +105,7 @@ func (c Relu) Information() dlperf.LayerInformation {
 	checkNumber(c.InputShapes, []int{1, 2}, c.OperatorType(), "number of inputs")
 	checkNumber(c.OutputShapes, []int{1}, c.OperatorType(), "number of outputs")
 
-	inputShapes := c.InputShapes()[0] // (N x C x H x W)
+	inputShapes := c.InputShapes()[0]
 
 	numOps := int64(1)
 	for _, s := range inputShapes {
