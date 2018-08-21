@@ -8,6 +8,14 @@ import (
 	"github.com/rai-project/onnx"
 )
 
+type baseBenchmarkArgs struct {
+	ArgNames          []string          `args:"-"`
+	UniqueBenchmarkID uint64            `args:"-"`
+	BenchmarkName     string            `args:"-"`
+	Algorithms        []string          `args:"-"`
+	DataTypes         []dlperf.DataType `args:"-"`
+}
+
 type Base struct {
 	node             *onnx.NodeProto `json:"-"`
 	name             string          `json:"name,omitempty"`
@@ -18,6 +26,15 @@ type Base struct {
 	outputNames      []string        `json:"outputNames,omitempty"`
 	inputShapes      []dlperf.Shape  `json:"input_shapes,omitempty"`
 	outputShapes     []dlperf.Shape  `json:"output_shapes,omitempty"`
+}
+
+func mkBaseBenchmarkArgs(c dlperf.Layer) baseBenchmarkArgs {
+	return baseBenchmarkArgs{
+		BenchmarkName: c.FwdBenchmarkName(),
+		ArgNames:      c.FwdBenchmarkGeneratorArgNames(),
+		Algorithms:    c.FwdBenchmarkAlgorithms(),
+		DataTypes:     c.DataTypes(),
+	}
 }
 
 func (b *Base) Name() string {
@@ -132,4 +149,17 @@ func (b Base) FwdBenchmarkName() string {
 func (b Base) FwdBenchmarkArgs() interface{} {
 	panic("FwdBenchmarkArgs not implemented")
 	return nil
+}
+func (b Base) FwdBenchmarkGeneratorArgNames() []string {
+	panic("FwdBenchmarkGeneratorArgNames not implemented")
+	return nil
+}
+
+func (b Base) FwdBenchmarkAlgorithms() []string {
+	panic("FwdBenchmarkAlgorithms not implemented")
+	return nil
+}
+
+func (c Base) DataTypes() []dlperf.DataType {
+	return dlperf.AllDataTypes
 }

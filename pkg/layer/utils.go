@@ -131,7 +131,7 @@ func mkBenchmarkFilterName(layer dlperf.Layer, datatype, algorithm string) strin
 	return name + ".*"
 }
 
-func benchmarkArgNames(st interface{}) string {
+func benchmarkArgNames(st interface{}) []string {
 	tags := []string{}
 	for _, field := range structs.New(st).Fields() {
 		tag := field.Tag("args")
@@ -140,7 +140,7 @@ func benchmarkArgNames(st interface{}) string {
 		}
 		tags = append(tags, "\""+tag+"\"")
 	}
-	return strings.Join(tags, ",")
+	return tags
 }
 
 func benchmarkAttributes(st interface{}) map[string]interface{} {

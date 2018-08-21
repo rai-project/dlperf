@@ -85,52 +85,41 @@ func (c Conv) FwdBenchmarkAlgorithms() []string {
 	}
 }
 
-func (c Conv) DataTypes() []DataType {
-	return allDataTypes
-}
-
 type convBenchmarkArgs struct {
-	Input0            int64      `args:"input[0]"`
-	Input1            int64      `args:"input[1]"`
-	Input2            int64      `args:"input[2]"`
-	Input3            int64      `args:"input[3]"`
-	FilterCount       int64      `args:"filter_count"`
-	FilterHeight      int64      `args:"filter_height"`
-	FilterWidth       int64      `args:"filter_width"`
-	PadHeight         int64      `args:"pad_height"`
-	PadWidth          int64      `args:"pad_width"`
-	StrideHeight      int64      `args:"stride_height"`
-	StrideWidth       int64      `args:"stride_width"`
-	DilationWidth     int64      `args:"dilation_height"`
-	DilationHeight    int64      `args:"dilation_width"`
-	ArgNames          string     `args:"-"`
-	UniqueBenchmarkID uint64     `args:"-"`
-	BenchmarkName     string     `args:"-"`
-	Algorithms        []string   `args:"-"`
-	DataTypes         []DataType `args:"-"`
+	baseBenchmarkArgs
+	Input0         int64 `args:"input[0]"`
+	Input1         int64 `args:"input[1]"`
+	Input2         int64 `args:"input[2]"`
+	Input3         int64 `args:"input[3]"`
+	FilterCount    int64 `args:"filter_count"`
+	FilterHeight   int64 `args:"filter_height"`
+	FilterWidth    int64 `args:"filter_width"`
+	PadHeight      int64 `args:"pad_height"`
+	PadWidth       int64 `args:"pad_width"`
+	StrideHeight   int64 `args:"stride_height"`
+	StrideWidth    int64 `args:"stride_width"`
+	DilationWidth  int64 `args:"dilation_height"`
+	DilationHeight int64 `args:"dilation_width"`
 }
 
 func (c Conv) FwdBenchmarkArgs() interface{} {
 	inShapes := c.InputShapes()
 
 	res := convBenchmarkArgs{
-		Input0:         inShapes[0][0],
-		Input1:         inShapes[0][1],
-		Input2:         inShapes[0][2],
-		Input3:         inShapes[0][3],
-		FilterCount:    inShapes[1][0],
-		FilterHeight:   c.KernelShape[0],
-		FilterWidth:    c.KernelShape[1],
-		PadHeight:      c.Pads[0],
-		PadWidth:       c.Pads[2],
-		StrideHeight:   c.Strides[0],
-		StrideWidth:    c.Strides[1],
-		DilationHeight: c.Dilations[0],
-		DilationWidth:  c.Dilations[1],
-		BenchmarkName:  c.FwdBenchmarkName(),
-		ArgNames:       c.FwdBenchmarkGeneratorArgNames(),
-		Algorithms:     c.FwdBenchmarkAlgorithms(),
-		DataTypes:      c.DataTypes(),
+		Input0:            inShapes[0][0],
+		Input1:            inShapes[0][1],
+		Input2:            inShapes[0][2],
+		Input3:            inShapes[0][3],
+		FilterCount:       inShapes[1][0],
+		FilterHeight:      c.KernelShape[0],
+		FilterWidth:       c.KernelShape[1],
+		PadHeight:         c.Pads[0],
+		PadWidth:          c.Pads[2],
+		StrideHeight:      c.Strides[0],
+		StrideWidth:       c.Strides[1],
+		DilationHeight:    c.Dilations[0],
+		DilationWidth:     c.Dilations[1],
+		baseBenchmarkArgs: mkBaseBenchmarkArgs(&c),
 	}
 
 	hash, err := hashstructure.Hash(res, nil)
@@ -153,7 +142,7 @@ func (c Conv) FwdBenchmarkFilter(datatype, algorithm string) benchmark.Benchmark
 	}
 }
 
-func (c Conv) FwdBenchmarkGeneratorArgNames() string {
+func (c Conv) FwdBenchmarkGeneratorArgNames() []string {
 	return benchmarkArgNames(convBenchmarkArgs{})
 }
 

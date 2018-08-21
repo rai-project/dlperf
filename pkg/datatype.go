@@ -1,11 +1,11 @@
-package layer
+package dlperf
 
 type DataType struct {
 	Name  string `json:"name"`
 	CType string `json:"ctype"`
 }
 
-var allDataTypes = []DataType{
+var AllDataTypes = []DataType{
 	// DataType{
 	// 	Name:  "Int8",
 	// 	CType: "int8_t",

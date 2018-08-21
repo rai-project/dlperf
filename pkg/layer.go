@@ -29,6 +29,9 @@ type Layer interface {
 	FwdBenchmarkName() string
 	FwdBenchmarkFilter(string, string) benchmark.Benchmark
 	FwdBenchmarkArgs() interface{}
+	FwdBenchmarkGeneratorArgNames() []string
+	FwdBenchmarkAlgorithms() []string
+	DataTypes() []DataType
 }
 
 type LayerInformation interface {

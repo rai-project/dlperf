@@ -28,7 +28,7 @@ namespace [[ .BenchmarkName ]]__[[.UniqueBenchmarkID]] {
   }})
 
 #define BENCHMARK_[[ .BenchmarkName ]](b)                                                                                             \
-[[ range $algorithm := .Algorithms ]] BENCHMARK_TEMPLATE(b, [[ $algorithm ]])->ArgNames({[[$.ArgNames]]})->BENCHMARK_[[ $.BenchmarkName ]]_INPUT_ARGS()->UseManualTime(); \
+[[ range $algorithm := .Algorithms ]] BENCHMARK_TEMPLATE(b, [[ $algorithm ]])->ArgNames({[[$.ArgNames | join ", "]]})->BENCHMARK_[[ $.BenchmarkName ]]_INPUT_ARGS()->UseManualTime(); \
 [[ end ]]
 
 [[ range $datatype := .DataTypes ]]

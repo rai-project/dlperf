@@ -56,6 +56,12 @@ var benchgenCmd = &cobra.Command{
 				prog.WriteString(l.FwdBenchmarkGenerator())
 				continue
 			}
+
+			if lyr.OperatorType() == "Relu" {
+				l := lyr.(*perflayer.Relu)
+				prog.WriteString(l.FwdBenchmarkGenerator())
+				continue
+			}
 		}
 
 		if outputFileName == "automatic" || outputFileName == "" {
