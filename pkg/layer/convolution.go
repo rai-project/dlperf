@@ -170,36 +170,61 @@ func (c Conv) FwdBenchmarkGeneratorArgNames() string {
 func (c Conv) FwdBenchmarkGenerator() string {
 	templString := `
 namespace conv__{{.UniqueBenchmarkID}} {
+
+  static void LAYER_CUDNN_CONV_FWD_ADD_COUNTERS__{{.UniqueBenchmarkID}}(benchmark::State& state) {
+    state.counters.insert({
+      {"input[0]", {{.Input0}}}, /* Input0 */ \
+      {"input[1]", {{.Input1}}}, /* Input1 */ \
+      {"input[2]", {{.Input2}}}, /* Input2 */ \
+      {"input[3]", {{.Input3}}}, /* Input3 */ \
+      {"filter_count", {{.FilterCount}}}, /* FilterCount */ \
+      {"filter_height", {{.FilterHeight}}}, /* FilterHeight */ \
+      {"filter_width", {{.FilterWidth}}}, /* FilterWidth */ \
+      {"pad_height", {{.PadHeight}}}, /* PadHeight */ \
+      {"pad_width", {{.PadWidth}}}, /* PadWidth */ \
+      {"stride_height", {{.StrideHeight}}}, /* StrideHeight */ \
+      {"stride_width", {{.StrideWidth}}}, /* StrideWidth */ \
+      {"dilation_height", {{.DilationHeight}}}, /* DilationHeight */ \
+      {"dilation_width", {{.DilationWidth}}} /* DilationWidth */
+    });
+  }
+
   template <cudnnConvolutionFwdAlgo_t convolution_algorithm>
   static void LAYER_CUDNN_CONV_FWD_INT8__{{.UniqueBenchmarkID}}(benchmark::State& state) {
     CUDNN_CONV_FWD_Impl<int8_t, convolution_algorithm>(state);
+    LAYER_CUDNN_CONV_FWD_ADD_COUNTERS__{{.UniqueBenchmarkID}}(state);
   }
 
   template <cudnnConvolutionFwdAlgo_t convolution_algorithm>
   static void LAYER_CUDNN_CONV_FWD_INT32__{{.UniqueBenchmarkID}}(benchmark::State& state) {
     CUDNN_CONV_FWD_Impl<int32_t, convolution_algorithm>(state);
+    LAYER_CUDNN_CONV_FWD_ADD_COUNTERS__{{.UniqueBenchmarkID}}(state);
   }
 
   template <cudnnConvolutionFwdAlgo_t convolution_algorithm>
   static void LAYER_CUDNN_CONV_FWD_HALF__{{.UniqueBenchmarkID}}(benchmark::State& state) {
     CUDNN_CONV_FWD_Impl<__half, convolution_algorithm>(state);
+    LAYER_CUDNN_CONV_FWD_ADD_COUNTERS__{{.UniqueBenchmarkID}}(state);
   }
 
   #ifdef CUDNN_SUPPORTS_TENSOR_OPS
   template <cudnnConvolutionFwdAlgo_t convolution_algorithm>
   static void LAYER_CUDNN_CONV_FWD_HALF_TENSOROP__{{.UniqueBenchmarkID}}(benchmark::State& state) {
     CUDNN_CONV_FWD_Impl<__half, convolution_algorithm, CUDNN_TENSOR_OP_MATH>(state);
+    LAYER_CUDNN_CONV_FWD_ADD_COUNTERS__{{.UniqueBenchmarkID}}(state);
   }
   #endif
 
   template <cudnnConvolutionFwdAlgo_t convolution_algorithm>
   static void LAYER_CUDNN_CONV_FWD_FLOAT__{{.UniqueBenchmarkID}}(benchmark::State& state) {
     CUDNN_CONV_FWD_Impl<float, convolution_algorithm>(state);
+    LAYER_CUDNN_CONV_FWD_ADD_COUNTERS__{{.UniqueBenchmarkID}}(state);
   }
 
   template <cudnnConvolutionFwdAlgo_t convolution_algorithm>
   static void LAYER_CUDNN_CONV_FWD_DOUBLE__{{.UniqueBenchmarkID}}(benchmark::State& state) {
     CUDNN_CONV_FWD_Impl<double, convolution_algorithm>(state);
+    LAYER_CUDNN_CONV_FWD_ADD_COUNTERS__{{.UniqueBenchmarkID}}(state);
   }
 
 
