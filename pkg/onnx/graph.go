@@ -213,7 +213,12 @@ func (o *Onnx) ToGraph(oo ...GraphOption) *Graph {
 	return network
 }
 
-func (g Graph) ToplologicallyOrderedNodes() (GraphNodes, error) {
+func (o Onnx) TopologicallyOrderedNodes(oo ...GraphOption) (GraphNodes, error) {
+	g := o.ToGraph(oo...)
+	return g.TopologicallyOrderedNodes()
+}
+
+func (g Graph) TopologicallyOrderedNodes() (GraphNodes, error) {
 	nds, err := topo.SortStabilized(g, sortById)
 	if err != nil {
 		return nil, errors.Wrap(err, "failed to topologically sort graph")

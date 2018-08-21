@@ -42,7 +42,7 @@ var benchinfoCmd = &cobra.Command{
 
 		net := model.Network()
 
-		nds, err := net.ToplologicallyOrderedNodes()
+		nds, err := net.TopologicallyOrderedNodes()
 		if err != nil {
 			return err
 		}

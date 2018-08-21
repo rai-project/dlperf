@@ -22,7 +22,7 @@ func (grph Graph) Dominators() DominatorTree {
 }
 
 func (o Onnx) Dominators() DominatorTree {
-	grph := o.ToGraph()
+	grph := o.ToGraph(GraphPruneInputs(true))
 	return grph.Dominators()
 }
 
@@ -60,7 +60,7 @@ func sortById(nodes []graph.Node) {
 }
 
 func (o Onnx) FindSubGraphs() ([]Graph, error) {
-	grph := o.ToGraph()
+	grph := o.ToGraph(GraphPruneInputs(true))
 	return grph.FindSubGraphs()
 }
 

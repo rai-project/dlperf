@@ -37,3 +37,10 @@ to get information per layer use
 ```
 go run main.go flopsinfo --model_path ~/onnx_models/bvlc_alexnet/model.onnx --full
 ```
+
+
+## Generate Benchmarks
+
+```
+go run main.go benchgen --model_path ~/onnx_models/bvlc_alexnet/model.onnx
+```

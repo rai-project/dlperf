@@ -53,7 +53,7 @@ func (pats Patterns) Counts() Patterns {
 
 func (o Onnx) NodeSubsequences(oo ...PatternOption) (Patterns, error) {
 	opts := NewPatternOptions(oo...)
-	grph := o.ToGraph()
+	grph := o.ToGraph(GraphPruneInputs(true))
 	if opts.PruneGraph {
 		grph = grph.Prune(opts.PruneGraphLayers)
 	}

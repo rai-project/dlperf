@@ -3,6 +3,7 @@ package layer
 import (
 	"fmt"
 	"math"
+	"strings"
 
 	"github.com/rai-project/dlperf/pkg"
 	"github.com/rai-project/dlperf/pkg/benchmark"
@@ -54,17 +55,19 @@ func (c Pooling) FwdTiming(system string /* hardware/software struct */) string 
 }
 
 func (c Pooling) FwdBenchmarkAlgorithms() []string {
-	if c.onnxOperatorType == "maxpool" {
+	switch strings.ToLower(c.onnxOperatorType) {
+	case "maxpool":
 		return []string{
 			"CUDNN_POOLING_MAX",
 			"CUDNN_POOLING_MAX_DETERMINISTIC",
 		}
-	} else if c.onnxOperatorType == "averagepool" {
+	case "averagepool":
 		return []string{
 			"CUDNN_POOLING_AVERAGE_COUNT_INCLUDE_PADDING",
 			"CUDNN_POOLING_AVERAGE_COUNT_EXCLUDE_PADDING",
 		}
 	}
+	panic("invalid pooling operator " + c.onnxOperatorType)
 
 	return nil
 }
