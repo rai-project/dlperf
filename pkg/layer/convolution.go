@@ -7,6 +7,7 @@ import (
 	"text/template"
 
 	"github.com/fatih/structs"
+	"github.com/mitchellh/hashstructure"
 	"github.com/rai-project/dlperf/pkg"
 	"github.com/rai-project/dlperf/pkg/benchmark"
 )
@@ -88,25 +89,27 @@ func (c Conv) FwdBenchmarkAlgorithms() []string {
 }
 
 type convBenchmarkArgs struct {
-	Input0         int64  `args:"input[0]"`
-	Input1         int64  `args:"input[1]"`
-	Input2         int64  `args:"input[2]"`
-	Input3         int64  `args:"input[3]"`
-	FilterCount    int64  `args:"filter_count"`
-	FilterHeight   int64  `args:"filter_height"`
-	FilterWidth    int64  `args:"filter_width"`
-	PadHeight      int64  `args:"pad_height"`
-	PadWidth       int64  `args:"pad_width"`
-	StrideHeight   int64  `args:"stride_height"`
-	StrideWidth    int64  `args:"stride_width"`
-	DilationWidth  int64  `args:"dilation_height"`
-	DilationHeight int64  `args:"dilation_width"`
-	ArgNames       string `args:"-"`
+	Input0            int64  `args:"input[0]"`
+	Input1            int64  `args:"input[1]"`
+	Input2            int64  `args:"input[2]"`
+	Input3            int64  `args:"input[3]"`
+	FilterCount       int64  `args:"filter_count"`
+	FilterHeight      int64  `args:"filter_height"`
+	FilterWidth       int64  `args:"filter_width"`
+	PadHeight         int64  `args:"pad_height"`
+	PadWidth          int64  `args:"pad_width"`
+	StrideHeight      int64  `args:"stride_height"`
+	StrideWidth       int64  `args:"stride_width"`
+	DilationWidth     int64  `args:"dilation_height"`
+	DilationHeight    int64  `args:"dilation_width"`
+	ArgNames          string `args:"-"`
+	UniqueBenchmarkID uint64 `args:"-"`
 }
 
 func (c Conv) FwdBenchmarkArgs() convBenchmarkArgs {
 	inShapes := c.InputShapes()
-	return convBenchmarkArgs{
+
+	res := convBenchmarkArgs{
 		Input0:         inShapes[0][0],
 		Input1:         inShapes[0][1],
 		Input2:         inShapes[0][2],
@@ -122,6 +125,14 @@ func (c Conv) FwdBenchmarkArgs() convBenchmarkArgs {
 		DilationWidth:  c.Dilations[1],
 		ArgNames:       c.FwdBenchmarkGeneratorArgNames(),
 	}
+
+	hash, err := hashstructure.Hash(res, nil)
+	if err != nil {
+		panic(err)
+	}
+	res.UniqueBenchmarkID = hash
+
+	return res
 }
 
 func (c Conv) FwdBenchmarkFilter(datatype, algorithm string) benchmark.Benchmark {
@@ -158,36 +169,36 @@ func (c Conv) FwdBenchmarkGeneratorArgNames() string {
 
 func (c Conv) FwdBenchmarkGenerator() string {
 	templString := `
-namespace {
+namespace conv__{{.UniqueBenchmarkID}} {
   template <cudnnConvolutionFwdAlgo_t convolution_algorithm>
-  static void LAYER_CUDNN_CONV_FWD_INT8(benchmark::State& state) {
+  static void LAYER_CUDNN_CONV_FWD_INT8__{{.UniqueBenchmarkID}}(benchmark::State& state) {
     CUDNN_CONV_FWD_Impl<int8_t, convolution_algorithm>(state);
   }
 
   template <cudnnConvolutionFwdAlgo_t convolution_algorithm>
-  static void LAYER_CUDNN_CONV_FWD_INT32(benchmark::State& state) {
+  static void LAYER_CUDNN_CONV_FWD_INT32__{{.UniqueBenchmarkID}}(benchmark::State& state) {
     CUDNN_CONV_FWD_Impl<int32_t, convolution_algorithm>(state);
   }
 
   template <cudnnConvolutionFwdAlgo_t convolution_algorithm>
-  static void LAYER_CUDNN_CONV_FWD_HALF(benchmark::State& state) {
+  static void LAYER_CUDNN_CONV_FWD_HALF__{{.UniqueBenchmarkID}}(benchmark::State& state) {
     CUDNN_CONV_FWD_Impl<__half, convolution_algorithm>(state);
   }
 
   #ifdef CUDNN_SUPPORTS_TENSOR_OPS
   template <cudnnConvolutionFwdAlgo_t convolution_algorithm>
-  static void LAYER_CUDNN_CONV_FWD_HALF_TENSOROP(benchmark::State& state) {
+  static void LAYER_CUDNN_CONV_FWD_HALF_TENSOROP__{{.UniqueBenchmarkID}}(benchmark::State& state) {
     CUDNN_CONV_FWD_Impl<__half, convolution_algorithm, CUDNN_TENSOR_OP_MATH>(state);
   }
   #endif
 
   template <cudnnConvolutionFwdAlgo_t convolution_algorithm>
-  static void LAYER_CUDNN_CONV_FWD_FLOAT(benchmark::State& state) {
+  static void LAYER_CUDNN_CONV_FWD_FLOAT__{{.UniqueBenchmarkID}}(benchmark::State& state) {
     CUDNN_CONV_FWD_Impl<float, convolution_algorithm>(state);
   }
 
   template <cudnnConvolutionFwdAlgo_t convolution_algorithm>
-  static void LAYER_CUDNN_CONV_FWD_DOUBLE(benchmark::State& state) {
+  static void LAYER_CUDNN_CONV_FWD_DOUBLE__{{.UniqueBenchmarkID}}(benchmark::State& state) {
     CUDNN_CONV_FWD_Impl<double, convolution_algorithm>(state);
   }
 
@@ -219,14 +230,14 @@ namespace {
   BENCHMARK_TEMPLATE(b, CUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD)->ArgNames({{.ArgNames}})->InputArgs()->UseManualTime();                        \
   BENCHMARK_TEMPLATE(b, CUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD_NONFUSED)->ArgNames({{.ArgNames}})->InputArgs()->UseManualTime()
 
-  /* BENCHMARK_LAYER_CUDNN_CONV_FWD(LAYER_CUDNN_CONV_FWD_INT8); */
-  /* BENCHMARK_LAYER_CUDNN_CONV_FWD(LAYER_CUDNN_CONV_FWD_INT32); */
-  BENCHMARK_LAYER_CUDNN_CONV_FWD(LAYER_CUDNN_CONV_FWD_HALF);
+  /* BENCHMARK_LAYER_CUDNN_CONV_FWD(LAYER_CUDNN_CONV_FWD_INT8__{{.UniqueBenchmarkID}}); */
+  /* BENCHMARK_LAYER_CUDNN_CONV_FWD(LAYER_CUDNN_CONV_FWD_INT32__{{.UniqueBenchmarkID}}); */
+  BENCHMARK_LAYER_CUDNN_CONV_FWD(LAYER_CUDNN_CONV_FWD_HALF__{{.UniqueBenchmarkID}});
   #ifdef CUDNN_SUPPORTS_TENSOR_OPS
-  BENCHMARK_LAYER_CUDNN_CONV_FWD(LAYER_CUDNN_CONV_FWD_HALF_TENSOROP);
+  BENCHMARK_LAYER_CUDNN_CONV_FWD(LAYER_CUDNN_CONV_FWD_HALF_TENSOROP__{{.UniqueBenchmarkID}});
   #endif // CUDNN_SUPPORTS_TENSOR_OPS
-  BENCHMARK_LAYER_CUDNN_CONV_FWD(LAYER_CUDNN_CONV_FWD_FLOAT);
-  BENCHMARK_LAYER_CUDNN_CONV_FWD(LAYER_CUDNN_CONV_FWD_DOUBLE);
+  BENCHMARK_LAYER_CUDNN_CONV_FWD(LAYER_CUDNN_CONV_FWD_FLOAT__{{.UniqueBenchmarkID}});
+  BENCHMARK_LAYER_CUDNN_CONV_FWD(LAYER_CUDNN_CONV_FWD_DOUBLE__{{.UniqueBenchmarkID}});
 
 #undef InputArgs
 #undef BENCHMARK_LAYER_CUDNN_CONV_FWD
