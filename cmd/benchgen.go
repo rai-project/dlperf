@@ -62,6 +62,12 @@ var benchgenCmd = &cobra.Command{
 				prog.WriteString(l.FwdBenchmarkGenerator())
 				continue
 			}
+			if lyr.OperatorType() == "Pooling" {
+				l := lyr.(*perflayer.Pooling)
+				prog.WriteString(l.FwdBenchmarkGenerator())
+				continue
+			}
+			// pp.Println(lyr.OperatorType())
 		}
 
 		if outputFileName == "automatic" || outputFileName == "" {
