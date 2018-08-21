@@ -97,17 +97,21 @@ static void [[ $.BenchmarkName ]]_[[ $datatype.Name | upper ]]__[[$.UniqueBenchm
 }
 [[ end ]]
 #define BENCHMARK_[[ .BenchmarkName ]]0(b, SOFTMAX_MODE) \
-[[ range $algorithm := .Algorithms ]] BENCHMARK_TEMPLATE(b, [[ $algorithm ]], SOFTMAX_MODE)->BENCHMARK_[[ $.BenchmarkName ]]_INPUT_ARG_NAMES()->BENCHMARK_[[ $.BenchmarkName ]]_INPUT_ARGS()->UseManualTime(); \
+[[ range $algorithm := .Algorithms ]] BENCHMARK_TEMPLATE(b, SOFTMAX_MODE, [[ $algorithm ]])\
+  ->BENCHMARK_[[ $.BenchmarkName ]]_INPUT_ARG_NAMES()\
+  ->BENCHMARK_[[ $.BenchmarkName ]]_INPUT_ARGS()\
+  ->UseManualTime(); \
 [[ end ]]
 
 #define BENCHMARK_[[ .BenchmarkName ]](b)                                                                                             \
-  BENCHMARK_[[ .BenchmarkName ]]0(b, CUDNN_SOFTMAX_MODE_INSTANCE);                                                                    \
-  BENCHMARK_[[ .BenchmarkName ]]0(b, CUDNN_SOFTMAX_MODE_CHANNEL)
+  BENCHMARK_[[ .BenchmarkName ]]0(b, CUDNN_SOFTMAX_FAST);                                                                    \
+  BENCHMARK_[[ .BenchmarkName ]]0(b, CUDNN_SOFTMAX_ACCURATE);                                                                    \
+  BENCHMARK_[[ .BenchmarkName ]]0(b, CUDNN_SOFTMAX_LOG)
 
 [[ range $datatype := .DataTypes ]]BENCHMARK_[[ $.BenchmarkName ]]([[ $.BenchmarkName ]]_[[ $datatype.Name | upper ]]__[[$.UniqueBenchmarkID]]);
 [[ end ]]
 #undef BENCHMARK_[[ .BenchmarkName ]]_INPUT_ARGS
-$undef BENCHMARK_[[ .BenchmarkName ]]_INPUT_ARG_NAMES
+#undef BENCHMARK_[[ .BenchmarkName ]]_INPUT_ARG_NAMES
 #undef BENCHMARK_[[ .BenchmarkName ]]0
 #undef BENCHMARK_[[ .BenchmarkName ]]
 }

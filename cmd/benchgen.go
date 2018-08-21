@@ -75,15 +75,15 @@ var benchgenCmd = &cobra.Command{
 				// case "pooling":
 				// 	l := lyr.(*perflayer.Pooling)
 				// 	b = l.FwdBenchmarkGenerator()
-				// case "softmax":
-				// 	l := lyr.(*perflayer.Softmax)
-				// 	b = l.FwdBenchmarkGenerator()
+				case "softmax":
+					l := lyr.(*perflayer.Softmax)
+					b = l.FwdBenchmarkGenerator()
 				// case "batchnorm":
 				// 	l := lyr.(*perflayer.BatchNorm)
 				// 	b = l.FwdBenchmarkGenerator()
-				case "dropout":
-					l := lyr.(*perflayer.Dropout)
-					b = l.FwdBenchmarkGenerator()
+				// case "dropout":
+				// 	l := lyr.(*perflayer.Dropout)
+				// 	b = l.FwdBenchmarkGenerator()
 				// case "identity":
 				// 	l := lyr.(*perflayer.Identity)
 				// 	b = l.FwdBenchmarkGenerator()
