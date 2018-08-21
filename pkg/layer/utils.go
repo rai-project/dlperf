@@ -123,6 +123,9 @@ func getOutputShapes(layers []dlperf.Layer) []dlperf.Shape {
 }
 
 func mkBenchmarkFilterName(layer dlperf.Layer, datatype, algorithm string) string {
-	return "^" + layer.FwdBenchmarkName() + "_" + strings.ToUpper(datatype) +
-		"<" + strings.ToUpper(algorithm) + ">" + ".*"
+	name := "^" + layer.FwdBenchmarkName() + "_" + strings.ToUpper(datatype)
+	if algorithm != "" {
+		name += "<" + strings.ToUpper(algorithm) + ">"
+	}
+	return name + ".*"
 }

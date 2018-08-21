@@ -55,8 +55,6 @@ func (c BatchNorm) FwdBenchmarkAlgorithms() []string {
 			"CUDNN_BATCHNORM_PER_ACTIVATION",
 		}
 	}
-
-	return nil
 }
 
 func (c BatchNorm) FwdBenchmarkFilter(datatype, algorithm string) benchmark.Benchmark {

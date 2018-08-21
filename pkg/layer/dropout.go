@@ -1,7 +1,10 @@
 package layer
 
 import (
+	"fmt"
+
 	"github.com/rai-project/dlperf/pkg"
+	"github.com/rai-project/dlperf/pkg/benchmark"
 )
 
 // https://github.com/onnx/onnx/blob/master/docs/Operators.md#Dropout
@@ -22,6 +25,46 @@ func (c *Dropout) InferShape(inputLayers []dlperf.Layer) {
 	inputShapes := getOutputShapes(inputLayers)
 	c.SetInputShapes(inputShapes)
 	c.SetOutputShapes(inputShapes)
+}
+
+func (c Dropout) FwdBenchmarkName() string {
+	return "LAYER_CUDNN_DROPOUT_FWD"
+}
+
+func (c Dropout) FwdBenchmarkArgs() []string {
+	return []string{""}
+}
+
+func (c Dropout) FwdCUDNNName() string {
+	return ""
+}
+
+func (c Dropout) FwdTiming(system string /* hardware/software struct */) string {
+	return ""
+}
+
+func (c Dropout) FwdBenchmarkAlgorithms() []string {
+	return []string{
+		"",
+	}
+}
+
+func (c Dropout) FwdBenchmarkFilter(datatype, algorithm string) benchmark.Benchmark {
+	if algorithm == "" {
+		algorithm = c.FwdBenchmarkAlgorithms()[0]
+	}
+	attrs := map[string]interface{}{}
+	for ii, dim := range c.InputShapes()[0] {
+		attrs[fmt.Sprintf("input[%d]", ii)] = dim
+	}
+	return benchmark.Benchmark{
+		Name:       mkBenchmarkFilterName(&c, datatype, algorithm),
+		Attributes: attrs,
+	}
+}
+
+func (c Dropout) Shape() dlperf.ShapeInformation {
+	return c.Information().Shape()
 }
 
 func (c Dropout) Information() dlperf.LayerInformation {

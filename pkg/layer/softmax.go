@@ -1,28 +1,72 @@
 package layer
 
 import (
+	"fmt"
+
 	"github.com/rai-project/dlperf/pkg"
+	"github.com/rai-project/dlperf/pkg/benchmark"
 )
 
-type SoftMax struct {
+type Softmax struct {
 	*Base `json:",inline,flatten,omitempty"`
 }
 
-func (SoftMax) OperatorType() string {
-	return "SoftMax"
+func (Softmax) OperatorType() string {
+	return "Softmax"
 }
 
-func (SoftMax) Description() string {
+func (Softmax) Description() string {
 	return ``
 }
 
-func (c *SoftMax) InferShape(inputLayers []dlperf.Layer) {
+func (c *Softmax) InferShape(inputLayers []dlperf.Layer) {
 	inputShapes := getOutputShapes(inputLayers)
 	c.SetInputShapes(inputShapes)
 	c.SetOutputShapes(inputShapes)
 }
 
-func (c SoftMax) Information() dlperf.LayerInformation {
+func (c Softmax) FwdBenchmarkName() string {
+	return "LAYER_CUDNN_ACTIVATION_FWD"
+}
+
+func (c Softmax) FwdBenchmarkArgs() []string {
+	return []string{""}
+}
+
+func (c Softmax) FwdCUDNNName() string {
+	return ""
+}
+
+func (c Softmax) FwdTiming(system string /* hardware/software struct */) string {
+	return ""
+}
+
+func (c Softmax) FwdBenchmarkAlgorithms() []string {
+	return []string{
+		"CUDNN_SOFTMAX_MODE_INSTANCE",
+		"CUDNN_SOFTMAX_MODE_CHANNEL",
+	}
+}
+
+func (c Softmax) Shape() dlperf.ShapeInformation {
+	return c.Information().Shape()
+}
+
+func (c Softmax) FwdBenchmarkFilter(datatype, algorithm string) benchmark.Benchmark {
+	if algorithm == "" {
+		algorithm = c.FwdBenchmarkAlgorithms()[0]
+	}
+	attrs := map[string]interface{}{}
+	for ii, dim := range c.InputShapes()[0] {
+		attrs[fmt.Sprintf("input[%d]", ii)] = dim
+	}
+	return benchmark.Benchmark{
+		Name:       mkBenchmarkFilterName(&c, datatype, algorithm),
+		Attributes: attrs,
+	}
+}
+
+func (c Softmax) Information() dlperf.LayerInformation {
 	info := &Information{
 		Base: c.Base,
 		shape: dlperf.ShapeInformation{
@@ -56,5 +100,5 @@ func (c SoftMax) Information() dlperf.LayerInformation {
 }
 
 func init() {
-	dlperf.Register(&SoftMax{})
+	dlperf.Register(&Softmax{})
 }

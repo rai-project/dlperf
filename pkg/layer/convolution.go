@@ -1,6 +1,7 @@
 package layer
 
 import (
+	"fmt"
 	"math"
 	"strings"
 
@@ -21,12 +22,12 @@ type Conv struct {
 	Strides     dlperf.Shape `json:"strides,omitempty"`
 }
 
-func (Conv) Description() string {
-	return ``
-}
-
 func (Conv) OperatorType() string {
 	return "Conv"
+}
+
+func (Conv) Description() string {
+	return ``
 }
 
 func (c *Conv) InferShape(inputLayers []dlperf.Layer) {
@@ -92,22 +93,24 @@ func (c Conv) FwdBenchmarkFilter(datatype, algorithm string) benchmark.Benchmark
 	if algorithm == "" {
 		algorithm = c.FwdBenchmarkAlgorithms()[0]
 	}
+
+	attrs := map[string]interface{}{}
+	for ii, dim := range c.InputShapes()[0] {
+		attrs[fmt.Sprintf("input[%d]", ii)] = dim
+	}
+
+	attrs["filter_height"] = c.KernelShape[0]
+	attrs["filter_width"] = c.KernelShape[1]
+	attrs["pad_height"] = c.Pads[0]
+	attrs["pad_width"] = c.Pads[2]
+	attrs["stride_height"] = c.Strides[0]
+	attrs["stride_width"] = c.Strides[1]
+	attrs["dilation_height"] = c.Dilations[0]
+	attrs["dilation_width"] = c.Dilations[1]
+
 	return benchmark.Benchmark{
-		Name: mkBenchmarkFilterName(&c, datatype, algorithm),
-		Attributes: map[string]interface{}{
-			"input_batch_size": c.inputShapes[0][0],
-			"input_channels":   c.inputShapes[0][1],
-			"input_width":      c.inputShapes[0][2],
-			"input_height":     c.inputShapes[0][3],
-			"filter_height":    c.KernelShape[0],
-			"filter_width":     c.KernelShape[1],
-			"pad_height":       c.Pads[0],
-			"pad_width":        c.Pads[2],
-			"stride_height":    c.Strides[0],
-			"stride_width":     c.Strides[1],
-			// "dilation_height":  c.Dilations[0],
-			// "dilation_width":   c.Dilations[1],
-		},
+		Name:       mkBenchmarkFilterName(&c, datatype, algorithm),
+		Attributes: attrs,
 	}
 }
 
