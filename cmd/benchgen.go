@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"bytes"
+	"io/ioutil"
 	"path/filepath"
 
 	"github.com/rai-project/dlperf/pkg"
@@ -57,7 +58,14 @@ var benchgenCmd = &cobra.Command{
 			}
 		}
 
-		println(prog.String())
+		if outputFileName == "automatic" {
+			println(prog.String())
+		} else {
+			err := ioutil.WriteFile(outputFileName, prog.Bytes(), 0644)
+			if err != nil {
+				return err
+			}
+		}
 
 		return nil
 	},
