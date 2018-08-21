@@ -47,7 +47,11 @@ func (bench) Header() []string {
 func (l bench) Row(humanFlops bool) []string {
 	ms := float64(l.benchmark.RealTime.Nanoseconds()) / float64(time.Millisecond)
 	realTime := fmt.Sprintf("%f", ms)
-	base := []string{l.layer.Name(), l.layer.OperatorType(), l.benchmark.Name, realTime}
+	benchmarkName := l.benchmark.Name
+	if len(benchmarkName) > 10 {
+		benchmarkName = benchmarkName[0:10] + "..."
+	}
+	base := []string{l.layer.Name(), l.layer.OperatorType(), benchmarkName, realTime}
 	return base
 	// flops := l.flops.Row(humanFlops)
 	// flops = append(flops, flopsToString(l.flops.Total(), humanFlops))

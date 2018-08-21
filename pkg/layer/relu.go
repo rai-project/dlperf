@@ -67,6 +67,8 @@ func (c Relu) FwdBenchmarkAlgorithms() []string {
 		}
 	}
 
+	panic("invalid onnx operator " + c.onnxOperatorType)
+
 	return nil
 }
 
