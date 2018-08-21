@@ -86,22 +86,29 @@ func (c Conv) FwdBenchmarkAlgorithms() []string {
 	}
 }
 
+func (c Conv) DataTypes() []DataType {
+	return allDataTypes
+}
+
 type convBenchmarkArgs struct {
-	Input0            int64  `args:"input[0]"`
-	Input1            int64  `args:"input[1]"`
-	Input2            int64  `args:"input[2]"`
-	Input3            int64  `args:"input[3]"`
-	FilterCount       int64  `args:"filter_count"`
-	FilterHeight      int64  `args:"filter_height"`
-	FilterWidth       int64  `args:"filter_width"`
-	PadHeight         int64  `args:"pad_height"`
-	PadWidth          int64  `args:"pad_width"`
-	StrideHeight      int64  `args:"stride_height"`
-	StrideWidth       int64  `args:"stride_width"`
-	DilationWidth     int64  `args:"dilation_height"`
-	DilationHeight    int64  `args:"dilation_width"`
-	ArgNames          string `args:"-"`
-	UniqueBenchmarkID uint64 `args:"-"`
+	Input0            int64      `args:"input[0]"`
+	Input1            int64      `args:"input[1]"`
+	Input2            int64      `args:"input[2]"`
+	Input3            int64      `args:"input[3]"`
+	FilterCount       int64      `args:"filter_count"`
+	FilterHeight      int64      `args:"filter_height"`
+	FilterWidth       int64      `args:"filter_width"`
+	PadHeight         int64      `args:"pad_height"`
+	PadWidth          int64      `args:"pad_width"`
+	StrideHeight      int64      `args:"stride_height"`
+	StrideWidth       int64      `args:"stride_width"`
+	DilationWidth     int64      `args:"dilation_height"`
+	DilationHeight    int64      `args:"dilation_width"`
+	ArgNames          string     `args:"-"`
+	UniqueBenchmarkID uint64     `args:"-"`
+	BenchmarkName     string     `args:"-"`
+	Algorithms        []string   `args:"-"`
+	DataTypes         []DataType `args:"-"`
 }
 
 func (c Conv) FwdBenchmarkArgs() convBenchmarkArgs {
@@ -121,7 +128,10 @@ func (c Conv) FwdBenchmarkArgs() convBenchmarkArgs {
 		StrideWidth:    c.Strides[1],
 		DilationHeight: c.Dilations[0],
 		DilationWidth:  c.Dilations[1],
+		BenchmarkName:  c.FwdBenchmarkName(),
 		ArgNames:       c.FwdBenchmarkGeneratorArgNames(),
+		Algorithms:     c.FwdBenchmarkAlgorithms(),
+		DataTypes:      c.DataTypes(),
 	}
 
 	hash, err := hashstructure.Hash(res, nil)
@@ -150,9 +160,9 @@ func (c Conv) FwdBenchmarkGeneratorArgNames() string {
 
 func (c Conv) FwdBenchmarkGenerator() string {
 	const templString = `
-namespace conv__[[.UniqueBenchmarkID]] {
+namespace [[ .BenchmarkName ]]__[[.UniqueBenchmarkID]] {
 
-  static void LAYER_CUDNN_CONV_FWD_ADD_COUNTERS__[[.UniqueBenchmarkID]](benchmark::State& state) {
+  static void BENCHMARK_[[ .BenchmarkName ]]_ADD_COUNTERS__[[.UniqueBenchmarkID]](benchmark::State& state) {
     state.counters.insert({
       {"input[0]", [[.Input0]]}, /* Input0 */ \
       {"input[1]", [[.Input1]]}, /* Input1 */ \
@@ -170,46 +180,16 @@ namespace conv__[[.UniqueBenchmarkID]] {
     });
   }
 
+  [[ range $datatype := .DataTypes ]]
   template <cudnnConvolutionFwdAlgo_t convolution_algorithm>
-  static void LAYER_CUDNN_CONV_FWD_INT8__[[.UniqueBenchmarkID]](benchmark::State& state) {
-    CUDNN_CONV_FWD_Impl<int8_t, convolution_algorithm>(state);
-    LAYER_CUDNN_CONV_FWD_ADD_COUNTERS__[[.UniqueBenchmarkID]](state);
+  static void [[ $.BenchmarkName ]]_[[ $datatype.Name | upper ]]__[[$.UniqueBenchmarkID]](benchmark::State& state) {
+    CUDNN_CONV_FWD_Impl<[[ $datatype.CType ]], convolution_algorithm>(state);
+    BENCHMARK_[[ $.BenchmarkName ]]_ADD_COUNTERS__[[$.UniqueBenchmarkID]](state);
   }
-
-  template <cudnnConvolutionFwdAlgo_t convolution_algorithm>
-  static void LAYER_CUDNN_CONV_FWD_INT32__[[.UniqueBenchmarkID]](benchmark::State& state) {
-    CUDNN_CONV_FWD_Impl<int32_t, convolution_algorithm>(state);
-    LAYER_CUDNN_CONV_FWD_ADD_COUNTERS__[[.UniqueBenchmarkID]](state);
-  }
-
-  template <cudnnConvolutionFwdAlgo_t convolution_algorithm>
-  static void LAYER_CUDNN_CONV_FWD_HALF__[[.UniqueBenchmarkID]](benchmark::State& state) {
-    CUDNN_CONV_FWD_Impl<__half, convolution_algorithm>(state);
-    LAYER_CUDNN_CONV_FWD_ADD_COUNTERS__[[.UniqueBenchmarkID]](state);
-  }
-
-  #ifdef CUDNN_SUPPORTS_TENSOR_OPS
-  template <cudnnConvolutionFwdAlgo_t convolution_algorithm>
-  static void LAYER_CUDNN_CONV_FWD_HALF_TENSOROP__[[.UniqueBenchmarkID]](benchmark::State& state) {
-    CUDNN_CONV_FWD_Impl<__half, convolution_algorithm, CUDNN_TENSOR_OP_MATH>(state);
-    LAYER_CUDNN_CONV_FWD_ADD_COUNTERS__[[.UniqueBenchmarkID]](state);
-  }
-  #endif
-
-  template <cudnnConvolutionFwdAlgo_t convolution_algorithm>
-  static void LAYER_CUDNN_CONV_FWD_FLOAT__[[.UniqueBenchmarkID]](benchmark::State& state) {
-    CUDNN_CONV_FWD_Impl<float, convolution_algorithm>(state);
-    LAYER_CUDNN_CONV_FWD_ADD_COUNTERS__[[.UniqueBenchmarkID]](state);
-  }
-
-  template <cudnnConvolutionFwdAlgo_t convolution_algorithm>
-  static void LAYER_CUDNN_CONV_FWD_DOUBLE__[[.UniqueBenchmarkID]](benchmark::State& state) {
-    CUDNN_CONV_FWD_Impl<double, convolution_algorithm>(state);
-    LAYER_CUDNN_CONV_FWD_ADD_COUNTERS__[[.UniqueBenchmarkID]](state);
-  }
+  [[ end ]]
 
 
-#define InputArgs() \
+#define BENCHMARK_[[ .BenchmarkName ]]_INPUT_ARGS() \
   Args({{ \
       [[.Input0]], /* Input0 */ \
       [[.Input1]], /* Input1 */ \
@@ -226,27 +206,16 @@ namespace conv__[[.UniqueBenchmarkID]] {
       [[.DilationWidth]] /* DilationWidth */ \
   }})
 
-#define BENCHMARK_LAYER_CUDNN_CONV_FWD(b)                                                                                             \
-  BENCHMARK_TEMPLATE(b, CUDNN_CONVOLUTION_FWD_ALGO_IMPLICIT_GEMM)->ArgNames({[[.ArgNames]]})->InputArgs()->UseManualTime();                   \
-  BENCHMARK_TEMPLATE(b, CUDNN_CONVOLUTION_FWD_ALGO_IMPLICIT_PRECOMP_GEMM)->ArgNames({[[.ArgNames]]})->InputArgs()->UseManualTime();           \
-  BENCHMARK_TEMPLATE(b, CUDNN_CONVOLUTION_FWD_ALGO_GEMM)->ArgNames({[[.ArgNames]]})->InputArgs()->UseManualTime();                            \
-  BENCHMARK_TEMPLATE(b, CUDNN_CONVOLUTION_FWD_ALGO_DIRECT)->ArgNames({[[.ArgNames]]})->InputArgs()->UseManualTime();                          \
-  BENCHMARK_TEMPLATE(b, CUDNN_CONVOLUTION_FWD_ALGO_FFT)->ArgNames({[[.ArgNames]]})->InputArgs()->UseManualTime();                             \
-  BENCHMARK_TEMPLATE(b, CUDNN_CONVOLUTION_FWD_ALGO_FFT_TILING)->ArgNames({[[.ArgNames]]})->InputArgs()->UseManualTime();                      \
-  BENCHMARK_TEMPLATE(b, CUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD)->ArgNames({[[.ArgNames]]})->InputArgs()->UseManualTime();                        \
-  BENCHMARK_TEMPLATE(b, CUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD_NONFUSED)->ArgNames({[[.ArgNames]]})->InputArgs()->UseManualTime()
+#define BENCHMARK_[[ .BenchmarkName ]](b)                                                                                             \
+[[ range $algorithm := .Algorithms ]] BENCHMARK_TEMPLATE(b, [[ $algorithm ]])->ArgNames({[[$.ArgNames]]})->BENCHMARK_[[ $.BenchmarkName ]]_INPUT_ARGS()->UseManualTime(); \
+[[ end ]]
 
-  /* BENCHMARK_LAYER_CUDNN_CONV_FWD(LAYER_CUDNN_CONV_FWD_INT8__[[.UniqueBenchmarkID]]); */
-  /* BENCHMARK_LAYER_CUDNN_CONV_FWD(LAYER_CUDNN_CONV_FWD_INT32__[[.UniqueBenchmarkID]]); */
-  BENCHMARK_LAYER_CUDNN_CONV_FWD(LAYER_CUDNN_CONV_FWD_HALF__[[.UniqueBenchmarkID]]);
-  #ifdef CUDNN_SUPPORTS_TENSOR_OPS
-  BENCHMARK_LAYER_CUDNN_CONV_FWD(LAYER_CUDNN_CONV_FWD_HALF_TENSOROP__[[.UniqueBenchmarkID]]);
-  #endif // CUDNN_SUPPORTS_TENSOR_OPS
-  BENCHMARK_LAYER_CUDNN_CONV_FWD(LAYER_CUDNN_CONV_FWD_FLOAT__[[.UniqueBenchmarkID]]);
-  BENCHMARK_LAYER_CUDNN_CONV_FWD(LAYER_CUDNN_CONV_FWD_DOUBLE__[[.UniqueBenchmarkID]]);
+[[ range $datatype := .DataTypes ]]
+  BENCHMARK_[[ $.BenchmarkName ]]([[ $.BenchmarkName ]]_[[ $datatype.Name | upper ]]__[[$.UniqueBenchmarkID]]);
+[[ end ]]
 
-#undef InputArgs
-#undef BENCHMARK_LAYER_CUDNN_CONV_FWD
+#undef BENCHMARK_[[ .BenchmarkName ]]_INPUT_ARGS
+#undef BENCHMARK_[[ .BenchmarkName ]]
 }
 `
 

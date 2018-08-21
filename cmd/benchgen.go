@@ -58,13 +58,14 @@ var benchgenCmd = &cobra.Command{
 			}
 		}
 
-		if outputFileName == "automatic" {
+		if outputFileName == "automatic" || outputFileName == "" {
 			println(prog.String())
-		} else {
-			err := ioutil.WriteFile(outputFileName, prog.Bytes(), 0644)
-			if err != nil {
-				return err
-			}
+			return nil
+		}
+
+		err = ioutil.WriteFile(outputFileName, prog.Bytes(), 0644)
+		if err != nil {
+			return err
 		}
 
 		return nil

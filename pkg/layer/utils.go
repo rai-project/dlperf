@@ -7,6 +7,7 @@ import (
 	"text/template"
 
 	"github.com/fatih/structs"
+	"github.com/leekchan/gtf"
 	dlperf "github.com/rai-project/dlperf/pkg"
 )
 
@@ -157,5 +158,7 @@ func benchmarkAttributes(st interface{}) map[string]interface{} {
 }
 
 func mkTemplate(lyr dlperf.Layer) *template.Template {
-	return template.New(lyr.OperatorType()).Delims("[[", "]]")
+	return template.New(lyr.OperatorType()).
+		Funcs(gtf.GtfTextFuncMap).
+		Delims("[[", "]]")
 }
