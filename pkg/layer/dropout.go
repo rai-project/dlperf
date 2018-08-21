@@ -55,7 +55,7 @@ func (c Dropout) FwdBenchmarkGeneratorArgNames() []string {
 
 func (c Dropout) FwdBenchmarkArgs() interface{} {
 
-	res := batchnormBenchmarkArgs{
+	res := dropoutBenchmarkArgs{
 		BaseBenchmarkInputArgs: mkBaseBenchmarkInputArgs(&c),
 		baseBenchmarkArgs:      mkBaseBenchmarkArgs(&c),
 	}
@@ -88,7 +88,7 @@ func (c Dropout) FwdBenchmarkGenerator() string {
 	const templString = `
 [[ range $datatype := .DataTypes ]]
 static void [[ $.BenchmarkName ]]_[[ $datatype.Name | upper ]]__[[$.UniqueBenchmarkID]](benchmark::State& state) {
-  [[ $.BenchmarkName ]]_Impl<[[ $datatype.CType ]], batchnorm_mode, is_training>(state);
+  [[ $.BenchmarkName ]]_Impl<[[ $datatype.CType ]]>(state);
   BENCHMARK_[[ $.BenchmarkName ]]_ADD_COUNTERS__[[$.UniqueBenchmarkID]](state);
 }
 [[ end ]]

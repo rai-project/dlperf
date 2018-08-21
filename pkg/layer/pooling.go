@@ -39,7 +39,7 @@ func (c *Pooling) InferShape(inputLayers dlperf.Layers) {
 }
 
 func (c Pooling) FwdBenchmarkName() string {
-	return "CUDNN_POOLING_FWD"
+	return "LAYER_CUDNN_POOLING_FWD"
 }
 
 func (c Pooling) FwdCUDNNName() string {
