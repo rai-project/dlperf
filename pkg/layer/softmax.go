@@ -97,7 +97,7 @@ static void [[ $.BenchmarkName ]]_[[ $datatype.Name | upper ]]__[[$.UniqueBenchm
 }
 [[ end ]]
 #define BENCHMARK_[[ .BenchmarkName ]]0(b, SOFTMAX_MODE) \
-[[ range $algorithm := .Algorithms ]] BENCHMARK_TEMPLATE(b, [[ $algorithm ]], SOFTMAX_MODE)->BENCHMARK_[[ $.BenchmarkName ]]_INPUT_ARG_NAMES()->UseManualTime(); \
+[[ range $algorithm := .Algorithms ]] BENCHMARK_TEMPLATE(b, [[ $algorithm ]], SOFTMAX_MODE)->BENCHMARK_[[ $.BenchmarkName ]]_INPUT_ARG_NAMES()->BENCHMARK_[[ $.BenchmarkName ]]_INPUT_ARGS()->UseManualTime(); \
 [[ end ]]
 
 #define BENCHMARK_[[ .BenchmarkName ]](b)                                                                                             \
@@ -111,6 +111,7 @@ $undef BENCHMARK_[[ .BenchmarkName ]]_INPUT_ARG_NAMES
 #undef BENCHMARK_[[ .BenchmarkName ]]0
 #undef BENCHMARK_[[ .BenchmarkName ]]
 }
+#endif // ENABLE_[[ .BenchmarkName ]]
 `
 
 	return templateExec(&c, templateBasePrefix+templString)

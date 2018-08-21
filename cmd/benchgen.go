@@ -50,7 +50,10 @@ var benchgenCmd = &cobra.Command{
 
 		layers = layers.FwdUnion("float", "")
 
-		prog := bytes.NewBufferString("")
+		prog := bytes.NewBufferString(`
+#include "layer/layer_benchmarks.hpp"
+
+    `)
 		var mut sync.Mutex
 
 		g, _ := errgroup.WithContext(context.Background())
@@ -69,27 +72,26 @@ var benchgenCmd = &cobra.Command{
 				case "conv":
 					l := lyr.(*perflayer.Conv)
 					b = l.FwdBenchmarkGenerator()
-				case "relu":
-					l := lyr.(*perflayer.Relu)
-					b = l.FwdBenchmarkGenerator()
-				case "pooling":
-					l := lyr.(*perflayer.Pooling)
-					b = l.FwdBenchmarkGenerator()
-				case "softmax":
-					l := lyr.(*perflayer.Softmax)
-					b = l.FwdBenchmarkGenerator()
+				// case "relu":
+				// 	l := lyr.(*perflayer.Relu)
+				// 	b = l.FwdBenchmarkGenerator()
+				// case "pooling":
+				// 	l := lyr.(*perflayer.Pooling)
+				// 	b = l.FwdBenchmarkGenerator()
+				// case "softmax":
+				// 	l := lyr.(*perflayer.Softmax)
+				// 	b = l.FwdBenchmarkGenerator()
 				case "batchnorm":
 					l := lyr.(*perflayer.BatchNorm)
 					b = l.FwdBenchmarkGenerator()
-				case "dropout":
-					l := lyr.(*perflayer.Dropout)
-					b = l.FwdBenchmarkGenerator()
-				case "identity":
-					l := lyr.(*perflayer.Identity)
-					b = l.FwdBenchmarkGenerator()
+				// case "dropout":
+				// 	l := lyr.(*perflayer.Dropout)
+				// 	b = l.FwdBenchmarkGenerator()
+				// case "identity":
+				// 	l := lyr.(*perflayer.Identity)
+				// 	b = l.FwdBenchmarkGenerator()
 				default:
 					pp.Println(lyr.OperatorType())
-
 				}
 				if b == "" {
 					return nil

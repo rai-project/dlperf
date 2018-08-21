@@ -75,13 +75,13 @@ func (c Conv) FwdTiming(system string /* hardware/software struct */) string {
 func (c Conv) FwdBenchmarkAlgorithms() []string {
 	return []string{
 		"CUDNN_CONVOLUTION_FWD_ALGO_IMPLICIT_GEMM",
-		"CUDNN_CONVOLUTION_FWD_ALGO_IMPLICIT_​PRECOMP_GEMM",
+		"CUDNN_CONVOLUTION_FWD_ALGO_IMPLICIT_PRECOMP_GEMM",
 		"CUDNN_CONVOLUTION_FWD_ALGO_GEMM",
 		"CUDNN_CONVOLUTION_FWD_ALGO_DIRECT",
 		"CUDNN_CONVOLUTION_FWD_ALGO_FFT",
 		"CUDNN_CONVOLUTION_FWD_ALGO_FFT_TILING",
 		"CUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD",
-		"CUDNN_CONVOLUTION_FWD_ALGO_​WINOGRAD_NONFUSED",
+		"CUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD_NONFUSED",
 	}
 }
 
@@ -147,6 +147,17 @@ func (c Conv) FwdBenchmarkFilter(datatype, algorithm string) benchmark.Benchmark
 	}
 }
 
+func (c Conv) DataTypes() []dlperf.DataType {
+	dts := c.Base.DataTypes()
+	return append(
+		dts,
+		dlperf.DataType{
+			Name:  "TensorCoreHalf",
+			CType: "__half",
+		},
+	)
+}
+
 func (c Conv) FwdBenchmarkGeneratorArgNames() []string {
 	return benchmarkArgNames(convBenchmarkArgs{})
 }
@@ -154,11 +165,21 @@ func (c Conv) FwdBenchmarkGeneratorArgNames() []string {
 func (c Conv) FwdBenchmarkGenerator() string {
 	const templString = `
 [[ range $datatype := .DataTypes ]]
+[[ if eq $datatype.Name "TensorCoreHalf" ]]
+#ifdef CUDNN_SUPPORTS_TENSOR_OPS
+[[ end ]]
 template <cudnnConvolutionFwdAlgo_t convolution_algorithm>
 static void [[ $.BenchmarkName ]]_[[ $datatype.Name | upper ]]__[[$.UniqueBenchmarkID]](benchmark::State& state) {
-  [[ $.BenchmarkName ]]_Impl<[[ $datatype.CType ]], convolution_algorithm>(state);
+  [[ if eq $datatype.Name "TensorCoreHalf" ]]
+    [[ $.BenchmarkName ]]_Impl<[[ $datatype.CType ]], convolution_algorithm, CUDNN_TENSOR_OP_MATH>(state);
+  [[ else ]]
+    [[ $.BenchmarkName ]]_Impl<[[ $datatype.CType ]], convolution_algorithm>(state);
+  [[ end ]]
   BENCHMARK_[[ $.BenchmarkName ]]_ADD_COUNTERS__[[$.UniqueBenchmarkID]](state);
 }
+[[ if eq $datatype.Name "TensorCoreHalf" ]]
+#endif //  CUDNN_SUPPORTS_TENSOR_OPS
+[[ end ]]
 [[ end ]]
 `
 

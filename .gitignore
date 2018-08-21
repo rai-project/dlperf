@@ -690,3 +690,8 @@ paket-files/
 theoretical_flops
 main
 dlperf
+
+test.cpp
+test2.cpp
+generate_benchmarks.hpp
+generated_benchmarks.hpp

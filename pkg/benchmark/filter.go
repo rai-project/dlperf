@@ -46,7 +46,7 @@ func isSameScalar(a, b interface{}) bool {
 		return false
 	}
 	if a0 < 0 {
-		panic("a0 < 0")
+		// panic("a0 < 0")
 		a0 = float64(0)
 	}
 
@@ -55,7 +55,7 @@ func isSameScalar(a, b interface{}) bool {
 		return false
 	}
 	if b0 < 0 {
-		panic("b0 < 0")
+		// panic("b0 < 0")
 		b0 = float64(0)
 	}
 

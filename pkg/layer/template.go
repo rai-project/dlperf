@@ -13,6 +13,7 @@ import (
 
 const (
 	templateBasePrefix = `
+#ifdef ENABLE_[[ .BenchmarkName ]]
 namespace [[ .BenchmarkName ]]__[[.UniqueBenchmarkID]] {
 
 #define BENCHMARK_[[ .BenchmarkName ]]_INPUT_ARGS() \
@@ -31,7 +32,10 @@ static void BENCHMARK_[[ .BenchmarkName ]]_ADD_COUNTERS__[[.UniqueBenchmarkID]](
 `
 	templateBaseSuffix = `
 #define BENCHMARK_[[ .BenchmarkName ]](b) \
-[[ range $algorithm := .Algorithms ]] BENCHMARK_TEMPLATE(b, [[ $algorithm ]])->BENCHMARK_[[ $.BenchmarkName ]]_INPUT_ARG_NAMES()->UseManualTime(); \
+[[ range $algorithm := .Algorithms ]] BENCHMARK_TEMPLATE(b, [[ $algorithm ]])-> \
+  BENCHMARK_[[ $.BenchmarkName ]]_INPUT_ARG_NAMES()->\
+  BENCHMARK_[[ $.BenchmarkName ]]_INPUT_ARGS()->\
+  UseManualTime(); \
 [[ end ]]
 
 [[ range $datatype := .DataTypes ]]BENCHMARK_[[ $.BenchmarkName ]]([[ $.BenchmarkName ]]_[[ $datatype.Name | upper ]]__[[$.UniqueBenchmarkID]]);
@@ -40,6 +44,7 @@ static void BENCHMARK_[[ .BenchmarkName ]]_ADD_COUNTERS__[[.UniqueBenchmarkID]](
 #undef BENCHMARK_[[ .BenchmarkName ]]_INPUT_ARG_NAMES
 #undef BENCHMARK_[[ .BenchmarkName ]]
 }
+#endif // ENABLE_[[ .BenchmarkName ]]
 `
 )
 

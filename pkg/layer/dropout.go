@@ -95,11 +95,15 @@ static void [[ $.BenchmarkName ]]_[[ $datatype.Name | upper ]]__[[$.UniqueBenchm
 
 
 [[ range $datatype := .DataTypes ]]
-BENCHMARK([[ $.BenchmarkName ]]_[[ $datatype.Name | upper ]]__[[$.UniqueBenchmarkID]]);
+BENCHMARK([[ $.BenchmarkName ]]_[[ $datatype.Name | upper ]]__[[$.UniqueBenchmarkID]])->\
+  BENCHMARK_[[ $.BenchmarkName ]]_INPUT_ARG_NAMES()->\
+  BENCHMARK_[[ $.BenchmarkName ]]_INPUT_ARGS()->\
+  UseManualTime();
 [[ end ]]
 #undef BENCHMARK_[[ .BenchmarkName ]]_INPUT_ARGS
 #undef BENCHMARK_[[ .BenchmarkName ]]_INPUT_ARG_NAMES
 }
+#endif // ENABLE_[[ .BenchmarkName ]]
 `
 
 	return templateExec(&c, templateBasePrefix+templString)

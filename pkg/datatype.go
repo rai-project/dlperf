@@ -26,8 +26,4 @@ var AllDataTypes = []DataType{
 	// 	Name:  "Float64",
 	// 	CType: "double",
 	// },
-	DataType{
-		Name:  "TensorCoreHalf",
-		CType: "__half",
-	},
 }
