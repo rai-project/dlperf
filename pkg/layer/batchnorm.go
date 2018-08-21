@@ -115,12 +115,12 @@ func (c BatchNorm) Information() dlperf.LayerInformation {
 	info := &Information{
 		Base: c.Base,
 		shape: dlperf.ShapeInformation{
-			InputShapes:  c.inputShapes,
-			OutputShapes: c.outputShapes,
+			InputShapes:  c.InputShapes(),
+			OutputShapes: c.OutputShapes(),
 		},
 	}
 
-	if isAnyEmpty(c.outputShapes) {
+	if isAnyEmpty(c.OutputShapes()) {
 		log.WithField("layer", c.OperatorType()).Info("len(OutputShapes) is 0")
 		return info
 	}
@@ -128,7 +128,7 @@ func (c BatchNorm) Information() dlperf.LayerInformation {
 	checkNumber(c.InputShapes, []int{5}, c.OperatorType(), "number of inputs")
 	checkNumber(c.OutputShapes, []int{1, 2, 3, 4, 5}, c.OperatorType(), "number of outputs")
 
-	inputShapes := c.inputShapes[0]
+	inputShapes := c.InputShapes()[0]
 
 	numOps := int64(1)
 	for _, s := range inputShapes {

@@ -25,7 +25,7 @@ func (Gemm) Description() string {
 func (c *Gemm) InferShape(inputLayers dlperf.Layers) {
 	c.SetInputShapes(getOutputShapes(inputLayers))
 
-	aShape := c.inputShapes[0]
+	aShape := c.InputShapes()[0]
 	var am int64
 	if c.TransA == 0 {
 		am = aShape[0]
@@ -33,7 +33,7 @@ func (c *Gemm) InferShape(inputLayers dlperf.Layers) {
 		am = aShape[1]
 	}
 
-	bShape := c.inputShapes[1]
+	bShape := c.InputShapes()[1]
 	var bn int64
 	if c.TransB == 0 {
 		bn = bShape[1]
@@ -49,12 +49,12 @@ func (c Gemm) Information() dlperf.LayerInformation {
 	info := &Information{
 		Base: c.Base,
 		shape: dlperf.ShapeInformation{
-			InputShapes:  c.inputShapes,
-			OutputShapes: c.outputShapes,
+			InputShapes:  c.InputShapes(),
+			OutputShapes: c.OutputShapes(),
 		},
 	}
 
-	if isAnyEmpty(c.outputShapes) {
+	if isAnyEmpty(c.OutputShapes()) {
 		log.WithField("layer", c.OperatorType()).Info("len(OutputShapes) is 0")
 		return info
 	}
@@ -62,7 +62,7 @@ func (c Gemm) Information() dlperf.LayerInformation {
 	checkNumber(c.InputShapes, []int{3}, c.OperatorType(), "number of inputs")
 	checkNumber(c.OutputShapes, []int{1}, c.OperatorType(), "number of outputs")
 
-	aShape := c.inputShapes[0]
+	aShape := c.InputShapes()[0]
 	var am, ak int64
 	if c.TransA == 0 {
 		am = aShape[0]
@@ -72,7 +72,7 @@ func (c Gemm) Information() dlperf.LayerInformation {
 		ak = aShape[0]
 	}
 
-	bShape := c.inputShapes[1]
+	bShape := c.InputShapes()[1]
 	var bn int64
 	if c.TransB == 0 {
 		bn = bShape[1]

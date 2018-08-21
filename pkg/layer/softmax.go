@@ -121,12 +121,12 @@ func (c Softmax) Information() dlperf.LayerInformation {
 	info := &Information{
 		Base: c.Base,
 		shape: dlperf.ShapeInformation{
-			InputShapes:  c.inputShapes,
-			OutputShapes: c.outputShapes,
+			InputShapes:  c.InputShapes(),
+			OutputShapes: c.OutputShapes(),
 		},
 	}
 
-	if isAnyEmpty(c.inputShapes) {
+	if isAnyEmpty(c.InputShapes()) {
 		log.WithField("layer", c.OperatorType()).Info("len(InputShapes) is 0")
 		return info
 	}

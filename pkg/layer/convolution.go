@@ -31,12 +31,12 @@ func (Conv) Description() string {
 }
 
 func (c *Conv) InferShape(inputLayers dlperf.Layers) {
-	xShape := c.inputShapes[0]
+	xShape := c.InputShapes()[0]
 	xn := xShape[0]
 	xh := xShape[2]
 	xw := xShape[3]
 
-	wShape := c.inputShapes[1]
+	wShape := c.InputShapes()[1]
 	wn := wShape[0]
 
 	wh := wShape[2]
@@ -57,6 +57,7 @@ func (c *Conv) InferShape(inputLayers dlperf.Layers) {
 		panic("invalid pad form " + c.AutoPad)
 	}
 	yShape := dlperf.Shape{yn, yc, yh, yw}
+
 	c.SetOutputShapes([]dlperf.Shape{yShape})
 }
 
@@ -194,12 +195,12 @@ func (c Conv) Information() dlperf.LayerInformation {
 	info := &Information{
 		Base: c.Base,
 		shape: dlperf.ShapeInformation{
-			InputShapes:  c.inputShapes,
-			OutputShapes: c.outputShapes,
+			InputShapes:  c.InputShapes(),
+			OutputShapes: c.OutputShapes(),
 		},
 	}
 
-	if isAnyEmpty(c.outputShapes) {
+	if isAnyEmpty(c.OutputShapes()) {
 		log.WithField("layer", c.OperatorType()).Info("len(OutputShapes) is 0")
 		return info
 	}

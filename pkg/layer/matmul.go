@@ -19,8 +19,8 @@ func (MatMul) Description() string {
 func (c *MatMul) InferShape(inputLayers dlperf.Layers) {
 	c.SetInputShapes(getOutputShapes(inputLayers))
 
-	aShape := c.inputShapes[0]
-	bShape := c.inputShapes[1]
+	aShape := c.InputShapes()[0]
+	bShape := c.InputShapes()[1]
 	var cShape dlperf.Shape
 
 	if len(aShape) > 2 {
@@ -53,12 +53,12 @@ func (c MatMul) Information() dlperf.LayerInformation {
 	info := &Information{
 		Base: c.Base,
 		shape: dlperf.ShapeInformation{
-			InputShapes:  c.inputShapes,
-			OutputShapes: c.outputShapes,
+			InputShapes:  c.InputShapes(),
+			OutputShapes: c.OutputShapes(),
 		},
 	}
 
-	if isAnyEmpty(c.outputShapes) {
+	if isAnyEmpty(c.OutputShapes()) {
 		log.WithField("layer", c.OperatorType()).Info("len(OutputShapes) is 0")
 		return info
 	}
@@ -66,8 +66,8 @@ func (c MatMul) Information() dlperf.LayerInformation {
 	checkNumber(c.InputShapes, []int{1, 2}, c.OperatorType(), "number of inputs")
 	checkNumber(c.OutputShapes, []int{1}, c.OperatorType(), "number of outputs")
 
-	inputADimensions := c.inputShapes[0] // (N x C x H x W)
-	inputBDimensions := c.inputShapes[1] // (N x C x H x W)
+	inputADimensions := c.InputShapes()[0] // (N x C x H x W)
+	inputBDimensions := c.InputShapes()[1] // (N x C x H x W)
 
 	var numOps int64
 	dimLen := len(inputADimensions)

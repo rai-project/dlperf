@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/getlantern/deepcopy"
 	dlperf "github.com/rai-project/dlperf/pkg"
 	"github.com/rai-project/dlperf/pkg/benchmark"
 	"github.com/rai-project/onnx"
@@ -148,19 +149,27 @@ func (b Base) SetOutputNames(names []string) {
 }
 
 func (b Base) InputShapes() []dlperf.Shape {
-	return b.inputShapes
+	cpy := []dlperf.Shape{}
+	deepcopy.Copy(&cpy, b.inputShapes)
+	return cpy
 }
 
 func (b *Base) SetInputShapes(in []dlperf.Shape) {
-	b.inputShapes = in
+	cpy := []dlperf.Shape{}
+	deepcopy.Copy(&cpy, in)
+	b.inputShapes = cpy
 }
 
 func (b Base) OutputShapes() []dlperf.Shape {
-	return b.outputShapes
+	cpy := []dlperf.Shape{}
+	deepcopy.Copy(&cpy, b.outputShapes)
+	return cpy
 }
 
 func (b *Base) SetOutputShapes(out []dlperf.Shape) {
-	b.outputShapes = out
+	cpy := []dlperf.Shape{}
+	deepcopy.Copy(&cpy, out)
+	b.outputShapes = cpy
 }
 
 func (b *Base) UnmarshalJSON(d []byte) error {

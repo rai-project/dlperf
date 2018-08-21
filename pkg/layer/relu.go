@@ -145,12 +145,12 @@ func (c Relu) Information() dlperf.LayerInformation {
 	info := &Information{
 		Base: c.Base,
 		shape: dlperf.ShapeInformation{
-			InputShapes:  c.inputShapes,
-			OutputShapes: c.outputShapes,
+			InputShapes:  c.InputShapes(),
+			OutputShapes: c.OutputShapes(),
 		},
 	}
 
-	if isAnyEmpty(c.outputShapes) {
+	if isAnyEmpty(c.OutputShapes()) {
 		log.WithField("layer", c.OperatorType()).Info("len(OutputShapes) is 0")
 		return info
 	}

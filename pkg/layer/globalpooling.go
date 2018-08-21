@@ -19,7 +19,7 @@ func (GlobalPooling) Description() string {
 func (c *GlobalPooling) InferShape(inputLayers dlperf.Layers) {
 	c.SetInputShapes(getOutputShapes(inputLayers))
 
-	xShape := c.inputShapes[0]
+	xShape := c.InputShapes()[0]
 	xn := xShape[0]
 	xc := xShape[1]
 
@@ -31,12 +31,12 @@ func (c GlobalPooling) Information() dlperf.LayerInformation {
 	info := &Information{
 		Base: c.Base,
 		shape: dlperf.ShapeInformation{
-			InputShapes:  c.inputShapes,
-			OutputShapes: c.outputShapes,
+			InputShapes:  c.InputShapes(),
+			OutputShapes: c.OutputShapes(),
 		},
 	}
 
-	if isAnyEmpty(c.outputShapes) {
+	if isAnyEmpty(c.OutputShapes()) {
 		log.WithField("layer", c.OperatorType()).Info("len(OutputShapes) is 0")
 		return info
 	}

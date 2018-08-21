@@ -26,7 +26,7 @@ func (Pooling) Description() string {
 
 func (c *Pooling) InferShape(inputLayers dlperf.Layers) {
 	inputShapes := getOutputShapes(inputLayers)
-	xShape := c.inputShapes[0]
+	xShape := c.InputShapes()[0]
 
 	yShape := dlperf.Shape{xShape[0], xShape[1]}
 	for ii, xs := range xShape[2:] {
@@ -129,12 +129,12 @@ func (c Pooling) Information() dlperf.LayerInformation {
 	info := &Information{
 		Base: c.Base,
 		shape: dlperf.ShapeInformation{
-			InputShapes:  c.inputShapes,
-			OutputShapes: c.outputShapes,
+			InputShapes:  c.InputShapes(),
+			OutputShapes: c.OutputShapes(),
 		},
 	}
 
-	if isAnyEmpty(c.outputShapes) {
+	if isAnyEmpty(c.OutputShapes()) {
 		log.WithField("layer", c.OperatorType()).Info("len(OutputShapes) is 0")
 		return info
 	}

@@ -89,8 +89,10 @@ func (o Onnx) mkBatchNorm(node *onnx.NodeProto) dlperf.Layer {
 }
 
 func (o Onnx) mkConcat(node *onnx.NodeProto) dlperf.Layer {
+	axisAttr := getNodeAttributeFromName(node, "axis")
 	return &layer.Concat{
 		Base: o.mkBase(node, "Concat"),
+		Axis: axisAttr.GetI(),
 	}
 }
 

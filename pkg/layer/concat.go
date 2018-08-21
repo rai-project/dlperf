@@ -6,7 +6,7 @@ import (
 
 type Concat struct {
 	*Base `json:",inline,flatten,omitempty"`
-	Axis  int `json:"axis,omitempty"`
+	Axis  int64 `json:"axis,omitempty"`
 }
 
 func (Concat) Description() string {
@@ -19,7 +19,7 @@ func (Concat) OperatorType() string {
 
 func (c *Concat) InferShape(inputLayers dlperf.Layers) {
 	inputShapes := getOutputShapes(inputLayers)
-	yShape := c.inputShapes[0]
+	yShape := c.InputShapes()[0]
 
 	for _, input := range inputShapes[1:] {
 		yShape[c.Axis] += input[c.Axis]
@@ -33,12 +33,12 @@ func (c Concat) Information() dlperf.LayerInformation {
 	info := &Information{
 		Base: c.Base,
 		shape: dlperf.ShapeInformation{
-			InputShapes:  c.inputShapes,
-			OutputShapes: c.outputShapes,
+			InputShapes:  c.InputShapes(),
+			OutputShapes: c.OutputShapes(),
 		},
 	}
 
-	if isAnyEmpty(c.outputShapes) {
+	if isAnyEmpty(c.OutputShapes()) {
 		log.WithField("layer", c.OperatorType()).Info("len(OutputShapes) is 0")
 		return info
 	}
