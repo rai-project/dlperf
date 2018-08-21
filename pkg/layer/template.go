@@ -15,29 +15,32 @@ const (
 	templateBasePrefix = `
 namespace [[ .BenchmarkName ]]__[[.UniqueBenchmarkID]] {
 
-  static void BENCHMARK_[[ .BenchmarkName ]]_ADD_COUNTERS__[[.UniqueBenchmarkID]](benchmark::State& state) {
-    state.counters.insert({
-[[ . | make_counters ]]
-    });
-  }
-`
-	templateBaseSuffix = `
 #define BENCHMARK_[[ .BenchmarkName ]]_INPUT_ARGS() \
   Args({{ \
-[[ . | make_arguments ]]
+  [[ . | make_arguments ]]
   }})
 
-#define BENCHMARK_[[ .BenchmarkName ]](b)                                                                                             \
-[[ range $algorithm := .Algorithms ]] BENCHMARK_TEMPLATE(b, [[ $algorithm ]])->ArgNames({[[$.ArgNames | join ", "]]})->BENCHMARK_[[ $.BenchmarkName ]]_INPUT_ARGS()->UseManualTime(); \
+#define BENCHMARK_[[ .BenchmarkName ]]_INPUT_ARG_NAMES() \
+  ArgNames({[[ .ArgNames | join ", " ]]})
+
+static void BENCHMARK_[[ .BenchmarkName ]]_ADD_COUNTERS__[[.UniqueBenchmarkID]](benchmark::State& state) {
+  state.counters.insert({
+[[ . | make_counters ]]
+  });
+}
+`
+	templateBaseSuffix = `
+#define BENCHMARK_[[ .BenchmarkName ]](b) \
+[[ range $algorithm := .Algorithms ]] BENCHMARK_TEMPLATE(b, [[ $algorithm ]])->BENCHMARK_[[ $.BenchmarkName ]]_INPUT_ARG_NAMES()->UseManualTime(); \
 [[ end ]]
 
-[[ range $datatype := .DataTypes ]]
-  BENCHMARK_[[ $.BenchmarkName ]]([[ $.BenchmarkName ]]_[[ $datatype.Name | upper ]]__[[$.UniqueBenchmarkID]]);
+[[ range $datatype := .DataTypes ]]BENCHMARK_[[ $.BenchmarkName ]]([[ $.BenchmarkName ]]_[[ $datatype.Name | upper ]]__[[$.UniqueBenchmarkID]]);
 [[ end ]]
-
 #undef BENCHMARK_[[ .BenchmarkName ]]_INPUT_ARGS
+$undef BENCHMARK_[[ .BenchmarkName ]]_INPUT_ARG_NAMES
 #undef BENCHMARK_[[ .BenchmarkName ]]
-}`
+}
+`
 )
 
 // recovery will silently swallow all unexpected panics.

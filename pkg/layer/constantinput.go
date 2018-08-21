@@ -20,6 +20,10 @@ func (c *ConstantInput) InferShape(inputLayers dlperf.Layers) {
 	// intentionally blank, set in mkConstantInput
 }
 
+func (c ConstantInput) FwdBenchmarkGenerator() string {
+	return ""
+}
+
 func (c ConstantInput) Information() dlperf.LayerInformation {
 	info := &Information{
 		Base: c.Base,

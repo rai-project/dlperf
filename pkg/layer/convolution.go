@@ -148,13 +148,13 @@ func (c Conv) FwdBenchmarkGeneratorArgNames() []string {
 
 func (c Conv) FwdBenchmarkGenerator() string {
 	const templString = `
-  [[ range $datatype := .DataTypes ]]
-  template <cudnnConvolutionFwdAlgo_t convolution_algorithm>
-  static void [[ $.BenchmarkName ]]_[[ $datatype.Name | upper ]]__[[$.UniqueBenchmarkID]](benchmark::State& state) {
-    CUDNN_CONV_FWD_Impl<[[ $datatype.CType ]], convolution_algorithm>(state);
-    BENCHMARK_[[ $.BenchmarkName ]]_ADD_COUNTERS__[[$.UniqueBenchmarkID]](state);
-  }
-  [[ end ]]
+[[ range $datatype := .DataTypes ]]
+template <cudnnConvolutionFwdAlgo_t convolution_algorithm>
+static void [[ $.BenchmarkName ]]_[[ $datatype.Name | upper ]]__[[$.UniqueBenchmarkID]](benchmark::State& state) {
+  CUDNN_CONV_FWD_Impl<[[ $datatype.CType ]], convolution_algorithm>(state);
+  BENCHMARK_[[ $.BenchmarkName ]]_ADD_COUNTERS__[[$.UniqueBenchmarkID]](state);
+}
+[[ end ]]
 `
 
 	return templateExec(&c, templateBasePrefix+templString+templateBaseSuffix)
