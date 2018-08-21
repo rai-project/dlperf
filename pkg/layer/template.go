@@ -37,7 +37,7 @@ static void BENCHMARK_[[ .BenchmarkName ]]_ADD_COUNTERS__[[.UniqueBenchmarkID]](
 [[ range $datatype := .DataTypes ]]BENCHMARK_[[ $.BenchmarkName ]]([[ $.BenchmarkName ]]_[[ $datatype.Name | upper ]]__[[$.UniqueBenchmarkID]]);
 [[ end ]]
 #undef BENCHMARK_[[ .BenchmarkName ]]_INPUT_ARGS
-$undef BENCHMARK_[[ .BenchmarkName ]]_INPUT_ARG_NAMES
+#undef BENCHMARK_[[ .BenchmarkName ]]_INPUT_ARG_NAMES
 #undef BENCHMARK_[[ .BenchmarkName ]]
 }
 `
