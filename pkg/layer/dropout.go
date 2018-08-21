@@ -60,7 +60,12 @@ func (c Dropout) FwdBenchmarkArgs() interface{} {
 		baseBenchmarkArgs:      mkBaseBenchmarkArgs(&c),
 	}
 
-	hash, err := hashstructure.Hash(res, nil)
+	hash, err := hashstructure.Hash(
+		res,
+		&hashstructure.HashOptions{
+			TagName: "args",
+		},
+	)
 	if err != nil {
 		panic(err)
 	}

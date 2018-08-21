@@ -45,10 +45,18 @@ func isSameScalar(a, b interface{}) bool {
 	if err != nil {
 		return false
 	}
+	if a0 < 0 {
+		panic("a0 < 0")
+		a0 = float64(0)
+	}
 
 	b0, err := cast.ToFloat64E(b)
 	if err != nil {
 		return false
+	}
+	if b0 < 0 {
+		panic("b0 < 0")
+		b0 = float64(0)
 	}
 
 	floatEquals := func(a, b float64) bool {

@@ -84,6 +84,9 @@ var benchgenCmd = &cobra.Command{
 				case "dropout":
 					l := lyr.(*perflayer.Dropout)
 					b = l.FwdBenchmarkGenerator()
+				case "identity":
+					l := lyr.(*perflayer.Identity)
+					b = l.FwdBenchmarkGenerator()
 				default:
 					pp.Println(lyr.OperatorType())
 

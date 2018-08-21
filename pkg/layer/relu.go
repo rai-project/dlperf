@@ -99,7 +99,12 @@ func (c Relu) FwdBenchmarkArgs() interface{} {
 		}
 	}
 
-	hash, err := hashstructure.Hash(res, nil)
+	hash, err := hashstructure.Hash(
+		res,
+		&hashstructure.HashOptions{
+			TagName: "args",
+		},
+	)
 	if err != nil {
 		panic(err)
 	}

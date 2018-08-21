@@ -1,8 +1,7 @@
 package layer
 
 import (
-	"fmt"
-
+	"github.com/mitchellh/hashstructure"
 	"github.com/rai-project/dlperf/pkg"
 	"github.com/rai-project/dlperf/pkg/benchmark"
 )
@@ -31,10 +30,6 @@ func (c Identity) FwdBenchmarkName() string {
 	return "LAYER_CUDNN_ACTIVATION_FWD"
 }
 
-func (c Identity) FwdBenchmarkArgs() interface{} {
-	return []string{""}
-}
-
 func (c Identity) FwdCUDNNName() string {
 	return ""
 }
@@ -49,18 +44,52 @@ func (c Identity) FwdBenchmarkAlgorithms() []string {
 	}
 }
 
+type identityBenchmarkArgs struct {
+	baseBenchmarkArgs
+	BaseBenchmarkInputArgs
+}
+
+func (c Identity) FwdBenchmarkGeneratorArgNames() []string {
+	return benchmarkArgNames(identityBenchmarkArgs{})
+}
+
+func (c Identity) FwdBenchmarkArgs() interface{} {
+	res := identityBenchmarkArgs{
+		BaseBenchmarkInputArgs: mkBaseBenchmarkInputArgs(&c),
+		baseBenchmarkArgs:      mkBaseBenchmarkArgs(&c),
+	}
+
+	hash, err := hashstructure.Hash(res, nil)
+	if err != nil {
+		panic(err)
+	}
+	res.UniqueBenchmarkID = hash
+
+	return res
+}
+
 func (c Identity) FwdBenchmarkFilter(datatype, algorithm string) benchmark.Benchmark {
 	if algorithm == "" {
 		algorithm = c.FwdBenchmarkAlgorithms()[0]
 	}
-	attrs := map[string]interface{}{}
-	for ii, dim := range c.InputShapes()[0] {
-		attrs[fmt.Sprintf("input[%d]", ii)] = dim
-	}
 	return benchmark.Benchmark{
 		Name:       mkBenchmarkFilterName(&c, datatype, algorithm),
-		Attributes: attrs,
+		Attributes: benchmarkAttributes(c.FwdBenchmarkArgs()),
 	}
+}
+
+func (c Identity) FwdBenchmarkGenerator() string {
+	const templString = `
+[[ range $datatype := .DataTypes ]]
+template <cudnnActivationMode_t activation_mode>
+static void [[ $.BenchmarkName ]]_[[ $datatype.Name | upper ]]__[[$.UniqueBenchmarkID]](benchmark::State& state) {
+  [[ $.BenchmarkName ]]_Impl<[[ $datatype.CType ]], activation_mode>(state);
+  BENCHMARK_[[ $.BenchmarkName ]]_ADD_COUNTERS__[[$.UniqueBenchmarkID]](state);
+}
+[[ end ]]
+`
+
+	return templateExec(&c, templateBasePrefix+templString+templateBaseSuffix)
 }
 
 func (c Identity) Shape() dlperf.ShapeInformation {
