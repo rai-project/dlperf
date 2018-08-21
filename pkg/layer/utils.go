@@ -4,7 +4,9 @@ import (
 	"errors"
 	"reflect"
 	"strings"
+	"text/template"
 
+	"github.com/fatih/structs"
 	dlperf "github.com/rai-project/dlperf/pkg"
 )
 
@@ -128,4 +130,32 @@ func mkBenchmarkFilterName(layer dlperf.Layer, datatype, algorithm string) strin
 		name += "<" + strings.ToUpper(algorithm) + ">"
 	}
 	return name + ".*"
+}
+
+func benchmarkArgNames(st interface{}) string {
+	tags := []string{}
+	for _, field := range structs.New(st).Fields() {
+		tag := field.Tag("args")
+		if tag == "" || tag == "-" {
+			continue
+		}
+		tags = append(tags, "\""+tag+"\"")
+	}
+	return strings.Join(tags, ",")
+}
+
+func benchmarkAttributes(st interface{}) map[string]interface{} {
+	attrs := map[string]interface{}{}
+	for _, field := range structs.New(st).Fields() {
+		tag := field.Tag("args")
+		if tag == "" || tag == "-" {
+			continue
+		}
+		attrs[tag] = field.Value()
+	}
+	return attrs
+}
+
+func mkTemplate(lyr dlperf.Layer) *template.Template {
+	return template.New(lyr.OperatorType()).Delims("[[", "]]")
 }

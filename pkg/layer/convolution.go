@@ -4,9 +4,7 @@ import (
 	"bytes"
 	"math"
 	"strings"
-	"text/template"
 
-	"github.com/fatih/structs"
 	"github.com/mitchellh/hashstructure"
 	"github.com/rai-project/dlperf/pkg"
 	"github.com/rai-project/dlperf/pkg/benchmark"
@@ -140,35 +138,18 @@ func (c Conv) FwdBenchmarkFilter(datatype, algorithm string) benchmark.Benchmark
 		algorithm = c.FwdBenchmarkAlgorithms()[0]
 	}
 
-	attrs := map[string]interface{}{}
-	for _, field := range structs.New(c.FwdBenchmarkArgs()).Fields() {
-		tag := field.Tag("args")
-		if tag == "" || tag == "-" {
-			continue
-		}
-		attrs[tag] = field.Value()
-	}
-
 	return benchmark.Benchmark{
 		Name:       mkBenchmarkFilterName(&c, datatype, algorithm),
-		Attributes: attrs,
+		Attributes: benchmarkAttributes(c.FwdBenchmarkArgs()),
 	}
 }
 
 func (c Conv) FwdBenchmarkGeneratorArgNames() string {
-	tags := []string{}
-	for _, field := range structs.New(convBenchmarkArgs{}).Fields() {
-		tag := field.Tag("args")
-		if tag == "" || tag == "-" {
-			continue
-		}
-		tags = append(tags, "\""+tag+"\"")
-	}
-	return strings.Join(tags, ",")
+	return benchmarkArgNames(convBenchmarkArgs{})
 }
 
 func (c Conv) FwdBenchmarkGenerator() string {
-	templString := `
+	const templString = `
 namespace conv__[[.UniqueBenchmarkID]] {
 
   static void LAYER_CUDNN_CONV_FWD_ADD_COUNTERS__[[.UniqueBenchmarkID]](benchmark::State& state) {
@@ -229,8 +210,7 @@ namespace conv__[[.UniqueBenchmarkID]] {
 
 
 #define InputArgs() \
-  Args({ \
-    { \
+  Args({{ \
       [[.Input0]], /* Input0 */ \
       [[.Input1]], /* Input1 */ \
       [[.Input2]], /* Input2 */ \
@@ -244,8 +224,7 @@ namespace conv__[[.UniqueBenchmarkID]] {
       [[.StrideWidth]], /* StrideWidth */ \
       [[.DilationHeight]], /* DilationHeight */ \
       [[.DilationWidth]] /* DilationWidth */ \
-    } \
-  })
+  }})
 
 #define BENCHMARK_LAYER_CUDNN_CONV_FWD(b)                                                                                             \
   BENCHMARK_TEMPLATE(b, CUDNN_CONVOLUTION_FWD_ALGO_IMPLICIT_GEMM)->ArgNames({[[.ArgNames]]})->InputArgs()->UseManualTime();                   \
@@ -272,7 +251,7 @@ namespace conv__[[.UniqueBenchmarkID]] {
 `
 
 	templArgs := c.FwdBenchmarkArgs()
-	tmpl, err := template.New(c.OperatorType()).Delims("[[", "]]").Parse(templString)
+	tmpl, err := mkTemplate(&c).Parse(templString)
 	if err != nil {
 		panic(err)
 	}
