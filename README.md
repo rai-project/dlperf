@@ -44,3 +44,9 @@ go run main.go flopsinfo --model_path ~/onnx_models/bvlc_alexnet/model.onnx --fu
 ```
 go run main.go benchgen --model_path ~/onnx_models/bvlc_alexnet/model.onnx
 ```
+
+## Query benchmark info
+
+```
+go run main.go benchinfo --model_path ~/onnx_models/vgg19/vgg19.onnx
+```

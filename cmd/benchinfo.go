@@ -6,7 +6,6 @@ import (
 	sourcepath "github.com/GeertJohan/go-sourcepath"
 	"github.com/k0kubun/pp"
 	"github.com/rai-project/dlperf/pkg/benchmark"
-	perflayer "github.com/rai-project/dlperf/pkg/layer"
 	"github.com/rai-project/dlperf/pkg/onnx"
 	"github.com/spf13/cobra"
 )
@@ -57,11 +56,6 @@ var benchinfoCmd = &cobra.Command{
 			if lyr.OperatorType() != "Conv" && lyr.OperatorType() != "Relu" {
 				pp.Println(lyr.OperatorType())
 				continue
-			}
-			if lyr.OperatorType() == "Conv" {
-				l := lyr.(*perflayer.Conv)
-				println(l.FwdBenchmarkGenerator())
-				return nil
 			}
 			filter := lyr.FwdBenchmarkFilter("float", "")
 			bs, err := benchSuite.Filter(filter)
