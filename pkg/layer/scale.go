@@ -16,7 +16,7 @@ func (Scale) Description() string {
 	return ``
 }
 
-func (c *Scale) InferShape(inputLayers []dlperf.Layer) {
+func (c *Scale) InferShape(inputLayers dlperf.Layers) {
 	inputShapes := getOutputShapes(inputLayers)
 	c.SetInputShapes(inputShapes)
 	c.SetOutputShapes(inputShapes)

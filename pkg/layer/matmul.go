@@ -16,7 +16,7 @@ func (MatMul) Description() string {
 	return ``
 }
 
-func (c *MatMul) InferShape(inputLayers []dlperf.Layer) {
+func (c *MatMul) InferShape(inputLayers dlperf.Layers) {
 	c.SetInputShapes(getOutputShapes(inputLayers))
 
 	aShape := c.inputShapes[0]

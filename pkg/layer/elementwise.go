@@ -18,7 +18,7 @@ func (ElementWise) Description() string {
 	return ``
 }
 
-func (c *ElementWise) InferShape(inputLayers []dlperf.Layer) {
+func (c *ElementWise) InferShape(inputLayers dlperf.Layers) {
 	inputShapes := getOutputShapes(inputLayers)
 	outputShapes := []dlperf.Shape{inputShapes[0]}
 	c.SetOutputShapes(outputShapes)

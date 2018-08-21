@@ -22,7 +22,7 @@ func (BatchNorm) Description() string {
 	return ``
 }
 
-func (c *BatchNorm) InferShape(inputLayers []dlperf.Layer) {
+func (c *BatchNorm) InferShape(inputLayers dlperf.Layers) {
 	inputShapes := getOutputShapes(inputLayers)
 	c.SetInputShapes(inputShapes)
 	c.SetOutputShapes(inputShapes)

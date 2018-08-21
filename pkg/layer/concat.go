@@ -17,7 +17,7 @@ func (Concat) OperatorType() string {
 	return "Concat"
 }
 
-func (c *Concat) InferShape(inputLayers []dlperf.Layer) {
+func (c *Concat) InferShape(inputLayers dlperf.Layers) {
 	inputShapes := getOutputShapes(inputLayers)
 	yShape := c.inputShapes[0]
 

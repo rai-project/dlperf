@@ -23,7 +23,7 @@ func (Pooling) Description() string {
 	return ``
 }
 
-func (c *Pooling) InferShape(inputLayers []dlperf.Layer) {
+func (c *Pooling) InferShape(inputLayers dlperf.Layers) {
 	inputShapes := getOutputShapes(inputLayers)
 	xShape := c.inputShapes[0]
 

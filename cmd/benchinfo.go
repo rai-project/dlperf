@@ -49,15 +49,20 @@ var benchinfoCmd = &cobra.Command{
 		benchmarkInfo := []bench{}
 
 		for _, nd := range nds {
-			layer := nd.Layer()
-			if layer.OperatorType() == "ConstantInput" {
+			lyr := nd.Layer()
+			if lyr.OperatorType() == "ConstantInput" {
 				continue
 			}
-			if layer.OperatorType() != "Conv" && layer.OperatorType() != "Relu" {
-				pp.Println(layer.OperatorType())
+			if lyr.OperatorType() != "Conv" && lyr.OperatorType() != "Relu" {
+				pp.Println(lyr.OperatorType())
 				continue
 			}
-			filter := layer.FwdBenchmarkFilter("float", "")
+			// if lyr.OperatorType() == "Conv" {
+			// 	l := lyr.(*perflayer.Conv)
+			// 	println(l.FwdBenchmarkGenerator())
+			// 	return nil
+			// }
+			filter := lyr.FwdBenchmarkFilter("float", "")
 			bs, err := benchSuite.Filter(filter)
 			if err != nil {
 				pp.ColoringEnabled = false
@@ -71,11 +76,11 @@ var benchinfoCmd = &cobra.Command{
 				pp.ColoringEnabled = true
 				continue
 			}
-			info := layer.Information()
+			info := lyr.Information()
 			for _, b := range bs {
 				benchmarkInfo = append(benchmarkInfo, bench{
 					benchmark: b,
-					layer:     layer,
+					layer:     lyr,
 					flops:     info.Flops(),
 				})
 			}

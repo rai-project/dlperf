@@ -19,7 +19,7 @@ func (Transpose) Description() string {
 	return ``
 }
 
-func (c *Transpose) InferShape(inputLayers []dlperf.Layer) {
+func (c *Transpose) InferShape(inputLayers dlperf.Layers) {
 	inputShapes := getOutputShapes(inputLayers)
 	// if c.OperatorType() == "Transpose" {
 	// 	pp.Println(inputLayers[1].Name())

@@ -10,7 +10,7 @@ import (
 	"gonum.org/v1/gonum/graph/topo"
 )
 
-func sortByOrder(nds []graph.Node, layers []dlperf.Layer) []dlperf.Layer {
+func sortByOrder(nds []graph.Node, layers dlperf.Layers) dlperf.Layers {
 
 	if len(layers) == 1 {
 		return layers
@@ -41,7 +41,7 @@ func sortByOrder(nds []graph.Node, layers []dlperf.Layer) []dlperf.Layer {
 	return layers
 }
 
-func sortByDimension(layers []dlperf.Layer) []dlperf.Layer {
+func sortByDimension(layers dlperf.Layers) dlperf.Layers {
 	if len(layers) == 1 {
 		return layers
 	}
@@ -66,7 +66,7 @@ func sortByDimension(layers []dlperf.Layer) []dlperf.Layer {
 
 	sort.Slice(rest, isGreater)
 
-	return append([]dlperf.Layer{layers[0]}, rest...)
+	return append(dlperf.Layers{layers[0]}, rest...)
 }
 
 func (o *Onnx) Information() ([]dlperf.LayerInformation, error) {
@@ -114,7 +114,7 @@ func (o *Onnx) Information() ([]dlperf.LayerInformation, error) {
 		}
 
 		nd := findNode(kv.Key.(string))
-		inputLayers := []dlperf.Layer{}
+		inputLayers := dlperf.Layers{}
 		for _, input0 := range grph.To(nd.ID()) {
 			input, ok := input0.(*GraphNode)
 			if !ok {
@@ -134,7 +134,7 @@ func (o *Onnx) Information() ([]dlperf.LayerInformation, error) {
 
 		// pp.Println(inputLayers)
 
-		outputLayers := []dlperf.Layer{}
+		outputLayers := dlperf.Layers{}
 		for _, output0 := range grph.From(nd.ID()) {
 			output, ok := output0.(*GraphNode)
 			if !ok {

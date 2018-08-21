@@ -30,7 +30,7 @@ func Register(s Layer) {
 	layers.Store(strings.ToLower(s.Name()), s)
 }
 
-func Layers() []string {
+func RegisteredLayers() []string {
 	names := []string{}
 	layers.Range(func(key, _ interface{}) bool {
 		if name, ok := key.(string); ok {

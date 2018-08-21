@@ -21,7 +21,7 @@ func (Identity) Description() string {
 	return ``
 }
 
-func (c *Identity) InferShape(inputLayers []dlperf.Layer) {
+func (c *Identity) InferShape(inputLayers dlperf.Layers) {
 	inputShapes := getOutputShapes(inputLayers)
 	c.SetInputShapes(inputShapes)
 	c.SetOutputShapes(inputShapes)

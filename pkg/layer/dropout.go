@@ -21,7 +21,7 @@ func (Dropout) Description() string {
 	return ``
 }
 
-func (c *Dropout) InferShape(inputLayers []dlperf.Layer) {
+func (c *Dropout) InferShape(inputLayers dlperf.Layers) {
 	inputShapes := getOutputShapes(inputLayers)
 	c.SetInputShapes(inputShapes)
 	c.SetOutputShapes(inputShapes)

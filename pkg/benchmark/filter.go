@@ -36,30 +36,30 @@ func (s Suite) Filter(filter Benchmark) (Benchmarks, error) {
 	return s.Benchmarks.Filter(filter)
 }
 
+func isSameScalar(a, b interface{}) bool {
+	if cmp.Equal(a, b) {
+		return true
+	}
+
+	a0, err := cast.ToFloat64E(a)
+	if err != nil {
+		return false
+	}
+
+	b0, err := cast.ToFloat64E(b)
+	if err != nil {
+		return false
+	}
+
+	floatEquals := func(a, b float64) bool {
+		const EPSILON float64 = 0.0001
+		return (a-b) < EPSILON && (b-a) < EPSILON
+	}
+	return floatEquals(a0, b0)
+}
+
 func (bs Benchmarks) Filter(filter Benchmark) (Benchmarks, error) {
 	benches := []Benchmark{}
-
-	isSame := func(a, b interface{}) bool {
-		if cmp.Equal(a, b) {
-			return true
-		}
-
-		a0, err := cast.ToFloat64E(a)
-		if err != nil {
-			return false
-		}
-
-		b0, err := cast.ToFloat64E(b)
-		if err != nil {
-			return false
-		}
-
-		floatEquals := func(a, b float64) bool {
-			const EPSILON float64 = 0.0001
-			return (a-b) < EPSILON && (b-a) < EPSILON
-		}
-		return floatEquals(a0, b0)
-	}
 
 	if filter.Name != "" {
 		var err error
@@ -89,7 +89,7 @@ func (bs Benchmarks) Filter(filter Benchmark) (Benchmarks, error) {
 				toAdd = false
 				break
 			}
-			if !isSame(filterVal, val) {
+			if !isSameScalar(filterVal, val) {
 				toAdd = false
 				break
 			}
@@ -100,4 +100,34 @@ func (bs Benchmarks) Filter(filter Benchmark) (Benchmarks, error) {
 	}
 
 	return benches, nil
+}
+
+func (b Benchmark) IsEqual(other Benchmark) bool {
+	if b.Name != other.Name {
+		return false
+	}
+
+	if b.Iterations != other.Iterations {
+		return false
+	}
+	if b.RealTime != other.RealTime {
+		return false
+	}
+	if b.CPUTime != other.CPUTime {
+		return false
+	}
+	if b.TimeUnit != other.TimeUnit {
+		return false
+	}
+	for k, filterVal := range other.Attributes {
+		val, ok := b.Attributes[k]
+		if !ok {
+			return false
+		}
+		if !isSameScalar(filterVal, val) {
+			return false
+		}
+	}
+
+	return true
 }

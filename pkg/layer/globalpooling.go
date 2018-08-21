@@ -16,7 +16,7 @@ func (GlobalPooling) Description() string {
 	return ``
 }
 
-func (c *GlobalPooling) InferShape(inputLayers []dlperf.Layer) {
+func (c *GlobalPooling) InferShape(inputLayers dlperf.Layers) {
 	c.SetInputShapes(getOutputShapes(inputLayers))
 
 	xShape := c.inputShapes[0]

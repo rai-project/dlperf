@@ -18,7 +18,7 @@ func (Reshape) Description() string {
 	return ``
 }
 
-func (c *Reshape) InferShape(inputLayers []dlperf.Layer) {
+func (c *Reshape) InferShape(inputLayers dlperf.Layers) {
 	inputShapes := getOutputShapes(inputLayers)
 	// if c.OperatorType() == "reshape" {
 	// 	pp.Println(inputLayers[1].Name())

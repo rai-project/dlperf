@@ -11,15 +11,17 @@ import (
 
 type Shape []int64
 
+type Layers []Layer
+
 type Layer interface {
 	Name() string
 	Node() *onnx.NodeProto
 	OperatorType() string
-	InferShape([]Layer)
-	Inputs() []Layer
-	SetInputs([]Layer)
-	Outputs() []Layer
-	SetOutputs([]Layer)
+	InferShape(Layers)
+	Inputs() Layers
+	SetInputs(Layers)
+	Outputs() Layers
+	SetOutputs(Layers)
 	InputShapes() []Shape
 	SetInputShapes([]Shape)
 	OutputShapes() []Shape

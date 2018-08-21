@@ -22,7 +22,7 @@ func (Gemm) Description() string {
 	return ``
 }
 
-func (c *Gemm) InferShape(inputLayers []dlperf.Layer) {
+func (c *Gemm) InferShape(inputLayers dlperf.Layers) {
 	c.SetInputShapes(getOutputShapes(inputLayers))
 
 	aShape := c.inputShapes[0]

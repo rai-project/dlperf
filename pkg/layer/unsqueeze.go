@@ -17,7 +17,7 @@ func (Unsqueeze) Description() string {
 	return ``
 }
 
-func (c *Unsqueeze) InferShape(inputLayers []dlperf.Layer) {
+func (c *Unsqueeze) InferShape(inputLayers dlperf.Layers) {
 	inputShapes := getOutputShapes(inputLayers)
 	for ii, inputShape := range inputShapes {
 		for _, ax := range c.Axes {

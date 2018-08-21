@@ -110,7 +110,7 @@ func isAnyEmpty(object interface{}) bool {
 	}
 }
 
-func getOutputShapes(layers []dlperf.Layer) []dlperf.Shape {
+func getOutputShapes(layers dlperf.Layers) []dlperf.Shape {
 	outputShapes := []dlperf.Shape{}
 	for _, layer := range layers {
 		if isAnyEmpty(layer.OutputShapes()) {

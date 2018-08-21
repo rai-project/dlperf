@@ -132,7 +132,7 @@ func toInt64Slice(i interface{}) []int64 {
 	return v
 }
 
-func getOutputShapes(layers []dlperf.Layer) []dlperf.Shape {
+func getOutputShapes(layers dlperf.Layers) []dlperf.Shape {
 	outputShapes := []dlperf.Shape{}
 	for _, layer := range layers {
 		// pp.Println(layer.Name())

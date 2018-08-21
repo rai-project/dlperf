@@ -253,7 +253,7 @@ func (o Onnx) mkScale(node *onnx.NodeProto) dlperf.Layer {
 }
 
 func (o Onnx) mkSoftMax(node *onnx.NodeProto) dlperf.Layer {
-	return &layer.SoftMax{
+	return &layer.Softmax{
 		Base: o.mkBase(node),
 	}
 }

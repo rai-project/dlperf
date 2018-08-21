@@ -20,7 +20,7 @@ func (Relu) Description() string {
 	return ``
 }
 
-func (c *Relu) InferShape(inputLayers []dlperf.Layer) {
+func (c *Relu) InferShape(inputLayers dlperf.Layers) {
 	inputShapes := getOutputShapes(inputLayers)
 	c.SetInputShapes(inputShapes)
 	c.SetOutputShapes(inputShapes)

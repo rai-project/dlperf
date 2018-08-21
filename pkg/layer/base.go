@@ -12,8 +12,8 @@ type Base struct {
 	node             *onnx.NodeProto `json:"-"`
 	name             string          `json:"name,omitempty"`
 	onnxOperatorType string          `json:"onnx_operator_type,omitempty"`
-	inputs           []dlperf.Layer  `json:-,omitempty"`
-	outputs          []dlperf.Layer  `json:-,omitempty"`
+	inputs           dlperf.Layers   `json:-,omitempty"`
+	outputs          dlperf.Layers   `json:-,omitempty"`
 	inputNames       []string        `json:"inputNames,omitempty"`
 	outputNames      []string        `json:"outputNames,omitempty"`
 	inputShapes      []dlperf.Shape  `json:"input_shapes,omitempty"`
@@ -54,19 +54,19 @@ func (b *Base) SetOnnxOperatorType(op string) {
 	b.onnxOperatorType = op
 }
 
-func (b Base) Inputs() []dlperf.Layer {
+func (b Base) Inputs() dlperf.Layers {
 	return b.inputs
 }
 
-func (b *Base) SetInputs(in []dlperf.Layer) {
+func (b *Base) SetInputs(in dlperf.Layers) {
 	b.inputs = in
 }
 
-func (b Base) Outputs() []dlperf.Layer {
+func (b Base) Outputs() dlperf.Layers {
 	return b.outputs
 }
 
-func (b *Base) SetOutputs(out []dlperf.Layer) {
+func (b *Base) SetOutputs(out dlperf.Layers) {
 	b.outputs = out
 }
 
