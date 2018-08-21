@@ -57,13 +57,21 @@ func (c Relu) FwdBenchmarkAlgorithms() []string {
 		return []string{
 			"CUDNN_ACTIVATION_ELU",
 		}
+	case "prelu":
+		return []string{
+			"ACTIVATION_PRELU",
+		}
+	case "leakyrelu":
+		return []string{
+			"ACTIVATION_LEAKY_RELU",
+		}
 	case "identity":
 		return []string{
 			"CUDNN_ACTIVATION_IDENTITY",
 		}
 	}
 
-	panic("invalid onnx operator " + c.onnxOperatorType)
+	panic("invalid relu operator = " + c.onnxOperatorType)
 
 	return nil
 }
@@ -92,6 +100,7 @@ func (c Relu) FwdBenchmarkArgs() interface{} {
 		}
 		return inShape[idx]
 	}
+
 	res := reluBenchmarkArgs{
 		Input0:            get(0),
 		Input1:            get(1),

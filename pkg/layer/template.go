@@ -50,8 +50,12 @@ func templateExec(lyr dlperf.Layer, templString string) string {
 	if err != nil {
 		panic(err)
 	}
+	args := lyr.FwdBenchmarkArgs()
+	if args == nil {
+		return ""
+	}
 	buf := bytes.NewBufferString("")
-	err = tmpl.Execute(buf, lyr.FwdBenchmarkArgs())
+	err = tmpl.Execute(buf, args)
 	if err != nil {
 		panic(err)
 	}
