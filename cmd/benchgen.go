@@ -50,10 +50,7 @@ var benchgenCmd = &cobra.Command{
 
 		layers = layers.FwdUnion("float", "")
 
-		prog := bytes.NewBufferString(`
-#include "layer/layer_benchmarks.hpp"
-
-    `)
+		prog := bytes.NewBufferString("")
 		var mut sync.Mutex
 
 		g, _ := errgroup.WithContext(context.Background())
