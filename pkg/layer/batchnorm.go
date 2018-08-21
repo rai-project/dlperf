@@ -1,8 +1,7 @@
 package layer
 
 import (
-	"fmt"
-
+	"github.com/mitchellh/hashstructure"
 	"github.com/rai-project/dlperf/pkg"
 	"github.com/rai-project/dlperf/pkg/benchmark"
 )
@@ -11,7 +10,7 @@ import (
 
 type BatchNorm struct {
 	*Base   `json:",inline,flatten,omitempty"`
-	Spatial int64 `json:"patial,omitempty"`
+	Spatial int64 `json:"spatial,omitempty"`
 }
 
 func (BatchNorm) OperatorType() string {
@@ -32,10 +31,6 @@ func (c BatchNorm) FwdBenchmarkName() string {
 	return "LAYER_CUDNN_BATCHNORM_FWD_INFERENCE"
 }
 
-func (c BatchNorm) FwdBenchmarkArgs() interface{} {
-	return []string{""}
-}
-
 func (c BatchNorm) FwdCUDNNName() string {
 	return ""
 }
@@ -45,30 +40,66 @@ func (c BatchNorm) FwdTiming(system string /* hardware/software struct */) strin
 }
 
 func (c BatchNorm) FwdBenchmarkAlgorithms() []string {
-	if c.Spatial == int64(1) {
+	switch c.Spatial {
+	case 1:
 		return []string{
 			"CUDNN_BATCHNORM_SPATIAL",
 			"CUDNN_BATCHNORM_SPATIAL_PERSISTENT",
 		}
-	} else {
+	default:
 		return []string{
 			"CUDNN_BATCHNORM_PER_ACTIVATION",
 		}
 	}
 }
 
+type batchnormBenchmarkArgs struct {
+	baseBenchmarkArgs
+	BaseBenchmarkInputArgs
+}
+
+func (c BatchNorm) FwdBenchmarkGeneratorArgNames() []string {
+	return benchmarkArgNames(reluBenchmarkArgs{})
+}
+
+func (c BatchNorm) FwdBenchmarkArgs() interface{} {
+
+	res := batchnormBenchmarkArgs{
+		BaseBenchmarkInputArgs: mkBaseBenchmarkInputArgs(&c),
+		baseBenchmarkArgs:      mkBaseBenchmarkArgs(&c),
+	}
+
+	hash, err := hashstructure.Hash(res, nil)
+	if err != nil {
+		panic(err)
+	}
+	res.UniqueBenchmarkID = hash
+
+	return res
+}
+
 func (c BatchNorm) FwdBenchmarkFilter(datatype, algorithm string) benchmark.Benchmark {
 	if algorithm == "" {
 		algorithm = c.FwdBenchmarkAlgorithms()[0]
 	}
-	attrs := map[string]interface{}{}
-	for ii, dim := range c.InputShapes()[0] {
-		attrs[fmt.Sprintf("input[%d]", ii)] = dim
-	}
 	return benchmark.Benchmark{
 		Name:       mkBenchmarkFilterName(&c, datatype, algorithm),
-		Attributes: attrs,
+		Attributes: benchmarkAttributes(c.FwdBenchmarkArgs()),
 	}
+}
+
+func (c BatchNorm) FwdBenchmarkGenerator() string {
+	const templString = `
+[[ range $datatype := .DataTypes ]]
+template <cudnnBatchNormMode_t batchnorm_mode>
+static void [[ $.BenchmarkName ]]_[[ $datatype.Name | upper ]]__[[$.UniqueBenchmarkID]](benchmark::State& state) {
+  [[ $.BenchmarkName ]]_Impl<[[ $datatype.CType ]], batchnorm_mode>(state);
+  BENCHMARK_[[ $.BenchmarkName ]]_ADD_COUNTERS__[[$.UniqueBenchmarkID]](state);
+}
+[[ end ]]
+`
+
+	return templateExec(&c, templateBasePrefix+templString+templateBaseSuffix)
 }
 
 func (c BatchNorm) Shape() dlperf.ShapeInformation {

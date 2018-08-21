@@ -8,6 +8,17 @@ import (
 	"github.com/rai-project/onnx"
 )
 
+type BaseBenchmarkInputArgs struct {
+	Input0 int64 `args:"input[0]"`
+	Input1 int64 `args:"input[1]"`
+	Input2 int64 `args:"input[2]"`
+	Input3 int64 `args:"input[3]"`
+	Input4 int64 `args:"input[4]"`
+	Input5 int64 `args:"input[5]"`
+	Input6 int64 `args:"input[6]"`
+	Input7 int64 `args:"input[7]"`
+}
+
 type baseBenchmarkArgs struct {
 	ArgNames          []string          `args:"-"`
 	UniqueBenchmarkID uint64            `args:"-"`
@@ -35,6 +46,19 @@ func mkBaseBenchmarkArgs(c dlperf.Layer) baseBenchmarkArgs {
 		Algorithms:    c.FwdBenchmarkAlgorithms(),
 		DataTypes:     c.DataTypes(),
 	}
+}
+
+func mkBaseBenchmarkInputArgs(c dlperf.Layer) BaseBenchmarkInputArgs {
+	input := c.InputShapes()[0]
+	return BaseBenchmarkInputArgs{
+		Input0: getOrMinus1(input, 0),
+		Input1: getOrMinus1(input, 1),
+		Input2: getOrMinus1(input, 2),
+		Input3: getOrMinus1(input, 3),
+		Input4: getOrMinus1(input, 4),
+		Input5: getOrMinus1(input, 5),
+		Input6: getOrMinus1(input, 6),
+		Input7: getOrMinus1(input, 7)}
 }
 
 func (b *Base) Name() string {

@@ -49,14 +49,7 @@ func (c Softmax) Shape() dlperf.ShapeInformation {
 
 type softmaxBenchmarkArgs struct {
 	baseBenchmarkArgs
-	Input0 int64 `args:"input[0]"`
-	Input1 int64 `args:"input[1]"`
-	Input2 int64 `args:"input[2]"`
-	Input3 int64 `args:"input[3]"`
-	Input4 int64 `args:"input[4]"`
-	Input5 int64 `args:"input[5]"`
-	Input6 int64 `args:"input[6]"`
-	Input7 int64 `args:"input[7]"`
+	BaseBenchmarkInputArgs
 }
 
 func (c Softmax) FwdBenchmarkGeneratorArgNames() []string {
@@ -64,24 +57,10 @@ func (c Softmax) FwdBenchmarkGeneratorArgNames() []string {
 }
 
 func (c Softmax) FwdBenchmarkArgs() interface{} {
-	inShape := c.InputShapes()[0]
-	get := func(idx int) int64 {
-		if len(inShape) <= idx {
-			return -1
-		}
-		return inShape[idx]
-	}
 
 	res := softmaxBenchmarkArgs{
-		Input0:            get(0),
-		Input1:            get(1),
-		Input2:            get(2),
-		Input3:            get(3),
-		Input4:            get(4),
-		Input5:            get(5),
-		Input6:            get(6),
-		Input7:            get(7),
-		baseBenchmarkArgs: mkBaseBenchmarkArgs(&c),
+		BaseBenchmarkInputArgs: mkBaseBenchmarkInputArgs(&c),
+		baseBenchmarkArgs:      mkBaseBenchmarkArgs(&c),
 	}
 
 	hash, err := hashstructure.Hash(res, nil)
@@ -108,7 +87,7 @@ func (c Softmax) FwdBenchmarkGenerator() string {
 [[ range $datatype := .DataTypes ]]
 template <cudnnSoftmaxAlgorithm_t softmax_algorithm, cudnnSoftmaxMode_t softmax_mode>
 static void [[ $.BenchmarkName ]]_[[ $datatype.Name | upper ]]__[[$.UniqueBenchmarkID]](benchmark::State& state) {
-  CUDNN_RELU_FWD_Impl<[[ $datatype.CType ]], softmax_algorithm, softmax_mode>(state);
+  [[ $.BenchmarkName ]]_Impl<[[ $datatype.CType ]], softmax_algorithm, softmax_mode>(state);
   BENCHMARK_[[ $.BenchmarkName ]]_ADD_COUNTERS__[[$.UniqueBenchmarkID]](state);
 }
 [[ end ]]

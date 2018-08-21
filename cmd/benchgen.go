@@ -8,6 +8,7 @@ import (
 	"strings"
 	"sync"
 
+	"github.com/k0kubun/pp"
 	"github.com/rai-project/dlperf/pkg"
 	"golang.org/x/sync/errgroup"
 
@@ -77,8 +78,14 @@ var benchgenCmd = &cobra.Command{
 				case "softmax":
 					l := lyr.(*perflayer.Softmax)
 					b = l.FwdBenchmarkGenerator()
+				case "batchnorm":
+					l := lyr.(*perflayer.BatchNorm)
+					b = l.FwdBenchmarkGenerator()
+				case "dropout":
+					l := lyr.(*perflayer.Dropout)
+					b = l.FwdBenchmarkGenerator()
 				default:
-					//pp.Println(lyr.OperatorType())
+					pp.Println(lyr.OperatorType())
 
 				}
 				if b == "" {
@@ -97,7 +104,7 @@ var benchgenCmd = &cobra.Command{
 		generateProgress.Finish()
 
 		if outputFileName == "automatic" || outputFileName == "" {
-			println(prog.String())
+			// println(prog.String())
 			return nil
 		}
 

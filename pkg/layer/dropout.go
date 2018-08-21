@@ -1,8 +1,7 @@
 package layer
 
 import (
-	"fmt"
-
+	"github.com/mitchellh/hashstructure"
 	"github.com/rai-project/dlperf/pkg"
 	"github.com/rai-project/dlperf/pkg/benchmark"
 )
@@ -31,10 +30,6 @@ func (c Dropout) FwdBenchmarkName() string {
 	return "LAYER_CUDNN_DROPOUT_FWD"
 }
 
-func (c Dropout) FwdBenchmarkArgs() interface{} {
-	return []string{""}
-}
-
 func (c Dropout) FwdCUDNNName() string {
 	return ""
 }
@@ -49,18 +44,60 @@ func (c Dropout) FwdBenchmarkAlgorithms() []string {
 	}
 }
 
+type dropoutBenchmarkArgs struct {
+	baseBenchmarkArgs
+	BaseBenchmarkInputArgs
+}
+
+func (c Dropout) FwdBenchmarkGeneratorArgNames() []string {
+	return benchmarkArgNames(reluBenchmarkArgs{})
+}
+
+func (c Dropout) FwdBenchmarkArgs() interface{} {
+
+	res := batchnormBenchmarkArgs{
+		BaseBenchmarkInputArgs: mkBaseBenchmarkInputArgs(&c),
+		baseBenchmarkArgs:      mkBaseBenchmarkArgs(&c),
+	}
+
+	hash, err := hashstructure.Hash(res, nil)
+	if err != nil {
+		panic(err)
+	}
+	res.UniqueBenchmarkID = hash
+
+	return res
+}
+
 func (c Dropout) FwdBenchmarkFilter(datatype, algorithm string) benchmark.Benchmark {
 	if algorithm == "" {
 		algorithm = c.FwdBenchmarkAlgorithms()[0]
 	}
-	attrs := map[string]interface{}{}
-	for ii, dim := range c.InputShapes()[0] {
-		attrs[fmt.Sprintf("input[%d]", ii)] = dim
-	}
 	return benchmark.Benchmark{
 		Name:       mkBenchmarkFilterName(&c, datatype, algorithm),
-		Attributes: attrs,
+		Attributes: benchmarkAttributes(c.FwdBenchmarkArgs()),
 	}
+}
+
+func (c Dropout) FwdBenchmarkGenerator() string {
+	const templString = `
+[[ range $datatype := .DataTypes ]]
+static void [[ $.BenchmarkName ]]_[[ $datatype.Name | upper ]]__[[$.UniqueBenchmarkID]](benchmark::State& state) {
+  [[ $.BenchmarkName ]]_Impl<[[ $datatype.CType ]], batchnorm_mode, is_training>(state);
+  BENCHMARK_[[ $.BenchmarkName ]]_ADD_COUNTERS__[[$.UniqueBenchmarkID]](state);
+}
+[[ end ]]
+
+
+[[ range $datatype := .DataTypes ]]
+BENCHMARK([[ $.BenchmarkName ]]_[[ $datatype.Name | upper ]]__[[$.UniqueBenchmarkID]]);
+[[ end ]]
+#undef BENCHMARK_[[ .BenchmarkName ]]_INPUT_ARGS
+#undef BENCHMARK_[[ .BenchmarkName ]]_INPUT_ARG_NAMES
+}
+`
+
+	return templateExec(&c, templateBasePrefix+templString)
 }
 
 func (c Dropout) Shape() dlperf.ShapeInformation {

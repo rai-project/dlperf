@@ -99,6 +99,10 @@ func mkTemplateCounters(st interface{}) string {
 	defer recovery()
 	res := []string{}
 	for _, field := range structs.New(st).Fields() {
+		if field.IsExported() && structs.IsStruct(field.Value()) {
+			res = append(res, mkTemplateCounters(field.Value()))
+			continue
+		}
 		tag := field.Tag("args")
 		if tag == "" || tag == "-" {
 			continue
@@ -125,6 +129,10 @@ func mkTemplateArguments(st interface{}) string {
 	defer recovery()
 	res := []string{}
 	for _, field := range structs.New(st).Fields() {
+		if field.IsExported() && structs.IsStruct(field.Value()) {
+			res = append(res, mkTemplateArguments(field.Value()))
+			continue
+		}
 		tag := field.Tag("args")
 		if tag == "" || tag == "-" {
 			continue

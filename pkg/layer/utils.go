@@ -9,6 +9,13 @@ import (
 	dlperf "github.com/rai-project/dlperf/pkg"
 )
 
+func getOrMinus1(arry []int64, idx int) int64 {
+	if len(arry) <= idx {
+		return int64(-1)
+	}
+	return arry[idx]
+}
+
 func checkNumber(val interface{}, expected []int, layer string, name string) error {
 
 	var valLen int
@@ -134,6 +141,13 @@ func mkBenchmarkFilterName(layer dlperf.Layer, datatype, algorithm string) strin
 func benchmarkArgNames(st interface{}) []string {
 	tags := []string{}
 	for _, field := range structs.New(st).Fields() {
+		if field.IsExported() && structs.IsStruct(field.Value()) {
+			es := benchmarkArgNames(field.Value())
+			for _, v := range es {
+				tags = append(tags, v)
+			}
+			continue
+		}
 		tag := field.Tag("args")
 		if tag == "" || tag == "-" {
 			continue
@@ -146,6 +160,13 @@ func benchmarkArgNames(st interface{}) []string {
 func benchmarkAttributes(st interface{}) map[string]interface{} {
 	attrs := map[string]interface{}{}
 	for _, field := range structs.New(st).Fields() {
+		if field.IsExported() && structs.IsStruct(field.Value()) {
+			es := benchmarkAttributes(field.Value())
+			for k, v := range es {
+				attrs[k] = v
+			}
+			continue
+		}
 		tag := field.Tag("args")
 		if tag == "" || tag == "-" {
 			continue
