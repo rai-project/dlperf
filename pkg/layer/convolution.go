@@ -1,7 +1,6 @@
 package layer
 
 import (
-	"bytes"
 	"math"
 	"strings"
 
@@ -111,7 +110,7 @@ type convBenchmarkArgs struct {
 	DataTypes         []DataType `args:"-"`
 }
 
-func (c Conv) FwdBenchmarkArgs() convBenchmarkArgs {
+func (c Conv) FwdBenchmarkArgs() interface{} {
 	inShapes := c.InputShapes()
 
 	res := convBenchmarkArgs{
@@ -160,14 +159,6 @@ func (c Conv) FwdBenchmarkGeneratorArgNames() string {
 
 func (c Conv) FwdBenchmarkGenerator() string {
 	const templString = `
-namespace [[ .BenchmarkName ]]__[[.UniqueBenchmarkID]] {
-
-  static void BENCHMARK_[[ .BenchmarkName ]]_ADD_COUNTERS__[[.UniqueBenchmarkID]](benchmark::State& state) {
-    state.counters.insert({
-[[ . | make_counters ]]
-    });
-  }
-
   [[ range $datatype := .DataTypes ]]
   template <cudnnConvolutionFwdAlgo_t convolution_algorithm>
   static void [[ $.BenchmarkName ]]_[[ $datatype.Name | upper ]]__[[$.UniqueBenchmarkID]](benchmark::State& state) {
@@ -175,37 +166,9 @@ namespace [[ .BenchmarkName ]]__[[.UniqueBenchmarkID]] {
     BENCHMARK_[[ $.BenchmarkName ]]_ADD_COUNTERS__[[$.UniqueBenchmarkID]](state);
   }
   [[ end ]]
-
-
-#define BENCHMARK_[[ .BenchmarkName ]]_INPUT_ARGS() \
-  Args({{ \
-[[ . | make_arguments ]]
-  }})
-
-#define BENCHMARK_[[ .BenchmarkName ]](b)                                                                                             \
-[[ range $algorithm := .Algorithms ]] BENCHMARK_TEMPLATE(b, [[ $algorithm ]])->ArgNames({[[$.ArgNames]]})->BENCHMARK_[[ $.BenchmarkName ]]_INPUT_ARGS()->UseManualTime(); \
-[[ end ]]
-
-[[ range $datatype := .DataTypes ]]
-  BENCHMARK_[[ $.BenchmarkName ]]([[ $.BenchmarkName ]]_[[ $datatype.Name | upper ]]__[[$.UniqueBenchmarkID]]);
-[[ end ]]
-
-#undef BENCHMARK_[[ .BenchmarkName ]]_INPUT_ARGS
-#undef BENCHMARK_[[ .BenchmarkName ]]
-}
 `
 
-	templArgs := c.FwdBenchmarkArgs()
-	tmpl, err := mkTemplate(&c).Parse(templString)
-	if err != nil {
-		panic(err)
-	}
-	buf := bytes.NewBufferString("")
-	err = tmpl.Execute(buf, templArgs)
-	if err != nil {
-		panic(err)
-	}
-	return buf.String()
+	return templateExec(&c, templateBasePrefix+templString+templateBaseSuffix)
 }
 
 func (c Conv) Shape() dlperf.ShapeInformation {

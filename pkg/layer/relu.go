@@ -30,7 +30,7 @@ func (c Relu) FwdBenchmarkName() string {
 	return "LAYER_CUDNN_ACTIVATION_FWD"
 }
 
-func (c Relu) FwdBenchmarkArgs() []string {
+func (c Relu) FwdBenchmarkArgs() interface{} {
 	return []string{""}
 }
 

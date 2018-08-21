@@ -32,7 +32,7 @@ func (c BatchNorm) FwdBenchmarkName() string {
 	return "LAYER_CUDNN_BATCHNORM_FWD_INFERENCE"
 }
 
-func (c BatchNorm) FwdBenchmarkArgs() []string {
+func (c BatchNorm) FwdBenchmarkArgs() interface{} {
 	return []string{""}
 }
 

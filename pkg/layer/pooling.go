@@ -42,7 +42,7 @@ func (c Pooling) FwdBenchmarkName() string {
 	return "CUDNN_POOLING_FWD"
 }
 
-func (c Pooling) FwdBenchmarkArgs() []string {
+func (c Pooling) FwdBenchmarkArgs() interface{} {
 	return []string{""}
 }
 

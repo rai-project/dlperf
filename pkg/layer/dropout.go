@@ -31,7 +31,7 @@ func (c Dropout) FwdBenchmarkName() string {
 	return "LAYER_CUDNN_DROPOUT_FWD"
 }
 
-func (c Dropout) FwdBenchmarkArgs() []string {
+func (c Dropout) FwdBenchmarkArgs() interface{} {
 	return []string{""}
 }
 

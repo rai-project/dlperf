@@ -29,7 +29,7 @@ func (c Softmax) FwdBenchmarkName() string {
 	return "LAYER_CUDNN_ACTIVATION_FWD"
 }
 
-func (c Softmax) FwdBenchmarkArgs() []string {
+func (c Softmax) FwdBenchmarkArgs() interface{} {
 	return []string{""}
 }
 

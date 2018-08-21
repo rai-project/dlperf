@@ -31,7 +31,7 @@ func (c Identity) FwdBenchmarkName() string {
 	return "LAYER_CUDNN_ACTIVATION_FWD"
 }
 
-func (c Identity) FwdBenchmarkArgs() []string {
+func (c Identity) FwdBenchmarkArgs() interface{} {
 	return []string{""}
 }
 

@@ -128,3 +128,8 @@ func (b Base) FwdBenchmarkFilter(datatype, algorithm string) benchmark.Benchmark
 func (b Base) FwdBenchmarkName() string {
 	panic("unimplemented FwdBenchmarkName")
 }
+
+func (b Base) FwdBenchmarkArgs() interface{} {
+	panic("FwdBenchmarkArgs not implemented")
+	return nil
+}

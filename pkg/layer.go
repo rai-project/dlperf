@@ -28,6 +28,7 @@ type Layer interface {
 	Information() LayerInformation
 	FwdBenchmarkName() string
 	FwdBenchmarkFilter(string, string) benchmark.Benchmark
+	FwdBenchmarkArgs() interface{}
 }
 
 type LayerInformation interface {
