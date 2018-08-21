@@ -164,19 +164,7 @@ namespace [[ .BenchmarkName ]]__[[.UniqueBenchmarkID]] {
 
   static void BENCHMARK_[[ .BenchmarkName ]]_ADD_COUNTERS__[[.UniqueBenchmarkID]](benchmark::State& state) {
     state.counters.insert({
-      {"input[0]", [[.Input0]]}, /* Input0 */ \
-      {"input[1]", [[.Input1]]}, /* Input1 */ \
-      {"input[2]", [[.Input2]]}, /* Input2 */ \
-      {"input[3]", [[.Input3]]}, /* Input3 */ \
-      {"filter_count", [[.FilterCount]]}, /* FilterCount */ \
-      {"filter_height", [[.FilterHeight]]}, /* FilterHeight */ \
-      {"filter_width", [[.FilterWidth]]}, /* FilterWidth */ \
-      {"pad_height", [[.PadHeight]]}, /* PadHeight */ \
-      {"pad_width", [[.PadWidth]]}, /* PadWidth */ \
-      {"stride_height", [[.StrideHeight]]}, /* StrideHeight */ \
-      {"stride_width", [[.StrideWidth]]}, /* StrideWidth */ \
-      {"dilation_height", [[.DilationHeight]]}, /* DilationHeight */ \
-      {"dilation_width", [[.DilationWidth]]} /* DilationWidth */
+[[ . | make_counters ]]
     });
   }
 
@@ -191,19 +179,7 @@ namespace [[ .BenchmarkName ]]__[[.UniqueBenchmarkID]] {
 
 #define BENCHMARK_[[ .BenchmarkName ]]_INPUT_ARGS() \
   Args({{ \
-      [[.Input0]], /* Input0 */ \
-      [[.Input1]], /* Input1 */ \
-      [[.Input2]], /* Input2 */ \
-      [[.Input3]], /* Input3 */ \
-      [[.FilterCount]], /* FilterCount */ \
-      [[.FilterHeight]], /* FilterHeight */ \
-      [[.FilterWidth]], /* FilterWidth */ \
-      [[.PadHeight]], /* PadHeight */ \
-      [[.PadWidth]], /* PadWidth */ \
-      [[.StrideHeight]], /* StrideHeight */ \
-      [[.StrideWidth]], /* StrideWidth */ \
-      [[.DilationHeight]], /* DilationHeight */ \
-      [[.DilationWidth]] /* DilationWidth */ \
+[[ . | make_arguments ]]
   }})
 
 #define BENCHMARK_[[ .BenchmarkName ]](b)                                                                                             \
