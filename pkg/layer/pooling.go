@@ -30,7 +30,7 @@ func (c *Pooling) InferShape(inputLayers dlperf.Layers) {
 
 	yShape := dlperf.Shape{xShape[0], xShape[1]}
 	for ii, xs := range xShape[2:] {
-		ys := int64(math.Floor(float64(xs+c.Pads[ii]+c.Pads[ii+1]-c.KernelShape[ii])/float64(c.Strides[ii]))) + 1
+		ys := int64(math.Floor(float64(xs+c.Pads[ii]+c.Pads[ii+len(xShape)-2]-c.KernelShape[ii])/float64(c.Strides[ii])) + 1)
 		yShape = append(yShape, ys)
 	}
 

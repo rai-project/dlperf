@@ -67,10 +67,15 @@ func runLayerStats(cmd *cobra.Command, args []string) error {
 		return err
 	}
 
+	infos, err := net.Information()
+	if err != nil {
+		return err
+	}
+
 	if outputFormat == "dot" {
 		// grph := net.Network()
 
-		grph := net.ToGraph(onnx.GraphPruneInputs(false), onnx.GraphInputsAsConstantNodes(true))
+		grph := net.Network()
 
 		dotEnc, err := dot.Marshal(grph, net.GetName(), "", "  ", true)
 		if err != nil {
@@ -85,11 +90,6 @@ func runLayerStats(cmd *cobra.Command, args []string) error {
 		println(img)
 
 		return nil
-	}
-
-	infos, err := net.Information()
-	if err != nil {
-		return err
 	}
 
 	writer := NewWriter(stat{}, humanFlops)
