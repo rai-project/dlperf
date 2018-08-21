@@ -2,10 +2,14 @@ package cmd
 
 import (
 	"bytes"
+	"context"
 	"io/ioutil"
 	"path/filepath"
+	"strings"
+	"sync"
 
 	"github.com/rai-project/dlperf/pkg"
+	"golang.org/x/sync/errgroup"
 
 	sourcepath "github.com/GeertJohan/go-sourcepath"
 	perflayer "github.com/rai-project/dlperf/pkg/layer"
@@ -46,29 +50,51 @@ var benchgenCmd = &cobra.Command{
 		layers = layers.FwdUnion("float", "")
 
 		prog := bytes.NewBufferString("")
+		var mut sync.Mutex
 
-		for _, lyr := range layers {
-			if lyr.OperatorType() == "ConstantInput" {
-				continue
-			}
-			if lyr.OperatorType() == "Conv" {
-				l := lyr.(*perflayer.Conv)
-				prog.WriteString(l.FwdBenchmarkGenerator())
-				continue
-			}
+		g, _ := errgroup.WithContext(context.Background())
 
-			if lyr.OperatorType() == "Relu" {
-				l := lyr.(*perflayer.Relu)
-				prog.WriteString(l.FwdBenchmarkGenerator())
-				continue
-			}
-			if lyr.OperatorType() == "Pooling" {
-				l := lyr.(*perflayer.Pooling)
-				prog.WriteString(l.FwdBenchmarkGenerator())
-				continue
-			}
-			// pp.Println(lyr.OperatorType())
+		generateProgress := newProgress("> Generating benchmarks", len(layers))
+
+		for ii := range layers {
+			lyr := layers[ii]
+			g.Go(func() error {
+				defer generateProgress.Increment()
+				if lyr.OperatorType() == "ConstantInput" {
+					return nil
+				}
+				var b string
+				switch strings.ToLower(lyr.OperatorType()) {
+				case "conv":
+					l := lyr.(*perflayer.Conv)
+					b = l.FwdBenchmarkGenerator()
+				case "relu":
+					l := lyr.(*perflayer.Relu)
+					b = l.FwdBenchmarkGenerator()
+				case "pooling":
+					l := lyr.(*perflayer.Pooling)
+					b = l.FwdBenchmarkGenerator()
+				case "softmax":
+					l := lyr.(*perflayer.Softmax)
+					b = l.FwdBenchmarkGenerator()
+				default:
+					//pp.Println(lyr.OperatorType())
+
+				}
+				if b == "" {
+					return nil
+				}
+				mut.Lock()
+				defer mut.Unlock()
+				prog.WriteString(b)
+				return nil
+			})
 		}
+
+		if err := g.Wait(); err != nil {
+			return err
+		}
+		generateProgress.Finish()
 
 		if outputFileName == "automatic" || outputFileName == "" {
 			println(prog.String())

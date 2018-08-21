@@ -17,7 +17,7 @@ namespace [[ .BenchmarkName ]]__[[.UniqueBenchmarkID]] {
 
 #define BENCHMARK_[[ .BenchmarkName ]]_INPUT_ARGS() \
   Args({{ \
-  [[ . | make_arguments ]]
+[[ . | make_arguments ]]
   }})
 
 #define BENCHMARK_[[ .BenchmarkName ]]_INPUT_ARG_NAMES() \
@@ -65,8 +65,16 @@ func templateExec(lyr dlperf.Layer, templString string) string {
 	return buf.String()
 }
 
+func copy(originalMap map[string]interface{}) map[string]interface{} {
+	newMap := make(map[string]interface{})
+	for key, value := range originalMap {
+		newMap[key] = value
+	}
+	return newMap
+}
+
 func mkTemplate(lyr dlperf.Layer) *template.Template {
-	funcs := gtf.GtfTextFuncMap
+	funcs := copy(gtf.GtfTextFuncMap)
 	funcs["make_counters"] = mkTemplateCounters
 	funcs["make_arguments"] = mkTemplateArguments
 	return template.New(lyr.OperatorType()).
