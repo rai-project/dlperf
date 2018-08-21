@@ -2,6 +2,8 @@ package layer
 
 import (
 	"encoding/json"
+	"fmt"
+	"strings"
 
 	dlperf "github.com/rai-project/dlperf/pkg"
 	"github.com/rai-project/dlperf/pkg/benchmark"
@@ -30,6 +32,7 @@ type baseBenchmarkArgs struct {
 type Base struct {
 	node             *onnx.NodeProto `json:"-"`
 	name             string          `json:"name,omitempty"`
+	operatorType     string          `json:"operator_type,omitempty"`
 	onnxOperatorType string          `json:"onnx_operator_type,omitempty"`
 	inputs           dlperf.Layers   `json:-,omitempty"`
 	outputs          dlperf.Layers   `json:-,omitempty"`
@@ -81,7 +84,14 @@ func (b *Base) SetNode(node *onnx.NodeProto) {
 }
 
 func (b Base) OperatorType() string {
-	panic("invalid operator type")
+	if b.operatorType == "" {
+		panic("invalid operator type")
+	}
+	return b.operatorType
+}
+
+func (b *Base) SetOperatorType(s string) {
+	b.operatorType = s
 }
 
 func (b Base) OnnxOperatorType() string {
@@ -163,7 +173,12 @@ func (b Base) MarshalJSON() ([]byte, error) {
 
 func (b Base) FwdBenchmarkFilter(datatype, algorithm string) benchmark.Benchmark {
 	// panic("unimplemented FwdBenchmarkFilter")
-	return benchmark.Benchmark{}
+	if b.operatorType == "" {
+		return benchmark.Benchmark{}
+	}
+	return benchmark.Benchmark{
+		Name: fmt.Sprintf("LAYER_CUDNN_%s_FWD", strings.ToUpper(b.OperatorType())),
+	}
 }
 
 func (b Base) FwdBenchmarkName() string {

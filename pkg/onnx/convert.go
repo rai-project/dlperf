@@ -58,7 +58,7 @@ func (o Onnx) mkLayer(node *onnx.NodeProto) dlperf.Layer {
 	return ret
 }
 
-func (o Onnx) mkBase(node *onnx.NodeProto) *layer.Base {
+func (o Onnx) mkBase(node *onnx.NodeProto, operatorTypeName string) *layer.Base {
 	inputs := node.GetInput()
 	outputs := node.GetOutput()
 
@@ -69,6 +69,7 @@ func (o Onnx) mkBase(node *onnx.NodeProto) *layer.Base {
 	base.SetInputNames(inputs)
 	base.SetOutputNames(outputs)
 	base.SetInputShapes(o.GetValueInfoDimensions(inputs))
+	base.SetOperatorType(operatorTypeName)
 	// base.SetOutputShapes(o.GetValueInfoDimensions(outputs))
 
 	return base
@@ -80,7 +81,7 @@ func (o Onnx) mkBatchNorm(node *onnx.NodeProto) dlperf.Layer {
 	spatialAttr := getNodeAttributeFromName(node, "spatial")
 	spatial = spatialAttr.GetI()
 
-	base := o.mkBase(node)
+	base := o.mkBase(node, "BatchNorm")
 	return &layer.BatchNorm{
 		Base:    base,
 		Spatial: spatial,
@@ -89,7 +90,7 @@ func (o Onnx) mkBatchNorm(node *onnx.NodeProto) dlperf.Layer {
 
 func (o Onnx) mkConcat(node *onnx.NodeProto) dlperf.Layer {
 	return &layer.Concat{
-		Base: o.mkBase(node),
+		Base: o.mkBase(node, "Concat"),
 	}
 }
 
@@ -132,7 +133,7 @@ func (o Onnx) mkConv(node *onnx.NodeProto) dlperf.Layer {
 	}
 
 	return &layer.Conv{
-		Base:        o.mkBase(node),
+		Base:        o.mkBase(node, "Conv"),
 		AutoPad:     autoPad,
 		Dilations:   dilations,
 		Group:       group,
@@ -144,13 +145,13 @@ func (o Onnx) mkConv(node *onnx.NodeProto) dlperf.Layer {
 
 func (o Onnx) mkDropout(node *onnx.NodeProto) dlperf.Layer {
 	return &layer.Dropout{
-		Base: o.mkBase(node),
+		Base: o.mkBase(node, "Dropout"),
 	}
 }
 
 func (o Onnx) mkElementWise(node *onnx.NodeProto) dlperf.Layer {
 	return &layer.ElementWise{
-		Base: o.mkBase(node),
+		Base: o.mkBase(node, "ElementWise"),
 	}
 }
 
@@ -159,7 +160,7 @@ func (o Onnx) mkGemm(node *onnx.NodeProto) dlperf.Layer {
 	transBAttr := getNodeAttributeFromName(node, "transB")
 
 	return &layer.Gemm{
-		Base:   o.mkBase(node),
+		Base:   o.mkBase(node, "Gemm"),
 		TransA: transAAttr.GetI(),
 		TransB: transBAttr.GetI(),
 	}
@@ -168,7 +169,7 @@ func (o Onnx) mkGemm(node *onnx.NodeProto) dlperf.Layer {
 func (o Onnx) mkMatMul(node *onnx.NodeProto) dlperf.Layer {
 
 	return &layer.MatMul{
-		Base: o.mkBase(node),
+		Base: o.mkBase(node, "MatMul"),
 	}
 }
 
@@ -193,7 +194,7 @@ func (o Onnx) mkPooling(node *onnx.NodeProto) dlperf.Layer {
 	}
 
 	return &layer.Pooling{
-		Base:        o.mkBase(node),
+		Base:        o.mkBase(node, "Pooling"),
 		KernelShape: kernelShapeAttr.GetInts(),
 		Pads:        pads,
 		Strides:     stridesShapeAttr.GetInts(),
@@ -202,7 +203,7 @@ func (o Onnx) mkPooling(node *onnx.NodeProto) dlperf.Layer {
 
 func (o Onnx) mkGlobalPooling(node *onnx.NodeProto) dlperf.Layer {
 	return &layer.GlobalPooling{
-		Base: o.mkBase(node),
+		Base: o.mkBase(node, "GlobalPooling"),
 	}
 }
 
@@ -214,20 +215,20 @@ func (o Onnx) mkLRN(node *onnx.NodeProto) dlperf.Layer {
 	}
 
 	return &layer.LRN{
-		Base: o.mkBase(node),
+		Base: o.mkBase(node, "LRN"),
 		Size: size,
 	}
 }
 
 func (o Onnx) mkRelu(node *onnx.NodeProto) dlperf.Layer {
 	return &layer.Relu{
-		Base: o.mkBase(node),
+		Base: o.mkBase(node, "Relu"),
 	}
 }
 
 func (o Onnx) mkReshape(node *onnx.NodeProto) dlperf.Layer {
 	return &layer.Reshape{
-		Base: o.mkBase(node),
+		Base: o.mkBase(node, "Reshape"),
 	}
 }
 
@@ -235,45 +236,45 @@ func (o Onnx) mkTranspose(node *onnx.NodeProto) dlperf.Layer {
 	permAttr := getNodeAttributeFromName(node, "perm")
 	perm := permAttr.GetInts()
 	return &layer.Transpose{
-		Base:        o.mkBase(node),
+		Base:        o.mkBase(node, "Transpose"),
 		Permutation: perm,
 	}
 }
 
 func (o Onnx) mkIdentity(node *onnx.NodeProto) dlperf.Layer {
 	return &layer.Identity{
-		Base: o.mkBase(node),
+		Base: o.mkBase(node, "Identity"),
 	}
 }
 
 func (o Onnx) mkScale(node *onnx.NodeProto) dlperf.Layer {
 	return &layer.Scale{
-		Base: o.mkBase(node),
+		Base: o.mkBase(node, "Scale"),
 	}
 }
 
 func (o Onnx) mkSoftMax(node *onnx.NodeProto) dlperf.Layer {
 	return &layer.Softmax{
-		Base: o.mkBase(node),
+		Base: o.mkBase(node, "Softmax"),
 	}
 }
 
 func (o Onnx) mkUnsqueeze(node *onnx.NodeProto) dlperf.Layer {
 	axesAttr := getNodeAttributeFromName(node, "axes")
 	return &layer.Unsqueeze{
-		Base: o.mkBase(node),
+		Base: o.mkBase(node, "Unsqueeze"),
 		Axes: axesAttr.GetInts(),
 	}
 }
 
 func (o Onnx) mkConstant(node *onnx.NodeProto) dlperf.Layer {
 	return &layer.Constant{
-		Base: o.mkBase(node),
+		Base: o.mkBase(node, "Constant"),
 	}
 }
 
 func (o Onnx) mkConstantInput(node *onnx.NodeProto) dlperf.Layer {
-	base := o.mkBase(node)
+	base := o.mkBase(node, "ConstantInput")
 
 	dims := o.GetValueInfoDimensions([]string{node.Name})
 	base.SetInputShapes(dims)
