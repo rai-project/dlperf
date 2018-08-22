@@ -70,7 +70,16 @@ func (c Pooling) FwdBenchmarkAlgorithms() []string {
 
 type poolingBenchmarkArgs struct {
 	baseBenchmarkArgs
-	BaseBenchmarkInputArgs
+	Input0       int64 `args:"input[0]"`
+	Input1       int64 `args:"input[1]"`
+	Input2       int64 `args:"input[2]"`
+	Input3       int64 `args:"input[3]"`
+	FilterHeight int64 `args:"filter_height"`
+	FilterWidth  int64 `args:"filter_width"`
+	PadHeight    int64 `args:"pad_height"`
+	PadWidth     int64 `args:"pad_width"`
+	StrideHeight int64 `args:"stride_height"`
+	StrideWidth  int64 `args:"stride_width"`
 }
 
 func (c Pooling) FwdBenchmarkGeneratorArgNames() []string {
@@ -78,9 +87,20 @@ func (c Pooling) FwdBenchmarkGeneratorArgNames() []string {
 }
 
 func (c Pooling) FwdBenchmarkArgs() interface{} {
-	res := poolingBenchmarkArgs{
-		BaseBenchmarkInputArgs: mkBaseBenchmarkInputArgs(&c),
-		baseBenchmarkArgs:      mkBaseBenchmarkArgs(&c),
+	inShapes := c.InputShapes()
+
+	res := convBenchmarkArgs{
+		Input0:            inShapes[0][0],
+		Input1:            inShapes[0][1],
+		Input2:            inShapes[0][2],
+		Input3:            inShapes[0][3],
+		FilterHeight:      c.KernelShape[0],
+		FilterWidth:       c.KernelShape[1],
+		PadHeight:         c.Pads[0],
+		PadWidth:          c.Pads[2],
+		StrideHeight:      c.Strides[0],
+		StrideWidth:       c.Strides[1],
+		baseBenchmarkArgs: mkBaseBenchmarkArgs(&c),
 	}
 
 	hash, err := hashstructure.Hash(
@@ -110,9 +130,9 @@ func (c Pooling) FwdBenchmarkFilter(datatype, algorithm string) benchmark.Benchm
 func (c Pooling) FwdBenchmarkGenerator() string {
 	const templString = `
   [[ range $datatype := .DataTypes ]]
-  template <cudnnActivationMode_t activation_mode>
+  template <cudnnPoolingMode_t pooling_mode>
   static void [[ $.BenchmarkName ]]_[[ $datatype.Name | upper ]]__[[$.UniqueBenchmarkID]](benchmark::State& state) {
-    [[ $.BenchmarkName ]]_Impl<[[ $datatype.CType ]], activation_mode>(state);
+    [[ $.BenchmarkName ]]_Impl<[[ $datatype.CType ]], pooling_mode>(state);
     BENCHMARK_[[ $.BenchmarkName ]]_ADD_COUNTERS__[[$.UniqueBenchmarkID]](state);
   }
   [[ end ]]
