@@ -3,8 +3,11 @@ package onnx
 import (
 	"encoding/json"
 	"fmt"
+	"image/color"
 	"strings"
 
+	colorful "github.com/lucasb-eyer/go-colorful"
+	"github.com/muesli/gamut"
 	"github.com/pkg/errors"
 	dlperf "github.com/rai-project/dlperf/pkg"
 	"github.com/rai-project/onnx"
@@ -14,7 +17,8 @@ import (
 )
 
 type Graph struct {
-	Root *GraphNode
+	Root   *GraphNode
+	colors map[string]color.Color
 	*simple.DirectedGraph
 }
 
@@ -22,6 +26,7 @@ type GraphNode struct {
 	id    int64
 	name  string
 	layer dlperf.Layer
+	color color.Color
 	*onnx.NodeProto
 }
 
@@ -51,7 +56,7 @@ func (nd GraphNode) Attributes() []encoding.Attribute {
 			lbl = fmt.Sprintf("\"{  %s  | %s | %s }\"", nd.Name, nd.OpType, string(outputShapes))
 		}
 	}
-	return []encoding.Attribute{
+	attrs := []encoding.Attribute{
 		encoding.Attribute{
 			Key:   "id",
 			Value: fmt.Sprintf("%v", nd.ID()),
@@ -81,6 +86,54 @@ func (nd GraphNode) Attributes() []encoding.Attribute {
 			Value: fmt.Sprintf("\"%s\"", strings.Join(nd.GetOutput(), ";")),
 		},
 	}
+	if nd.color != nil {
+		clr, ok := colorful.MakeColor(nd.color)
+		if ok {
+			attrs = append(
+				attrs,
+				[]encoding.Attribute{
+					encoding.Attribute{
+						Key:   "style",
+						Value: "filled",
+					},
+					encoding.Attribute{
+						Key:   "fillcolor",
+						Value: fmt.Sprintf("\"%s\"", clr.Hex()),
+					},
+				}...,
+			)
+		}
+	}
+	return attrs
+}
+
+func (nd GraphEdge) Attributes() []encoding.Attribute {
+	return []encoding.Attribute{
+		encoding.Attribute{
+			Key:   "penwidth",
+			Value: "3",
+		},
+	}
+}
+
+func (o *Onnx) mkColors() map[string]color.Color {
+	ndColors := map[string]color.Color{}
+	onnxGraph := o.GetGraph()
+	for _, nd := range onnxGraph.GetNode() {
+		ndColors[nd.GetOpType()] = nil
+	}
+	colors, err := gamut.Generate(len(ndColors), gamut.PastelGenerator{})
+	if err != nil {
+		return ndColors
+	}
+	ii := 0
+	for k := range ndColors {
+		color := colors[ii]
+		ndColors[k] = color
+		ii++
+	}
+
+	return ndColors
 }
 
 func (o *Onnx) ToGraph(oo ...GraphOption) *Graph {
@@ -89,6 +142,8 @@ func (o *Onnx) ToGraph(oo ...GraphOption) *Graph {
 	graphIds := map[string]int64{}
 
 	grph := simple.NewDirectedGraph()
+
+	colors := o.mkColors()
 
 	isInputNode := func(name string) bool {
 		inputs := onnxGraph.GetInput()
@@ -164,9 +219,14 @@ func (o *Onnx) ToGraph(oo ...GraphOption) *Graph {
 				S:    []byte(name),
 			})
 		}
+		color, ok := colors[onnxNode.GetOpType()]
+		if !ok {
+			color = nil
+		}
 		nd := &GraphNode{
 			id:        id,
 			name:      name,
+			color:     color,
 			NodeProto: onnxNode,
 		}
 		grph.AddNode(nd)
