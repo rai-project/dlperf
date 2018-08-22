@@ -89,7 +89,7 @@ func (c Pooling) FwdBenchmarkGeneratorArgNames() []string {
 func (c Pooling) FwdBenchmarkArgs() interface{} {
 	inShapes := c.InputShapes()
 
-	res := convBenchmarkArgs{
+	res := poolingBenchmarkArgs{
 		Input0:            inShapes[0][0],
 		Input1:            inShapes[0][1],
 		Input2:            inShapes[0][2],
