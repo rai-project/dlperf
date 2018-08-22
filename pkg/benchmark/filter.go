@@ -4,6 +4,7 @@ import (
 	"regexp"
 
 	"github.com/google/go-cmp/cmp"
+	"github.com/k0kubun/pp"
 	"github.com/spf13/cast"
 )
 
@@ -43,21 +44,23 @@ func isSameScalar(a, b interface{}) bool {
 
 	a0, err := cast.ToFloat64E(a)
 	if err != nil {
+		pp.Println(a)
 		return false
 	}
-	if a0 < 0 {
-		// panic("a0 < 0")
-		a0 = float64(0)
-	}
+	// if a0 < 0 {
+	// 	// panic("a0 < 0")
+	// 	a0 = float64(0)
+	// }
 
 	b0, err := cast.ToFloat64E(b)
 	if err != nil {
+		pp.Println(b)
 		return false
 	}
-	if b0 < 0 {
-		// panic("b0 < 0")
-		b0 = float64(0)
-	}
+	// if b0 < 0 {
+	// 	// panic("b0 < 0")
+	// 	b0 = float64(0)
+	// }
 
 	floatEquals := func(a, b float64) bool {
 		const EPSILON float64 = 0.0001
@@ -77,6 +80,7 @@ func (bs Benchmarks) Filter(filter Benchmark) (Benchmarks, error) {
 		}
 	}
 
+next:
 	for _, b := range bs {
 		if filter.Iterations != 0 && b.Iterations != filter.Iterations {
 			continue
@@ -90,21 +94,16 @@ func (bs Benchmarks) Filter(filter Benchmark) (Benchmarks, error) {
 		if filter.TimeUnit != "" && b.TimeUnit != filter.TimeUnit {
 			continue
 		}
-		toAdd := true
 		for k, filterVal := range filter.Attributes {
 			val, ok := b.Attributes[k]
 			if !ok {
-				toAdd = false
-				break
+				break next
 			}
 			if !isSameScalar(filterVal, val) {
-				toAdd = false
-				break
+				break next
 			}
 		}
-		if toAdd {
-			benches = append(benches, b)
-		}
+		benches = append(benches, b)
 	}
 
 	return benches, nil
@@ -125,6 +124,9 @@ func (b Benchmark) IsEqual(other Benchmark) bool {
 		return false
 	}
 	if b.TimeUnit != other.TimeUnit {
+		return false
+	}
+	if len(b.Attributes) != len(other.Attributes) {
 		return false
 	}
 	for k, filterVal := range other.Attributes {

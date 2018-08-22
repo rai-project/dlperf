@@ -8,7 +8,6 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/k0kubun/pp"
 	"github.com/rai-project/dlperf/pkg"
 	"golang.org/x/sync/errgroup"
 
@@ -85,7 +84,7 @@ var benchgenCmd = &cobra.Command{
 					l := lyr.(*perflayer.Dropout)
 					b = l.FwdBenchmarkGenerator()
 				default:
-					pp.Println(lyr.OperatorType())
+					// pp.Println(lyr.OperatorType())
 				}
 				if b == "" {
 					return nil

@@ -77,7 +77,7 @@ func (c Relu) FwdBenchmarkAlgorithms() []string {
 }
 
 type reluBenchmarkArgs struct {
-	baseBenchmarkArgs
+	BaseBenchmarkArgs
 	BaseBenchmarkInputArgs
 }
 
@@ -88,7 +88,7 @@ func (c Relu) FwdBenchmarkGeneratorArgNames() []string {
 func (c Relu) FwdBenchmarkArgs() interface{} {
 	res := reluBenchmarkArgs{
 		BaseBenchmarkInputArgs: mkBaseBenchmarkInputArgs(&c),
-		baseBenchmarkArgs:      mkBaseBenchmarkArgs(&c),
+		BaseBenchmarkArgs:      mkBaseBenchmarkArgs(&c),
 	}
 
 	// substitution because cudnn does not support certain algorithms
@@ -102,7 +102,7 @@ func (c Relu) FwdBenchmarkArgs() interface{} {
 	hash, err := hashstructure.Hash(
 		res,
 		&hashstructure.HashOptions{
-			TagName: "args",
+			TagName: "hash",
 		},
 	)
 	if err != nil {

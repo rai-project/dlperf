@@ -54,7 +54,7 @@ func (c BatchNorm) FwdBenchmarkAlgorithms() []string {
 }
 
 type batchnormBenchmarkArgs struct {
-	baseBenchmarkArgs
+	BaseBenchmarkArgs
 	BaseBenchmarkInputArgs
 }
 
@@ -66,13 +66,13 @@ func (c BatchNorm) FwdBenchmarkArgs() interface{} {
 
 	res := batchnormBenchmarkArgs{
 		BaseBenchmarkInputArgs: mkBaseBenchmarkInputArgs(&c),
-		baseBenchmarkArgs:      mkBaseBenchmarkArgs(&c),
+		BaseBenchmarkArgs:      mkBaseBenchmarkArgs(&c),
 	}
 
 	hash, err := hashstructure.Hash(
 		res,
 		&hashstructure.HashOptions{
-			TagName: "args",
+			TagName: "hash",
 		},
 	)
 	if err != nil {

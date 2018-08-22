@@ -48,7 +48,7 @@ func (c Softmax) Shape() dlperf.ShapeInformation {
 }
 
 type softmaxBenchmarkArgs struct {
-	baseBenchmarkArgs
+	BaseBenchmarkArgs
 	BaseBenchmarkInputArgs
 }
 
@@ -60,13 +60,13 @@ func (c Softmax) FwdBenchmarkArgs() interface{} {
 
 	res := softmaxBenchmarkArgs{
 		BaseBenchmarkInputArgs: mkBaseBenchmarkInputArgs(&c),
-		baseBenchmarkArgs:      mkBaseBenchmarkArgs(&c),
+		BaseBenchmarkArgs:      mkBaseBenchmarkArgs(&c),
 	}
 
 	hash, err := hashstructure.Hash(
 		res,
 		&hashstructure.HashOptions{
-			TagName: "args",
+			TagName: "hash",
 		},
 	)
 	if err != nil {

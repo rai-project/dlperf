@@ -25,8 +25,7 @@ namespace [[ .BenchmarkName ]]__[[.UniqueBenchmarkID]] {
   ArgNames({[[ .ArgNames | join ", " ]]})
 
 static void BENCHMARK_[[ .BenchmarkName ]]_ADD_COUNTERS__[[.UniqueBenchmarkID]](benchmark::State& state) {
-  state.counters.insert({
-[[ . | make_counters ]]
+  state.counters.insert({[[ . | make_counters ]]
   });
 }
 `
@@ -105,7 +104,10 @@ func mkTemplateCounters(st interface{}) string {
 	res := []string{}
 	for _, field := range structs.New(st).Fields() {
 		if field.IsExported() && structs.IsStruct(field.Value()) {
-			res = append(res, mkTemplateCounters(field.Value()))
+			args := mkTemplateCounters(field.Value())
+			if len(args) > 0 {
+				res = append(res, args)
+			}
 			continue
 		}
 		tag := field.Tag("args")
@@ -135,7 +137,10 @@ func mkTemplateArguments(st interface{}) string {
 	res := []string{}
 	for _, field := range structs.New(st).Fields() {
 		if field.IsExported() && structs.IsStruct(field.Value()) {
-			res = append(res, mkTemplateArguments(field.Value()))
+			args := mkTemplateArguments(field.Value())
+			if len(args) > 0 {
+				res = append(res, args)
+			}
 			continue
 		}
 		tag := field.Tag("args")

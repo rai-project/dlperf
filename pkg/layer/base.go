@@ -12,22 +12,22 @@ import (
 )
 
 type BaseBenchmarkInputArgs struct {
-	Input0 int64 `args:"input[0]"`
-	Input1 int64 `args:"input[1]"`
-	Input2 int64 `args:"input[2]"`
-	Input3 int64 `args:"input[3]"`
-	Input4 int64 `args:"input[4]"`
-	Input5 int64 `args:"input[5]"`
-	Input6 int64 `args:"input[6]"`
-	Input7 int64 `args:"input[7]"`
+	Input0 int64 `args:"input[0]" hash:"input[0]" json:"input_0,omitempty"`
+	Input1 int64 `args:"input[1]" hash:"input[1]" json:"input_1,omitempty"`
+	Input2 int64 `args:"input[2]" hash:"input[2]" json:"input_2,omitempty"`
+	Input3 int64 `args:"input[3]" hash:"input[3]" json:"input_3,omitempty"`
+	Input4 int64 `args:"input[4]" hash:"input[4]" json:"input_4,omitempty"`
+	Input5 int64 `args:"input[5]" hash:"input[5]" json:"input_5,omitempty"`
+	Input6 int64 `args:"input[6]" hash:"input[6]" json:"input_6,omitempty"`
+	Input7 int64 `args:"input[7]" hash:"input[7]" json:"input_7,omitempty"`
 }
 
-type baseBenchmarkArgs struct {
-	ArgNames          []string          `args:"-"`
-	UniqueBenchmarkID uint64            `args:"-"`
-	BenchmarkName     string            `args:"-"`
-	Algorithms        []string          `args:"-"`
-	DataTypes         []dlperf.DataType `args:"-"`
+type BaseBenchmarkArgs struct {
+	ArgNames          []string          `args:"-" json:"arg_names,omitempty"`
+	UniqueBenchmarkID uint64            `args:"-" json:"unique_benchmark_id,omitempty"`
+	BenchmarkName     string            `args:"-" hash:"name" json:"benchmark_name,omitempty"`
+	Algorithms        []string          `args:"-" json:"algorithms,omitempty"`
+	DataTypes         []dlperf.DataType `args:"-" json:"data_types,omitempty"`
 }
 
 type Base struct {
@@ -43,8 +43,8 @@ type Base struct {
 	outputShapes     []dlperf.Shape  `json:"output_shapes,omitempty"`
 }
 
-func mkBaseBenchmarkArgs(c dlperf.Layer) baseBenchmarkArgs {
-	return baseBenchmarkArgs{
+func mkBaseBenchmarkArgs(c dlperf.Layer) BaseBenchmarkArgs {
+	return BaseBenchmarkArgs{
 		BenchmarkName: c.FwdBenchmarkName(),
 		ArgNames:      c.FwdBenchmarkGeneratorArgNames(),
 		Algorithms:    c.FwdBenchmarkAlgorithms(),

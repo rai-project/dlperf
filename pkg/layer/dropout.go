@@ -45,7 +45,7 @@ func (c Dropout) FwdBenchmarkAlgorithms() []string {
 }
 
 type dropoutBenchmarkArgs struct {
-	baseBenchmarkArgs
+	BaseBenchmarkArgs
 	BaseBenchmarkInputArgs
 }
 
@@ -57,13 +57,13 @@ func (c Dropout) FwdBenchmarkArgs() interface{} {
 
 	res := dropoutBenchmarkArgs{
 		BaseBenchmarkInputArgs: mkBaseBenchmarkInputArgs(&c),
-		baseBenchmarkArgs:      mkBaseBenchmarkArgs(&c),
+		BaseBenchmarkArgs:      mkBaseBenchmarkArgs(&c),
 	}
 
 	hash, err := hashstructure.Hash(
 		res,
 		&hashstructure.HashOptions{
-			TagName: "args",
+			TagName: "hash",
 		},
 	)
 	if err != nil {
