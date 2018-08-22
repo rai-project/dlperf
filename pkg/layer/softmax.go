@@ -114,6 +114,7 @@ static void [[ $.BenchmarkName ]]_[[ $datatype.Name | upper ]]__[[$.UniqueBenchm
 #undef BENCHMARK_[[ .BenchmarkName ]]_INPUT_ARG_NAMES
 #undef BENCHMARK_[[ .BenchmarkName ]]0
 #undef BENCHMARK_[[ .BenchmarkName ]]
+}
 #endif // ENABLE_[[ .BenchmarkName ]]
 `
 

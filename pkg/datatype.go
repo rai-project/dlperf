@@ -14,10 +14,10 @@ var AllDataTypes = []DataType{
 	// 	Name:  "Int32",
 	// 	CType: "int32_t",
 	// },
-	DataType{
-		Name:  "Float16",
-		CType: "__half",
-	},
+	// DataType{
+	// 	Name:  "Float16",
+	// 	CType: "__half",
+	// },
 	DataType{
 		Name:  "Float32",
 		CType: "float",

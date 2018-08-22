@@ -150,13 +150,15 @@ func (c Conv) FwdBenchmarkFilter(datatype, algorithm string) benchmark.Benchmark
 
 func (c Conv) DataTypes() []dlperf.DataType {
 	dts := c.Base.DataTypes()
-	return append(
-		dts,
-		dlperf.DataType{
-			Name:  "TensorCoreHalf",
-			CType: "__half",
-		},
-	)
+	// dts = append(
+	// 	dts,
+	// 	dlperf.DataType{
+	// 		Name:  "TensorCoreHalf",
+	// 		CType: "__half",
+	// 	},
+	// )
+
+	return dts
 }
 
 func (c Conv) FwdBenchmarkGeneratorArgNames() []string {

@@ -102,6 +102,7 @@ BENCHMARK([[ $.BenchmarkName ]]_[[ $datatype.Name | upper ]]__[[$.UniqueBenchmar
 [[ end ]]
 #undef BENCHMARK_[[ .BenchmarkName ]]_INPUT_ARGS
 #undef BENCHMARK_[[ .BenchmarkName ]]_INPUT_ARG_NAMES
+}
 #endif // ENABLE_[[ .BenchmarkName ]]
 `
 

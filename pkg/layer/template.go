@@ -14,6 +14,8 @@ import (
 const (
 	templateBasePrefix = `
 #ifdef ENABLE_[[ .BenchmarkName ]]
+namespace [[ .BenchmarkName ]]__[[.UniqueBenchmarkID]] {
+
 #define BENCHMARK_[[ .BenchmarkName ]]_INPUT_ARGS() \
   Args({{ \
 [[ . | make_arguments ]]
@@ -41,6 +43,7 @@ static void BENCHMARK_[[ .BenchmarkName ]]_ADD_COUNTERS__[[.UniqueBenchmarkID]](
 #undef BENCHMARK_[[ .BenchmarkName ]]_INPUT_ARGS
 #undef BENCHMARK_[[ .BenchmarkName ]]_INPUT_ARG_NAMES
 #undef BENCHMARK_[[ .BenchmarkName ]]
+}
 #endif // ENABLE_[[ .BenchmarkName ]]
 `
 )
