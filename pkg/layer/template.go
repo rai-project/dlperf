@@ -25,7 +25,8 @@ namespace [[ .BenchmarkName ]]__[[.UniqueBenchmarkID]] {
   ArgNames({[[ .ArgNames | join ", " ]]})
 
 static void BENCHMARK_[[ .BenchmarkName ]]_ADD_COUNTERS__[[.UniqueBenchmarkID]](benchmark::State& state) {
-  state.counters.insert({[[ . | make_counters ]]
+  state.counters.insert({
+[[ . | make_counters ]]
   });
 }
 `
