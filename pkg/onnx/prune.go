@@ -111,8 +111,12 @@ func (g Graph) doPrune(layerTypes []string) *Graph {
 
 	edgeContract = func(start, end graph.Node) {
 		if !toPrune(start) && !toPrune(end) {
-			edge := newgrph.NewEdge(start, end)
-			newgrph.SetEdge(edge)
+			newgrph.SetEdge(&GraphEdge{
+				Edge: simple.Edge{
+					F: start,
+					T: end,
+				},
+			})
 		}
 		if toPrune(end) {
 			for _, succ := range g.From(end.ID()) {
@@ -142,15 +146,23 @@ func (g Graph) doPrune(layerTypes []string) *Graph {
 				if toPrune(pred) {
 					continue
 				}
-				edge := newgrph.NewEdge(pred, nd)
-				newgrph.SetEdge(edge)
+				newgrph.SetEdge(&GraphEdge{
+					Edge: simple.Edge{
+						F: pred,
+						T: nd,
+					},
+				})
 			}
 			for _, succ := range succs {
 				if toPrune(succ) {
 					continue
 				}
-				edge := newgrph.NewEdge(nd, succ)
-				newgrph.SetEdge(edge)
+				newgrph.SetEdge(&GraphEdge{
+					Edge: simple.Edge{
+						F: nd,
+						T: succ,
+					},
+				})
 			}
 		}
 	}

@@ -95,8 +95,12 @@ func (grph Graph) FindSubGraphs() ([]Graph, error) {
 			for _, succ := range grph.From(nd.ID()) {
 				if dt.Dominates(nd, succ) {
 					visit(succ)
-					edge := subgrph.NewEdge(nd, succ)
-					subgrph.SetEdge(edge)
+					subgrph.SetEdge(&GraphEdge{
+						Edge: simple.Edge{
+							F: nd,
+							T: succ,
+						},
+					})
 				}
 			}
 		}

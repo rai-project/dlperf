@@ -25,6 +25,10 @@ type GraphNode struct {
 	*onnx.NodeProto
 }
 
+type GraphEdge struct {
+	simple.Edge
+}
+
 type GraphNodes []*GraphNode
 
 func (nd GraphNode) ID() int64 {
@@ -194,8 +198,12 @@ func (o *Onnx) ToGraph(oo ...GraphOption) *Graph {
 				}
 				inNd := grph.Node(inId)
 				outNd := grph.Node(outId)
-				edge := grph.NewEdge(inNd, outNd)
-				grph.SetEdge(edge)
+				grph.SetEdge(&GraphEdge{
+					Edge: simple.Edge{
+						F: inNd,
+						T: outNd,
+					},
+				})
 			}
 		}
 	}
