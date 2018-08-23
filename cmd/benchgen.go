@@ -47,7 +47,11 @@ var benchgenCmd = &cobra.Command{
 			}
 		}
 
+		// fmt.Println("before = ", len(layers))
+
 		layers = layers.FwdUnion("float", "")
+
+		// fmt.Println("after = ", len(layers))
 
 		prog := bytes.NewBufferString("")
 		var mut sync.Mutex

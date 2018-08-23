@@ -6,5 +6,6 @@
     "**/CVS": true,
     "vendor": true,
     "**/.DS_Store": true
-  }
+  },
+  "cquery.cacheDirectory": "${workspaceFolder}/.vscode/cquery_cached_index/"
 }
