@@ -3,28 +3,52 @@
 package layer
 
 import (
-	"fmt"
+	"sort"
 
-	tg "github.com/galeone/tfgo"
 	tf "github.com/tensorflow/tensorflow/tensorflow/go"
+	"github.com/tensorflow/tensorflow/tensorflow/go/op"
 )
 
-func (c Conv) TensorflowRun() {
-	root := tg.NewRoot()
+func toTensorflowShape(dims []int64) tf.Shape {
+	return tf.MakeShape(dims...)
+}
 
-	// fakeInput, _ := tf.NewTensor([1][28][28][1]float32{})
-	A := tg.NewTensor(root, tg.Const(root, [2][2]int32{{1, 2}, {-1, -2}}))
-	x := tg.NewTensor(root, tg.Const(root, [2][1]int64{{10}, {100}}))
-	b := tg.NewTensor(root, tg.Const(root, [2][1]int32{{-10}, {10}}))
-	Y := A.MatMul(x.Output).Add(b.Output)
+func (c Conv) FwdTensorflow(root *op.Scope) {
+	inShapes := c.InputShapes()
+	in := op.Placeholder(
+		root.SubScope(c.Name()),
+		tf.Float,
+		op.PlaceholderShape(toTensorflowShape(inShapes[0])),
+	)
+	weights := op.Placeholder(
+		root.SubScope(c.Name()),
+		tf.Float,
+		op.PlaceholderShape(toTensorflowShape(sort.Reverse(Int64Slice(c.KernelShape)))),
+	)
+	conv := op.Conv2D(
+		root.SubScope(c.Name()),
+		in,
+		weights,
+		[]int64{1, c.Strides[0], c.Strides[1], 1},
+		c.AutoPad,
+		op.Conv2DUseCudnnOnGpu(true),
+		op.Conv2DDilations(c.Dilations),
+		op.Conv2DDataFormat("NCHW"),
+	)
 
-	// Please note that Y is just a pointer to A!
+	if len(inShapes) > 2 {
+		bias = op.Placeholder(
+			root.SubScope(c.Name()),
+			tf.Float,
+			op.PlaceholderShape(tf.MakeShape(inShapes[2][0])),
+		)
+		conv = op.BiasAdd(
+			root.SubScope(c.Name()+"_bias"),
+			conv,
+			bias,
+			op.BiasAddDataFormat("NCHW"),
+		)
+	}
 
-	// If we want to create a different node in the graph, we have to clone Y
-	// or equivalently A
-	Z := A.Clone()
-	results := tg.Exec(root, []tf.Output{Y.Output, Z.Output}, nil, &tf.SessionOptions{})
-	fmt.Println("Y: ", results[0].Value(), "Z: ", results[1].Value())
-	fmt.Println("Y == A", Y == A) // ==> true
-	fmt.Println("Z == A", Z == A) // ==> false
+	return conv
 }
