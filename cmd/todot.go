@@ -11,6 +11,10 @@ import (
 	"gonum.org/v1/gonum/graph/encoding/dot"
 )
 
+var (
+	inferShape bool
+)
+
 // todotCmd represents the todot command
 var todotCmd = &cobra.Command{
 	Use:     "todot",
@@ -36,7 +40,14 @@ var todotCmd = &cobra.Command{
 			return err
 		}
 
-		grph := model.ToGraph(onnx.GraphPruneInputs(false), onnx.GraphInputsAsConstantNodes(true))
+		var grph *onnx.Graph
+		if inferShape {
+			model.Information()
+			grph = model.Network()
+		} else {
+			grph = model.ToGraph(onnx.GraphPruneInputs(false), onnx.GraphInputsAsConstantNodes(true))
+		}
+
 		if pruneGraph {
 			grph = grph.Prune(nil)
 		}
@@ -59,5 +70,6 @@ var todotCmd = &cobra.Command{
 
 func init() {
 	todotCmd.PersistentFlags().BoolVar(&pruneGraph, "prune", false, "prune graph")
+	todotCmd.PersistentFlags().BoolVar(&inferShape, "infer_shape", true, "infer shape")
 	rootCmd.AddCommand(todotCmd)
 }

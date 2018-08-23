@@ -42,6 +42,10 @@ func dotToImage(dot []byte) (string, error) {
 	cmd := exec.Command(dotExe, "-Tpng", "-o", img)
 	cmd.Stdin = bytes.NewReader(dot)
 	if err := cmd.Run(); err != nil {
+		bts, e := cmd.CombinedOutput()
+		if e == nil {
+			return "", errors.Wrap(err, string(bts))
+		}
 		return "", err
 	}
 	return img, nil

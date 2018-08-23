@@ -36,6 +36,44 @@ type GraphEdge struct {
 
 type GraphNodes []*GraphNode
 
+type gAttributer struct{}
+type nAttributer struct{}
+type eAttributer struct{}
+
+func (gAttributer) Attributes() []encoding.Attribute {
+	return []encoding.Attribute{
+		encoding.Attribute{
+			Key:   "rankdir",
+			Value: "\"TB\"",
+		},
+	}
+}
+
+func (nAttributer) Attributes() []encoding.Attribute {
+	return []encoding.Attribute{
+		encoding.Attribute{
+			Key:   "shape",
+			Value: "Mrecord",
+		},
+	}
+}
+
+func (eAttributer) Attributes() []encoding.Attribute {
+	return []encoding.Attribute{
+		encoding.Attribute{
+			Key:   "penwidth",
+			Value: "3",
+		},
+	}
+}
+
+func (g Graph) DOTAttributers() (graph, node, edge encoding.Attributer) {
+	graph = gAttributer{}
+	node = nAttributer{}
+	edge = eAttributer{}
+	return
+}
+
 func (nd GraphNode) ID() int64 {
 	return nd.id
 }
@@ -49,11 +87,33 @@ func (nd GraphNode) DOTID() string {
 }
 
 func (nd GraphNode) Attributes() []encoding.Attribute {
-	lbl := fmt.Sprintf("\"{  %s  | %s }\"", nd.Name, nd.OpType)
-	if nd.layer != nil {
-		outputShapes, err := json.Marshal(nd.layer.OutputShapes())
-		if err == nil {
-			lbl = fmt.Sprintf("\"{  %s  | %s | %s }\"", nd.Name, nd.OpType, string(outputShapes))
+	var lbl string
+	extraAttrs := []encoding.Attribute{}
+	if nd.OpType == "constant_input" {
+		lbl = fmt.Sprintf("\"%s\"", nd.Name)
+		extraAttrs = append(extraAttrs,
+			[]encoding.Attribute{
+				encoding.Attribute{
+					Key:   "shape",
+					Value: "box",
+				},
+				encoding.Attribute{
+					Key:   "style",
+					Value: `"filled,dashed"`,
+				},
+				encoding.Attribute{
+					Key:   "fillcolor",
+					Value: `"white"`,
+				},
+			}...,
+		)
+	} else {
+		lbl = fmt.Sprintf("\"{%s}  | {%s}\"", nd.Name, nd.OpType)
+		if nd.layer != nil {
+			outputShapes, err := json.Marshal(nd.layer.OutputShapes())
+			if err == nil {
+				lbl = fmt.Sprintf(`"{ %s  | %s} | %s"`, nd.Name, nd.OpType, string(outputShapes))
+			}
 		}
 	}
 	attrs := []encoding.Attribute{
@@ -70,10 +130,6 @@ func (nd GraphNode) Attributes() []encoding.Attribute {
 			Value: nd.OpType,
 		},
 		encoding.Attribute{
-			Key:   "shape",
-			Value: "record",
-		},
-		encoding.Attribute{
 			Key:   "label",
 			Value: lbl,
 		},
@@ -86,6 +142,7 @@ func (nd GraphNode) Attributes() []encoding.Attribute {
 			Value: fmt.Sprintf("\"%s\"", strings.Join(nd.GetOutput(), ";")),
 		},
 	}
+	attrs = append(attrs, extraAttrs...)
 	if nd.color != nil {
 		clr, ok := colorful.MakeColor(nd.color)
 		if ok {
@@ -108,12 +165,7 @@ func (nd GraphNode) Attributes() []encoding.Attribute {
 }
 
 func (nd GraphEdge) Attributes() []encoding.Attribute {
-	return []encoding.Attribute{
-		encoding.Attribute{
-			Key:   "penwidth",
-			Value: "3",
-		},
-	}
+	return []encoding.Attribute{}
 }
 
 func (o *Onnx) mkColors() map[string]color.Color {
