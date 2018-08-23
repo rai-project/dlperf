@@ -145,12 +145,12 @@
   version = "v1.4.7"
 
 [[projects]]
-  digest = "1:eceec69de4581189a65244bf958b2c4b3a121ed80700f92ae25c03ab2c8f61a2"
+  branch = "master"
+  digest = "1:1f474d2b2bb13904b111a9257ced00c1d2131fad9d4aa27349e2e2b2285a5ccd"
   name = "github.com/getlantern/deepcopy"
   packages = ["."]
   pruneopts = "UT"
-  revision = "b923171e8640f94369e21e324b1b0465cb82ec9f"
-  version = "v1"
+  revision = "7f45deb8130a0acc553242eb0e009e3f6f3d9ce3"
 
 [[projects]]
   digest = "1:bbadccf3d3317ea03c0dac0b45b673b4b397c8f91a1d2eff550a3c51c4ad770e"

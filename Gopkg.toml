@@ -108,3 +108,15 @@
 [[override]]
   branch = "master"
   name = "github.com/muesli/kmeans"
+
+[[constraint]]
+  branch = "master"
+  name = "github.com/getlantern/deepcopy"
+
+[[constraint]]
+  branch = "master"
+  name = "github.com/leekchan/gtf"
+
+[[constraint]]
+  branch = "master"
+  name = "github.com/mitchellh/hashstructure"
