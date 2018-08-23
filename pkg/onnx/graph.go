@@ -162,6 +162,17 @@ func (nd GraphNode) Attributes() []encoding.Attribute {
 			}
 			return ""
 		}
+		color := nd.color
+		fillColor := color
+		// if nd.layer != nil && len(nd.layer.OutputShapes()) != 0 {
+		// 	outputShape := nd.layer.OutputShapes()[0]
+		// 	bytes := int64(1)
+		// 	for _, b := range outputShape {
+		// 		bytes *= b
+		// 	}
+		// 	println(float64(bytes) / float64(1024))
+		// 	fillColor = gamut.Lighter(fillColor, float64(bytes)/float64(1024))
+		// }
 		attrs = append(
 			attrs,
 			[]encoding.Attribute{
@@ -175,15 +186,15 @@ func (nd GraphNode) Attributes() []encoding.Attribute {
 				},
 				encoding.Attribute{
 					Key:   "color",
-					Value: toHex(gamut.Darker(nd.color, 0.1)),
+					Value: toHex(gamut.Darker(color, 0.1)),
 				},
 				encoding.Attribute{
 					Key:   "fontcolor",
-					Value: toHex(gamut.Contrast(nd.color)),
+					Value: toHex(gamut.Contrast(color)),
 				},
 				encoding.Attribute{
 					Key:   "fillcolor",
-					Value: toHex(nd.color),
+					Value: toHex(fillColor),
 				},
 			}...,
 		)
