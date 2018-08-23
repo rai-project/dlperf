@@ -2,12 +2,15 @@ package benchmark
 
 import (
 	"encoding/json"
+	"encoding/xml"
 	"io/ioutil"
 	"path/filepath"
+	"strings"
 
 	"github.com/Unknwon/com"
 	zglob "github.com/mattn/go-zglob"
 	"github.com/pkg/errors"
+	nvidiasmi "github.com/rai-project/nvidia-smi"
 )
 
 func readDir(path string) (Suite, error) {
@@ -56,5 +59,15 @@ func New(path string) (Suite, error) {
 	var res Suite
 	res.Context = suite.Context
 	res.Benchmarks = resBenchs
+	if com.IsFile(strings.TrimSuffix(path, ".json") + ".machine") {
+		info := new(nvidiasmi.NvidiaSmi)
+		xmlFilePath := strings.TrimSuffix(path, ".json") + ".machine"
+		if bts, err := ioutil.ReadFile(xmlFilePath); err == nil {
+			err := xml.Unmarshal(bts, info)
+			if err == nil {
+				res.GPUInformation = info
+			}
+		}
+	}
 	return res, nil
 }

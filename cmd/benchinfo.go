@@ -128,6 +128,11 @@ var benchinfoCmd = &cobra.Command{
 			flops: dlperf.FlopsInformation{},
 		})
 
+		if benchSuite.GPUInformation != nil && len(benchSuite.GPUInformation.GPUS) != 0 {
+			for _, gpu := range benchSuite.GPUInformation.GPUS {
+				fmt.Println(gpu.ProductName)
+			}
+		}
 		writer := NewWriter(bench{}, humanFlops)
 		defer writer.Close()
 

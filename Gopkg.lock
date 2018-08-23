@@ -10,12 +10,12 @@
   revision = "83e8b8723a9bf39481216e80575f4854c63ece4a"
 
 [[projects]]
-  digest = "1:adbfc2db750d6fbe0c165ad801ba2d730883a3bc40bc8fe829516eb42ed17771"
+  digest = "1:f9ae348e1f793dcf9ed930ed47136a67343dbd6809c5c91391322267f4476892"
   name = "github.com/Microsoft/go-winio"
   packages = ["."]
   pruneopts = "UT"
-  revision = "a6d595ae73cf27a1b8fc32930668708f45ce1c85"
-  version = "v0.4.9"
+  revision = "78a084671df137c2acfcacaa730d7e7dc285ac39"
+  version = "v0.4.10"
 
 [[projects]]
   digest = "1:f033a81755b461d605dd88a4eaaf35542db9b425ee504ef44cef810ff2b0f9d2"
@@ -80,16 +80,16 @@
   version = "v0.2.0"
 
 [[projects]]
-  digest = "1:a2c1d0e43bd3baaa071d1b9ed72c27d78169b2b269f71c105ac4ba34b1be4a39"
+  digest = "1:ffe9824d294da03b391f44e1ae8281281b4afc1bdaa9588c9097785e3af10cec"
   name = "github.com/davecgh/go-spew"
   packages = ["spew"]
   pruneopts = "UT"
-  revision = "346938d642f2ec3594ed81d874461961cd0faa76"
-  version = "v1.1.0"
+  revision = "8991bc29aa16c548c550c7ff78260e27b9ab7c73"
+  version = "v1.1.1"
 
 [[projects]]
   branch = "master"
-  digest = "1:f3a36b518193e8bc8b1333f89af0b928e5643e952e647886b94e68dbd0ca5510"
+  digest = "1:fa747cc47ee5a6520994bb08364a54c719c7e3700584ae48eec22dee84643869"
   name = "github.com/docker/docker"
   packages = [
     "pkg/archive",
@@ -102,7 +102,7 @@
     "pkg/system",
   ]
   pruneopts = "UT"
-  revision = "678d4b3a6d4cd7824d26592090b4dec507ce4bc2"
+  revision = "a0385f7ad7f8ebab4ca88e9b629a6b31423a10ee"
 
 [[projects]]
   digest = "1:6f82cacd0af5921e99bf3f46748705239b36489464f4529a1589bc895764fb18"
@@ -145,6 +145,14 @@
   version = "v1.4.7"
 
 [[projects]]
+  digest = "1:eceec69de4581189a65244bf958b2c4b3a121ed80700f92ae25c03ab2c8f61a2"
+  name = "github.com/getlantern/deepcopy"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "b923171e8640f94369e21e324b1b0465cb82ec9f"
+  version = "v1"
+
+[[projects]]
   digest = "1:bbadccf3d3317ea03c0dac0b45b673b4b397c8f91a1d2eff550a3c51c4ad770e"
   name = "github.com/gogo/protobuf"
   packages = ["proto"]
@@ -153,7 +161,18 @@
   version = "v1.1.1"
 
 [[projects]]
-  digest = "1:7e84d43e13c40dd0e5982be013881b5ced48550237cfb35e12e0579d31f6276a"
+  branch = "master"
+  digest = "1:62c57507df491b657e9ae2645f30958d9964c8eeb380600469eedc951ebb3a0e"
+  name = "github.com/golang/freetype"
+  packages = [
+    "raster",
+    "truetype",
+  ]
+  pruneopts = "UT"
+  revision = "e2365dfdc4a05e4b8299a783240d4a7d5a65d4e4"
+
+[[projects]]
+  digest = "1:69148993c8baff35dbb0b5ec92eccb6b75b2b7255a4ad1257be38f51fff8f267"
   name = "github.com/golang/protobuf"
   packages = [
     "jsonpb",
@@ -161,8 +180,8 @@
     "ptypes/struct",
   ]
   pruneopts = "UT"
-  revision = "b4deda0973fb4c70b50d226b1af49f3da59f5265"
-  version = "v1.1.0"
+  revision = "aa810b61a9c79d51363740d207bb46cf8e620ed5"
+  version = "v1.2.0"
 
 [[projects]]
   digest = "1:2e3c336fc7fde5c984d2841455a658a6d626450b1754a854b3b32e7a8f49a07a"
@@ -214,11 +233,27 @@
 
 [[projects]]
   branch = "master"
+  digest = "1:a28319de27d47bf8e613fb2ce1cf4873f2cf487421c115658aca7a5e9c5afa1f"
+  name = "github.com/leekchan/gtf"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "79e3a68ab435edb72c6490289a33ef8bedcee15a"
+
+[[projects]]
+  branch = "master"
   digest = "1:e46d65f9f587fdc342c86135ac46449ab1302717a68ee0336568ed35ce945722"
   name = "github.com/linkosmos/mapop"
   packages = ["."]
   pruneopts = "UT"
   revision = "30336b2a6179ae763465b95e561c99eb87cba942"
+
+[[projects]]
+  digest = "1:c65a16ac77d0b1aefc7009cabb6ac5ad05def02025f5be85f450c03f52cc6f86"
+  name = "github.com/lucasb-eyer/go-colorful"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "345fbb3dbcdb252d9985ee899a84963c0fa24c82"
+  version = "v1.0"
 
 [[projects]]
   digest = "1:c568d7727aa262c32bdf8a3f7db83614f7af0ed661474b24588de635c20024c7"
@@ -227,6 +262,19 @@
   pruneopts = "UT"
   revision = "c2353362d570a7bfa228149c62842019201cfb71"
   version = "v1.8.0"
+
+[[projects]]
+  branch = "master"
+  digest = "1:aa3d8d42865c42626b5c1add193692d045b3188b1479f0a0a88690d21fe20083"
+  name = "github.com/mailru/easyjson"
+  packages = [
+    ".",
+    "buffer",
+    "jlexer",
+    "jwriter",
+  ]
+  pruneopts = "UT"
+  revision = "03f2033d19d5860aef995fe360ac7d395cd8ce65"
 
 [[projects]]
   digest = "1:c658e84ad3916da105a761660dcaeb01e63416c8ec7bc62256a9b411a05fcd67"
@@ -273,11 +321,43 @@
 
 [[projects]]
   branch = "master"
+  digest = "1:544635141f5fb084637823f438f3563be046a9730c256d2e7760dbb741cd88b5"
+  name = "github.com/mitchellh/hashstructure"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "2bca23e0e452137f789efbc8610126fd8b94f73b"
+
+[[projects]]
+  branch = "master"
   digest = "1:5ab79470a1d0fb19b041a624415612f8236b3c06070161a910562f2b2d064355"
   name = "github.com/mitchellh/mapstructure"
   packages = ["."]
   pruneopts = "UT"
   revision = "f15292f7a699fcc1a38a80977f80a046874ba8ac"
+
+[[projects]]
+  branch = "master"
+  digest = "1:39b36f898cc0c7cec682e86ccf717488d4663aa60aa39a018572e22554323c0a"
+  name = "github.com/muesli/clusters"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "a07a36e67d36635392ec89f47d0e0c9da99b7dbf"
+
+[[projects]]
+  branch = "master"
+  digest = "1:2db93ec9cff973966f35e26900868d3f3684e4ab12368b0f034d3c27f481d491"
+  name = "github.com/muesli/gamut"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "72f6a12f4e6453123a1049b59828287d0b71771d"
+
+[[projects]]
+  branch = "master"
+  digest = "1:4e6d18965879a270a2156eaa86c384e1960ab86c80f8ffc6ae110ad3f6d4a790"
+  name = "github.com/muesli/kmeans"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "144a85a37fd387d6b0b6a7598a2ff11c53640300"
 
 [[projects]]
   branch = "master"
@@ -375,11 +455,27 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:41829ee5aea7d66dda5b1c9306ac57f2fe933dd7fd34b98c20816fcb2b026452"
+  digest = "1:086870c7b4fb298cace0fac6062765a210506567c36157a1dbfaad5b2e3b343a"
+  name = "github.com/rai-project/nvidia-smi"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "723811cc64b6c7f0c1e698ac70b9fcd38a600367"
+
+[[projects]]
+  branch = "master"
+  digest = "1:4845bb4452f066d4c2f93a90f1c143a1b6705e733cbb5d34ea485768987d8cb8"
   name = "github.com/rai-project/onnx"
   packages = ["."]
   pruneopts = "UT"
-  revision = "6b5176deb0308ee2cab7dd74815248ac129bbd38"
+  revision = "f87c3f49c239562ad46da16e695f52dd9b60a11d"
+
+[[projects]]
+  branch = "master"
+  digest = "1:3375b223c98eff16f655037159a7317d4df1a6e6b06ddd3c74a0cb650eeae061"
+  name = "github.com/rai-project/tegra"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "6670bcd508d44c4b41f640cd14c3226d718d4a95"
 
 [[projects]]
   branch = "master"
@@ -476,6 +572,21 @@
   version = "v1.1.1"
 
 [[projects]]
+  digest = "1:cf762a0ce01d48d8ac03f717aa41f66b655abea67c616d89994ce091a2cc6831"
+  name = "github.com/wcharczuk/go-chart"
+  packages = [
+    ".",
+    "drawing",
+    "matrix",
+    "roboto",
+    "seq",
+    "util",
+  ]
+  pruneopts = "UT"
+  revision = "7c3982fe3d8ab0c9eea9ab5d2aced51e45d447bc"
+  version = "v2.0.1"
+
+[[projects]]
   branch = "master"
   digest = "1:b2faf2256a00b05784390fbd8ea4b22519ea62daf751fef4ab4ce583c66abf1b"
   name = "github.com/xordataexchange/crypt"
@@ -488,6 +599,14 @@
   ]
   pruneopts = "UT"
   revision = "b2862e3d0a775f18c7cfe02273500ae307b61218"
+
+[[projects]]
+  branch = "master"
+  digest = "1:85ceb7046447e3f5cf21c621ec137b23eb8d02ae9b585dd5c22d65543a0f3020"
+  name = "github.com/xrash/smetrics"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "a3153f7040e90324c58c6287535e26a0ac5c1cc1"
 
 [[projects]]
   branch = "master"
@@ -504,7 +623,7 @@
     "ssh/terminal",
   ]
   pruneopts = "UT"
-  revision = "de0752318171da717af4ce24d0a2e8626afaeb11"
+  revision = "614d502a4dac94afa3a6ce146bd1736da82514c6"
 
 [[projects]]
   branch = "master"
@@ -516,11 +635,24 @@
 
 [[projects]]
   branch = "master"
+  digest = "1:c46a80735d879b1b808686638e0a5c0a356ed4edc0981971dab4dad93d8c20cc"
+  name = "golang.org/x/image"
+  packages = [
+    "draw",
+    "font",
+    "math/f64",
+    "math/fixed",
+  ]
+  pruneopts = "UT"
+  revision = "c73c2afc3b812cdd6385de5a50616511c4a3d458"
+
+[[projects]]
+  branch = "master"
   digest = "1:76ee51c3f468493aff39dbacc401e8831fbb765104cbf613b89bef01cf4bad70"
   name = "golang.org/x/net"
   packages = ["context"]
   pruneopts = "UT"
-  revision = "c39426892332e1bb5ec0a434a079bf82f5d30c54"
+  revision = "922f4815f713f213882e8ef45e0d315b164d705c"
 
 [[projects]]
   branch = "master"
@@ -535,14 +667,14 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:d756534cd4124a2c7f9b349b2a70a63e53d4e32befae47d6a4bd938a64b92e14"
+  digest = "1:48774faa158e9eaee1ba45aad66434bb0345927b43756a24d4fe4c44ad79e307"
   name = "golang.org/x/sys"
   packages = [
     "unix",
     "windows",
   ]
   pruneopts = "UT"
-  revision = "4e1fef5609515ec7a2cee7b5de30ba6d9b438cbf"
+  revision = "3b58ed4ad3395d483fc92d5d14123ce2c3581fec"
 
 [[projects]]
   digest = "1:8029e9743749d4be5bc9f7d42ea1659471767860f0cdc34d37c3111bd308a295"
@@ -561,7 +693,7 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:1931ac37a62394ded600cc0e61bbb8d9f2dfb0a591bc4948680444b8c2bfe562"
+  digest = "1:daafd0df53adda14a5e2f262bf2c28143f102c764d6257f48cfc342b83ad230a"
   name = "gonum.org/v1/gonum"
   packages = [
     "blas",
@@ -596,7 +728,7 @@
     "mat",
   ]
   pruneopts = "UT"
-  revision = "f4b55da7eefa5a4b5c8521a05c554392f71816f6"
+  revision = "0d927069219651367007a1ff1931bf06245acfeb"
 
 [[projects]]
   digest = "1:342378ac4dcb378a5448dd723f0784ae519383532f5e70ade24132c4c8693202"
@@ -616,17 +748,23 @@
     "github.com/cheggaaa/pb",
     "github.com/fatih/color",
     "github.com/fatih/structs",
+    "github.com/getlantern/deepcopy",
     "github.com/google/go-cmp/cmp",
     "github.com/k0kubun/pp",
+    "github.com/leekchan/gtf",
     "github.com/linkosmos/mapop",
+    "github.com/lucasb-eyer/go-colorful",
     "github.com/mattn/go-zglob",
     "github.com/mitchellh/go-homedir",
+    "github.com/mitchellh/hashstructure",
     "github.com/mitchellh/mapstructure",
+    "github.com/muesli/gamut",
     "github.com/olekukonko/tablewriter",
     "github.com/pkg/errors",
     "github.com/rai-project/archive",
     "github.com/rai-project/config",
     "github.com/rai-project/logger",
+    "github.com/rai-project/nvidia-smi",
     "github.com/rai-project/onnx",
     "github.com/rai-project/utils",
     "github.com/sirupsen/logrus",

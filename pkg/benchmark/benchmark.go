@@ -6,6 +6,7 @@ import (
 
 	"github.com/fatih/structs"
 	"github.com/linkosmos/mapop"
+	nvidiasmi "github.com/rai-project/nvidia-smi"
 	"github.com/spf13/cast"
 )
 
@@ -26,8 +27,9 @@ type Context struct {
 }
 
 type Suite struct {
-	Context    Context    `json:"context"`
-	Benchmarks Benchmarks `json:"benchmarks"`
+	Context        Context              `json:"context"`
+	Benchmarks     Benchmarks           `json:"benchmarks"`
+	GPUInformation *nvidiasmi.NvidiaSmi `json:"gpu_information,omitempty"`
 }
 
 type Benchmarks []Benchmark

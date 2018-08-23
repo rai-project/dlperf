@@ -100,3 +100,11 @@
 [[constraint]]
   branch = "master"
   name = "github.com/cheggaaa/pb"
+
+[[constraint]]
+  branch = "master"
+  name = "github.com/muesli/gamut"
+
+[[override]]
+  branch = "master"
+  name = "github.com/muesli/kmeans"
