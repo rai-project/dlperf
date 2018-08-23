@@ -47,8 +47,16 @@ func (gAttributer) Attributes() []encoding.Attribute {
 			Value: "\"TB\"",
 		},
 		encoding.Attribute{
+			Key:   "overlap",
+			Value: "prism",
+		},
+		encoding.Attribute{
+			Key:   "overlap_shrink",
+			Value: "true",
+		},
+		encoding.Attribute{
 			Key:   "splines",
-			Value: "curved",
+			Value: "curved", //"polyline",
 		},
 	}
 }
