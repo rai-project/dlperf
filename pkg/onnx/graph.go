@@ -46,6 +46,10 @@ func (gAttributer) Attributes() []encoding.Attribute {
 			Key:   "rankdir",
 			Value: "\"TB\"",
 		},
+		encoding.Attribute{
+			Key:   "splines",
+			Value: "curved",
+		},
 	}
 }
 
@@ -110,9 +114,16 @@ func (nd GraphNode) Attributes() []encoding.Attribute {
 	} else {
 		lbl = fmt.Sprintf("\"{%s}  | {%s}\"", nd.Name, nd.OpType)
 		if nd.layer != nil {
-			outputShapes, err := json.Marshal(nd.layer.OutputShapes())
+			var outputShapesBuf []byte
+			var err error
+			outShapes := nd.layer.OutputShapes()
+			if len(outShapes) == 1 {
+				outputShapesBuf, err = json.Marshal(outShapes[0])
+			} else {
+				outputShapesBuf, err = json.Marshal(outShapes)
+			}
 			if err == nil {
-				lbl = fmt.Sprintf(`"{ %s  | %s} | %s"`, nd.Name, nd.OpType, string(outputShapes))
+				lbl = fmt.Sprintf(`"{ {%s  | %s} | %s }"`, nd.Name, nd.OpType, string(outputShapesBuf))
 			}
 		}
 	}
@@ -144,22 +155,38 @@ func (nd GraphNode) Attributes() []encoding.Attribute {
 	}
 	attrs = append(attrs, extraAttrs...)
 	if nd.color != nil {
-		clr, ok := colorful.MakeColor(nd.color)
-		if ok {
-			attrs = append(
-				attrs,
-				[]encoding.Attribute{
-					encoding.Attribute{
-						Key:   "style",
-						Value: "filled",
-					},
-					encoding.Attribute{
-						Key:   "fillcolor",
-						Value: fmt.Sprintf("\"%s\"", clr.Hex()),
-					},
-				}...,
-			)
+		toHex := func(clr0 color.Color) string {
+			clr, ok := colorful.MakeColor(clr0)
+			if ok {
+				return fmt.Sprintf(`"%s"`, clr.Hex())
+			}
+			return ""
 		}
+		attrs = append(
+			attrs,
+			[]encoding.Attribute{
+				encoding.Attribute{
+					Key:   "penwidth",
+					Value: "3",
+				},
+				encoding.Attribute{
+					Key:   "style",
+					Value: "filled",
+				},
+				encoding.Attribute{
+					Key:   "color",
+					Value: toHex(gamut.Darker(nd.color, 0.1)),
+				},
+				encoding.Attribute{
+					Key:   "fontcolor",
+					Value: toHex(gamut.Contrast(nd.color)),
+				},
+				encoding.Attribute{
+					Key:   "fillcolor",
+					Value: toHex(nd.color),
+				},
+			}...,
+		)
 	}
 	return attrs
 }
