@@ -7,6 +7,7 @@ import (
 	"strings"
 
 	"github.com/fatih/structs"
+	"github.com/getlantern/deepcopy"
 	dlperf "github.com/rai-project/dlperf/pkg"
 )
 
@@ -19,6 +20,11 @@ func (p Int64Slice) Swap(i, j int)      { p[i], p[j] = p[j], p[i] }
 
 // Sort is a convenience method.
 func (p Int64Slice) Sort() { sort.Sort(p) }
+func (p Int64Slice) Reverse() Int64Slice {
+	cpy := []int64{}
+	deepcopy.Copy(&cpy, p)
+	return sort.Reverse(Int64Slice(p)).(Int64Slice)
+}
 
 func getOrMinus1(arry []int64, idx int) int64 {
 	if len(arry) <= idx {

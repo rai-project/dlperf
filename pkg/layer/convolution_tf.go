@@ -3,8 +3,6 @@
 package layer
 
 import (
-	"sort"
-
 	tf "github.com/tensorflow/tensorflow/tensorflow/go"
 	"github.com/tensorflow/tensorflow/tensorflow/go/op"
 )
@@ -13,7 +11,7 @@ func toTensorflowShape(dims []int64) tf.Shape {
 	return tf.MakeShape(dims...)
 }
 
-func (c Conv) FwdTensorflow(root *op.Scope) {
+func (c Conv) FwdTensorflow(root *op.Scope) tf.Output {
 	inShapes := c.InputShapes()
 	in := op.Placeholder(
 		root.SubScope(c.Name()),
@@ -23,8 +21,9 @@ func (c Conv) FwdTensorflow(root *op.Scope) {
 	weights := op.Placeholder(
 		root.SubScope(c.Name()),
 		tf.Float,
-		op.PlaceholderShape(toTensorflowShape(sort.Reverse(Int64Slice(c.KernelShape)))),
+		op.PlaceholderShape(toTensorflowShape(Int64Slice(c.KernelShape).Reverse())),
 	)
+
 	conv := op.Conv2D(
 		root.SubScope(c.Name()),
 		in,
@@ -37,7 +36,7 @@ func (c Conv) FwdTensorflow(root *op.Scope) {
 	)
 
 	if len(inShapes) > 2 {
-		bias = op.Placeholder(
+		bias := op.Placeholder(
 			root.SubScope(c.Name()),
 			tf.Float,
 			op.PlaceholderShape(tf.MakeShape(inShapes[2][0])),
