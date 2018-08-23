@@ -1,6 +1,7 @@
 package benchmark
 
 import (
+	"fmt"
 	"regexp"
 
 	"github.com/google/go-cmp/cmp"
@@ -21,6 +22,7 @@ func (bs Benchmarks) FilterByName(rx string) (Benchmarks, error) {
 
 	regex, err := regexp.Compile(rx)
 	if err != nil {
+		fmt.Println(err)
 		return benches, err
 	}
 
@@ -97,10 +99,10 @@ next:
 		for k, filterVal := range filter.Attributes {
 			val, ok := b.Attributes[k]
 			if !ok {
-				break next
+				continue next
 			}
 			if !isSameScalar(filterVal, val) {
-				break next
+				continue next
 			}
 		}
 		benches = append(benches, b)

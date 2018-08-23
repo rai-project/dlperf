@@ -1,7 +1,12 @@
 package cmd
 
 import (
+	"fmt"
 	"path/filepath"
+	"strings"
+	"time"
+
+	"github.com/rai-project/dlperf/pkg"
 
 	sourcepath "github.com/GeertJohan/go-sourcepath"
 	"github.com/k0kubun/pp"
@@ -48,30 +53,64 @@ var benchinfoCmd = &cobra.Command{
 
 		benchmarkInfo := []bench{}
 
+		totalTime := time.Duration(0)
+
 		for _, nd := range nds {
 			lyr := nd.Layer()
-			if lyr.OperatorType() == "ConstantInput" {
+			switch strings.ToLower(lyr.OperatorType()) {
+			case "constantinput":
+				continue
+			case "lrn":
+				fmt.Println("LRN is not supported by CUDNN")
+				continue
+			case "reshape":
+				fmt.Println("Reshape is not supported by CUDNN")
+				continue
+			case "gemm":
+				fmt.Println("Gemm is not supported by CUDNN")
+				continue
+			case "dropout":
+				fmt.Println("Dropout is skipped for now")
+				continue
+			case "concat":
+				fmt.Println("Concat is skipped for now")
+				continue
+			case "identity":
+				fmt.Println("Identity is skipped for now")
+				continue
+			case "elementwise":
+				fmt.Println("Elementwise is not supported by CUDNN")
 				continue
 			}
-			if lyr.OperatorType() != "Conv" && lyr.OperatorType() != "Relu" {
-				pp.Println(lyr.OperatorType())
-				continue
-			}
-			filter := lyr.FwdBenchmarkFilter("float", "")
+			// if lyr.OperatorType() != "Conv" && lyr.OperatorType() != "Relu" {
+			// 	pp.Println(lyr.OperatorType())
+			// 	continue
+			// }
+			filter := lyr.FwdBenchmarkFilter("float32", "")
 			bs, err := benchSuite.Filter(filter)
 			if err != nil {
-				pp.ColoringEnabled = false
-				log.WithError(err).WithField("filter", pp.Sprint(filter)).Error("failed to find benchmark within benchmark suite")
-				pp.ColoringEnabled = true
+				// pp.ColoringEnabled = false
+				// log.WithError(err).WithField("filter", pp.Sprint(filter)).Error("failed to find benchmark within benchmark suite")
+				// pp.ColoringEnabled = true
+				// continue
+
+				pp.Println(lyr.Name())
+				pp.Println(filter)
 				continue
 			}
 			if len(bs) == 0 {
-				pp.ColoringEnabled = false
-				log.WithField("filter", pp.Sprint(filter)).Error("unable to find benchmark within benchmark suite")
-				pp.ColoringEnabled = true
+				// pp.ColoringEnabled = false
+				// log.WithField("filter", pp.Sprint(filter)).Error("unable to find benchmark within benchmark suite")
+				// pp.ColoringEnabled = true
+				// continue
+				pp.Println(lyr.Name())
+				pp.Println(filter)
 				continue
 			}
 			info := lyr.Information()
+			if len(bs) > 0 {
+				totalTime = totalTime + bs[0].RealTime
+			}
 			for _, b := range bs {
 				benchmarkInfo = append(benchmarkInfo, bench{
 					benchmark: b,
@@ -80,6 +119,14 @@ var benchinfoCmd = &cobra.Command{
 				})
 			}
 		}
+		benchmarkInfo = append(benchmarkInfo, bench{
+			benchmark: benchmark.Benchmark{
+				Name:     "Total",
+				RealTime: totalTime,
+			},
+			layer: nil,
+			flops: dlperf.FlopsInformation{},
+		})
 
 		writer := NewWriter(bench{}, humanFlops)
 		defer writer.Close()

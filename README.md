@@ -50,3 +50,9 @@ go run main.go benchgen --model_path ~/onnx_models/bvlc_alexnet/model.onnx
 ```
 go run main.go benchinfo --model_path ~/onnx_models/vgg19/vgg19.onnx
 ```
+
+or
+
+```
+go run main.go benchinfo --model_path ~/onnx_models/resnet100/resnet100.onnx --benchmark_database ../microbench/results/cudnn/ip-172-31-26-89.json
+```

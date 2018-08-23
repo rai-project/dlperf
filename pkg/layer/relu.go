@@ -85,6 +85,15 @@ func (c Relu) FwdBenchmarkGeneratorArgNames() []string {
 	return benchmarkArgNames(reluBenchmarkArgs{})
 }
 
+func (c Relu) substituteAlgorithm(alg string) string {
+	// substitution because cudnn does not support certain algorithms
+	switch strings.ToUpper(alg) {
+	case "ACTIVATION_PRELU", "ACTIVATION_LEAKY_RELU":
+		return "CUDNN_ACTIVATION_RELU"
+	}
+	return alg
+}
+
 func (c Relu) FwdBenchmarkArgs() interface{} {
 	res := reluBenchmarkArgs{
 		BaseBenchmarkInputArgs: mkBaseBenchmarkInputArgs(&c),
@@ -93,10 +102,7 @@ func (c Relu) FwdBenchmarkArgs() interface{} {
 
 	// substitution because cudnn does not support certain algorithms
 	for ii, alg := range res.Algorithms {
-		switch strings.ToUpper(alg) {
-		case "ACTIVATION_PRELU", "ACTIVATION_LEAKY_RELU":
-			res.Algorithms[ii] = "CUDNN_ACTIVATION_RELU"
-		}
+		res.Algorithms[ii] = c.substituteAlgorithm(alg)
 	}
 
 	hash, err := hashstructure.Hash(
@@ -115,7 +121,7 @@ func (c Relu) FwdBenchmarkArgs() interface{} {
 
 func (c Relu) FwdBenchmarkFilter(datatype, algorithm string) benchmark.Benchmark {
 	if algorithm == "" {
-		algorithm = c.FwdBenchmarkAlgorithms()[0]
+		algorithm = c.substituteAlgorithm(c.FwdBenchmarkAlgorithms()[0])
 	}
 	return benchmark.Benchmark{
 		Name:       mkBenchmarkFilterName(&c, datatype, algorithm),

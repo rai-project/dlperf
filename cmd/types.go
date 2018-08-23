@@ -51,7 +51,13 @@ func (l bench) Row(humanFlops bool) []string {
 	if len(benchmarkName) > 10 {
 		benchmarkName = benchmarkName[0:10] + "..."
 	}
-	base := []string{l.layer.Name(), l.layer.OperatorType(), benchmarkName, realTime}
+	layerName := ""
+	operatorType := ""
+	if l.layer != nil {
+		layerName = l.layer.Name()
+		operatorType = l.layer.OperatorType()
+	}
+	base := []string{layerName, operatorType, benchmarkName, realTime}
 	return base
 	// flops := l.flops.Row(humanFlops)
 	// flops = append(flops, flopsToString(l.flops.Total(), humanFlops))

@@ -82,7 +82,7 @@ func (c Softmax) FwdBenchmarkFilter(datatype, algorithm string) benchmark.Benchm
 		algorithm = c.FwdBenchmarkAlgorithms()[0]
 	}
 	return benchmark.Benchmark{
-		Name:       mkBenchmarkFilterName(&c, datatype, algorithm),
+		Name:       mkBenchmarkFilterName(&c, datatype, "CUDNN_SOFTMAX_FAST, "+algorithm),
 		Attributes: benchmarkAttributes(c.FwdBenchmarkArgs()),
 	}
 }
