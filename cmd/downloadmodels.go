@@ -3,7 +3,9 @@ package cmd
 import (
 	"context"
 	"net/http"
+	"os"
 
+	"github.com/Unknwon/com"
 	"github.com/rai-project/archive"
 	"github.com/spf13/cobra"
 	"golang.org/x/sync/errgroup"
@@ -90,6 +92,9 @@ var downloadModelsCmd = &cobra.Command{
 	Aliases: []string{"download"},
 	RunE: func(cmd *cobra.Command, args []string) error {
 		g, _ := errgroup.WithContext(context.Background())
+		if !com.IsDir(outputFileName) {
+			os.MkdirAll(outputFileName, os.ModePerm)
+		}
 
 		for ii := range modelURLs {
 			url := modelURLs[ii]
