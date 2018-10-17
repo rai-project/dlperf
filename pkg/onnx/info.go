@@ -115,7 +115,9 @@ func (o *Onnx) Information() ([]dlperf.LayerInformation, error) {
 
 		nd := findNode(kv.Key.(string))
 		inputLayers := dlperf.Layers{}
-		for _, input0 := range grph.To(nd.ID()) {
+		inputNodes := grph.To(nd.ID())
+		for inputNodes.Next() {
+			input0 := inputNodes.Node()
 			input, ok := input0.(*GraphNode)
 			if !ok {
 				panic("invalid type for " + pp.Sprint(input0))
@@ -135,7 +137,9 @@ func (o *Onnx) Information() ([]dlperf.LayerInformation, error) {
 		// pp.Println(inputLayers)
 
 		outputLayers := dlperf.Layers{}
-		for _, output0 := range grph.From(nd.ID()) {
+		outputNodes := grph.From(nd.ID())
+		for outputNodes.Next() {
+			output0 := outputNodes.Node()
 			output, ok := output0.(*GraphNode)
 			if !ok {
 				panic("invalid type for " + pp.Sprint(output0))

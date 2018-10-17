@@ -92,7 +92,9 @@ func (grph Graph) FindSubGraphs() ([]Graph, error) {
 			visited[nd.ID()] = true
 			subgrph.AddNode(nd)
 
-			for _, succ := range grph.From(nd.ID()) {
+			nds := grph.From(nd.ID())
+			for nds.Next() {
+				succ := nds.Node()
 				if dt.Dominates(nd, succ) {
 					visit(succ)
 					subgrph.SetEdge(&GraphEdge{
@@ -108,11 +110,12 @@ func (grph Graph) FindSubGraphs() ([]Graph, error) {
 		visit(root)
 
 		succs := grph.From(root.ID())
-		for _, succ := range succs {
+		for succs.Next() {
+			succ := succs.Node()
 			visit(succ)
 		}
 
-		if len(subgrph.Nodes()) != 0 {
+		if subgrph.Nodes().Len() != 0 {
 			res = append(res, Graph{
 				Root:          root.(*GraphNode),
 				DirectedGraph: subgrph,
@@ -125,7 +128,7 @@ func (grph Graph) FindSubGraphs() ([]Graph, error) {
 			continue
 		}
 		var start, elem graph.Node
-		wrkgrp := grph.To(nd.ID())
+		wrkgrp := graph.NodesOf(grph.To(nd.ID()))
 		for len(wrkgrp) > 0 {
 			elem, wrkgrp = wrkgrp[0], wrkgrp[1:]
 			if _, ok := visited[elem.ID()]; ok {
@@ -135,12 +138,12 @@ func (grph Graph) FindSubGraphs() ([]Graph, error) {
 				start = elem
 				break
 			}
-			wrkgrp = append(wrkgrp, grph.To(elem.ID())...)
+			wrkgrp = append(wrkgrp, graph.NodesOf(grph.To(elem.ID()))...)
 		}
 		if start == nil {
 			continue
 		}
-		if len(grph.From(start.ID())) > 1 {
+		if grph.From(start.ID()).Len() > 1 {
 			captureGroup(start, nd)
 		}
 	}

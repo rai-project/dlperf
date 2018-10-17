@@ -88,7 +88,7 @@ func (g Graph) doPrune(layerTypes []string) *Graph {
 		}
 		preds := g.To(nd.ID())
 		succs := g.From(nd.ID())
-		if len(preds) > 1 || len(succs) > 1 {
+		if preds.Len() > 1 || succs.Len() > 1 {
 			return false
 		}
 		s := strings.ToLower(nd.OpType)
@@ -102,7 +102,9 @@ func (g Graph) doPrune(layerTypes []string) *Graph {
 
 	newgrph := simple.NewDirectedGraph()
 
-	for _, nd := range g.Nodes() {
+	nds := g.Nodes()
+	for nds.Next() {
+		nd := nds.Node()
 		if toPrune(nd) {
 			continue
 		}
@@ -119,51 +121,61 @@ func (g Graph) doPrune(layerTypes []string) *Graph {
 			})
 		}
 		if toPrune(end) {
-			for _, succ := range g.From(end.ID()) {
+			succs := g.From(end.ID())
+			for succs.Next() {
+				succ := succs.Node()
 				edgeContract(start, succ)
 			}
 		}
 		if toPrune(start) {
-			for _, pred := range g.To(start.ID()) {
+			preds := g.To(start.ID())
+			for preds.Next() {
+				pred := preds.Node()
 				edgeContract(pred, end)
 			}
 		}
 	}
 
-	for _, nd := range g.Nodes() {
+	grphNodes := g.Nodes()
+	for grphNodes.Next() {
+		nd := grphNodes.Node()
 		if toPrune(nd) {
 			preds := g.To(nd.ID())
 			succs := g.From(nd.ID())
-			for _, pred := range preds {
-				for _, succ := range succs {
+			for preds.Next() {
+				pred := preds.Node()
+				for succs.Next() {
+					succ := succs.Node()
 					edgeContract(pred, succ)
 				}
 			}
-		} else {
-			preds := g.To(nd.ID())
-			succs := g.From(nd.ID())
-			for _, pred := range preds {
-				if toPrune(pred) {
-					continue
-				}
-				newgrph.SetEdge(&GraphEdge{
-					Edge: simple.Edge{
-						F: pred,
-						T: nd,
-					},
-				})
+			continue
+		}
+		preds := g.To(nd.ID())
+		succs := g.From(nd.ID())
+		for preds.Next() {
+			pred := preds.Node()
+			if toPrune(pred) {
+				continue
 			}
-			for _, succ := range succs {
-				if toPrune(succ) {
-					continue
-				}
-				newgrph.SetEdge(&GraphEdge{
-					Edge: simple.Edge{
-						F: nd,
-						T: succ,
-					},
-				})
+			newgrph.SetEdge(&GraphEdge{
+				Edge: simple.Edge{
+					F: pred,
+					T: nd,
+				},
+			})
+		}
+		for succs.Next() {
+			succ := succs.Node()
+			if toPrune(succ) {
+				continue
 			}
+			newgrph.SetEdge(&GraphEdge{
+				Edge: simple.Edge{
+					F: nd,
+					T: succ,
+				},
+			})
 		}
 	}
 	return &Graph{
