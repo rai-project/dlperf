@@ -1,6 +1,7 @@
 package layer
 
 import (
+	"github.com/k0kubun/pp"
 	"github.com/rai-project/dlperf/pkg"
 )
 
@@ -63,6 +64,7 @@ func (c Gemm) Information() dlperf.LayerInformation {
 	checkNumber(c.OutputShapes, []int{1}, c.OperatorType(), "number of outputs")
 
 	aShape := c.InputShapes()[0]
+	pp.Println(aShape)
 	var am, ak int64
 	if c.TransA == 0 {
 		am = aShape[0]

@@ -21,7 +21,7 @@ func (Flatten) Description() string {
 func (c *Flatten) InferShape(inputLayers dlperf.Layers) {
 	inputShapes := getOutputShapes(inputLayers)
 	shape := int64(1)
-	for _, e := range inputShapes[1] {
+	for _, e := range inputShapes[0] {
 		shape *= e
 	}
 	c.SetInputShapes(inputShapes)
