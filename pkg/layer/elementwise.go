@@ -2,6 +2,7 @@ package layer
 
 import (
 	"strings"
+	"github.com/k0kubun/pp"
 
 	"github.com/rai-project/dlperf/pkg"
 )
@@ -19,6 +20,7 @@ func (ElementWise) Description() string {
 }
 
 func (c *ElementWise) InferShape(inputLayers dlperf.Layers) {
+	pp.Println(inputLayers)
 	inputShapes := getOutputShapes(inputLayers)
 	outputShapes := []dlperf.Shape{inputShapes[0]}
 	c.SetOutputShapes(outputShapes)

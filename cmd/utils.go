@@ -11,6 +11,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/k0kubun/pp"
 	"github.com/Unknwon/com"
 	"github.com/cheggaaa/pb"
 	zglob "github.com/mattn/go-zglob"
@@ -65,6 +66,8 @@ func readModels(modelPath string) ([]*onnx.Onnx, error) {
 	}
 
 	if com.IsFile(modelPath) {
+		pp.Println(modelPath)
+
 		model, err := onnx.New(modelPath)
 		if err != nil {
 			return nil, err
@@ -88,7 +91,7 @@ func readModels(modelPath string) ([]*onnx.Onnx, error) {
 		g.Go(func() error {
 			defer modelReadProgress.Increment()
 			path := modelPaths[idx]
-			// pp.Println(path)
+			 pp.Println(path)
 			model, err := onnx.New(path)
 			if err != nil {
 				return err

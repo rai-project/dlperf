@@ -52,7 +52,7 @@ func (o Onnx) mkLayer(node *onnx.NodeProto) dlperf.Layer {
 	case "constant_input":
 		ret = o.mkConstantInput(node)
 	default:
-		panic("unhandeled layer = " + operatorType)
+		panic("unhandeled layer = " + operatorType + " when running the model at " + o.path)
 	}
 
 	return ret
