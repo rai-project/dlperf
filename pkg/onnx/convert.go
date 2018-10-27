@@ -239,7 +239,7 @@ func (o Onnx) mkReshape(node *onnx.NodeProto) dlperf.Layer {
 }
 
 func (o Onnx) mkFlatten(node *onnx.NodeProto) dlperf.Layer {
-	return &layer.Reshape{
+	return &layer.Flatten{
 		Base: o.mkBase(node, "Flatten"),
 	}
 }
@@ -262,7 +262,7 @@ func (o Onnx) mkIdentity(node *onnx.NodeProto) dlperf.Layer {
 func (o Onnx) mkClip(node *onnx.NodeProto) dlperf.Layer {
 	minAttr := getNodeAttributeFromName(node, "min")
 	maxAttr := getNodeAttributeFromName(node, "min")
-	return &layer.Identity{
+	return &layer.Clip{
 		Base: o.mkBase(node, "Clip"),
 		Min:  minAttr.GetF(),
 		Max:  maxAttr.GetF(),
