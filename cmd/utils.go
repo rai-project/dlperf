@@ -9,11 +9,12 @@ import (
 	"path"
 	"path/filepath"
 	"strings"
+	"sync"
 	"time"
 
-	"github.com/k0kubun/pp"
 	"github.com/Unknwon/com"
 	"github.com/cheggaaa/pb"
+	"github.com/k0kubun/pp"
 	zglob "github.com/mattn/go-zglob"
 	"github.com/pkg/errors"
 	"github.com/rai-project/dlperf/pkg/onnx"
@@ -81,22 +82,32 @@ func readModels(modelPath string) ([]*onnx.Onnx, error) {
 	if err != nil {
 		return nil, err
 	}
-	models := make([]*onnx.Onnx, len(modelPaths))
+
+	models := []*onnx.Onnx{}
 
 	modelReadProgress := newProgress("> Reading models", len(modelPaths))
-
+	var mut sync.Mutex
 	g, _ := errgroup.WithContext(context.Background())
 	for ii := range modelPaths {
 		idx := ii
 		g.Go(func() error {
 			defer modelReadProgress.Increment()
+			defer func() {
+				if r := recover(); r != nil {
+					pp.Println("rocvering from error", r)
+				}
+			}()
+
 			path := modelPaths[idx]
-			 pp.Println(path)
+			pp.Println(path)
 			model, err := onnx.New(path)
 			if err != nil {
 				return err
 			}
-			models[idx] = model
+			mut.Lock()
+			defer mut.Unlock()
+			models = append(models, model)
+
 			return nil
 		})
 	}
