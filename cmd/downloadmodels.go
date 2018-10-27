@@ -52,7 +52,7 @@ var downloadModelsCmd = &cobra.Command{
 					}
 					return nil
 				}
-				err = archive.Unzip(resp.Body, outputFileName)
+				err = archive.Unzip(resp.Body, outputFileName, archive.GZipFormat())
 				if err != nil {
 					log.WithError(err).WithField("url", url).Error("failed to decompress model")
 					return nil
