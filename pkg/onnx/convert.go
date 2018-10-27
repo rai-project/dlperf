@@ -239,8 +239,14 @@ func (o Onnx) mkReshape(node *onnx.NodeProto) dlperf.Layer {
 }
 
 func (o Onnx) mkFlatten(node *onnx.NodeProto) dlperf.Layer {
+	axis := int64(1)
+	axisAttr := getNodeAttributeFromName(node, "size")
+	if axisAttr.GetInts() != nil {
+		axis = axisAttr.GetInts()[0]
+	}
 	return &layer.Flatten{
 		Base: o.mkBase(node, "Flatten"),
+		Axis: axis,
 	}
 }
 
