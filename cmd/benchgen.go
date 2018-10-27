@@ -8,7 +8,6 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/k0kubun/pp"
 	"github.com/rai-project/dlperf/pkg"
 	"golang.org/x/sync/errgroup"
 
@@ -110,7 +109,6 @@ var benchgenCmd = &cobra.Command{
 			// println(prog.String())
 			return nil
 		}
-		pp.Println("fda")
 
 		err = ioutil.WriteFile(outputFileName, prog.Bytes(), 0644)
 		if err != nil {
