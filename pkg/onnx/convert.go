@@ -15,6 +15,8 @@ func (o Onnx) mkLayer(node *onnx.NodeProto) dlperf.Layer {
 	switch operatorType {
 	case "identity":
 		ret = o.mkIdentity(node)
+	case "clip":
+		ret = o.mkClip(node)
 	case "batchnorm", "batchnormalization":
 		ret = o.mkBatchNorm(node)
 	case "concat":
@@ -39,6 +41,8 @@ func (o Onnx) mkLayer(node *onnx.NodeProto) dlperf.Layer {
 		ret = o.mkRelu(node)
 	case "reshape":
 		ret = o.mkReshape(node)
+	case "flatten":
+		ret = o.mkFlatten(node)
 	case "transpose":
 		ret = o.mkTranspose(node)
 	case "unsqueeze":
@@ -234,6 +238,12 @@ func (o Onnx) mkReshape(node *onnx.NodeProto) dlperf.Layer {
 	}
 }
 
+func (o Onnx) mkFlatten(node *onnx.NodeProto) dlperf.Layer {
+	return &layer.Reshape{
+		Base: o.mkBase(node, "Flatten"),
+	}
+}
+
 func (o Onnx) mkTranspose(node *onnx.NodeProto) dlperf.Layer {
 	permAttr := getNodeAttributeFromName(node, "perm")
 	perm := permAttr.GetInts()
@@ -246,6 +256,16 @@ func (o Onnx) mkTranspose(node *onnx.NodeProto) dlperf.Layer {
 func (o Onnx) mkIdentity(node *onnx.NodeProto) dlperf.Layer {
 	return &layer.Identity{
 		Base: o.mkBase(node, "Identity"),
+	}
+}
+
+func (o Onnx) mkClip(node *onnx.NodeProto) dlperf.Layer {
+	minAttr := getNodeAttributeFromName(node, "min")
+	maxAttr := getNodeAttributeFromName(node, "min")
+	return &layer.Identity{
+		Base: o.mkBase(node, "Clip"),
+		Min:  minAttr.GetF(),
+		Max:  maxAttr.GetF(),
 	}
 }
 
