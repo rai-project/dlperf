@@ -91,14 +91,15 @@ func readModels(modelPath string) ([]*onnx.Onnx, error) {
 	for ii := range modelPaths {
 		idx := ii
 		g.Go(func() error {
+
+			path := modelPaths[idx]
+
 			defer modelReadProgress.Increment()
 			defer func() {
 				if r := recover(); r != nil {
-					pp.Println("rocvering from error", r)
+					pp.Println("[PANIC] while processing " + path + "[error = " + pp.Sprint(r) + "]")
 				}
 			}()
-
-			path := modelPaths[idx]
 			pp.Println(path)
 			model, err := onnx.New(path)
 			if err != nil {
