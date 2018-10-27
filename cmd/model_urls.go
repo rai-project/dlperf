@@ -163,4 +163,4 @@ var onnxModelURLs = []string{
 	"https://s3.amazonaws.com/download.onnx/models/opset_9/zfnet512.tar.gz",
 }
 
-var modelURLs = append(ourModvelURLs, onnxModelURLs...)
+var modelURLs = append(ourModelURLs, onnxModelURLs...)
