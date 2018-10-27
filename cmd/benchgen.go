@@ -8,6 +8,7 @@ import (
 	"strings"
 	"sync"
 
+	"github.com/k0kubun/pp"
 	"github.com/rai-project/dlperf/pkg"
 	"golang.org/x/sync/errgroup"
 
@@ -47,11 +48,11 @@ var benchgenCmd = &cobra.Command{
 			}
 		}
 
-		// fmt.Println("before = ", len(layers))
+		pp.Printf("computing the union of %v layers\n", len(layers))
 
 		layers = layers.FwdUnion("float", "")
 
-		// fmt.Println("after = ", len(layers))
+		pp.Printf("reduced the number of layers to %v layers\n", len(layers))
 
 		prog := bytes.NewBufferString("")
 		var mut sync.Mutex
