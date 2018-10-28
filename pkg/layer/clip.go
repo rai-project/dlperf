@@ -8,8 +8,8 @@ import (
 
 type Clip struct {
 	*Base `json:",inline,flatten,omitempty"`
-	Min   float32
-	Max   float32
+	Min   float32 `json:"min,omitempty"`
+	Max   float32 `json:"max,omitempty"`
 }
 
 func (Clip) OperatorType() string {

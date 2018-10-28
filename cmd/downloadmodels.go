@@ -47,6 +47,7 @@ var downloadModelsCmd = &cobra.Command{
 					defer f.Close()
 					_, err = io.Copy(f, resp.Body)
 					if err != nil {
+						defer os.RemoveAll(filename)
 						log.WithError(err).WithField("url", url).Error("failed to write model")
 						return nil
 					}
@@ -54,6 +55,7 @@ var downloadModelsCmd = &cobra.Command{
 				}
 				err = archive.Unzip(resp.Body, outputFileName, archive.GZipFormat())
 				if err != nil {
+					defer os.RemoveAll(outputFileName)
 					log.WithError(err).WithField("url", url).Error("failed to decompress model")
 					return nil
 				}

@@ -156,8 +156,13 @@ func (o Onnx) mkDropout(node *onnx.NodeProto) dlperf.Layer {
 }
 
 func (o Onnx) mkElementWise(node *onnx.NodeProto) dlperf.Layer {
+	boardcastAttr := getNodeAttributeFromName(node, "broadcast")
+	axisAttr := getNodeAttributeFromName(node, "axis")
+
 	return &layer.ElementWise{
-		Base: o.mkBase(node, "ElementWise"),
+		Base:      o.mkBase(node, "ElementWise"),
+		Broadcast: boardcastAttr.GetI(),
+		Axis:      axisAttr.GetI(),
 	}
 }
 
@@ -296,8 +301,14 @@ func (o Onnx) mkUnsqueeze(node *onnx.NodeProto) dlperf.Layer {
 }
 
 func (o Onnx) mkConstant(node *onnx.NodeProto) dlperf.Layer {
+	base := o.mkBase(node, "Constant")
+
+	dims := o.GetValueInfoDimensions([]string{node.Name})
+	base.SetInputShapes(dims)
+	base.SetOutputShapes(dims)
+
 	return &layer.Constant{
-		Base: o.mkBase(node, "Constant"),
+		Base: base,
 	}
 }
 

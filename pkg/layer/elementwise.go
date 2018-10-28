@@ -7,7 +7,9 @@ import (
 )
 
 type ElementWise struct {
-	*Base `json:",inline,flatten,omitempty"`
+	*Base     `json:",inline,flatten,omitempty"`
+	Broadcast int64 `json:"broadcast,omitempty"`
+	Axis      int64 `json:"axis,omitempty"`
 }
 
 func (ElementWise) OperatorType() string {
@@ -20,7 +22,52 @@ func (ElementWise) Description() string {
 
 func (c *ElementWise) InferShape(inputLayers dlperf.Layers) {
 	inputShapes := getOutputShapes(inputLayers)
-	outputShapes := []dlperf.Shape{inputShapes[0]}
+	resultShapeSize := 0
+	for _, input := range inputShapes {
+		if len(input) > resultShapeSize {
+			resultShapeSize = len(input)
+		}
+	}
+	resultShape := dlperf.Shape{}
+	for ii := 0; ii < resultShapeSize; ii++ {
+		dimValue := int64(1)
+		symbolicDim := int64(0)
+		numSymbolicDims := int64(0)
+		for _, shape := range inputShapes {
+			if ii < resultShapeSize-len(shape) {
+				continue
+			}
+			l := ii - resultShapeSize + len(shape)
+			dimIJ := int64(0)
+			if l < len(shape) {
+				dimIJ = shape[l]
+			}
+			if dimIJ != 0 {
+				if dimIJ != 1 {
+					if dimValue != dimIJ && dimValue != 1 {
+						panic("Incompatible dimensions")
+					} else {
+						dimValue = dimIJ
+					}
+				}
+			} else {
+				if numSymbolicDims == 0 {
+					symbolicDim = dimIJ
+				}
+				numSymbolicDims++
+			}
+		}
+		if dimValue != 0 || numSymbolicDims == 0 {
+			resultShape = append(resultShape, int64(dimValue))
+		} else if numSymbolicDims == 1 {
+			resultShape = append(resultShape, int64(symbolicDim))
+		} else {
+			resultShape = append(resultShape, 0)
+		}
+	}
+
+	outputShapes := []dlperf.Shape{resultShape}
+
 	c.SetOutputShapes(outputShapes)
 }
 
@@ -55,7 +102,7 @@ func (c ElementWise) Information() dlperf.LayerInformation {
 	}
 
 	flops := dlperf.FlopsInformation{}
-	switch strings.ToLower(c.onnxOperatorType) {
+	switch strings.ToLower(c.OnnxOperatorType()) {
 	case "add", "sum", "sub":
 		flops.Additions = numOps * (numInputs - 1)
 	case "mul", "div":

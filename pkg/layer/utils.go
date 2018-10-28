@@ -138,6 +138,9 @@ func isAnyEmpty(object interface{}) bool {
 func getOutputShapes(layers dlperf.Layers) []dlperf.Shape {
 	outputShapes := []dlperf.Shape{}
 	for _, layer := range layers {
+		if len(layer.OutputShapes()) == 0 {
+			continue
+		}
 		if isAnyEmpty(layer.OutputShapes()) {
 			log.WithField("layer", layer.Name()).Error(" has empty OutputShapes")
 		}

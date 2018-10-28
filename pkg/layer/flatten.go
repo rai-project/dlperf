@@ -8,7 +8,7 @@ import (
 
 type Flatten struct {
 	*Base `json:",inline,flatten,omitempty"`
-	Axis int64
+	Axis  int64 `json:"axis,omitempty"`
 }
 
 func (Flatten) OperatorType() string {
@@ -22,11 +22,11 @@ func (Flatten) Description() string {
 func (c *Flatten) InferShape(inputLayers dlperf.Layers) {
 	inputShapes := getOutputShapes(inputLayers)
 	accum := int64(1)
-	for  ii := int64(0); ii < c.Axis; ii+=1 {
+	for ii := int64(0); ii < c.Axis; ii += 1 {
 		accum *= inputShapes[0][ii]
 	}
 	shape := []int64{accum}
-	for  ii := c.Axis; ii < int64(len(inputShapes[0])); ii+=1 {
+	for ii := c.Axis; ii < int64(len(inputShapes[0])); ii += 1 {
 		shape = append(shape, inputShapes[0][ii])
 	}
 

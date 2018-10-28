@@ -138,7 +138,11 @@ func getOutputShapes(layers dlperf.Layers) []dlperf.Shape {
 		// pp.Println(layer.Name())
 		// pp.Println(layer.OperatorType())
 		// pp.Println(layer.InputShapes())
-		outputShapes = append(outputShapes, layer.OutputShapes()[0])
+		os := layer.OutputShapes()
+		if len(os) == 0 {
+			continue
+		}
+		outputShapes = append(outputShapes, os[0])
 	}
 
 	return outputShapes

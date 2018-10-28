@@ -31,12 +31,14 @@ func (Conv) Description() string {
 }
 
 func (c *Conv) InferShape(inputLayers dlperf.Layers) {
-	xShape := c.InputShapes()[0]
+	inputShapes := getOutputShapes(inputLayers)
+
+	xShape := inputShapes[0]
 	xn := xShape[0]
 	xh := xShape[2]
 	xw := xShape[3]
 
-	wShape := c.InputShapes()[1]
+	wShape := inputShapes[1]
 	wn := wShape[0]
 
 	wh := wShape[2]

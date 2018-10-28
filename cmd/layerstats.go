@@ -1,25 +1,13 @@
-// Copyright © 2018 NAME HERE <EMAIL ADDRESS>
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
 package cmd
 
 import (
 	"os"
 	"path/filepath"
+	"strings"
 
 	sourcepath "github.com/GeertJohan/go-sourcepath"
 	"github.com/Unknwon/com"
+	"github.com/acarl005/stripansi"
 	"github.com/k0kubun/pp"
 	zglob "github.com/mattn/go-zglob"
 	"github.com/pkg/errors"
@@ -29,8 +17,14 @@ import (
 )
 
 func runLayerStats(cmd *cobra.Command, args []string) error {
+	defer func() {
+		if r := recover(); r != nil {
+			pp.Println("[PANIC] while computing layer stats " + modelPath + " [error = " + stripansi.Strip(pp.Sprint(r)) + "]")
+		}
+	}()
 
 	if com.IsDir(modelPath) {
+
 		baseOutputFileName := outputFileName
 		if !com.IsDir(baseOutputFileName) {
 			os.MkdirAll(baseOutputFileName, os.ModePerm)
@@ -39,12 +33,19 @@ func runLayerStats(cmd *cobra.Command, args []string) error {
 		if err != nil {
 			return errors.Wrapf(err, "unable to glob %s", modelPath)
 		}
+		progress := newProgress("> Computing stats models", len(modelPaths))
+		defer progress.Finish()
 		for _, path := range modelPaths {
 			modelPath = path
 			modelName := getModelName(modelPath)
-			outputFileName = filepath.Join(baseOutputFileName, modelName+"."+outputFormat)
-			pp.Println("processing " + modelName + " from " + modelPath + " to " + outputFileName)
-			runLayerStats(cmd, args)
+			outputFileName = filepath.Join(baseOutputFileName, strings.TrimPrefix(modelName, ".")+"."+outputFormat)
+			if true {
+				pp.Println("processing " + modelName + " from " + modelPath + " to " + outputFileName)
+			}
+			if err := runLayerStats(cmd, args); err != nil {
+				pp.Println("failed processing "+modelName+" from "+modelPath+" to "+outputFileName, err)
+			}
+			progress.Increment()
 		}
 		return nil
 	}
@@ -67,15 +68,10 @@ func runLayerStats(cmd *cobra.Command, args []string) error {
 		return err
 	}
 
-	infos, err := net.Information()
-	if err != nil {
-		return err
-	}
+	// net.RemoveWeights()
 
 	if outputFormat == "dot" {
-		// grph := net.Network()
-
-		grph := net.Network()
+		grph := net.ToGraph(onnx.GraphPruneInputs(false), onnx.GraphInputsAsConstantNodes(true))
 
 		dotEnc, err := dot.Marshal(grph, net.GetName(), "", "  ", true)
 		if err != nil {
@@ -90,6 +86,10 @@ func runLayerStats(cmd *cobra.Command, args []string) error {
 		println(img)
 
 		return nil
+	}
+	infos, err := net.Information()
+	if err != nil {
+		return err
 	}
 
 	writer := NewWriter(stat{}, humanFlops)

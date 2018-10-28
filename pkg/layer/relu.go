@@ -39,7 +39,7 @@ func (c Relu) FwdTiming(system string /* hardware/software struct */) string {
 }
 
 func (c Relu) FwdBenchmarkAlgorithms() []string {
-	switch strings.ToLower(c.onnxOperatorType) {
+	switch strings.ToLower(c.OnnxOperatorType()) {
 	case "sigmoid":
 		return []string{
 			"CUDNN_ACTIVATION_SIGMOID",
@@ -71,7 +71,7 @@ func (c Relu) FwdBenchmarkAlgorithms() []string {
 		}
 	}
 
-	panic("invalid relu operator = " + c.onnxOperatorType)
+	panic("invalid relu operator = " + c.OnnxOperatorType())
 
 	return nil
 }

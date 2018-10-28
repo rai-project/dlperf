@@ -51,7 +51,7 @@ func (c Pooling) FwdTiming(system string /* hardware/software struct */) string 
 }
 
 func (c Pooling) FwdBenchmarkAlgorithms() []string {
-	switch strings.ToLower(c.onnxOperatorType) {
+	switch strings.ToLower(c.OnnxOperatorType()) {
 	case "maxpool":
 		return []string{
 			"CUDNN_POOLING_MAX",
@@ -63,7 +63,7 @@ func (c Pooling) FwdBenchmarkAlgorithms() []string {
 			"CUDNN_POOLING_AVERAGE_COUNT_EXCLUDE_PADDING",
 		}
 	}
-	panic("invalid pooling operator " + c.onnxOperatorType)
+	panic("invalid pooling operator " + c.OnnxOperatorType())
 
 	return nil
 }
@@ -170,7 +170,7 @@ func (c Pooling) Information() dlperf.LayerInformation {
 	wOut := outputShape[3]
 
 	flops := dlperf.FlopsInformation{}
-	switch c.onnxOperatorType {
+	switch c.OnnxOperatorType() {
 	case "maxpool":
 		flops.Comparisons = hOut * wOut * nOut * cOut * c.KernelShape[0] * c.KernelShape[1]
 	case "averagepool":

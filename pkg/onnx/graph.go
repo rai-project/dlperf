@@ -245,11 +245,11 @@ func (o *Onnx) ToGraph(oo ...GraphOption) *Graph {
 
 	isInputNode := func(name string) bool {
 		inputs := onnxGraph.GetInput()
-		if len(inputs) <= 1 {
-			return false
-		}
 		if !opts.InputsAsConstantNodes {
 			inputs = inputs[1:]
+		}
+		if len(inputs) == 0 {
+			return false
 		}
 		for _, input := range inputs {
 			if input.GetName() == name {

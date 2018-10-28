@@ -16,19 +16,19 @@ type Information struct {
 }
 
 func (info *Information) Name() string {
-	return info.name
+	return info.Name_
 }
 
 func (info *Information) OnnxOperatorType() string {
-	return info.onnxOperatorType
+	return info.OnnxOperatorType_
 }
 
 func (info *Information) InputNames() []string {
-	return info.inputNames
+	return info.InputNames_
 }
 
 func (info *Information) OutputNames() []string {
-	return info.outputNames
+	return info.OutputNames_
 }
 
 func (info *Information) Shape() dlperf.ShapeInformation {

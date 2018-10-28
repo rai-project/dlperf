@@ -20,13 +20,13 @@ func (Reshape) Description() string {
 
 func (c *Reshape) InferShape(inputLayers dlperf.Layers) {
 	inputShapes := getOutputShapes(inputLayers)
-	// if c.OperatorType() == "reshape" {
-	// 	pp.Println(inputLayers[1].Name())
-	// 	pp.Println(inputLayers[1].OutputShapes())
-	// }
 	// pp.Println(c.name)
 	// pp.Println(inputShapes)
 	c.SetInputShapes(inputShapes)
+	if len(inputShapes) == 1 {
+		c.SetOutputShapes(inputShapes)
+		return
+	}
 	c.SetOutputShapes([]dlperf.Shape{inputShapes[1]})
 }
 

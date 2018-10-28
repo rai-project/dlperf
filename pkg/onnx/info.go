@@ -70,6 +70,7 @@ func sortByDimension(layers dlperf.Layers) dlperf.Layers {
 }
 
 func (o *Onnx) Information() ([]dlperf.LayerInformation, error) {
+
 	ret := []dlperf.LayerInformation{}
 
 	grph := o.ToGraph(GraphPruneInputs(false), GraphInputsAsConstantNodes(true))

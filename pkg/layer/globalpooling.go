@@ -52,7 +52,7 @@ func (c GlobalPooling) Information() dlperf.LayerInformation {
 	wIn := inputShapes[3]
 
 	flops := dlperf.FlopsInformation{}
-	switch c.onnxOperatorType {
+	switch c.OnnxOperatorType() {
 	case "globalmaxpool":
 		flops.Comparisons = wIn * hIn * cIn * nIn
 	case "globalaveragepool":

@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/getlantern/deepcopy"
 	dlperf "github.com/rai-project/dlperf/pkg"
 	"github.com/rai-project/dlperf/pkg/benchmark"
 	"github.com/rai-project/onnx"
@@ -31,16 +30,16 @@ type BaseBenchmarkArgs struct {
 }
 
 type Base struct {
-	node             *onnx.NodeProto `json:"-"`
-	name             string          `json:"name,omitempty"`
-	operatorType     string          `json:"operator_type,omitempty"`
-	onnxOperatorType string          `json:"onnx_operator_type,omitempty"`
-	inputs           dlperf.Layers   `json:-,omitempty"`
-	outputs          dlperf.Layers   `json:-,omitempty"`
-	inputNames       []string        `json:"inputNames,omitempty"`
-	outputNames      []string        `json:"outputNames,omitempty"`
-	inputShapes      []dlperf.Shape  `json:"input_shapes,omitempty"`
-	outputShapes     []dlperf.Shape  `json:"output_shapes,omitempty"`
+	node              *onnx.NodeProto `json:"-"`
+	Name_             string          `json:"name,omitempty"`
+	OperatorType_     string          `json:"operator_type,omitempty"`
+	OnnxOperatorType_ string          `json:"onnx_operator_type,omitempty"`
+	inputs            dlperf.Layers   `json:-,omitempty"`
+	outputs           dlperf.Layers   `json:-,omitempty"`
+	InputNames_       []string        `json:"input_names,omitempty"`
+	OutputNames_      []string        `json:"output_names,omitempty"`
+	InputShapes_      []dlperf.Shape  `json:"input_shapes,omitempty"`
+	OutputShapes_     []dlperf.Shape  `json:"output_shapes,omitempty"`
 }
 
 func mkBaseBenchmarkArgs(c dlperf.Layer) BaseBenchmarkArgs {
@@ -69,11 +68,11 @@ func (b *Base) Name() string {
 	if b == nil {
 		return ""
 	}
-	return b.name
+	return b.Name_
 }
 
 func (b *Base) SetName(s string) {
-	b.name = s
+	b.Name_ = s
 }
 
 func (b Base) Node() *onnx.NodeProto {
@@ -85,25 +84,25 @@ func (b *Base) SetNode(node *onnx.NodeProto) {
 }
 
 func (b Base) OperatorType() string {
-	if b.operatorType == "" {
+	if b.OperatorType_ == "" {
 		panic("invalid operator type")
 	}
-	return b.operatorType
+	return b.OperatorType_
 }
 
 func (b *Base) SetOperatorType(s string) {
-	b.operatorType = s
+	b.OperatorType_ = s
 }
 
 func (b Base) OnnxOperatorType() string {
-	if b.onnxOperatorType == "" {
+	if b.OnnxOperatorType_ == "" {
 		return "unkown onnx operator"
 	}
-	return b.onnxOperatorType
+	return b.OnnxOperatorType_
 }
 
 func (b *Base) SetOnnxOperatorType(op string) {
-	b.onnxOperatorType = op
+	b.OnnxOperatorType_ = op
 }
 
 func (b Base) Inputs() dlperf.Layers {
@@ -132,7 +131,7 @@ func (b Base) InputNames() []string {
 }
 
 func (b Base) SetInputNames(names []string) {
-	b.inputNames = names
+	b.InputNames_ = names
 }
 
 func (b Base) OutputNames() []string {
@@ -145,35 +144,61 @@ func (b Base) OutputNames() []string {
 }
 
 func (b Base) SetOutputNames(names []string) {
-	b.outputNames = names
+	b.OutputNames_ = names
 }
 
 func (b Base) InputShapes() []dlperf.Shape {
-	cpy := []dlperf.Shape{}
-	deepcopy.Copy(&cpy, b.inputShapes)
+	in := b.InputShapes_
+	cpy := make([]dlperf.Shape, len(in))
+	for ii, e := range in {
+		tmp := make([]int64, len(e))
+		for jj, m := range e {
+			tmp[jj] = m
+		}
+		cpy[ii] = dlperf.Shape(tmp)
+	}
 	return cpy
 }
 
 func (b *Base) SetInputShapes(in []dlperf.Shape) {
-	cpy := []dlperf.Shape{}
-	deepcopy.Copy(&cpy, in)
-	b.inputShapes = cpy
+	cpy := make([]dlperf.Shape, len(in))
+	for ii, e := range in {
+		tmp := make([]int64, len(e))
+		for jj, m := range e {
+			tmp[jj] = m
+		}
+		cpy[ii] = dlperf.Shape(tmp)
+	}
+	b.InputShapes_ = cpy
 }
 
 func (b Base) OutputShapes() []dlperf.Shape {
-	cpy := []dlperf.Shape{}
-	deepcopy.Copy(&cpy, b.outputShapes)
+	out := b.OutputShapes_
+	cpy := make([]dlperf.Shape, len(out))
+	for ii, e := range out {
+		tmp := make([]int64, len(e))
+		for jj, m := range e {
+			tmp[jj] = m
+		}
+		cpy[ii] = dlperf.Shape(tmp)
+	}
 	return cpy
 }
 
 func (b *Base) SetOutputShapes(out []dlperf.Shape) {
-	cpy := []dlperf.Shape{}
-	deepcopy.Copy(&cpy, out)
-	b.outputShapes = cpy
+	cpy := make([]dlperf.Shape, len(out))
+	for ii, e := range out {
+		tmp := make([]int64, len(e))
+		for jj, m := range e {
+			tmp[jj] = m
+		}
+		cpy[ii] = dlperf.Shape(tmp)
+	}
+	b.OutputShapes_ = cpy
 }
 
 func (b *Base) UnmarshalJSON(d []byte) error {
-	return json.Unmarshal(d, &b.name)
+	return json.Unmarshal(d, &b.Name_)
 }
 
 func (b Base) MarshalJSON() ([]byte, error) {
@@ -182,7 +207,7 @@ func (b Base) MarshalJSON() ([]byte, error) {
 
 func (b Base) FwdBenchmarkFilter(datatype, algorithm string) benchmark.Benchmark {
 	// panic("unimplemented FwdBenchmarkFilter")
-	if b.operatorType == "" {
+	if b.OperatorType_ == "" {
 		return benchmark.Benchmark{}
 	}
 	return benchmark.Benchmark{
