@@ -3,12 +3,12 @@ package cmd
 import (
 	"bytes"
 	"context"
+	"fmt"
 	"io/ioutil"
 	"path/filepath"
 	"strings"
 	"sync"
 
-	"github.com/k0kubun/pp"
 	"github.com/rai-project/dlperf/pkg"
 	"golang.org/x/sync/errgroup"
 
@@ -48,11 +48,11 @@ var benchgenCmd = &cobra.Command{
 			}
 		}
 
-		pp.Printf("computing the union of %v layers\n", len(layers))
+		fmt.Printf("computing the union of %d layers\n", len(layers))
 
 		layers = layers.FwdUnion("float", "")
 
-		pp.Printf("reduced the number of layers to %v layers\n", len(layers))
+		fmt.Printf("reduced the number of layers to %d layers\n", len(layers))
 
 		prog := bytes.NewBufferString("")
 		var mut sync.Mutex
