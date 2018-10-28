@@ -6,6 +6,7 @@ import (
 
 // https://github.com/onnx/onnx/blob/master/docs/Operators.md#Identity
 
+//easyjson:json
 type Identity struct {
 	*Base `json:",inline,flatten,omitempty"`
 }

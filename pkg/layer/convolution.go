@@ -12,6 +12,7 @@ import (
 // https://github.com/onnx/onnx/blob/master/docs/Operators.md#Conv
 // NCHW tensor layout for passing inputs and outputs
 
+//easyjson:json
 type Conv struct {
 	*Base       `json:",inline,flatten,omitempty"`
 	AutoPad     string       `json:"auto_pad,omitempty"`
@@ -168,25 +169,7 @@ func (c Conv) FwdBenchmarkGeneratorArgNames() []string {
 }
 
 func (c Conv) FwdBenchmarkGenerator() string {
-	const templString = `
-[[ range $datatype := .DataTypes ]]
-[[ if eq $datatype.Name "TensorCoreHalf" ]]
-#ifdef CUDNN_SUPPORTS_TENSOR_OPS
-[[ end ]]
-template <cudnnConvolutionFwdAlgo_t convolution_algorithm>
-static void [[ $.BenchmarkName ]]_[[ $datatype.Name | upper ]]__[[$.UniqueBenchmarkID]](benchmark::State& state) {
-  [[ if eq $datatype.Name "TensorCoreHalf" ]]
-    [[ $.BenchmarkName ]]_Impl<[[ $datatype.CType ]], convolution_algorithm, CUDNN_TENSOR_OP_MATH>(state);
-  [[ else ]]
-    [[ $.BenchmarkName ]]_Impl<[[ $datatype.CType ]], convolution_algorithm>(state);
-  [[ end ]]
-  BENCHMARK_[[ $.BenchmarkName ]]_ADD_COUNTERS__[[$.UniqueBenchmarkID]](state);
-}
-[[ if eq $datatype.Name "TensorCoreHalf" ]]
-#endif //  CUDNN_SUPPORTS_TENSOR_OPS
-[[ end ]]
-[[ end ]]
-`
+	templString := _escFSMustString(false, "/scope/conv.tmpl")
 
 	return templateExec(&c, templateBasePrefix+templString+templateBaseSuffix)
 }

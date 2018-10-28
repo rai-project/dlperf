@@ -8,6 +8,7 @@ import (
 	"github.com/rai-project/dlperf/pkg/benchmark"
 )
 
+//easyjson:json
 type Relu struct {
 	*Base `json:",inline,flatten,omitempty"`
 }

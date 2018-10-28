@@ -6,6 +6,7 @@ import (
 	"github.com/rai-project/dlperf/pkg/benchmark"
 )
 
+//easyjson:json
 type Softmax struct {
 	*Base `json:",inline,flatten,omitempty"`
 }

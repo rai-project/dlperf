@@ -4,6 +4,7 @@ import (
 	"github.com/rai-project/dlperf/pkg"
 )
 
+//easyjson:json
 type Unsqueeze struct {
 	*Base `json:",inline,flatten,omitempty"`
 	Axes  []int64 `json:"axes,omitempty"`

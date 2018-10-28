@@ -7,5 +7,9 @@
     "vendor": true,
     "**/.DS_Store": true
   },
+  "files.associations": {
+    "*.tmpl": "gotemplate"
+  },
+  "editor.formatOnSave": true,
   "cquery.cacheDirectory": "${workspaceFolder}/.vscode/cquery_cached_index/"
 }

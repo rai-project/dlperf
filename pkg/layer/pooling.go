@@ -9,6 +9,7 @@ import (
 	"github.com/rai-project/dlperf/pkg/benchmark"
 )
 
+//easyjson:json
 type Pooling struct {
 	*Base       `json:",inline,flatten,omitempty"`
 	KernelShape dlperf.Shape `json:"kernel_shape,omitempty"`

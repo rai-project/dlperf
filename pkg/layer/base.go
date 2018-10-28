@@ -1,7 +1,6 @@
 package layer
 
 import (
-	"encoding/json"
 	"fmt"
 	"strings"
 
@@ -205,13 +204,13 @@ func (b *Base) SetOutputShapes(out []dlperf.Shape) {
 	b.OutputShapes_ = cpy
 }
 
-func (b *Base) UnmarshalJSON(d []byte) error {
-	return json.Unmarshal(d, &b.Name_)
-}
+// func (b *Base) UnmarshalJSON(d []byte) error {
+// 	return json.Unmarshal(d, &b.Name_)
+// }
 
-func (b Base) MarshalJSON() ([]byte, error) {
-	return []byte(b.Name()), nil
-}
+// func (b Base) MarshalJSON() ([]byte, error) {
+// 	return []byte(b.Name()), nil
+// }
 
 func (b Base) FwdBenchmarkFilter(datatype, algorithm string) benchmark.Benchmark {
 	// panic("unimplemented FwdBenchmarkFilter")

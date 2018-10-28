@@ -6,6 +6,7 @@ import (
 
 // https://github.com/onnx/onnx/blob/master/docs/Operators.md#Reshape
 
+//easyjson:json
 type Reshape struct {
 	*Base `json:",inline,flatten,omitempty"`
 }

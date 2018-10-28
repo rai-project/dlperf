@@ -6,6 +6,7 @@ import (
 
 // https://github.com/onnx/onnx/blob/master/docs/Operators.md#Gemm
 
+//easyjson:json
 type Gemm struct {
 	*Base  `json:",inline,flatten,omitempty"`
 	Alpha  float64 `json:"alpha,omitempty"`

@@ -4,6 +4,7 @@ import (
 	"github.com/rai-project/dlperf/pkg"
 )
 
+//easyjson:json
 type ConstantInput struct {
 	*Base `json:",inline,flatten,omitempty"`
 }

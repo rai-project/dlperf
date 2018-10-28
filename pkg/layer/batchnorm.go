@@ -7,7 +7,7 @@ import (
 )
 
 // https://github.com/onnx/onnx/blob/master/docs/Operators.md#BatchNormalization
-
+//easyjson:json
 type BatchNorm struct {
 	*Base   `json:",inline,flatten,omitempty"`
 	Spatial int64 `json:"spatial,omitempty"`
@@ -94,15 +94,7 @@ func (c BatchNorm) FwdBenchmarkFilter(datatype, algorithm string) benchmark.Benc
 }
 
 func (c BatchNorm) FwdBenchmarkGenerator() string {
-	const templString = `
-[[ range $datatype := .DataTypes ]]
-template <cudnnBatchNormMode_t batchnorm_mode>
-static void [[ $.BenchmarkName ]]_[[ $datatype.Name | upper ]]__[[$.UniqueBenchmarkID]](benchmark::State& state) {
-  [[ $.BenchmarkName ]]_Impl<[[ $datatype.CType ]], batchnorm_mode>(state);
-  BENCHMARK_[[ $.BenchmarkName ]]_ADD_COUNTERS__[[$.UniqueBenchmarkID]](state);
-}
-[[ end ]]
-`
+	templString := _escFSMustString(false, "/scope/batchnorm.tmpl")
 
 	return templateExec(&c, templateBasePrefix+templString+templateBaseSuffix)
 }

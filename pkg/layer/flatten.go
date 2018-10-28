@@ -6,6 +6,7 @@ import (
 
 // https://github.com/onnx/onnx/blob/master/docs/Operators.md#Flatten
 
+//easyjson:json
 type Flatten struct {
 	*Base `json:",inline,flatten,omitempty"`
 	Axis  int64 `json:"axis,omitempty"`

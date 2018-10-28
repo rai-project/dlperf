@@ -6,6 +6,7 @@ import (
 	"github.com/rai-project/dlperf/pkg"
 )
 
+//easyjson:json
 type ElementWise struct {
 	*Base     `json:",inline,flatten,omitempty"`
 	Broadcast int64 `json:"broadcast,omitempty"`

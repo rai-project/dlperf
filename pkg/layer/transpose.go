@@ -6,6 +6,7 @@ import (
 
 // https://github.com/onnx/onnx/blob/master/docs/Operators.md#Transpose
 
+//easyjson:json
 type Transpose struct {
 	*Base       `json:",inline,flatten,omitempty"`
 	Permutation []int64 `json:"perm,omitempty"`

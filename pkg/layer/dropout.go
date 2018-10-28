@@ -8,6 +8,7 @@ import (
 
 // https://github.com/onnx/onnx/blob/master/docs/Operators.md#Dropout
 
+//easyjson:json
 type Dropout struct {
 	*Base `json:",inline,flatten,omitempty"`
 }

@@ -6,6 +6,7 @@ import (
 
 // https://github.com/onnx/onnx/blob/master/docs/Operators.md#Clip
 
+//easyjson:json
 type Clip struct {
 	*Base `json:",inline,flatten,omitempty"`
 	Min   float32 `json:"min,omitempty"`
