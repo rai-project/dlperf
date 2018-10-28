@@ -27,6 +27,14 @@
 
 [[projects]]
   branch = "master"
+  digest = "0:"
+  name = "github.com/acarl005/stripansi"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "5a71ef0e047df0427e87a79f27009029921f1f9b"
+
+[[projects]]
+  branch = "master"
   digest = "1:1237f2e0fe3256bbce813cc1bafddaf26b85bddbd2f8c08c30eb845140198aee"
   name = "github.com/armon/consul-api"
   packages = ["."]
@@ -47,7 +55,7 @@
   name = "github.com/cheggaaa/pb"
   packages = ["."]
   pruneopts = "UT"
-  revision = "007b75a044e968336a69a6c0c617251ab62ac14c"
+  revision = "751f9183c336d1bb8ef77beb95243f367d1d90e1"
 
 [[projects]]
   branch = "master"
@@ -55,7 +63,7 @@
   name = "github.com/containerd/continuity"
   packages = ["pathdriver"]
   pruneopts = "UT"
-  revision = "be9bd761db19d4fc551d40be908f02e00487511d"
+  revision = "bea7585dbfac2847dbf49a6b8e7738a36c09bc75"
 
 [[projects]]
   digest = "0:"
@@ -102,7 +110,7 @@
     "pkg/system",
   ]
   pruneopts = "UT"
-  revision = "5271c7cb484d44a22b96709894080ea85c8eef14"
+  revision = "b8e87cfdad8daa6ef782ddb90691a259483bc8e4"
 
 [[projects]]
   digest = "1:6f82cacd0af5921e99bf3f46748705239b36489464f4529a1589bc895764fb18"
@@ -151,6 +159,18 @@
   packages = ["."]
   pruneopts = "UT"
   revision = "7f45deb8130a0acc553242eb0e009e3f6f3d9ce3"
+
+[[projects]]
+  digest = "0:"
+  name = "github.com/go-python/gpython"
+  packages = [
+    "ast",
+    "parser",
+    "py",
+  ]
+  pruneopts = "UT"
+  revision = "2609237ddef238242467618344ca5fb6775302e8"
+  version = "v0.0.2"
 
 [[projects]]
   digest = "1:bbadccf3d3317ea03c0dac0b45b673b4b397c8f91a1d2eff550a3c51c4ad770e"
@@ -222,6 +242,14 @@
   pruneopts = "UT"
   revision = "76626ae9c91c4f2a10f34cad8ce83ea42c93bb75"
   version = "v1.0"
+
+[[projects]]
+  digest = "0:"
+  name = "github.com/jaypipes/ghw"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "8fc4046cb80975e821e632e79fc8815ceaa11a0f"
+  version = "0.1"
 
 [[projects]]
   digest = "1:16dd6b893b78a50564cdde1d9f7ea67224dece11bb0886bd882f1dc3dc1d440d"
@@ -373,7 +401,7 @@
   name = "github.com/olekukonko/tablewriter"
   packages = ["."]
   pruneopts = "UT"
-  revision = "be2c049b30ccd4d3fd795d6bf7dce74e42eeedaa"
+  revision = "e6d60cf7ba1f42d86d54cdf5508611c4aafb3970"
 
 [[projects]]
   digest = "1:ee4d4af67d93cc7644157882329023ce9a7bcfce956a079069a9405521c7cc8d"
@@ -475,7 +503,7 @@
   name = "github.com/rai-project/onnx"
   packages = ["."]
   pruneopts = "UT"
-  revision = "32f89935d9f4d1d33d3b7f37bef814253bcf93ef"
+  revision = "904dc35dee48ffc76d1a6975190e486e7e072e75"
 
 [[projects]]
   branch = "master"
@@ -521,12 +549,12 @@
   version = "v1.1.2"
 
 [[projects]]
-  digest = "1:516e71bed754268937f57d4ecb190e01958452336fa73dbac880894164e91c1f"
+  digest = "0:"
   name = "github.com/spf13/cast"
   packages = ["."]
   pruneopts = "UT"
-  revision = "8965335b8c7107321228e3e3702cab9832751bac"
-  version = "v1.2.0"
+  revision = "8c9545af88b134710ab1cd196795e7f2388358d7"
+  version = "v1.3.0"
 
 [[projects]]
   digest = "1:645cabccbb4fa8aab25a956cbcbdf6a6845ca736b2c64e197ca7cbb9d210b939"
@@ -642,7 +670,7 @@
     "ssh/terminal",
   ]
   pruneopts = "UT"
-  revision = "0c41d7ab0a0ee717d4590a44bcb987dfd9e183eb"
+  revision = "e84da0312774c21d64ee2317962ef669b27ffb41"
 
 [[projects]]
   branch = "master"
@@ -650,7 +678,7 @@
   name = "golang.org/x/exp"
   packages = ["rand"]
   pruneopts = "UT"
-  revision = "d8bb7a16721e319e95865be2662b889387204776"
+  revision = "42ba7d4b6eb299bf56fcfc4f0541a857ad0e2da3"
 
 [[projects]]
   branch = "master"
@@ -663,7 +691,7 @@
     "math/fixed",
   ]
   pruneopts = "UT"
-  revision = "991ec62608f3c0da01d400756917825d1e2fd528"
+  revision = "2a2258ff36e99cf9156acfc715e3f83d47d6f0fd"
 
 [[projects]]
   branch = "master"
@@ -671,7 +699,7 @@
   name = "golang.org/x/net"
   packages = ["context"]
   pruneopts = "UT"
-  revision = "49bb7cea24b1df9410e1712aa6433dae904ff66a"
+  revision = "9b4f9f5ad5197c79fd623a3638e70d8b26cef344"
 
 [[projects]]
   branch = "master"
@@ -693,7 +721,7 @@
     "windows",
   ]
   pruneopts = "UT"
-  revision = "fa43e7bc11baaae89f3f902b2b4d832b68234844"
+  revision = "95b1ffbd15a57cc5abb3f04402b9e8ec0016a52c"
 
 [[projects]]
   digest = "1:8029e9743749d4be5bc9f7d42ea1659471767860f0cdc34d37c3111bd308a295"
@@ -748,7 +776,7 @@
     "mat",
   ]
   pruneopts = "UT"
-  revision = "9922db829382769e78a4586457372544eddd5a7a"
+  revision = "acd85591b9169151f6e550ceff8c2931f55b08a7"
 
 [[projects]]
   digest = "1:342378ac4dcb378a5448dd723f0784ae519383532f5e70ade24132c4c8693202"
@@ -764,16 +792,24 @@
   input-imports = [
     "github.com/GeertJohan/go-sourcepath",
     "github.com/Unknwon/com",
+    "github.com/acarl005/stripansi",
     "github.com/cevaris/ordered_map",
     "github.com/cheggaaa/pb",
     "github.com/fatih/color",
     "github.com/fatih/structs",
     "github.com/getlantern/deepcopy",
+    "github.com/go-python/gpython/ast",
+    "github.com/go-python/gpython/parser",
+    "github.com/go-python/gpython/py",
     "github.com/google/go-cmp/cmp",
+    "github.com/jaypipes/ghw",
     "github.com/k0kubun/pp",
     "github.com/leekchan/gtf",
     "github.com/linkosmos/mapop",
     "github.com/lucasb-eyer/go-colorful",
+    "github.com/mailru/easyjson",
+    "github.com/mailru/easyjson/jlexer",
+    "github.com/mailru/easyjson/jwriter",
     "github.com/mattn/go-zglob",
     "github.com/mitchellh/go-homedir",
     "github.com/mitchellh/hashstructure",
