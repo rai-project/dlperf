@@ -66,10 +66,10 @@ func (l bench) Row(humanFlops bool) []string {
 }
 
 type stat struct {
-	Name                    string   `json:"name"`
-	Type                    string   `json:"type"`
-	InputNames              []string `json:"inputs"`
-	OutputNames             []string `json:"outputs"`
+	Name                    string   `json:"name,omitempty"`
+	Type                    string   `json:"type,omitempty"`
+	InputNames              []string `json:"inputs,omitempty"`
+	OutputNames             []string `json:"outputs,omitempty"`
 	dlperf.ShapeInformation `json:"input_dimensions"`
 }
 

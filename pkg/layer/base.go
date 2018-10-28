@@ -122,29 +122,37 @@ func (b *Base) SetOutputs(out dlperf.Layers) {
 }
 
 func (b Base) InputNames() []string {
-	var inputNames []string
-	for _, input := range b.inputs {
-		inputNames = append(inputNames, input.Name())
+	inputNames := make([]string, len(b.inputs))
+	for ii, input := range b.inputs {
+		inputNames[ii] = input.Name()
 	}
 
 	return inputNames
 }
 
-func (b Base) SetInputNames(names []string) {
-	b.InputNames_ = names
+func (b *Base) SetInputNames(names []string) {
+	inputNames := make([]string, len(names))
+	for ii, name := range names {
+		inputNames[ii] = name
+	}
+	b.InputNames_ = inputNames
 }
 
 func (b Base) OutputNames() []string {
-	var outputNames []string
-	for _, input := range b.inputs {
-		outputNames = append(outputNames, input.Name())
+	outputNames := make([]string, len(b.outputs))
+	for ii, output := range b.outputs {
+		outputNames[ii] = output.Name()
 	}
 
 	return outputNames
 }
 
-func (b Base) SetOutputNames(names []string) {
-	b.OutputNames_ = names
+func (b *Base) SetOutputNames(names []string) {
+	outputNames := make([]string, len(names))
+	for ii, name := range names {
+		outputNames[ii] = name
+	}
+	b.OutputNames_ = outputNames
 }
 
 func (b Base) InputShapes() []dlperf.Shape {

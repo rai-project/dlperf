@@ -38,12 +38,15 @@ func runLayerStats(cmd *cobra.Command, args []string) error {
 		for _, path := range modelPaths {
 			modelPath = path
 			modelName := getModelName(modelPath)
-			outputFileName = filepath.Join(baseOutputFileName, strings.TrimPrefix(modelName, ".")+"."+outputFormat)
-			if true {
+			if strings.HasPrefix(modelName, ".") {
+				continue
+			}
+			outputFileName = filepath.Join(baseOutputFileName, modelName+"."+outputFormat)
+			if false {
 				pp.Println("processing " + modelName + " from " + modelPath + " to " + outputFileName)
 			}
 			if err := runLayerStats(cmd, args); err != nil {
-				pp.Println("failed processing "+modelName+" from "+modelPath+" to "+outputFileName, err)
+				pp.Println("failed processing "+modelName+" from "+modelPath+" to "+outputFileName, errors.WithStack(err))
 			}
 			progress.Increment()
 		}
