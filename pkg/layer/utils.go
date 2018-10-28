@@ -60,7 +60,7 @@ func checkNumber(val interface{}, expected []int, layer string, name string) err
 		}
 	}
 
-	log.WithField("layer", layer).WithField(name, valLen).Errorf("should be in", expected)
+	log.WithField("layer", layer).WithField(name, valLen).Errorf("should be in %v", expected)
 
 	return errors.New("checkNumber failed")
 }
