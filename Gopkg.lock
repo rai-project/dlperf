@@ -161,6 +161,7 @@
   revision = "7f45deb8130a0acc553242eb0e009e3f6f3d9ce3"
 
 [[projects]]
+  branch = "master"
   digest = "0:"
   name = "github.com/go-python/gpython"
   packages = [
@@ -169,8 +170,7 @@
     "py",
   ]
   pruneopts = "UT"
-  revision = "2609237ddef238242467618344ca5fb6775302e8"
-  version = "v0.0.2"
+  revision = "b7156160805489c022cdd66d3b34976362fdb726"
 
 [[projects]]
   digest = "1:bbadccf3d3317ea03c0dac0b45b673b4b397c8f91a1d2eff550a3c51c4ad770e"

@@ -120,3 +120,7 @@
 [[constraint]]
   branch = "master"
   name = "github.com/mitchellh/hashstructure"
+
+[[constraint]]
+  branch = "master"
+  name = "github.com/go-python/gpython"
