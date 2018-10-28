@@ -131,15 +131,7 @@ func (c Relu) FwdBenchmarkFilter(datatype, algorithm string) benchmark.Benchmark
 }
 
 func (c Relu) FwdBenchmarkGenerator() string {
-	const templString = `
-[[ range $datatype := .DataTypes ]]
-template <cudnnActivationMode_t activation_mode>
-static void [[ $.BenchmarkName ]]_[[ $datatype.Name | upper ]]__[[$.UniqueBenchmarkID]](benchmark::State& state) {
-  [[ $.BenchmarkName ]]_Impl<[[ $datatype.CType ]], activation_mode>(state);
-  BENCHMARK_[[ $.BenchmarkName ]]_ADD_COUNTERS__[[$.UniqueBenchmarkID]](state);
-}
-[[ end ]]
-`
+	templString := _escFSMustString(false, "/scope/relu.tmpl")
 
 	return templateExec(&c, templateBasePrefix+templString+templateBaseSuffix)
 }

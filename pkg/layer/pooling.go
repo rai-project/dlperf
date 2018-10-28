@@ -129,16 +129,7 @@ func (c Pooling) FwdBenchmarkFilter(datatype, algorithm string) benchmark.Benchm
 }
 
 func (c Pooling) FwdBenchmarkGenerator() string {
-	const templString = `
-  [[ range $datatype := .DataTypes ]]
-  template <cudnnPoolingMode_t pooling_mode>
-  static void [[ $.BenchmarkName ]]_[[ $datatype.Name | upper ]]__[[$.UniqueBenchmarkID]](benchmark::State& state) {
-    [[ $.BenchmarkName ]]_Impl<[[ $datatype.CType ]], pooling_mode>(state);
-    BENCHMARK_[[ $.BenchmarkName ]]_ADD_COUNTERS__[[$.UniqueBenchmarkID]](state);
-  }
-  [[ end ]]
-`
-
+	templString := _escFSMustString(false, "/scope/pooling.tmpl")
 	return templateExec(&c, templateBasePrefix+templString+templateBaseSuffix)
 }
 

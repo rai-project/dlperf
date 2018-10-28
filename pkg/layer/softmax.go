@@ -89,35 +89,7 @@ func (c Softmax) FwdBenchmarkFilter(datatype, algorithm string) benchmark.Benchm
 }
 
 func (c Softmax) FwdBenchmarkGenerator() string {
-	const templString = `
-[[ range $datatype := .DataTypes ]]
-template <cudnnSoftmaxAlgorithm_t softmax_algorithm, cudnnSoftmaxMode_t softmax_mode>
-static void [[ $.BenchmarkName ]]_[[ $datatype.Name | upper ]]__[[$.UniqueBenchmarkID]](benchmark::State& state) {
-  [[ $.BenchmarkName ]]_Impl<[[ $datatype.CType ]], softmax_algorithm, softmax_mode>(state);
-  BENCHMARK_[[ $.BenchmarkName ]]_ADD_COUNTERS__[[$.UniqueBenchmarkID]](state);
-}
-[[ end ]]
-#define BENCHMARK_[[ .BenchmarkName ]]0(b, SOFTMAX_MODE) \
-[[ range $algorithm := .Algorithms ]] BENCHMARK_TEMPLATE(b, SOFTMAX_MODE, [[ $algorithm ]])\
-  ->BENCHMARK_[[ $.BenchmarkName ]]_INPUT_ARG_NAMES()\
-  ->BENCHMARK_[[ $.BenchmarkName ]]_INPUT_ARGS()\
-  ->UseManualTime(); \
-[[ end ]]
-
-#define BENCHMARK_[[ .BenchmarkName ]](b)                                                                                             \
-  BENCHMARK_[[ .BenchmarkName ]]0(b, CUDNN_SOFTMAX_FAST);                                                                    \
-  BENCHMARK_[[ .BenchmarkName ]]0(b, CUDNN_SOFTMAX_ACCURATE);                                                                    \
-  BENCHMARK_[[ .BenchmarkName ]]0(b, CUDNN_SOFTMAX_LOG)
-
-[[ range $datatype := .DataTypes ]]BENCHMARK_[[ $.BenchmarkName ]]([[ $.BenchmarkName ]]_[[ $datatype.Name | upper ]]__[[$.UniqueBenchmarkID]]);
-[[ end ]]
-#undef BENCHMARK_[[ .BenchmarkName ]]_INPUT_ARGS
-#undef BENCHMARK_[[ .BenchmarkName ]]_INPUT_ARG_NAMES
-#undef BENCHMARK_[[ .BenchmarkName ]]0
-#undef BENCHMARK_[[ .BenchmarkName ]]
-}
-#endif // ENABLE_[[ .BenchmarkName ]]
-`
+	templString := _escFSMustString(false, "/scope/softmax.tmpl")
 
 	return templateExec(&c, templateBasePrefix+templString)
 }

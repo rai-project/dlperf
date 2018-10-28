@@ -86,27 +86,7 @@ func (c Dropout) FwdBenchmarkFilter(datatype, algorithm string) benchmark.Benchm
 }
 
 func (c Dropout) FwdBenchmarkGenerator() string {
-	const templString = `
-[[ range $datatype := .DataTypes ]]
-static void [[ $.BenchmarkName ]]_[[ $datatype.Name | upper ]]__[[$.UniqueBenchmarkID]](benchmark::State& state) {
-  [[ $.BenchmarkName ]]_Impl<[[ $datatype.CType ]]>(state);
-  BENCHMARK_[[ $.BenchmarkName ]]_ADD_COUNTERS__[[$.UniqueBenchmarkID]](state);
-}
-[[ end ]]
-
-
-[[ range $datatype := .DataTypes ]]
-BENCHMARK([[ $.BenchmarkName ]]_[[ $datatype.Name | upper ]]__[[$.UniqueBenchmarkID]])->\
-  BENCHMARK_[[ $.BenchmarkName ]]_INPUT_ARG_NAMES()->\
-  BENCHMARK_[[ $.BenchmarkName ]]_INPUT_ARGS()->\
-  UseManualTime();
-[[ end ]]
-#undef BENCHMARK_[[ .BenchmarkName ]]_INPUT_ARGS
-#undef BENCHMARK_[[ .BenchmarkName ]]_INPUT_ARG_NAMES
-}
-#endif // ENABLE_[[ .BenchmarkName ]]
-`
-
+	templString := _escFSMustString(false, "/scope/dropout.tmpl")
 	return templateExec(&c, templateBasePrefix+templString)
 }
 
