@@ -4,6 +4,7 @@
 //go:generate go get github.com/gotpl/gtfmt
 //go:generate go get -v github.com/mjibson/esc
 //go:generate go get github.com/wlbr/templify
-//xxx go:generate esc -o generated_templates.go -pkg layer -prefix codegen -private codegen/scope
+//go:generate esc -o generated_templates.go -pkg layer -prefix codegen -private codegen/scope
+//go:generate esc -o generated_tensorflow.go -pkg layer -prefix codegen -private codegen/tensorflow
 
 package layer
