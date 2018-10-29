@@ -89,9 +89,17 @@ func (c Softmax) FwdBenchmarkFilter(datatype, algorithm string) benchmark.Benchm
 }
 
 func (c Softmax) FwdBenchmarkGenerator(standAloneGenerate bool) string {
-	templString := _escFSMustString(false, "/scope/softmax.tmpl")
+	templString := _escFSMustString(dlperf.IsDebug, "/scope/softmax.tmpl")
 
 	return templateExec(&c, templateBasePrefix+templString)
+}
+
+func (c Softmax) FwdBenchmarkGeneratorPrefix(standAloneGenerate bool) string {
+	panic("error")
+}
+
+func (c Softmax) FwdBenchmarkGeneratorSuffix(standAloneGenerate bool) string {
+	panic("error")
 }
 
 func (c Softmax) Information() dlperf.LayerInformation {

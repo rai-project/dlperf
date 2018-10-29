@@ -94,9 +94,17 @@ func (c BatchNorm) FwdBenchmarkFilter(datatype, algorithm string) benchmark.Benc
 }
 
 func (c BatchNorm) FwdBenchmarkGenerator(standAloneGenerate bool) string {
-	templString := _escFSMustString(false, "/scope/batchnorm.tmpl")
+	templString := _escFSMustString(dlperf.IsDebug, "/scope/batchnorm.tmpl")
 
 	return templateExec(&c, templateBasePrefix+templString+templateBaseSuffix)
+}
+
+func (c BatchNorm) FwdBenchmarkGeneratorPrefix(standAloneGenerate bool) string {
+	panic("error")
+}
+
+func (c BatchNorm) FwdBenchmarkGeneratorSuffix(standAloneGenerate bool) string {
+	panic("error")
 }
 
 func (c BatchNorm) Shape() dlperf.ShapeInformation {

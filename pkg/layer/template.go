@@ -19,10 +19,10 @@ var (
 )
 
 func init() {
-	templateBasePrefix = _escFSMustString(false, "/scope/base_prefix.tmpl")
-	templateBaseSuffix = _escFSMustString(false, "/scope/base_suffix.tmpl")
-	templateBaseStandalonePrefix = _escFSMustString(false, "/scope/base_standalone_prefix.tmpl")
-	templateBaseStandaloneSuffix = _escFSMustString(false, "/scope/base_standalone_suffix.tmpl")
+	templateBasePrefix = _escFSMustString(dlperf.IsDebug, "/scope/base_prefix.tmpl")
+	templateBaseSuffix = _escFSMustString(dlperf.IsDebug, "/scope/base_suffix.tmpl")
+	templateBaseStandalonePrefix = _escFSMustString(dlperf.IsDebug, "/scope/base_standalone_prefix.tmpl")
+	templateBaseStandaloneSuffix = _escFSMustString(dlperf.IsDebug, "/scope/base_standalone_suffix.tmpl")
 }
 
 // recovery will silently swallow all unexpected panics.

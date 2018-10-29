@@ -131,9 +131,17 @@ func (c Relu) FwdBenchmarkFilter(datatype, algorithm string) benchmark.Benchmark
 }
 
 func (c Relu) FwdBenchmarkGenerator(standAloneGenerate bool) string {
-	templString := _escFSMustString(false, "/scope/relu.tmpl")
+	templString := _escFSMustString(dlperf.IsDebug, "/scope/relu.tmpl")
 
 	return templateExec(&c, templateBasePrefix+templString+templateBaseSuffix)
+}
+
+func (c Relu) FwdBenchmarkGeneratorPrefix(standAloneGenerate bool) string {
+	panic("error")
+}
+
+func (c Relu) FwdBenchmarkGeneratorSuffix(standAloneGenerate bool) string {
+	panic("error")
 }
 
 func (c Relu) Shape() dlperf.ShapeInformation {
