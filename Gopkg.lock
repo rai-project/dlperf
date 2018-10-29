@@ -76,6 +76,14 @@
 
 [[projects]]
   branch = "master"
+  digest = "1:8b9e086ce740a57d5a949b1a193b52245c669f1d97ee184ae474294599ea1678"
+  name = "github.com/alecthomas/repr"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "d37bc2a10ba1a7951e19dd5dc10f7d59b142d8d7"
+
+[[projects]]
+  branch = "master"
   digest = "1:1237f2e0fe3256bbce813cc1bafddaf26b85bddbd2f8c08c30eb845140198aee"
   name = "github.com/armon/consul-api"
   packages = ["."]
@@ -220,7 +228,8 @@
   version = "v1"
 
 [[projects]]
-  digest = "1:42340e33092a5400d9c9f235b86c8ac4054e31c4ba7931a8a70d9f9f71b917a9"
+  branch = "master"
+  digest = "1:7353b038142ee0f32adeae9bf8edffb6554bad8c6974c1c8f8db00c44cdb0f9a"
   name = "github.com/go-python/gpython"
   packages = [
     "ast",
@@ -228,8 +237,7 @@
     "py",
   ]
   pruneopts = "UT"
-  revision = "2609237ddef238242467618344ca5fb6775302e8"
-  version = "v0.0.2"
+  revision = "b7156160805489c022cdd66d3b34976362fdb726"
 
 [[projects]]
   digest = "1:bbadccf3d3317ea03c0dac0b45b673b4b397c8f91a1d2eff550a3c51c4ad770e"
@@ -890,6 +898,7 @@
     "github.com/Unknwon/com",
     "github.com/acarl005/stripansi",
     "github.com/alecthomas/chroma/quick",
+    "github.com/alecthomas/repr",
     "github.com/cevaris/ordered_map",
     "github.com/cheggaaa/pb",
     "github.com/fatih/color",

@@ -98,7 +98,7 @@ func readModels(modelPath string) ([]*onnx.Onnx, error) {
 			defer modelReadProgress.Increment()
 			defer func() {
 				if r := recover(); r != nil {
-					pp.Println("[PANIC] while processing " + path + " [error = " + stripansi.Strip(rpr.String(r)) + "]")
+					pp.Println("[PANIC] while processing " + path + " [error = " + stripansi.Strip(repr.String(r)) + "]")
 				}
 			}()
 			pp.Println(path)

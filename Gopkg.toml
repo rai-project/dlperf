@@ -150,3 +150,7 @@
 [[constraint]]
   branch = "master"
   name = "github.com/alecthomas/chroma"
+
+[[constraint]]
+  branch = "master"
+  name = "github.com/alecthomas/repr"

@@ -18,7 +18,7 @@ import (
 func runLayerStats(cmd *cobra.Command, args []string) error {
 	defer func() {
 		if r := recover(); r != nil {
-			pp.Println("[PANIC] while computing layer stats " + modelPath + " [error = " + rpr.String(r) + "]")
+			pp.Println("[PANIC] while computing layer stats " + modelPath + " [error = " + rper.String(r) + "]")
 		}
 	}()
 
