@@ -14,6 +14,7 @@ import (
 
 	"github.com/Unknwon/com"
 	"github.com/acarl005/stripansi"
+	"github.com/alecthomas/repr"
 	"github.com/cheggaaa/pb"
 	"github.com/k0kubun/pp"
 	zglob "github.com/mattn/go-zglob"

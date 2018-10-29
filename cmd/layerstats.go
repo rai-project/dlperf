@@ -7,6 +7,7 @@ import (
 
 	sourcepath "github.com/GeertJohan/go-sourcepath"
 	"github.com/Unknwon/com"
+	"github.com/alecthomas/repr"
 	"github.com/k0kubun/pp"
 	zglob "github.com/mattn/go-zglob"
 	"github.com/pkg/errors"
@@ -18,7 +19,7 @@ import (
 func runLayerStats(cmd *cobra.Command, args []string) error {
 	defer func() {
 		if r := recover(); r != nil {
-			pp.Println("[PANIC] while computing layer stats " + modelPath + " [error = " + rper.String(r) + "]")
+			pp.Println("[PANIC] while computing layer stats " + modelPath + " [error = " + repr.String(r) + "]")
 		}
 	}()
 
