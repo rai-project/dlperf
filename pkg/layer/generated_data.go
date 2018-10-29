@@ -192,8 +192,17 @@ var _escData = map[string]*_escFile{
 
 	"/scope/base_prefix.tmpl": {
 		local:   "codegen/scope/base_prefix.tmpl",
+		size:    0,
+		modtime: 1540782429,
+		compressed: `
+H4sIAAAAAAAC/wEAAP//AAAAAAAAAAA=
+`,
+	},
+
+	"/scope/base_standalone_prefix.tmpl": {
+		local:   "codegen/scope/base_standalone_prefix.tmpl",
 		size:    458,
-		modtime: 1540763274,
+		modtime: 1540782324,
 		compressed: `
 H4sIAAAAAAAC/5SQ30rDMBjF7/MUhw2kBekDzKtsKzp0Ufbnqgshdl9nHE21Sb3J+u4StKIwEe9yOCf8
 Pn5jU+2pQi749C5XRYFsSrZ8qnV7FLomSMmsrsm96JJwrlaqKLKtNa8dfVWLuZQIjI33VBlLmOZidrPk
@@ -203,10 +212,10 @@ MbrECFJGivPamxJvjdn/ReLzuZrdb8UmX61/U5M8DmkyWXvt6QKRQCkCw8czK5vOempdZqyj1ifhh4qh
 `,
 	},
 
-	"/scope/base_suffix.tmpl": {
-		local:   "codegen/scope/base_suffix.tmpl",
+	"/scope/base_standalone_suffix.tmpl": {
+		local:   "codegen/scope/base_standalone_suffix.tmpl",
 		size:    599,
-		modtime: 1540763274,
+		modtime: 1540782331,
 		compressed: `
 H4sIAAAAAAAC/5SRwWrCQBCG73mKgeSQQI33SoVNXVqpCWKT0zqEsZnoUrNNY3IQ2ncvUZQtFazHnd1v
 /vl23IJLbRgimTw+x2LxkisFYcTmbVNR855QxYDorwJYOkpBQ2bN4NF2/dHodlPB/QOE4nTaAaLVKZXx
@@ -216,10 +225,28 @@ LbX7mg9mE2op3dfci12J9C8P0ldPLcND8Qu6uuamv8yV8sLM6M+Oz+B0ghiMrNnczhRcXlmQJXwrcPzY
 `,
 	},
 
-	"/scope/batchnorm.tmpl": {
-		local:   "codegen/scope/batchnorm.tmpl",
+	"/scope/base_suffix.tmpl": {
+		local:   "codegen/scope/base_suffix.tmpl",
+		size:    0,
+		modtime: 1540782437,
+		compressed: `
+H4sIAAAAAAAC/wEAAP//AAAAAAAAAAA=
+`,
+	},
+
+	"/scope/batchnorm.templ": {
+		local:   "codegen/scope/batchnorm.templ",
+		size:    0,
+		modtime: 1540782343,
+		compressed: `
+H4sIAAAAAAAC/wEAAP//AAAAAAAAAAA=
+`,
+	},
+
+	"/scope/batchnorm_standalone.tmpl": {
+		local:   "codegen/scope/batchnorm_standalone.tmpl",
 		size:    367,
-		modtime: 1540763274,
+		modtime: 1540782337,
 		compressed: `
 H4sIAAAAAAAC/3SQ3UoDMRCF7/MUc7FIBdkHWKvQ3S1YpCv05yqEME0Gu9j8mM4KRX13ibKC0l6eE3K+
 M0dICQn9M0FhkZFPkaC6g7JFxs0p0hGUEkwuHpAJpmaw3tfIZt+F5JbBkmbYZe1DctoFS/fiyMi9gbfQ
@@ -230,8 +257,17 @@ W5ASirImb/YO00uHjkApnd0RV36bHzDESCk/aimLcuv714F+Py5apSa7UVXVmpHpCjKJruFdwAXQwsXD
 
 	"/scope/conv.tmpl": {
 		local:   "codegen/scope/conv.tmpl",
+		size:    0,
+		modtime: 1540782310,
+		compressed: `
+H4sIAAAAAAAC/wEAAP//AAAAAAAAAAA=
+`,
+	},
+
+	"/scope/conv_standalone.tmpl": {
+		local:   "codegen/scope/conv_standalone.tmpl",
 		size:    773,
-		modtime: 1540763274,
+		modtime: 1540782306,
 		compressed: `
 H4sIAAAAAAAC/6ySX2vCMBTF3/0UFyfDgdR354TaOpRhK/3zVELI2lsNS5Papg7Z9t1HrVpkDibsrb25
 95xfTm4UQcHkGqGXMM30PkcYPYFhM82CfY4lENIBiCLgKeC27TIcliF0A5SlKixV4JyJtNt03/E0wRSs
@@ -242,10 +278,10 @@ yw2dYOb5v6fe6n/dvnUoE57CcAh/3Lz26zsAAP//K6U0AAUDAAA=
 `,
 	},
 
-	"/scope/dropout.tmpl": {
-		local:   "codegen/scope/dropout.tmpl",
+	"/scope/dropout_standalone.tmpl": {
+		local:   "codegen/scope/dropout_standalone.tmpl",
 		size:    709,
-		modtime: 1540763274,
+		modtime: 1540782316,
 		compressed: `
 H4sIAAAAAAAC/6yQTUvzQBSF9/MrLrS8JIs33adayBcaNKPkYzUOw9jcarAZYzIRiva/y1gSLLTSgsvc
 8Jxz5iGMQSvVE8K0lFrqTYPgXoITSi3zTYMdcE46LXW1hPfXqgTGYOr4qJbPtWxfqKwROBfmOvDO9/ET
@@ -257,8 +293,17 @@ e/7DwqRXJa72M3+LPBfYTSdbMkFVViuYzSCinn8bHeTIVwAAAP//UFK1K8UCAAA=
 
 	"/scope/pooling.tmpl": {
 		local:   "codegen/scope/pooling.tmpl",
+		size:    0,
+		modtime: 1540782361,
+		compressed: `
+H4sIAAAAAAAC/wEAAP//AAAAAAAAAAA=
+`,
+	},
+
+	"/scope/pooling_standlone.tmpl": {
+		local:   "codegen/scope/pooling_standlone.tmpl",
 		size:    375,
-		modtime: 1540763274,
+		modtime: 1540782351,
 		compressed: `
 H4sIAAAAAAAC/3SQ3UrDQBCF7/MU5yJIBckDxCq0ScEijdKfq7AsY3aowWR3TSdCUd9dNqFKwV7OLPt9
 Z04ElCU6sntGbEhIjp6R3iHJSWh79HyAUhEg3PqGhDGtemPts3NNbfcrZ1gL/Djp1hm+j4CDkNQVPlxt
@@ -269,8 +314,17 @@ Aj5O5myr15a6t4JahlI6bE+6ZFh+ofeeu/CoyzJOdrZ+7/n34zJXavJymtJ0IyR8NZj4Gp8RgAuqZeub
 
 	"/scope/relu.tmpl": {
 		local:   "codegen/scope/relu.tmpl",
+		size:    0,
+		modtime: 1540782388,
+		compressed: `
+H4sIAAAAAAAC/wEAAP//AAAAAAAAAAA=
+`,
+	},
+
+	"/scope/relu_standalone.tmpl": {
+		local:   "codegen/scope/relu_standalone.tmpl",
 		size:    370,
-		modtime: 1540763274,
+		modtime: 1540782369,
 		compressed: `
 H4sIAAAAAAAC/3SQX0vDQBDE3/Mp5iFIBckHiFVIk4JFGqF/no7jWHOLBnuXM90Uivrd5ZQUxPZxZ9n5
 zU6iFHryL4zUkpAcAyO/Q1aR0OYYeA+tE2EXdiSMaTNY74tG2gNJ2/llZ9kI6CQY11m+T/ZC0jY4dK2F
@@ -281,8 +335,17 @@ tDL+Ba1v/uWe/LrdJsBsXpcPy2L1aM7bFlVlyqdtvZmv1pfzjn5fsWb2Npb5HQAA//9dLGtNcgEAAA==
 
 	"/scope/softmax.tmpl": {
 		local:   "codegen/scope/softmax.tmpl",
+		size:    0,
+		modtime: 1540782380,
+		compressed: `
+H4sIAAAAAAAC/wEAAP//AAAAAAAAAAA=
+`,
+	},
+
+	"/scope/softmax_standalone.tmpl": {
+		local:   "codegen/scope/softmax_standalone.tmpl",
 		size:    1540,
-		modtime: 1540763274,
+		modtime: 1540782378,
 		compressed: `
 H4sIAAAAAAAC/8RUYW/aMBD97l9xUtGUSIz2M3SVTOJ2aCRUxJEmBcsy+GijEScDZ1q19b9PgYWFjopU
 2kS+5Xz33r17Z5MkgbUyDwgdrayyTwVC/wP0fGUVfypwA0IQi1mxUhbhelFqY6J8aTP1na4e8nVqHzNp
@@ -297,13 +360,14 @@ I8/kAo1Ol3B5CSykwzE7nvcrAAD//+QaFkQEBgAA
 
 	"/tensorflow/base_prefix.py": {
 		local:   "codegen/tensorflow/base_prefix.py",
-		size:    392,
-		modtime: 1540763274,
+		size:    408,
+		modtime: 1540763436,
 		compressed: `
-H4sIAAAAAAAC/2zPwUrEMBCA4XufIuS0K1I8Cx60LVKQulC3F5EQuskaaGZCMlnp20trE1fwNsz3t2SM
-deiJQbRuZjIwcMW2wpCmMOeRFAT0esKvJSZdaI+WjWgtQumklzawLb35Y5HMdEUYSgUX4xHeeXWsH8XQ
-9u3TSyPqZmirpucf7IHxO144b4B2/LW/Z/x2eUnpJkkavd0nO8z0iZD9onwwCJm75bRVwZVCbCxEDt7y
-TWtF+t/q+XBc+axInF0UIK3a7RMv2zGeZPrwV3gV665jw88+/WGMJ4Dr+DsAAP//EIXqbogBAAA=
+H4sIAAAAAAAC/3TPzUrEMBDA8XufYoiXXZHiWfCgbZGC1IW6vYiE0E3WQDMT8rHSt5fWthsP3ob5/1oy
+2lhyATAaO4LwgDZbVuTXyY/bGCR6cmqg7wkHlSlHBnoyhjC3wgnjYaG3f1oMekhSRj6XeNGO8IMVx/KJ
+d3VbP79WvKy6uqha9gmPwO5Zlt2AdRrDjr21D8DuptfkdhBBkTP7az2M4YtwExfpvCZMQDOdOHe0OecL
+4Dwh79t1swvqH/dyOM7gLAM/28hRGLnbX8G07+NJrB+njRWxbBrofsv6lz6eEFP+EwAA//+73BsbmAEA
+AA==
 `,
 	},
 

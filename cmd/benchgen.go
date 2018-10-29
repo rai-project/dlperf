@@ -17,6 +17,10 @@ import (
 	"github.com/spf13/cobra"
 )
 
+var (
+	standAloneGenerate = false
+)
+
 var benchgenCmd = &cobra.Command{
 	Use:     "benchgen",
 	Aliases: []string{"benchmark_generate"},
@@ -72,22 +76,22 @@ var benchgenCmd = &cobra.Command{
 				switch strings.ToLower(lyr.OperatorType()) {
 				case "conv":
 					l := lyr.(*perflayer.Conv)
-					b = l.FwdBenchmarkGenerator()
+					b = l.FwdBenchmarkGenerator(standAloneGenerate)
 				case "relu":
 					l := lyr.(*perflayer.Relu)
-					b = l.FwdBenchmarkGenerator()
+					b = l.FwdBenchmarkGenerator(standAloneGenerate)
 				case "pooling":
 					l := lyr.(*perflayer.Pooling)
-					b = l.FwdBenchmarkGenerator()
+					b = l.FwdBenchmarkGenerator(standAloneGenerate)
 				case "softmax":
 					l := lyr.(*perflayer.Softmax)
-					b = l.FwdBenchmarkGenerator()
+					b = l.FwdBenchmarkGenerator(standAloneGenerate)
 				case "batchnorm":
 					l := lyr.(*perflayer.BatchNorm)
-					b = l.FwdBenchmarkGenerator()
+					b = l.FwdBenchmarkGenerator(standAloneGenerate)
 				case "dropout":
 					l := lyr.(*perflayer.Dropout)
-					b = l.FwdBenchmarkGenerator()
+					b = l.FwdBenchmarkGenerator(standAloneGenerate)
 				default:
 					// pp.Println(lyr.OperatorType())
 				}
@@ -121,5 +125,6 @@ var benchgenCmd = &cobra.Command{
 }
 
 func init() {
+	benchinfoCmd.PersistentFlags().BoolVar(&standAloneGenerate, "standalone", false, "generate benchmarks so that they are all standalone")
 	rootCmd.AddCommand(benchgenCmd)
 }
