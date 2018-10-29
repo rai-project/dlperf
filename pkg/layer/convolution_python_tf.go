@@ -5,11 +5,10 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/rai-project/dlperf/pkg"
-
 	"github.com/go-python/gpython/ast"
 	"github.com/go-python/gpython/parser"
 	"github.com/go-python/gpython/py"
+	"github.com/rai-project/dlperf/pkg"
 )
 
 func createPythonTFTensor(name string, ty string, shape dlperf.Shape) *ast.Assign {
@@ -57,7 +56,7 @@ func (c Conv) FwdPythonTensorflowAST() (ast.Ast, error) {
 
 	args := c.FwdBenchmarkArgs().(convBenchmarkArgs)
 
-	header := _escFSMustString(false, "/tensorflow/base_prefix.py")
+	header := _escFSMustString(dlperf.IsDebug, "/tensorflow/base_prefix.py")
 	prog0, err := parser.Parse(bytes.NewBufferString(header), "test", "exec")
 	if err != nil {
 		return nil, err

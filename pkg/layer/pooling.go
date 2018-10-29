@@ -129,8 +129,16 @@ func (c Pooling) FwdBenchmarkFilter(datatype, algorithm string) benchmark.Benchm
 }
 
 func (c Pooling) FwdBenchmarkGenerator(standAloneGenerate bool) string {
-	templString := _escFSMustString(false, "/scope/pooling.tmpl")
+	templString := _escFSMustString(dlperf.IsDebug, "/scope/pooling.tmpl")
 	return templateExec(&c, templateBasePrefix+templString+templateBaseSuffix)
+}
+
+func (c Pooling) FwdBenchmarkGeneratorPrefix(standAloneGenerate bool) string {
+	panic("error")
+}
+
+func (c Pooling) FwdBenchmarkGeneratorSuffix(standAloneGenerate bool) string {
+	panic("error")
 }
 
 func (c Pooling) Shape() dlperf.ShapeInformation {

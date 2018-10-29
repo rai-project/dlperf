@@ -76,22 +76,22 @@ var benchgenCmd = &cobra.Command{
 				var b string
 				layerType := strings.ToLower(lyr.OperatorType())
 				switch layerType {
-				case "conv":
+				case strings.ToLower(conv.OperatorType()):
 					l := lyr.(*perflayer.Conv)
 					b = l.FwdBenchmarkGenerator(standAloneGenerate)
-				case "relu":
+				case strings.ToLower(relu.OperatorType()):
 					l := lyr.(*perflayer.Relu)
 					b = l.FwdBenchmarkGenerator(standAloneGenerate)
-				case "pooling":
+				case strings.ToLower(pooling.OperatorType()):
 					l := lyr.(*perflayer.Pooling)
 					b = l.FwdBenchmarkGenerator(standAloneGenerate)
-				case "softmax":
+				case strings.ToLower(softmax.OperatorType()):
 					l := lyr.(*perflayer.Softmax)
 					b = l.FwdBenchmarkGenerator(standAloneGenerate)
-				case "batchnorm":
+				case strings.ToLower(batchNorm.OperatorType()):
 					l := lyr.(*perflayer.BatchNorm)
 					b = l.FwdBenchmarkGenerator(standAloneGenerate)
-				case "dropout":
+				case strings.ToLower(dropout.OperatorType()):
 					l := lyr.(*perflayer.Dropout)
 					b = l.FwdBenchmarkGenerator(standAloneGenerate)
 				default:
@@ -115,8 +115,33 @@ var benchgenCmd = &cobra.Command{
 		}
 
 		prog := bytes.NewBufferString("")
-		for _, val := range layerProgs {
-			prog.Write(val.Bytes())
+		for layerType, val := range layerProgs {
+			func() {
+				switch layerType {
+				case strings.ToLower(conv.OperatorType()):
+					prog.WriteString(conv.FwdBenchmarkGeneratorPrefix(standAloneGenerate))
+					defer prog.WriteString(conv.FwdBenchmarkGeneratorSuffix(standAloneGenerate))
+				case strings.ToLower(relu.OperatorType()):
+					prog.WriteString(relu.FwdBenchmarkGeneratorPrefix(standAloneGenerate))
+					defer prog.WriteString(relu.FwdBenchmarkGeneratorSuffix(standAloneGenerate))
+				case strings.ToLower(pooling.OperatorType()):
+					prog.WriteString(pooling.FwdBenchmarkGeneratorPrefix(standAloneGenerate))
+					defer prog.WriteString(pooling.FwdBenchmarkGeneratorSuffix(standAloneGenerate))
+				case strings.ToLower(softmax.OperatorType()):
+					prog.WriteString(softmax.FwdBenchmarkGeneratorPrefix(standAloneGenerate))
+					defer prog.WriteString(softmax.FwdBenchmarkGeneratorSuffix(standAloneGenerate))
+				case strings.ToLower(batchNorm.OperatorType()):
+					prog.WriteString(batchNorm.FwdBenchmarkGeneratorPrefix(standAloneGenerate))
+					defer prog.WriteString(batchNorm.FwdBenchmarkGeneratorSuffix(standAloneGenerate))
+				case strings.ToLower(dropout.OperatorType()):
+					prog.WriteString(dropout.FwdBenchmarkGeneratorPrefix(standAloneGenerate))
+					defer prog.WriteString(dropout.FwdBenchmarkGeneratorSuffix(standAloneGenerate))
+				default:
+					// pp.Println(lyr.OperatorType())
+				}
+
+				prog.Write(val.Bytes())
+			}()
 		}
 
 		generateProgress.Finish()

@@ -25,6 +25,14 @@ func (c ConstantInput) FwdBenchmarkGenerator() string {
 	return ""
 }
 
+func (c ConstantInput) FwdBenchmarkGeneratorPrefix(standAloneGenerate bool) string {
+	return ""
+}
+
+func (c ConstantInput) FwdBenchmarkGeneratorSuffix(standAloneGenerate bool) string {
+	return ""
+}
+
 func (c ConstantInput) Information() dlperf.LayerInformation {
 	info := &Information{
 		Base: c.Base,
