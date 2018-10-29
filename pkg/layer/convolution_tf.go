@@ -7,6 +7,8 @@ import (
 	"github.com/tensorflow/tensorflow/tensorflow/go/op"
 )
 
+// use with https://github.com/golang/go/blob/master/src/testing/benchmark.go#L688
+
 func toTensorflowShape(dims []int64) tf.Shape {
 	return tf.MakeShape(dims...)
 }

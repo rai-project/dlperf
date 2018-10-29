@@ -1,9 +1,10 @@
 package layer
 
 import (
-	"fmt"
+	"os"
 	"testing"
 
+	"github.com/alecthomas/chroma/quick"
 	dlperf "github.com/rai-project/dlperf/pkg"
 	"github.com/stretchr/testify/assert"
 )
@@ -43,5 +44,7 @@ func TestConvolutionPythonTF(t *testing.T) {
 	prog, err := conv.FwdPythonTensorflow()
 	assert.NoError(t, err)
 	assert.NotEmpty(t, prog)
-	fmt.Println(prog)
+
+	err = quick.Highlight(os.Stdout, prog, "python", "terminal256", "monokai")
+	assert.NoError(t, err)
 }
