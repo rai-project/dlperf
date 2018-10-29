@@ -1,0 +1,14 @@
+#define BENCHMARK_[[ .BenchmarkName ]](b) \
+[[ range $algorithm := .Algorithms ]] BENCHMARK_TEMPLATE(b, [[ $algorithm ]])-> \
+  BENCHMARK_[[ $.BenchmarkName ]]_INPUT_ARG_NAMES()->\
+  BENCHMARK_[[ $.BenchmarkName ]]_INPUT_ARGS()->\
+  UseManualTime(); \
+[[ end ]]
+
+[[ range $datatype := .DataTypes ]]BENCHMARK_[[ $.BenchmarkName ]]([[ $.BenchmarkName ]]_[[ $datatype.Name | upper ]]__[[$.UniqueBenchmarkID]]);
+[[ end ]]
+#undef BENCHMARK_[[ .BenchmarkName ]]_INPUT_ARGS
+#undef BENCHMARK_[[ .BenchmarkName ]]_INPUT_ARG_NAMES
+#undef BENCHMARK_[[ .BenchmarkName ]]
+}
+#endif // ENABLE_[[ .BenchmarkName ]]

@@ -93,7 +93,7 @@ func (c BatchNorm) FwdBenchmarkFilter(datatype, algorithm string) benchmark.Benc
 	}
 }
 
-func (c BatchNorm) FwdBenchmarkGenerator() string {
+func (c BatchNorm) FwdBenchmarkGenerator(standAloneGenerate bool) string {
 	templString := _escFSMustString(false, "/scope/batchnorm.tmpl")
 
 	return templateExec(&c, templateBasePrefix+templString+templateBaseSuffix)

@@ -88,7 +88,7 @@ func (c Softmax) FwdBenchmarkFilter(datatype, algorithm string) benchmark.Benchm
 	}
 }
 
-func (c Softmax) FwdBenchmarkGenerator() string {
+func (c Softmax) FwdBenchmarkGenerator(standAloneGenerate bool) string {
 	templString := _escFSMustString(false, "/scope/softmax.tmpl")
 
 	return templateExec(&c, templateBasePrefix+templString)

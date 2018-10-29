@@ -85,7 +85,7 @@ func (c Dropout) FwdBenchmarkFilter(datatype, algorithm string) benchmark.Benchm
 	}
 }
 
-func (c Dropout) FwdBenchmarkGenerator() string {
+func (c Dropout) FwdBenchmarkGenerator(standAloneGenerate bool) string {
 	templString := _escFSMustString(false, "/scope/dropout.tmpl")
 	return templateExec(&c, templateBasePrefix+templString)
 }

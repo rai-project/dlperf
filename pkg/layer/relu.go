@@ -130,7 +130,7 @@ func (c Relu) FwdBenchmarkFilter(datatype, algorithm string) benchmark.Benchmark
 	}
 }
 
-func (c Relu) FwdBenchmarkGenerator() string {
+func (c Relu) FwdBenchmarkGenerator(standAloneGenerate bool) string {
 	templString := _escFSMustString(false, "/scope/relu.tmpl")
 
 	return templateExec(&c, templateBasePrefix+templString+templateBaseSuffix)
