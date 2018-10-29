@@ -168,10 +168,13 @@ func (c Conv) FwdBenchmarkGeneratorArgNames() []string {
 	return benchmarkArgNames(convBenchmarkArgs{})
 }
 
-func (c Conv) FwdBenchmarkGenerator() string {
-	templString := _escFSMustString(false, "/scope/conv.tmpl")
+func (c Conv) FwdBenchmarkGenerator(standalone bool) string {
+	templString := templateBasePrefix + _escFSMustString(false, "/scope/conv.tmpl") + templateBaseSuffix
+	if standalone {
+		templString = templateBaseStandalonePrefix + _escFSMustString(false, "/scope/conv_standalone.tmpl") + templateBaseStandaloneSuffix
+	}
 
-	return templateExec(&c, templateBasePrefix+templString+templateBaseSuffix)
+	return templateExec(&c, templString)
 }
 
 func (c Conv) Shape() dlperf.ShapeInformation {

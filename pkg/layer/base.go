@@ -22,7 +22,7 @@ type BaseBenchmarkInputArgs struct {
 
 type BaseBenchmarkArgs struct {
 	ArgNames          []string          `args:"-" json:"arg_names,omitempty"`
-	UniqueBenchmarkID uint64            `args:"-" json:"unique_benchmark_id,omitempty"`
+	UniqueBenchmarkID uint64            `args:"-" id:"true" json:"unique_benchmark_id,omitempty"`
 	BenchmarkName     string            `args:"-" hash:"name" json:"benchmark_name,omitempty"`
 	Algorithms        []string          `args:"-" json:"algorithms,omitempty"`
 	DataTypes         []dlperf.DataType `args:"-" json:"data_types,omitempty"`

@@ -12,13 +12,17 @@ import (
 )
 
 var (
-	templateBasePrefix string
-	templateBaseSuffix string
+	templateBasePrefix           string
+	templateBaseSuffix           string
+	templateBaseStandalonePrefix string
+	templateBaseStandaloneSuffix string
 )
 
 func init() {
 	templateBasePrefix = _escFSMustString(false, "/scope/base_prefix.tmpl")
 	templateBaseSuffix = _escFSMustString(false, "/scope/base_suffix.tmpl")
+	templateBaseStandalonePrefix = _escFSMustString(false, "/scope/base_standalone_prefix.tmpl")
+	templateBaseStandaloneSuffix = _escFSMustString(false, "/scope/base_standalone_suffix.tmpl")
 }
 
 // recovery will silently swallow all unexpected panics.
@@ -60,6 +64,7 @@ func mkTemplate(lyr dlperf.Layer) *template.Template {
 		Delims("[[", "]]")
 }
 
+// e.g.
 // {"input[0]", [[.Input0]]}, /* Input0 */ \
 //     {"input[1]", [[.Input1]]}, /* Input1 */ \
 //     {"input[2]", [[.Input2]]}, /* Input2 */ \
@@ -73,8 +78,10 @@ func mkTemplate(lyr dlperf.Layer) *template.Template {
 //     {"stride_width", [[.StrideWidth]]}, /* StrideWidth */ \
 //     {"dilation_height", [[.DilationHeight]]}, /* DilationHeight */ \
 //     {"dilation_width", [[.DilationWidth]]} /* DilationWidth */
+//     {"unique_benchmark_id", [[.Id]]} /* UniqueBenchmarkID */
 func mkTemplateCounters(st interface{}) string {
 	defer recovery()
+	id := ""
 	res := []string{}
 	for _, field := range structs.New(st).Fields() {
 		if field.IsExported() && structs.IsStruct(field.Value()) {
@@ -84,15 +91,24 @@ func mkTemplateCounters(st interface{}) string {
 			}
 			continue
 		}
+		idTag := field.Tag("id")
+		if idTag == "true" {
+			tag := field.Tag("json")
+			id = fmt.Sprintf(`      {"%s", %v} /* %s */, `, tag, field.Value(), field.Name())
+		}
 		tag := field.Tag("args")
 		if tag == "" || tag == "-" {
 			continue
 		}
 		res = append(res, fmt.Sprintf(`      {"%s", %v} /* %s */, `, tag, field.Value(), field.Name()))
 	}
+	if id != "" {
+		res = append(res, id)
+	}
 	return strings.Join(res, "\n")
 }
 
+// e.g.
 // [[.Input0]], /* Input0 */ \
 // [[.Input1]], /* Input1 */ \
 // [[.Input2]], /* Input2 */ \
@@ -106,8 +122,10 @@ func mkTemplateCounters(st interface{}) string {
 // [[.StrideWidth]], /* StrideWidth */ \
 // [[.DilationHeight]], /* DilationHeight */ \
 // [[.DilationWidth]] /* DilationWidth */ \
+// [[.Id]] /* UniqueBenchmarkID */ \
 func mkTemplateArguments(st interface{}) string {
 	defer recovery()
+	id := ""
 	res := []string{}
 	for _, field := range structs.New(st).Fields() {
 		if field.IsExported() && structs.IsStruct(field.Value()) {
@@ -117,11 +135,20 @@ func mkTemplateArguments(st interface{}) string {
 			}
 			continue
 		}
+
+		idTag := field.Tag("id")
+		if idTag == "true" {
+			id = fmt.Sprintf(`      %v /* %s */, \`, field.Value(), field.Name())
+		}
 		tag := field.Tag("args")
 		if tag == "" || tag == "-" {
 			continue
 		}
-		res = append(res, fmt.Sprintf(`      %v /* %s */, \`, field.Value(), field.Name()))
+		e := fmt.Sprintf(`      %v /* %s */, \`, field.Value(), field.Name())
+		res = append(res, e)
+	}
+	if id != "" {
+		res = append(res, id)
 	}
 	return strings.Join(res, "\n")
 }
