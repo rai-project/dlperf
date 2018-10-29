@@ -58,7 +58,8 @@ var benchgenCmd = &cobra.Command{
 
 		fmt.Printf("reduced the number of layers to %d layers\n", len(layers))
 
-		prog := bytes.NewBufferString("")
+		layerProgs := map[string]*bytes.Buffer{}
+
 		var mut sync.Mutex
 
 		g, _ := errgroup.WithContext(context.Background())
@@ -73,7 +74,8 @@ var benchgenCmd = &cobra.Command{
 					return nil
 				}
 				var b string
-				switch strings.ToLower(lyr.OperatorType()) {
+				layerType := strings.ToLower(lyr.OperatorType())
+				switch layerType {
 				case "conv":
 					l := lyr.(*perflayer.Conv)
 					b = l.FwdBenchmarkGenerator(standAloneGenerate)
@@ -100,7 +102,10 @@ var benchgenCmd = &cobra.Command{
 				}
 				mut.Lock()
 				defer mut.Unlock()
-				prog.WriteString(b)
+				if _, ok := layerProgs[layerType]; !ok {
+					layerProgs[layerType] = bytes.NewBufferString("")
+				}
+				layerProgs[layerType].WriteString(b)
 				return nil
 			})
 		}
@@ -108,6 +113,12 @@ var benchgenCmd = &cobra.Command{
 		if err := g.Wait(); err != nil {
 			return err
 		}
+
+		prog := bytes.NewBufferString("")
+		for _, val := range layerProgs {
+			prog.Write(val.Bytes())
+		}
+
 		generateProgress.Finish()
 
 		if outputFileName == "automatic" || outputFileName == "" {

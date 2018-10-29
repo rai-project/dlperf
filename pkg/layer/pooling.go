@@ -128,7 +128,7 @@ func (c Pooling) FwdBenchmarkFilter(datatype, algorithm string) benchmark.Benchm
 	}
 }
 
-func (c Pooling) FwdBenchmarkGenerator() string {
+func (c Pooling) FwdBenchmarkGenerator(standAloneGenerate bool) string {
 	templString := _escFSMustString(false, "/scope/pooling.tmpl")
 	return templateExec(&c, templateBasePrefix+templString+templateBaseSuffix)
 }
