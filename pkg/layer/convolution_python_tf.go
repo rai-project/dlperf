@@ -140,6 +140,7 @@ func (c Conv) FwdPythonTensorflowAST() (ast.Ast, error) {
 		},
 	}
 
+	prog.Body = append(prog.Body, x)
 	prog.Body = append(prog.Body, conv)
 
 	return prog, nil
