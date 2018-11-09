@@ -40,7 +40,7 @@ var subgraphCmd = &cobra.Command{
 		}
 
 		for _, subgrph := range subgrphs {
-			dotEnc, err := dot.Marshal(subgrph, model.GetName(), "", "  ", true)
+			dotEnc, err := dot.Marshal(subgrph, model.GetName(), "", "  ")
 			if err != nil {
 				println(err)
 				continue

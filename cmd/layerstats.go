@@ -76,7 +76,7 @@ func runLayerStats(cmd *cobra.Command, args []string) error {
 	if outputFormat == "dot" {
 		grph := net.ToGraph(onnx.GraphPruneInputs(false), onnx.GraphInputsAsConstantNodes(true))
 
-		dotEnc, err := dot.Marshal(grph, net.GetName(), "", "  ", true)
+		dotEnc, err := dot.Marshal(grph, net.GetName(), "", "  ")
 		if err != nil {
 			return err
 		}

@@ -52,7 +52,7 @@ var todotCmd = &cobra.Command{
 			grph = grph.Prune(nil)
 		}
 
-		dotEnc, err := dot.Marshal(grph, model.GetName(), "", "  ", true)
+		dotEnc, err := dot.Marshal(grph, model.GetName(), "", "  ")
 		if err != nil {
 			return err
 		}
