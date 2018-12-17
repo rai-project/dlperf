@@ -24,7 +24,6 @@ func runLayerStats(cmd *cobra.Command, args []string) error {
 	}()
 
 	if com.IsDir(modelPath) {
-
 		baseOutputFileName := outputFileName
 		if !com.IsDir(baseOutputFileName) {
 			os.MkdirAll(baseOutputFileName, os.ModePerm)
@@ -36,19 +35,19 @@ func runLayerStats(cmd *cobra.Command, args []string) error {
 		progress := newProgress("> Computing stats models", len(modelPaths))
 		defer progress.Finish()
 		for _, path := range modelPaths {
+			progress.Increment()
 			modelPath = path
 			modelName := getModelName(modelPath)
 			if strings.HasPrefix(modelName, ".") {
 				continue
 			}
 			outputFileName = filepath.Join(baseOutputFileName, modelName+"."+outputFormat)
-			if false {
+			if true {
 				pp.Println("processing " + modelName + " from " + modelPath + " to " + outputFileName)
 			}
 			if err := runLayerStats(cmd, args); err != nil {
 				pp.Println("failed processing "+modelName+" from "+modelPath+" to "+outputFileName, errors.WithStack(err))
 			}
-			progress.Increment()
 		}
 		return nil
 	}
@@ -90,6 +89,7 @@ func runLayerStats(cmd *cobra.Command, args []string) error {
 
 		return nil
 	}
+
 	infos, err := net.Information()
 	if err != nil {
 		return err

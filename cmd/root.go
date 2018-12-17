@@ -12,6 +12,7 @@ import (
 
 var (
 	modelPath      string
+	modelDir       string
 	fullFlops      bool
 	humanFlops     bool
 	outputFormat   string
@@ -50,7 +51,8 @@ var rootCmd = &cobra.Command{
 
 func init() {
 
-	rootCmd.PersistentFlags().StringVar(&modelPath, "model_path", "", "path to the model prototxt file")
+	rootCmd.PersistentFlags().StringVar(&modelPath, "model_path", "p", "path to the model prototxt file")
+	rootCmd.PersistentFlags().StringVarP(&modelDir, "model_dir", "d", "", "model directory")
 	rootCmd.PersistentFlags().BoolVar(&humanFlops, "human", false, "print flops in human form")
 	rootCmd.PersistentFlags().BoolVar(&fullFlops, "full", false, "print all information about flops")
 
