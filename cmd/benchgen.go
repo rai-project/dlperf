@@ -9,6 +9,7 @@ import (
 	"strings"
 	"sync"
 
+	"github.com/k0kubun/pp"
 	"github.com/rai-project/dlperf/pkg"
 	"golang.org/x/sync/errgroup"
 
@@ -108,6 +109,7 @@ var benchgenCmd = &cobra.Command{
 
 		if outputFileName == "automatic" || outputFileName == "" {
 			// println(prog.String())
+			pp.Println("Need to specify output_path to output to a file")
 			return nil
 		}
 

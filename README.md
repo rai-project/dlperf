@@ -1,30 +1,36 @@
 # DLPerf
+
 [![Build Status](https://travis-ci.org/rai-project/dlperf.svg?branch=master)](https://travis-ci.org/rai-project/dlperf)
 
-## Layer Stats
+## Download Models
 
-Get layer statistics in json format using
-
-```bash
-go run main.go downloadmodels --output ~/onnx_models
-```
-
-
-## Layer Stats
-
-Get layer statistics in json format using
+Download the models listed models in [model_urls](cmd/model_urls.go) to `model_dir` using
 
 ```bash
-go run main.go layerstats --model_path ~/onnx_models --output assets/layer_stats --format json
+go run main.go downloadmodels --model_dir ~/onnx_models
 ```
 
-infer and view the shape information
+## Layer Stats
+
+`model_path` and `output_path` can be a folder or a file.
+
+### Get layer statistics in json format using
+
+```bash
+go run main.go layerstats --model_path ~/onnx_models --output_path assets/layer_stats --format json
+```
+
+### Infer and view the shape information using
 
 ```bash
 go run main.go layerstats --model_path ~/onnx_models/emotion_ferplus/model.onnx --format dot
 ```
 
+`dot` from `graphviz` is needed. On macos, install it using `brew install graphviz`.
+
 ## Find Patterns
+
+`model_path` and `output_path` can be a folder or a file.
 
 Find the patterns of length 4
 
@@ -34,26 +40,29 @@ go run main.go patterns --model_path ~/onnx_models/ --length 4
 
 ## Get Flops
 
-To get the flops information for alexnet use
+Get the flops information for alexnet using
 
 ```
 go run main.go flopsinfo --model_path ~/onnx_models/bvlc_alexnet/model.onnx
 ```
 
-to get information per layer use
+Get information per layer using
 
 ```
 go run main.go flopsinfo --model_path ~/onnx_models/bvlc_alexnet/model.onnx --full
 ```
 
-
 ## Generate Benchmarks
+
+Generate the benchmark files of a model or across models at `model_path`.
 
 ```
 go run main.go benchgen --model_path ~/onnx_models/bvlc_alexnet/model.onnx
 ```
 
 ## Query benchmark info
+
+Query benchmark database at `benchmark_database` to to get information on the model at `model_path`
 
 ```
 go run main.go benchinfo --model_path ~/onnx_models/vgg19/vgg19.onnx

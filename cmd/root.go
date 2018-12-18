@@ -57,7 +57,7 @@ func init() {
 	rootCmd.PersistentFlags().BoolVar(&fullFlops, "full", false, "print all information about flops")
 
 	rootCmd.PersistentFlags().BoolVar(&noHeader, "no_header", false, "show header labels for output")
-	rootCmd.PersistentFlags().StringVarP(&outputFileName, "output", "o", "", "output file name")
+	rootCmd.PersistentFlags().StringVarP(&outputFileName, "output_path", "o", "", "output file name")
 	rootCmd.PersistentFlags().StringVarP(&outputFormat, "format", "f", "automatic", "print format to use")
 
 	Init()
