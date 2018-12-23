@@ -18,7 +18,6 @@ type Onnx struct {
 }
 
 func New(protoFileName string) (*Onnx, error) {
-
 	model, err := onnx.New(protoFileName, onnx.Steps([]string{}))
 
 	if err != nil {

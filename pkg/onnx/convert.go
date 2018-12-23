@@ -62,12 +62,26 @@ func (o Onnx) mkLayer(node *onnx.NodeProto) dlperf.Layer {
 	return ret
 }
 
+func (o *Onnx) getTensorProtoByName(name string) *onnx.TensorProto {
+	ret, ok := o.initializers[name]
+	if ok != true {
+		return nil
+	}
+	return ret
+}
+
 func (o Onnx) mkBase(node *onnx.NodeProto, operatorTypeName string) *layer.Base {
 	inputs := node.GetInput()
 	outputs := node.GetOutput()
 
+	tensors := make([]*onnx.TensorProto, len(inputs))
+	for ii, input := range inputs {
+		tensors[ii] = getTensorProtoByName(input)
+	}
+
 	base := &layer.Base{}
 	base.SetNode(node)
+	base.SetInitializers(tensors)
 	base.SetName(node.GetName())
 	base.SetOnnxOperatorType(node.GetOpType())
 	base.SetInputNames(inputs)

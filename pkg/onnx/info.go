@@ -11,7 +11,6 @@ import (
 )
 
 func sortByOrder(nds []graph.Node, layers dlperf.Layers) dlperf.Layers {
-
 	if len(layers) == 1 {
 		return layers
 	}
@@ -70,7 +69,6 @@ func sortByDimension(layers dlperf.Layers) dlperf.Layers {
 }
 
 func (o *Onnx) Information() ([]dlperf.LayerInformation, error) {
-
 	ret := []dlperf.LayerInformation{}
 
 	grph := o.ToGraph(GraphPruneInputs(false), GraphInputsAsConstantNodes(true))
@@ -134,8 +132,6 @@ func (o *Onnx) Information() ([]dlperf.LayerInformation, error) {
 
 		inputLayers = sortByOrder(nds, inputLayers)
 		layer.SetInputs(inputLayers)
-
-		// pp.Println(inputLayers)
 
 		outputLayers := dlperf.Layers{}
 		outputNodes := grph.From(nd.ID())

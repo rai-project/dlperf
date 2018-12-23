@@ -14,29 +14,19 @@ go run main.go downloadmodels --model_dir ~/onnx_models
 
 `model_path` and `output_path` can be a folder or a file.
 
-### Get layer statistics in json format using
-
-```bash
-go run main.go layerstats --model_path ~/onnx_models --output_path assets/layer_stats --format json
-```
-
 ### Infer and view the shape information using
 
 ```bash
 go run main.go layerstats --model_path ~/onnx_models/emotion_ferplus/model.onnx --format dot
 ```
 
-`dot` from `graphviz` is needed. On macos, install it using `brew install graphviz`.
-
-## Find Patterns
-
-`model_path` and `output_path` can be a folder or a file.
-
-Find the patterns of length 4
+### Get layer statistics in json format using
 
 ```bash
-go run main.go patterns --model_path ~/onnx_models/ --length 4
+go run main.go layerstats --model_path ~/onnx_models --output_path assets/layer_stats --format json
 ```
+
+`dot` from `graphviz` is needed. On macos, install it using `brew install graphviz`.
 
 ## Get Flops
 
@@ -52,6 +42,16 @@ Get information per layer using
 go run main.go flopsinfo --model_path ~/onnx_models/bvlc_alexnet/model.onnx --full
 ```
 
+## Find Patterns
+
+`model_path` and `output_path` can be a folder or a file.
+
+Find the patterns of length 4
+
+```bash
+go run main.go patterns --model_path ~/onnx_models/ --length 4
+```
+
 ## Generate Benchmarks
 
 Generate the benchmark files of a model or across models at `model_path`.
@@ -60,7 +60,7 @@ Generate the benchmark files of a model or across models at `model_path`.
 go run main.go benchgen --model_path ~/onnx_models/bvlc_alexnet/model.onnx
 ```
 
-## Query benchmark info
+## Query benchmark database
 
 Query benchmark database at `benchmark_database` to to get information on the model at `model_path`
 

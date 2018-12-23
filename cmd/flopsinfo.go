@@ -14,7 +14,6 @@ import (
 )
 
 func runFlopsCmd(cmd *cobra.Command, args []string) error {
-
 	if com.IsDir(modelPath) {
 		baseOutputFileName := outputFileName
 		if !com.IsDir(baseOutputFileName) {
@@ -52,7 +51,7 @@ func runFlopsCmd(cmd *cobra.Command, args []string) error {
 		return err
 	}
 
-	if fullFlops {
+	if fullInfo {
 		infos, err := net.Information()
 		if err != nil {
 			return err
@@ -66,7 +65,7 @@ func runFlopsCmd(cmd *cobra.Command, args []string) error {
 				continue
 			}
 			writer.Row(
-				layer{
+				layerFlops{
 					Name:             info.Name(),
 					Type:             info.OperatorType(),
 					FlopsInformation: info.Flops(),
@@ -80,16 +79,16 @@ func runFlopsCmd(cmd *cobra.Command, args []string) error {
 
 	info := net.FlopsInformation()
 
-	writer := NewWriter(netSummary{}, humanFlops)
+	writer := NewWriter(netFlopsSummary{}, humanFlops)
 	defer writer.Close()
 
-	writer.Row(netSummary{Name: "MultipleAdds", Value: info.MultiplyAdds})
-	writer.Row(netSummary{Name: "Additions", Value: info.Additions})
-	writer.Row(netSummary{Name: "Divisions", Value: info.Divisions})
-	writer.Row(netSummary{Name: "Exponentiations", Value: info.Exponentiations})
-	writer.Row(netSummary{Name: "Comparisons", Value: info.Comparisons})
-	writer.Row(netSummary{Name: "General", Value: info.General})
-	writer.Row(netSummary{Name: "Total", Value: info.Total()})
+	writer.Row(netFlopsSummary{Name: "MultipleAdds", Value: info.MultiplyAdds})
+	writer.Row(netFlopsSummary{Name: "Additions", Value: info.Additions})
+	writer.Row(netFlopsSummary{Name: "Divisions", Value: info.Divisions})
+	writer.Row(netFlopsSummary{Name: "Exponentiations", Value: info.Exponentiations})
+	writer.Row(netFlopsSummary{Name: "Comparisons", Value: info.Comparisons})
+	writer.Row(netFlopsSummary{Name: "General", Value: info.General})
+	writer.Row(netFlopsSummary{Name: "Total", Value: info.Total()})
 
 	return nil
 }

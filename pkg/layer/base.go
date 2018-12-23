@@ -29,16 +29,17 @@ type BaseBenchmarkArgs struct {
 }
 
 type Base struct {
-	node              *onnx.NodeProto `json:"-"`
-	Name_             string          `json:"name,omitempty"`
-	OperatorType_     string          `json:"operator_type,omitempty"`
-	OnnxOperatorType_ string          `json:"onnx_operator_type,omitempty"`
-	inputs            dlperf.Layers   `json:-,omitempty"`
-	outputs           dlperf.Layers   `json:-,omitempty"`
-	InputNames_       []string        `json:"input_names,omitempty"`
-	OutputNames_      []string        `json:"output_names,omitempty"`
-	InputShapes_      []dlperf.Shape  `json:"input_shapes,omitempty"`
-	OutputShapes_     []dlperf.Shape  `json:"output_shapes,omitempty"`
+	node              *onnx.NodeProto     `json:"-"`
+	initializers      []*onnx.TensorProto `json:"-"`
+	Name_             string              `json:"name,omitempty"`
+	OperatorType_     string              `json:"operator_type,omitempty"`
+	OnnxOperatorType_ string              `json:"onnx_operator_type,omitempty"`
+	inputs            dlperf.Layers       `json:-,omitempty"`
+	outputs           dlperf.Layers       `json:-,omitempty"`
+	InputNames_       []string            `json:"input_names,omitempty"`
+	OutputNames_      []string            `json:"output_names,omitempty"`
+	InputShapes_      []dlperf.Shape      `json:"input_shapes,omitempty"`
+	OutputShapes_     []dlperf.Shape      `json:"output_shapes,omitempty"`
 }
 
 func mkBaseBenchmarkArgs(c dlperf.Layer) BaseBenchmarkArgs {
@@ -80,6 +81,14 @@ func (b Base) Node() *onnx.NodeProto {
 
 func (b *Base) SetNode(node *onnx.NodeProto) {
 	b.node = node
+}
+
+func (b Base) Initializers() []*onnx.TensorProto {
+	return b.initializers
+}
+
+func (b *Base) SetInitializers(tensors []*onnx.TensorProto) {
+	b.initializers = tensors
 }
 
 func (b Base) OperatorType() string {

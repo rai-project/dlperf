@@ -16,6 +16,7 @@ type Layers []Layer
 type Layer interface {
 	Name() string
 	Node() *onnx.NodeProto
+	Initializers() []*onnx.TensorProto
 	OperatorType() string
 	InferShape(Layers)
 	Inputs() Layers
@@ -39,6 +40,7 @@ type LayerInformation interface {
 	OperatorType() string
 	InputNames() []string
 	OutputNames() []string
+	Weigths() []float32
 	Shape() ShapeInformation
 	Flops() FlopsInformation
 	Memory() MemoryInformation

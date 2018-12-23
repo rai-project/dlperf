@@ -13,7 +13,7 @@ import (
 var (
 	modelPath      string
 	modelDir       string
-	fullFlops      bool
+	fullInfo       bool
 	humanFlops     bool
 	outputFormat   string
 	outputFileName string
@@ -50,12 +50,10 @@ var rootCmd = &cobra.Command{
 }
 
 func init() {
-
 	rootCmd.PersistentFlags().StringVar(&modelPath, "model_path", "p", "path to the model prototxt file")
 	rootCmd.PersistentFlags().StringVarP(&modelDir, "model_dir", "d", "", "model directory")
 	rootCmd.PersistentFlags().BoolVar(&humanFlops, "human", false, "print flops in human form")
-	rootCmd.PersistentFlags().BoolVar(&fullFlops, "full", false, "print all information about flops")
-
+	rootCmd.PersistentFlags().BoolVar(&fullInfo, "full", false, "print all information about the layers")
 	rootCmd.PersistentFlags().BoolVar(&noHeader, "no_header", false, "show header labels for output")
 	rootCmd.PersistentFlags().StringVarP(&outputFileName, "output_path", "o", "", "output file name")
 	rootCmd.PersistentFlags().StringVarP(&outputFormat, "format", "f", "automatic", "print format to use")

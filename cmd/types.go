@@ -83,34 +83,52 @@ func (l stat) Row(humanFlops bool) []string {
 	return append([]string{l.Name, l.Type, strings.Join(l.InputNames, ";"), strings.Join(l.OutputNames, ";")}, base...)
 }
 
-type layer struct {
+type layerFlops struct {
 	Name                    string `json:"name"`
 	Type                    string `json:"type"`
 	dlperf.FlopsInformation `json:",inline,flatten""`
 	Total                   int64 `json:"total"`
 }
 
-func (layer) Header() []string {
+func (layerFlops) Header() []string {
 	base := dlperf.FlopsInformation{}.Header()
 	base = append(base, "Total")
 	return append([]string{"LayerName", "LayerType"}, base...)
 }
 
-func (l layer) Row(humanFlops bool) []string {
+func (l layerFlops) Row(humanFlops bool) []string {
 	base := l.FlopsInformation.Row(humanFlops)
 	base = append(base, flopsToString(l.FlopsInformation.Total(), humanFlops))
 	return append([]string{l.Name, l.Type}, base...)
 }
 
-type netSummary struct {
+type layerWeights struct {
+	Name    string `json:"name"`
+	Type    string `json:"type"`
+	Weigths []float32 `json:"weights"`
+}
+
+func (layerWeights) Header() []string {
+	return []string{"LayerName", "LayerType", "LayerWeights"}
+}
+
+func (l layerWeights) Row(humanFlops bool) []string {
+  ws, err :=  cast.ToStringSliceE(l.Weigths)
+  if err != nil {
+    panic(err)
+  }
+	return []string{l.Name, l.Type, strings.Join(ws, ";")}
+}
+
+type netFlopsSummary struct {
 	Name  string `json:"name"`
 	Value int64  `json:"value"`
 }
 
-func (netSummary) Header() []string {
+func (netFlopsSummary) Header() []string {
 	return []string{"Flop Type", "#"}
 }
 
-func (l netSummary) Row(humanFlops bool) []string {
+func (l netFlopsSummary) Row(humanFlops bool) []string {
 	return []string{l.Name, flopsToString(l.Value, humanFlops)}
 }

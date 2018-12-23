@@ -19,6 +19,14 @@ func (info *Information) Name() string {
 	return info.Name_
 }
 
+func (info *Information) Weigths() []float32 {
+  var ret []float32
+  for _, initializer :== range info.Base.initializers {
+    initializer.
+  }
+}
+
+
 func (info *Information) OnnxOperatorType() string {
 	return info.OnnxOperatorType_
 }
