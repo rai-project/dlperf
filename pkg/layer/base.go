@@ -88,6 +88,12 @@ func (b Base) Initializers() []*onnx.TensorProto {
 }
 
 func (b *Base) SetInitializers(tensors []*onnx.TensorProto) {
+
+	// inits := []*onnx.TensorProto{}
+	// deepcopy.Copy(&inits, tensors)
+
+	// b.initializers = inits
+
 	b.initializers = tensors
 }
 

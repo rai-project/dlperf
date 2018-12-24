@@ -115,6 +115,10 @@ func (layerWeights) Header() []string {
 }
 
 func (l layerWeights) Row(humanFlops bool) []string {
+	if l.Weigths == nil {
+		// pp.Println(l.Name + "   layer weights is nil")
+		return []string{}
+	}
 	ws, err := cast.ToStringSliceE(l.Weigths)
 	if err != nil {
 		panic(err)

@@ -74,9 +74,12 @@ func (o Onnx) mkBase(node *onnx.NodeProto, operatorTypeName string) *layer.Base 
 	inputs := node.GetInput()
 	outputs := node.GetOutput()
 
-	tensors := make([]*onnx.TensorProto, len(inputs))
-	for ii, input := range inputs {
-		tensors[ii] = o.getTensorProtoByName(input)
+	var tensors []*onnx.TensorProto
+	for _, input := range inputs {
+		t := o.getTensorProtoByName(input)
+		if t != nil && node.OpType != "Reshape" {
+			tensors = append(tensors, t)
+		}
 	}
 
 	base := &layer.Base{}

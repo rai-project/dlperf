@@ -74,13 +74,13 @@ func runWeightsCmd(cmd *cobra.Command, args []string) error {
 	return nil
 }
 
-var weigthsinfoCmd = &cobra.Command{
-	Use:     "weigthsinfo",
+var weightsinfoCmd = &cobra.Command{
+	Use:     "weightsinfo",
 	Aliases: []string{"weights"},
 	Short:   "Get weights information about the model",
 	RunE:    runWeightsCmd,
 }
 
 func init() {
-	rootCmd.AddCommand(weigthsinfoCmd)
+	rootCmd.AddCommand(weightsinfoCmd)
 }

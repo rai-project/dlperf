@@ -21,8 +21,12 @@ func (info *Information) Name() string {
 
 func (info *Information) Weigths() []float32 {
 	var ret []float32
+
 	for _, initializer := range info.initializers {
-		ret = append(ret, initializer.FloatData...)
+		if initializer == nil {
+			continue
+		}
+		ret = append(ret, initializer.RawData...)
 	}
 	return ret
 }
