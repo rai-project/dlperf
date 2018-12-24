@@ -55,7 +55,7 @@ func runWeightsCmd(cmd *cobra.Command, args []string) error {
 		return err
 	}
 
-	writer := NewWriter(layer{}, humanFlops)
+	writer := NewWriter(layerWeights{}, humanFlops)
 	defer writer.Close()
 
 	for _, info := range infos {

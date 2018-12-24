@@ -76,7 +76,7 @@ func (o Onnx) mkBase(node *onnx.NodeProto, operatorTypeName string) *layer.Base 
 
 	tensors := make([]*onnx.TensorProto, len(inputs))
 	for ii, input := range inputs {
-		tensors[ii] = getTensorProtoByName(input)
+		tensors[ii] = o.getTensorProtoByName(input)
 	}
 
 	base := &layer.Base{}

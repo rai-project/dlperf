@@ -20,12 +20,12 @@ func (info *Information) Name() string {
 }
 
 func (info *Information) Weigths() []float32 {
-  var ret []float32
-  for _, initializer :== range info.Base.initializers {
-    initializer.
-  }
+	var ret []float32
+	for _, initializer := range info.initializers {
+		ret = append(ret, initializer.FloatData...)
+	}
+	return ret
 }
-
 
 func (info *Information) OnnxOperatorType() string {
 	return info.OnnxOperatorType_

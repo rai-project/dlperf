@@ -5,6 +5,8 @@ import (
 	"strings"
 	"time"
 
+	"github.com/spf13/cast"
+
 	"github.com/rai-project/dlperf/pkg"
 	"github.com/rai-project/dlperf/pkg/benchmark"
 	"github.com/rai-project/dlperf/pkg/onnx"
@@ -103,8 +105,8 @@ func (l layerFlops) Row(humanFlops bool) []string {
 }
 
 type layerWeights struct {
-	Name    string `json:"name"`
-	Type    string `json:"type"`
+	Name    string    `json:"name"`
+	Type    string    `json:"type"`
 	Weigths []float32 `json:"weights"`
 }
 
@@ -113,10 +115,10 @@ func (layerWeights) Header() []string {
 }
 
 func (l layerWeights) Row(humanFlops bool) []string {
-  ws, err :=  cast.ToStringSliceE(l.Weigths)
-  if err != nil {
-    panic(err)
-  }
+	ws, err := cast.ToStringSliceE(l.Weigths)
+	if err != nil {
+		panic(err)
+	}
 	return []string{l.Name, l.Type, strings.Join(ws, ";")}
 }
 
