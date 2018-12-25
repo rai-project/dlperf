@@ -5,8 +5,6 @@ import (
 	"strings"
 	"time"
 
-	"github.com/spf13/cast"
-
 	"github.com/rai-project/dlperf/pkg"
 	"github.com/rai-project/dlperf/pkg/benchmark"
 	"github.com/rai-project/dlperf/pkg/onnx"
@@ -119,11 +117,8 @@ func (l layerWeights) Row(humanFlops bool) []string {
 		// pp.Println(l.Name + "   layer weights is nil")
 		return []string{}
 	}
-	ws, err := cast.ToStringSliceE(l.Weigths)
-	if err != nil {
-		panic(err)
-	}
-	return []string{l.Name, l.Type, strings.Join(ws, ";")}
+
+	return []string{l.Name, l.Type, strings.Join(strings.Fields(fmt.Sprint(l.Weigths)), ";")}
 }
 
 type netFlopsSummary struct {
