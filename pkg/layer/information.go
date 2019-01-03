@@ -4,8 +4,6 @@ import (
 	"encoding/json"
 	"unsafe"
 
-	"github.com/k0kubun/pp"
-
 	"github.com/fatih/structs"
 	"github.com/mitchellh/mapstructure"
 	dlperf "github.com/rai-project/dlperf/pkg"
@@ -38,18 +36,11 @@ func byteSliceToFloat32Slice(src []byte) []float32 {
 
 func (info *Information) Weigths() []float32 {
 	var ret []float32
-	a := 0
-	for _, initializer := range info.initializers {
-		if initializer == nil {
+	for _, t := range info.WeightTensors() {
+		if t == nil {
 			continue
 		}
-		a++
-		ret = append(ret, byteSliceToFloat32Slice(initializer.RawData)...)
-	}
-	if ret == nil {
-		pp.Print("initializer is nil")
-		pp.Print(info.Name())
-		pp.Print(a)
+		ret = append(ret, t.FloatData...)
 	}
 	return ret
 }

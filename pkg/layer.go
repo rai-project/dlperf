@@ -16,7 +16,7 @@ type Layers []Layer
 type Layer interface {
 	Name() string
 	Node() *onnx.NodeProto
-	Initializers() []*onnx.TensorProto
+	WeightTensors() []*onnx.TensorProto
 	OperatorType() string
 	InferShape(Layers)
 	Inputs() Layers

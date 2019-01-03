@@ -62,7 +62,7 @@ func runWeightsCmd(cmd *cobra.Command, args []string) error {
 	defer writer.Close()
 
 	for _, info := range infos {
-		if info.OperatorType() == "constant_input" || info.OperatorType() == "constant" {
+		if info.OperatorType() == "ConstantInput" {
 			continue
 		}
 		histo := stats.NewHistogram(stats.HistogramOptions{
@@ -74,15 +74,18 @@ func runWeightsCmd(cmd *cobra.Command, args []string) error {
 			// BaseBucketSize is the size of the first bucket.
 			BaseBucketSize: float64(1.0) / float64(numBuckets),
 			// MinValue is the lower bound of the first bucket.
-			MinValue: 0,
+			MinValue: -100,
 		})
 
 		weigths := info.Weigths()
 		if weigths == nil {
-			panic("weights are nil")
-		}
-		for _, w := range weigths {
-			histo.Add(int64(w * 100))
+			pp.Println("NIL", info.Name())
+			histo = nil
+		} else {
+			pp.Println("NOT NIL", info.Name())
+			for _, w := range weigths {
+				histo.Add(int64(w * 100))
+			}
 		}
 
 		writer.Row(

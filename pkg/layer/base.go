@@ -7,6 +7,8 @@ import (
 	dlperf "github.com/rai-project/dlperf/pkg"
 	"github.com/rai-project/dlperf/pkg/benchmark"
 	"github.com/rai-project/onnx"
+
+	"github.com/k0kubun/pp"
 )
 
 type BaseBenchmarkInputArgs struct {
@@ -30,7 +32,7 @@ type BaseBenchmarkArgs struct {
 
 type Base struct {
 	node              *onnx.NodeProto     `json:"-"`
-	initializers      []*onnx.TensorProto `json:"-"`
+	weightTensors     []*onnx.TensorProto `json:"-"`
 	Name_             string              `json:"name,omitempty"`
 	OperatorType_     string              `json:"operator_type,omitempty"`
 	OnnxOperatorType_ string              `json:"onnx_operator_type,omitempty"`
@@ -83,18 +85,18 @@ func (b *Base) SetNode(node *onnx.NodeProto) {
 	b.node = node
 }
 
-func (b Base) Initializers() []*onnx.TensorProto {
-	return b.initializers
+func (b Base) WeightTensors() []*onnx.TensorProto {
+	return b.weightTensors
 }
 
-func (b *Base) SetInitializers(tensors []*onnx.TensorProto) {
-
+func (b *Base) SetWeightTensors(tensors []*onnx.TensorProto) {
 	// inits := []*onnx.TensorProto{}
 	// deepcopy.Copy(&inits, tensors)
-
 	// b.initializers = inits
-
-	b.initializers = tensors
+	if b.Name() == "Convolution28" {
+		pp.Print(len(tensors[0].FloatData))
+	}
+	b.weightTensors = tensors
 }
 
 func (b Base) OperatorType() string {
