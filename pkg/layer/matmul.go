@@ -29,40 +29,22 @@ func (c *MatMul) InferShape(inputLayers dlperf.Layers) {
 	if aLen > 2 {
 		cShape = aShape
 		if bLen >= 2 {
-			if bShape[bLen-2] != aShape[aLen-1] {
-				panic("incompatible dimensions for matrix multiplication")
-			}
 			cShape[aLen-1] = bShape[bLen-1]
 		} else {
-			if bShape[bLen-1] != aShape[aLen-1] {
-				panic("incompatible dimensions for matrix multiplication")
-			}
 			cShape = aShape[:aLen-1]
 		}
 	} else if aLen == 2 {
 		cShape = bShape
 		if bLen >= 2 {
-			if bShape[bLen-2] != aShape[aLen-1] {
-				panic("incompatible dimensions for matrix multiplication")
-			}
 			cShape[bLen-2] = aShape[0]
 		} else {
-			if bShape[bLen-1] != aShape[aLen-1] {
-				panic("incompatible dimensions for matrix multiplication")
-			}
 			cShape = aShape[:1]
 		}
 	} else {
 		cShape = bShape
 		if bLen >= 2 {
-			if bShape[bLen-2] != aShape[aLen-1] {
-				panic("incompatible dimensions for matrix multiplication")
-			}
 			cShape = bShape[1:]
 		} else {
-			if bShape[bLen-1] != aShape[aLen-1] {
-				panic("incompatible dimensions for matrix multiplication")
-			}
 			cShape = dlperf.Shape{}
 		}
 	}

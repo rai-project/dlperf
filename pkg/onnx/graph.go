@@ -292,9 +292,6 @@ func (o *Onnx) ToGraph(oo ...GraphOption) *Graph {
 	_ = mkOnnxConstantOutputNode
 
 	skipNode := func(name string) bool {
-		// if strings.HasPrefix(name, "_") {
-		// 	return true
-		// }
 		if !opts.PruneInputs {
 			return false
 		}

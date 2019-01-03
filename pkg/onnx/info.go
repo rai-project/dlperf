@@ -27,11 +27,6 @@ func sortByOrder(nds []graph.Node, layers dlperf.Layers) dlperf.Layers {
 		return 0
 	}
 
-	if len(layers) != 0 && layers[0].Name() == "Times212_reshape0" {
-		pp.Println(findNodePosition(layers[0].Name()))
-		pp.Println(findNodePosition(layers[1].Name()))
-	}
-
 	order := func(ii, jj int) bool {
 		a := layers[ii]
 		b := layers[jj]
@@ -90,8 +85,6 @@ func (o *Onnx) Information() ([]dlperf.LayerInformation, error) {
 			}
 		}
 		panic("unable to find node " + name)
-
-		return nil
 	}
 
 	layers := ordered_map.NewOrderedMap()
@@ -116,85 +109,36 @@ func (o *Onnx) Information() ([]dlperf.LayerInformation, error) {
 		if !ok {
 			panic("invalid layer type for " + pp.Sprint(kv.Value))
 		}
-
 		nd := findNode(kv.Key.(string))
-		inputLayers := dlperf.Layers{}
-		inputNodes := grph.To(nd.ID())
-		for inputNodes.Next() {
-			input0 := inputNodes.Node()
-			input, ok := input0.(*GraphNode)
-			if !ok {
-				panic("invalid type for " + pp.Sprint(input0))
-			}
 
-			inputLayer, ok := layers.Get(input.name)
+		inputLayers := dlperf.Layers{}
+		for _, inputName := range layer.Node().GetInput() {
+			inputLayer, ok := layers.Get(inputName)
 			if !ok {
-				panic("unable to find input layer " + pp.Sprint(input))
+				panic("unable to find input layer " + pp.Sprint(inputName))
 			}
 
 			inputLayers = append(inputLayers, inputLayer.(dlperf.Layer))
 		}
-
-		if layer.Name() == "Times212" {
-			for _, ll := range inputLayers {
-				pp.Println(ll.Name())
-			}
-		}
-
-		inputLayers = sortByOrder(nds, inputLayers)
-
-		if layer.Name() == "Times212" {
-			for _, ll := range inputLayers {
-				pp.Println(ll.Name())
-			}
-		}
-
 		layer.SetInputs(inputLayers)
 
 		outputLayers := dlperf.Layers{}
-		outputNodes := grph.From(nd.ID())
-		for outputNodes.Next() {
-			output0 := outputNodes.Node()
-			output, ok := output0.(*GraphNode)
+		for _, outputName := range layer.Node().GetOutput() {
+			outputLayer, ok := layers.Get(outputName)
 			if !ok {
-				panic("invalid type for " + pp.Sprint(output0))
-			}
-
-			outputLayer, ok := layers.Get(output.name)
-			if !ok {
-				panic("unable to find input layer " + pp.Sprint(output))
+				panic("unable to find input layer " + pp.Sprint(outputName))
 			}
 
 			outputLayers = append(outputLayers, outputLayer.(dlperf.Layer))
 		}
-		outputLayers = sortByOrder(nds, outputLayers)
 		layer.SetOutputs(outputLayers)
-
-		// if layer.Name() == "conv0" {
-		// 	pp.Println("Infering Shape on ", layer.Name())
-		// 	for _, input := range inputLayers {
-		// 		pp.Println(input.Name())
-		// 	}
-		// }
-
-		// defer func() {
-		// 	if r := recover(); r != nil {
-		// 		// pp.Println(layer.Name())
-		// 		panic(r)
-		// 	}
-
-		// }()
 
 		if len(inputLayers) > 0 {
 			layer.SetInputShapes(getOutputShapes(inputLayers))
 		}
 
 		layer.InferShape(inputLayers)
-
 		nd.layer = layer
-
-		// pp.Println(layer.Name())
-		// pp.Println(layer.OutputShapes())
 
 		info := layer.Information()
 		ret = append(ret, info)
