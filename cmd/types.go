@@ -5,9 +5,10 @@ import (
 	"strings"
 	"time"
 
-	"github.com/rai-project/dlperf/pkg"
+	dlperf "github.com/rai-project/dlperf/pkg"
 	"github.com/rai-project/dlperf/pkg/benchmark"
 	"github.com/rai-project/dlperf/pkg/onnx"
+	"google.golang.org/grpc/benchmark/stats"
 )
 
 type pattern struct {
@@ -103,22 +104,23 @@ func (l layerFlops) Row(humanFlops bool) []string {
 }
 
 type layerWeights struct {
-	Name    string    `json:"name"`
-	Type    string    `json:"type"`
-	Weigths []float32 `json:"weights"`
+	Name      string           `json:"name"`
+	Type      string           `json:"type"`
+	Weigths   []float32        `json:"weights"`
+	Histogram *stats.Histogram `json:",inline,flatten""`
 }
 
 func (layerWeights) Header() []string {
-	return []string{"LayerName", "LayerType", "LayerWeights"}
+	return []string{"LayerName", "LayerType", "LayerWeightsHistogram"}
 }
 
 func (l layerWeights) Row(humanFlops bool) []string {
 	if l.Weigths == nil {
-		// pp.Println(l.Name + "   layer weights is nil")
 		return []string{}
 	}
+	// wegiths := strings.Join(strings.Fields(fmt.Sprint(l.Weigths)), ";")
 
-	return []string{l.Name, l.Type, strings.Join(strings.Fields(fmt.Sprint(l.Weigths)), ";")}
+	return []string{l.Name, l.Type, l.Histogram.String()}
 }
 
 type netFlopsSummary struct {

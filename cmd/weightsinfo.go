@@ -11,7 +11,10 @@ import (
 	"github.com/pkg/errors"
 	"github.com/rai-project/dlperf/pkg/onnx"
 	"github.com/spf13/cobra"
+	"google.golang.org/grpc/benchmark/stats"
 )
+
+var numBuckets = 100
 
 func runWeightsCmd(cmd *cobra.Command, args []string) error {
 	if com.IsDir(modelPath) {
@@ -62,11 +65,32 @@ func runWeightsCmd(cmd *cobra.Command, args []string) error {
 		if info.OperatorType() == "constant_input" || info.OperatorType() == "constant" {
 			continue
 		}
+		histo := stats.NewHistogram(stats.HistogramOptions{
+			// NumBuckets is the number of buckets.
+			NumBuckets: numBuckets,
+			// GrowthFactor is the growth factor of the buckets. A value of 0.1
+			// indicates that bucket N+1 will be 10% larger than bucket N.
+			GrowthFactor: float64(1.0) / float64(numBuckets),
+			// BaseBucketSize is the size of the first bucket.
+			BaseBucketSize: float64(1.0) / float64(numBuckets),
+			// MinValue is the lower bound of the first bucket.
+			MinValue: 0,
+		})
+
+		weigths := info.Weigths()
+		if weigths == nil {
+			panic("weights are nil")
+		}
+		for _, w := range weigths {
+			histo.Add(int64(w * 100))
+		}
+
 		writer.Row(
 			layerWeights{
-				Name:    info.Name(),
-				Type:    info.OperatorType(),
-				Weigths: info.Weigths(),
+				Name:      info.Name(),
+				Type:      info.OperatorType(),
+				Weigths:   info.Weigths(),
+				Histogram: histo,
 			},
 		)
 	}
@@ -83,4 +107,5 @@ var weightsinfoCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(weightsinfoCmd)
+	weightsinfoCmd.PersistentFlags().IntVarP(&numBuckets, "num_buckets", "n", 100, "number of buckets")
 }
