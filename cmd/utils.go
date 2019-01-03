@@ -105,7 +105,7 @@ func readModels(modelPath string) ([]*onnx.Onnx, error) {
 			pp.Println(path)
 			model, err := onnx.New(path)
 			if err != nil {
-				panic(err)
+				log.Fatal(err)
 			}
 			mut.Lock()
 			defer mut.Unlock()

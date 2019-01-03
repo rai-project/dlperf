@@ -5,7 +5,7 @@ import (
 
 	"github.com/cevaris/ordered_map"
 	"github.com/k0kubun/pp"
-	"github.com/rai-project/dlperf/pkg"
+	dlperf "github.com/rai-project/dlperf/pkg"
 	"gonum.org/v1/gonum/graph"
 	"gonum.org/v1/gonum/graph/topo"
 )
@@ -27,6 +27,11 @@ func sortByOrder(nds []graph.Node, layers dlperf.Layers) dlperf.Layers {
 		return 0
 	}
 
+	if len(layers) != 0 && layers[0].Name() == "Times212_reshape0" {
+		pp.Println(findNodePosition(layers[0].Name()))
+		pp.Println(findNodePosition(layers[1].Name()))
+	}
+
 	order := func(ii, jj int) bool {
 		a := layers[ii]
 		b := layers[jj]
@@ -35,7 +40,7 @@ func sortByOrder(nds []graph.Node, layers dlperf.Layers) dlperf.Layers {
 		return apos < bpos
 	}
 
-	sort.Slice(layers, order)
+	sort.SliceStable(layers, order)
 
 	return layers
 }
@@ -130,7 +135,20 @@ func (o *Onnx) Information() ([]dlperf.LayerInformation, error) {
 			inputLayers = append(inputLayers, inputLayer.(dlperf.Layer))
 		}
 
+		if layer.Name() == "Times212" {
+			for _, ll := range inputLayers {
+				pp.Println(ll.Name())
+			}
+		}
+
 		inputLayers = sortByOrder(nds, inputLayers)
+
+		if layer.Name() == "Times212" {
+			for _, ll := range inputLayers {
+				pp.Println(ll.Name())
+			}
+		}
+
 		layer.SetInputs(inputLayers)
 
 		outputLayers := dlperf.Layers{}
@@ -194,7 +212,7 @@ func (o Onnx) FlopsInformation() dlperf.FlopsInformation {
 	flops := dlperf.FlopsInformation{}
 	infos, err := o.Information()
 	if err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
 	for _, info := range infos {
 		flops = flops.Add(info.Flops())
@@ -206,7 +224,7 @@ func (o Onnx) MemoryInformation() dlperf.MemoryInformation {
 	memory := dlperf.MemoryInformation{}
 	infos, err := o.Information()
 	if err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
 	for _, info := range infos {
 		memory = memory.Add(info.Memory())

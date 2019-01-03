@@ -41,7 +41,7 @@ func (dt DominatorTree) Dominated(a, b graph.Node) bool {
 	return false
 }
 
-// byID implements the sort.Interface sorting a slice of graph.Node by reverse ID.
+// byID implements the sort.Interface sorting a slice of graph.Node by ID.
 type byID []graph.Node
 
 func (n byID) Len() int           { return len(n) }

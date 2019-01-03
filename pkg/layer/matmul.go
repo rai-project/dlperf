@@ -1,7 +1,7 @@
 package layer
 
 import (
-	"github.com/rai-project/dlperf/pkg"
+	dlperf "github.com/rai-project/dlperf/pkg"
 )
 
 //easyjson:json
@@ -22,28 +22,48 @@ func (c *MatMul) InferShape(inputLayers dlperf.Layers) {
 
 	aShape := c.InputShapes()[0]
 	bShape := c.InputShapes()[1]
+	aLen := len(aShape)
+	bLen := len(bShape)
 	var cShape dlperf.Shape
 
-	if len(aShape) > 2 {
+	if aLen > 2 {
 		cShape = aShape
-		if len(bShape) >= 2 {
-			cShape[len(cShape)-1] = bShape[len(bShape)-1]
+		if bLen >= 2 {
+			if bShape[bLen-2] != aShape[aLen-1] {
+				panic("incompatible dimensions for matrix multiplication")
+			}
+			cShape[aLen-1] = bShape[bLen-1]
 		} else {
-			cShape = aShape[:len(bShape)-1]
+			if bShape[bLen-1] != aShape[aLen-1] {
+				panic("incompatible dimensions for matrix multiplication")
+			}
+			cShape = aShape[:aLen-1]
 		}
-	} else if len(aShape) == 2 {
+	} else if aLen == 2 {
 		cShape = bShape
-		if len(bShape) >= 2 {
-			cShape[len(cShape)-2] = aShape[len(aShape)-2]
+		if bLen >= 2 {
+			if bShape[bLen-2] != aShape[aLen-1] {
+				panic("incompatible dimensions for matrix multiplication")
+			}
+			cShape[bLen-2] = aShape[0]
 		} else {
+			if bShape[bLen-1] != aShape[aLen-1] {
+				panic("incompatible dimensions for matrix multiplication")
+			}
 			cShape = aShape[:1]
 		}
 	} else {
 		cShape = bShape
-		if len(bShape) >= 2 {
+		if bLen >= 2 {
+			if bShape[bLen-2] != aShape[aLen-1] {
+				panic("incompatible dimensions for matrix multiplication")
+			}
 			cShape = bShape[1:]
 		} else {
-			cShape = dlperf.Shape{1}
+			if bShape[bLen-1] != aShape[aLen-1] {
+				panic("incompatible dimensions for matrix multiplication")
+			}
+			cShape = dlperf.Shape{}
 		}
 	}
 

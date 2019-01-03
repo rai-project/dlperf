@@ -38,7 +38,7 @@ func (lyrs Layers) FwdUnion(datatype, algorithm string) Layers {
 		})
 	}
 	if err := g.Wait(); err != nil {
-		panic(err)
+		log.Fatal(err)
 		return nil
 	}
 	return res

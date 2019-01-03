@@ -29,7 +29,7 @@ func recovery() {
 func templateExec(lyr dlperf.Layer, templString string) string {
 	tmpl, err := mkTemplate(lyr).Parse(templString)
 	if err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
 	args := lyr.FwdBenchmarkArgs()
 	if args == nil {
@@ -38,7 +38,7 @@ func templateExec(lyr dlperf.Layer, templString string) string {
 	buf := bytes.NewBufferString("")
 	err = tmpl.Execute(buf, args)
 	if err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
 	return buf.String()
 }

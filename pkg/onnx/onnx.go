@@ -54,7 +54,7 @@ func New(protoFileName string) (*Onnx, error) {
 		// 	var f1 float32
 		// 	binary.Read(buf, binary.LittleEndian, &f1)
 		// 	pp.Println(f1)
-		// 	// pp.Println(int64(binary.LittleEndian.Uint64(i.RawData[8:])))
+		// 	pp.Println(int64(binary.LittleEndian.Uint64(i.RawData[8:])))
 		// }
 		initializers[i.Name] = i
 	}

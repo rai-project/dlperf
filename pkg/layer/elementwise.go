@@ -3,7 +3,7 @@ package layer
 import (
 	"strings"
 
-	"github.com/rai-project/dlperf/pkg"
+	dlperf "github.com/rai-project/dlperf/pkg"
 )
 
 //easyjson:json
@@ -21,54 +21,10 @@ func (ElementWise) Description() string {
 	return ``
 }
 
+// multidirectionalBroadcastShapeInference
 func (c *ElementWise) InferShape(inputLayers dlperf.Layers) {
 	inputShapes := getOutputShapes(inputLayers)
-	resultShapeSize := 0
-	for _, input := range inputShapes {
-		if len(input) > resultShapeSize {
-			resultShapeSize = len(input)
-		}
-	}
-	resultShape := dlperf.Shape{}
-	for ii := 0; ii < resultShapeSize; ii++ {
-		dimValue := int64(1)
-		symbolicDim := int64(0)
-		numSymbolicDims := int64(0)
-		for _, shape := range inputShapes {
-			if ii < resultShapeSize-len(shape) {
-				continue
-			}
-			l := ii - resultShapeSize + len(shape)
-			dimIJ := int64(0)
-			if l < len(shape) {
-				dimIJ = shape[l]
-			}
-			if dimIJ != 0 {
-				if dimIJ != 1 {
-					if dimValue != dimIJ && dimValue != 1 {
-						panic("Incompatible dimensions")
-					} else {
-						dimValue = dimIJ
-					}
-				}
-			} else {
-				if numSymbolicDims == 0 {
-					symbolicDim = dimIJ
-				}
-				numSymbolicDims++
-			}
-		}
-		if dimValue != 0 || numSymbolicDims == 0 {
-			resultShape = append(resultShape, int64(dimValue))
-		} else if numSymbolicDims == 1 {
-			resultShape = append(resultShape, int64(symbolicDim))
-		} else {
-			resultShape = append(resultShape, 0)
-		}
-	}
-
-	outputShapes := []dlperf.Shape{resultShape}
-
+	outputShapes := multidirectionalBroadcastShapeInference(inputShapes)
 	c.SetOutputShapes(outputShapes)
 }
 

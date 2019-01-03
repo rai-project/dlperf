@@ -111,7 +111,7 @@ func (c Pooling) FwdBenchmarkArgs() interface{} {
 		},
 	)
 	if err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
 	res.UniqueBenchmarkID = hash
 

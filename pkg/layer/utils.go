@@ -150,6 +150,56 @@ func getOutputShapes(layers dlperf.Layers) []dlperf.Shape {
 	return outputShapes
 }
 
+// multidirectionalBroadcastShapeInference
+func multidirectionalBroadcastShapeInference(inputShapes []dlperf.Shape) []dlperf.Shape {
+	resultShapeSize := 0
+	for _, inputShape := range inputShapes {
+		if len(inputShape) > resultShapeSize {
+			resultShapeSize = len(inputShape)
+		}
+	}
+
+	resultShape := dlperf.Shape{}
+	for ii := 0; ii < resultShapeSize; ii++ {
+		dimValue := int64(1)
+		symbolicDim := int64(0)
+		numSymbolicDims := int64(0)
+		for _, shape := range inputShapes {
+			if ii < resultShapeSize-len(shape) {
+				continue
+			}
+			l := ii - resultShapeSize + len(shape)
+			dimIJ := int64(0)
+			if l < len(shape) {
+				dimIJ = shape[l]
+			}
+			if dimIJ != 0 {
+				if dimIJ != 1 {
+					if dimValue != dimIJ && dimValue != 1 {
+						panic("Incompatible dimensions")
+					} else {
+						dimValue = dimIJ
+					}
+				}
+			} else {
+				if numSymbolicDims == 0 {
+					symbolicDim = dimIJ
+				}
+				numSymbolicDims++
+			}
+		}
+		if dimValue != 0 || numSymbolicDims == 0 {
+			resultShape = append(resultShape, int64(dimValue))
+		} else if numSymbolicDims == 1 {
+			resultShape = append(resultShape, int64(symbolicDim))
+		} else {
+			resultShape = append(resultShape, 0)
+		}
+	}
+
+	return []dlperf.Shape{resultShape}
+}
+
 func mkBenchmarkFilterName(layer dlperf.Layer, datatype, algorithm string) string {
 	name := "^" + layer.FwdBenchmarkName() + "_" + strings.ToUpper(datatype) + `(__\d+)?`
 	if algorithm != "" {

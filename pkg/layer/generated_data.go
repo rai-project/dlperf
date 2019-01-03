@@ -172,7 +172,7 @@ func _escFSByte(useLocal bool, name string) ([]byte, error) {
 func _escFSMustByte(useLocal bool, name string) []byte {
 	b, err := _escFSByte(useLocal, name)
 	if err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
 	return b
 }
