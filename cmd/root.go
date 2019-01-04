@@ -17,7 +17,6 @@ var (
 	humanFlops     bool
 	outputFormat   string
 	outputFileName string
-	outputPath     string
 	noHeader       bool
 	appendOutput   bool
 	pruneGraph     bool
@@ -55,7 +54,7 @@ func init() {
 	rootCmd.PersistentFlags().BoolVar(&humanFlops, "human", false, "print flops in human form")
 	rootCmd.PersistentFlags().BoolVar(&fullInfo, "full", false, "print all information about the layers")
 	rootCmd.PersistentFlags().BoolVar(&noHeader, "no_header", false, "show header labels for output")
-	rootCmd.PersistentFlags().StringVarP(&outputFileName, "output_path", "o", "", "output file name")
+	rootCmd.PersistentFlags().StringVarP(&outputFileName, "output_file", "o", "", "output file name")
 	rootCmd.PersistentFlags().StringVarP(&outputFormat, "format", "f", "automatic", "print format to use")
 
 	Init()

@@ -8,7 +8,6 @@ import (
 	dlperf "github.com/rai-project/dlperf/pkg"
 	"github.com/rai-project/dlperf/pkg/benchmark"
 	"github.com/rai-project/dlperf/pkg/onnx"
-	"google.golang.org/grpc/benchmark/stats"
 )
 
 type pattern struct {
@@ -104,23 +103,20 @@ func (l layerFlops) Row(humanFlops bool) []string {
 }
 
 type layerWeights struct {
-	Name      string           `json:"name"`
-	Type      string           `json:"type"`
-	Weigths   []float32        `json:"weights"`
-	Histogram *stats.Histogram `json:",inline,flatten""`
+	Name              string  `json:"name"`
+	Type              string  `json:"type"`
+	Length            int     `json:"length"`
+	Max               float64 `json:"max"`
+	Min               float64 `json:"min"`
+	StandardDeviation float64 `json:"standard_deviation"`
 }
 
 func (layerWeights) Header() []string {
-	return []string{"LayerName", "LayerType", "LayerWeightsHistogram"}
+	return []string{"LayerName", "LayerType", "Length", "LayerWeightsMax", "LayerWeightsMin", "LayerWeightsSdev"}
 }
 
 func (l layerWeights) Row(humanFlops bool) []string {
-	if l.Weigths == nil {
-		return []string{}
-	}
-	// wegiths := strings.Join(strings.Fields(fmt.Sprint(l.Weigths)), ";")
-
-	return []string{l.Name, l.Type, l.Histogram.String()}
+	return []string{l.Name, l.Type, fmt.Sprint(l.Length), fmt.Sprint(l.Max), fmt.Sprint(l.Min), fmt.Sprint(l.StandardDeviation)}
 }
 
 type netFlopsSummary struct {

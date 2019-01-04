@@ -8,13 +8,16 @@ import (
 	"github.com/Unknwon/com"
 	"github.com/k0kubun/pp"
 	zglob "github.com/mattn/go-zglob"
+	"github.com/montanaflynn/stats"
 	"github.com/pkg/errors"
 	"github.com/rai-project/dlperf/pkg/onnx"
 	"github.com/spf13/cobra"
-	"google.golang.org/grpc/benchmark/stats"
+	"gonum.org/v1/plot"
+	"gonum.org/v1/plot/plotter"
+	"gonum.org/v1/plot/vg"
 )
 
-var numBuckets = 100
+var numBuckets = 20
 
 func runWeightsCmd(cmd *cobra.Command, args []string) error {
 	if com.IsDir(modelPath) {
@@ -58,6 +61,16 @@ func runWeightsCmd(cmd *cobra.Command, args []string) error {
 		return err
 	}
 
+	dir, err := filepath.Abs(filepath.Dir(outputFileName))
+	if err != nil {
+		return err
+	}
+	dir = filepath.Join(dir, getModelName(modelPath))
+	if !com.IsDir(dir) {
+		os.MkdirAll(dir, os.ModePerm)
+	}
+
+	outputFileName = filepath.Join(dir, filepath.Base(outputFileName))
 	writer := NewWriter(layerWeights{}, humanFlops)
 	defer writer.Close()
 
@@ -65,37 +78,55 @@ func runWeightsCmd(cmd *cobra.Command, args []string) error {
 		if info.OperatorType() == "ConstantInput" {
 			continue
 		}
-		histo := stats.NewHistogram(stats.HistogramOptions{
-			// NumBuckets is the number of buckets.
-			NumBuckets: numBuckets,
-			// GrowthFactor is the growth factor of the buckets. A value of 0.1
-			// indicates that bucket N+1 will be 10% larger than bucket N.
-			GrowthFactor: float64(1.0) / float64(numBuckets),
-			// BaseBucketSize is the size of the first bucket.
-			BaseBucketSize: float64(1.0) / float64(numBuckets),
-			// MinValue is the lower bound of the first bucket.
-			MinValue: -100,
-		})
-
 		weigths := info.Weigths()
 		if weigths == nil {
-			pp.Println("NIL", info.Name())
-			histo = nil
-		} else {
-			pp.Println("NOT NIL", info.Name())
-			for _, w := range weigths {
-				histo.Add(int64(w * 100))
-			}
+			continue
+		}
+
+		v := make([]float64, len(weigths))
+		for ii := range v {
+			v[ii] = float64(weigths[ii])
+		}
+
+		max, err := stats.Max(v)
+		if err != nil {
+			return err
+		}
+		min, err := stats.Min(v)
+		if err != nil {
+			return err
+		}
+		sdev, err := stats.StandardDeviation(v)
+		if err != nil {
+			return err
 		}
 
 		writer.Row(
 			layerWeights{
-				Name:      info.Name(),
-				Type:      info.OperatorType(),
-				Weigths:   info.Weigths(),
-				Histogram: histo,
+				Name:              info.Name(),
+				Type:              info.OperatorType(),
+				Length:            len(v),
+				Max:               max,
+				Min:               min,
+				StandardDeviation: sdev,
 			},
 		)
+
+		p, err := plot.New()
+		if err != nil {
+			return err
+		}
+		p.Title.Text = info.Name()
+
+		h, err := plotter.NewHist(plotter.Values(v), numBuckets)
+		if err != nil {
+			return err
+		}
+		p.Add(h)
+
+		if err := p.Save(4*vg.Inch, 4*vg.Inch, filepath.Join(dir, info.OperatorType()+"_"+info.Name()+".png")); err != nil {
+			return err
+		}
 	}
 
 	return nil
