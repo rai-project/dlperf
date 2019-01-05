@@ -42,6 +42,14 @@ Get information per layer using
 go run main.go flopsinfo --model_path ~/onnx_models/bvlc_alexnet/model.onnx --full
 ```
 
+## Get Weights Histogram
+
+Get information per layer using
+
+```
+go run main.go weightsinfo --model_path ~/onnx_models/bvlc_alexnet/model.onnx --output_file=out
+```
+
 ## Find Patterns
 
 `model_path` and `output_path` can be a folder or a file.
