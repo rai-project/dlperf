@@ -7,8 +7,6 @@ import (
 	dlperf "github.com/rai-project/dlperf/pkg"
 	"github.com/rai-project/dlperf/pkg/benchmark"
 	"github.com/rai-project/onnx"
-
-	"github.com/k0kubun/pp"
 )
 
 type BaseBenchmarkInputArgs struct {
@@ -90,12 +88,6 @@ func (b Base) WeightTensors() []*onnx.TensorProto {
 }
 
 func (b *Base) SetWeightTensors(tensors []*onnx.TensorProto) {
-	// inits := []*onnx.TensorProto{}
-	// deepcopy.Copy(&inits, tensors)
-	// b.initializers = inits
-	if b.Name() == "Convolution28" {
-		pp.Print(len(tensors[0].FloatData))
-	}
 	b.weightTensors = tensors
 }
 

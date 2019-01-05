@@ -1,8 +1,6 @@
 package layer
 
-import (
-	"github.com/rai-project/dlperf/pkg"
-)
+import dlperf "github.com/rai-project/dlperf/pkg"
 
 // https://github.com/onnx/onnx/blob/master/docs/Operators.md#Reshape
 
@@ -21,8 +19,6 @@ func (Reshape) Description() string {
 
 func (c *Reshape) InferShape(inputLayers dlperf.Layers) {
 	inputShapes := getOutputShapes(inputLayers)
-	// pp.Println(c.name)
-	// pp.Println(inputShapes)
 	c.SetInputShapes(inputShapes)
 	if len(inputShapes) == 1 {
 		c.SetOutputShapes(inputShapes)

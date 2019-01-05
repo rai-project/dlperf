@@ -6,7 +6,9 @@ import (
 
 	"github.com/fatih/structs"
 	"github.com/mitchellh/mapstructure"
+
 	dlperf "github.com/rai-project/dlperf/pkg"
+	"github.com/rai-project/onnx"
 )
 
 type Information struct {
@@ -40,7 +42,13 @@ func (info *Information) Weigths() []float32 {
 		if t == nil {
 			continue
 		}
-		ret = append(ret, t.FloatData...)
+		if t.DataType == onnx.TensorProto_FLOAT {
+			if t.FloatData != nil {
+				ret = append(ret, t.FloatData...)
+			} else if t.RawData != nil {
+				ret = append(ret, byteSliceToFloat32Slice(t.RawData)...)
+			}
+		}
 	}
 	return ret
 }

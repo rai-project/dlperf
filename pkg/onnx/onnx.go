@@ -2,6 +2,7 @@ package onnx
 
 import (
 	"github.com/cevaris/ordered_map"
+
 	"github.com/rai-project/onnx"
 )
 
@@ -47,15 +48,6 @@ func New(protoFileName string) (*Onnx, error) {
 
 	initializers := map[string]*onnx.TensorProto{}
 	for _, i := range graph.Initializer {
-		// if i.Name == "OC2_DUMMY_1" {
-		// 	pp.Println(i)
-		// 	pp.Println(i.DataType.String())
-		// 	buf := bytes.NewBuffer(i.RawData)
-		// 	var f1 float32
-		// 	binary.Read(buf, binary.LittleEndian, &f1)
-		// 	pp.Println(f1)
-		// 	pp.Println(int64(binary.LittleEndian.Uint64(i.RawData[8:])))
-		// }
 		initializers[i.Name] = i
 	}
 

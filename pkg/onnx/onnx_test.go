@@ -4,9 +4,8 @@ import (
 	"path/filepath"
 	"testing"
 
+	sourcepath "github.com/GeertJohan/go-sourcepath"
 	"github.com/k0kubun/pp"
-
-	"github.com/GeertJohan/go-sourcepath"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -31,5 +30,4 @@ func TestOnnxReader(t *testing.T) {
 
 	info := model.FlopsInformation()
 	pp.Println(info)
-	// pp.Println(model.Information())
 }

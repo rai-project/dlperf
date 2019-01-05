@@ -22,9 +22,7 @@ func getNodeAttributeFromName(node *onnx.NodeProto, attrName string) *onnx.Attri
 
 func getTensorProtoDimensions(tensor *onnx.TensorProto) dlperf.Shape {
 	var ret dlperf.Shape
-	// if tensor.Name == "Parameter1367_reshape1_shape" {
-	// 	pp.Println(tensor)
-	// }
+
 	isInt32 := (tensor.DataType == onnx.TensorProto_INT32 || tensor.DataType == onnx.TensorProto_UINT32)
 	if isInt32 && len(tensor.GetInt32Data()) > 0 {
 		return toInt64Slice(tensor.GetInt32Data())
@@ -135,9 +133,6 @@ func toInt64Slice(i interface{}) []int64 {
 func getOutputShapes(layers dlperf.Layers) []dlperf.Shape {
 	outputShapes := []dlperf.Shape{}
 	for _, layer := range layers {
-		// pp.Println(layer.Name())
-		// pp.Println(layer.OperatorType())
-		// pp.Println(layer.InputShapes())
 		os := layer.OutputShapes()
 		if len(os) == 0 {
 			continue
