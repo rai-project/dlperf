@@ -18,8 +18,6 @@ func (MatMul) Description() string {
 }
 
 func (c *MatMul) InferShape(inputLayers dlperf.Layers) {
-	c.SetInputShapes(getOutputShapes(inputLayers))
-
 	aShape := c.InputShapes()[0]
 	bShape := c.InputShapes()[1]
 	aLen := len(aShape)

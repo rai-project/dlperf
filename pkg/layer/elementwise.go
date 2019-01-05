@@ -24,7 +24,8 @@ func (ElementWise) Description() string {
 // multidirectionalBroadcastShapeInference
 func (c *ElementWise) InferShape(inputLayers dlperf.Layers) {
 	inputShapes := getOutputShapes(inputLayers)
-	outputShapes := multidirectionalBroadcastShapeInference(inputShapes)
+	// outputShapes := multidirectionalBroadcastShapeInference(inputShapes) TODO: NOT correct for mul
+	outputShapes := []dlperf.Shape{inputShapes[0]}
 	c.SetOutputShapes(outputShapes)
 }
 

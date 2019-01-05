@@ -6,13 +6,13 @@ import (
 	"strings"
 	"time"
 
-	"github.com/rai-project/dlperf/pkg"
-
 	sourcepath "github.com/GeertJohan/go-sourcepath"
 	"github.com/k0kubun/pp"
+	"github.com/spf13/cobra"
+
+	dlperf "github.com/rai-project/dlperf/pkg"
 	"github.com/rai-project/dlperf/pkg/benchmark"
 	"github.com/rai-project/dlperf/pkg/onnx"
-	"github.com/spf13/cobra"
 )
 
 var (

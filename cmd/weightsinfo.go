@@ -10,11 +10,12 @@ import (
 	zglob "github.com/mattn/go-zglob"
 	"github.com/montanaflynn/stats"
 	"github.com/pkg/errors"
-	"github.com/rai-project/dlperf/pkg/onnx"
 	"github.com/spf13/cobra"
 	"gonum.org/v1/plot"
 	"gonum.org/v1/plot/plotter"
 	"gonum.org/v1/plot/vg"
+
+	"github.com/rai-project/dlperf/pkg/onnx"
 )
 
 var numBuckets = 20

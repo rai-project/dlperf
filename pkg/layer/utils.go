@@ -8,6 +8,8 @@ import (
 
 	"github.com/fatih/structs"
 	"github.com/getlantern/deepcopy"
+	"github.com/k0kubun/pp"
+
 	dlperf "github.com/rai-project/dlperf/pkg"
 )
 
@@ -154,11 +156,12 @@ func getOutputShapes(layers dlperf.Layers) []dlperf.Shape {
 func multidirectionalBroadcastShapeInference(inputShapes []dlperf.Shape) []dlperf.Shape {
 	resultShapeSize := 0
 	for _, inputShape := range inputShapes {
+		pp.Println(inputShape)
+
 		if len(inputShape) > resultShapeSize {
 			resultShapeSize = len(inputShape)
 		}
 	}
-
 	resultShape := dlperf.Shape{}
 	for ii := 0; ii < resultShapeSize; ii++ {
 		dimValue := int64(1)
@@ -176,6 +179,7 @@ func multidirectionalBroadcastShapeInference(inputShapes []dlperf.Shape) []dlper
 			if dimIJ != 0 {
 				if dimIJ != 1 {
 					if dimValue != dimIJ && dimValue != 1 {
+						pp.Println("dimValue =", dimValue, "dimIJ =", dimIJ)
 						panic("Incompatible dimensions")
 					} else {
 						dimValue = dimIJ
