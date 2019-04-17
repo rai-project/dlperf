@@ -5,19 +5,19 @@ import (
 
 	"github.com/pkg/errors"
 	"gonum.org/v1/gonum/graph"
-	"gonum.org/v1/gonum/graph/path"
+	"gonum.org/v1/gonum/graph/flow"
 	"gonum.org/v1/gonum/graph/simple"
 	"gonum.org/v1/gonum/graph/topo"
 )
 
 // A DominatorTree represents a dominator tree.
 type DominatorTree struct {
-	path.DominatorTree
+	flow.DominatorTree
 }
 
 func (grph Graph) Dominators() DominatorTree {
 	return DominatorTree{
-		path.DominatorsSLT(grph.Root, grph),
+		flow.DominatorsSLT(grph.Root, grph),
 	}
 }
 
@@ -28,11 +28,11 @@ func (o Onnx) Dominators() DominatorTree {
 
 // Dominates reports whether A dominates B.
 func (dt DominatorTree) Dominates(a, b graph.Node) bool {
-	return a.ID() == dt.DominatorOf(b).ID()
+	return a.ID() == dt.DominatorOf(b.ID()).ID()
 }
 
 func (dt DominatorTree) Dominated(a, b graph.Node) bool {
-	doms := dt.DominatedBy(a)
+	doms := dt.DominatedBy(a.ID())
 	for _, dom := range doms {
 		if dom.ID() == b.ID() {
 			return true

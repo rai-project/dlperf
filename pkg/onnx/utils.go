@@ -25,7 +25,7 @@ func getTensorProtoDimensions(tensor *onnx.TensorProto) dlperf.Shape {
 	// if tensor.Name == "Parameter1367_reshape1_shape" {
 	// 	pp.Println(tensor)
 	// }
-	isInt32 := (tensor.DataType == onnx.TensorProto_INT32 || tensor.DataType == onnx.TensorProto_UINT32)
+	isInt32 := (onnx.TensorProto_DataType(tensor.DataType) == onnx.TensorProto_INT32 || onnx.TensorProto_DataType(tensor.DataType) == onnx.TensorProto_UINT32)
 	if isInt32 && len(tensor.GetInt32Data()) > 0 {
 		return toInt64Slice(tensor.GetInt32Data())
 	}
@@ -39,7 +39,7 @@ func getTensorProtoDimensions(tensor *onnx.TensorProto) dlperf.Shape {
 		return ret
 	}
 
-	isInt64 := (tensor.DataType == onnx.TensorProto_INT64 || tensor.DataType == onnx.TensorProto_UINT64)
+	isInt64 := (onnx.TensorProto_DataType(tensor.DataType) == onnx.TensorProto_INT64 || onnx.TensorProto_DataType(tensor.DataType) == onnx.TensorProto_UINT64)
 	if isInt64 && len(tensor.GetInt64Data()) > 0 {
 		return tensor.GetInt64Data()
 	}
