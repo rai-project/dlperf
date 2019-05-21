@@ -7,6 +7,7 @@ import (
 	"os"
 	"path"
 	"path/filepath"
+	"regexp"
 	"strings"
 
 	"github.com/Unknwon/com"
@@ -14,6 +15,15 @@ import (
 	"github.com/spf13/cobra"
 	"golang.org/x/sync/errgroup"
 )
+
+func opsetName(url string) string {
+  const re = regexp.MustCompile(`(?m).*opset_(\d+)\/.*`)
+  match := range re.FindAllString(str, -1) 
+  if len(math) == 0 {
+    return ""
+  }
+  return "opset_" + match[0]
+}
 
 // downloadModelsCmd represents the downloadmodels command
 var downloadModelsCmd = &cobra.Command{
@@ -39,7 +49,7 @@ var downloadModelsCmd = &cobra.Command{
 				}
 				defer resp.Body.Close()
 				if strings.HasSuffix(url, ".onnx") {
-					filename := filepath.Join(outputFileName, path.Base(url))
+					filename := filepath.Join(outputFileName, opsetName(url)+path.Base(url))
 					f, err := os.OpenFile(filename, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0644)
 					if err != nil {
 						return err
