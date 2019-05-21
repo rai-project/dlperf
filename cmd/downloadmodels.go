@@ -42,6 +42,10 @@ var downloadModelsCmd = &cobra.Command{
 			url := modelURLs[ii]
 			g.Go(func() error {
 				defer progress.Increment()
+				outputDir := outputFileName
+				if opsetName(url) != "" {
+					outputDir = filepath.Join(outputFileName, opsetName(url))
+				}
 				resp, err := http.Get(url)
 				if err != nil {
 					log.WithError(err).WithField("url", url).Error("failed to download model")
@@ -49,7 +53,7 @@ var downloadModelsCmd = &cobra.Command{
 				}
 				defer resp.Body.Close()
 				if strings.HasSuffix(url, ".onnx") {
-					filename := filepath.Join(outputFileName, opsetName(url)+path.Base(url))
+					filename := filepath.Join(outputDir, path.Base(url))
 					f, err := os.OpenFile(filename, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0644)
 					if err != nil {
 						return err
@@ -63,7 +67,7 @@ var downloadModelsCmd = &cobra.Command{
 					}
 					return nil
 				}
-				err = archive.Unzip(resp.Body, outputFileName, archive.GZipFormat())
+				err = archive.Unzip(resp.Body, outputDir, archive.GZipFormat())
 				if err != nil {
 					defer os.RemoveAll(outputFileName)
 					log.WithError(err).WithField("url", url).Error("failed to decompress model")
