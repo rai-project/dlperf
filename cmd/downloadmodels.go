@@ -17,12 +17,12 @@ import (
 )
 
 func opsetName(url string) string {
-  const re = regexp.MustCompile(`(?m).*opset_(\d+)\/.*`)
-  match := range re.FindAllString(str, -1) 
-  if len(math) == 0 {
-    return ""
-  }
-  return "opset_" + match[0]
+	re := regexp.MustCompile(`(?m).*opset_(\d+)\/.*`)
+	match := re.FindAllString(url, -1)
+	if len(match) == 0 {
+		return ""
+	}
+	return "opset_" + match[0]
 }
 
 // downloadModelsCmd represents the downloadmodels command
