@@ -1,4 +1,5 @@
 # DLPerf
+
 [![Build Status](https://travis-ci.org/rai-project/dlperf.svg?branch=master)](https://travis-ci.org/rai-project/dlperf)
 
 ## Layer Stats
@@ -8,7 +9,6 @@ Get layer statistics in json format using
 ```bash
 go run main.go downloadmodels --output ~/onnx_models
 ```
-
 
 ## Layer Stats
 
@@ -46,11 +46,17 @@ to get information per layer use
 go run main.go flopsinfo --model_path ~/onnx_models/bvlc_alexnet/model.onnx --full
 ```
 
-
 ## Generate Benchmarks
 
 ```
 go run main.go benchgen --model_path ~/onnx_models/bvlc_alexnet/model.onnx
+```
+
+which can then be run using
+
+```
+cmake .. -DENABLE_CUDNN=ON -DENABLE_CUDNN_DLPERF=ON
+./scope ---benchmark_filter=LAYER_ --benchmark_out=`hostname`.json --benchmark_format=json
 ```
 
 ## Query benchmark info
