@@ -33,6 +33,8 @@ func runLayerStats(cmd *cobra.Command, args []string) error {
 		if err != nil {
 			return errors.Wrapf(err, "unable to glob %s", modelPath)
 		}
+		pp.Println(modelPaths)
+		// return nil
 		progress := newProgress("> Computing stats models", len(modelPaths))
 		defer progress.Finish()
 		for _, path := range modelPaths {

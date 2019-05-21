@@ -75,6 +75,9 @@ var downloadModelsCmd = &cobra.Command{
 					Mode: getter.ClientModeFile,
 				}
 				if err := client.Get(); err != nil {
+					if com.IsFile(targetFilePath) {
+						os.Remove(targetFilePath)
+					}
 					return err
 				}
 				return nil
