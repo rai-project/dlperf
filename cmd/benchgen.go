@@ -9,7 +9,8 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/rai-project/dlperf/pkg"
+	"github.com/k0kubun/pp"
+	dlperf "github.com/rai-project/dlperf/pkg"
 	"golang.org/x/sync/errgroup"
 
 	sourcepath "github.com/GeertJohan/go-sourcepath"
@@ -151,6 +152,7 @@ var benchgenCmd = &cobra.Command{
 			return nil
 		}
 
+		pp.Println(outputFileName)
 		err = ioutil.WriteFile(outputFileName, prog.Bytes(), 0644)
 		if err != nil {
 			return err
@@ -161,6 +163,6 @@ var benchgenCmd = &cobra.Command{
 }
 
 func init() {
-	benchinfoCmd.PersistentFlags().BoolVar(&standAloneGenerate, "standalone", false, "generate benchmarks so that they are all standalone")
+	benchgenCmd.PersistentFlags().BoolVar(&standAloneGenerate, "standalone", false, "generate benchmarks so that they are all standalone")
 	rootCmd.AddCommand(benchgenCmd)
 }
