@@ -26,6 +26,7 @@ type BaseBenchmarkArgs struct {
 	BenchmarkName     string            `args:"-" hash:"name" json:"benchmark_name,omitempty"`
 	Algorithms        []string          `args:"-" json:"algorithms,omitempty"`
 	DataTypes         []dlperf.DataType `args:"-" json:"data_types,omitempty"`
+	IsTraining        bool              `args:"-" json:"is_training,omitempty"`
 }
 
 type Base struct {
@@ -42,18 +43,18 @@ type Base struct {
 	OutputShapes_     []dlperf.Shape      `json:"output_shapes,omitempty"`
 }
 
-func mkBaseBenchmarkFWDArgs(c dlperf.Layer) BaseBenchmarkArgs {
+func mkBaseBenchmarkFWDArgs(c dlperf.Layer, opts ...dlperf.FwdBenchmarkArgsOptionFunc) BaseBenchmarkArgs {
 	return BaseBenchmarkArgs{
-		BenchmarkName: c.FwdBenchmarkName(),
+		BenchmarkName: c.FwdBenchmarkName(opts...),
 		ArgNames:      c.FwdBenchmarkGeneratorArgNames(),
 		Algorithms:    c.FwdBenchmarkAlgorithms(),
 		DataTypes:     c.DataTypes(),
 	}
 }
 
-func mkBaseBenchmarkBWDArgs(c dlperf.Layer) BaseBenchmarkArgs {
+func mkBaseBenchmarkBWDArgs(c dlperf.Layer, opts ...dlperf.BwdBenchmarkArgsOptionFunc) BaseBenchmarkArgs {
 	return BaseBenchmarkArgs{
-		BenchmarkName: c.BwdBenchmarkName(),
+		BenchmarkName: c.BwdBenchmarkName(opts...),
 		ArgNames:      c.BwdBenchmarkGeneratorArgNames(),
 		Algorithms:    c.BwdBenchmarkAlgorithms(),
 		DataTypes:     c.DataTypes(),
@@ -245,7 +246,7 @@ func (b *Base) SetOutputShapes(out []dlperf.Shape) {
 // 	return []byte(b.Name()), nil
 // }
 
-func (b Base) FwdBenchmarkFilter(datatype, algorithm string) benchmark.Benchmark {
+func (b Base) FwdBenchmarkFilter(datatype, algorithm string, opts ...dlperf.FwdBenchmarkArgsOptionFunc) benchmark.Benchmark {
 	// panic("unimplemented FwdBenchmarkFilter")
 	if b.OperatorType_ == "" {
 		return benchmark.Benchmark{}
@@ -255,11 +256,11 @@ func (b Base) FwdBenchmarkFilter(datatype, algorithm string) benchmark.Benchmark
 	}
 }
 
-func (b Base) FwdBenchmarkName() string {
+func (b Base) FwdBenchmarkName(...dlperf.FwdBenchmarkArgsOptionFunc) string {
 	panic("unimplemented FwdBenchmarkName")
 }
 
-func (b Base) FwdBenchmarkArgs() interface{} {
+func (b Base) FwdBenchmarkArgs(...dlperf.FwdBenchmarkArgsOptionFunc) interface{} {
 	panic("FwdBenchmarkArgs not implemented")
 	return nil
 }
@@ -273,7 +274,7 @@ func (b Base) FwdBenchmarkAlgorithms() []string {
 	return nil
 }
 
-func (b Base) BwdBenchmarkFilter(datatype, algorithm string) benchmark.Benchmark {
+func (b Base) BwdBenchmarkFilter(datatype, algorithm string, opts ...dlperf.BwdBenchmarkArgsOptionFunc) benchmark.Benchmark {
 	// panic("unimplemented BwdBenchmarkFilter")
 	if b.OperatorType_ == "" {
 		return benchmark.Benchmark{}
@@ -283,11 +284,11 @@ func (b Base) BwdBenchmarkFilter(datatype, algorithm string) benchmark.Benchmark
 	}
 }
 
-func (b Base) BwdBenchmarkName() string {
+func (b Base) BwdBenchmarkName(opts ...dlperf.BwdBenchmarkArgsOptionFunc) string {
 	panic("unimplemented BwdBenchmarkName")
 }
 
-func (b Base) BwdBenchmarkArgs() interface{} {
+func (b Base) BwdBenchmarkArgs(opts ...dlperf.BwdBenchmarkArgsOptionFunc) interface{} {
 	panic("BwdBenchmarkArgs not implemented")
 	return nil
 }

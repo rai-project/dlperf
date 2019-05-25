@@ -26,12 +26,12 @@ func recovery() {
 	recover()
 }
 
-func templateExecFWD(lyr dlperf.Layer, templString string) string {
+func templateExecFWD(lyr dlperf.Layer, templString string, opts ...dlperf.FwdBenchmarkArgsOptionFunc) string {
 	tmpl, err := mkTemplate(lyr).Parse(templString)
 	if err != nil {
 		log.Fatal(err)
 	}
-	args := lyr.FwdBenchmarkArgs()
+	args := lyr.FwdBenchmarkArgs(opts...)
 	if args == nil {
 		return ""
 	}

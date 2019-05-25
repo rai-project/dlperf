@@ -27,11 +27,11 @@ func (c *Relu) InferShape(inputLayers dlperf.Layers) {
 	c.SetOutputShapes(inputShapes)
 }
 
-func (c Relu) FwdBenchmarkName() string {
+func (c Relu) FwdBenchmarkName(opts ...dlperf.FwdBenchmarkArgsOptionFunc) string {
 	return "LAYER_CUDNN_ACTIVATION_FWD"
 }
 
-func (c Relu) BwdBenchmarkName() string {
+func (c Relu) BwdBenchmarkName(opts ...dlperf.BwdBenchmarkArgsOptionFunc) string {
 	return "LAYER_CUDNN_ACTIVATION_BWD"
 }
 
@@ -119,26 +119,10 @@ func (c Relu) substituteAlgorithm(alg string) string {
 	return alg
 }
 
-func (c Relu) FwdBenchmarkArgs() interface{} {
-	return c.BenchmarkArgs(true)
-}
-
-func (c Relu) BwdBenchmarkArgs() interface{} {
-	return c.BenchmarkArgs(false)
-}
-
-func (c Relu) BenchmarkArgs(isForward bool) interface{} {
-	var res reluBenchmarkArgs
-	if isForward {
-		res = reluBenchmarkArgs{
-			BaseBenchmarkInputArgs: mkBaseBenchmarkInputArgs(&c),
-			BaseBenchmarkArgs:      mkBaseBenchmarkFWDArgs(&c),
-		}
-	} else {
-		res = reluBenchmarkArgs{
-			BaseBenchmarkInputArgs: mkBaseBenchmarkOutputArgs(&c),
-			BaseBenchmarkArgs:      mkBaseBenchmarkBWDArgs(&c),
-		}
+func (c Relu) FwdBenchmarkArgs(opts ...dlperf.FwdBenchmarkArgsOptionFunc) interface{} {
+	res := reluBenchmarkArgs{
+		BaseBenchmarkInputArgs: mkBaseBenchmarkInputArgs(&c),
+		BaseBenchmarkArgs:      mkBaseBenchmarkFWDArgs(&c, opts...),
 	}
 
 	// substitution because cudnn does not support certain algorithms
@@ -160,11 +144,36 @@ func (c Relu) BenchmarkArgs(isForward bool) interface{} {
 	return res
 }
 
-func (c Relu) FwdBenchmarkFilter(datatype, algorithm string) benchmark.Benchmark {
+func (c Relu) BwdBenchmarkArgs(opts ...dlperf.BwdBenchmarkArgsOptionFunc) interface{} {
+	res := reluBenchmarkArgs{
+		BaseBenchmarkInputArgs: mkBaseBenchmarkOutputArgs(&c),
+		BaseBenchmarkArgs:      mkBaseBenchmarkBWDArgs(&c, opts...),
+	}
+
+	// substitution because cudnn does not support certain algorithms
+	for ii, alg := range res.Algorithms {
+		res.Algorithms[ii] = c.substituteAlgorithm(alg)
+	}
+
+	hash, err := hashstructure.Hash(
+		res,
+		&hashstructure.HashOptions{
+			TagName: "hash",
+		},
+	)
+	if err != nil {
+		log.Fatal(err)
+	}
+	res.UniqueBenchmarkID = hash
+
+	return res
+}
+
+func (c Relu) FwdBenchmarkFilter(datatype, algorithm string, opts ...dlperf.FwdBenchmarkArgsOptionFunc) benchmark.Benchmark {
 	return c.BenchmarkFilter(datatype, algorithm)
 }
 
-func (c Relu) BwdBenchmarkFilter(datatype, algorithm string) benchmark.Benchmark {
+func (c Relu) BwdBenchmarkFilter(datatype, algorithm string, opts ...dlperf.BwdBenchmarkArgsOptionFunc) benchmark.Benchmark {
 	return c.BenchmarkFilter(datatype, algorithm)
 }
 

@@ -27,18 +27,19 @@ type Layer interface {
 	SetInputShapes([]Shape)
 	OutputShapes() []Shape
 	Information() LayerInformation
-	FwdBenchmarkName() string
-	FwdBenchmarkFilter(string, string) benchmark.Benchmark
-	FwdBenchmarkArgs() interface{}
+	DataTypes() []DataType
+
+	FwdBenchmarkName(...FwdBenchmarkArgsOptionFunc) string
+	FwdBenchmarkFilter(string, string, ...FwdBenchmarkArgsOptionFunc) benchmark.Benchmark
+	FwdBenchmarkArgs(...FwdBenchmarkArgsOptionFunc) interface{}
 	FwdBenchmarkGeneratorArgNames() []string
 	FwdBenchmarkAlgorithms() []string
 
-	BwdBenchmarkName() string
-	BwdBenchmarkFilter(string, string) benchmark.Benchmark
-	BwdBenchmarkArgs() interface{}
+	BwdBenchmarkName(...BwdBenchmarkArgsOptionFunc) string
+	BwdBenchmarkFilter(string, string, ...BwdBenchmarkArgsOptionFunc) benchmark.Benchmark
+	BwdBenchmarkArgs(...BwdBenchmarkArgsOptionFunc) interface{}
 	BwdBenchmarkGeneratorArgNames() []string
 	BwdBenchmarkAlgorithms() []string
-	DataTypes() []DataType
 }
 
 type LayerInformation interface {

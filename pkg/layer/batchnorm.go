@@ -2,7 +2,7 @@ package layer
 
 import (
 	"github.com/mitchellh/hashstructure"
-	"github.com/rai-project/dlperf/pkg"
+	dlperf "github.com/rai-project/dlperf/pkg"
 	"github.com/rai-project/dlperf/pkg/benchmark"
 )
 
@@ -27,11 +27,23 @@ func (c *BatchNorm) InferShape(inputLayers dlperf.Layers) {
 	c.SetOutputShapes(inputShapes)
 }
 
-func (c BatchNorm) FwdBenchmarkName() string {
+func (c BatchNorm) FwdBenchmarkName(iopts ...dlperf.FwdBenchmarkArgsOptionFunc) string {
+	opts := dlperf.CreateFwdBenchmarkArgsOption(iopts...)
+	if opts.IsTraining {
+		return "LAYER_CUDNN_BATCHNORM_FWD_TRAINING"
+	}
 	return "LAYER_CUDNN_BATCHNORM_FWD_INFERENCE"
 }
 
+func (c BatchNorm) BwdBenchmarkName(opts ...dlperf.BwdBenchmarkArgsOptionFunc) string {
+	return "LAYER_CUDNN_BATCHNORM_BWD"
+}
+
 func (c BatchNorm) FwdCUDNNName() string {
+	return ""
+}
+
+func (c BatchNorm) BwdCUDNNName() string {
 	return ""
 }
 
@@ -39,7 +51,19 @@ func (c BatchNorm) FwdTiming(system string /* hardware/software struct */) strin
 	return ""
 }
 
+func (c BatchNorm) BwdTiming(system string /* hardware/software struct */) string {
+	return ""
+}
+
 func (c BatchNorm) FwdBenchmarkAlgorithms() []string {
+	return c.BenchmarkAlgorithms()
+}
+
+func (c BatchNorm) BwdBenchmarkAlgorithms() []string {
+	return c.BenchmarkAlgorithms()
+}
+
+func (c BatchNorm) BenchmarkAlgorithms() []string {
 	switch c.Spatial {
 	case 1:
 		return []string{
@@ -56,17 +80,23 @@ func (c BatchNorm) FwdBenchmarkAlgorithms() []string {
 type batchnormBenchmarkArgs struct {
 	BaseBenchmarkArgs
 	BaseBenchmarkInputArgs
+	IsTraining bool
 }
 
 func (c BatchNorm) FwdBenchmarkGeneratorArgNames() []string {
-	return benchmarkArgNames(reluBenchmarkArgs{})
+	return benchmarkArgNames(batchnormBenchmarkArgs{})
 }
 
-func (c BatchNorm) FwdBenchmarkArgs() interface{} {
+func (c BatchNorm) BwdBenchmarkGeneratorArgNames() []string {
+	return benchmarkArgNames(batchnormBenchmarkArgs{})
+}
 
+func (c BatchNorm) FwdBenchmarkArgs(iopts ...dlperf.FwdBenchmarkArgsOptionFunc) interface{} {
+	opts := dlperf.CreateFwdBenchmarkArgsOption(iopts...)
 	res := batchnormBenchmarkArgs{
 		BaseBenchmarkInputArgs: mkBaseBenchmarkInputArgs(&c),
-		BaseBenchmarkArgs:      mkBaseBenchmarkFWDArgs(&c),
+		BaseBenchmarkArgs:      mkBaseBenchmarkFWDArgs(&c, iopts...),
+		IsTraining:             opts.IsTraining,
 	}
 
 	hash, err := hashstructure.Hash(
@@ -83,7 +113,27 @@ func (c BatchNorm) FwdBenchmarkArgs() interface{} {
 	return res
 }
 
-func (c BatchNorm) FwdBenchmarkFilter(datatype, algorithm string) benchmark.Benchmark {
+func (c BatchNorm) BwdBenchmarkArgs(iopts ...dlperf.BwdBenchmarkArgsOptionFunc) interface{} {
+	res := batchnormBenchmarkArgs{
+		BaseBenchmarkInputArgs: mkBaseBenchmarkInputArgs(&c),
+		BaseBenchmarkArgs:      mkBaseBenchmarkBWDArgs(&c, iopts...),
+	}
+
+	hash, err := hashstructure.Hash(
+		res,
+		&hashstructure.HashOptions{
+			TagName: "hash",
+		},
+	)
+	if err != nil {
+		log.Fatal(err)
+	}
+	res.UniqueBenchmarkID = hash
+
+	return res
+}
+
+func (c BatchNorm) FwdBenchmarkFilter(datatype, algorithm string, opts ...dlperf.FwdBenchmarkArgsOptionFunc) benchmark.Benchmark {
 	if algorithm == "" {
 		algorithm = c.FwdBenchmarkAlgorithms()[0]
 	}
@@ -93,10 +143,24 @@ func (c BatchNorm) FwdBenchmarkFilter(datatype, algorithm string) benchmark.Benc
 	}
 }
 
-func (c BatchNorm) FwdBenchmarkGenerator() string {
-	templString := _escFSMustString(false, "/scope/batchnorm.tmpl")
+func (c BatchNorm) BwdBenchmarkFilter(datatype, algorithm string, opts ...dlperf.BwdBenchmarkArgsOptionFunc) benchmark.Benchmark {
+	if algorithm == "" {
+		algorithm = c.BwdBenchmarkAlgorithms()[0]
+	}
+	return benchmark.Benchmark{
+		Name:       mkBenchmarkFilterName(&c, datatype, algorithm),
+		Attributes: benchmarkAttributes(c.BwdBenchmarkArgs()),
+	}
+}
 
-	return templateExecFWD(&c, templateBasePrefix+templString+templateBaseSuffix)
+func (c BatchNorm) FwdBenchmarkGenerator(opts ...dlperf.FwdBenchmarkArgsOptionFunc) string {
+	templString := _escFSMustString(false, "/scope/batchnorm.tmpl")
+	return templateExecFWD(&c, templateBasePrefix+templString+templateBaseSuffix, opts...)
+}
+
+func (c BatchNorm) BwdBenchmarkGenerator(opts ...dlperf.BwdBenchmarkArgsOptionFunc) string {
+	templString := _escFSMustString(false, "/scope/batchnorm.tmpl")
+	return templateExecBWD(&c, templateBasePrefix+templString+templateBaseSuffix)
 }
 
 func (c BatchNorm) Shape() dlperf.ShapeInformation {

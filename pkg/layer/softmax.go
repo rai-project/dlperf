@@ -2,7 +2,7 @@ package layer
 
 import (
 	"github.com/mitchellh/hashstructure"
-	"github.com/rai-project/dlperf/pkg"
+	dlperf "github.com/rai-project/dlperf/pkg"
 	"github.com/rai-project/dlperf/pkg/benchmark"
 )
 
@@ -25,7 +25,7 @@ func (c *Softmax) InferShape(inputLayers dlperf.Layers) {
 	c.SetOutputShapes(inputShapes)
 }
 
-func (c Softmax) FwdBenchmarkName() string {
+func (c Softmax) FwdBenchmarkName(opts ...dlperf.FwdBenchmarkArgsOptionFunc) string {
 	return "LAYER_CUDNN_SOFTMAX_FWD"
 }
 
@@ -57,11 +57,11 @@ func (c Softmax) FwdBenchmarkGeneratorArgNames() []string {
 	return benchmarkArgNames(softmaxBenchmarkArgs{})
 }
 
-func (c Softmax) FwdBenchmarkArgs() interface{} {
+func (c Softmax) FwdBenchmarkArgs(opts ...dlperf.FwdBenchmarkArgsOptionFunc) interface{} {
 
 	res := softmaxBenchmarkArgs{
 		BaseBenchmarkInputArgs: mkBaseBenchmarkInputArgs(&c),
-		BaseBenchmarkArgs:      mkBaseBenchmarkFWDArgs(&c),
+		BaseBenchmarkArgs:      mkBaseBenchmarkFWDArgs(&c, opts...),
 	}
 
 	hash, err := hashstructure.Hash(
@@ -78,13 +78,13 @@ func (c Softmax) FwdBenchmarkArgs() interface{} {
 	return res
 }
 
-func (c Softmax) FwdBenchmarkFilter(datatype, algorithm string) benchmark.Benchmark {
+func (c Softmax) FwdBenchmarkFilter(datatype, algorithm string, opts ...dlperf.FwdBenchmarkArgsOptionFunc) benchmark.Benchmark {
 	if algorithm == "" {
 		algorithm = c.FwdBenchmarkAlgorithms()[0]
 	}
 	return benchmark.Benchmark{
 		Name:       mkBenchmarkFilterName(&c, datatype, "CUDNN_SOFTMAX_FAST, "+algorithm),
-		Attributes: benchmarkAttributes(c.FwdBenchmarkArgs()),
+		Attributes: benchmarkAttributes(c.FwdBenchmarkArgs(opts...)),
 	}
 }
 

@@ -89,7 +89,9 @@ var benchgenCmd = &cobra.Command{
 						b = l.FwdBenchmarkGenerator()
 					case "batchnorm":
 						l := lyr.(*perflayer.BatchNorm)
-						b = l.FwdBenchmarkGenerator()
+						b = l.FwdBenchmarkGenerator(dlperf.FwdBenchmarkArgsOption.IsTraining(false))
+						b += "\n"
+						b += l.FwdBenchmarkGenerator(dlperf.FwdBenchmarkArgsOption.IsTraining(true))
 					case "dropout":
 						l := lyr.(*perflayer.Dropout)
 						b = l.FwdBenchmarkGenerator()
@@ -120,18 +122,18 @@ var benchgenCmd = &cobra.Command{
 					// case "conv":
 					// 	l := lyr.(*perflayer.Conv)
 					// 	b = l.BwdBenchmarkGenerator()
-					case "relu":
-						l := lyr.(*perflayer.Relu)
-						b = l.BwdBenchmarkGenerator()
+					// case "relu":
+					// 	l := lyr.(*perflayer.Relu)
+					// 	b = l.BwdBenchmarkGenerator()
 					// case "pooling":
 					// 	l := lyr.(*perflayer.Pooling)
 					// 	b = l.BwdBenchmarkGenerator()
 					// case "softmax":
 					// 	l := lyr.(*perflayer.Softmax)
 					// 	b = l.BwdBenchmarkGenerator()
-					// case "batchnorm":
-					// 	l := lyr.(*perflayer.BatchNorm)
-					// 	b = l.BwdBenchmarkGenerator()
+					case "batchnorm":
+						l := lyr.(*perflayer.BatchNorm)
+						b = l.BwdBenchmarkGenerator()
 					// case "dropout":
 					// 	l := lyr.(*perflayer.Dropout)
 					// 	b = l.BwdBenchmarkGenerator()

@@ -64,7 +64,7 @@ func (c *Conv) InferShape(inputLayers dlperf.Layers) {
 	c.SetOutputShapes([]dlperf.Shape{yShape})
 }
 
-func (c Conv) FwdBenchmarkName() string {
+func (c Conv) FwdBenchmarkName(opts ...dlperf.FwdBenchmarkArgsOptionFunc) string {
 	return "LAYER_CUDNN_CONV_FWD"
 }
 
@@ -107,7 +107,7 @@ type convBenchmarkArgs struct {
 	DilationHeight int64 `args:"dilation_width" hash:"dilation_width" json:"dilation_height,omitempty"`
 }
 
-func (c Conv) FwdBenchmarkArgs() interface{} {
+func (c Conv) FwdBenchmarkArgs(opts ...dlperf.FwdBenchmarkArgsOptionFunc) interface{} {
 	inShapes := c.InputShapes()
 
 	res := convBenchmarkArgs{
@@ -124,7 +124,7 @@ func (c Conv) FwdBenchmarkArgs() interface{} {
 		StrideWidth:       c.Strides[1],
 		DilationHeight:    c.Dilations[0],
 		DilationWidth:     c.Dilations[1],
-		BaseBenchmarkArgs: mkBaseBenchmarkFWDArgs(&c),
+		BaseBenchmarkArgs: mkBaseBenchmarkFWDArgs(&c, opts...),
 	}
 
 	hash, err := hashstructure.Hash(
@@ -141,14 +141,14 @@ func (c Conv) FwdBenchmarkArgs() interface{} {
 	return res
 }
 
-func (c Conv) FwdBenchmarkFilter(datatype, algorithm string) benchmark.Benchmark {
+func (c Conv) FwdBenchmarkFilter(datatype, algorithm string, opts ...dlperf.FwdBenchmarkArgsOptionFunc) benchmark.Benchmark {
 	if algorithm == "" {
 		algorithm = c.FwdBenchmarkAlgorithms()[0]
 	}
 
 	return benchmark.Benchmark{
 		Name:       mkBenchmarkFilterName(&c, datatype, algorithm),
-		Attributes: benchmarkAttributes(c.FwdBenchmarkArgs()),
+		Attributes: benchmarkAttributes(c.FwdBenchmarkArgs(opts...)),
 	}
 }
 

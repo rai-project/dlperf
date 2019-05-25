@@ -2,7 +2,7 @@ package layer
 
 import (
 	"github.com/mitchellh/hashstructure"
-	"github.com/rai-project/dlperf/pkg"
+	dlperf "github.com/rai-project/dlperf/pkg"
 	"github.com/rai-project/dlperf/pkg/benchmark"
 )
 
@@ -27,7 +27,7 @@ func (c *Dropout) InferShape(inputLayers dlperf.Layers) {
 	c.SetOutputShapes(inputShapes)
 }
 
-func (c Dropout) FwdBenchmarkName() string {
+func (c Dropout) FwdBenchmarkName(opts ...dlperf.FwdBenchmarkArgsOptionFunc) string {
 	return "LAYER_CUDNN_DROPOUT_FWD"
 }
 
@@ -51,14 +51,14 @@ type dropoutBenchmarkArgs struct {
 }
 
 func (c Dropout) FwdBenchmarkGeneratorArgNames() []string {
-	return benchmarkArgNames(reluBenchmarkArgs{})
+	return benchmarkArgNames(dropoutBenchmarkArgs{})
 }
 
-func (c Dropout) FwdBenchmarkArgs() interface{} {
+func (c Dropout) FwdBenchmarkArgs(opts ...dlperf.FwdBenchmarkArgsOptionFunc) interface{} {
 
 	res := dropoutBenchmarkArgs{
 		BaseBenchmarkInputArgs: mkBaseBenchmarkInputArgs(&c),
-		BaseBenchmarkArgs:      mkBaseBenchmarkFWDArgs(&c),
+		BaseBenchmarkArgs:      mkBaseBenchmarkFWDArgs(&c, opts...),
 	}
 
 	hash, err := hashstructure.Hash(
@@ -75,7 +75,7 @@ func (c Dropout) FwdBenchmarkArgs() interface{} {
 	return res
 }
 
-func (c Dropout) FwdBenchmarkFilter(datatype, algorithm string) benchmark.Benchmark {
+func (c Dropout) FwdBenchmarkFilter(datatype, algorithm string, opts ...dlperf.FwdBenchmarkArgsOptionFunc) benchmark.Benchmark {
 	if algorithm == "" {
 		algorithm = c.FwdBenchmarkAlgorithms()[0]
 	}
@@ -85,7 +85,7 @@ func (c Dropout) FwdBenchmarkFilter(datatype, algorithm string) benchmark.Benchm
 	}
 }
 
-func (c Dropout) FwdBenchmarkGenerator() string {
+func (c Dropout) FwdBenchmarkGenerator(opts ...dlperf.FwdBenchmarkArgsOptionFunc) string {
 	templString := _escFSMustString(false, "/scope/dropout.tmpl")
 	return templateExecFWD(&c, templateBasePrefix+templString)
 }

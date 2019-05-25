@@ -5,7 +5,7 @@ import (
 	"strings"
 
 	"github.com/mitchellh/hashstructure"
-	"github.com/rai-project/dlperf/pkg"
+	dlperf "github.com/rai-project/dlperf/pkg"
 	"github.com/rai-project/dlperf/pkg/benchmark"
 )
 
@@ -39,7 +39,7 @@ func (c *Pooling) InferShape(inputLayers dlperf.Layers) {
 	c.SetOutputShapes([]dlperf.Shape{yShape})
 }
 
-func (c Pooling) FwdBenchmarkName() string {
+func (c Pooling) FwdBenchmarkName(opts ...dlperf.FwdBenchmarkArgsOptionFunc) string {
 	return "LAYER_CUDNN_POOLING_FWD"
 }
 
@@ -87,7 +87,7 @@ func (c Pooling) FwdBenchmarkGeneratorArgNames() []string {
 	return benchmarkArgNames(poolingBenchmarkArgs{})
 }
 
-func (c Pooling) FwdBenchmarkArgs() interface{} {
+func (c Pooling) FwdBenchmarkArgs(opts ...dlperf.FwdBenchmarkArgsOptionFunc) interface{} {
 	inShapes := c.InputShapes()
 
 	res := poolingBenchmarkArgs{
@@ -101,7 +101,7 @@ func (c Pooling) FwdBenchmarkArgs() interface{} {
 		PadWidth:          c.Pads[2],
 		StrideHeight:      c.Strides[0],
 		StrideWidth:       c.Strides[1],
-		BaseBenchmarkArgs: mkBaseBenchmarkFWDArgs(&c),
+		BaseBenchmarkArgs: mkBaseBenchmarkFWDArgs(&c, opts...),
 	}
 
 	hash, err := hashstructure.Hash(
@@ -118,13 +118,13 @@ func (c Pooling) FwdBenchmarkArgs() interface{} {
 	return res
 }
 
-func (c Pooling) FwdBenchmarkFilter(datatype, algorithm string) benchmark.Benchmark {
+func (c Pooling) FwdBenchmarkFilter(datatype, algorithm string, opts ...dlperf.FwdBenchmarkArgsOptionFunc) benchmark.Benchmark {
 	if algorithm == "" {
 		algorithm = c.FwdBenchmarkAlgorithms()[0]
 	}
 	return benchmark.Benchmark{
 		Name:       mkBenchmarkFilterName(&c, datatype, algorithm),
-		Attributes: benchmarkAttributes(c.FwdBenchmarkArgs()),
+		Attributes: benchmarkAttributes(c.FwdBenchmarkArgs(opts...)),
 	}
 }
 
