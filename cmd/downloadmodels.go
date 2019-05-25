@@ -50,7 +50,9 @@ var downloadModelsCmd = &cobra.Command{
 
 		sem := make(chan bool, concurrencyLimit)
 		for ii := range modelURLs {
-			url := modelURLs[ii]
+			model := modelURLs[ii]
+			url := model.URL
+			modelName := model.Name
 
 			sem <- true
 
@@ -59,7 +61,7 @@ var downloadModelsCmd = &cobra.Command{
 				defer func() { <-sem }()
 
 				outputDir := outputFileName
-				if opsetName(url) != "" {
+				if opsetName(url) != "" && modelName == "" {
 					outputDir = filepath.Join(outputFileName, opsetName(url))
 				}
 
@@ -67,8 +69,19 @@ var downloadModelsCmd = &cobra.Command{
 				if strings.HasSuffix(url, ".onnx") {
 					targetFilePath = path.Base(url)
 				}
+				if modelName != "" {
+					targetFilePath = modelName
+				}
 
-				targetFilePath = filepath.Join(outputDir, targetFilePath)
+				if !strings.HasSuffix(url, ".onnx") {
+					targetFilePath = targetFilePath + ".tar.gz"
+				}
+
+				if modelName == "" {
+					targetFilePath = filepath.Join(outputDir, targetFilePath)
+				} else {
+					targetFilePath = filepath.Join(outputDir, modelName, targetFilePath)
+				}
 
 				resp, err := http.Get(url)
 				if err != nil {
