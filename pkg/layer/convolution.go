@@ -5,7 +5,7 @@ import (
 	"strings"
 
 	"github.com/mitchellh/hashstructure"
-	"github.com/rai-project/dlperf/pkg"
+	dlperf "github.com/rai-project/dlperf/pkg"
 	"github.com/rai-project/dlperf/pkg/benchmark"
 )
 
@@ -82,6 +82,7 @@ func (c Conv) FwdBenchmarkAlgorithms() []string {
 		"CUDNN_CONVOLUTION_FWD_ALGO_IMPLICIT_PRECOMP_GEMM",
 		"CUDNN_CONVOLUTION_FWD_ALGO_GEMM",
 		"CUDNN_CONVOLUTION_FWD_ALGO_DIRECT",
+		"CUDNN_CONVOLUTION_FWD_ALGO_COUNT",
 		"CUDNN_CONVOLUTION_FWD_ALGO_FFT",
 		"CUDNN_CONVOLUTION_FWD_ALGO_FFT_TILING",
 		"CUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD",
