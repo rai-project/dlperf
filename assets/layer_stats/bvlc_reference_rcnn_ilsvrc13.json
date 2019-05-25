@@ -38,7 +38,6 @@
 {"name":"relu_7","type":"Relu","inputs":["fc7_1"],"outputs":["fc7_2"],"input_dimensions":{"input_shapes":[[1,4096]],"output_shapes":[[1,4096]]}},
 {"name":"dropout_2","type":"Dropout","inputs":["fc7_2"],"outputs":["fc7_3","_fc7_mask_1"],"input_dimensions":{"input_shapes":[[1,4096]],"output_shapes":[[1,4096]]}},
 {"name":"dropout_2","type":"Dropout","inputs":["fc7_2"],"outputs":["fc7_3","_fc7_mask_1"],"input_dimensions":{"input_shapes":[[1,4096]],"output_shapes":[[1,4096]]}},
-{"name":"fc8_w_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[1000,4096]],"output_shapes":[[1000,4096]]}},
-{"name":"fc8_b_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[1000]],"output_shapes":[[1000]]}},
-{"name":"gemm_3","type":"Gemm","inputs":["fc7_3","fc8_w_0","fc8_b_0"],"outputs":["fc8_1"],"input_dimensions":{"input_shapes":[[1,4096],[1000,4096],[1000]],"output_shapes":[[1,1000]]}},
-{"name":"softmax_1","type":"Softmax","inputs":["fc8_1"],"outputs":["prob_1"],"input_dimensions":{"input_shapes":[[1,1000]],"output_shapes":[[1,1000]]}}]
+{"name":"fc-rcnn_w_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[200,4096]],"output_shapes":[[200,4096]]}},
+{"name":"fc-rcnn_b_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[200]],"output_shapes":[[200]]}},
+{"name":"gemm_3","type":"Gemm","inputs":["fc7_3","fc-rcnn_w_0","fc-rcnn_b_0"],"outputs":["fc-rcnn_1"],"input_dimensions":{"input_shapes":[[1,4096],[200,4096],[200]],"output_shapes":[[1,200]]}}]

@@ -302,6 +302,7 @@
 {"name":"resnetv16_stage4__plus2","type":"ElementWise","inputs":["resnetv16_stage4_activation1","resnetv16_stage4_batchnorm6_fwd"],"outputs":["resnetv16_stage4__plus2"],"input_dimensions":{"input_shapes":[[1,512,7,7],[1,512,7,7]],"output_shapes":[[1,512,7,7]]}},
 {"name":"resnetv16_stage4_activation2","type":"Relu","inputs":["resnetv16_stage4__plus2"],"outputs":["resnetv16_stage4_activation2"],"input_dimensions":{"input_shapes":[[1,512,7,7]],"output_shapes":[[1,512,7,7]]}},
 {"name":"resnetv16_pool1_fwd","type":"GlobalPooling","inputs":["resnetv16_stage4_activation2"],"outputs":["resnetv16_pool1_fwd"],"input_dimensions":{"input_shapes":[[1,512,7,7]],"output_shapes":[[1,512,1,1]]}},
+{"name":"flatten_306","type":"Flatten","inputs":["resnetv16_pool1_fwd"],"outputs":["flatten_306"],"input_dimensions":{"input_shapes":[[1,512,1,1]],"output_shapes":[[1,512,1,1]]}},
 {"name":"resnetv16_dense0_weight","type":"ConstantInput","input_dimensions":{"input_shapes":[[1000,512]],"output_shapes":[[1000,512]]}},
 {"name":"resnetv16_dense0_bias","type":"ConstantInput","input_dimensions":{"input_shapes":[[1000]],"output_shapes":[[1000]]}},
-{"name":"resnetv16_dense0_fwd","type":"Gemm","inputs":["resnetv16_pool1_fwd","resnetv16_dense0_weight","resnetv16_dense0_bias"],"outputs":["resnetv16_dense0_fwd"],"input_dimensions":{"input_shapes":[[1,512,1,1],[1000,512],[1000]],"output_shapes":[[1,1000]]}}]
+{"name":"resnetv16_dense0_fwd","type":"Gemm","inputs":["flatten_306","resnetv16_dense0_weight","resnetv16_dense0_bias"],"outputs":["resnetv16_dense0_fwd"],"input_dimensions":{"input_shapes":[[1,512,1,1],[1000,512],[1000]],"output_shapes":[[1,1000]]}}]
