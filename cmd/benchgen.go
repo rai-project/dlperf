@@ -5,17 +5,20 @@ import (
 	"context"
 	"fmt"
 	"io/ioutil"
-	"path/filepath"
 	"strings"
 	"sync"
 
 	"github.com/k0kubun/pp"
-	"github.com/rai-project/dlperf/pkg"
+	dlperf "github.com/rai-project/dlperf/pkg"
 	"golang.org/x/sync/errgroup"
 
-	sourcepath "github.com/GeertJohan/go-sourcepath"
 	perflayer "github.com/rai-project/dlperf/pkg/layer"
 	"github.com/spf13/cobra"
+)
+
+var (
+	generateForward  bool
+	generateBackward bool
 )
 
 var benchgenCmd = &cobra.Command{
@@ -23,14 +26,7 @@ var benchgenCmd = &cobra.Command{
 	Aliases: []string{"benchmark_generate"},
 	Short:   "Generates the benchmark files for layers",
 	RunE: func(cmd *cobra.Command, args []string) error {
-		if modelPath == "" {
-			modelPath = filepath.Join(sourcepath.MustAbsoluteDir(), "..", "assets", "onnx_models", "mnist.onnx")
-		} else {
-			s, err := filepath.Abs(modelPath)
-			if err == nil {
-				modelPath = s
-			}
-		}
+		modelPath = expandModelPath(modelPath)
 
 		models, err := readModels(modelPath)
 		if err != nil {
@@ -60,46 +56,97 @@ var benchgenCmd = &cobra.Command{
 
 		g, _ := errgroup.WithContext(context.Background())
 
-		generateProgress := newProgress("> Generating benchmarks", len(layers))
+		numToGenerate := 0
+		if generateForward {
+			numToGenerate += len(layers)
+		}
+		if generateBackward {
+			numToGenerate += len(layers)
+		}
+		generateProgress := newProgress("> Generating benchmarks", numToGenerate)
 
-		for ii := range layers {
-			lyr := layers[ii]
-			g.Go(func() error {
-				defer generateProgress.Increment()
-				if lyr.OperatorType() == "ConstantInput" {
+		if generateForward {
+			for ii := range layers {
+				lyr := layers[ii]
+				g.Go(func() error {
+					defer generateProgress.Increment()
+					if lyr.OperatorType() == "ConstantInput" {
+						return nil
+					}
+					var b string
+					switch strings.ToLower(lyr.OperatorType()) {
+					case "conv":
+						l := lyr.(*perflayer.Conv)
+						b = l.FwdBenchmarkGenerator()
+					case "relu":
+						l := lyr.(*perflayer.Relu)
+						b = l.FwdBenchmarkGenerator()
+					case "pooling":
+						l := lyr.(*perflayer.Pooling)
+						b = l.FwdBenchmarkGenerator()
+					case "softmax":
+						l := lyr.(*perflayer.Softmax)
+						b = l.FwdBenchmarkGenerator()
+					case "batchnorm":
+						l := lyr.(*perflayer.BatchNorm)
+						b = l.FwdBenchmarkGenerator()
+					case "dropout":
+						l := lyr.(*perflayer.Dropout)
+						b = l.FwdBenchmarkGenerator()
+					default:
+						// pp.Println(lyr.OperatorType())
+					}
+					if b == "" {
+						return nil
+					}
+					mut.Lock()
+					defer mut.Unlock()
+					prog.WriteString(b)
 					return nil
-				}
-				var b string
-				switch strings.ToLower(lyr.OperatorType()) {
-				case "conv":
-					l := lyr.(*perflayer.Conv)
-					b = l.FwdBenchmarkGenerator()
-				case "relu":
-					l := lyr.(*perflayer.Relu)
-					b = l.FwdBenchmarkGenerator()
-				case "pooling":
-					l := lyr.(*perflayer.Pooling)
-					b = l.FwdBenchmarkGenerator()
-				case "softmax":
-					l := lyr.(*perflayer.Softmax)
-					b = l.FwdBenchmarkGenerator()
-				case "batchnorm":
-					l := lyr.(*perflayer.BatchNorm)
-					b = l.FwdBenchmarkGenerator()
-				case "dropout":
-					l := lyr.(*perflayer.Dropout)
-					b = l.FwdBenchmarkGenerator()
-				default:
-					// pp.Println(lyr.OperatorType())
-				}
-				if b == "" {
+				})
+			}
+		}
+
+		if generateBackward {
+			for ii := range layers {
+				lyr := layers[ii]
+				g.Go(func() error {
+					defer generateProgress.Increment()
+					if lyr.OperatorType() == "ConstantInput" {
+						return nil
+					}
+					var b string
+					switch strings.ToLower(lyr.OperatorType()) {
+					// case "conv":
+					// 	l := lyr.(*perflayer.Conv)
+					// 	b = l.BwdBenchmarkGenerator()
+					case "relu":
+						l := lyr.(*perflayer.Relu)
+						b = l.BwdBenchmarkGenerator()
+					// case "pooling":
+					// 	l := lyr.(*perflayer.Pooling)
+					// 	b = l.BwdBenchmarkGenerator()
+					// case "softmax":
+					// 	l := lyr.(*perflayer.Softmax)
+					// 	b = l.BwdBenchmarkGenerator()
+					// case "batchnorm":
+					// 	l := lyr.(*perflayer.BatchNorm)
+					// 	b = l.BwdBenchmarkGenerator()
+					// case "dropout":
+					// 	l := lyr.(*perflayer.Dropout)
+					// 	b = l.BwdBenchmarkGenerator()
+					default:
+						// pp.Println(lyr.OperatorType())
+					}
+					if b == "" {
+						return nil
+					}
+					mut.Lock()
+					defer mut.Unlock()
+					prog.WriteString(b)
 					return nil
-				}
-				mut.Lock()
-				defer mut.Unlock()
-				prog.WriteString(b)
-				return nil
-			})
+				})
+			}
 		}
 
 		if err := g.Wait(); err != nil {
@@ -123,5 +170,7 @@ var benchgenCmd = &cobra.Command{
 }
 
 func init() {
+	benchgenCmd.PersistentFlags().BoolVar(&generateBackward, "backward", false, "generate backward layers")
+	benchgenCmd.PersistentFlags().BoolVar(&generateForward, "forward", true, "generate forward layers")
 	rootCmd.AddCommand(benchgenCmd)
 }

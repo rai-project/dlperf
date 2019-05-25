@@ -23,7 +23,7 @@ func getNodeAttributeFromName(node *onnx.NodeProto, attrName string) *onnx.Attri
 func getTensorProtoDimensions(tensor *onnx.TensorProto) dlperf.Shape {
 	var ret dlperf.Shape
 
-	isInt32 := (tensor.DataType == onnx.TensorProto_INT32 || tensor.DataType == onnx.TensorProto_UINT32)
+	isInt32 := (tensor.DataType == int32(onnx.TensorProto_INT32) || tensor.DataType == int32(onnx.TensorProto_UINT32))
 	if isInt32 && len(tensor.GetInt32Data()) > 0 {
 		return toInt64Slice(tensor.GetInt32Data())
 	}
@@ -37,7 +37,7 @@ func getTensorProtoDimensions(tensor *onnx.TensorProto) dlperf.Shape {
 		return ret
 	}
 
-	isInt64 := (tensor.DataType == onnx.TensorProto_INT64 || tensor.DataType == onnx.TensorProto_UINT64)
+	isInt64 := (tensor.DataType == int32(onnx.TensorProto_INT64) || tensor.DataType == int32(onnx.TensorProto_UINT64))
 	if isInt64 && len(tensor.GetInt64Data()) > 0 {
 		return tensor.GetInt64Data()
 	}

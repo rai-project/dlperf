@@ -42,11 +42,20 @@ type Base struct {
 	OutputShapes_     []dlperf.Shape      `json:"output_shapes,omitempty"`
 }
 
-func mkBaseBenchmarkArgs(c dlperf.Layer) BaseBenchmarkArgs {
+func mkBaseBenchmarkFWDArgs(c dlperf.Layer) BaseBenchmarkArgs {
 	return BaseBenchmarkArgs{
 		BenchmarkName: c.FwdBenchmarkName(),
 		ArgNames:      c.FwdBenchmarkGeneratorArgNames(),
 		Algorithms:    c.FwdBenchmarkAlgorithms(),
+		DataTypes:     c.DataTypes(),
+	}
+}
+
+func mkBaseBenchmarkBWDArgs(c dlperf.Layer) BaseBenchmarkArgs {
+	return BaseBenchmarkArgs{
+		BenchmarkName: c.BwdBenchmarkName(),
+		ArgNames:      c.BwdBenchmarkGeneratorArgNames(),
+		Algorithms:    c.BwdBenchmarkAlgorithms(),
 		DataTypes:     c.DataTypes(),
 	}
 }
@@ -61,7 +70,22 @@ func mkBaseBenchmarkInputArgs(c dlperf.Layer) BaseBenchmarkInputArgs {
 		Input4: getOrMinus1(input, 4),
 		Input5: getOrMinus1(input, 5),
 		Input6: getOrMinus1(input, 6),
-		Input7: getOrMinus1(input, 7)}
+		Input7: getOrMinus1(input, 7),
+	}
+}
+
+func mkBaseBenchmarkOutputArgs(c dlperf.Layer) BaseBenchmarkInputArgs {
+	output := c.OutputShapes()[0]
+	return BaseBenchmarkInputArgs{
+		Input0: getOrMinus1(output, 0),
+		Input1: getOrMinus1(output, 1),
+		Input2: getOrMinus1(output, 2),
+		Input3: getOrMinus1(output, 3),
+		Input4: getOrMinus1(output, 4),
+		Input5: getOrMinus1(output, 5),
+		Input6: getOrMinus1(output, 6),
+		Input7: getOrMinus1(output, 7),
+	}
 }
 
 func (b *Base) Name() string {
@@ -246,6 +270,34 @@ func (b Base) FwdBenchmarkGeneratorArgNames() []string {
 
 func (b Base) FwdBenchmarkAlgorithms() []string {
 	panic("FwdBenchmarkAlgorithms not implemented")
+	return nil
+}
+
+func (b Base) BwdBenchmarkFilter(datatype, algorithm string) benchmark.Benchmark {
+	// panic("unimplemented BwdBenchmarkFilter")
+	if b.OperatorType_ == "" {
+		return benchmark.Benchmark{}
+	}
+	return benchmark.Benchmark{
+		Name: fmt.Sprintf("LAYER_CUDNN_%s_BWD", strings.ToUpper(b.OperatorType())),
+	}
+}
+
+func (b Base) BwdBenchmarkName() string {
+	panic("unimplemented BwdBenchmarkName")
+}
+
+func (b Base) BwdBenchmarkArgs() interface{} {
+	panic("BwdBenchmarkArgs not implemented")
+	return nil
+}
+func (b Base) BwdBenchmarkGeneratorArgNames() []string {
+	panic("BwdBenchmarkGeneratorArgNames not implemented")
+	return nil
+}
+
+func (b Base) BwdBenchmarkAlgorithms() []string {
+	panic("BwdBenchmarkAlgorithms not implemented")
 	return nil
 }
 

@@ -12,12 +12,14 @@ import (
 	"sync"
 	"time"
 
+	sourcepath "github.com/GeertJohan/go-sourcepath"
 	"github.com/Unknwon/com"
 	"github.com/acarl005/stripansi"
 	"github.com/alecthomas/repr"
 	"github.com/cheggaaa/pb"
 	"github.com/k0kubun/pp"
 	zglob "github.com/mattn/go-zglob"
+	homedir "github.com/mitchellh/go-homedir"
 	"github.com/pkg/errors"
 	"github.com/rai-project/dlperf/pkg/onnx"
 	"github.com/rai-project/utils"
@@ -62,14 +64,28 @@ func newProgress(prefix string, count int) *pb.ProgressBar {
 	return bar
 }
 
-func readModels(modelPath string) ([]*onnx.Onnx, error) {
+func expandModelPath(modelPath string) string {
+	if dir, err := homedir.Expand(modelPath); err == nil {
+		modelPath = dir
+	}
 
+	if modelPath == "" {
+		modelPath = filepath.Join(sourcepath.MustAbsoluteDir(), "..", "assets", "onnx_models", "mnist.onnx")
+	} else {
+		s, err := filepath.Abs(modelPath)
+		if err == nil {
+			modelPath = s
+		}
+	}
+	return modelPath
+}
+
+func readModels(modelPath string) ([]*onnx.Onnx, error) {
 	if !com.IsFile(modelPath) && !com.IsDir(modelPath) {
 		return nil, errors.Errorf("file %v does not exist", modelPath)
 	}
 
 	if com.IsFile(modelPath) {
-		pp.Println(modelPath)
 
 		model, err := onnx.New(modelPath)
 		if err != nil {

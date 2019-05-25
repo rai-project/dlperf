@@ -61,7 +61,7 @@ func (c Softmax) FwdBenchmarkArgs() interface{} {
 
 	res := softmaxBenchmarkArgs{
 		BaseBenchmarkInputArgs: mkBaseBenchmarkInputArgs(&c),
-		BaseBenchmarkArgs:      mkBaseBenchmarkArgs(&c),
+		BaseBenchmarkArgs:      mkBaseBenchmarkFWDArgs(&c),
 	}
 
 	hash, err := hashstructure.Hash(
@@ -91,7 +91,7 @@ func (c Softmax) FwdBenchmarkFilter(datatype, algorithm string) benchmark.Benchm
 func (c Softmax) FwdBenchmarkGenerator() string {
 	templString := _escFSMustString(false, "/scope/softmax.tmpl")
 
-	return templateExec(&c, templateBasePrefix+templString)
+	return templateExecFWD(&c, templateBasePrefix+templString)
 }
 
 func (c Softmax) Information() dlperf.LayerInformation {

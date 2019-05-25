@@ -26,12 +26,29 @@ func recovery() {
 	recover()
 }
 
-func templateExec(lyr dlperf.Layer, templString string) string {
+func templateExecFWD(lyr dlperf.Layer, templString string) string {
 	tmpl, err := mkTemplate(lyr).Parse(templString)
 	if err != nil {
 		log.Fatal(err)
 	}
 	args := lyr.FwdBenchmarkArgs()
+	if args == nil {
+		return ""
+	}
+	buf := bytes.NewBufferString("")
+	err = tmpl.Execute(buf, args)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return buf.String()
+}
+
+func templateExecBWD(lyr dlperf.Layer, templString string) string {
+	tmpl, err := mkTemplate(lyr).Parse(templString)
+	if err != nil {
+		log.Fatal(err)
+	}
+	args := lyr.BwdBenchmarkArgs()
 	if args == nil {
 		return ""
 	}

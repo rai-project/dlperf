@@ -42,7 +42,7 @@ func (info *Information) Weigths() []float32 {
 		if t == nil {
 			continue
 		}
-		if t.DataType == onnx.TensorProto_FLOAT {
+		if t.DataType == int32(onnx.TensorProto_FLOAT) {
 			if t.FloatData != nil {
 				ret = append(ret, t.FloatData...)
 			} else if t.RawData != nil {

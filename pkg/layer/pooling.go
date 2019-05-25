@@ -101,7 +101,7 @@ func (c Pooling) FwdBenchmarkArgs() interface{} {
 		PadWidth:          c.Pads[2],
 		StrideHeight:      c.Strides[0],
 		StrideWidth:       c.Strides[1],
-		BaseBenchmarkArgs: mkBaseBenchmarkArgs(&c),
+		BaseBenchmarkArgs: mkBaseBenchmarkFWDArgs(&c),
 	}
 
 	hash, err := hashstructure.Hash(
@@ -130,7 +130,7 @@ func (c Pooling) FwdBenchmarkFilter(datatype, algorithm string) benchmark.Benchm
 
 func (c Pooling) FwdBenchmarkGenerator() string {
 	templString := _escFSMustString(false, "/scope/pooling.tmpl")
-	return templateExec(&c, templateBasePrefix+templString+templateBaseSuffix)
+	return templateExecFWD(&c, templateBasePrefix+templString+templateBaseSuffix)
 }
 
 func (c Pooling) Shape() dlperf.ShapeInformation {

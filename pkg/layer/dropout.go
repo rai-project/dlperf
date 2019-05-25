@@ -58,7 +58,7 @@ func (c Dropout) FwdBenchmarkArgs() interface{} {
 
 	res := dropoutBenchmarkArgs{
 		BaseBenchmarkInputArgs: mkBaseBenchmarkInputArgs(&c),
-		BaseBenchmarkArgs:      mkBaseBenchmarkArgs(&c),
+		BaseBenchmarkArgs:      mkBaseBenchmarkFWDArgs(&c),
 	}
 
 	hash, err := hashstructure.Hash(
@@ -87,7 +87,7 @@ func (c Dropout) FwdBenchmarkFilter(datatype, algorithm string) benchmark.Benchm
 
 func (c Dropout) FwdBenchmarkGenerator() string {
 	templString := _escFSMustString(false, "/scope/dropout.tmpl")
-	return templateExec(&c, templateBasePrefix+templString)
+	return templateExecFWD(&c, templateBasePrefix+templString)
 }
 
 func (c Dropout) Shape() dlperf.ShapeInformation {

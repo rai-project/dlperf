@@ -6,7 +6,6 @@ import (
 	"strings"
 	"time"
 
-	sourcepath "github.com/GeertJohan/go-sourcepath"
 	"github.com/k0kubun/pp"
 	"github.com/spf13/cobra"
 
@@ -25,14 +24,7 @@ var benchinfoCmd = &cobra.Command{
 	Aliases: []string{"bench"},
 	Short:   "Prints out the benchmark information",
 	RunE: func(cmd *cobra.Command, args []string) error {
-		if modelPath == "" {
-			modelPath = filepath.Join(sourcepath.MustAbsoluteDir(), "..", "assets", "onnx_models", "mnist.onnx")
-		} else {
-			s, err := filepath.Abs(modelPath)
-			if err == nil {
-				modelPath = s
-			}
-		}
+		modelPath = expandModelPath(modelPath)
 
 		benchSuite, err := benchmark.New(benchmarkResultsFolder)
 		if err != nil {

@@ -1,9 +1,6 @@
 package cmd
 
 import (
-	"path/filepath"
-
-	sourcepath "github.com/GeertJohan/go-sourcepath"
 	"github.com/Unknwon/com"
 	"github.com/pkg/errors"
 	"github.com/rai-project/dlperf/pkg/onnx"
@@ -16,14 +13,8 @@ var subgraphCmd = &cobra.Command{
 	Aliases: []string{"subgraphs", "find_subgraphs"},
 	Short:   "Finds subgraphs within a model",
 	RunE: func(cmd *cobra.Command, args []string) error {
-		if modelPath == "" {
-			modelPath = filepath.Join(sourcepath.MustAbsoluteDir(), "..", "assets", "onnx_models", "mnist.onnx")
-		} else {
-			s, err := filepath.Abs(modelPath)
-			if err == nil {
-				modelPath = s
-			}
-		}
+
+		modelPath = expandModelPath(modelPath)
 
 		if !com.IsFile(modelPath) {
 			return errors.Errorf("file %v does not exist", modelPath)

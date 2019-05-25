@@ -32,6 +32,12 @@ type Layer interface {
 	FwdBenchmarkArgs() interface{}
 	FwdBenchmarkGeneratorArgNames() []string
 	FwdBenchmarkAlgorithms() []string
+
+	BwdBenchmarkName() string
+	BwdBenchmarkFilter(string, string) benchmark.Benchmark
+	BwdBenchmarkArgs() interface{}
+	BwdBenchmarkGeneratorArgNames() []string
+	BwdBenchmarkAlgorithms() []string
 	DataTypes() []DataType
 }
 

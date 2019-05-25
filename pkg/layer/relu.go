@@ -4,7 +4,7 @@ import (
 	"strings"
 
 	"github.com/mitchellh/hashstructure"
-	"github.com/rai-project/dlperf/pkg"
+	dlperf "github.com/rai-project/dlperf/pkg"
 	"github.com/rai-project/dlperf/pkg/benchmark"
 )
 
@@ -31,7 +31,15 @@ func (c Relu) FwdBenchmarkName() string {
 	return "LAYER_CUDNN_ACTIVATION_FWD"
 }
 
+func (c Relu) BwdBenchmarkName() string {
+	return "LAYER_CUDNN_ACTIVATION_BWD"
+}
+
 func (c Relu) FwdCUDNNName() string {
+	return ""
+}
+
+func (c Relu) BwdCUDNNName() string {
 	return ""
 }
 
@@ -39,7 +47,19 @@ func (c Relu) FwdTiming(system string /* hardware/software struct */) string {
 	return ""
 }
 
+func (c Relu) BwdTiming(system string /* hardware/software struct */) string {
+	return ""
+}
+
 func (c Relu) FwdBenchmarkAlgorithms() []string {
+	return c.BenchmarkAlgorithms()
+}
+
+func (c Relu) BwdBenchmarkAlgorithms() []string {
+	return c.BenchmarkAlgorithms()
+}
+
+func (c Relu) BenchmarkAlgorithms() []string {
 	switch strings.ToLower(c.OnnxOperatorType()) {
 	case "sigmoid":
 		return []string{
@@ -86,6 +106,10 @@ func (c Relu) FwdBenchmarkGeneratorArgNames() []string {
 	return benchmarkArgNames(reluBenchmarkArgs{})
 }
 
+func (c Relu) BwdBenchmarkGeneratorArgNames() []string {
+	return benchmarkArgNames(reluBenchmarkArgs{})
+}
+
 func (c Relu) substituteAlgorithm(alg string) string {
 	// substitution because cudnn does not support certain algorithms
 	switch strings.ToUpper(alg) {
@@ -96,9 +120,25 @@ func (c Relu) substituteAlgorithm(alg string) string {
 }
 
 func (c Relu) FwdBenchmarkArgs() interface{} {
-	res := reluBenchmarkArgs{
-		BaseBenchmarkInputArgs: mkBaseBenchmarkInputArgs(&c),
-		BaseBenchmarkArgs:      mkBaseBenchmarkArgs(&c),
+	return c.BenchmarkArgs(true)
+}
+
+func (c Relu) BwdBenchmarkArgs() interface{} {
+	return c.BenchmarkArgs(false)
+}
+
+func (c Relu) BenchmarkArgs(isForward bool) interface{} {
+	var res reluBenchmarkArgs
+	if isForward {
+		res = reluBenchmarkArgs{
+			BaseBenchmarkInputArgs: mkBaseBenchmarkInputArgs(&c),
+			BaseBenchmarkArgs:      mkBaseBenchmarkFWDArgs(&c),
+		}
+	} else {
+		res = reluBenchmarkArgs{
+			BaseBenchmarkInputArgs: mkBaseBenchmarkOutputArgs(&c),
+			BaseBenchmarkArgs:      mkBaseBenchmarkBWDArgs(&c),
+		}
 	}
 
 	// substitution because cudnn does not support certain algorithms
@@ -121,6 +161,14 @@ func (c Relu) FwdBenchmarkArgs() interface{} {
 }
 
 func (c Relu) FwdBenchmarkFilter(datatype, algorithm string) benchmark.Benchmark {
+	return c.BenchmarkFilter(datatype, algorithm)
+}
+
+func (c Relu) BwdBenchmarkFilter(datatype, algorithm string) benchmark.Benchmark {
+	return c.BenchmarkFilter(datatype, algorithm)
+}
+
+func (c Relu) BenchmarkFilter(datatype, algorithm string) benchmark.Benchmark {
 	if algorithm == "" {
 		algorithm = c.substituteAlgorithm(c.FwdBenchmarkAlgorithms()[0])
 	}
@@ -133,7 +181,13 @@ func (c Relu) FwdBenchmarkFilter(datatype, algorithm string) benchmark.Benchmark
 func (c Relu) FwdBenchmarkGenerator() string {
 	templString := _escFSMustString(false, "/scope/relu.tmpl")
 
-	return templateExec(&c, templateBasePrefix+templString+templateBaseSuffix)
+	return templateExecFWD(&c, templateBasePrefix+templString+templateBaseSuffix)
+}
+
+func (c Relu) BwdBenchmarkGenerator() string {
+	templString := _escFSMustString(false, "/scope/relu.tmpl")
+
+	return templateExecBWD(&c, templateBasePrefix+templString+templateBaseSuffix)
 }
 
 func (c Relu) Shape() dlperf.ShapeInformation {

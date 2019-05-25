@@ -66,7 +66,7 @@ func (c BatchNorm) FwdBenchmarkArgs() interface{} {
 
 	res := batchnormBenchmarkArgs{
 		BaseBenchmarkInputArgs: mkBaseBenchmarkInputArgs(&c),
-		BaseBenchmarkArgs:      mkBaseBenchmarkArgs(&c),
+		BaseBenchmarkArgs:      mkBaseBenchmarkFWDArgs(&c),
 	}
 
 	hash, err := hashstructure.Hash(
@@ -96,7 +96,7 @@ func (c BatchNorm) FwdBenchmarkFilter(datatype, algorithm string) benchmark.Benc
 func (c BatchNorm) FwdBenchmarkGenerator() string {
 	templString := _escFSMustString(false, "/scope/batchnorm.tmpl")
 
-	return templateExec(&c, templateBasePrefix+templString+templateBaseSuffix)
+	return templateExecFWD(&c, templateBasePrefix+templString+templateBaseSuffix)
 }
 
 func (c BatchNorm) Shape() dlperf.ShapeInformation {

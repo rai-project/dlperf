@@ -124,7 +124,7 @@ func (c Conv) FwdBenchmarkArgs() interface{} {
 		StrideWidth:       c.Strides[1],
 		DilationHeight:    c.Dilations[0],
 		DilationWidth:     c.Dilations[1],
-		BaseBenchmarkArgs: mkBaseBenchmarkArgs(&c),
+		BaseBenchmarkArgs: mkBaseBenchmarkFWDArgs(&c),
 	}
 
 	hash, err := hashstructure.Hash(
@@ -172,7 +172,7 @@ func (c Conv) FwdBenchmarkGeneratorArgNames() []string {
 func (c Conv) FwdBenchmarkGenerator() string {
 	templString := _escFSMustString(false, "/scope/conv.tmpl")
 
-	return templateExec(&c, templateBasePrefix+templString+templateBaseSuffix)
+	return templateExecFWD(&c, templateBasePrefix+templString+templateBaseSuffix)
 }
 
 func (c Conv) Shape() dlperf.ShapeInformation {

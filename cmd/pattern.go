@@ -1,9 +1,6 @@
 package cmd
 
 import (
-	"path/filepath"
-
-	sourcepath "github.com/GeertJohan/go-sourcepath"
 	"github.com/rai-project/dlperf/pkg/onnx"
 	"github.com/spf13/cobra"
 )
@@ -17,14 +14,8 @@ var patternCmd = &cobra.Command{
 	Aliases: []string{"patterns", "find_pattern"},
 	Short:   "Finds pattern chains within models",
 	RunE: func(cmd *cobra.Command, args []string) error {
-		if modelPath == "" {
-			modelPath = filepath.Join(sourcepath.MustAbsoluteDir(), "..", "assets", "onnx_models", "mnist.onnx")
-		} else {
-			s, err := filepath.Abs(modelPath)
-			if err == nil {
-				modelPath = s
-			}
-		}
+
+		modelPath = expandModelPath(modelPath)
 
 		models, err := readModels(modelPath)
 		if err != nil {
