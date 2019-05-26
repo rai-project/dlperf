@@ -166,8 +166,27 @@ func getModelName(modelPath string) string {
 	return iGetModelName(modelPath, "")
 }
 
+func findModelNameFile(dir string, level int) (string, error) {
+	if level < 0 {
+		return "", errors.New("unable to find model_name file")
+	}
+	pth := filepath.Join(dir, "model_name")
+	if com.IsFile(pth) {
+		bts, err := ioutils.ReadFile(pth)
+		if err != nil {
+			return "", err
+		}
+		return string(bts), err
+	}
+	return findModelNameFile(filepath.Dir(dir), level-1)
+}
+
 func iGetModelName(modelPath, suffix string) string {
-	name := strings.TrimSuffix(filepath.Base(modelPath), ".onnx")
+	name, err := findModelNameFile(filepath.Dir(modelPath) /* levels */, 3)
+	if err == nil {
+		return name
+	}
+	name = strings.TrimSuffix(filepath.Base(modelPath), ".onnx")
 	if name != "model" && name != "model_inferred" {
 		return name + suffix
 	}
