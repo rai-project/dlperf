@@ -38,7 +38,7 @@ func runLayerStats(cmd *cobra.Command, args []string) error {
 			progress.Increment()
 			modelPath = path
 			modelName := getModelName(modelPath)
-			if strings.HasPrefix(modelName, ".") {
+			if strings.HasPrefix(modelName, ".") || strings.HasPrefix(filepath.Base(modelPath), ".") {
 				continue
 			}
 			outputFileName = filepath.Join(baseOutputFileName, modelName+"."+outputFormat)

@@ -183,7 +183,7 @@ func findModelNameFile(dir string, level int) (string, error) {
 }
 
 func iGetModelName(modelPath, suffix string) string {
-	name, err := findModelNameFile(filepath.Dir(modelPath) /* levels */, 3)
+	name, err := findModelNameFile(filepath.Dir(modelPath), 4 /* levels */)
 	if err == nil {
 		return name
 	}
