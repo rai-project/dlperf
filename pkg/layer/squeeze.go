@@ -3,37 +3,37 @@ package layer
 import dlperf "github.com/rai-project/dlperf/pkg"
 
 //easyjson:json
-type Unsqueeze struct {
+type Squeeze struct {
 	*Base `json:",inline,flatten,omitempty"`
 	Axes  []int64 `json:"axes,omitempty"`
 }
 
-func (Unsqueeze) OperatorType() string {
-	return "Unsqueeze"
+func (Squeeze) OperatorType() string {
+	return "Squeeze"
 }
 
-func (Unsqueeze) Description() string {
+func (Squeeze) Description() string {
 	return ``
 }
 
-func (c *Unsqueeze) InferShape(inputLayers dlperf.Layers) {
+func (c *Squeeze) InferShape(inputLayers dlperf.Layers) {
 	inputShapes := getOutputShapes(inputLayers)
-	for ii, inputShape := range inputShapes {
-		for _, ax := range c.Axes {
-			if int64(len(inputShape)) >= ax {
-				inputShapes[ii] = append(inputShape[:ax], append([]int64{1}, inputShape[ax:]...)...)
-			} else {
-				if ax != int64(len(inputShape))+1 {
-					panic("expecting next axis to be inputShape + 1")
-				}
-				inputShapes[ii] = append(inputShape, int64(1))
-			}
+	ii := int64(0)
+	jj := int64(0)
+	res := []int64{}
+	for ; ii < int64(len(inputShapes[0])); ii++ {
+		if jj < int64(len(c.Axes)) && c.Axes[jj] == ii {
+			jj++
+		} else {
+			res = append(res, inputShapes[0][ii])
 		}
 	}
-	c.SetOutputShapes(inputShapes)
+	c.SetOutputShapes([]dlperf.Shape{
+		dlperf.Shape(res),
+	})
 }
 
-func (c Unsqueeze) Information() dlperf.LayerInformation {
+func (c Squeeze) Information() dlperf.LayerInformation {
 	info := &Information{
 		Base: c.Base,
 		shape: dlperf.ShapeInformation{
@@ -65,5 +65,5 @@ func (c Unsqueeze) Information() dlperf.LayerInformation {
 }
 
 func init() {
-	dlperf.Register(&Unsqueeze{})
+	dlperf.Register(&Squeeze{})
 }

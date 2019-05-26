@@ -3,37 +3,25 @@ package layer
 import dlperf "github.com/rai-project/dlperf/pkg"
 
 //easyjson:json
-type Unsqueeze struct {
+type NonMaxSuppression struct {
 	*Base `json:",inline,flatten,omitempty"`
-	Axes  []int64 `json:"axes,omitempty"`
 }
 
-func (Unsqueeze) OperatorType() string {
-	return "Unsqueeze"
+func (NonMaxSuppression) OperatorType() string {
+	return "NonMaxSuppression"
 }
 
-func (Unsqueeze) Description() string {
+func (NonMaxSuppression) Description() string {
 	return ``
 }
 
-func (c *Unsqueeze) InferShape(inputLayers dlperf.Layers) {
+func (c *NonMaxSuppression) InferShape(inputLayers dlperf.Layers) {
 	inputShapes := getOutputShapes(inputLayers)
-	for ii, inputShape := range inputShapes {
-		for _, ax := range c.Axes {
-			if int64(len(inputShape)) >= ax {
-				inputShapes[ii] = append(inputShape[:ax], append([]int64{1}, inputShape[ax:]...)...)
-			} else {
-				if ax != int64(len(inputShape))+1 {
-					panic("expecting next axis to be inputShape + 1")
-				}
-				inputShapes[ii] = append(inputShape, int64(1))
-			}
-		}
-	}
+	c.SetInputShapes(inputShapes)
 	c.SetOutputShapes(inputShapes)
 }
 
-func (c Unsqueeze) Information() dlperf.LayerInformation {
+func (c NonMaxSuppression) Information() dlperf.LayerInformation {
 	info := &Information{
 		Base: c.Base,
 		shape: dlperf.ShapeInformation{
@@ -65,5 +53,5 @@ func (c Unsqueeze) Information() dlperf.LayerInformation {
 }
 
 func init() {
-	dlperf.Register(&Unsqueeze{})
+	dlperf.Register(&NonMaxSuppression{})
 }

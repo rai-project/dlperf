@@ -3,6 +3,8 @@ package onnx
 import (
 	"strings"
 
+	"github.com/k0kubun/pp"
+
 	dlperf "github.com/rai-project/dlperf/pkg"
 	"github.com/rai-project/dlperf/pkg/layer"
 	"github.com/rai-project/onnx"
@@ -15,14 +17,20 @@ func (o Onnx) mkLayer(node *onnx.NodeProto) dlperf.Layer {
 	switch operatorType {
 	case "identity":
 		ret = o.mkIdentity(node)
+	case "cast":
+		ret = o.mkCast(node)
 	case "clip":
 		ret = o.mkClip(node)
+	case "exp":
+		ret = o.mkExp(node)
 	case "batchnorm", "batchnormalization":
 		ret = o.mkBatchNorm(node)
 	case "concat":
 		ret = o.mkConcat(node)
 	case "conv":
 		ret = o.mkConv(node)
+	case "nonmaxsuppression":
+		ret = o.mkNonMaxSuppression(node)
 	case "dropout":
 		ret = o.mkDropout(node)
 	case "add", "sum", "sub", "mul", "div", "max,", "min":
@@ -35,6 +43,10 @@ func (o Onnx) mkLayer(node *onnx.NodeProto) dlperf.Layer {
 		ret = o.mkMatMul(node)
 	case "maxpool", "averagepool":
 		ret = o.mkPooling(node)
+	case "reducemin":
+		ret = o.mkReduceMin(node)
+	case "topk":
+		ret = o.mkTopK(node)
 	case "globalmaxpool", "globalaveragepool":
 		ret = o.mkGlobalPooling(node)
 	case "relu", "leakyrelu", "prelu":
@@ -45,6 +57,8 @@ func (o Onnx) mkLayer(node *onnx.NodeProto) dlperf.Layer {
 		ret = o.mkFlatten(node)
 	case "transpose":
 		ret = o.mkTranspose(node)
+	case "squeeze":
+		ret = o.mkSqueeze(node)
 	case "unsqueeze":
 		ret = o.mkUnsqueeze(node)
 	case "scale", "imagescaler":
@@ -53,6 +67,14 @@ func (o Onnx) mkLayer(node *onnx.NodeProto) dlperf.Layer {
 		ret = o.mkSoftMax(node)
 	case "constant":
 		ret = o.mkConstant(node)
+	case "shape":
+		ret = o.mkShape(node)
+	case "gather":
+		ret = o.mkGather(node)
+	case "slice":
+		ret = o.mkSlice(node)
+	case "constantofshape":
+		ret = o.mkConstantOfShape(node)
 	case "constant_input":
 		ret = o.mkConstantInput(node)
 	default:
@@ -114,6 +136,12 @@ func (o Onnx) mkConcat(node *onnx.NodeProto) dlperf.Layer {
 	return &layer.Concat{
 		Base: o.mkBase(node, "Concat"),
 		Axis: axisAttr.GetI(),
+	}
+}
+
+func (o Onnx) mkNonMaxSuppression(node *onnx.NodeProto) dlperf.Layer {
+	return &layer.NonMaxSuppression{
+		Base: o.mkBase(node, "NonMaxSuppression"),
 	}
 }
 
@@ -198,6 +226,34 @@ func (o Onnx) mkMatMul(node *onnx.NodeProto) dlperf.Layer {
 
 	return &layer.MatMul{
 		Base: o.mkBase(node, "MatMul"),
+	}
+}
+
+func (o Onnx) mkReduceMin(node *onnx.NodeProto) dlperf.Layer {
+	axesAttr := getNodeAttributeFromName(node, "axes")
+	keepDimsAttr := getNodeAttributeFromName(node, "keepdims")
+	return &layer.Reduce{
+    Base: o.mkBase(node, "ReduceMin"),
+    Axes: axesAttr.GetInts(),
+    KeepDims: keepDimsAttr.GetI() == 1,
+	}
+}
+
+func (o Onnx) mkTopK(node *onnx.NodeProto) dlperf.Layer {
+  axis := int64(-1)
+	axisAttr := getNodeAttributeFromName(node, "axis")
+  if axisAttr.GetI() != 0 {
+    axis = axisAttr.GetI()
+  } else if axisAttr.GetInts() != nil {
+		axis = axisAttr.GetInts()[0]
+  }
+
+  // k := o.getTensorProtoByName(node.Input[1])
+  pp.Println(node.Input)
+  
+	return &layer.TopK{
+    Base: o.mkBase(node, "TopK"),
+    Axis: axis,
 	}
 }
 
@@ -287,6 +343,18 @@ func (o Onnx) mkIdentity(node *onnx.NodeProto) dlperf.Layer {
 	}
 }
 
+func (o Onnx) mkCast(node *onnx.NodeProto) dlperf.Layer {
+	return &layer.Cast{
+		Base: o.mkBase(node, "Cast"),
+	}
+}
+
+func (o Onnx) mkExp(node *onnx.NodeProto) dlperf.Layer {
+	return &layer.Exp{
+		Base: o.mkBase(node, "Exp"),
+	}
+}
+
 func (o Onnx) mkClip(node *onnx.NodeProto) dlperf.Layer {
 	minAttr := getNodeAttributeFromName(node, "min")
 	maxAttr := getNodeAttributeFromName(node, "min")
@@ -309,11 +377,46 @@ func (o Onnx) mkSoftMax(node *onnx.NodeProto) dlperf.Layer {
 	}
 }
 
+func (o Onnx) mkSqueeze(node *onnx.NodeProto) dlperf.Layer {
+	axesAttr := getNodeAttributeFromName(node, "axes")
+	return &layer.Squeeze{
+		Base: o.mkBase(node, "Squeeze"),
+		Axes: axesAttr.GetInts(),
+	}
+}
+
 func (o Onnx) mkUnsqueeze(node *onnx.NodeProto) dlperf.Layer {
 	axesAttr := getNodeAttributeFromName(node, "axes")
 	return &layer.Unsqueeze{
 		Base: o.mkBase(node, "Unsqueeze"),
 		Axes: axesAttr.GetInts(),
+	}
+}
+
+func (o Onnx) mkShape(node *onnx.NodeProto) dlperf.Layer {
+	return &layer.Shape{
+		Base: o.mkBase(node, "Shape"),
+	}
+}
+
+func (o Onnx) mkGather(node *onnx.NodeProto) dlperf.Layer {
+	base := o.mkBase(node, "Gather")
+
+	axis := getNodeAttributeFromName(node, "axis").GetI()
+
+	return &layer.Gather{
+		Base: base,
+		Axis: axis,
+	}
+}
+
+func (o Onnx) mkSlice(node *onnx.NodeProto) dlperf.Layer {
+	base := o.mkBase(node, "Slice")
+
+	println("todo slice operator")
+	return &layer.Gather{
+		Base: base,
+		// Axis: axis,
 	}
 }
 
@@ -329,6 +432,14 @@ func (o Onnx) mkConstant(node *onnx.NodeProto) dlperf.Layer {
 	}
 }
 
+func (o Onnx) mkConstantOfShape(node *onnx.NodeProto) dlperf.Layer {
+	base := o.mkBase(node, "ConstantOfShape")
+
+	return &layer.ConstantOfShape{
+		Base: base,
+	}
+}
+
 func (o Onnx) mkConstantInput(node *onnx.NodeProto) dlperf.Layer {
 	base := o.mkBase(node, "ConstantInput")
 
@@ -339,4 +450,8 @@ func (o Onnx) mkConstantInput(node *onnx.NodeProto) dlperf.Layer {
 	return &layer.ConstantInput{
 		Base: base,
 	}
+}
+
+func dummy() {
+	pp.Println("dummy")
 }

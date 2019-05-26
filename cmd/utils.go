@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"context"
 	"fmt"
+	"io/ioutil"
 	"os"
 	"os/exec"
 	"path"
@@ -172,7 +173,7 @@ func findModelNameFile(dir string, level int) (string, error) {
 	}
 	pth := filepath.Join(dir, "model_name")
 	if com.IsFile(pth) {
-		bts, err := ioutils.ReadFile(pth)
+		bts, err := ioutil.ReadFile(pth)
 		if err != nil {
 			return "", err
 		}
