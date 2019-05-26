@@ -42,7 +42,7 @@ var downloadModelsCmd = &cobra.Command{
 		return nil
 	},
 	RunE: func(cmd *cobra.Command, args []string) error {
-		concurrencyLimit := 4
+		concurrencyLimit := 1
 		g, _ := errgroup.WithContext(context.Background())
 
 		progress := newProgress("> Downloading models", len(modelURLs))
@@ -69,19 +69,18 @@ var downloadModelsCmd = &cobra.Command{
 				if strings.HasSuffix(url, ".onnx") {
 					targetFilePath = path.Base(url)
 				}
+
 				if modelName != "" {
-					targetFilePath = modelName
+					outputDir = filepath.Join(outputFileName, modelName)
+					if !strings.HasSuffix(url, ".onnx") {
+						targetFilePath = modelName + ".tar.gz"
+					} else {
+						targetFilePath = modelName + ".onnx"
+
+					}
 				}
 
-				if !strings.HasSuffix(url, ".onnx") {
-					targetFilePath = targetFilePath + ".tar.gz"
-				}
-
-				if modelName == "" {
-					targetFilePath = filepath.Join(outputDir, targetFilePath)
-				} else {
-					targetFilePath = filepath.Join(outputDir, modelName, targetFilePath)
-				}
+				targetFilePath = filepath.Join(outputDir, targetFilePath)
 
 				resp, err := http.Get(url)
 				if err != nil {
@@ -106,6 +105,10 @@ var downloadModelsCmd = &cobra.Command{
 					}
 					return nil
 
+				}
+
+				if !com.IsDir(outputDir) {
+					os.MkdirAll(outputDir, os.ModePerm)
 				}
 				err = archive.Unzip(resp.Body, outputDir, archive.GZipFormat())
 				if err != nil {
