@@ -247,10 +247,10 @@ var onnxModelURLs = []modelURLInfo{
 	//   URL: "https://s3.amazonaws.com/download.onnx/models/opset_9/squeezenet.tar.gz",
 	//   Name: "",
 	// },
-	modelURLInfo{
-		URL:  "https://onnxzoo.blob.core.windows.net/models/opset_10/ssd/ssd.onnx",
-		Name: "ssd",
-	},
+	// modelURLInfo{
+	// 	URL:  "https://onnxzoo.blob.core.windows.net/models/opset_10/ssd/ssd.onnx",
+	// 	Name: "ssd",
+	// },
 	// "https://onnxzoo.blob.core.windows.net/models/opset_1/tiny_yolov2/tiny_yolov2.tar.gz",
 	// "https://onnxzoo.blob.core.windows.net/models/opset_7/tiny_yolov2/tiny_yolov2.tar.gz",
 	modelURLInfo{
@@ -265,10 +265,10 @@ var onnxModelURLs = []modelURLInfo{
 	//   URL: "https://s3.amazonaws.com/download.onnx/models/opset_9/vgg19.tar.gz",
 	//   Name: "",
 	// },
-	modelURLInfo{
-		URL:  "https://onnxzoo.blob.core.windows.net/models/opset_10/yolov3/yolov3.onnx",
-		Name: "Yolov3",
-	},
+	// modelURLInfo{
+	// 	URL:  "https://onnxzoo.blob.core.windows.net/models/opset_10/yolov3/yolov3.onnx",
+	// 	Name: "Yolov3",
+	// },
 	// "https://s3.amazonaws.com/download.onnx/models/opset_3/zfnet512.tar.gz",
 	// "https://s3.amazonaws.com/download.onnx/models/opset_6/zfnet512.tar.gz",
 	// "https://s3.amazonaws.com/download.onnx/models/opset_7/zfnet512.tar.gz",
