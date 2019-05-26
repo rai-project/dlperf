@@ -248,7 +248,7 @@ var onnxModelURLs = []modelURLInfo{
 	//   Name: "",
 	// },
 	modelURLInfo{
-		URL:  "https://onnxzoo.blob.core.windows.net/models/opset_10/ssd/ssd.tar.gz",
+		URL:  "https://onnxzoo.blob.core.windows.net/models/opset_10/ssd/ssd.onnx",
 		Name: "ssd",
 	},
 	// "https://onnxzoo.blob.core.windows.net/models/opset_1/tiny_yolov2/tiny_yolov2.tar.gz",
@@ -266,7 +266,7 @@ var onnxModelURLs = []modelURLInfo{
 	//   Name: "",
 	// },
 	modelURLInfo{
-		URL:  "https://onnxzoo.blob.core.windows.net/models/opset_10/yolov3/yolov3.tar.gz",
+		URL:  "https://onnxzoo.blob.core.windows.net/models/opset_10/yolov3/yolov3.onnx",
 		Name: "Yolov3",
 	},
 	// "https://s3.amazonaws.com/download.onnx/models/opset_3/zfnet512.tar.gz",
