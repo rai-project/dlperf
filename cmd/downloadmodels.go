@@ -82,6 +82,12 @@ var downloadModelsCmd = &cobra.Command{
 
 				targetFilePath = filepath.Join(outputDir, targetFilePath)
 
+				if !com.IsDir(outputDir) {
+					os.MkdirAll(outputDir, os.ModePerm)
+				}
+
+				com.WriteFile(filepath.Join(outputDir, "model_name"), []byte(modelName))
+
 				resp, err := http.Get(url)
 				if err != nil {
 					log.WithError(err).WithField("url", url).Error("failed to download model")
@@ -105,10 +111,6 @@ var downloadModelsCmd = &cobra.Command{
 					}
 					return nil
 
-				}
-
-				if !com.IsDir(outputDir) {
-					os.MkdirAll(outputDir, os.ModePerm)
 				}
 				err = archive.Unzip(resp.Body, outputDir, archive.GZipFormat())
 				if err != nil {
