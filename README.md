@@ -63,9 +63,10 @@ go run main.go patterns --model_path ~/onnx_models/ --length 4
 ## Generate Benchmarks
 
 Generate the benchmark files of a model or across models at `model_path`.
+Use `--forward` and `--backward` to control whether to generate benchmarks for forward and backward pass.
 
 ```
-go run main.go benchgen --model_path ~/onnx_models/bvlc_alexnet/model.onnx
+go run main.go benchgen --model_path ~/onnx_models/bvlc_alexnet/model.onnx --forward=true --backward=false -o generated_benchmarks.hpp
 ```
 
 ## Query benchmark database

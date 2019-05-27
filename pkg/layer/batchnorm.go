@@ -55,11 +55,11 @@ func (c BatchNorm) BwdTiming(system string /* hardware/software struct */) strin
 	return ""
 }
 
-func (c BatchNorm) FwdBenchmarkAlgorithms() []string {
+func (c BatchNorm) FwdBenchmarkAlgorithms(opts ...dlperf.FwdBenchmarkArgsOptionFunc) []string {
 	return c.BenchmarkAlgorithms()
 }
 
-func (c BatchNorm) BwdBenchmarkAlgorithms() []string {
+func (c BatchNorm) BwdBenchmarkAlgorithms(opts ...dlperf.BwdBenchmarkArgsOptionFunc) []string {
 	return c.BenchmarkAlgorithms()
 }
 
@@ -81,14 +81,6 @@ type batchnormBenchmarkArgs struct {
 	BaseBenchmarkArgs
 	BaseBenchmarkInputArgs
 	IsTraining bool
-}
-
-func (c BatchNorm) FwdBenchmarkGeneratorArgNames() []string {
-	return benchmarkArgNames(batchnormBenchmarkArgs{})
-}
-
-func (c BatchNorm) BwdBenchmarkGeneratorArgNames() []string {
-	return benchmarkArgNames(batchnormBenchmarkArgs{})
 }
 
 func (c BatchNorm) FwdBenchmarkArgs(iopts ...dlperf.FwdBenchmarkArgsOptionFunc) interface{} {
@@ -135,21 +127,21 @@ func (c BatchNorm) BwdBenchmarkArgs(iopts ...dlperf.BwdBenchmarkArgsOptionFunc) 
 
 func (c BatchNorm) FwdBenchmarkFilter(datatype, algorithm string, opts ...dlperf.FwdBenchmarkArgsOptionFunc) benchmark.Benchmark {
 	if algorithm == "" {
-		algorithm = c.FwdBenchmarkAlgorithms()[0]
+		algorithm = c.FwdBenchmarkAlgorithms(opts...)[0]
 	}
 	return benchmark.Benchmark{
-		Name:       mkBenchmarkFilterName(&c, datatype, algorithm),
+		Name:       mkFwdBenchmarkFilterName(&c, datatype, algorithm),
 		Attributes: benchmarkAttributes(c.FwdBenchmarkArgs()),
 	}
 }
 
 func (c BatchNorm) BwdBenchmarkFilter(datatype, algorithm string, opts ...dlperf.BwdBenchmarkArgsOptionFunc) benchmark.Benchmark {
 	if algorithm == "" {
-		algorithm = c.BwdBenchmarkAlgorithms()[0]
+		algorithm = c.BwdBenchmarkAlgorithms(opts...)[0]
 	}
 	return benchmark.Benchmark{
-		Name:       mkBenchmarkFilterName(&c, datatype, algorithm),
-		Attributes: benchmarkAttributes(c.BwdBenchmarkArgs()),
+		Name:       mkBwdBenchmarkFilterName(&c, datatype, algorithm),
+		Attributes: benchmarkAttributes(c.BwdBenchmarkArgs(opts...)),
 	}
 }
 
@@ -161,6 +153,14 @@ func (c BatchNorm) FwdBenchmarkGenerator(opts ...dlperf.FwdBenchmarkArgsOptionFu
 func (c BatchNorm) BwdBenchmarkGenerator(opts ...dlperf.BwdBenchmarkArgsOptionFunc) string {
 	templString := _escFSMustString(false, "/scope/batchnorm.tmpl")
 	return templateExecBWD(&c, templateBasePrefix+templString+templateBaseSuffix)
+}
+
+func (c BatchNorm) FwdBenchmarkGeneratorArgNames() []string {
+	return benchmarkArgNames(batchnormBenchmarkArgs{})
+}
+
+func (c BatchNorm) BwdBenchmarkGeneratorArgNames() []string {
+	return benchmarkArgNames(batchnormBenchmarkArgs{})
 }
 
 func (c BatchNorm) Shape() dlperf.ShapeInformation {

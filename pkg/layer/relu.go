@@ -51,11 +51,11 @@ func (c Relu) BwdTiming(system string /* hardware/software struct */) string {
 	return ""
 }
 
-func (c Relu) FwdBenchmarkAlgorithms() []string {
+func (c Relu) FwdBenchmarkAlgorithms(...dlperf.FwdBenchmarkArgsOptionFunc) []string {
 	return c.BenchmarkAlgorithms()
 }
 
-func (c Relu) BwdBenchmarkAlgorithms() []string {
+func (c Relu) BwdBenchmarkAlgorithms(...dlperf.BwdBenchmarkArgsOptionFunc) []string {
 	return c.BenchmarkAlgorithms()
 }
 
@@ -78,11 +78,11 @@ func (c Relu) BenchmarkAlgorithms() []string {
 		return []string{
 			"CUDNN_ACTIVATION_ELU",
 		}
-	case "prelu":
+	case "prelu": // NOT IN CUDNN
 		return []string{
 			"ACTIVATION_PRELU",
 		}
-	case "leakyrelu":
+	case "leakyrelu": // NOT IN CUDNN
 		return []string{
 			"ACTIVATION_LEAKY_RELU",
 		}
@@ -100,14 +100,6 @@ func (c Relu) BenchmarkAlgorithms() []string {
 type reluBenchmarkArgs struct {
 	BaseBenchmarkArgs
 	BaseBenchmarkInputArgs
-}
-
-func (c Relu) FwdBenchmarkGeneratorArgNames() []string {
-	return benchmarkArgNames(reluBenchmarkArgs{})
-}
-
-func (c Relu) BwdBenchmarkGeneratorArgNames() []string {
-	return benchmarkArgNames(reluBenchmarkArgs{})
 }
 
 func (c Relu) substituteAlgorithm(alg string) string {
@@ -170,19 +162,21 @@ func (c Relu) BwdBenchmarkArgs(opts ...dlperf.BwdBenchmarkArgsOptionFunc) interf
 }
 
 func (c Relu) FwdBenchmarkFilter(datatype, algorithm string, opts ...dlperf.FwdBenchmarkArgsOptionFunc) benchmark.Benchmark {
-	return c.BenchmarkFilter(datatype, algorithm)
-}
-
-func (c Relu) BwdBenchmarkFilter(datatype, algorithm string, opts ...dlperf.BwdBenchmarkArgsOptionFunc) benchmark.Benchmark {
-	return c.BenchmarkFilter(datatype, algorithm)
-}
-
-func (c Relu) BenchmarkFilter(datatype, algorithm string) benchmark.Benchmark {
 	if algorithm == "" {
 		algorithm = c.substituteAlgorithm(c.FwdBenchmarkAlgorithms()[0])
 	}
 	return benchmark.Benchmark{
-		Name:       mkBenchmarkFilterName(&c, datatype, algorithm),
+		Name:       mkFwdBenchmarkFilterName(&c, datatype, algorithm),
+		Attributes: benchmarkAttributes(c.FwdBenchmarkArgs()),
+	}
+}
+
+func (c Relu) BwdBenchmarkFilter(datatype, algorithm string, opts ...dlperf.BwdBenchmarkArgsOptionFunc) benchmark.Benchmark {
+	if algorithm == "" {
+		algorithm = c.substituteAlgorithm(c.FwdBenchmarkAlgorithms()[0])
+	}
+	return benchmark.Benchmark{
+		Name:       mkBwdBenchmarkFilterName(&c, datatype, algorithm),
 		Attributes: benchmarkAttributes(c.FwdBenchmarkArgs()),
 	}
 }
@@ -197,6 +191,14 @@ func (c Relu) BwdBenchmarkGenerator() string {
 	templString := _escFSMustString(false, "/scope/relu.tmpl")
 
 	return templateExecBWD(&c, templateBasePrefix+templString+templateBaseSuffix)
+}
+
+func (c Relu) FwdBenchmarkGeneratorArgNames() []string {
+	return benchmarkArgNames(reluBenchmarkArgs{})
+}
+
+func (c Relu) BwdBenchmarkGeneratorArgNames() []string {
+	return benchmarkArgNames(reluBenchmarkArgs{})
 }
 
 func (c Relu) Shape() dlperf.ShapeInformation {

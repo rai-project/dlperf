@@ -33,13 +33,13 @@ type Layer interface {
 	FwdBenchmarkFilter(string, string, ...FwdBenchmarkArgsOptionFunc) benchmark.Benchmark
 	FwdBenchmarkArgs(...FwdBenchmarkArgsOptionFunc) interface{}
 	FwdBenchmarkGeneratorArgNames() []string
-	FwdBenchmarkAlgorithms() []string
+	FwdBenchmarkAlgorithms(...FwdBenchmarkArgsOptionFunc) []string
 
 	BwdBenchmarkName(...BwdBenchmarkArgsOptionFunc) string
 	BwdBenchmarkFilter(string, string, ...BwdBenchmarkArgsOptionFunc) benchmark.Benchmark
 	BwdBenchmarkArgs(...BwdBenchmarkArgsOptionFunc) interface{}
 	BwdBenchmarkGeneratorArgNames() []string
-	BwdBenchmarkAlgorithms() []string
+	BwdBenchmarkAlgorithms(...BwdBenchmarkArgsOptionFunc) []string
 }
 
 type LayerInformation interface {

@@ -43,7 +43,15 @@ func (c Pooling) FwdBenchmarkName(opts ...dlperf.FwdBenchmarkArgsOptionFunc) str
 	return "LAYER_CUDNN_POOLING_FWD"
 }
 
+func (c Pooling) BwdBenchmarkName(opts ...dlperf.BwdBenchmarkArgsOptionFunc) string {
+	return "LAYER_CUDNN_POOLING_BWD"
+}
+
 func (c Pooling) FwdCUDNNName() string {
+	return ""
+}
+
+func (c Pooling) BwdCUDNNName() string {
 	return ""
 }
 
@@ -51,7 +59,19 @@ func (c Pooling) FwdTiming(system string /* hardware/software struct */) string 
 	return ""
 }
 
-func (c Pooling) FwdBenchmarkAlgorithms() []string {
+func (c Pooling) BwdTiming(system string /* hardware/software struct */) string {
+	return ""
+}
+
+func (c Pooling) FwdBenchmarkAlgorithms(...dlperf.FwdBenchmarkArgsOptionFunc) []string {
+	return c.BenchmarkAlgorithms()
+}
+
+func (c Pooling) BwdBenchmarkAlgorithms(...dlperf.BwdBenchmarkArgsOptionFunc) []string {
+	return c.BenchmarkAlgorithms()
+}
+
+func (c Pooling) BenchmarkAlgorithms() []string {
 	switch strings.ToLower(c.OnnxOperatorType()) {
 	case "maxpool":
 		return []string{
@@ -81,10 +101,6 @@ type poolingBenchmarkArgs struct {
 	PadWidth     int64 `args:"pad_width" hash:"pad_width" json:"pad_width,omitempty"`
 	StrideHeight int64 `args:"stride_height" hash:"stride_height" json:"stride_height,omitempty"`
 	StrideWidth  int64 `args:"stride_width" hash:"stride_width" json:"stride_width,omitempty"`
-}
-
-func (c Pooling) FwdBenchmarkGeneratorArgNames() []string {
-	return benchmarkArgNames(poolingBenchmarkArgs{})
 }
 
 func (c Pooling) FwdBenchmarkArgs(opts ...dlperf.FwdBenchmarkArgsOptionFunc) interface{} {
@@ -118,19 +134,73 @@ func (c Pooling) FwdBenchmarkArgs(opts ...dlperf.FwdBenchmarkArgsOptionFunc) int
 	return res
 }
 
+func (c Pooling) BwdBenchmarkArgs(opts ...dlperf.BwdBenchmarkArgsOptionFunc) interface{} {
+	inShapes := c.InputShapes()
+
+	res := poolingBenchmarkArgs{
+		Input0:            inShapes[0][0],
+		Input1:            inShapes[0][1],
+		Input2:            inShapes[0][2],
+		Input3:            inShapes[0][3],
+		FilterHeight:      c.KernelShape[0],
+		FilterWidth:       c.KernelShape[1],
+		PadHeight:         c.Pads[0],
+		PadWidth:          c.Pads[2],
+		StrideHeight:      c.Strides[0],
+		StrideWidth:       c.Strides[1],
+		BaseBenchmarkArgs: mkBaseBenchmarkBWDArgs(&c, opts...),
+	}
+
+	hash, err := hashstructure.Hash(
+		res,
+		&hashstructure.HashOptions{
+			TagName: "hash",
+		},
+	)
+	if err != nil {
+		log.Fatal(err)
+	}
+	res.UniqueBenchmarkID = hash
+
+	return res
+}
+
 func (c Pooling) FwdBenchmarkFilter(datatype, algorithm string, opts ...dlperf.FwdBenchmarkArgsOptionFunc) benchmark.Benchmark {
 	if algorithm == "" {
 		algorithm = c.FwdBenchmarkAlgorithms()[0]
 	}
 	return benchmark.Benchmark{
-		Name:       mkBenchmarkFilterName(&c, datatype, algorithm),
+		Name:       mkFwdBenchmarkFilterName(&c, datatype, algorithm),
 		Attributes: benchmarkAttributes(c.FwdBenchmarkArgs(opts...)),
+	}
+}
+
+func (c Pooling) BwdBenchmarkFilter(datatype, algorithm string, opts ...dlperf.BwdBenchmarkArgsOptionFunc) benchmark.Benchmark {
+	if algorithm == "" {
+		algorithm = c.BwdBenchmarkAlgorithms()[0]
+	}
+	return benchmark.Benchmark{
+		Name:       mkBwdBenchmarkFilterName(&c, datatype, algorithm),
+		Attributes: benchmarkAttributes(c.BwdBenchmarkArgs(opts...)),
 	}
 }
 
 func (c Pooling) FwdBenchmarkGenerator() string {
 	templString := _escFSMustString(false, "/scope/pooling.tmpl")
 	return templateExecFWD(&c, templateBasePrefix+templString+templateBaseSuffix)
+}
+
+func (c Pooling) BwdBenchmarkGenerator() string {
+	templString := _escFSMustString(false, "/scope/pooling.tmpl")
+	return templateExecFWD(&c, templateBasePrefix+templString+templateBaseSuffix)
+}
+
+func (c Pooling) FwdBenchmarkGeneratorArgNames() []string {
+	return benchmarkArgNames(poolingBenchmarkArgs{})
+}
+
+func (c Pooling) BwdBenchmarkGeneratorArgNames() []string {
+	return benchmarkArgNames(poolingBenchmarkArgs{})
 }
 
 func (c Pooling) Shape() dlperf.ShapeInformation {

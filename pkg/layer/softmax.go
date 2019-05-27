@@ -29,7 +29,15 @@ func (c Softmax) FwdBenchmarkName(opts ...dlperf.FwdBenchmarkArgsOptionFunc) str
 	return "LAYER_CUDNN_SOFTMAX_FWD"
 }
 
+func (c Softmax) BwdBenchmarkName(opts ...dlperf.BwdBenchmarkArgsOptionFunc) string {
+	return "LAYER_CUDNN_SOFTMAX_BWD"
+}
+
 func (c Softmax) FwdCUDNNName() string {
+	return ""
+}
+
+func (c Softmax) BwdCUDNNName() string {
 	return ""
 }
 
@@ -37,7 +45,19 @@ func (c Softmax) FwdTiming(system string /* hardware/software struct */) string 
 	return ""
 }
 
-func (c Softmax) FwdBenchmarkAlgorithms() []string {
+func (c Softmax) BwdTiming(system string /* hardware/software struct */) string {
+	return ""
+}
+
+func (c Softmax) FwdBenchmarkAlgorithms(...dlperf.FwdBenchmarkArgsOptionFunc) []string {
+	return c.BenchmarkAlgorithms()
+}
+
+func (c Softmax) BwdBenchmarkAlgorithms(...dlperf.BwdBenchmarkArgsOptionFunc) []string {
+	return c.BenchmarkAlgorithms()
+}
+
+func (c Softmax) BenchmarkAlgorithms() []string {
 	return []string{
 		"CUDNN_SOFTMAX_MODE_INSTANCE",
 		"CUDNN_SOFTMAX_MODE_CHANNEL",
@@ -51,10 +71,6 @@ func (c Softmax) Shape() dlperf.ShapeInformation {
 type softmaxBenchmarkArgs struct {
 	BaseBenchmarkArgs
 	BaseBenchmarkInputArgs
-}
-
-func (c Softmax) FwdBenchmarkGeneratorArgNames() []string {
-	return benchmarkArgNames(softmaxBenchmarkArgs{})
 }
 
 func (c Softmax) FwdBenchmarkArgs(opts ...dlperf.FwdBenchmarkArgsOptionFunc) interface{} {
@@ -78,20 +94,59 @@ func (c Softmax) FwdBenchmarkArgs(opts ...dlperf.FwdBenchmarkArgsOptionFunc) int
 	return res
 }
 
+func (c Softmax) BwdBenchmarkArgs(opts ...dlperf.BwdBenchmarkArgsOptionFunc) interface{} {
+
+	res := softmaxBenchmarkArgs{
+		BaseBenchmarkInputArgs: mkBaseBenchmarkInputArgs(&c),
+		BaseBenchmarkArgs:      mkBaseBenchmarkBWDArgs(&c, opts...),
+	}
+
+	hash, err := hashstructure.Hash(
+		res,
+		&hashstructure.HashOptions{
+			TagName: "hash",
+		},
+	)
+	if err != nil {
+		log.Fatal(err)
+	}
+	res.UniqueBenchmarkID = hash
+
+	return res
+}
+
 func (c Softmax) FwdBenchmarkFilter(datatype, algorithm string, opts ...dlperf.FwdBenchmarkArgsOptionFunc) benchmark.Benchmark {
 	if algorithm == "" {
 		algorithm = c.FwdBenchmarkAlgorithms()[0]
 	}
 	return benchmark.Benchmark{
-		Name:       mkBenchmarkFilterName(&c, datatype, "CUDNN_SOFTMAX_FAST, "+algorithm),
+		Name:       mkFwdBenchmarkFilterName(&c, datatype, "CUDNN_SOFTMAX_FAST, "+algorithm),
 		Attributes: benchmarkAttributes(c.FwdBenchmarkArgs(opts...)),
+	}
+}
+
+func (c Softmax) BwdBenchmarkFilter(datatype, algorithm string, opts ...dlperf.BwdBenchmarkArgsOptionFunc) benchmark.Benchmark {
+	if algorithm == "" {
+		algorithm = c.BwdBenchmarkAlgorithms()[0]
+	}
+	return benchmark.Benchmark{
+		Name:       mkBwdBenchmarkFilterName(&c, datatype, "CUDNN_SOFTMAX_FAST, "+algorithm),
+		Attributes: benchmarkAttributes(c.BwdBenchmarkArgs(opts...)),
 	}
 }
 
 func (c Softmax) FwdBenchmarkGenerator() string {
 	templString := _escFSMustString(false, "/scope/softmax.tmpl")
-
 	return templateExecFWD(&c, templateBasePrefix+templString)
+}
+
+func (c Softmax) BwdBenchmarkGenerator() string {
+	templString := _escFSMustString(false, "/scope/softmax.tmpl")
+	return templateExecBWD(&c, templateBasePrefix+templString)
+}
+
+func (c Softmax) FwdBenchmarkGeneratorArgNames() []string {
+	return benchmarkArgNames(softmaxBenchmarkArgs{})
 }
 
 func (c Softmax) Information() dlperf.LayerInformation {

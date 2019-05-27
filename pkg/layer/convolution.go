@@ -68,7 +68,25 @@ func (c Conv) FwdBenchmarkName(opts ...dlperf.FwdBenchmarkArgsOptionFunc) string
 	return "LAYER_CUDNN_CONV_FWD"
 }
 
+func (c Conv) BwdBenchmarkName(iopts ...dlperf.BwdBenchmarkArgsOptionFunc) string {
+	opts := dlperf.CreateBwdBenchmarkArgsOption(iopts...)
+	switch opts.ConvBwdType {
+	case dlperf.ConvBwdTypeData:
+		return "LAYER_CUDNN_CONV_BWD_DATA"
+	case dlperf.ConvBwdTypeFilter:
+		return "LAYER_CUDNN_CONV_BWD_FILTER"
+	case dlperf.ConvBwdTypeBias:
+		return "LAYER_CUDNN_CONV_BWD_BIAS"
+	default:
+		panic("unknown conv bwd type")
+	}
+}
+
 func (c Conv) FwdCUDNNName() string {
+	return ""
+}
+
+func (c Conv) BwdCUDNNName() string {
 	return ""
 }
 
@@ -76,17 +94,50 @@ func (c Conv) FwdTiming(system string /* hardware/software struct */) string {
 	return ""
 }
 
-func (c Conv) FwdBenchmarkAlgorithms() []string {
+func (c Conv) BwdTiming(system string /* hardware/software struct */) string {
+	return ""
+}
+
+func (c Conv) FwdBenchmarkAlgorithms(...dlperf.FwdBenchmarkArgsOptionFunc) []string {
 	return []string{
 		"CUDNN_CONVOLUTION_FWD_ALGO_IMPLICIT_GEMM",
 		"CUDNN_CONVOLUTION_FWD_ALGO_IMPLICIT_PRECOMP_GEMM",
 		"CUDNN_CONVOLUTION_FWD_ALGO_GEMM",
 		"CUDNN_CONVOLUTION_FWD_ALGO_DIRECT",
-		"CUDNN_CONVOLUTION_FWD_ALGO_COUNT",
 		"CUDNN_CONVOLUTION_FWD_ALGO_FFT",
 		"CUDNN_CONVOLUTION_FWD_ALGO_FFT_TILING",
 		"CUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD",
 		"CUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD_NONFUSED",
+	}
+}
+
+func (c Conv) BwdBenchmarkAlgorithms(iopts ...dlperf.BwdBenchmarkArgsOptionFunc) []string {
+	opts := dlperf.CreateBwdBenchmarkArgsOption(iopts...)
+	switch opts.ConvBwdType {
+	case dlperf.ConvBwdTypeData:
+		return []string{
+			"CUDNN_CONVOLUTION_BWD_DATA_ALGO_0",
+			"CUDNN_CONVOLUTION_BWD_DATA_ALGO_1",
+			"CUDNN_CONVOLUTION_BWD_DATA_ALGO_FFT",
+			"CUDNN_CONVOLUTION_BWD_DATA_ALGO_​FFT_TILING",
+			"CUDNN_CONVOLUTION_BWD_DATA_ALGO_WINOGRAD",
+			"CUDNN_CONVOLUTION_BWD_DATA_ALGO_​WINOGRAD_NONFUSED",
+		}
+	case dlperf.ConvBwdTypeFilter:
+		return []string{
+			"CUDNN_CONVOLUTION_BWD_FILTER_ALGO_0",
+			"CUDNN_CONVOLUTION_BWD_FILTER_ALGO_1",
+			"CUDNN_CONVOLUTION_BWD_FILTER_ALGO_FFT",
+			"CUDNN_CONVOLUTION_BWD_FILTER_ALGO_3",
+			"CUDNN_CONVOLUTION_BWD_FILTER_​WINOGRAD_NONFUSED",
+			"CUDNN_CONVOLUTION_BWD_FILTER_ALGO_​FFT_TILING",
+		}
+	case dlperf.ConvBwdTypeBias:
+		return []string{
+			"",
+		}
+	default:
+		return []string{}
 	}
 }
 
@@ -141,14 +192,59 @@ func (c Conv) FwdBenchmarkArgs(opts ...dlperf.FwdBenchmarkArgsOptionFunc) interf
 	return res
 }
 
+func (c Conv) BwdBenchmarkArgs(opts ...dlperf.BwdBenchmarkArgsOptionFunc) interface{} {
+	inShapes := c.InputShapes()
+
+	res := convBenchmarkArgs{
+		Input0:            inShapes[0][0],
+		Input1:            inShapes[0][1],
+		Input2:            inShapes[0][2],
+		Input3:            inShapes[0][3],
+		FilterCount:       inShapes[1][0],
+		FilterHeight:      c.KernelShape[0],
+		FilterWidth:       c.KernelShape[1],
+		PadHeight:         c.Pads[0],
+		PadWidth:          c.Pads[2],
+		StrideHeight:      c.Strides[0],
+		StrideWidth:       c.Strides[1],
+		DilationHeight:    c.Dilations[0],
+		DilationWidth:     c.Dilations[1],
+		BaseBenchmarkArgs: mkBaseBenchmarkBWDArgs(&c, opts...),
+	}
+
+	hash, err := hashstructure.Hash(
+		res,
+		&hashstructure.HashOptions{
+			TagName: "hash",
+		},
+	)
+	if err != nil {
+		log.Fatal(err)
+	}
+	res.UniqueBenchmarkID = hash
+
+	return res
+}
+
 func (c Conv) FwdBenchmarkFilter(datatype, algorithm string, opts ...dlperf.FwdBenchmarkArgsOptionFunc) benchmark.Benchmark {
 	if algorithm == "" {
-		algorithm = c.FwdBenchmarkAlgorithms()[0]
+		algorithm = c.FwdBenchmarkAlgorithms(opts...)[0]
 	}
 
 	return benchmark.Benchmark{
-		Name:       mkBenchmarkFilterName(&c, datatype, algorithm),
+		Name:       mkFwdBenchmarkFilterName(&c, datatype, algorithm),
 		Attributes: benchmarkAttributes(c.FwdBenchmarkArgs(opts...)),
+	}
+}
+
+func (c Conv) BwdBenchmarkFilter(datatype, algorithm string, opts ...dlperf.BwdBenchmarkArgsOptionFunc) benchmark.Benchmark {
+	if algorithm == "" {
+		algorithm = c.BwdBenchmarkAlgorithms(opts...)[0]
+	}
+
+	return benchmark.Benchmark{
+		Name:       mkBwdBenchmarkFilterName(&c, datatype, algorithm),
+		Attributes: benchmarkAttributes(c.BwdBenchmarkArgs(opts...)),
 	}
 }
 
@@ -165,14 +261,22 @@ func (c Conv) DataTypes() []dlperf.DataType {
 	return dts
 }
 
+func (c Conv) FwdBenchmarkGenerator() string {
+	templString := _escFSMustString(false, "/scope/conv.tmpl")
+	return templateExecFWD(&c, templateBasePrefix+templString+templateBaseSuffix)
+}
+
+func (c Conv) BwdBenchmarkGenerator(opts ...dlperf.BwdBenchmarkArgsOptionFunc) string {
+	templString := _escFSMustString(false, "/scope/conv.tmpl")
+	return templateExecBWD(&c, templateBasePrefix+templString+templateBaseSuffix, opts...)
+}
+
 func (c Conv) FwdBenchmarkGeneratorArgNames() []string {
 	return benchmarkArgNames(convBenchmarkArgs{})
 }
 
-func (c Conv) FwdBenchmarkGenerator() string {
-	templString := _escFSMustString(false, "/scope/conv.tmpl")
-
-	return templateExecFWD(&c, templateBasePrefix+templString+templateBaseSuffix)
+func (c Conv) BwdBenchmarkGeneratorArgNames() []string {
+	return benchmarkArgNames(convBenchmarkArgs{})
 }
 
 func (c Conv) Shape() dlperf.ShapeInformation {

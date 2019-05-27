@@ -31,7 +31,15 @@ func (c Dropout) FwdBenchmarkName(opts ...dlperf.FwdBenchmarkArgsOptionFunc) str
 	return "LAYER_CUDNN_DROPOUT_FWD"
 }
 
+func (c Dropout) BwdBenchmarkName(opts ...dlperf.BwdBenchmarkArgsOptionFunc) string {
+	return "LAYER_CUDNN_DROPOUT_BWD"
+}
+
 func (c Dropout) FwdCUDNNName() string {
+	return ""
+}
+
+func (c Dropout) BwdCUDNNName() string {
 	return ""
 }
 
@@ -39,7 +47,17 @@ func (c Dropout) FwdTiming(system string /* hardware/software struct */) string 
 	return ""
 }
 
-func (c Dropout) FwdBenchmarkAlgorithms() []string {
+func (c Dropout) BwdTiming(system string /* hardware/software struct */) string {
+	return ""
+}
+
+func (c Dropout) FwdBenchmarkAlgorithms(...dlperf.FwdBenchmarkArgsOptionFunc) []string {
+	return []string{
+		"",
+	}
+}
+
+func (c Dropout) BwdBenchmarkAlgorithms(...dlperf.BwdBenchmarkArgsOptionFunc) []string {
 	return []string{
 		"",
 	}
@@ -50,15 +68,30 @@ type dropoutBenchmarkArgs struct {
 	BaseBenchmarkInputArgs
 }
 
-func (c Dropout) FwdBenchmarkGeneratorArgNames() []string {
-	return benchmarkArgNames(dropoutBenchmarkArgs{})
-}
-
 func (c Dropout) FwdBenchmarkArgs(opts ...dlperf.FwdBenchmarkArgsOptionFunc) interface{} {
-
 	res := dropoutBenchmarkArgs{
 		BaseBenchmarkInputArgs: mkBaseBenchmarkInputArgs(&c),
 		BaseBenchmarkArgs:      mkBaseBenchmarkFWDArgs(&c, opts...),
+	}
+
+	hash, err := hashstructure.Hash(
+		res,
+		&hashstructure.HashOptions{
+			TagName: "hash",
+		},
+	)
+	if err != nil {
+		log.Fatal(err)
+	}
+	res.UniqueBenchmarkID = hash
+
+	return res
+}
+
+func (c Dropout) BwdBenchmarkArgs(opts ...dlperf.BwdBenchmarkArgsOptionFunc) interface{} {
+	res := dropoutBenchmarkArgs{
+		BaseBenchmarkInputArgs: mkBaseBenchmarkInputArgs(&c),
+		BaseBenchmarkArgs:      mkBaseBenchmarkBWDArgs(&c, opts...),
 	}
 
 	hash, err := hashstructure.Hash(
@@ -80,14 +113,37 @@ func (c Dropout) FwdBenchmarkFilter(datatype, algorithm string, opts ...dlperf.F
 		algorithm = c.FwdBenchmarkAlgorithms()[0]
 	}
 	return benchmark.Benchmark{
-		Name:       mkBenchmarkFilterName(&c, datatype, algorithm),
+		Name:       mkFwdBenchmarkFilterName(&c, datatype, algorithm),
 		Attributes: benchmarkAttributes(c.FwdBenchmarkArgs()),
+	}
+}
+
+func (c Dropout) BwdBenchmarkFilter(datatype, algorithm string, opts ...dlperf.BwdBenchmarkArgsOptionFunc) benchmark.Benchmark {
+	if algorithm == "" {
+		algorithm = c.BwdBenchmarkAlgorithms()[0]
+	}
+	return benchmark.Benchmark{
+		Name:       mkFwdBenchmarkFilterName(&c, datatype, algorithm),
+		Attributes: benchmarkAttributes(c.BwdBenchmarkArgs()),
 	}
 }
 
 func (c Dropout) FwdBenchmarkGenerator(opts ...dlperf.FwdBenchmarkArgsOptionFunc) string {
 	templString := _escFSMustString(false, "/scope/dropout.tmpl")
 	return templateExecFWD(&c, templateBasePrefix+templString)
+}
+
+func (c Dropout) BwdBenchmarkGenerator(opts ...dlperf.BwdBenchmarkArgsOptionFunc) string {
+	templString := _escFSMustString(false, "/scope/dropout.tmpl")
+	return templateExecFWD(&c, templateBasePrefix+templString)
+}
+
+func (c Dropout) FwdBenchmarkGeneratorArgNames() []string {
+	return benchmarkArgNames(dropoutBenchmarkArgs{})
+}
+
+func (c Dropout) BwdBenchmarkGeneratorArgNames() []string {
+	return benchmarkArgNames(dropoutBenchmarkArgs{})
 }
 
 func (c Dropout) Shape() dlperf.ShapeInformation {

@@ -43,12 +43,12 @@ func templateExecFWD(lyr dlperf.Layer, templString string, opts ...dlperf.FwdBen
 	return buf.String()
 }
 
-func templateExecBWD(lyr dlperf.Layer, templString string) string {
+func templateExecBWD(lyr dlperf.Layer, templString string, opts ...dlperf.BwdBenchmarkArgsOptionFunc) string {
 	tmpl, err := mkTemplate(lyr).Parse(templString)
 	if err != nil {
 		log.Fatal(err)
 	}
-	args := lyr.BwdBenchmarkArgs()
+	args := lyr.BwdBenchmarkArgs(opts...)
 	if args == nil {
 		return ""
 	}

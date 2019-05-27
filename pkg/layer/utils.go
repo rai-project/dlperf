@@ -204,8 +204,16 @@ func multidirectionalBroadcastShapeInference(inputShapes []dlperf.Shape) []dlper
 	return []dlperf.Shape{resultShape}
 }
 
-func mkBenchmarkFilterName(layer dlperf.Layer, datatype, algorithm string) string {
+func mkFwdBenchmarkFilterName(layer dlperf.Layer, datatype, algorithm string) string {
 	name := "^" + layer.FwdBenchmarkName() + "_" + strings.ToUpper(datatype) + `(__\d+)?`
+	if algorithm != "" {
+		name += `<(.*,\s*)*` + strings.ToUpper(algorithm) + `(\s*,.*)*>`
+	}
+	return name + ".*"
+}
+
+func mkBwdBenchmarkFilterName(layer dlperf.Layer, datatype, algorithm string) string {
+	name := "^" + layer.BwdBenchmarkName() + "_" + strings.ToUpper(datatype) + `(__\d+)?`
 	if algorithm != "" {
 		name += `<(.*,\s*)*` + strings.ToUpper(algorithm) + `(\s*,.*)*>`
 	}

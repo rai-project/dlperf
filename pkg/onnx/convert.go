@@ -233,27 +233,27 @@ func (o Onnx) mkReduceMin(node *onnx.NodeProto) dlperf.Layer {
 	axesAttr := getNodeAttributeFromName(node, "axes")
 	keepDimsAttr := getNodeAttributeFromName(node, "keepdims")
 	return &layer.Reduce{
-    Base: o.mkBase(node, "ReduceMin"),
-    Axes: axesAttr.GetInts(),
-    KeepDims: keepDimsAttr.GetI() == 1,
+		Base:     o.mkBase(node, "ReduceMin"),
+		Axes:     axesAttr.GetInts(),
+		KeepDims: keepDimsAttr.GetI() == 1,
 	}
 }
 
 func (o Onnx) mkTopK(node *onnx.NodeProto) dlperf.Layer {
-  axis := int64(-1)
+	axis := int64(-1)
 	axisAttr := getNodeAttributeFromName(node, "axis")
-  if axisAttr.GetI() != 0 {
-    axis = axisAttr.GetI()
-  } else if axisAttr.GetInts() != nil {
+	if axisAttr.GetI() != 0 {
+		axis = axisAttr.GetI()
+	} else if axisAttr.GetInts() != nil {
 		axis = axisAttr.GetInts()[0]
-  }
+	}
 
-  // k := o.getTensorProtoByName(node.Input[1])
-  pp.Println(node.Input)
-  
+	// k := o.getTensorProtoByName(node.Input[1])
+	pp.Println(node.Input)
+
 	return &layer.TopK{
-    Base: o.mkBase(node, "TopK"),
-    Axis: axis,
+		Base: o.mkBase(node, "TopK"),
+		Axis: axis,
 	}
 }
 

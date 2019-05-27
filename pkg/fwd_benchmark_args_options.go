@@ -13,7 +13,7 @@ type fwdBenchmarkArgsOptionHandler struct {
 var FwdBenchmarkArgsOption = fwdBenchmarkArgsOptionHandler{
 	IsTraining: func(isTraining bool) FwdBenchmarkArgsOptionFunc {
 		return func(o *fwdBenchmarkArgsOptions) {
-			o.IsTraining = true
+			o.IsTraining = isTraining
 		}
 	},
 }

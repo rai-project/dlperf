@@ -47,7 +47,7 @@ func mkBaseBenchmarkFWDArgs(c dlperf.Layer, opts ...dlperf.FwdBenchmarkArgsOptio
 	return BaseBenchmarkArgs{
 		BenchmarkName: c.FwdBenchmarkName(opts...),
 		ArgNames:      c.FwdBenchmarkGeneratorArgNames(),
-		Algorithms:    c.FwdBenchmarkAlgorithms(),
+		Algorithms:    c.FwdBenchmarkAlgorithms(opts...),
 		DataTypes:     c.DataTypes(),
 	}
 }
@@ -269,7 +269,7 @@ func (b Base) FwdBenchmarkGeneratorArgNames() []string {
 	return nil
 }
 
-func (b Base) FwdBenchmarkAlgorithms() []string {
+func (b Base) FwdBenchmarkAlgorithms(...dlperf.FwdBenchmarkArgsOptionFunc) []string {
 	panic("FwdBenchmarkAlgorithms not implemented")
 	return nil
 }
@@ -297,7 +297,7 @@ func (b Base) BwdBenchmarkGeneratorArgNames() []string {
 	return nil
 }
 
-func (b Base) BwdBenchmarkAlgorithms() []string {
+func (b Base) BwdBenchmarkAlgorithms(...dlperf.BwdBenchmarkArgsOptionFunc) []string {
 	panic("BwdBenchmarkAlgorithms not implemented")
 	return nil
 }
