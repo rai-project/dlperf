@@ -116,21 +116,27 @@ func (c Softmax) BwdBenchmarkArgs(opts ...dlperf.BwdBenchmarkArgsOptionFunc) int
 }
 
 func (c Softmax) FwdBenchmarkFilter(datatype, algorithm string, opts ...dlperf.FwdBenchmarkArgsOptionFunc) benchmark.Benchmark {
+	var alg string
 	if algorithm == "" {
-		algorithm = c.FwdBenchmarkAlgorithms()[0]
+		alg = "CUDNN_SOFTMAX_FAST"
+	} else {
+		alg = "CUDNN_SOFTMAX_FAST, " + algorithm
 	}
 	return benchmark.Benchmark{
-		Name:       mkFwdBenchmarkFilterName(&c, datatype, "CUDNN_SOFTMAX_FAST, "+algorithm),
+		Name:       mkFwdBenchmarkFilterName(&c, datatype, alg),
 		Attributes: benchmarkAttributes(c.FwdBenchmarkArgs(opts...)),
 	}
 }
 
 func (c Softmax) BwdBenchmarkFilter(datatype, algorithm string, opts ...dlperf.BwdBenchmarkArgsOptionFunc) benchmark.Benchmark {
+	var alg string
 	if algorithm == "" {
-		algorithm = c.BwdBenchmarkAlgorithms()[0]
+		alg = "CUDNN_SOFTMAX_FAST"
+	} else {
+		alg = "CUDNN_SOFTMAX_FAST, " + algorithm
 	}
 	return benchmark.Benchmark{
-		Name:       mkBwdBenchmarkFilterName(&c, datatype, "CUDNN_SOFTMAX_FAST, "+algorithm),
+		Name:       mkBwdBenchmarkFilterName(&c, datatype, alg),
 		Attributes: benchmarkAttributes(c.BwdBenchmarkArgs(opts...)),
 	}
 }

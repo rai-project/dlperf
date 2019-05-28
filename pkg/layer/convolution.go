@@ -115,7 +115,7 @@ func (c Conv) FwdBenchmarkAlgorithms(...dlperf.FwdBenchmarkArgsOptionFunc) []str
 func (c Conv) BwdBenchmarkAlgorithms(iopts ...dlperf.BwdBenchmarkArgsOptionFunc) []string {
 	opts := dlperf.CreateBwdBenchmarkArgsOption(iopts...)
 	if false {
-	pp.Println(opts.ConvBwdType.String())
+		pp.Println(opts.ConvBwdType.String())
 	}
 	switch opts.ConvBwdType {
 	case dlperf.ConvBwdTypeData:
@@ -133,12 +133,11 @@ func (c Conv) BwdBenchmarkAlgorithms(iopts ...dlperf.BwdBenchmarkArgsOptionFunc)
 			"CUDNN_CONVOLUTION_BWD_FILTER_ALGO_1",
 			"CUDNN_CONVOLUTION_BWD_FILTER_ALGO_FFT",
 			"CUDNN_CONVOLUTION_BWD_FILTER_ALGO_3",
-			"CUDNN_CONVOLUTION_BWD_FILTER_ALGO_WINOGRAD_NONFUSED", 
+			"CUDNN_CONVOLUTION_BWD_FILTER_ALGO_WINOGRAD_NONFUSED",
 			"CUDNN_CONVOLUTION_BWD_FILTER_ALGO_FFT_TILING",
 		}
 	case dlperf.ConvBwdTypeBias:
-		return []string{
-		}
+		return []string{}
 	default:
 		return []string{}
 	}
@@ -146,20 +145,20 @@ func (c Conv) BwdBenchmarkAlgorithms(iopts ...dlperf.BwdBenchmarkArgsOptionFunc)
 
 type convBenchmarkArgs struct {
 	BaseBenchmarkArgs
-	Input0         int64 `args:"input[0]" hash:"input[0]" json:"input_0,omitempty"`
-	Input1         int64 `args:"input[1]" hash:"input[1]" json:"input_1,omitempty"`
-	Input2         int64 `args:"input[2]" hash:"input[2]" json:"input_2,omitempty"`
-	Input3         int64 `args:"input[3]" hash:"input[3]" json:"input_3,omitempty"`
-	FilterCount    int64 `args:"filter_count" hash:"filter_count" json:"filter_count,omitempty"`
-	FilterHeight   int64 `args:"filter_height" hash:"filter_height" json:"filter_height,omitempty"`
-	FilterWidth    int64 `args:"filter_width" hash:"filter_width" json:"filter_width,omitempty"`
-	PadHeight      int64 `args:"pad_height" hash:"pad_height" json:"pad_height,omitempty"`
-	PadWidth       int64 `args:"pad_width" hash:"pad_width" json:"pad_width,omitempty"`
-	StrideHeight   int64 `args:"stride_height" hash:"stride_height" json:"stride_height,omitempty"`
-	StrideWidth    int64 `args:"stride_width" hash:"stride_width" json:"stride_width,omitempty"`
-	DilationWidth  int64 `args:"dilation_height" hash:"dilation_height" json:"dilation_width,omitempty"`
-	DilationHeight int64 `args:"dilation_width" hash:"dilation_width" json:"dilation_height,omitempty"`
-	ConvBwdType dlperf.ConvBwdType `args:"-" hash:"-" json:"conv_bwd_type,omitempty"`
+	Input0         int64              `args:"input[0]" hash:"input[0]" json:"input_0,omitempty"`
+	Input1         int64              `args:"input[1]" hash:"input[1]" json:"input_1,omitempty"`
+	Input2         int64              `args:"input[2]" hash:"input[2]" json:"input_2,omitempty"`
+	Input3         int64              `args:"input[3]" hash:"input[3]" json:"input_3,omitempty"`
+	FilterCount    int64              `args:"filter_count" hash:"filter_count" json:"filter_count,omitempty"`
+	FilterHeight   int64              `args:"filter_height" hash:"filter_height" json:"filter_height,omitempty"`
+	FilterWidth    int64              `args:"filter_width" hash:"filter_width" json:"filter_width,omitempty"`
+	PadHeight      int64              `args:"pad_height" hash:"pad_height" json:"pad_height,omitempty"`
+	PadWidth       int64              `args:"pad_width" hash:"pad_width" json:"pad_width,omitempty"`
+	StrideHeight   int64              `args:"stride_height" hash:"stride_height" json:"stride_height,omitempty"`
+	StrideWidth    int64              `args:"stride_width" hash:"stride_width" json:"stride_width,omitempty"`
+	DilationWidth  int64              `args:"dilation_height" hash:"dilation_height" json:"dilation_width,omitempty"`
+	DilationHeight int64              `args:"dilation_width" hash:"dilation_width" json:"dilation_height,omitempty"`
+	ConvBwdType    dlperf.ConvBwdType `args:"-" hash:"-" json:"conv_bwd_type,omitempty"`
 }
 
 func (c Conv) FwdBenchmarkArgs(opts ...dlperf.FwdBenchmarkArgsOptionFunc) interface{} {
@@ -215,7 +214,7 @@ func (c Conv) BwdBenchmarkArgs(iopts ...dlperf.BwdBenchmarkArgsOptionFunc) inter
 		DilationHeight:    c.Dilations[0],
 		DilationWidth:     c.Dilations[1],
 		BaseBenchmarkArgs: mkBaseBenchmarkBWDArgs(&c, iopts...),
-		ConvBwdType: opts.ConvBwdType,
+		ConvBwdType:       opts.ConvBwdType,
 	}
 
 	hash, err := hashstructure.Hash(
@@ -233,10 +232,6 @@ func (c Conv) BwdBenchmarkArgs(iopts ...dlperf.BwdBenchmarkArgsOptionFunc) inter
 }
 
 func (c Conv) FwdBenchmarkFilter(datatype, algorithm string, opts ...dlperf.FwdBenchmarkArgsOptionFunc) benchmark.Benchmark {
-	if algorithm == "" {
-		algorithm = c.FwdBenchmarkAlgorithms(opts...)[0]
-	}
-
 	return benchmark.Benchmark{
 		Name:       mkFwdBenchmarkFilterName(&c, datatype, algorithm),
 		Attributes: benchmarkAttributes(c.FwdBenchmarkArgs(opts...)),
@@ -244,10 +239,6 @@ func (c Conv) FwdBenchmarkFilter(datatype, algorithm string, opts ...dlperf.FwdB
 }
 
 func (c Conv) BwdBenchmarkFilter(datatype, algorithm string, opts ...dlperf.BwdBenchmarkArgsOptionFunc) benchmark.Benchmark {
-	if algorithm == "" {
-		algorithm = c.BwdBenchmarkAlgorithms(opts...)[0]
-	}
-
 	return benchmark.Benchmark{
 		Name:       mkBwdBenchmarkFilterName(&c, datatype, algorithm),
 		Attributes: benchmarkAttributes(c.BwdBenchmarkArgs(opts...)),
@@ -273,15 +264,15 @@ func (c Conv) FwdBenchmarkGenerator() string {
 }
 
 func (c Conv) BwdBenchmarkGenerator(iopts ...dlperf.BwdBenchmarkArgsOptionFunc) string {
-	var templString string 
+	var templString string
 	opts := dlperf.CreateBwdBenchmarkArgsOption(iopts...)
-	
+
 	switch opts.ConvBwdType {
-		case dlperf.ConvBwdTypeData, dlperf.ConvBwdTypeFilter:
-			templString = _escFSMustString(false, "/scope/conv_bwd.tmpl")
-		case dlperf.ConvBwdTypeBias:
-			templString = _escFSMustString(false, "/scope/conv_bias.tmpl")
-		}
+	case dlperf.ConvBwdTypeData, dlperf.ConvBwdTypeFilter:
+		templString = _escFSMustString(false, "/scope/conv_bwd.tmpl")
+	case dlperf.ConvBwdTypeBias:
+		templString = _escFSMustString(false, "/scope/conv_bias.tmpl")
+	}
 
 	return templateExecBWD(&c, templateBasePrefix+templString+templateBaseSuffix, iopts...)
 }

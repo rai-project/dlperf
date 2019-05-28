@@ -109,9 +109,6 @@ func (c Dropout) BwdBenchmarkArgs(opts ...dlperf.BwdBenchmarkArgsOptionFunc) int
 }
 
 func (c Dropout) FwdBenchmarkFilter(datatype, algorithm string, opts ...dlperf.FwdBenchmarkArgsOptionFunc) benchmark.Benchmark {
-	if algorithm == "" {
-		algorithm = c.FwdBenchmarkAlgorithms()[0]
-	}
 	return benchmark.Benchmark{
 		Name:       mkFwdBenchmarkFilterName(&c, datatype, algorithm),
 		Attributes: benchmarkAttributes(c.FwdBenchmarkArgs()),
@@ -119,11 +116,8 @@ func (c Dropout) FwdBenchmarkFilter(datatype, algorithm string, opts ...dlperf.F
 }
 
 func (c Dropout) BwdBenchmarkFilter(datatype, algorithm string, opts ...dlperf.BwdBenchmarkArgsOptionFunc) benchmark.Benchmark {
-	if algorithm == "" {
-		algorithm = c.BwdBenchmarkAlgorithms()[0]
-	}
 	return benchmark.Benchmark{
-		Name:       mkFwdBenchmarkFilterName(&c, datatype, algorithm),
+		Name:       mkBwdBenchmarkFilterName(&c, datatype, algorithm),
 		Attributes: benchmarkAttributes(c.BwdBenchmarkArgs()),
 	}
 }

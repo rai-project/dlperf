@@ -126,9 +126,6 @@ func (c BatchNorm) BwdBenchmarkArgs(iopts ...dlperf.BwdBenchmarkArgsOptionFunc) 
 }
 
 func (c BatchNorm) FwdBenchmarkFilter(datatype, algorithm string, opts ...dlperf.FwdBenchmarkArgsOptionFunc) benchmark.Benchmark {
-	if algorithm == "" {
-		algorithm = c.FwdBenchmarkAlgorithms(opts...)[0]
-	}
 	return benchmark.Benchmark{
 		Name:       mkFwdBenchmarkFilterName(&c, datatype, algorithm),
 		Attributes: benchmarkAttributes(c.FwdBenchmarkArgs()),
@@ -136,9 +133,6 @@ func (c BatchNorm) FwdBenchmarkFilter(datatype, algorithm string, opts ...dlperf
 }
 
 func (c BatchNorm) BwdBenchmarkFilter(datatype, algorithm string, opts ...dlperf.BwdBenchmarkArgsOptionFunc) benchmark.Benchmark {
-	if algorithm == "" {
-		algorithm = c.BwdBenchmarkAlgorithms(opts...)[0]
-	}
 	return benchmark.Benchmark{
 		Name:       mkBwdBenchmarkFilterName(&c, datatype, algorithm),
 		Attributes: benchmarkAttributes(c.BwdBenchmarkArgs(opts...)),

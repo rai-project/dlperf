@@ -162,9 +162,6 @@ func (c Relu) BwdBenchmarkArgs(opts ...dlperf.BwdBenchmarkArgsOptionFunc) interf
 }
 
 func (c Relu) FwdBenchmarkFilter(datatype, algorithm string, opts ...dlperf.FwdBenchmarkArgsOptionFunc) benchmark.Benchmark {
-	if algorithm == "" {
-		algorithm = c.substituteAlgorithm(c.FwdBenchmarkAlgorithms()[0])
-	}
 	return benchmark.Benchmark{
 		Name:       mkFwdBenchmarkFilterName(&c, datatype, algorithm),
 		Attributes: benchmarkAttributes(c.FwdBenchmarkArgs()),
@@ -172,9 +169,6 @@ func (c Relu) FwdBenchmarkFilter(datatype, algorithm string, opts ...dlperf.FwdB
 }
 
 func (c Relu) BwdBenchmarkFilter(datatype, algorithm string, opts ...dlperf.BwdBenchmarkArgsOptionFunc) benchmark.Benchmark {
-	if algorithm == "" {
-		algorithm = c.substituteAlgorithm(c.FwdBenchmarkAlgorithms()[0])
-	}
 	return benchmark.Benchmark{
 		Name:       mkBwdBenchmarkFilterName(&c, datatype, algorithm),
 		Attributes: benchmarkAttributes(c.FwdBenchmarkArgs()),
