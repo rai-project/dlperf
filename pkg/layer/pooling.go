@@ -192,7 +192,7 @@ func (c Pooling) FwdBenchmarkGenerator() string {
 
 func (c Pooling) BwdBenchmarkGenerator() string {
 	templString := _escFSMustString(false, "/scope/pooling.tmpl")
-	return templateExecFWD(&c, templateBasePrefix+templString+templateBaseSuffix)
+	return templateExecBWD(&c, templateBasePrefix+templString+templateBaseSuffix)
 }
 
 func (c Pooling) FwdBenchmarkGeneratorArgNames() []string {

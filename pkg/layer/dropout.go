@@ -135,7 +135,7 @@ func (c Dropout) FwdBenchmarkGenerator(opts ...dlperf.FwdBenchmarkArgsOptionFunc
 
 func (c Dropout) BwdBenchmarkGenerator(opts ...dlperf.BwdBenchmarkArgsOptionFunc) string {
 	templString := _escFSMustString(false, "/scope/dropout.tmpl")
-	return templateExecFWD(&c, templateBasePrefix+templString)
+	return templateExecBWD(&c, templateBasePrefix+templString)
 }
 
 func (c Dropout) FwdBenchmarkGeneratorArgNames() []string {
