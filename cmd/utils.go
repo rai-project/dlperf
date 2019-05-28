@@ -109,6 +109,11 @@ func readModels(modelPath string) ([]*onnx.Onnx, error) {
 	g, _ := errgroup.WithContext(context.Background())
 	for ii := range modelPaths {
 		idx := ii
+		modelPath := modelPaths[ii]
+		modelName := getModelName(modelPath)
+		if strings.HasPrefix(modelName, ".") || strings.HasPrefix(filepath.Base(modelPath), ".") {
+			continue
+		}
 		g.Go(func() error {
 
 			path := modelPaths[idx]
