@@ -6,6 +6,8 @@ import (
 	"strings"
 	"time"
 
+	"github.com/pkg/errors"
+	sourcepath "github.com/GeertJohan/go-sourcepath"
 	"github.com/k0kubun/pp"
 	"github.com/spf13/cobra"
 
@@ -15,13 +17,15 @@ import (
 )
 
 var (
-	benchmarkResultsFolder string
+  benchmarkResultsFolder string
+  benchInfoTraining bool 
+  benchInfoDataType string
 )
 
 // benchinfoCmd represents the benchinfo command
 var benchinfoCmd = &cobra.Command{
 	Use:     "benchinfo",
-	Aliases: []string{"bench"},
+	Aliases: []string{"info", "recall"},
 	Short:   "Prints out the benchmark information",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		modelPath = expandModelPath(modelPath)
@@ -67,40 +71,76 @@ var benchinfoCmd = &cobra.Command{
 			case "concat":
 				fmt.Println("Concat is skipped for now")
 				continue
+			case "flatten":
+				fmt.Println("Faltten is skipped for now")
+				continue
+			case "globalpooling":
+				fmt.Println("GlobalPooling is skipped for now")
+				continue
 			case "identity":
 				fmt.Println("Identity is skipped for now")
 				continue
 			case "elementwise":
 				fmt.Println("Elementwise is not supported by CUDNN")
 				continue
-			}
+      }
 			// if lyr.OperatorType() != "Conv" && lyr.OperatorType() != "Relu" {
 			// 	pp.Println(lyr.OperatorType())
 			// 	continue
-			// }
-			filter := lyr.FwdBenchmarkFilter("float32", "")
-			bs, err := benchSuite.Filter(filter)
-			if err != nil {
-				// pp.ColoringEnabled = false
-				// log.WithError(err).WithField("filter", pp.Sprint(filter)).Error("failed to find benchmark within benchmark suite")
-				// pp.ColoringEnabled = true
-				// continue
+      // }
 
-				pp.Println(lyr.Name())
-				pp.Println(filter)
-				continue
-			}
-			if len(bs) == 0 {
-				// pp.ColoringEnabled = false
-				// log.WithField("filter", pp.Sprint(filter)).Error("unable to find benchmark within benchmark suite")
-				// pp.ColoringEnabled = true
-				// continue
-				pp.Println(lyr.Name())
-				pp.Println(filter)
-				continue
-			}
+      filterBenchmarks := func(benchInfoBackward bool, datatype string, algorithm string, iopts ...interface{})  *benchmark.Benchmark {
+        if benchInfoBackward {
+          opts := make([]dlperf.BwdBenchmarkArgsOptionFunc, len(iopts))
+          for ii, opt := range iopts {
+            opts[ii] = opt.(dlperf.BwdBenchmarkArgsOptionFunc)
+          }
+          filter := lyr.BwdBenchmarkFilter(datatype, algorithm, opts...)
+          return &filter
+        }
+        
+          opts := make([]dlperf.FwdBenchmarkArgsOptionFunc, len(iopts))
+          for ii, opt := range iopts {
+            opts[ii] = opt.(dlperf.FwdBenchmarkArgsOptionFunc)
+          }
+          filter := lyr.FwdBenchmarkFilter(datatype, algorithm, opts...)
+          return &filter
+        }
+      }
+
+      getBenchmarkTime := func(filter *benchmark.Benchmark) (benchmark.Benchmarks, error) {
+        if filter == nil {
+          pp.Println(lyr.Name())
+          pp.Println(filter)
+          return nil, errors.New("empty filter")
+        }
+        bs, err := benchSuite.Filter(*filter)
+        if err != nil {
+          // pp.ColoringEnabled = false
+          // log.WithError(err).WithField("filter", pp.Sprint(filter)).Error("failed to find benchmark within benchmark suite")
+          // pp.ColoringEnabled = true
+          // continue
+  
+          pp.Println(lyr.Name())
+          pp.Println(filter)
+          return nil, errors.New("invalid filter benchmarks")
+        }
+        if len(bs) == 0 {
+          // pp.ColoringEnabled = false
+          // log.WithField("filter", pp.Sprint(filter)).Error("unable to find benchmark within benchmark suite")
+          // pp.ColoringEnabled = true
+          // continue
+          pp.Println(lyr.OperatorType())
+          pp.Println(lyr.Name())
+          pp.Println(filter)
+          return nil, errors.New("no benchmarks")
+        }
+        return bs, nil
+      }
+      
+      addLayerInfos := func (bs benchmark.Benchmarks) {
 			info := lyr.Information()
-			if len(bs) > 0 {
+			if len(bs) > 0  {
 				totalTime = totalTime + bs[0].RealTime
 			}
 			for _, b := range bs {
@@ -110,6 +150,52 @@ var benchinfoCmd = &cobra.Command{
 					flops:     info.Flops(),
 				})
 			}
+      }
+
+			switch strings.ToLower(lyr.OperatorType()) {
+      case "relu", "pooling", "softmax",  "dropout":
+      filter := filterBenchmarks(false, benchInfoDataType, "")
+      bs, err := getBenchmarkTime(filter)
+      if err != nil {
+        continue 
+      }
+      addLayerInfos(bs)
+
+      if benchInfoTraining {
+        filter := filterBenchmarks(true, benchInfoDataType, "")
+      bs, err := getBenchmarkTime(filter)
+      if err != nil {
+        continue 
+      }
+      addLayerInfos(bs)
+      }
+    case "conv":
+    case "batchnorm":
+      var filter *benchmark.Benchmark
+      if benchInfoTraining {
+        filter = filterBenchmarks(false, benchInfoDataType, dlperf.FwdBenchmarkArgsOption.IsTraining(true))
+      } else {
+        filter = filterBenchmarks(false, benchInfoDataType, dlperf.FwdBenchmarkArgsOption.IsTraining(false))
+      }
+      bs, err := getBenchmarkTime(filter)
+      if err != nil {
+        continue 
+      }
+      addLayerInfos(bs)
+
+
+      if benchInfoTraining {
+        filter := filterBenchmarks(true, benchInfoDataType, "")
+      bs, err := getBenchmarkTime(filter)
+      if err != nil {
+        continue 
+      }
+      addLayerInfos(bs)
+      }
+    default:
+      pp.Println(lyr.OperatorType())
+      }
+      
 		}
 		benchmarkInfo = append(benchmarkInfo, bench{
 			benchmark: benchmark.Benchmark{
@@ -137,7 +223,9 @@ var benchinfoCmd = &cobra.Command{
 }
 
 func init() {
-	benchmarkResultsFolder = filepath.Join(raiSrcPath, "microbench", "results", "cudnn", "tesla.ncsa.illinois.edu")
+  benchmarkResultsFolder = filepath.Join(sourcepath.MustAbsoluteDir(), "..", "results")
+	benchinfoCmd.PersistentFlags().BoolVar(&benchInfoTraining, "training", false, "compute the training information")
+  benchinfoCmd.PersistentFlags().StringVar(&benchInfoDataType, "datatype", "float32", "compute the information for the specified scalar datatype")
 	benchinfoCmd.PersistentFlags().StringVar(&benchmarkResultsFolder, "benchmark_database", benchmarkResultsFolder, "path to the benchmark results folder")
 	rootCmd.AddCommand(benchinfoCmd)
 }
