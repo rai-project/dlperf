@@ -149,6 +149,10 @@ func (c Softmax) FwdBenchmarkGeneratorArgNames() []string {
 	return benchmarkArgNames(softmaxBenchmarkArgs{})
 }
 
+func (c Softmax) BwdBenchmarkGeneratorArgNames() []string {
+	return benchmarkArgNames(softmaxBenchmarkArgs{})
+}
+
 func (c Softmax) Information() dlperf.LayerInformation {
 	info := &Information{
 		Base: c.Base,

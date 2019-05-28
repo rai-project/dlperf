@@ -75,20 +75,6 @@ func mkBaseBenchmarkInputArgs(c dlperf.Layer) BaseBenchmarkInputArgs {
 	}
 }
 
-func mkBaseBenchmarkOutputArgs(c dlperf.Layer) BaseBenchmarkInputArgs {
-	output := c.OutputShapes()[0]
-	return BaseBenchmarkInputArgs{
-		Input0: getOrMinus1(output, 0),
-		Input1: getOrMinus1(output, 1),
-		Input2: getOrMinus1(output, 2),
-		Input3: getOrMinus1(output, 3),
-		Input4: getOrMinus1(output, 4),
-		Input5: getOrMinus1(output, 5),
-		Input6: getOrMinus1(output, 6),
-		Input7: getOrMinus1(output, 7),
-	}
-}
-
 func (b *Base) Name() string {
 	if b == nil {
 		return ""

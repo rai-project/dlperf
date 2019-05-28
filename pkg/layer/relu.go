@@ -138,7 +138,7 @@ func (c Relu) FwdBenchmarkArgs(opts ...dlperf.FwdBenchmarkArgsOptionFunc) interf
 
 func (c Relu) BwdBenchmarkArgs(opts ...dlperf.BwdBenchmarkArgsOptionFunc) interface{} {
 	res := reluBenchmarkArgs{
-		BaseBenchmarkInputArgs: mkBaseBenchmarkOutputArgs(&c),
+		BaseBenchmarkInputArgs: mkBaseBenchmarkInputArgs(&c),
 		BaseBenchmarkArgs:      mkBaseBenchmarkBWDArgs(&c, opts...),
 	}
 
