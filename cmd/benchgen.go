@@ -11,7 +11,6 @@ import (
 	"github.com/k0kubun/pp"
 	dlperf "github.com/rai-project/dlperf/pkg"
 	"golang.org/x/sync/errgroup"
-
 	perflayer "github.com/rai-project/dlperf/pkg/layer"
 	"github.com/spf13/cobra"
 )
@@ -123,9 +122,9 @@ var benchgenCmd = &cobra.Command{
 						l := lyr.(*perflayer.Conv)
 						b = l.BwdBenchmarkGenerator(dlperf.BwdBenchmarkArgsOption.ConvBwdType(dlperf.ConvBwdTypeData))
 						b += "\n"
-						b = l.BwdBenchmarkGenerator(dlperf.BwdBenchmarkArgsOption.ConvBwdType(dlperf.ConvBwdTypeFilter))
+						b += l.BwdBenchmarkGenerator(dlperf.BwdBenchmarkArgsOption.ConvBwdType(dlperf.ConvBwdTypeFilter))
 						b += "\n"
-						b = l.BwdBenchmarkGenerator(dlperf.BwdBenchmarkArgsOption.ConvBwdType(dlperf.ConvBwdTypeBias))
+						b += l.BwdBenchmarkGenerator(dlperf.BwdBenchmarkArgsOption.ConvBwdType(dlperf.ConvBwdTypeBias))
 					// case "relu":
 					// 	l := lyr.(*perflayer.Relu)
 					// 	b = l.BwdBenchmarkGenerator()

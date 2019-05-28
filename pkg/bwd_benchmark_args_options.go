@@ -3,9 +3,10 @@ package dlperf
 type ConvBwdType int
 
 const (
-	ConvBwdTypeData   ConvBwdType = 0
-	ConvBwdTypeFilter ConvBwdType = 1
-	ConvBwdTypeBias   ConvBwdType = 2
+	ConvBwdTypeUndefined ConvBwdType = 0
+	ConvBwdTypeData   ConvBwdType = 1
+	ConvBwdTypeFilter ConvBwdType = 2
+	ConvBwdTypeBias   ConvBwdType = 3
 )
 
 type bwdBenchmarkArgsOptions struct {

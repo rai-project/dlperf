@@ -6,6 +6,8 @@ import (
 	"bytes"
 	"compress/gzip"
 	"encoding/base64"
+	"fmt"
+	"io"
 	"io/ioutil"
 	"net/http"
 	"os"
@@ -100,7 +102,24 @@ func (f *_escFile) Close() error {
 }
 
 func (f *_escFile) Readdir(count int) ([]os.FileInfo, error) {
-	return nil, nil
+	if !f.isDir {
+		return nil, fmt.Errorf(" escFile.Readdir: '%s' is not directory", f.name)
+	}
+
+	fis, ok := _escDirs[f.local]
+	if !ok {
+		return nil, fmt.Errorf(" escFile.Readdir: '%s' is directory, but we have no info about content of this dir, local=%s", f.name, f.local)
+	}
+	limit := count
+	if count <= 0 || limit > len(fis) {
+		limit = len(fis)
+	}
+
+	if len(fis) == 0 && count > 0 {
+		return nil, io.EOF
+	}
+
+	return fis[0:limit], nil
 }
 
 func (f *_escFile) Stat() (os.FileInfo, error) {
@@ -172,7 +191,7 @@ func _escFSByte(useLocal bool, name string) ([]byte, error) {
 func _escFSMustByte(useLocal bool, name string) []byte {
 	b, err := _escFSByte(useLocal, name)
 	if err != nil {
-		log.Fatal(err)
+		panic(err)
 	}
 	return b
 }
@@ -191,9 +210,10 @@ func _escFSMustString(useLocal bool, name string) string {
 var _escData = map[string]*_escFile{
 
 	"/scope/base_prefix.tmpl": {
+		name:    "base_prefix.tmpl",
 		local:   "codegen/scope/base_prefix.tmpl",
 		size:    458,
-		modtime: 1540763274,
+		modtime: 1558740137,
 		compressed: `
 H4sIAAAAAAAC/5SQ30rDMBjF7/MUhw2kBekDzKtsKzp0Ufbnqgshdl9nHE21Sb3J+u4StKIwEe9yOCf8
 Pn5jU+2pQi749C5XRYFsSrZ8qnV7FLomSMmsrsm96JJwrlaqKLKtNa8dfVWLuZQIjI33VBlLmOZidrPk
@@ -204,22 +224,25 @@ MbrECFJGivPamxJvjdn/ReLzuZrdb8UmX61/U5M8DmkyWXvt6QKRQCkCw8czK5vOempdZqyj1ifhh4qh
 	},
 
 	"/scope/base_suffix.tmpl": {
+		name:    "base_suffix.tmpl",
 		local:   "codegen/scope/base_suffix.tmpl",
-		size:    599,
-		modtime: 1540763274,
+		size:    848,
+		modtime: 1559014401,
 		compressed: `
-H4sIAAAAAAAC/5SRwWrCQBCG73mKgeSQQI33SoVNXVqpCWKT0zqEsZnoUrNNY3IQ2ncvUZQtFazHnd1v
-/vl23IJLbRgimTw+x2LxkisFYcTmbVNR855QxYDorwJYOkpBQ2bN4NF2/dHodlPB/QOE4nTaAaLVKZXx
-fCZS6a/uQCmbQgwGY1g68DvX+xOcT5N5luZi8ZQnIpavfjAY34SdiWzHMZmOtqmu2A9GRx82BSA6llpB
-LbX7mg9mE2op3dfci12J9C8P0ldPLcND8Qu6uuamv8yV8sLM6M+Oz+B0ghiMrNnczhRcXlmQJXwrcPzY
-/1HOt+OyKXQJwyHIREQzefndTwAAAP//W6VtSVcCAAA=
+H4sIAAAAAAAC/8yST2vyQBCH7/spBvSwgfeNPVdaWOvSSk0QG0/rEtZmkixNtjF/DkL73ctqNbEK1ltv
+YWZ+mecZthdhrA3CiPsPTx6bP4dCgDtC85rmqnzzVY4gJV05sCRCQF9lyXup6zSfoknqFG7vIEMDLtvX
+K5AShAAdA65P529s+7CMrpz/90sCAMcA/ROCcOLPFkHI5o+hzzz+Qq8PdjKLCj1lGpUFOkfqDHdymFX4
+TV8qk2CH3nr+cGz3BtybTVnA6eofHN0IpPwzfmDR0EQgJWm/SOsaqVrVmwK3qmNVq2BToDW9AEDPY9nq
+/pfutvgBTVFgaZuhEH13YfS6wUNwMpbSGXbYeo2JML7wMjv61wZ2h/5dinySHppIxzAYAPfZaMrPz30F
+AAD//4/GP2NQAwAA
 `,
 	},
 
 	"/scope/batchnorm.tmpl": {
+		name:    "batchnorm.tmpl",
 		local:   "codegen/scope/batchnorm.tmpl",
 		size:    367,
-		modtime: 1540763274,
+		modtime: 1558740137,
 		compressed: `
 H4sIAAAAAAAC/3SQ3UoDMRCF7/MUc7FIBdkHWKvQ3S1YpCv05yqEME0Gu9j8mM4KRX13ibKC0l6eE3K+
 M0dICQn9M0FhkZFPkaC6g7JFxs0p0hGUEkwuHpAJpmaw3tfIZt+F5JbBkmbYZe1DctoFS/fiyMi9gbfQ
@@ -228,10 +251,41 @@ W5ASirImb/YO00uHjkApnd0RV36bHzDESCk/aimLcuv714F+Py5apSa7UVXVmpHpCjKJruFdwAXQwsXD
 `,
 	},
 
-	"/scope/conv.tmpl": {
-		local:   "codegen/scope/conv.tmpl",
+	"/scope/conv_bias.tmpl": {
+		name:    "conv_bias.tmpl",
+		local:   "codegen/scope/conv_bias.tmpl",
+		size:    644,
+		modtime: 1559014909,
+		compressed: `
+H4sIAAAAAAAC/6yRX2uDMBTF3/spLp2M7sW+uz/QqtAyFsXoUwghq9ctTKON6aBs++7DOieFDlboW3Jz
+7vndnMsYGKlfEJxcWmn3DYJ3D24grUz3DbbA+QSAMVAF4HZUuURWCNMUdVsbvza4kmUx7dVXqsixAD8L
+CBE0i+MoSalIQ0KjREQx7Q1R5728tdKqDbzXKu/qjrtEvXmtpHk7MDgXXfUY/Am7pkHTPQrGHDfTarvD
+38Z1wPnsebh5HrXS4vWBhDfwMQE4908/HSeGW1dNeXc0od8lB5w/zHrg7cDDssVL2g0JAixD4q+eFsmj
+OO26CALhRxlJw4T+ndjo/3X+0lHnqoD5HP65+PH0HQAA///VR53ohAIAAA==
+`,
+	},
+
+	"/scope/conv_bwd.tmpl": {
+		name:    "conv_bwd.tmpl",
+		local:   "codegen/scope/conv_bwd.tmpl",
+		size:    858,
+		modtime: 1559016003,
+		compressed: `
+H4sIAAAAAAAC/6ySX8vaMBTG7/0Uh3cy3sFLZbfOCf3jUIat9M9VCSFrTjUsTWqbKrLtu4+2aidTmLC7
+NvnlPM95zklTqJjaIow5M8ycSoTpZ7A8Zlh8KrEGQkYAaQoiB9wPlOWzAuElRlXrytUVLpnMX3r6ncg5
+5uAmnu/TKNlsgjCOaLzwoyCkwSbqC6LiPW6wKCUzCLNBxnK1OjhH3nqAj0AIZA1Xqj3VsjFCK+fIW5O2
+3GpqunqyxgfgFyENVn+gnTRkA0SZ3OpKmF0xHwHUhhmRwUEL3uJjy0GV7QpWfe+6JoS2p7dR/ISmLLFq
+L2majq1EiX2D14crj5DXb5e/6TQyzOD7Tgk/wI8RwLMpn1/cMbcqSjm7ceh2ORLydr/nt/OsriOiazte
+zl97d58u5s4J/1/tv1UuewHgLHx3ubbDr/S+mO151A0SP16E0ePUh/q/nl9lVFzkMJnAP67z8PU7AAD/
+/76hNZRaAwAA
+`,
+	},
+
+	"/scope/conv_fwd.tmpl": {
+		name:    "conv_fwd.tmpl",
+		local:   "codegen/scope/conv_fwd.tmpl",
 		size:    773,
-		modtime: 1540763274,
+		modtime: 1559015453,
 		compressed: `
 H4sIAAAAAAAC/6ySX2vCMBTF3/0UFyfDgdR354TaOpRhK/3zVELI2lsNS5Papg7Z9t1HrVpkDibsrb25
 95xfTm4UQcHkGqGXMM30PkcYPYFhM82CfY4lENIBiCLgKeC27TIcliF0A5SlKixV4JyJtNt03/E0wRSs
@@ -243,9 +297,10 @@ yw2dYOb5v6fe6n/dvnUoE57CcAh/3Lz26zsAAP//K6U0AAUDAAA=
 	},
 
 	"/scope/dropout.tmpl": {
+		name:    "dropout.tmpl",
 		local:   "codegen/scope/dropout.tmpl",
 		size:    709,
-		modtime: 1540763274,
+		modtime: 1558740137,
 		compressed: `
 H4sIAAAAAAAC/6yQTUvzQBSF9/MrLrS8JIs33adayBcaNKPkYzUOw9jcarAZYzIRiva/y1gSLLTSgsvc
 8Jxz5iGMQSvVE8K0lFrqTYPgXoITSi3zTYMdcE46LXW1hPfXqgTGYOr4qJbPtWxfqKwROBfmOvDO9/ET
@@ -256,9 +311,10 @@ e/7DwqRXJa72M3+LPBfYTSdbMkFVViuYzSCinn8bHeTIVwAAAP//UFK1K8UCAAA=
 	},
 
 	"/scope/pooling.tmpl": {
+		name:    "pooling.tmpl",
 		local:   "codegen/scope/pooling.tmpl",
 		size:    375,
-		modtime: 1540763274,
+		modtime: 1558740137,
 		compressed: `
 H4sIAAAAAAAC/3SQ3UrDQBCF7/MU5yJIBckDxCq0ScEijdKfq7AsY3aowWR3TSdCUd9dNqFKwV7OLPt9
 Z04ElCU6sntGbEhIjp6R3iHJSWh79HyAUhEg3PqGhDGtemPts3NNbfcrZ1gL/Djp1hm+j4CDkNQVPlxt
@@ -268,9 +324,10 @@ Aj5O5myr15a6t4JahlI6bE+6ZFh+ofeeu/CoyzJOdrZ+7/n34zJXavJymtJ0IyR8NZj4Gp8RgAuqZeub
 	},
 
 	"/scope/relu.tmpl": {
+		name:    "relu.tmpl",
 		local:   "codegen/scope/relu.tmpl",
 		size:    370,
-		modtime: 1540763274,
+		modtime: 1558740137,
 		compressed: `
 H4sIAAAAAAAC/3SQX0vDQBDE3/Mp5iFIBckHiFVIk4JFGqF/no7jWHOLBnuXM90Uivrd5ZQUxPZxZ9n5
 zU6iFHryL4zUkpAcAyO/Q1aR0OYYeA+tE2EXdiSMaTNY74tG2gNJ2/llZ9kI6CQY11m+T/ZC0jY4dK2F
@@ -280,9 +337,10 @@ tDL+Ba1v/uWe/LrdJsBsXpcPy2L1aM7bFlVlyqdtvZmv1pfzjn5fsWb2Npb5HQAA//9dLGtNcgEAAA==
 	},
 
 	"/scope/softmax.tmpl": {
+		name:    "softmax.tmpl",
 		local:   "codegen/scope/softmax.tmpl",
 		size:    1540,
-		modtime: 1540763274,
+		modtime: 1558740137,
 		compressed: `
 H4sIAAAAAAAC/8RUYW/aMBD97l9xUtGUSIz2M3SVTOJ2aCRUxJEmBcsy+GijEScDZ1q19b9PgYWFjopU
 2kS+5Xz33r17Z5MkgbUyDwgdrayyTwVC/wP0fGUVfypwA0IQi1mxUhbhelFqY6J8aTP1na4e8nVqHzNp
@@ -296,29 +354,59 @@ I8/kAo1Ol3B5CSykwzE7nvcrAAD//+QaFkQEBgAA
 	},
 
 	"/tensorflow/base_prefix.py": {
+		name:    "base_prefix.py",
 		local:   "codegen/tensorflow/base_prefix.py",
-		size:    392,
-		modtime: 1540763274,
+		size:    408,
+		modtime: 1558738826,
 		compressed: `
-H4sIAAAAAAAC/2zPwUrEMBCA4XufIuS0K1I8Cx60LVKQulC3F5EQuskaaGZCMlnp20trE1fwNsz3t2SM
-deiJQbRuZjIwcMW2wpCmMOeRFAT0esKvJSZdaI+WjWgtQumklzawLb35Y5HMdEUYSgUX4xHeeXWsH8XQ
-9u3TSyPqZmirpucf7IHxO144b4B2/LW/Z/x2eUnpJkkavd0nO8z0iZD9onwwCJm75bRVwZVCbCxEDt7y
-TWtF+t/q+XBc+axInF0UIK3a7RMv2zGeZPrwV3gV665jw88+/WGMJ4Dr+DsAAP//EIXqbogBAAA=
+H4sIAAAAAAAC/3TPzUrEMBDA8XufYoiXXZHiWfCgbZGC1IW6vYiE0E3WQDMT8rHSt5fWthsP3ob5/1oy
+2lhyATAaO4LwgDZbVuTXyY/bGCR6cmqg7wkHlSlHBnoyhjC3wgnjYaG3f1oMekhSRj6XeNGO8IMVx/KJ
+d3VbP79WvKy6uqha9gmPwO5Zlt2AdRrDjr21D8DuptfkdhBBkTP7az2M4YtwExfpvCZMQDOdOHe0OecL
+4Dwh79t1swvqH/dyOM7gLAM/28hRGLnbX8G07+NJrB+njRWxbBrofsv6lz6eEFP+EwAA//+73BsbmAEA
+AA==
 `,
 	},
 
 	"/": {
+		name:  "/",
+		local: `codegen`,
 		isDir: true,
-		local: "codegen",
 	},
 
 	"/scope": {
+		name:  "scope",
+		local: `codegen/scope`,
 		isDir: true,
-		local: "codegen/scope",
 	},
 
 	"/tensorflow": {
+		name:  "tensorflow",
+		local: `codegen/tensorflow`,
 		isDir: true,
-		local: "codegen/tensorflow",
+	},
+}
+
+var _escDirs = map[string][]os.FileInfo{
+
+	"codegen": {
+		_escData["/scope"],
+		_escData["/tensorflow"],
+	},
+
+	"codegen/scope": {
+		_escData["/scope/base_prefix.tmpl"],
+		_escData["/scope/base_suffix.tmpl"],
+		_escData["/scope/batchnorm.tmpl"],
+		_escData["/scope/conv_bias.tmpl"],
+		_escData["/scope/conv_bwd.tmpl"],
+		_escData["/scope/conv_fwd.tmpl"],
+		_escData["/scope/dropout.tmpl"],
+		_escData["/scope/pooling.tmpl"],
+		_escData["/scope/relu.tmpl"],
+		_escData["/scope/softmax.tmpl"],
+	},
+
+	"codegen/tensorflow": {
+		_escData["/tensorflow/base_prefix.py"],
 	},
 }

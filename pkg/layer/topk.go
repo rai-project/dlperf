@@ -5,7 +5,7 @@ import dlperf "github.com/rai-project/dlperf/pkg"
 //easyjson:json
 type TopK struct {
 	*Base `json:",inline,flatten,omitempty"`
-	K     int64 `json:"axis,omitempty"`
+	K     int64 `json:"k,omitempty"`
 	Axis  int64 `json:"axis,omitempty"`
 }
 

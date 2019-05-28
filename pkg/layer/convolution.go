@@ -4,6 +4,7 @@ import (
 	"math"
 	"strings"
 
+	"github.com/k0kubun/pp"
 	"github.com/mitchellh/hashstructure"
 	dlperf "github.com/rai-project/dlperf/pkg"
 	"github.com/rai-project/dlperf/pkg/benchmark"
@@ -113,15 +114,18 @@ func (c Conv) FwdBenchmarkAlgorithms(...dlperf.FwdBenchmarkArgsOptionFunc) []str
 
 func (c Conv) BwdBenchmarkAlgorithms(iopts ...dlperf.BwdBenchmarkArgsOptionFunc) []string {
 	opts := dlperf.CreateBwdBenchmarkArgsOption(iopts...)
+	if false {
+	pp.Println(opts.ConvBwdType.String())
+	}
 	switch opts.ConvBwdType {
 	case dlperf.ConvBwdTypeData:
 		return []string{
 			"CUDNN_CONVOLUTION_BWD_DATA_ALGO_0",
 			"CUDNN_CONVOLUTION_BWD_DATA_ALGO_1",
 			"CUDNN_CONVOLUTION_BWD_DATA_ALGO_FFT",
-			"CUDNN_CONVOLUTION_BWD_DATA_ALGO_​FFT_TILING",
+			"CUDNN_CONVOLUTION_BWD_DATA_ALGO_FFT_TILING",
 			"CUDNN_CONVOLUTION_BWD_DATA_ALGO_WINOGRAD",
-			"CUDNN_CONVOLUTION_BWD_DATA_ALGO_​WINOGRAD_NONFUSED",
+			"CUDNN_CONVOLUTION_BWD_DATA_ALGO_WINOGRAD_NONFUSED",
 		}
 	case dlperf.ConvBwdTypeFilter:
 		return []string{
@@ -129,12 +133,11 @@ func (c Conv) BwdBenchmarkAlgorithms(iopts ...dlperf.BwdBenchmarkArgsOptionFunc)
 			"CUDNN_CONVOLUTION_BWD_FILTER_ALGO_1",
 			"CUDNN_CONVOLUTION_BWD_FILTER_ALGO_FFT",
 			"CUDNN_CONVOLUTION_BWD_FILTER_ALGO_3",
-			"CUDNN_CONVOLUTION_BWD_FILTER_​WINOGRAD_NONFUSED",
-			"CUDNN_CONVOLUTION_BWD_FILTER_ALGO_​FFT_TILING",
+			"CUDNN_CONVOLUTION_BWD_FILTER_ALGO_WINOGRAD_NONFUSED", 
+			"CUDNN_CONVOLUTION_BWD_FILTER_ALGO_FFT_TILING",
 		}
 	case dlperf.ConvBwdTypeBias:
 		return []string{
-			"",
 		}
 	default:
 		return []string{}
@@ -156,6 +159,7 @@ type convBenchmarkArgs struct {
 	StrideWidth    int64 `args:"stride_width" hash:"stride_width" json:"stride_width,omitempty"`
 	DilationWidth  int64 `args:"dilation_height" hash:"dilation_height" json:"dilation_width,omitempty"`
 	DilationHeight int64 `args:"dilation_width" hash:"dilation_width" json:"dilation_height,omitempty"`
+	ConvBwdType dlperf.ConvBwdType `args:"-" hash:"-" json:"conv_bwd_type,omitempty"`
 }
 
 func (c Conv) FwdBenchmarkArgs(opts ...dlperf.FwdBenchmarkArgsOptionFunc) interface{} {
@@ -192,7 +196,8 @@ func (c Conv) FwdBenchmarkArgs(opts ...dlperf.FwdBenchmarkArgsOptionFunc) interf
 	return res
 }
 
-func (c Conv) BwdBenchmarkArgs(opts ...dlperf.BwdBenchmarkArgsOptionFunc) interface{} {
+func (c Conv) BwdBenchmarkArgs(iopts ...dlperf.BwdBenchmarkArgsOptionFunc) interface{} {
+	opts := dlperf.CreateBwdBenchmarkArgsOption(iopts...)
 	inShapes := c.InputShapes()
 
 	res := convBenchmarkArgs{
@@ -209,7 +214,8 @@ func (c Conv) BwdBenchmarkArgs(opts ...dlperf.BwdBenchmarkArgsOptionFunc) interf
 		StrideWidth:       c.Strides[1],
 		DilationHeight:    c.Dilations[0],
 		DilationWidth:     c.Dilations[1],
-		BaseBenchmarkArgs: mkBaseBenchmarkBWDArgs(&c, opts...),
+		BaseBenchmarkArgs: mkBaseBenchmarkBWDArgs(&c, iopts...),
+		ConvBwdType: opts.ConvBwdType,
 	}
 
 	hash, err := hashstructure.Hash(
@@ -262,13 +268,22 @@ func (c Conv) DataTypes() []dlperf.DataType {
 }
 
 func (c Conv) FwdBenchmarkGenerator() string {
-	templString := _escFSMustString(false, "/scope/conv.tmpl")
+	templString := _escFSMustString(false, "/scope/conv_fwd.tmpl")
 	return templateExecFWD(&c, templateBasePrefix+templString+templateBaseSuffix)
 }
 
-func (c Conv) BwdBenchmarkGenerator(opts ...dlperf.BwdBenchmarkArgsOptionFunc) string {
-	templString := _escFSMustString(false, "/scope/conv.tmpl")
-	return templateExecBWD(&c, templateBasePrefix+templString+templateBaseSuffix, opts...)
+func (c Conv) BwdBenchmarkGenerator(iopts ...dlperf.BwdBenchmarkArgsOptionFunc) string {
+	var templString string 
+	opts := dlperf.CreateBwdBenchmarkArgsOption(iopts...)
+	
+	switch opts.ConvBwdType {
+		case dlperf.ConvBwdTypeData, dlperf.ConvBwdTypeFilter:
+			templString = _escFSMustString(false, "/scope/conv_bwd.tmpl")
+		case dlperf.ConvBwdTypeBias:
+			templString = _escFSMustString(false, "/scope/conv_bias.tmpl")
+		}
+
+	return templateExecBWD(&c, templateBasePrefix+templString+templateBaseSuffix, iopts...)
 }
 
 func (c Conv) FwdBenchmarkGeneratorArgNames() []string {

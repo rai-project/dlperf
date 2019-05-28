@@ -1,0 +1,16 @@
+[[ range $datatype := .DataTypes ]]
+  [[ if eq $datatype.Name "TensorCoreHalf" ]]
+  #ifdef CUDNN_SUPPORTS_TENSOR_OPS
+  [[ end ]]
+  static void [[ $.BenchmarkName ]]_[[ $datatype.Name | upper ]]__[[$.UniqueBenchmarkID]](benchmark::State& state) {
+    [[ if eq $datatype.Name "TensorCoreHalf" ]]
+      [[ $.BenchmarkName ]]_Impl<[[ $datatype.CType ]]>(state);
+    [[ else ]]
+      [[ $.BenchmarkName ]]_Impl<[[ $datatype.CType ]]>(state);
+    [[ end ]]
+    BENCHMARK_[[ $.BenchmarkName ]]_ADD_COUNTERS__[[$.UniqueBenchmarkID]](state);
+  }
+  [[ if eq $datatype.Name "TensorCoreHalf" ]]
+  #endif //  CUDNN_SUPPORTS_TENSOR_OPS
+  [[ end ]]
+[[ end ]]

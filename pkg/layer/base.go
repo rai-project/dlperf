@@ -56,7 +56,7 @@ func mkBaseBenchmarkBWDArgs(c dlperf.Layer, opts ...dlperf.BwdBenchmarkArgsOptio
 	return BaseBenchmarkArgs{
 		BenchmarkName: c.BwdBenchmarkName(opts...),
 		ArgNames:      c.BwdBenchmarkGeneratorArgNames(),
-		Algorithms:    c.BwdBenchmarkAlgorithms(),
+		Algorithms:    c.BwdBenchmarkAlgorithms(opts...),
 		DataTypes:     c.DataTypes(),
 	}
 }

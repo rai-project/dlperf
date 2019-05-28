@@ -18,6 +18,10 @@ var AllDataTypes = []DataType{
 	// 	Name:  "Float16",
 	// 	CType: "__half",
 	// },
+	// DataType{
+	// 	Name:  "TensorCoreHalf",
+	// 	CType: "__half",
+	// },
 	DataType{
 		Name:  "Float32",
 		CType: "float",
