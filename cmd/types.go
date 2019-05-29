@@ -28,9 +28,9 @@ func (l pattern) Row(humanFlops bool) []string {
 }
 
 type bench struct {
-	layer     dlperf.Layer            `json:"layer"`
-	benchmark benchmark.Benchmark     `json:"benchmark"`
-	flops     dlperf.FlopsInformation `json:"flops_information"`
+	Layer     dlperf.Layer            `json:"layer"`
+	Benchmark benchmark.Benchmark     `json:"benchmark"`
+	Flops     dlperf.FlopsInformation `json:"flops_information"`
 }
 
 func (bench) Header() []string {
@@ -45,17 +45,17 @@ func (bench) Header() []string {
 }
 
 func (l bench) Row(humanFlops bool) []string {
-	ms := float64(l.benchmark.RealTime.Nanoseconds()) / float64(time.Millisecond)
+	ms := float64(l.Benchmark.RealTime.Nanoseconds()) / float64(time.Millisecond)
 	realTime := fmt.Sprintf("%f", ms)
-	benchmarkName := l.benchmark.Name
+	benchmarkName := l.Benchmark.Name
 	if len(benchmarkName) > 10 {
 		benchmarkName = benchmarkName[0:10] + "..."
 	}
 	layerName := ""
 	operatorType := ""
-	if l.layer != nil {
-		layerName = l.layer.Name()
-		operatorType = l.layer.OperatorType()
+	if l.Layer != nil {
+		layerName = l.Layer.Name()
+		operatorType = l.Layer.OperatorType()
 	}
 	base := []string{layerName, operatorType, benchmarkName, realTime}
 	return base

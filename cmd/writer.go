@@ -4,10 +4,12 @@ import (
 	"bytes"
 	"encoding/csv"
 	"encoding/json"
+	"github.com/k0kubun/pp"
 	"io"
 	"io/ioutil"
 	"os"
 	"strings"
+	"fmt"
 
 	"github.com/Unknwon/com"
 	"github.com/olekukonko/tablewriter"
@@ -74,6 +76,9 @@ func (w *Writer) Row(rower Rower) error {
 			log.WithError(err).Error("failed to marshal json data...")
 			return err
 		}
+		if false {
+		pp.Println(rower)
+		}
 		w.json = append(w.json, string(buf))
 	}
 	return nil
@@ -109,5 +114,9 @@ func (w *Writer) Close() {
 	w.Flush()
 	if w.outputFileName != "" {
 		com.WriteFile(w.outputFileName, w.output.(*bytes.Buffer).Bytes())
+		return 
+	}
+	if w.format == "json" {
+	fmt.Println(w.json)
 	}
 }

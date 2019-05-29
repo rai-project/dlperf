@@ -19,6 +19,7 @@ import (
 var (
 	benchmarkResultsFolder string
 	benchInfoTraining      bool
+	benchInfoShort      bool
 	benchInfoDataType      string
 )
 
@@ -141,14 +142,16 @@ var benchinfoCmd = &cobra.Command{
 				info := lyr.Information()
 				if len(bs) > 0 {
 					totalTime = totalTime + bs[0].RealTime
-				}
+        }
+        if !benchInfoShort {
 				for _, b := range bs {
 					benchmarkInfo = append(benchmarkInfo, bench{
-						benchmark: b,
-						layer:     lyr,
-						flops:     info.Flops(),
+						Benchmark: b,
+						Layer:     lyr,
+						Flops:     info.Flops(),
 					})
-				}
+        }
+      }
 			}
 
 			switch strings.ToLower(lyr.OperatorType()) {
@@ -231,12 +234,12 @@ var benchinfoCmd = &cobra.Command{
 		}
 
 		benchmarkInfo = append(benchmarkInfo, bench{
-			benchmark: benchmark.Benchmark{
-				Name:     "Total",
+			Benchmark: benchmark.Benchmark{
+        Name:     "Total",
 				RealTime: totalTime,
 			},
-			layer: nil,
-			flops: dlperf.FlopsInformation{},
+			Layer: nil,
+			Flops: dlperf.FlopsInformation{},
 		})
 
 		if benchSuite.GPUInformation != nil && len(benchSuite.GPUInformation.GPUS) != 0 {
@@ -258,6 +261,7 @@ var benchinfoCmd = &cobra.Command{
 func init() {
 	benchmarkResultsFolder = filepath.Join(sourcepath.MustAbsoluteDir(), "..", "results")
 	benchinfoCmd.PersistentFlags().BoolVar(&benchInfoTraining, "training", false, "compute the training information")
+	benchinfoCmd.PersistentFlags().BoolVar(&benchInfoShort, "short", false, "only get info about the total, rather than reporting per-layer information")
 	benchinfoCmd.PersistentFlags().StringVar(&benchInfoDataType, "datatype", "float32", "compute the information for the specified scalar datatype")
 	benchinfoCmd.PersistentFlags().StringVar(&benchmarkResultsFolder, "benchmark_database", benchmarkResultsFolder, "path to the benchmark results folder")
 	rootCmd.AddCommand(benchinfoCmd)
