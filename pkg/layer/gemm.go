@@ -1,9 +1,11 @@
 package layer
 
 import (
+    "github.com/spf13/cast"
 	"github.com/mitchellh/hashstructure"
 	dlperf "github.com/rai-project/dlperf/pkg"
 	"github.com/rai-project/dlperf/pkg/benchmark"
+	"github.com/k0kubun/pp"
 )
 
 // https://github.com/onnx/onnx/blob/master/docs/Operators.md#Gemm
@@ -82,9 +84,49 @@ type gemmBenchmarkArgs struct {
 	BaseBenchmarkInputArgs
 }
 
+func (c Gemm) mkGemmBenchmarkInputArgs() BaseBenchmarkInputArgs {
+if false {
+
+	pp.Println(c.InputShapes())
+	pp.Println(c.TransA)
+	pp.Println(c.TransB)
+}
+
+
+	aShape := c.InputShapes()[0]
+	var am, ak int64
+	if c.TransA == 0 {
+		am = aShape[0]
+		ak = aShape[1]
+	} else {
+		am = aShape[1]
+		ak = aShape[0]
+	}
+
+	bShape := c.InputShapes()[1]
+	var bn int64
+	if c.TransB == 0 {
+		bn = bShape[1]
+	} else {
+		bn = bShape[0]
+	}
+
+	return BaseBenchmarkInputArgs{
+		Input0: am,
+		Input1: bn,
+		Input2: ak,
+		Input3: c.TransA,
+		Input4: c.TransB,
+		Input5: cast.ToInt64(c.Alpha),
+		Input6: cast.ToInt64(c.Beta),
+		Input7: -1,
+	}
+}
+
+
 func (c Gemm) FwdBenchmarkArgs(opts ...dlperf.FwdBenchmarkArgsOptionFunc) interface{} {
 	res := gemmBenchmarkArgs{
-		BaseBenchmarkInputArgs: mkBaseBenchmarkInputArgs(&c),
+		BaseBenchmarkInputArgs: c.mkGemmBenchmarkInputArgs(),
 		BaseBenchmarkArgs:      mkBaseBenchmarkFWDArgs(&c, opts...),
 	}
 
@@ -105,7 +147,7 @@ func (c Gemm) FwdBenchmarkArgs(opts ...dlperf.FwdBenchmarkArgsOptionFunc) interf
 
 func (c Gemm) BwdBenchmarkArgs(opts ...dlperf.BwdBenchmarkArgsOptionFunc) interface{} {
 	res := gemmBenchmarkArgs{
-		BaseBenchmarkInputArgs: mkBaseBenchmarkInputArgs(&c),
+		BaseBenchmarkInputArgs: c.mkGemmBenchmarkInputArgs(),
 		BaseBenchmarkArgs:      mkBaseBenchmarkBWDArgs(&c, opts...),
 	}
 

@@ -215,8 +215,23 @@ func (o Onnx) mkGemm(node *onnx.NodeProto) dlperf.Layer {
 	transAAttr := getNodeAttributeFromName(node, "transA")
 	transBAttr := getNodeAttributeFromName(node, "transB")
 
+alphaAttr := getNodeAttributeFromName(node, "alpha")
+alpha := alphaAttr.GetF()
+if alphaAttr == nil {
+	alpha = 1.0
+}
+
+betaAttr := getNodeAttributeFromName(node, "beta")
+beta := betaAttr.GetF()
+if betaAttr == nil {
+	beta = 1.0
+}
+
+
 	return &layer.Gemm{
 		Base:   o.mkBase(node, "Gemm"),
+		Alpha: float64(alpha),
+		Beta: float64(beta),
 		TransA: transAAttr.GetI(),
 		TransB: transBAttr.GetI(),
 	}

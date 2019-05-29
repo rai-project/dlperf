@@ -310,6 +310,20 @@ e/7DwqRXJa72M3+LPBfYTSdbMkFVViuYzSCinn8bHeTIVwAAAP//UFK1K8UCAAA=
 `,
 	},
 
+	"/scope/gemm.tmpl": {
+		name:    "gemm.tmpl",
+		local:   "codegen/scope/gemm.tmpl",
+		size:    709,
+		modtime: 1559092889,
+		compressed: `
+H4sIAAAAAAAC/6yQTUvzQBSF9/MrLrS8JIs33adayBcaNKPkYzUOw9jcarAZYzIRiva/y1gSLLTSgsvc
+8Jxz5iGMQSvVE8K0lFrqTYPgXoITSi3zTYMdcE46LXW1hPfXqgTGYOr4qJbPtWxfqKwROBfmOvDO9/ET
++qbB1vwUjE2dQlVvPY5gHHJuPQ5frptpqfEfmCa04YPAkaK4btYXe22BmQmcL6wdPCcAfkSD68RLb8Th
+FC8MRXBX0DxKs+PzhrytkYSqNCrIScLGfusPddn/Fw8nvC2m90UuvPRKUC+JMutcbCSKDhOpernOqxot
+e/7DwqRXJa72M3+LPBfYTSdbMkFVViuYzSCinn8bHeTIVwAAAP//UFK1K8UCAAA=
+`,
+	},
+
 	"/scope/pooling.tmpl": {
 		name:    "pooling.tmpl",
 		local:   "codegen/scope/pooling.tmpl",
@@ -401,6 +415,7 @@ var _escDirs = map[string][]os.FileInfo{
 		_escData["/scope/conv_bwd.tmpl"],
 		_escData["/scope/conv_fwd.tmpl"],
 		_escData["/scope/dropout.tmpl"],
+		_escData["/scope/gemm.tmpl"],
 		_escData["/scope/pooling.tmpl"],
 		_escData["/scope/relu.tmpl"],
 		_escData["/scope/softmax.tmpl"],
