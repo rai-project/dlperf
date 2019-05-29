@@ -1,7 +1,9 @@
 package layer
 
 import (
-	"github.com/rai-project/dlperf/pkg"
+	"github.com/mitchellh/hashstructure"
+	dlperf "github.com/rai-project/dlperf/pkg"
+	"github.com/rai-project/dlperf/pkg/benchmark"
 )
 
 // https://github.com/onnx/onnx/blob/master/docs/Operators.md#Gemm
@@ -44,6 +46,118 @@ func (c *Gemm) InferShape(inputLayers dlperf.Layers) {
 
 	yShape := dlperf.Shape{am, bn}
 	c.SetOutputShapes([]dlperf.Shape{yShape})
+}
+
+func (c Gemm) FwdBenchmarkName(opts ...dlperf.FwdBenchmarkArgsOptionFunc) string {
+	return "LAYER_CUBLAS_GEMM_FWD"
+}
+
+func (c Gemm) BwdBenchmarkName(opts ...dlperf.BwdBenchmarkArgsOptionFunc) string {
+	return "LAYER_CUBLAS_GEMM_BWD"
+}
+
+
+func (c Gemm) FwdTiming(system string /* hardware/software struct */) string {
+	return ""
+}
+
+func (c Gemm) BwdTiming(system string /* hardware/software struct */) string {
+	return ""
+}
+
+func (c Gemm) FwdBenchmarkAlgorithms(...dlperf.FwdBenchmarkArgsOptionFunc) []string {
+	return []string{
+		"",
+	}
+}
+
+func (c Gemm) BwdBenchmarkAlgorithms(...dlperf.BwdBenchmarkArgsOptionFunc) []string {
+	return []string{
+		"",
+	}
+}
+
+type gemmBenchmarkArgs struct {
+	BaseBenchmarkArgs
+	BaseBenchmarkInputArgs
+}
+
+func (c Gemm) FwdBenchmarkArgs(opts ...dlperf.FwdBenchmarkArgsOptionFunc) interface{} {
+	res := gemmBenchmarkArgs{
+		BaseBenchmarkInputArgs: mkBaseBenchmarkInputArgs(&c),
+		BaseBenchmarkArgs:      mkBaseBenchmarkFWDArgs(&c, opts...),
+	}
+
+	hash, err := hashstructure.Hash(
+		res,
+		&hashstructure.HashOptions{
+			TagName: "hash",
+		},
+	)
+	if err != nil {
+		log.Fatal(err)
+	}
+	res.UniqueBenchmarkID = hash
+
+	return res
+}
+
+
+func (c Gemm) BwdBenchmarkArgs(opts ...dlperf.BwdBenchmarkArgsOptionFunc) interface{} {
+	res := gemmBenchmarkArgs{
+		BaseBenchmarkInputArgs: mkBaseBenchmarkInputArgs(&c),
+		BaseBenchmarkArgs:      mkBaseBenchmarkBWDArgs(&c, opts...),
+	}
+
+	hash, err := hashstructure.Hash(
+		res,
+		&hashstructure.HashOptions{
+			TagName: "hash",
+		},
+	)
+	if err != nil {
+		log.Fatal(err)
+	}
+	res.UniqueBenchmarkID = hash
+
+	return res
+}
+
+func (c Gemm) FwdBenchmarkFilter(datatype, algorithm string, opts ...dlperf.FwdBenchmarkArgsOptionFunc) benchmark.Benchmark {
+	return benchmark.Benchmark{
+		Name:       mkFwdBenchmarkFilterName(&c, datatype, algorithm),
+		Attributes: benchmarkAttributes(c.FwdBenchmarkArgs()),
+	}
+}
+
+func (c Gemm) BwdBenchmarkFilter(datatype, algorithm string, opts ...dlperf.BwdBenchmarkArgsOptionFunc) benchmark.Benchmark {
+	return benchmark.Benchmark{
+		Name:       mkBwdBenchmarkFilterName(&c, datatype, algorithm),
+		Attributes: benchmarkAttributes(c.BwdBenchmarkArgs()),
+	}
+}
+
+func (c Gemm) FwdBenchmarkGenerator(opts ...dlperf.FwdBenchmarkArgsOptionFunc) string {
+	templString := _escFSMustString(false, "/scope/gemm.tmpl")
+	return templateExecFWD(&c, templateBasePrefix+templString)
+}
+
+func (c Gemm) BwdBenchmarkGenerator(opts ...dlperf.BwdBenchmarkArgsOptionFunc) string {
+	templString := _escFSMustString(false, "/scope/gemm.tmpl")
+	return templateExecBWD(&c, templateBasePrefix+templString)
+}
+
+func (c Gemm) FwdBenchmarkGeneratorArgNames() []string {
+	return benchmarkArgNames(gemmBenchmarkArgs{})
+}
+
+func (c Gemm) BwdBenchmarkGeneratorArgNames() []string {
+	return benchmarkArgNames(gemmBenchmarkArgs{})
+}
+
+
+func (c Gemm) Shape() dlperf.ShapeInformation {
+	return c.Information().Shape()
 }
 
 func (c Gemm) Information() dlperf.LayerInformation {

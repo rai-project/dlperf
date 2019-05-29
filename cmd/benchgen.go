@@ -94,6 +94,9 @@ var benchgenCmd = &cobra.Command{
 					case "dropout":
 						l := lyr.(*perflayer.Dropout)
 						b = l.FwdBenchmarkGenerator()
+					case "gemm":
+						l := lyr.(*perflayer.Gemm)
+						b = l.FwdBenchmarkGenerator()
 					default:
 						// pp.Println(lyr.OperatorType())
 					}
@@ -139,6 +142,9 @@ var benchgenCmd = &cobra.Command{
 						b = l.BwdBenchmarkGenerator()
 					case "dropout":
 						l := lyr.(*perflayer.Dropout)
+						b = l.BwdBenchmarkGenerator()
+					case "gemm":
+						l := lyr.(*perflayer.Gemm)
 						b = l.BwdBenchmarkGenerator()
 					default:
 						// pp.Println(lyr.OperatorType())
