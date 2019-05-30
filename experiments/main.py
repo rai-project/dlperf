@@ -4,6 +4,7 @@ import os.path
 import sys
 import click
 import glob
+import traceback
 
 
 import info
@@ -14,11 +15,11 @@ from models import models
 
 def get_backend(backend):
     utils.debug("Loading {} backend".format(backend))
-    if backend == "tensorflow":
+    if backend == "tensorflow" or backend == "tf":
         from backend_tf import BackendTensorflow
 
         backend = BackendTensorflow()
-    if backend == "caffe2":
+    elif backend == "caffe2":
         from backend_caffe2 import BackendCaffe2
 
         backend = BackendCaffe2()
@@ -82,12 +83,26 @@ def main(ctx, backend, debug, quiet):
 
     utils.DEBUG = debug
     utils.QUIET = quiet
-    backend = get_backend(backend)
+
+    try:
+        backend = get_backend(backend)
+    except Exception as err:
+        traceback.print_exc()
+        sys.exit(1)
 
     img = input_image.get(model)
 
-    backend.load(model)
-    t = backend.forward(img)
+    try:
+        backend.load(model)
+    except Exception as err:
+        traceback.print_exc()
+        sys.exit(1)
+
+    try:
+        t = backend.forward(img)
+    except Exception as err:
+        traceback.print_exc()
+        sys.exit(1)
 
     print("elapsed time = {}".format(t))
 

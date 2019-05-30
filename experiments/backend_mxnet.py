@@ -10,8 +10,6 @@ class BackendMXNet(backend.Backend):
     def __init__(self):
         super(BackendMXNet, self).__init__()
         self.session = None
-        self.input_data = None
-        self.input_name = None
         self.ctx = mx.gpu() if len(mx.test_utils.list_gpus()) else mx.cpu()
 
     def name(self):

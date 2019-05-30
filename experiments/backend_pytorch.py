@@ -9,8 +9,6 @@ class BackendPytorch(backend.Backend):
     def __init__(self):
         super(BackendPytorch, self).__init__()
         self.session = None
-        self.input_data = None
-        self.input_name = None
         self.device = "cuda:0" if torch.cuda.is_available() else "cpu"
 
     def name(self):

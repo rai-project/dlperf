@@ -7,8 +7,6 @@ class BackendOnnxruntime(backend.Backend):
     def __init__(self):
         super(BackendOnnxruntime, self).__init__()
         self.session = None
-        self.input_data = None
-        self.input_name = None
 
     def name(self):
         return "onnxruntime"

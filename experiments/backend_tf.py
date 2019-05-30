@@ -24,10 +24,8 @@ class BackendTensorflow(backend.Backend):
     def __init__(self):
         super(BackendTensorflow, self).__init__()
         self.session = None
-        self.input_data = None
-        self.input_name = None
-        utils.debug("getting device = {}".format(supports_device("CUDA")))
         self.device = "/device:GPU:0" if supports_device("CUDA") else "/cpu:0"
+        utils.debug("running on {}".format(self.device))
 
     def name(self):
         return "tensorflow"
@@ -39,18 +37,31 @@ class BackendTensorflow(backend.Backend):
         utils.debug("loading onnx model {} from disk".format(model.path))
         self.onnx_model = onnx.load(model.path)
         with tf.device(self.device):
-            self.model = prepare(onnx_model)
-        self.session = tf.Session(graph=self.model)
+            self.model = prepare(self.onnx_model)
+        self.session = tf.Session(
+            graph=tf.import_graph_def(
+                self.model.predict_net.graph.as_graph_def(), name=""
+            )
+        )
+        self.inputs = self.session.graph.get_tensor_by_name(
+            self.model.predict_net.tensor_dict[
+                self.model.predict_net.external_input[0]
+            ].name
+        )
+        self.outputs = self.session.graph.get_tensor_by_name(
+            self.model.predict_net.tensor_dict[
+                self.model.predict_net.external_output[0]
+            ].name
+        )
+        utils.debug("loaded onnx model")
 
     def forward_once(self, img):
-        with torch.no_grad():
-            start = time.time()
-            result = self.model(img)
-            end = time.time()  # stop timer
-            return end - start
+        start = time.time()
+        result = self.session.run(self.output, {self.inputs: img})
+        end = time.time()  # stop timer
+        return end - start
 
     def forward(self, img, warmup=True):
-        img = torch.tensor(img).float().to(self.device)
         if warmup:
             self.forward_once(img)
         return self.forward_once(img)
