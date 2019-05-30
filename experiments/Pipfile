@@ -18,6 +18,7 @@ torch = "*"
 tensorflow = "*"
 future = "*"
 onnx-tf = "*"
+tvm = "*"
 
 [requires]
 python_version = "3.7"
