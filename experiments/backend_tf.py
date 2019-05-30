@@ -36,23 +36,25 @@ class BackendTensorflow(backend.Backend):
     def load(self, model):
         utils.debug("loading onnx model {} from disk".format(model.path))
         self.onnx_model = onnx.load(model.path)
+        utils.debug("loaded onnx model")
         with tf.device(self.device):
             self.model = prepare(self.onnx_model)
+        utils.debug("prepared onnx model")
         self.session = tf.Session(
             graph=tf.import_graph_def(
                 self.model.predict_net.graph.as_graph_def(), name=""
             )
         )
-        # self.inputs = self.session.graph.get_tensor_by_name(
-        #     self.model.predict_net.tensor_dict[
-        #         self.model.predict_net.external_input[0]
-        #     ].name
-        # )
-        # self.outputs = self.session.graph.get_tensor_by_name(
-        #     self.model.predict_net.tensor_dict[
-        #         self.model.predict_net.external_output[0]
-        #     ].name
-        # )
+        self.inputs = self.session.graph.get_tensor_by_name(
+            self.model.predict_net.tensor_dict[
+                self.model.predict_net.external_input[0]
+            ].name
+        )
+        self.outputs = self.session.graph.get_tensor_by_name(
+            self.model.predict_net.tensor_dict[
+                self.model.predict_net.external_output[0]
+            ].name
+        )
         utils.debug("loaded onnx model")
 
     def forward_once(self, img):
