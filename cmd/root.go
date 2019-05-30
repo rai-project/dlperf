@@ -13,6 +13,7 @@ import (
 var (
 	modelPath      string
 	modelDir       string
+	batchSize int
 	fullInfo       bool
 	humanFlops     bool
 	outputFormat   string
@@ -51,6 +52,7 @@ var rootCmd = &cobra.Command{
 func init() {
 	rootCmd.PersistentFlags().StringVar(&modelPath, "model_path", "p", "path to the model prototxt file")
 	rootCmd.PersistentFlags().StringVarP(&modelDir, "model_dir", "d", "", "model directory")
+	rootCmd.PersistentFlags().IntVarP(&batchSize, "batch_size", "b", 1, "batch size")
 	rootCmd.PersistentFlags().BoolVar(&humanFlops, "human", false, "print flops in human form")
 	rootCmd.PersistentFlags().BoolVar(&fullInfo, "full", false, "print all information about the layers")
 	rootCmd.PersistentFlags().BoolVar(&noHeader, "no_header", false, "show header labels for output")

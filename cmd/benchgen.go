@@ -181,7 +181,7 @@ var benchgenCmd = &cobra.Command{
 }
 
 func init() {
-	benchgenCmd.PersistentFlags().BoolVar(&generateBackward, "backward", false, "generate backward layers")
-	benchgenCmd.PersistentFlags().BoolVar(&generateForward, "forward", true, "generate forward layers")
+	benchgenCmd.PersistentFlags().BoolVar(&generateBackward, "backward", false, "generate the backward pass")
+	benchgenCmd.PersistentFlags().BoolVar(&generateForward, "forward", true, "generate the forward pass")
 	rootCmd.AddCommand(benchgenCmd)
 }

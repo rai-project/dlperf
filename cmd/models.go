@@ -7,8 +7,9 @@ import (
 )
 
 var modelURLsCmd = &cobra.Command{
-	Use:     "model_urls",
+	Use:     "modelurls",
 	Aliases: []string{"models"},
+	Short:   "Prints the model urls",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		for _, model := range modelURLs {
 			fmt.Printf("(\"%s\", \"%s\"), \n", model.Name, model.URL)

@@ -117,6 +117,7 @@ func runLayerStats(cmd *cobra.Command, args []string) error {
 var layerstatsCmd = &cobra.Command{
 	Use:     "layerstats",
 	Aliases: []string{"stats"},
+	Short:   "Generates layer statistics for the model",
 	RunE:    runLayerStats,
 }
 
