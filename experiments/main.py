@@ -79,10 +79,12 @@ def get_backend(backend):
 @click.pass_context
 @click.version_option()
 def main(ctx, backend, debug, quiet):
-    model = models[1]
-
     utils.DEBUG = debug
     utils.QUIET = quiet
+
+    model = models[5]
+
+    utils.debug("Using {} model".format(model.name))
 
     try:
         backend = get_backend(backend)
