@@ -16,8 +16,8 @@ click = "*"
 pycodestyle = "*"
 torch = "*"
 tensorflow = "*"
-caffe2 = "*"
 future = "*"
+onnx-tf = "*"
 
 [requires]
 python_version = "3.7"
