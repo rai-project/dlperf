@@ -43,16 +43,16 @@ class BackendTensorflow(backend.Backend):
                 self.model.predict_net.graph.as_graph_def(), name=""
             )
         )
-        self.inputs = self.session.graph.get_tensor_by_name(
-            self.model.predict_net.tensor_dict[
-                self.model.predict_net.external_input[0]
-            ].name
-        )
-        self.outputs = self.session.graph.get_tensor_by_name(
-            self.model.predict_net.tensor_dict[
-                self.model.predict_net.external_output[0]
-            ].name
-        )
+        # self.inputs = self.session.graph.get_tensor_by_name(
+        #     self.model.predict_net.tensor_dict[
+        #         self.model.predict_net.external_input[0]
+        #     ].name
+        # )
+        # self.outputs = self.session.graph.get_tensor_by_name(
+        #     self.model.predict_net.tensor_dict[
+        #         self.model.predict_net.external_output[0]
+        #     ].name
+        # )
         utils.debug("loaded onnx model")
 
     def forward_once(self, img):
