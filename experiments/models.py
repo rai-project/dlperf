@@ -19,7 +19,10 @@ class model_url_info:
     def __init__(self, name, url, shape=(1, 224, 224, 3)):
         self.name = name
         self.url = url
-        self.path = find_onnx_model(name)
+        try:
+            self.path = find_onnx_model(name)
+        except:
+            self.path = None
         self.shape = shape
 
     def __repr__(self):
