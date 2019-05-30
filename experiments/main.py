@@ -38,6 +38,10 @@ def get_backend(backend):
         from backend_pytorch_native import BackendPytorchNative
 
         backend = BackendPytorchNative()
+    elif backend == "mxnet":
+        from backend_mxnet import BackendMXNet
+
+        backend = BackendMXNet()
     elif backend == "tflite":
         from backend_tflite import BackendTflite
 
