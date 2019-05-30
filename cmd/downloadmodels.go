@@ -42,7 +42,7 @@ var downloadModelsCmd = &cobra.Command{
 		return nil
 	},
 	RunE: func(cmd *cobra.Command, args []string) error {
-		concurrencyLimit := 1
+		concurrencyLimit := 4
 		g, _ := errgroup.WithContext(context.Background())
 
 		progress := newProgress("> Downloading models", len(modelURLs))
