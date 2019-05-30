@@ -7,6 +7,7 @@ pyenv virtualenv miniconda3-4.3.30 dlperf_experiments
 pyenv activate dlperf_experiments
 
 pip install onnx
+pip install future
 pip install click
 pip install onnxmltools
 pip install onnxruntime-gpu
@@ -50,7 +51,7 @@ pipenv install --python=`pyenv which python`
 Or manually install the packages using pip
 
 ```
-pip install onnx gluoncv mxnet onnxmltools onnxruntime torchvision click pycodestyle torch tensorflow future onnx-tf tvm
+pip install onnx future gluoncv mxnet onnxmltools onnxruntime torchvision click pycodestyle torch tensorflow future onnx-tf tvm
 ```
 
 
@@ -58,4 +59,6 @@ pip install onnx gluoncv mxnet onnxmltools onnxruntime torchvision click pycodes
 
 ```
 python main.py --debug --backend=mxnet
+python main.py --debug --backend=onnxruntime
+python main.py --debug --backend=caffe2
 ```
