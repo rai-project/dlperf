@@ -50,6 +50,6 @@ def get(model):
 
     input_wrapped = []
     input_wrapped.append(input)
-    input_wrapped = np.asarray(input_wrapped)
+    input_wrapped = np.asarray(input_wrapped).astype(np.float32)
     return input_wrapped
 
