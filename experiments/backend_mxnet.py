@@ -2,7 +2,9 @@ import mxnet as mx
 from mxnet.contrib import onnx as onnx_mxnet
 import time
 from collections import namedtuple
+import utils
 
+from image_net_labels import labels
 import backend
 
 
@@ -32,15 +34,24 @@ class BackendMXNet(backend.Backend):
             label_names=None,
         )
 
-    def forward_once(self, img):
+    def forward_once(self, img, validate=False):
         start = time.time()
         result = self.model.forward(img)
         end = time.time()  # stop timer
+        if validate:
+            import numpy as np
+
+            prob = self.model.get_outputs()[0].asnumpy()
+            prob = np.squeeze(prob)
+            a = np.argsort(prob)[::-1]
+            for i in a[0:5]:
+                print("probability=%f, class=%s" % (prob[i], labels[i]))
         return end - start
 
     def forward(self, img, warmup=True):
         Batch = namedtuple("Batch", ["data"])
         img = mx.nd.array(img, ctx=self.ctx)
+        utils.debug("input shape = {}".format(img.shape))
         self.model.bind(
             for_training=False,
             data_shapes=[(self.data_names[0], img.shape)],

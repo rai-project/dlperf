@@ -43,11 +43,13 @@ def yolo_preprocess(img):
 
 
 def get(model):
-    input = np.asarray(Image.open("images/dog.jpg"))
+    img = Image.open("images/dog.jpg")
+    img = img.resize((224, 224), Image.BICUBIC)
+    input = np.asarray(img)
     input = np.asarray([input[:, :, 0], input[:, :, 1], input[:, :, 2]])
 
     input_wrapped = []
     input_wrapped.append(input)
     input_wrapped = np.asarray(input_wrapped)
-    return preprocess_imagenet(input_wrapped)
+    return input_wrapped
 
