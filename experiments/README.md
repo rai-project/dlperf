@@ -2,7 +2,7 @@
 
 ### Install Requirements
 
-Use `pipenv` to launch a shell
+Use [`pipenv`](https://github.com/pypa/pipenv) to launch a shell
 
 ```
 pipenv shell
