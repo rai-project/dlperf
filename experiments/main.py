@@ -18,6 +18,10 @@ def get_backend(backend):
         from backend_tf import BackendTensorflow
 
         backend = BackendTensorflow()
+    if backend == "caffe2":
+        from backend_caffe2 import BackendCaffe2
+
+        backend = BackendCaffe2()
     elif backend == "onnxruntime":
         from backend_onnxruntime import BackendOnnxruntime
 
