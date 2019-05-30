@@ -1,7 +1,6 @@
 import torch
-import onnx
+import torch.onnx as torch_onnx
 import time
-import caffe2.python.onnx.backend
 
 import backend
 
@@ -12,6 +11,7 @@ class BackendPytorch(backend.Backend):
         self.session = None
         self.input_data = None
         self.input_name = None
+        self.device = "cuda:0" if torch.cuda.is_available() else "cpu"
 
     def name(self):
         return "pytroch"
@@ -20,7 +20,9 @@ class BackendPytorch(backend.Backend):
         return torch.__version__
 
     def load(self, model):
-        self.model = onnx.load(model.path)
+        self.model = torch.load(model.path, map_location=lambda storage, loc: storage)
+        self.model.eval()
+
         self.inputs = []
         initializers = set()
         for i in self.model.graph.initializer:
@@ -32,15 +34,17 @@ class BackendPytorch(backend.Backend):
         for i in self.model.graph.output:
             self.outputs.append(i.name)
         device = "CUDA:0" if torch.cuda.is_available() else "CPU"
-        self.session = caffe2.python.onnx.backend.prepare(self.model, device)
+        self.model = self.model.to(self.device)
 
     def forward_once(self, img):
-        start = time.time()
-        result = self.session.run(self.input_data)
-        end = time.time()  # stop timer
-        return end - start
+        with torch.no_grad():
+            start = time.time()
+            result = self.model(img)
+            end = time.time()  # stop timer
+            return end - start
 
     def forward(self, img, warmup=True):
+        img = torch.tensor(img).float().to(self.device)
         if warmup:
             self.forward_once(img)
         return self.forward_once(img)

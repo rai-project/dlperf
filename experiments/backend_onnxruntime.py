@@ -19,12 +19,12 @@ class BackendOnnxruntime(backend.Backend):
     def load(self, model):
         self.model = model
         self.session = onnxruntime.InferenceSession(model.path, None)
-        self.inputs = [meta.name for meta in self.sess.get_inputs()]
-        self.outputs = [meta.name for meta in self.sess.get_outputs()]
+        self.inputs = [meta.name for meta in self.session.get_inputs()]
+        self.outputs = [meta.name for meta in self.session.get_outputs()]
 
     def forward_once(self, img):
         start = time.time()
-        result = self.session.run([], {input_name: img})
+        result = self.session.run([], {self.inputs[0]: img})
         end = time.time()  # stop timer
         return end - start
 
