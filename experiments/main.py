@@ -84,6 +84,9 @@ def main(ctx, backend, debug, quiet):
 
     model = models[5]
 
+    if model.path is None:
+        raise Exception("unable to find model in {}".format(model.name))
+
     utils.debug("Using {} model".format(model.name))
 
     try:
