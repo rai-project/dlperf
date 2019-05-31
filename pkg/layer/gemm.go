@@ -80,9 +80,9 @@ func (c Gemm) BwdBenchmarkAlgorithms(...dlperf.BwdBenchmarkArgsOptionFunc) []str
 
 //easyjson:json
 type gemmBenchmarkArgs struct {
-	BaseBenchmarkArgs `json:",inline,flatten,omitempty"`
+	BaseBenchmarkArgs      `json:",inline,flatten,omitempty"`
 	BaseBenchmarkInputArgs `json:",inline,flatten,omitempty"`
-	BatchSize int64 `json:"batch_size,omitempty"`
+	BatchSize              int64 `json:"batch_size,omitempty"`
 }
 
 func (c Gemm) mkGemmBenchmarkInputArgs() BaseBenchmarkInputArgs {
@@ -128,7 +128,7 @@ func (c Gemm) FwdBenchmarkArgs(opts ...dlperf.FwdBenchmarkArgsOptionFunc) interf
 	res := gemmBenchmarkArgs{
 		BaseBenchmarkInputArgs: c.mkGemmBenchmarkInputArgs(),
 		BaseBenchmarkArgs:      mkBaseBenchmarkFWDArgs(&c, opts...),
-		BatchSize: dlperf.GetBatchSize(),
+		BatchSize:              dlperf.GetBatchSize(),
 	}
 
 	hash, err := hashstructure.Hash(
@@ -149,7 +149,7 @@ func (c Gemm) BwdBenchmarkArgs(opts ...dlperf.BwdBenchmarkArgsOptionFunc) interf
 	res := gemmBenchmarkArgs{
 		BaseBenchmarkInputArgs: c.mkGemmBenchmarkInputArgs(),
 		BaseBenchmarkArgs:      mkBaseBenchmarkBWDArgs(&c, opts...),
-		BatchSize: dlperf.GetBatchSize(),
+		BatchSize:              dlperf.GetBatchSize(),
 	}
 
 	hash, err := hashstructure.Hash(

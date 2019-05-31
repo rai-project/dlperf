@@ -89,21 +89,20 @@ func (c Pooling) BenchmarkAlgorithms() []string {
 	return nil
 }
 
-
 //easyjson:json
 type poolingBenchmarkArgs struct {
 	BaseBenchmarkArgs `json:",inline,flatten,omitempty"`
-	Input0       int64 `args:"input[0]" hash:"input[0]" json:"input_0,omitempty"`
-	Input1       int64 `args:"input[1]" hash:"input[1]" json:"input_1,omitempty"`
-	Input2       int64 `args:"input[2]" hash:"input[2]" json:"input_2,omitempty"`
-	Input3       int64 `args:"input[3]" hash:"input[3]" json:"input_3,omitempty"`
-	FilterHeight int64 `args:"filter_height" hash:"filter_height" json:"filter_height,omitempty"`
-	FilterWidth  int64 `args:"filter_width" hash:"filter_width" json:"filter_width,omitempty"`
-	PadHeight    int64 `args:"pad_height" hash:"pad_height" json:"pad_height,omitempty"`
-	PadWidth     int64 `args:"pad_width" hash:"pad_width" json:"pad_width,omitempty"`
-	StrideHeight int64 `args:"stride_height" hash:"stride_height" json:"stride_height,omitempty"`
-	StrideWidth  int64 `args:"stride_width" hash:"stride_width" json:"stride_width,omitempty"`
-	BatchSize  int64 `args:"batch_size" hash:"batch_size" json:"batch_size,omitempty"`
+	Input0            int64 `args:"input[0]" hash:"input[0]" json:"input_0,omitempty"`
+	Input1            int64 `args:"input[1]" hash:"input[1]" json:"input_1,omitempty"`
+	Input2            int64 `args:"input[2]" hash:"input[2]" json:"input_2,omitempty"`
+	Input3            int64 `args:"input[3]" hash:"input[3]" json:"input_3,omitempty"`
+	FilterHeight      int64 `args:"filter_height" hash:"filter_height" json:"filter_height,omitempty"`
+	FilterWidth       int64 `args:"filter_width" hash:"filter_width" json:"filter_width,omitempty"`
+	PadHeight         int64 `args:"pad_height" hash:"pad_height" json:"pad_height,omitempty"`
+	PadWidth          int64 `args:"pad_width" hash:"pad_width" json:"pad_width,omitempty"`
+	StrideHeight      int64 `args:"stride_height" hash:"stride_height" json:"stride_height,omitempty"`
+	StrideWidth       int64 `args:"stride_width" hash:"stride_width" json:"stride_width,omitempty"`
+	BatchSize         int64 `args:"batch_size" hash:"batch_size" json:"batch_size,omitempty"`
 }
 
 func (c Pooling) FwdBenchmarkArgs(opts ...dlperf.FwdBenchmarkArgsOptionFunc) interface{} {
@@ -120,7 +119,7 @@ func (c Pooling) FwdBenchmarkArgs(opts ...dlperf.FwdBenchmarkArgsOptionFunc) int
 		PadWidth:          c.Pads[2],
 		StrideHeight:      c.Strides[0],
 		StrideWidth:       c.Strides[1],
-		BatchSize: dlperf.GetBatchSize(),
+		BatchSize:         dlperf.GetBatchSize(),
 		BaseBenchmarkArgs: mkBaseBenchmarkFWDArgs(&c, opts...),
 	}
 
