@@ -81,6 +81,7 @@ type batchnormBenchmarkArgs struct {
 	BaseBenchmarkArgs
 	BaseBenchmarkInputArgs
 	IsTraining bool
+	BatchSize int64
 }
 
 func (c BatchNorm) FwdBenchmarkArgs(iopts ...dlperf.FwdBenchmarkArgsOptionFunc) interface{} {
@@ -89,6 +90,7 @@ func (c BatchNorm) FwdBenchmarkArgs(iopts ...dlperf.FwdBenchmarkArgsOptionFunc) 
 		BaseBenchmarkInputArgs: mkBaseBenchmarkInputArgs(&c),
 		BaseBenchmarkArgs:      mkBaseBenchmarkFWDArgs(&c, iopts...),
 		IsTraining:             opts.IsTraining,
+		BatchSize: dlperf.GetBatchSize(),
 	}
 
 	hash, err := hashstructure.Hash(
@@ -109,6 +111,7 @@ func (c BatchNorm) BwdBenchmarkArgs(iopts ...dlperf.BwdBenchmarkArgsOptionFunc) 
 	res := batchnormBenchmarkArgs{
 		BaseBenchmarkInputArgs: mkBaseBenchmarkInputArgs(&c),
 		BaseBenchmarkArgs:      mkBaseBenchmarkBWDArgs(&c, iopts...),
+		BatchSize: dlperf.GetBatchSize(),
 	}
 
 	hash, err := hashstructure.Hash(

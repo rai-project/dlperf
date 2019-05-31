@@ -80,7 +80,8 @@ func (c Gemm) BwdBenchmarkAlgorithms(...dlperf.BwdBenchmarkArgsOptionFunc) []str
 
 type gemmBenchmarkArgs struct {
 	BaseBenchmarkArgs
-	BaseBenchmarkInputArgs
+  BaseBenchmarkInputArgs
+  BatchSize int64
 }
 
 func (c Gemm) mkGemmBenchmarkInputArgs() BaseBenchmarkInputArgs {
@@ -126,6 +127,7 @@ func (c Gemm) FwdBenchmarkArgs(opts ...dlperf.FwdBenchmarkArgsOptionFunc) interf
 	res := gemmBenchmarkArgs{
 		BaseBenchmarkInputArgs: c.mkGemmBenchmarkInputArgs(),
 		BaseBenchmarkArgs:      mkBaseBenchmarkFWDArgs(&c, opts...),
+		BatchSize: dlperf.GetBatchSize(),
 	}
 
 	hash, err := hashstructure.Hash(
@@ -146,6 +148,7 @@ func (c Gemm) BwdBenchmarkArgs(opts ...dlperf.BwdBenchmarkArgsOptionFunc) interf
 	res := gemmBenchmarkArgs{
 		BaseBenchmarkInputArgs: c.mkGemmBenchmarkInputArgs(),
 		BaseBenchmarkArgs:      mkBaseBenchmarkBWDArgs(&c, opts...),
+		BatchSize: dlperf.GetBatchSize(),
 	}
 
 	hash, err := hashstructure.Hash(

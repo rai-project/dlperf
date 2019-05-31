@@ -71,6 +71,7 @@ func (c Softmax) Shape() dlperf.ShapeInformation {
 type softmaxBenchmarkArgs struct {
 	BaseBenchmarkArgs
 	BaseBenchmarkInputArgs
+	BatchSize int64
 }
 
 func (c Softmax) FwdBenchmarkArgs(opts ...dlperf.FwdBenchmarkArgsOptionFunc) interface{} {
@@ -78,6 +79,7 @@ func (c Softmax) FwdBenchmarkArgs(opts ...dlperf.FwdBenchmarkArgsOptionFunc) int
 	res := softmaxBenchmarkArgs{
 		BaseBenchmarkInputArgs: mkBaseBenchmarkInputArgs(&c),
 		BaseBenchmarkArgs:      mkBaseBenchmarkFWDArgs(&c, opts...),
+		BatchSize: dlperf.GetBatchSize(),
 	}
 
 	hash, err := hashstructure.Hash(
@@ -99,6 +101,7 @@ func (c Softmax) BwdBenchmarkArgs(opts ...dlperf.BwdBenchmarkArgsOptionFunc) int
 	res := softmaxBenchmarkArgs{
 		BaseBenchmarkInputArgs: mkBaseBenchmarkInputArgs(&c),
 		BaseBenchmarkArgs:      mkBaseBenchmarkBWDArgs(&c, opts...),
+		BatchSize: dlperf.GetBatchSize(),
 	}
 
 	hash, err := hashstructure.Hash(

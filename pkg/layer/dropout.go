@@ -66,12 +66,14 @@ func (c Dropout) BwdBenchmarkAlgorithms(...dlperf.BwdBenchmarkArgsOptionFunc) []
 type dropoutBenchmarkArgs struct {
 	BaseBenchmarkArgs
 	BaseBenchmarkInputArgs
+	BatchSize int64
 }
 
 func (c Dropout) FwdBenchmarkArgs(opts ...dlperf.FwdBenchmarkArgsOptionFunc) interface{} {
 	res := dropoutBenchmarkArgs{
 		BaseBenchmarkInputArgs: mkBaseBenchmarkInputArgs(&c),
 		BaseBenchmarkArgs:      mkBaseBenchmarkFWDArgs(&c, opts...),
+		BatchSize: dlperf.GetBatchSize(),
 	}
 
 	hash, err := hashstructure.Hash(
@@ -92,6 +94,7 @@ func (c Dropout) BwdBenchmarkArgs(opts ...dlperf.BwdBenchmarkArgsOptionFunc) int
 	res := dropoutBenchmarkArgs{
 		BaseBenchmarkInputArgs: mkBaseBenchmarkInputArgs(&c),
 		BaseBenchmarkArgs:      mkBaseBenchmarkBWDArgs(&c, opts...),
+		BatchSize: dlperf.GetBatchSize(),
 	}
 
 	hash, err := hashstructure.Hash(
