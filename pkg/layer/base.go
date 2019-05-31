@@ -9,6 +9,7 @@ import (
 	"github.com/rai-project/onnx"
 )
 
+//easyjson:json
 type BaseBenchmarkInputArgs struct {
 	Input0    int64 `args:"input[0]" hash:"input[0]" json:"input_0,omitempty"`
 	Input1    int64 `args:"input[1]" hash:"input[1]" json:"input_1,omitempty"`
@@ -21,6 +22,7 @@ type BaseBenchmarkInputArgs struct {
 	BatchSize int64 `args:"batch_size" hash:"batch_size" json:"batch_size,omitempty"`
 }
 
+//easyjson:json
 type BaseBenchmarkArgs struct {
 	ArgNames          []string          `args:"-" json:"arg_names,omitempty"`
 	UniqueBenchmarkID uint64            `args:"-" json:"unique_benchmark_id,omitempty"`
@@ -31,6 +33,7 @@ type BaseBenchmarkArgs struct {
 	BatchSize        int64              `args:"batch_size" json:"batch_size,omitempty"`
 }
 
+//easyjson:json
 type Base struct {
 	node              *onnx.NodeProto     `json:"-"`
 	weightTensors     []*onnx.TensorProto `json:"-"`

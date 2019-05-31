@@ -143,8 +143,9 @@ func (c Conv) BwdBenchmarkAlgorithms(iopts ...dlperf.BwdBenchmarkArgsOptionFunc)
 	}
 }
 
+//easyjson:json
 type convBenchmarkArgs struct {
-	BaseBenchmarkArgs
+	BaseBenchmarkArgs `json:",inline,flatten,omitempty"`
 	Input0         int64              `args:"input[0]" hash:"input[0]" json:"input_0,omitempty"`
 	Input1         int64              `args:"input[1]" hash:"input[1]" json:"input_1,omitempty"`
 	Input2         int64              `args:"input[2]" hash:"input[2]" json:"input_2,omitempty"`

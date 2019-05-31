@@ -68,10 +68,11 @@ func (c Softmax) Shape() dlperf.ShapeInformation {
 	return c.Information().Shape()
 }
 
+//easyjson:json
 type softmaxBenchmarkArgs struct {
-	BaseBenchmarkArgs
-	BaseBenchmarkInputArgs
-	BatchSize int64
+	BaseBenchmarkArgs `json:",inline,flatten,omitempty"`
+	BaseBenchmarkInputArgs `json:",inline,flatten,omitempty"`
+	BatchSize int64 `json:"batch_size,omitempty"`
 }
 
 func (c Softmax) FwdBenchmarkArgs(opts ...dlperf.FwdBenchmarkArgsOptionFunc) interface{} {

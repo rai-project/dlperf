@@ -2,9 +2,10 @@ package dlperf
 
 import (
 	"context"
-	"sync"
 	"runtime"
+	"sync"
 
+	"github.com/rai-project/dlperf/pkg/benchmark"
 	"golang.org/x/sync/errgroup"
 )
 
@@ -17,6 +18,26 @@ func (lyrs Layers) FwdUnion(datatype, algorithm string) Layers {
 	concurrencyLimit := runtime.NumCPU()
 	sem := make(chan bool, concurrencyLimit)
 
+	filterCache := map[int]benchmark.Benchmark{}
+	var filterCacheLock sync.RWMutex
+
+	getBenchmarkFilter := func(ii int) *benchmark.Benchmark {
+		lyrI := lyrs[ii]
+		if lyrI == nil {
+			return nil
+		}
+		filterCacheLock.RLock()
+		bI, ok := filterCache[ii]
+		filterCacheLock.RUnlock()
+		if !ok {
+			bI = lyrI.FwdBenchmarkFilter(datatype, algorithm)
+			filterCacheLock.Lock()
+			filterCache[ii] = bI
+			filterCacheLock.Unlock()
+		}
+		return &bI
+	}
+
 	for ii0 := range lyrs {
 		ii := ii0
 		lyrI := lyrs[ii]
@@ -27,21 +48,23 @@ func (lyrs Layers) FwdUnion(datatype, algorithm string) Layers {
 		sem <- true
 
 		g.Go(func() error {
-				defer func() { <-sem }()
-			bI := lyrI.FwdBenchmarkFilter(datatype, algorithm)
+			defer func() { <-sem }()
+			bI := getBenchmarkFilter(ii)
+			if bI == nil {
+				return nil
+			}
 			for jj := ii + 1; jj < len(lyrs); jj++ {
-				lyrJ := lyrs[jj]
-				if lyrJ == nil {
-					return nil
+				bJ := getBenchmarkFilter(jj)
+				if bJ == nil {
+					continue
 				}
-				bJ := lyrJ.FwdBenchmarkFilter(datatype, algorithm)
-				if bI.IsEqual(bJ) {
+				if bI.IsEqual(*bJ) {
 					return nil
 				}
 			}
 			mut.Lock()
-			defer mut.Unlock()
 			res = append(res, lyrI)
+			mut.Unlock()
 			return nil
 		})
 	}

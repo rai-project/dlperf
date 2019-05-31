@@ -77,11 +77,12 @@ func (c BatchNorm) BenchmarkAlgorithms() []string {
 	}
 }
 
+//easyjson:json
 type batchnormBenchmarkArgs struct {
-	BaseBenchmarkArgs
-	BaseBenchmarkInputArgs
-	IsTraining bool
-	BatchSize int64
+	BaseBenchmarkArgs `json:",inline,flatten,omitempty"`
+	BaseBenchmarkInputArgs `json:",inline,flatten,omitempty"`
+	IsTraining bool `json:"is_training"`
+	BatchSize int64 `json:"batch_size,omitempty"`
 }
 
 func (c BatchNorm) FwdBenchmarkArgs(iopts ...dlperf.FwdBenchmarkArgsOptionFunc) interface{} {

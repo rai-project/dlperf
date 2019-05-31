@@ -78,10 +78,11 @@ func (c Gemm) BwdBenchmarkAlgorithms(...dlperf.BwdBenchmarkArgsOptionFunc) []str
 	}
 }
 
+//easyjson:json
 type gemmBenchmarkArgs struct {
-	BaseBenchmarkArgs
-  BaseBenchmarkInputArgs
-  BatchSize int64
+	BaseBenchmarkArgs `json:",inline,flatten,omitempty"`
+	BaseBenchmarkInputArgs `json:",inline,flatten,omitempty"`
+	BatchSize int64 `json:"batch_size,omitempty"`
 }
 
 func (c Gemm) mkGemmBenchmarkInputArgs() BaseBenchmarkInputArgs {

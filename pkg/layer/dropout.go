@@ -63,10 +63,11 @@ func (c Dropout) BwdBenchmarkAlgorithms(...dlperf.BwdBenchmarkArgsOptionFunc) []
 	}
 }
 
+//easyjson:json
 type dropoutBenchmarkArgs struct {
-	BaseBenchmarkArgs
-	BaseBenchmarkInputArgs
-	BatchSize int64
+	BaseBenchmarkArgs `json:",inline,flatten,omitempty"`
+	BaseBenchmarkInputArgs `json:",inline,flatten,omitempty"`
+	BatchSize int64 `json:"batch_size,omitempty"`
 }
 
 func (c Dropout) FwdBenchmarkArgs(opts ...dlperf.FwdBenchmarkArgsOptionFunc) interface{} {

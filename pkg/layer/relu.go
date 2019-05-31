@@ -97,10 +97,11 @@ func (c Relu) BenchmarkAlgorithms() []string {
 	return nil
 }
 
+//easyjson:json
 type reluBenchmarkArgs struct {
-	BaseBenchmarkArgs
-	BaseBenchmarkInputArgs
-	BatchSize int64
+	BaseBenchmarkArgs `json:",inline,flatten,omitempty"`
+	BaseBenchmarkInputArgs `json:",inline,flatten,omitempty"`
+	BatchSize int64 `json:"batch_size,omitempty"`
 }
 
 func (c Relu) substituteAlgorithm(alg string) string {
