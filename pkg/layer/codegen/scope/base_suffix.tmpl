@@ -10,10 +10,10 @@
   [[ end ]]
 [[ end ]]
 
-[[ range $datatype := .DataTypes ]]BENCHMARK_[[ $.BenchmarkName ]]([[ $.BenchmarkName ]]_[[ $datatype.Name | upper ]]__[[$.UniqueBenchmarkID]]);
+[[ range $datatype := .DataTypes ]]BENCHMARK_[[ $.BenchmarkName ]]([[ $.BenchmarkName ]]_[[ $datatype.Name | upper ]]__BatchSize_[[$.BatchSize]]__[[$.UniqueBenchmarkID]]);
 [[ end ]]
 #undef BENCHMARK_[[ .BenchmarkName ]]_INPUT_ARGS
 #undef BENCHMARK_[[ .BenchmarkName ]]_INPUT_ARG_NAMES
 #undef BENCHMARK_[[ .BenchmarkName ]]
-}
+} // end namespace [[ .BenchmarkName ]]__BatchSize_[[$.BatchSize]]__[[.UniqueBenchmarkID]]
 #endif // ENABLE_[[ .BenchmarkName ]]

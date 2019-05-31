@@ -101,6 +101,7 @@ type poolingBenchmarkArgs struct {
 	PadWidth     int64 `args:"pad_width" hash:"pad_width" json:"pad_width,omitempty"`
 	StrideHeight int64 `args:"stride_height" hash:"stride_height" json:"stride_height,omitempty"`
 	StrideWidth  int64 `args:"stride_width" hash:"stride_width" json:"stride_width,omitempty"`
+	BatchSize  int64 `args:"batch_size" hash:"batch_size" json:"batch_size,omitempty"`
 }
 
 func (c Pooling) FwdBenchmarkArgs(opts ...dlperf.FwdBenchmarkArgsOptionFunc) interface{} {
@@ -117,6 +118,7 @@ func (c Pooling) FwdBenchmarkArgs(opts ...dlperf.FwdBenchmarkArgsOptionFunc) int
 		PadWidth:          c.Pads[2],
 		StrideHeight:      c.Strides[0],
 		StrideWidth:       c.Strides[1],
+		BatchSize: dlperf.GetBatchSize(),
 		BaseBenchmarkArgs: mkBaseBenchmarkFWDArgs(&c, opts...),
 	}
 

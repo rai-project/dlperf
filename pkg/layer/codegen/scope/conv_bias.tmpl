@@ -2,13 +2,13 @@
   [[ if eq $datatype.Name "TensorCoreHalf" ]]
   #ifdef CUDNN_SUPPORTS_TENSOR_OPS
   [[ end ]]
-  static void [[ $.BenchmarkName ]]_[[ $datatype.Name | upper ]]__[[$.UniqueBenchmarkID]](benchmark::State& state) {
+  static void [[ $.BenchmarkName ]]_[[ $datatype.Name | upper ]]__BatchSize_[[$.BatchSize]]__[[$.UniqueBenchmarkID]](benchmark::State& state) {
     [[ if eq $datatype.Name "TensorCoreHalf" ]]
       [[ $.BenchmarkName ]]_Impl<[[ $datatype.CType ]]>(state);
     [[ else ]]
       [[ $.BenchmarkName ]]_Impl<[[ $datatype.CType ]]>(state);
     [[ end ]]
-    BENCHMARK_[[ $.BenchmarkName ]]_ADD_COUNTERS__[[$.UniqueBenchmarkID]](state);
+    BENCHMARK_[[ $.BenchmarkName ]]_ADD_COUNTERS__BatchSize_[[$.BatchSize]]__[[$.UniqueBenchmarkID]](state);
   }
   [[ if eq $datatype.Name "TensorCoreHalf" ]]
   #endif //  CUDNN_SUPPORTS_TENSOR_OPS

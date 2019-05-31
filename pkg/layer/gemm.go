@@ -1,11 +1,11 @@
 package layer
 
 import (
-    "github.com/spf13/cast"
+	"github.com/k0kubun/pp"
 	"github.com/mitchellh/hashstructure"
 	dlperf "github.com/rai-project/dlperf/pkg"
 	"github.com/rai-project/dlperf/pkg/benchmark"
-	"github.com/k0kubun/pp"
+	"github.com/spf13/cast"
 )
 
 // https://github.com/onnx/onnx/blob/master/docs/Operators.md#Gemm
@@ -58,7 +58,6 @@ func (c Gemm) BwdBenchmarkName(opts ...dlperf.BwdBenchmarkArgsOptionFunc) string
 	return "LAYER_CUBLAS_GEMM_BWD"
 }
 
-
 func (c Gemm) FwdTiming(system string /* hardware/software struct */) string {
 	return ""
 }
@@ -85,13 +84,12 @@ type gemmBenchmarkArgs struct {
 }
 
 func (c Gemm) mkGemmBenchmarkInputArgs() BaseBenchmarkInputArgs {
-if false {
+	if false {
 
-	pp.Println(c.InputShapes())
-	pp.Println(c.TransA)
-	pp.Println(c.TransB)
-}
-
+		pp.Println(c.InputShapes())
+		pp.Println(c.TransA)
+		pp.Println(c.TransB)
+	}
 
 	aShape := c.InputShapes()[0]
 	var am, ak int64
@@ -112,17 +110,17 @@ if false {
 	}
 
 	return BaseBenchmarkInputArgs{
-		Input0: am,
-		Input1: bn,
-		Input2: ak,
-		Input3: c.TransA,
-		Input4: c.TransB,
-		Input5: cast.ToInt64(c.Alpha),
-		Input6: cast.ToInt64(c.Beta),
-		Input7: -1,
+		Input0:    am,
+		Input1:    bn,
+		Input2:    ak,
+		Input3:    c.TransA,
+		Input4:    c.TransB,
+		Input5:    cast.ToInt64(c.Alpha),
+		Input6:    cast.ToInt64(c.Beta),
+		Input7:    -1,
+		BatchSize: dlperf.GetBatchSize(),
 	}
 }
-
 
 func (c Gemm) FwdBenchmarkArgs(opts ...dlperf.FwdBenchmarkArgsOptionFunc) interface{} {
 	res := gemmBenchmarkArgs{
@@ -143,7 +141,6 @@ func (c Gemm) FwdBenchmarkArgs(opts ...dlperf.FwdBenchmarkArgsOptionFunc) interf
 
 	return res
 }
-
 
 func (c Gemm) BwdBenchmarkArgs(opts ...dlperf.BwdBenchmarkArgsOptionFunc) interface{} {
 	res := gemmBenchmarkArgs{
@@ -196,7 +193,6 @@ func (c Gemm) FwdBenchmarkGeneratorArgNames() []string {
 func (c Gemm) BwdBenchmarkGeneratorArgNames() []string {
 	return benchmarkArgNames(gemmBenchmarkArgs{})
 }
-
 
 func (c Gemm) Shape() dlperf.ShapeInformation {
 	return c.Information().Shape()

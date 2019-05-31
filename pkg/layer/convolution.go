@@ -158,7 +158,8 @@ type convBenchmarkArgs struct {
 	StrideWidth    int64              `args:"stride_width" hash:"stride_width" json:"stride_width,omitempty"`
 	DilationWidth  int64              `args:"dilation_height" hash:"dilation_height" json:"dilation_width,omitempty"`
 	DilationHeight int64              `args:"dilation_width" hash:"dilation_width" json:"dilation_height,omitempty"`
-	ConvBwdType    dlperf.ConvBwdType `args:"-" hash:"-" json:"conv_bwd_type,omitempty"`
+	ConvBwdType    *dlperf.ConvBwdType `args:"conv_bwd_type" hash:"conv_bwd_type" json:"conv_bwd_type,omitempty"`
+	BatchSize    int64 `args:"batch_size" hash:"batch_size" json:"batch_size,omitempty"`
 }
 
 func (c Conv) FwdBenchmarkArgs(opts ...dlperf.FwdBenchmarkArgsOptionFunc) interface{} {
@@ -178,6 +179,7 @@ func (c Conv) FwdBenchmarkArgs(opts ...dlperf.FwdBenchmarkArgsOptionFunc) interf
 		StrideWidth:       c.Strides[1],
 		DilationHeight:    c.Dilations[0],
 		DilationWidth:     c.Dilations[1],
+		BatchSize: dlperf.GetBatchSize(),
 		BaseBenchmarkArgs: mkBaseBenchmarkFWDArgs(&c, opts...),
 	}
 
@@ -214,7 +216,8 @@ func (c Conv) BwdBenchmarkArgs(iopts ...dlperf.BwdBenchmarkArgsOptionFunc) inter
 		DilationHeight:    c.Dilations[0],
 		DilationWidth:     c.Dilations[1],
 		BaseBenchmarkArgs: mkBaseBenchmarkBWDArgs(&c, iopts...),
-		ConvBwdType:       opts.ConvBwdType,
+		ConvBwdType:       &opts.ConvBwdType,
+		BatchSize: dlperf.GetBatchSize(),
 	}
 
 	hash, err := hashstructure.Hash(

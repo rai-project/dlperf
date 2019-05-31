@@ -694,6 +694,9 @@ dlperf
 test.cpp
 test2.cpp
 generate_benchmarks.hpp
+generate_benchmarks_*.hpp
+generated_benchmarks_*.hpp
 generated_benchmarks.hpp
 
 onnx_models_1.3
+gen/

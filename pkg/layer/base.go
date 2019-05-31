@@ -10,14 +10,15 @@ import (
 )
 
 type BaseBenchmarkInputArgs struct {
-	Input0 int64 `args:"input[0]" hash:"input[0]" json:"input_0,omitempty"`
-	Input1 int64 `args:"input[1]" hash:"input[1]" json:"input_1,omitempty"`
-	Input2 int64 `args:"input[2]" hash:"input[2]" json:"input_2,omitempty"`
-	Input3 int64 `args:"input[3]" hash:"input[3]" json:"input_3,omitempty"`
-	Input4 int64 `args:"input[4]" hash:"input[4]" json:"input_4,omitempty"`
-	Input5 int64 `args:"input[5]" hash:"input[5]" json:"input_5,omitempty"`
-	Input6 int64 `args:"input[6]" hash:"input[6]" json:"input_6,omitempty"`
-	Input7 int64 `args:"input[7]" hash:"input[7]" json:"input_7,omitempty"`
+	Input0    int64 `args:"input[0]" hash:"input[0]" json:"input_0,omitempty"`
+	Input1    int64 `args:"input[1]" hash:"input[1]" json:"input_1,omitempty"`
+	Input2    int64 `args:"input[2]" hash:"input[2]" json:"input_2,omitempty"`
+	Input3    int64 `args:"input[3]" hash:"input[3]" json:"input_3,omitempty"`
+	Input4    int64 `args:"input[4]" hash:"input[4]" json:"input_4,omitempty"`
+	Input5    int64 `args:"input[5]" hash:"input[5]" json:"input_5,omitempty"`
+	Input6    int64 `args:"input[6]" hash:"input[6]" json:"input_6,omitempty"`
+	Input7    int64 `args:"input[7]" hash:"input[7]" json:"input_7,omitempty"`
+	BatchSize int64 `args:"batch_size" hash:"batch_size" json:"batch_size,omitempty"`
 }
 
 type BaseBenchmarkArgs struct {
@@ -27,6 +28,7 @@ type BaseBenchmarkArgs struct {
 	Algorithms        []string          `args:"-" json:"algorithms,omitempty"`
 	DataTypes         []dlperf.DataType `args:"-" json:"data_types,omitempty"`
 	IsTraining        bool              `args:"-" json:"is_training,omitempty"`
+	BatchSize        int64              `args:"batch_size" json:"batch_size,omitempty"`
 }
 
 type Base struct {
@@ -48,7 +50,8 @@ func mkBaseBenchmarkFWDArgs(c dlperf.Layer, opts ...dlperf.FwdBenchmarkArgsOptio
 		BenchmarkName: c.FwdBenchmarkName(opts...),
 		ArgNames:      c.FwdBenchmarkGeneratorArgNames(),
 		Algorithms:    c.FwdBenchmarkAlgorithms(opts...),
-		DataTypes:     c.DataTypes(),
+    DataTypes:     c.DataTypes(),
+    BatchSize: dlperf.GetBatchSize(),
 	}
 }
 
@@ -58,20 +61,22 @@ func mkBaseBenchmarkBWDArgs(c dlperf.Layer, opts ...dlperf.BwdBenchmarkArgsOptio
 		ArgNames:      c.BwdBenchmarkGeneratorArgNames(),
 		Algorithms:    c.BwdBenchmarkAlgorithms(opts...),
 		DataTypes:     c.DataTypes(),
+    BatchSize: dlperf.GetBatchSize(),
 	}
 }
 
 func mkBaseBenchmarkInputArgs(c dlperf.Layer) BaseBenchmarkInputArgs {
 	input := c.InputShapes()[0]
 	return BaseBenchmarkInputArgs{
-		Input0: getOrMinus1(input, 0),
-		Input1: getOrMinus1(input, 1),
-		Input2: getOrMinus1(input, 2),
-		Input3: getOrMinus1(input, 3),
-		Input4: getOrMinus1(input, 4),
-		Input5: getOrMinus1(input, 5),
-		Input6: getOrMinus1(input, 6),
-		Input7: getOrMinus1(input, 7),
+		Input0:    getOrMinus1(input, 0),
+		Input1:    getOrMinus1(input, 1),
+		Input2:    getOrMinus1(input, 2),
+		Input3:    getOrMinus1(input, 3),
+		Input4:    getOrMinus1(input, 4),
+		Input5:    getOrMinus1(input, 5),
+		Input6:    getOrMinus1(input, 6),
+		Input7:    getOrMinus1(input, 7),
+		BatchSize: dlperf.GetBatchSize(),
 	}
 }
 

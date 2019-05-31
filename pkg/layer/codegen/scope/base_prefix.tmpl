@@ -1,5 +1,5 @@
 #ifdef ENABLE_[[ .BenchmarkName ]]
-namespace [[ .BenchmarkName ]]__[[.UniqueBenchmarkID]] {
+namespace [[ .BenchmarkName ]]__BatchSize_[[$.BatchSize]]__[[.UniqueBenchmarkID]] {
 
 #define BENCHMARK_[[ .BenchmarkName ]]_INPUT_ARGS() \
   Args({{ \
@@ -9,7 +9,7 @@ namespace [[ .BenchmarkName ]]__[[.UniqueBenchmarkID]] {
 #define BENCHMARK_[[ .BenchmarkName ]]_INPUT_ARG_NAMES() \
   ArgNames({[[ .ArgNames | join ", " ]]})
 
-static void BENCHMARK_[[ .BenchmarkName ]]_ADD_COUNTERS__[[.UniqueBenchmarkID]](benchmark::State& state) {
+static void BENCHMARK_[[ .BenchmarkName ]]_ADD_COUNTERS__BatchSize_[[$.BatchSize]]__[[.UniqueBenchmarkID]](benchmark::State& state) {
   state.counters.insert({
 [[ . | make_counters ]]
   });
