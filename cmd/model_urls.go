@@ -82,10 +82,10 @@ var ourModelURLs = []modelURLInfo{
 }
 
 var onnxModelURLs = []modelURLInfo{
-	modelURLInfo{
-		URL:  "https://onnxzoo.blob.core.windows.net/models/opset_9/bidaf/bidaf.tar.gz",
-		Name: "BiDAF",
-	},
+	// modelURLInfo{
+	// 	URL:  "https://onnxzoo.blob.core.windows.net/models/opset_9/bidaf/bidaf.tar.gz",
+	// 	Name: "BiDAF",
+	// },
 	// "https://s3.amazonaws.com/download.onnx/models/opset_3/bvlc_alexnet.tar.gz",
 	// "https://s3.amazonaws.com/download.onnx/models/opset_6/bvlc_alexnet.tar.gz",
 	// "https://s3.amazonaws.com/download.onnx/models/opset_7/bvlc_alexnet.tar.gz",

@@ -7,8 +7,17 @@ import (
 )
 
 var (
-	log *logrus.Entry
+	batchSize int64
+	log       *logrus.Entry
 )
+
+func GetBatchSize() int64 {
+	return batchSize
+}
+
+func SetBatchSize(size int64) {
+	batchSize = size
+}
 
 func init() {
 	config.AfterInit(func() {

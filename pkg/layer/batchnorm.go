@@ -77,10 +77,12 @@ func (c BatchNorm) BenchmarkAlgorithms() []string {
 	}
 }
 
+//easyjson:json
 type batchnormBenchmarkArgs struct {
-	BaseBenchmarkArgs
-	BaseBenchmarkInputArgs
-	IsTraining bool
+	BaseBenchmarkArgs      `json:",inline,flatten,omitempty"`
+	BaseBenchmarkInputArgs `json:",inline,flatten,omitempty"`
+	IsTraining             bool  `json:"is_training"`
+	BatchSize              int64 `json:"batch_size,omitempty"`
 }
 
 func (c BatchNorm) FwdBenchmarkArgs(iopts ...dlperf.FwdBenchmarkArgsOptionFunc) interface{} {
@@ -89,6 +91,7 @@ func (c BatchNorm) FwdBenchmarkArgs(iopts ...dlperf.FwdBenchmarkArgsOptionFunc) 
 		BaseBenchmarkInputArgs: mkBaseBenchmarkInputArgs(&c),
 		BaseBenchmarkArgs:      mkBaseBenchmarkFWDArgs(&c, iopts...),
 		IsTraining:             opts.IsTraining,
+		BatchSize:              dlperf.GetBatchSize(),
 	}
 
 	hash, err := hashstructure.Hash(
@@ -109,6 +112,7 @@ func (c BatchNorm) BwdBenchmarkArgs(iopts ...dlperf.BwdBenchmarkArgsOptionFunc) 
 	res := batchnormBenchmarkArgs{
 		BaseBenchmarkInputArgs: mkBaseBenchmarkInputArgs(&c),
 		BaseBenchmarkArgs:      mkBaseBenchmarkBWDArgs(&c, iopts...),
+		BatchSize:              dlperf.GetBatchSize(),
 	}
 
 	hash, err := hashstructure.Hash(

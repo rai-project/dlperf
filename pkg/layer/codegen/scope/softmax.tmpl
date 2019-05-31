@@ -1,9 +1,9 @@
 
 [[ range $datatype := .DataTypes ]]
 template <cudnnSoftmaxAlgorithm_t softmax_algorithm, cudnnSoftmaxMode_t softmax_mode>
-static void [[ $.BenchmarkName ]]_[[ $datatype.Name | upper ]]__[[$.UniqueBenchmarkID]](benchmark::State& state) {
+static void [[ $.BenchmarkName ]]_[[ $datatype.Name | upper ]]__BatchSize_[[$.BatchSize]]__[[$.UniqueBenchmarkID]](benchmark::State& state) {
   [[ $.BenchmarkName ]]_Impl<[[ $datatype.CType ]], softmax_algorithm, softmax_mode>(state);
-  BENCHMARK_[[ $.BenchmarkName ]]_ADD_COUNTERS__[[$.UniqueBenchmarkID]](state);
+  BENCHMARK_[[ $.BenchmarkName ]]_ADD_COUNTERS__BatchSize_[[$.BatchSize]]__[[$.UniqueBenchmarkID]](state);
 }
 [[ end ]]
 #define BENCHMARK_[[ .BenchmarkName ]]0(b, SOFTMAX_MODE) \
@@ -18,7 +18,7 @@ static void [[ $.BenchmarkName ]]_[[ $datatype.Name | upper ]]__[[$.UniqueBenchm
   BENCHMARK_[[ .BenchmarkName ]]0(b, CUDNN_SOFTMAX_ACCURATE);                                                                    \
   BENCHMARK_[[ .BenchmarkName ]]0(b, CUDNN_SOFTMAX_LOG)
 
-[[ range $datatype := .DataTypes ]]BENCHMARK_[[ $.BenchmarkName ]]([[ $.BenchmarkName ]]_[[ $datatype.Name | upper ]]__[[$.UniqueBenchmarkID]]);
+[[ range $datatype := .DataTypes ]]BENCHMARK_[[ $.BenchmarkName ]]([[ $.BenchmarkName ]]_[[ $datatype.Name | upper ]]__BatchSize_[[$.BatchSize]]__[[$.UniqueBenchmarkID]]);
 [[ end ]]
 #undef BENCHMARK_[[ .BenchmarkName ]]_INPUT_ARGS
 #undef BENCHMARK_[[ .BenchmarkName ]]_INPUT_ARG_NAMES

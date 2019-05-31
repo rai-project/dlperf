@@ -205,7 +205,7 @@ func multidirectionalBroadcastShapeInference(inputShapes []dlperf.Shape) []dlper
 }
 
 func mkFwdBenchmarkFilterName(layer dlperf.Layer, datatype, algorithm string) string {
-	name := "^" + layer.FwdBenchmarkName() + "_" + strings.ToUpper(datatype) + `(__\d+)?`
+	name := "^" + layer.FwdBenchmarkName() + "_" + strings.ToUpper(datatype) + `(__BatchSize_\d+)?` + `(__\d+)?`
 	if algorithm != "" {
 		name += `<(.*,\s*)*` + strings.ToUpper(algorithm) + `(\s*,.*)*>`
 	}
@@ -213,7 +213,7 @@ func mkFwdBenchmarkFilterName(layer dlperf.Layer, datatype, algorithm string) st
 }
 
 func mkBwdBenchmarkFilterName(layer dlperf.Layer, datatype, algorithm string) string {
-	name := "^" + layer.BwdBenchmarkName() + "_" + strings.ToUpper(datatype) + `(__\d+)?`
+	name := "^" + layer.BwdBenchmarkName() + "_" + strings.ToUpper(datatype) + `(__BatchSize_\d+)?` + `(__\d+)?`
 	if algorithm != "" {
 		name += `<(.*,\s*)*` + strings.ToUpper(algorithm) + `(\s*,.*)*>`
 	}

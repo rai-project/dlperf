@@ -22,6 +22,7 @@ import (
 	zglob "github.com/mattn/go-zglob"
 	homedir "github.com/mitchellh/go-homedir"
 	"github.com/pkg/errors"
+	dlperf "github.com/rai-project/dlperf/pkg"
 	"github.com/rai-project/dlperf/pkg/onnx"
 	"github.com/rai-project/utils"
 	"golang.org/x/sync/errgroup"
@@ -86,6 +87,8 @@ func readModels(modelPath string) ([]*onnx.Onnx, error) {
 		return nil, errors.Errorf("file %v does not exist", modelPath)
 	}
 
+	dlperf.SetBatchSize(batchSize)
+
 	if com.IsFile(modelPath) {
 
 		model, err := onnx.New(modelPath, batchSize)
@@ -124,7 +127,7 @@ func readModels(modelPath string) ([]*onnx.Onnx, error) {
 					pp.Println("[PANIC] while processing " + path + " [error = " + stripansi.Strip(repr.String(r)) + "]")
 				}
 			}()
-			pp.Println(path)
+			// pp.Println(path)
 			model, err := onnx.New(path, batchSize)
 			if err != nil {
 				log.Fatal(err)

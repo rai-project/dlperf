@@ -63,15 +63,18 @@ func (c Dropout) BwdBenchmarkAlgorithms(...dlperf.BwdBenchmarkArgsOptionFunc) []
 	}
 }
 
+//easyjson:json
 type dropoutBenchmarkArgs struct {
-	BaseBenchmarkArgs
-	BaseBenchmarkInputArgs
+	BaseBenchmarkArgs      `json:",inline,flatten,omitempty"`
+	BaseBenchmarkInputArgs `json:",inline,flatten,omitempty"`
+	BatchSize              int64 `json:"batch_size,omitempty"`
 }
 
 func (c Dropout) FwdBenchmarkArgs(opts ...dlperf.FwdBenchmarkArgsOptionFunc) interface{} {
 	res := dropoutBenchmarkArgs{
 		BaseBenchmarkInputArgs: mkBaseBenchmarkInputArgs(&c),
 		BaseBenchmarkArgs:      mkBaseBenchmarkFWDArgs(&c, opts...),
+		BatchSize:              dlperf.GetBatchSize(),
 	}
 
 	hash, err := hashstructure.Hash(
@@ -92,6 +95,7 @@ func (c Dropout) BwdBenchmarkArgs(opts ...dlperf.BwdBenchmarkArgsOptionFunc) int
 	res := dropoutBenchmarkArgs{
 		BaseBenchmarkInputArgs: mkBaseBenchmarkInputArgs(&c),
 		BaseBenchmarkArgs:      mkBaseBenchmarkBWDArgs(&c, opts...),
+		BatchSize:              dlperf.GetBatchSize(),
 	}
 
 	hash, err := hashstructure.Hash(
