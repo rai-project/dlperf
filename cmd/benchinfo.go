@@ -19,7 +19,7 @@ import (
 var (
 	benchmarkResultsFolder string
 	benchInfoTraining      bool
-	benchInfoShort      bool
+	benchInfoShort         bool
 	benchInfoDataType      string
 )
 
@@ -36,7 +36,7 @@ var benchinfoCmd = &cobra.Command{
 			return err
 		}
 
-		model, err := onnx.New(modelPath)
+		model, err := onnx.New(modelPath, batchSize)
 		if err != nil {
 			return err
 		}
@@ -142,16 +142,16 @@ var benchinfoCmd = &cobra.Command{
 				info := lyr.Information()
 				if len(bs) > 0 {
 					totalTime = totalTime + bs[0].RealTime
-        }
-        if !benchInfoShort {
-				for _, b := range bs {
-					benchmarkInfo = append(benchmarkInfo, bench{
-						Benchmark: b,
-						Layer:     lyr,
-						Flops:     info.Flops(),
-					})
-        }
-      }
+				}
+				if !benchInfoShort {
+					for _, b := range bs {
+						benchmarkInfo = append(benchmarkInfo, bench{
+							Benchmark: b,
+							Layer:     lyr,
+							Flops:     info.Flops(),
+						})
+					}
+				}
 			}
 
 			switch strings.ToLower(lyr.OperatorType()) {
@@ -235,7 +235,7 @@ var benchinfoCmd = &cobra.Command{
 
 		benchmarkInfo = append(benchmarkInfo, bench{
 			Benchmark: benchmark.Benchmark{
-        Name:     "Total",
+				Name:     "Total",
 				RealTime: totalTime,
 			},
 			Layer: nil,

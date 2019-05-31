@@ -65,7 +65,7 @@ func runLayerStats(cmd *cobra.Command, args []string) error {
 		return errors.Errorf("file %v does not exist", modelPath)
 	}
 
-	net, err := onnx.New(modelPath)
+	net, err := onnx.New(modelPath, batchSize)
 	if err != nil {
 		return err
 	}

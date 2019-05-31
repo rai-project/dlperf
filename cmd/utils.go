@@ -88,7 +88,7 @@ func readModels(modelPath string) ([]*onnx.Onnx, error) {
 
 	if com.IsFile(modelPath) {
 
-		model, err := onnx.New(modelPath)
+		model, err := onnx.New(modelPath, batchSize)
 		if err != nil {
 			return nil, err
 		}
@@ -125,7 +125,7 @@ func readModels(modelPath string) ([]*onnx.Onnx, error) {
 				}
 			}()
 			pp.Println(path)
-			model, err := onnx.New(path)
+			model, err := onnx.New(path, batchSize)
 			if err != nil {
 				log.Fatal(err)
 			}

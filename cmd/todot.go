@@ -25,7 +25,7 @@ var todotCmd = &cobra.Command{
 			return errors.Errorf("file %v does not exist", modelPath)
 		}
 
-		model, err := onnx.New(modelPath)
+		model, err := onnx.New(modelPath, batchSize)
 		if err != nil {
 			return err
 		}

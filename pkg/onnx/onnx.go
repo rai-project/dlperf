@@ -16,9 +16,10 @@ type Onnx struct {
 	inputs       map[string]*onnx.ValueInfoProto
 	outputs      map[string]*onnx.ValueInfoProto
 	initializers map[string]*onnx.TensorProto
+	batchSize    int64
 }
 
-func New(protoFileName string) (*Onnx, error) {
+func New(protoFileName string, batchSize int64) (*Onnx, error) {
 	model, err := onnx.New(protoFileName, onnx.Steps([]string{}))
 
 	if err != nil {
@@ -38,6 +39,13 @@ func New(protoFileName string) (*Onnx, error) {
 
 	inputs := map[string]*onnx.ValueInfoProto{}
 	for _, i := range graph.Input {
+		// Assume the input is image and len(shape) == 4 && shape[0] == 1
+		shape := getValueInfoDimensions(i)
+		if len(shape) == 4 && shape[0] == 1 {
+			dim := i.GetType().GetTensorType().GetShape().GetDim()[0]
+			val := onnx.TensorShapeProto_Dimension_DimValue{DimValue: batchSize}
+			dim.Value = &val
+		}
 		inputs[i.Name] = i
 	}
 
@@ -59,6 +67,7 @@ func New(protoFileName string) (*Onnx, error) {
 		inputs:       inputs,
 		outputs:      outputs,
 		initializers: initializers,
+		batchSize:    batchSize,
 	}
 
 	o.Information()
@@ -68,4 +77,8 @@ func New(protoFileName string) (*Onnx, error) {
 
 func (o Onnx) Network() *Graph {
 	return o.network
+}
+
+func (o Onnx) BatchSize() int64 {
+	return o.batchSize
 }

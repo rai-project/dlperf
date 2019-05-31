@@ -10,9 +10,9 @@ import (
 
 	"github.com/k0kubun/pp"
 	dlperf "github.com/rai-project/dlperf/pkg"
-	"golang.org/x/sync/errgroup"
 	perflayer "github.com/rai-project/dlperf/pkg/layer"
 	"github.com/spf13/cobra"
+	"golang.org/x/sync/errgroup"
 )
 
 var (
