@@ -315,13 +315,14 @@ v8JXAAAA//+fAa1xrQEAAA==
 
 	"/scope/relu.tmpl": {
 		local:   "codegen/scope/relu.tmpl",
-		size:    370,
-		modtime: 1558743694,
+		size:    424,
+		modtime: 1559288840,
 		compressed: `
-H4sIAAAAAAAC/3SQX0vDQBDE3/Mp5iFIBckHiFVIk4JFGqF/no7jWHOLBnuXM90Uivrd5ZQUxPZxZ9n5
-zU6iFHryL4zUkpAcAyO/Q1aR0OYYeA+tE2EXdiSMaTNY74tG2gNJ2/llZ9kI6CQY11m+T/ZC0jY4dK2F
-UkizGfvm1VH/VpNjaG2iOgKzH/ETQwjcx6VRKs22vn0f+HS4qLSePI9Tnq+FhK8QSXyNjwQXQAsXdtM/
-tDL+Ba1v/uWe/LrdJsBsXpcPy2L1aM7bFlVlyqdtvZmv1pfzjn5fsWb2Npb5HQAA//9dLGtNcgEAAA==
+H4sIAAAAAAAC/5yR20rDQBCG7/MUcxGkguQBYhVyKFikEZr2almWcXewi93Nmk4K9fDuskoCot70cr6B
+/8CfCAE9+ieC1CAjnwJBfgNZjYybU6ADSJkwubBHJpjrwXhfaLZHZNv5VWdIMeAElOsM3SYHRrYajp01
+IASkWUle7xz2zw06AilVpKNh9gXfYQiB+vhUJbLetfaVlBBpNl3xFcHW25eBJs1lLeXscbzyvGVkuoAY
+gi7hLYF/Mixd2M9/BKliZZDy6lel2bfadQJQLprqblWs79XfskVdq+ph22wW6/asKqPVRxyHvIkTfAYA
+AP//wHA506gBAAA=
 `,
 	},
 
