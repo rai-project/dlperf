@@ -70,9 +70,9 @@ func (c Softmax) Shape() dlperf.ShapeInformation {
 
 //easyjson:json
 type softmaxBenchmarkArgs struct {
-	BaseBenchmarkArgs `json:",inline,flatten,omitempty"`
+	BaseBenchmarkArgs      `json:",inline,flatten,omitempty"`
 	BaseBenchmarkInputArgs `json:",inline,flatten,omitempty"`
-	BatchSize int64 `json:"batch_size,omitempty"`
+	BatchSize              int64 `json:"batch_size,omitempty"`
 }
 
 func (c Softmax) FwdBenchmarkArgs(opts ...dlperf.FwdBenchmarkArgsOptionFunc) interface{} {
@@ -80,7 +80,7 @@ func (c Softmax) FwdBenchmarkArgs(opts ...dlperf.FwdBenchmarkArgsOptionFunc) int
 	res := softmaxBenchmarkArgs{
 		BaseBenchmarkInputArgs: mkBaseBenchmarkInputArgs(&c),
 		BaseBenchmarkArgs:      mkBaseBenchmarkFWDArgs(&c, opts...),
-		BatchSize: dlperf.GetBatchSize(),
+		BatchSize:              dlperf.GetBatchSize(),
 	}
 
 	hash, err := hashstructure.Hash(
@@ -102,7 +102,7 @@ func (c Softmax) BwdBenchmarkArgs(opts ...dlperf.BwdBenchmarkArgsOptionFunc) int
 	res := softmaxBenchmarkArgs{
 		BaseBenchmarkInputArgs: mkBaseBenchmarkInputArgs(&c),
 		BaseBenchmarkArgs:      mkBaseBenchmarkBWDArgs(&c, opts...),
-		BatchSize: dlperf.GetBatchSize(),
+		BatchSize:              dlperf.GetBatchSize(),
 	}
 
 	hash, err := hashstructure.Hash(

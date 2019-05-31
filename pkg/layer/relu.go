@@ -99,9 +99,9 @@ func (c Relu) BenchmarkAlgorithms() []string {
 
 //easyjson:json
 type reluBenchmarkArgs struct {
-	BaseBenchmarkArgs `json:",inline,flatten,omitempty"`
+	BaseBenchmarkArgs      `json:",inline,flatten,omitempty"`
 	BaseBenchmarkInputArgs `json:",inline,flatten,omitempty"`
-	BatchSize int64 `json:"batch_size,omitempty"`
+	BatchSize              int64 `json:"batch_size,omitempty"`
 }
 
 func (c Relu) substituteAlgorithm(alg string) string {
@@ -117,7 +117,7 @@ func (c Relu) FwdBenchmarkArgs(opts ...dlperf.FwdBenchmarkArgsOptionFunc) interf
 	res := reluBenchmarkArgs{
 		BaseBenchmarkInputArgs: mkBaseBenchmarkInputArgs(&c),
 		BaseBenchmarkArgs:      mkBaseBenchmarkFWDArgs(&c, opts...),
-		BatchSize: dlperf.GetBatchSize(),
+		BatchSize:              dlperf.GetBatchSize(),
 	}
 
 	// substitution because cudnn does not support certain algorithms
@@ -143,7 +143,7 @@ func (c Relu) BwdBenchmarkArgs(opts ...dlperf.BwdBenchmarkArgsOptionFunc) interf
 	res := reluBenchmarkArgs{
 		BaseBenchmarkInputArgs: mkBaseBenchmarkInputArgs(&c),
 		BaseBenchmarkArgs:      mkBaseBenchmarkBWDArgs(&c, opts...),
-		BatchSize: dlperf.GetBatchSize(),
+		BatchSize:              dlperf.GetBatchSize(),
 	}
 
 	// substitution because cudnn does not support certain algorithms

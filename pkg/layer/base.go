@@ -30,7 +30,7 @@ type BaseBenchmarkArgs struct {
 	Algorithms        []string          `args:"-" json:"algorithms,omitempty"`
 	DataTypes         []dlperf.DataType `args:"-" json:"data_types,omitempty"`
 	IsTraining        bool              `args:"-" json:"is_training,omitempty"`
-	BatchSize        int64              `args:"batch_size" json:"batch_size,omitempty"`
+	BatchSize         int64             `args:"-" json:"batch_size,omitempty"`
 }
 
 //easyjson:json
@@ -53,8 +53,8 @@ func mkBaseBenchmarkFWDArgs(c dlperf.Layer, opts ...dlperf.FwdBenchmarkArgsOptio
 		BenchmarkName: c.FwdBenchmarkName(opts...),
 		ArgNames:      c.FwdBenchmarkGeneratorArgNames(),
 		Algorithms:    c.FwdBenchmarkAlgorithms(opts...),
-    DataTypes:     c.DataTypes(),
-    BatchSize: dlperf.GetBatchSize(),
+		DataTypes:     c.DataTypes(),
+		BatchSize:     dlperf.GetBatchSize(),
 	}
 }
 
@@ -64,7 +64,7 @@ func mkBaseBenchmarkBWDArgs(c dlperf.Layer, opts ...dlperf.BwdBenchmarkArgsOptio
 		ArgNames:      c.BwdBenchmarkGeneratorArgNames(),
 		Algorithms:    c.BwdBenchmarkAlgorithms(opts...),
 		DataTypes:     c.DataTypes(),
-    BatchSize: dlperf.GetBatchSize(),
+		BatchSize:     dlperf.GetBatchSize(),
 	}
 }
 
