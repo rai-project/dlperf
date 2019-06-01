@@ -3,13 +3,11 @@ package benchmark
 import (
 	"fmt"
 	"regexp"
-
-	"sort"
 )
 
-func (bs Benchmarks) Len() int { return len(bs)}
-func (bs Benchmarks) Less(ii, jj int) bool { return bs[ii].RealTime < bs[jj].RealTime}
-func (p Benchmarks) Swap(i, j int)      { p[i], p[j] = p[j], p[i] }
+func (bs Benchmarks) Len() int             { return len(bs) }
+func (bs Benchmarks) Less(ii, jj int) bool { return bs[ii].RealTime < bs[jj].RealTime }
+func (p Benchmarks) Swap(i, j int)         { p[i], p[j] = p[j], p[i] }
 
 func (bs Benchmarks) Merge(other Benchmarks) Benchmarks {
 	return append(bs, other...)
@@ -41,7 +39,6 @@ func (s Suite) Filter(filter Benchmark) (Benchmarks, error) {
 	return s.Benchmarks.Filter(filter)
 }
 
-
 func (bs Benchmarks) Filter(filter Benchmark) (Benchmarks, error) {
 	benches := []Benchmark{}
 
@@ -69,6 +66,9 @@ next:
 		}
 
 		for k, filterVal := range filter.Attributes {
+			if k == "batch_size" {
+				continue
+			}
 			val, ok := b.Attributes[k]
 			if !ok {
 				continue next
@@ -82,7 +82,7 @@ next:
 
 	res := Benchmarks(benches)
 
-	sort.Sort(res)
+	res.Sort()
 
 	return res, nil
 }

@@ -3,8 +3,9 @@
 
 package benchmark
 
-
 import (
+	"reflect"
+
 	"github.com/k0kubun/pp"
 	"github.com/spf13/cast"
 
@@ -13,8 +14,7 @@ import (
 
 type ElementType generic.Type
 
-
-func isSameElementType(self ElementType, other interface{}) bool {
+func isSameElementType(self ElementType, other0 interface{}) bool {
 
 	float32Equals := func(a, b float32) bool {
 		const EPSILON float32 = 0.0001
@@ -26,9 +26,12 @@ func isSameElementType(self ElementType, other interface{}) bool {
 		return (a-b) < EPSILON && (b-a) < EPSILON
 	}
 
-	switch other := other.(type) {
+	switch other := other0.(type) {
 	case int:
-		return cast.ToInt(self) == other
+		if i, err := cast.ToIntE(self); err == nil {
+			return i == other
+		}
+		return int(reflect.ValueOf(self).Int()) == other
 	case uint:
 		return cast.ToUint(self) == other
 	case int8:
@@ -54,6 +57,6 @@ func isSameElementType(self ElementType, other interface{}) bool {
 	case string:
 		return cast.ToString(self) == other
 	}
-	pp.Println(other)
+	pp.Println(other0)
 	return false
 }

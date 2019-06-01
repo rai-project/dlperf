@@ -2,6 +2,7 @@ package benchmark
 
 import (
 	"encoding/json"
+	"sort"
 	"time"
 
 	"github.com/fatih/structs"
@@ -82,6 +83,9 @@ func (w *Benchmark) UnmarshalJSON(data []byte) error {
 				continue
 			}
 		}
+		if k == "batch_size" {
+			continue
+		}
 		w.Attributes[k] = v
 	}
 
@@ -110,4 +114,8 @@ func (w Benchmark) MarshalJSON() ([]byte, error) {
 	// w.RealTime = w.RealTime / time.Microsecond
 	// w.CPUTime = w.CPUTime / time.Microsecond
 	return json.Marshal(m)
+}
+
+func (b Benchmarks) Sort() {
+	sort.Sort(b)
 }

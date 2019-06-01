@@ -143,6 +143,8 @@ var benchinfoCmd = &cobra.Command{
 			}
 
 			addLayerInfos := func(bs benchmark.Benchmarks) {
+				bs.Sort()
+
 				info := lyr.Information()
 				if len(bs) > 0 {
 					totalTime = totalTime + bs[0].RealTime
@@ -195,6 +197,7 @@ var benchinfoCmd = &cobra.Command{
 					filter = filterBenchmarks(true, benchInfoDataType, "", dlperf.BwdBenchmarkArgsOption.ConvBwdType(dlperf.ConvBwdTypeFilter))
 					bs, err = getBenchmarkTime(filter)
 					if err != nil {
+						pp.Println(err)
 						pp.Println("unable to get conv filter")
 						continue
 					}

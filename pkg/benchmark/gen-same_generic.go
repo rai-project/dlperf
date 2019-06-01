@@ -7,11 +7,13 @@
 package benchmark
 
 import (
+	"reflect"
+
 	"github.com/k0kubun/pp"
 	"github.com/spf13/cast"
 )
 
-func isSameInt(self int, other interface{}) bool {
+func isSameInt(self int, other0 interface{}) bool {
 
 	float32Equals := func(a, b float32) bool {
 		const EPSILON float32 = 0.0001
@@ -23,9 +25,12 @@ func isSameInt(self int, other interface{}) bool {
 		return (a-b) < EPSILON && (b-a) < EPSILON
 	}
 
-	switch other := other.(type) {
+	switch other := other0.(type) {
 	case int:
-		return cast.ToInt(self) == other
+		if i, err := cast.ToIntE(self); err == nil {
+			return i == other
+		}
+		return int(reflect.ValueOf(self).Int()) == other
 	case uint:
 		return cast.ToUint(self) == other
 	case int8:
@@ -51,13 +56,13 @@ func isSameInt(self int, other interface{}) bool {
 	case string:
 		return cast.ToString(self) == other
 	}
-	pp.Println(other)
+	pp.Println(other0)
 	return false
 }
 
 //go:generate go get github.com/cheekybits/genny
 
-func isSameUint(self uint, other interface{}) bool {
+func isSameUint(self uint, other0 interface{}) bool {
 
 	float32Equals := func(a, b float32) bool {
 		const EPSILON float32 = 0.0001
@@ -69,9 +74,12 @@ func isSameUint(self uint, other interface{}) bool {
 		return (a-b) < EPSILON && (b-a) < EPSILON
 	}
 
-	switch other := other.(type) {
+	switch other := other0.(type) {
 	case int:
-		return cast.ToInt(self) == other
+		if i, err := cast.ToIntE(self); err == nil {
+			return i == other
+		}
+		return int(reflect.ValueOf(self).Int()) == other
 	case uint:
 		return cast.ToUint(self) == other
 	case int8:
@@ -97,13 +105,13 @@ func isSameUint(self uint, other interface{}) bool {
 	case string:
 		return cast.ToString(self) == other
 	}
-	pp.Println(other)
+	pp.Println(other0)
 	return false
 }
 
 //go:generate go get github.com/cheekybits/genny
 
-func isSameUintptr(self uintptr, other interface{}) bool {
+func isSameUintptr(self uintptr, other0 interface{}) bool {
 
 	float32Equals := func(a, b float32) bool {
 		const EPSILON float32 = 0.0001
@@ -115,9 +123,12 @@ func isSameUintptr(self uintptr, other interface{}) bool {
 		return (a-b) < EPSILON && (b-a) < EPSILON
 	}
 
-	switch other := other.(type) {
+	switch other := other0.(type) {
 	case int:
-		return cast.ToInt(self) == other
+		if i, err := cast.ToIntE(self); err == nil {
+			return i == other
+		}
+		return int(reflect.ValueOf(self).Int()) == other
 	case uint:
 		return cast.ToUint(self) == other
 	case int8:
@@ -143,13 +154,13 @@ func isSameUintptr(self uintptr, other interface{}) bool {
 	case string:
 		return cast.ToString(self) == other
 	}
-	pp.Println(other)
+	pp.Println(other0)
 	return false
 }
 
 //go:generate go get github.com/cheekybits/genny
 
-func isSameUint8(self uint8, other interface{}) bool {
+func isSameUint8(self uint8, other0 interface{}) bool {
 
 	float32Equals := func(a, b float32) bool {
 		const EPSILON float32 = 0.0001
@@ -161,9 +172,12 @@ func isSameUint8(self uint8, other interface{}) bool {
 		return (a-b) < EPSILON && (b-a) < EPSILON
 	}
 
-	switch other := other.(type) {
+	switch other := other0.(type) {
 	case int:
-		return cast.ToInt(self) == other
+		if i, err := cast.ToIntE(self); err == nil {
+			return i == other
+		}
+		return int(reflect.ValueOf(self).Int()) == other
 	case uint:
 		return cast.ToUint(self) == other
 	case int8:
@@ -189,13 +203,13 @@ func isSameUint8(self uint8, other interface{}) bool {
 	case string:
 		return cast.ToString(self) == other
 	}
-	pp.Println(other)
+	pp.Println(other0)
 	return false
 }
 
 //go:generate go get github.com/cheekybits/genny
 
-func isSameUint16(self uint16, other interface{}) bool {
+func isSameUint16(self uint16, other0 interface{}) bool {
 
 	float32Equals := func(a, b float32) bool {
 		const EPSILON float32 = 0.0001
@@ -207,9 +221,12 @@ func isSameUint16(self uint16, other interface{}) bool {
 		return (a-b) < EPSILON && (b-a) < EPSILON
 	}
 
-	switch other := other.(type) {
+	switch other := other0.(type) {
 	case int:
-		return cast.ToInt(self) == other
+		if i, err := cast.ToIntE(self); err == nil {
+			return i == other
+		}
+		return int(reflect.ValueOf(self).Int()) == other
 	case uint:
 		return cast.ToUint(self) == other
 	case int8:
@@ -235,13 +252,13 @@ func isSameUint16(self uint16, other interface{}) bool {
 	case string:
 		return cast.ToString(self) == other
 	}
-	pp.Println(other)
+	pp.Println(other0)
 	return false
 }
 
 //go:generate go get github.com/cheekybits/genny
 
-func isSameUint32(self uint32, other interface{}) bool {
+func isSameUint32(self uint32, other0 interface{}) bool {
 
 	float32Equals := func(a, b float32) bool {
 		const EPSILON float32 = 0.0001
@@ -253,9 +270,12 @@ func isSameUint32(self uint32, other interface{}) bool {
 		return (a-b) < EPSILON && (b-a) < EPSILON
 	}
 
-	switch other := other.(type) {
+	switch other := other0.(type) {
 	case int:
-		return cast.ToInt(self) == other
+		if i, err := cast.ToIntE(self); err == nil {
+			return i == other
+		}
+		return int(reflect.ValueOf(self).Int()) == other
 	case uint:
 		return cast.ToUint(self) == other
 	case int8:
@@ -281,13 +301,13 @@ func isSameUint32(self uint32, other interface{}) bool {
 	case string:
 		return cast.ToString(self) == other
 	}
-	pp.Println(other)
+	pp.Println(other0)
 	return false
 }
 
 //go:generate go get github.com/cheekybits/genny
 
-func isSameUint64(self uint64, other interface{}) bool {
+func isSameUint64(self uint64, other0 interface{}) bool {
 
 	float32Equals := func(a, b float32) bool {
 		const EPSILON float32 = 0.0001
@@ -299,9 +319,12 @@ func isSameUint64(self uint64, other interface{}) bool {
 		return (a-b) < EPSILON && (b-a) < EPSILON
 	}
 
-	switch other := other.(type) {
+	switch other := other0.(type) {
 	case int:
-		return cast.ToInt(self) == other
+		if i, err := cast.ToIntE(self); err == nil {
+			return i == other
+		}
+		return int(reflect.ValueOf(self).Int()) == other
 	case uint:
 		return cast.ToUint(self) == other
 	case int8:
@@ -327,13 +350,13 @@ func isSameUint64(self uint64, other interface{}) bool {
 	case string:
 		return cast.ToString(self) == other
 	}
-	pp.Println(other)
+	pp.Println(other0)
 	return false
 }
 
 //go:generate go get github.com/cheekybits/genny
 
-func isSameInt8(self int8, other interface{}) bool {
+func isSameInt8(self int8, other0 interface{}) bool {
 
 	float32Equals := func(a, b float32) bool {
 		const EPSILON float32 = 0.0001
@@ -345,9 +368,12 @@ func isSameInt8(self int8, other interface{}) bool {
 		return (a-b) < EPSILON && (b-a) < EPSILON
 	}
 
-	switch other := other.(type) {
+	switch other := other0.(type) {
 	case int:
-		return cast.ToInt(self) == other
+		if i, err := cast.ToIntE(self); err == nil {
+			return i == other
+		}
+		return int(reflect.ValueOf(self).Int()) == other
 	case uint:
 		return cast.ToUint(self) == other
 	case int8:
@@ -373,13 +399,13 @@ func isSameInt8(self int8, other interface{}) bool {
 	case string:
 		return cast.ToString(self) == other
 	}
-	pp.Println(other)
+	pp.Println(other0)
 	return false
 }
 
 //go:generate go get github.com/cheekybits/genny
 
-func isSameInt16(self int16, other interface{}) bool {
+func isSameInt16(self int16, other0 interface{}) bool {
 
 	float32Equals := func(a, b float32) bool {
 		const EPSILON float32 = 0.0001
@@ -391,9 +417,12 @@ func isSameInt16(self int16, other interface{}) bool {
 		return (a-b) < EPSILON && (b-a) < EPSILON
 	}
 
-	switch other := other.(type) {
+	switch other := other0.(type) {
 	case int:
-		return cast.ToInt(self) == other
+		if i, err := cast.ToIntE(self); err == nil {
+			return i == other
+		}
+		return int(reflect.ValueOf(self).Int()) == other
 	case uint:
 		return cast.ToUint(self) == other
 	case int8:
@@ -419,13 +448,13 @@ func isSameInt16(self int16, other interface{}) bool {
 	case string:
 		return cast.ToString(self) == other
 	}
-	pp.Println(other)
+	pp.Println(other0)
 	return false
 }
 
 //go:generate go get github.com/cheekybits/genny
 
-func isSameInt32(self int32, other interface{}) bool {
+func isSameInt32(self int32, other0 interface{}) bool {
 
 	float32Equals := func(a, b float32) bool {
 		const EPSILON float32 = 0.0001
@@ -437,9 +466,12 @@ func isSameInt32(self int32, other interface{}) bool {
 		return (a-b) < EPSILON && (b-a) < EPSILON
 	}
 
-	switch other := other.(type) {
+	switch other := other0.(type) {
 	case int:
-		return cast.ToInt(self) == other
+		if i, err := cast.ToIntE(self); err == nil {
+			return i == other
+		}
+		return int(reflect.ValueOf(self).Int()) == other
 	case uint:
 		return cast.ToUint(self) == other
 	case int8:
@@ -465,13 +497,13 @@ func isSameInt32(self int32, other interface{}) bool {
 	case string:
 		return cast.ToString(self) == other
 	}
-	pp.Println(other)
+	pp.Println(other0)
 	return false
 }
 
 //go:generate go get github.com/cheekybits/genny
 
-func isSameInt64(self int64, other interface{}) bool {
+func isSameInt64(self int64, other0 interface{}) bool {
 
 	float32Equals := func(a, b float32) bool {
 		const EPSILON float32 = 0.0001
@@ -483,9 +515,12 @@ func isSameInt64(self int64, other interface{}) bool {
 		return (a-b) < EPSILON && (b-a) < EPSILON
 	}
 
-	switch other := other.(type) {
+	switch other := other0.(type) {
 	case int:
-		return cast.ToInt(self) == other
+		if i, err := cast.ToIntE(self); err == nil {
+			return i == other
+		}
+		return int(reflect.ValueOf(self).Int()) == other
 	case uint:
 		return cast.ToUint(self) == other
 	case int8:
@@ -511,13 +546,13 @@ func isSameInt64(self int64, other interface{}) bool {
 	case string:
 		return cast.ToString(self) == other
 	}
-	pp.Println(other)
+	pp.Println(other0)
 	return false
 }
 
 //go:generate go get github.com/cheekybits/genny
 
-func isSameFloat32(self float32, other interface{}) bool {
+func isSameFloat32(self float32, other0 interface{}) bool {
 
 	float32Equals := func(a, b float32) bool {
 		const EPSILON float32 = 0.0001
@@ -529,9 +564,12 @@ func isSameFloat32(self float32, other interface{}) bool {
 		return (a-b) < EPSILON && (b-a) < EPSILON
 	}
 
-	switch other := other.(type) {
+	switch other := other0.(type) {
 	case int:
-		return cast.ToInt(self) == other
+		if i, err := cast.ToIntE(self); err == nil {
+			return i == other
+		}
+		return int(reflect.ValueOf(self).Int()) == other
 	case uint:
 		return cast.ToUint(self) == other
 	case int8:
@@ -557,13 +595,13 @@ func isSameFloat32(self float32, other interface{}) bool {
 	case string:
 		return cast.ToString(self) == other
 	}
-	pp.Println(other)
+	pp.Println(other0)
 	return false
 }
 
 //go:generate go get github.com/cheekybits/genny
 
-func isSameFloat64(self float64, other interface{}) bool {
+func isSameFloat64(self float64, other0 interface{}) bool {
 
 	float32Equals := func(a, b float32) bool {
 		const EPSILON float32 = 0.0001
@@ -575,9 +613,12 @@ func isSameFloat64(self float64, other interface{}) bool {
 		return (a-b) < EPSILON && (b-a) < EPSILON
 	}
 
-	switch other := other.(type) {
+	switch other := other0.(type) {
 	case int:
-		return cast.ToInt(self) == other
+		if i, err := cast.ToIntE(self); err == nil {
+			return i == other
+		}
+		return int(reflect.ValueOf(self).Int()) == other
 	case uint:
 		return cast.ToUint(self) == other
 	case int8:
@@ -603,6 +644,6 @@ func isSameFloat64(self float64, other interface{}) bool {
 	case string:
 		return cast.ToString(self) == other
 	}
-	pp.Println(other)
+	pp.Println(other0)
 	return false
 }
