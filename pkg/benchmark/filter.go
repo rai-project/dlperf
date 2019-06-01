@@ -54,6 +54,7 @@ func (bs Benchmarks) Filter(filter Benchmark) (Benchmarks, error) {
   }
   
 	delete(filter.Attributes, "batch_size") // we do not care about batchsize in filter
+	delete(filter.Attributes, "conv_bwd_type") // we do not care about conv_bwd_type since it's encoded in name
 
 next:
 	for _, b := range bs {

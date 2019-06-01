@@ -204,16 +204,16 @@ func multidirectionalBroadcastShapeInference(inputShapes []dlperf.Shape) []dlper
 	return []dlperf.Shape{resultShape}
 }
 
-func mkFwdBenchmarkFilterName(layer dlperf.Layer, datatype, algorithm string) string {
-	name := "^" + layer.FwdBenchmarkName() + "_" + strings.ToUpper(datatype) + `(__BatchSize_\d+)?` + `(__\d+)?`
+func mkFwdBenchmarkFilterName(layer dlperf.Layer, datatype, algorithm string, opts ...dlperf.FwdBenchmarkArgsOptionFunc) string {
+	name := "^" + layer.FwdBenchmarkName(opts...) + "_" + strings.ToUpper(datatype) + `(__BatchSize_\d+)?` + `(__\d+)?`
 	if algorithm != "" {
 		name += `<(.*,\s*)*` + strings.ToUpper(algorithm) + `(\s*,.*)*>`
 	}
 	return name + ".*"
 }
 
-func mkBwdBenchmarkFilterName(layer dlperf.Layer, datatype, algorithm string) string {
-	name := "^" + layer.BwdBenchmarkName() + "_" + strings.ToUpper(datatype) + `(__BatchSize_\d+)?` + `(__\d+)?`
+func mkBwdBenchmarkFilterName(layer dlperf.Layer, datatype, algorithm string, opts ...dlperf.BwdBenchmarkArgsOptionFunc) string {
+	name := "^" + layer.BwdBenchmarkName(opts...) + "_" + strings.ToUpper(datatype) + `(__BatchSize_\d+)?` + `(__\d+)?`
 	if algorithm != "" {
 		name += `<(.*,\s*)*` + strings.ToUpper(algorithm) + `(\s*,.*)*>`
 	}
