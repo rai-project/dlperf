@@ -151,17 +151,25 @@ var benchinfoCmd = &cobra.Command{
 			addLayerInfos := func(bs benchmark.Benchmarks) {
 				bs.Sort()
 
-				info := lyr.Information()
+				flops := lyr.Information().Flops()
+				if bs[0].Flops != nil && *bs[0].Flops != -1 {
+					flops = dlperf.FlopsInformation{
+						MultiplyAdds: int64(*bs[0].Flops),
+					}
+				} else {
+					pp.Println("cannot get flops for " + bs[0].Name + " using builtin flops computation")
+				}
+
 				if len(bs) > 0 {
 					totalTime = totalTime + bs[0].RealTime
-					totalFlops = totalFlops.Add(lyr.Information().Flops())
+					totalFlops = totalFlops.Add(flops)
 				}
 				if !benchInfoShort {
 					for _, b := range bs {
 						benchmarkInfo = append(benchmarkInfo, bench{
 							Benchmark: b,
 							Layer:     lyr,
-							Flops:     info.Flops(),
+							Flops:     flops,
 						})
 					}
 				}
@@ -260,6 +268,7 @@ var benchinfoCmd = &cobra.Command{
 				fmt.Println(gpu.ProductName)
 			}
 		}
+
 		writer := NewWriter(bench{}, humanFlops)
 		defer writer.Close()
 

@@ -8,6 +8,7 @@ import (
 	dlperf "github.com/rai-project/dlperf/pkg"
 	"github.com/rai-project/dlperf/pkg/benchmark"
 	"github.com/rai-project/dlperf/pkg/onnx"
+	"github.com/rai-project/utils"
 	terminal "github.com/wayneashleyberry/terminal-dimensions"
 )
 
@@ -80,7 +81,12 @@ func (l bench) Row(humanFlops bool) []string {
 	}
 	flops = l.Flops.Total()
 
-	base := []string{layerName, operatorType, benchmarkName, realTime, fmt.Sprintf("%v", flops)}
+	flopsString := fmt.Sprintf("%v", flops)
+	if humanFlops {
+		flopsString = utils.Flops(uint64(flops))
+	}
+
+	base := []string{layerName, operatorType, benchmarkName, realTime, flopsString}
 	return base
 	// flops := l.flops.Row(humanFlops)
 	// flops = append(flops, flopsToString(l.flops.Total(), humanFlops))

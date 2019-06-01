@@ -6,6 +6,7 @@ import (
 	"time"
 
 	"github.com/fatih/structs"
+	"github.com/k0kubun/pp"
 	"github.com/linkosmos/mapop"
 	nvidiasmi "github.com/rai-project/nvidia-smi"
 	"github.com/spf13/cast"
@@ -41,6 +42,7 @@ type Benchmark struct {
 	RealTime   time.Duration          `json:"real_time"`
 	CPUTime    time.Duration          `json:"cpu_time"`
 	TimeUnit   string                 `json:"time_unit"`
+	Flops      *float64               `json:"predicted_flops_count,omitempty"`
 	Attributes map[string]interface{} `json:"-"`
 }
 
@@ -54,6 +56,8 @@ func (w *Benchmark) UnmarshalJSON(data []byte) error {
 	if err != nil {
 		return err
 	}
+
+	delete(elems, "batch_size") // we do not care about batchsize in filter
 
 	if e, ok := elems["error_occurred"]; ok {
 		if eok, ok := e.(bool); ok && eok {
@@ -77,12 +81,21 @@ func (w *Benchmark) UnmarshalJSON(data []byte) error {
 			f.Set(v)
 			continue
 		}
+		if false {
+			pp.Println(k, "  ", jsonTagMap[k], "  ", elems[k])
+		}
 		if jk, ok := jsonTagMap[k]; ok {
 			if f, ok := st.FieldOk(jk); ok {
 				f.Set(v)
 				continue
 			}
 		}
+
+		if f, ok := elems["predicted_flops_count"]; ok {
+			val := cast.ToFloat64(f)
+			w.Flops = &val
+		}
+
 		w.Attributes[k] = v
 	}
 

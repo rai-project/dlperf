@@ -4,12 +4,13 @@ import (
 	"bytes"
 	"encoding/csv"
 	"encoding/json"
-	"github.com/k0kubun/pp"
+	"fmt"
 	"io"
 	"io/ioutil"
 	"os"
 	"strings"
-	"fmt"
+
+	"github.com/k0kubun/pp"
 
 	"github.com/Unknwon/com"
 	"github.com/olekukonko/tablewriter"
@@ -39,6 +40,7 @@ func NewWriter(rower Rower, humanFlops bool) *Writer {
 		format:         outputFormat,
 		output:         output,
 		outputFileName: outputFileName,
+		humanFlops:     humanFlops,
 	}
 	switch wr.format {
 	case "table":
@@ -77,7 +79,7 @@ func (w *Writer) Row(rower Rower) error {
 			return err
 		}
 		if false {
-		pp.Println(rower)
+			pp.Println(rower)
 		}
 		w.json = append(w.json, string(buf))
 	}
@@ -114,9 +116,9 @@ func (w *Writer) Close() {
 	w.Flush()
 	if w.outputFileName != "" {
 		com.WriteFile(w.outputFileName, w.output.(*bytes.Buffer).Bytes())
-		return 
+		return
 	}
 	if w.format == "json" {
-	fmt.Println(w.json)
+		fmt.Println(w.json)
 	}
 }
