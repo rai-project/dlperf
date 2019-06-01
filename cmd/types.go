@@ -35,7 +35,7 @@ type bench struct {
 }
 
 func (bench) Header() []string {
-	base := []string{"LayerName", "LayerType", "BenchmarkName", "RealTime(ms)"}
+	base := []string{"LayerName", "LayerType", "BenchmarkName", "RealTime(ms)", "Flops"}
 	return base
 	// flopsInfo := dlperf.FlopsInformation{}.Header()
 	// for ii, f := range flopsInfo {
@@ -58,6 +58,7 @@ func (l bench) Row(humanFlops bool) []string {
 	benchmarkName = strings.TrimPrefix(benchmarkName, "LAYER_CUDNN_")
 	benchmarkName = strings.TrimPrefix(benchmarkName, "LAYER_CUBLAS_")
 	benchmarkName = strings.ReplaceAll(benchmarkName, "_FLOAT32_", "")
+	benchmarkName = strings.Split(benchmarkName, "/")[0]
 	// benchmarkName = strings.ReplaceAll(benchmarkName, "__Batch_Size_", "")
 
 	if uint(len(benchmarkName)) > termWidth/2 {
@@ -65,11 +66,14 @@ func (l bench) Row(humanFlops bool) []string {
 	}
 	layerName := ""
 	operatorType := ""
+	flops := int64(0)
 	if l.Layer != nil {
 		layerName = l.Layer.Name()
 		operatorType = l.Layer.OperatorType()
 	}
-	base := []string{layerName, operatorType, benchmarkName, realTime}
+	flops = l.Flops.Total()
+
+	base := []string{layerName, operatorType, benchmarkName, realTime, fmt.Sprintf("%v", flops)}
 	return base
 	// flops := l.flops.Row(humanFlops)
 	// flops = append(flops, flopsToString(l.flops.Total(), humanFlops))

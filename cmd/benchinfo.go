@@ -32,7 +32,7 @@ var benchinfoCmd = &cobra.Command{
 	RunE: func(cmd *cobra.Command, args []string) error {
 		modelPath = expandModelPath(modelPath)
 
-    dlperf.SetBatchSize(batchSize)
+		dlperf.SetBatchSize(batchSize)
 
 		benchSuite, err := benchmark.New(benchmarkResultsFolder)
 		if err != nil {
@@ -54,6 +54,7 @@ var benchinfoCmd = &cobra.Command{
 		benchmarkInfo := []bench{}
 
 		totalTime := time.Duration(0)
+		totalFlops := dlperf.FlopsInformation{}
 
 		debugPrint := func(val ...interface{}) {
 			if config.App.IsDebug {
@@ -150,6 +151,7 @@ var benchinfoCmd = &cobra.Command{
 				info := lyr.Information()
 				if len(bs) > 0 {
 					totalTime = totalTime + bs[0].RealTime
+					totalFlops = totalFlops.Add(lyr.Information().Flops())
 				}
 				if !benchInfoShort {
 					for _, b := range bs {
@@ -247,7 +249,7 @@ var benchinfoCmd = &cobra.Command{
 				RealTime: totalTime,
 			},
 			Layer: nil,
-			Flops: dlperf.FlopsInformation{},
+			Flops: totalFlops,
 		})
 
 		if benchSuite.GPUInformation != nil && len(benchSuite.GPUInformation.GPUS) != 0 {
