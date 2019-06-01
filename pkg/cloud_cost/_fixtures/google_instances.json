@@ -1,0 +1,557 @@
+{
+  "products": [
+    {
+      "category": "Memory optimized",
+      "type": "n1-highmem-96",
+      "onDemandPrice": 6.395184,
+      "spotPrice": [
+        { "zone": "us-east4-a", "price": 1.2791721600000001 },
+        { "zone": "us-east4-b", "price": 1.2791721600000001 },
+        { "zone": "us-east4-c", "price": 1.2791721600000001 }
+      ],
+      "cpusPerVm": 96,
+      "memPerVm": 624,
+      "gpusPerVm": 0,
+      "ntwPerf": "16 Gbit/s",
+      "ntwPerfCategory": "extra",
+      "zones": ["us-east4-c", "us-east4-b", "us-east4-a"],
+      "attributes": {
+        "cpu": "96",
+        "instanceTypeCategory": "Memory optimized",
+        "memory": "624",
+        "networkPerfCategory": "extra"
+      },
+      "currentGen": false
+    },
+    {
+      "category": "Compute optimized",
+      "type": "n1-highcpu-64",
+      "onDemandPrice": 2.5535277363281255,
+      "spotPrice": [
+        { "zone": "us-east4-a", "price": 0.510709771171875 },
+        { "zone": "us-east4-b", "price": 0.510709771171875 },
+        { "zone": "us-east4-c", "price": 0.510709771171875 }
+      ],
+      "cpusPerVm": 64,
+      "memPerVm": 57.599609375,
+      "gpusPerVm": 0,
+      "ntwPerf": "16 Gbit/s",
+      "ntwPerfCategory": "extra",
+      "zones": ["us-east4-c", "us-east4-b", "us-east4-a"],
+      "attributes": {
+        "cpu": "64",
+        "instanceTypeCategory": "Compute optimized",
+        "memory": "57.599609375",
+        "networkPerfCategory": "extra"
+      },
+      "currentGen": false
+    },
+    {
+      "category": "Memory optimized",
+      "type": "n1-highmem-64",
+      "onDemandPrice": 4.263456000000001,
+      "spotPrice": [
+        { "zone": "us-east4-a", "price": 0.85278144 },
+        { "zone": "us-east4-b", "price": 0.85278144 },
+        { "zone": "us-east4-c", "price": 0.85278144 }
+      ],
+      "cpusPerVm": 64,
+      "memPerVm": 416,
+      "gpusPerVm": 0,
+      "ntwPerf": "16 Gbit/s",
+      "ntwPerfCategory": "extra",
+      "zones": ["us-east4-c", "us-east4-b", "us-east4-a"],
+      "attributes": {
+        "cpu": "64",
+        "instanceTypeCategory": "Memory optimized",
+        "memory": "416",
+        "networkPerfCategory": "extra"
+      },
+      "currentGen": false
+    },
+    {
+      "category": "General purpose",
+      "type": "n1-standard-1",
+      "onDemandPrice": 0.05349625000000001,
+      "spotPrice": [
+        { "zone": "us-east4-a", "price": 0.010700000000000001 },
+        { "zone": "us-east4-b", "price": 0.010700000000000001 },
+        { "zone": "us-east4-c", "price": 0.010700000000000001 }
+      ],
+      "cpusPerVm": 1,
+      "memPerVm": 3.75,
+      "gpusPerVm": 0,
+      "ntwPerf": "2 Gbit/s",
+      "ntwPerfCategory": "low",
+      "zones": ["us-east4-c", "us-east4-b", "us-east4-a"],
+      "attributes": {
+        "cpu": "1",
+        "instanceTypeCategory": "General purpose",
+        "memory": "3.75",
+        "networkPerfCategory": "low"
+      },
+      "currentGen": false
+    },
+    {
+      "category": "General purpose",
+      "type": "n1-standard-64",
+      "onDemandPrice": 3.4237600000000006,
+      "spotPrice": [
+        { "zone": "us-east4-a", "price": 0.6848000000000001 },
+        { "zone": "us-east4-b", "price": 0.6848000000000001 },
+        { "zone": "us-east4-c", "price": 0.6848000000000001 }
+      ],
+      "cpusPerVm": 64,
+      "memPerVm": 240,
+      "gpusPerVm": 0,
+      "ntwPerf": "16 Gbit/s",
+      "ntwPerfCategory": "extra",
+      "zones": ["us-east4-c", "us-east4-b", "us-east4-a"],
+      "attributes": {
+        "cpu": "64",
+        "instanceTypeCategory": "General purpose",
+        "memory": "240",
+        "networkPerfCategory": "extra"
+      },
+      "currentGen": false
+    },
+    {
+      "category": "General purpose",
+      "type": "f1-micro",
+      "onDemandPrice": 0.0086,
+      "spotPrice": [
+        { "zone": "us-east4-a", "price": 0.0037500000000000003 },
+        { "zone": "us-east4-b", "price": 0.0037500000000000003 },
+        { "zone": "us-east4-c", "price": 0.0037500000000000003 }
+      ],
+      "cpusPerVm": 1,
+      "memPerVm": 0.599609375,
+      "gpusPerVm": 0,
+      "ntwPerf": "2 Gbit/s",
+      "ntwPerfCategory": "low",
+      "zones": ["us-east4-c", "us-east4-b", "us-east4-a"],
+      "attributes": {
+        "cpu": "1",
+        "instanceTypeCategory": "General purpose",
+        "memory": "0.599609375",
+        "networkPerfCategory": "low"
+      },
+      "currentGen": false
+    },
+    {
+      "category": "General purpose",
+      "type": "g1-small",
+      "onDemandPrice": 0.028900000000000002,
+      "spotPrice": [
+        { "zone": "us-east4-a", "price": 0.00749 },
+        { "zone": "us-east4-b", "price": 0.00749 },
+        { "zone": "us-east4-c", "price": 0.00749 }
+      ],
+      "cpusPerVm": 1,
+      "memPerVm": 1.69921875,
+      "gpusPerVm": 0,
+      "ntwPerf": "2 Gbit/s",
+      "ntwPerfCategory": "low",
+      "zones": ["us-east4-c", "us-east4-b", "us-east4-a"],
+      "attributes": {
+        "cpu": "1",
+        "instanceTypeCategory": "General purpose",
+        "memory": "1.69921875",
+        "networkPerfCategory": "low"
+      },
+      "currentGen": false
+    },
+    {
+      "category": "Compute optimized",
+      "type": "n1-highcpu-4",
+      "onDemandPrice": 0.159593736328125,
+      "spotPrice": [
+        { "zone": "us-east4-a", "price": 0.031919011171875004 },
+        { "zone": "us-east4-b", "price": 0.031919011171875004 },
+        { "zone": "us-east4-c", "price": 0.031919011171875004 }
+      ],
+      "cpusPerVm": 4,
+      "memPerVm": 3.599609375,
+      "gpusPerVm": 0,
+      "ntwPerf": "8 Gbit/s",
+      "ntwPerfCategory": "medium",
+      "zones": ["us-east4-c", "us-east4-b", "us-east4-a"],
+      "attributes": {
+        "cpu": "4",
+        "instanceTypeCategory": "Compute optimized",
+        "memory": "3.599609375",
+        "networkPerfCategory": "medium"
+      },
+      "currentGen": false
+    },
+    {
+      "category": "Memory optimized",
+      "type": "n1-highmem-8",
+      "onDemandPrice": 0.5329320000000001,
+      "spotPrice": [
+        { "zone": "us-east4-c", "price": 0.10659768 },
+        { "zone": "us-east4-a", "price": 0.10659768 },
+        { "zone": "us-east4-b", "price": 0.10659768 }
+      ],
+      "cpusPerVm": 8,
+      "memPerVm": 52,
+      "gpusPerVm": 0,
+      "ntwPerf": "16 Gbit/s",
+      "ntwPerfCategory": "extra",
+      "zones": ["us-east4-c", "us-east4-b", "us-east4-a"],
+      "attributes": {
+        "cpu": "8",
+        "instanceTypeCategory": "Memory optimized",
+        "memory": "52",
+        "networkPerfCategory": "extra"
+      },
+      "currentGen": false
+    },
+    {
+      "category": "General purpose",
+      "type": "n1-standard-32",
+      "onDemandPrice": 1.7118800000000003,
+      "spotPrice": [
+        { "zone": "us-east4-a", "price": 0.34240000000000004 },
+        { "zone": "us-east4-b", "price": 0.34240000000000004 },
+        { "zone": "us-east4-c", "price": 0.34240000000000004 }
+      ],
+      "cpusPerVm": 32,
+      "memPerVm": 120,
+      "gpusPerVm": 0,
+      "ntwPerf": "16 Gbit/s",
+      "ntwPerfCategory": "extra",
+      "zones": ["us-east4-c", "us-east4-b", "us-east4-a"],
+      "attributes": {
+        "cpu": "32",
+        "instanceTypeCategory": "General purpose",
+        "memory": "120",
+        "networkPerfCategory": "extra"
+      },
+      "currentGen": false
+    },
+    {
+      "category": "General purpose",
+      "type": "n1-standard-4",
+      "onDemandPrice": 0.21398500000000004,
+      "spotPrice": [
+        { "zone": "us-east4-b", "price": 0.042800000000000005 },
+        { "zone": "us-east4-c", "price": 0.042800000000000005 },
+        { "zone": "us-east4-a", "price": 0.042800000000000005 }
+      ],
+      "cpusPerVm": 4,
+      "memPerVm": 15,
+      "gpusPerVm": 0,
+      "ntwPerf": "8 Gbit/s",
+      "ntwPerfCategory": "medium",
+      "zones": ["us-east4-c", "us-east4-b", "us-east4-a"],
+      "attributes": {
+        "cpu": "4",
+        "instanceTypeCategory": "General purpose",
+        "memory": "15",
+        "networkPerfCategory": "medium"
+      },
+      "currentGen": false
+    },
+    {
+      "category": "Compute optimized",
+      "type": "n1-highcpu-16",
+      "onDemandPrice": 0.6383842636718751,
+      "spotPrice": [
+        { "zone": "us-east4-a", "price": 0.12767790882812502 },
+        { "zone": "us-east4-b", "price": 0.12767790882812502 },
+        { "zone": "us-east4-c", "price": 0.12767790882812502 }
+      ],
+      "cpusPerVm": 16,
+      "memPerVm": 14.400390625,
+      "gpusPerVm": 0,
+      "ntwPerf": "16 Gbit/s",
+      "ntwPerfCategory": "extra",
+      "zones": ["us-east4-c", "us-east4-b", "us-east4-a"],
+      "attributes": {
+        "cpu": "16",
+        "instanceTypeCategory": "Compute optimized",
+        "memory": "14.400390625",
+        "networkPerfCategory": "extra"
+      },
+      "currentGen": false
+    },
+    {
+      "category": "Memory optimized",
+      "type": "n1-highmem-16",
+      "onDemandPrice": 1.0658640000000001,
+      "spotPrice": [
+        { "zone": "us-east4-a", "price": 0.21319536 },
+        { "zone": "us-east4-b", "price": 0.21319536 },
+        { "zone": "us-east4-c", "price": 0.21319536 }
+      ],
+      "cpusPerVm": 16,
+      "memPerVm": 104,
+      "gpusPerVm": 0,
+      "ntwPerf": "16 Gbit/s",
+      "ntwPerfCategory": "extra",
+      "zones": ["us-east4-c", "us-east4-b", "us-east4-a"],
+      "attributes": {
+        "cpu": "16",
+        "instanceTypeCategory": "Memory optimized",
+        "memory": "104",
+        "networkPerfCategory": "extra"
+      },
+      "currentGen": false
+    },
+    {
+      "category": "Compute optimized",
+      "type": "n1-highcpu-96",
+      "onDemandPrice": 3.8302962636718756,
+      "spotPrice": [
+        { "zone": "us-east4-a", "price": 0.766065588828125 },
+        { "zone": "us-east4-b", "price": 0.766065588828125 },
+        { "zone": "us-east4-c", "price": 0.766065588828125 }
+      ],
+      "cpusPerVm": 96,
+      "memPerVm": 86.400390625,
+      "gpusPerVm": 0,
+      "ntwPerf": "16 Gbit/s",
+      "ntwPerfCategory": "extra",
+      "zones": ["us-east4-c", "us-east4-b", "us-east4-a"],
+      "attributes": {
+        "cpu": "96",
+        "instanceTypeCategory": "Compute optimized",
+        "memory": "86.400390625",
+        "networkPerfCategory": "extra"
+      },
+      "currentGen": false
+    },
+    {
+      "category": "General purpose",
+      "type": "n1-standard-16",
+      "onDemandPrice": 0.8559400000000001,
+      "spotPrice": [
+        { "zone": "us-east4-a", "price": 0.17120000000000002 },
+        { "zone": "us-east4-b", "price": 0.17120000000000002 },
+        { "zone": "us-east4-c", "price": 0.17120000000000002 }
+      ],
+      "cpusPerVm": 16,
+      "memPerVm": 60,
+      "gpusPerVm": 0,
+      "ntwPerf": "16 Gbit/s",
+      "ntwPerfCategory": "extra",
+      "zones": ["us-east4-c", "us-east4-b", "us-east4-a"],
+      "attributes": {
+        "cpu": "16",
+        "instanceTypeCategory": "General purpose",
+        "memory": "60",
+        "networkPerfCategory": "extra"
+      },
+      "currentGen": false
+    },
+    {
+      "category": "Compute optimized",
+      "type": "n1-highcpu-2",
+      "onDemandPrice": 0.0797968681640625,
+      "spotPrice": [
+        { "zone": "us-east4-a", "price": 0.015959505585937502 },
+        { "zone": "us-east4-b", "price": 0.015959505585937502 },
+        { "zone": "us-east4-c", "price": 0.015959505585937502 }
+      ],
+      "cpusPerVm": 2,
+      "memPerVm": 1.7998046875,
+      "gpusPerVm": 0,
+      "ntwPerf": "4 Gbit/s",
+      "ntwPerfCategory": "medium",
+      "zones": ["us-east4-c", "us-east4-b", "us-east4-a"],
+      "attributes": {
+        "cpu": "2",
+        "instanceTypeCategory": "Compute optimized",
+        "memory": "1.7998046875",
+        "networkPerfCategory": "medium"
+      },
+      "currentGen": false
+    },
+    {
+      "category": "Memory optimized",
+      "type": "n1-highmem-32",
+      "onDemandPrice": 2.1317280000000003,
+      "spotPrice": [
+        { "zone": "us-east4-a", "price": 0.42639072 },
+        { "zone": "us-east4-b", "price": 0.42639072 },
+        { "zone": "us-east4-c", "price": 0.42639072 }
+      ],
+      "cpusPerVm": 32,
+      "memPerVm": 208,
+      "gpusPerVm": 0,
+      "ntwPerf": "16 Gbit/s",
+      "ntwPerfCategory": "extra",
+      "zones": ["us-east4-c", "us-east4-b", "us-east4-a"],
+      "attributes": {
+        "cpu": "32",
+        "instanceTypeCategory": "Memory optimized",
+        "memory": "208",
+        "networkPerfCategory": "extra"
+      },
+      "currentGen": false
+    },
+    {
+      "category": "General purpose",
+      "type": "n1-standard-2",
+      "onDemandPrice": 0.10699250000000002,
+      "spotPrice": [
+        { "zone": "us-east4-a", "price": 0.021400000000000002 },
+        { "zone": "us-east4-b", "price": 0.021400000000000002 },
+        { "zone": "us-east4-c", "price": 0.021400000000000002 }
+      ],
+      "cpusPerVm": 2,
+      "memPerVm": 7.5,
+      "gpusPerVm": 0,
+      "ntwPerf": "4 Gbit/s",
+      "ntwPerfCategory": "medium",
+      "zones": ["us-east4-c", "us-east4-b", "us-east4-a"],
+      "attributes": {
+        "cpu": "2",
+        "instanceTypeCategory": "General purpose",
+        "memory": "7.5",
+        "networkPerfCategory": "medium"
+      },
+      "currentGen": false
+    },
+    {
+      "category": "Compute optimized",
+      "type": "n1-highcpu-32",
+      "onDemandPrice": 1.2767638681640627,
+      "spotPrice": [
+        { "zone": "us-east4-a", "price": 0.2553548855859375 },
+        { "zone": "us-east4-b", "price": 0.2553548855859375 },
+        { "zone": "us-east4-c", "price": 0.2553548855859375 }
+      ],
+      "cpusPerVm": 32,
+      "memPerVm": 28.7998046875,
+      "gpusPerVm": 0,
+      "ntwPerf": "16 Gbit/s",
+      "ntwPerfCategory": "extra",
+      "zones": ["us-east4-c", "us-east4-b", "us-east4-a"],
+      "attributes": {
+        "cpu": "32",
+        "instanceTypeCategory": "Compute optimized",
+        "memory": "28.7998046875",
+        "networkPerfCategory": "extra"
+      },
+      "currentGen": false
+    },
+    {
+      "category": "Memory optimized",
+      "type": "n1-highmem-2",
+      "onDemandPrice": 0.13323300000000002,
+      "spotPrice": [
+        { "zone": "us-east4-a", "price": 0.02664942 },
+        { "zone": "us-east4-b", "price": 0.02664942 },
+        { "zone": "us-east4-c", "price": 0.02664942 }
+      ],
+      "cpusPerVm": 2,
+      "memPerVm": 13,
+      "gpusPerVm": 0,
+      "ntwPerf": "4 Gbit/s",
+      "ntwPerfCategory": "medium",
+      "zones": ["us-east4-c", "us-east4-b", "us-east4-a"],
+      "attributes": {
+        "cpu": "2",
+        "instanceTypeCategory": "Memory optimized",
+        "memory": "13",
+        "networkPerfCategory": "medium"
+      },
+      "currentGen": false
+    },
+    {
+      "category": "General purpose",
+      "type": "n1-standard-8",
+      "onDemandPrice": 0.4279700000000001,
+      "spotPrice": [
+        { "zone": "us-east4-a", "price": 0.08560000000000001 },
+        { "zone": "us-east4-b", "price": 0.08560000000000001 },
+        { "zone": "us-east4-c", "price": 0.08560000000000001 }
+      ],
+      "cpusPerVm": 8,
+      "memPerVm": 30,
+      "gpusPerVm": 0,
+      "ntwPerf": "16 Gbit/s",
+      "ntwPerfCategory": "extra",
+      "zones": ["us-east4-c", "us-east4-b", "us-east4-a"],
+      "attributes": {
+        "cpu": "8",
+        "instanceTypeCategory": "General purpose",
+        "memory": "30",
+        "networkPerfCategory": "extra"
+      },
+      "currentGen": false
+    },
+    {
+      "category": "General purpose",
+      "type": "n1-standard-96",
+      "onDemandPrice": 5.13564,
+      "spotPrice": [
+        { "zone": "us-east4-a", "price": 1.0272000000000001 },
+        { "zone": "us-east4-b", "price": 1.0272000000000001 },
+        { "zone": "us-east4-c", "price": 1.0272000000000001 }
+      ],
+      "cpusPerVm": 96,
+      "memPerVm": 360,
+      "gpusPerVm": 0,
+      "ntwPerf": "16 Gbit/s",
+      "ntwPerfCategory": "extra",
+      "zones": ["us-east4-c", "us-east4-b", "us-east4-a"],
+      "attributes": {
+        "cpu": "96",
+        "instanceTypeCategory": "General purpose",
+        "memory": "360",
+        "networkPerfCategory": "extra"
+      },
+      "currentGen": false
+    },
+    {
+      "category": "Compute optimized",
+      "type": "n1-highcpu-8",
+      "onDemandPrice": 0.31919213183593753,
+      "spotPrice": [
+        { "zone": "us-east4-a", "price": 0.06383895441406251 },
+        { "zone": "us-east4-b", "price": 0.06383895441406251 },
+        { "zone": "us-east4-c", "price": 0.06383895441406251 }
+      ],
+      "cpusPerVm": 8,
+      "memPerVm": 7.2001953125,
+      "gpusPerVm": 0,
+      "ntwPerf": "16 Gbit/s",
+      "ntwPerfCategory": "extra",
+      "zones": ["us-east4-c", "us-east4-b", "us-east4-a"],
+      "attributes": {
+        "cpu": "8",
+        "instanceTypeCategory": "Compute optimized",
+        "memory": "7.2001953125",
+        "networkPerfCategory": "extra"
+      },
+      "currentGen": false
+    },
+    {
+      "category": "Memory optimized",
+      "type": "n1-highmem-4",
+      "onDemandPrice": 0.26646600000000004,
+      "spotPrice": [
+        { "zone": "us-east4-a", "price": 0.05329884 },
+        { "zone": "us-east4-b", "price": 0.05329884 },
+        { "zone": "us-east4-c", "price": 0.05329884 }
+      ],
+      "cpusPerVm": 4,
+      "memPerVm": 26,
+      "gpusPerVm": 0,
+      "ntwPerf": "8 Gbit/s",
+      "ntwPerfCategory": "medium",
+      "zones": ["us-east4-c", "us-east4-b", "us-east4-a"],
+      "attributes": {
+        "cpu": "4",
+        "instanceTypeCategory": "Memory optimized",
+        "memory": "26",
+        "networkPerfCategory": "medium"
+      },
+      "currentGen": false
+    }
+  ],
+  "scrapingTime": "1559416297619"
+}
