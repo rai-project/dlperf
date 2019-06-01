@@ -72,13 +72,14 @@ def get_backend(backend):
 
 @click.command()
 @click.option("--backend", type=click.STRING, default="onnxruntime")
+@click.option("--batch_size", type=click.INT, default=1)
 @click.option(
     "--debug/--no-debug", help="print debug messages to stderr.", default=False
 )
 @click.option("--quiet/--no-quiet", help="don't print messages", default=False)
 @click.pass_context
 @click.version_option()
-def main(ctx, backend, debug, quiet):
+def main(ctx, backend, batch_size, debug, quiet):
     utils.DEBUG = debug
     utils.QUIET = quiet
 
@@ -95,7 +96,7 @@ def main(ctx, backend, debug, quiet):
         traceback.print_exc()
         sys.exit(1)
 
-    img = input_image.get(model)
+    img = input_image.get(model, batch_size)
 
     try:
         backend.load(model)
