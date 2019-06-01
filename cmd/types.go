@@ -8,6 +8,7 @@ import (
 	dlperf "github.com/rai-project/dlperf/pkg"
 	"github.com/rai-project/dlperf/pkg/benchmark"
 	"github.com/rai-project/dlperf/pkg/onnx"
+	terminal "github.com/wayneashleyberry/terminal-dimensions"
 )
 
 type pattern struct {
@@ -45,11 +46,22 @@ func (bench) Header() []string {
 }
 
 func (l bench) Row(humanFlops bool) []string {
+	termWidth, err := terminal.Width()
+	if err != nil {
+		termWidth = 80
+	}
+
 	ms := float64(l.Benchmark.RealTime.Nanoseconds()) / float64(time.Millisecond)
 	realTime := fmt.Sprintf("%f", ms)
 	benchmarkName := l.Benchmark.Name
-	if len(benchmarkName) > 10 {
-		benchmarkName = benchmarkName[0:10] + "..."
+
+	benchmarkName = strings.TrimPrefix(benchmarkName, "LAYER_CUDNN_")
+	benchmarkName = strings.TrimPrefix(benchmarkName, "LAYER_CUBLAS_")
+	benchmarkName = strings.ReplaceAll(benchmarkName, "_FLOAT32_", "")
+	// benchmarkName = strings.ReplaceAll(benchmarkName, "__Batch_Size_", "")
+
+	if uint(len(benchmarkName)) > termWidth/2 {
+		benchmarkName = benchmarkName[0:termWidth/2] + "..."
 	}
 	layerName := ""
 	operatorType := ""
