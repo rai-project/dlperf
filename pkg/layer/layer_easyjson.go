@@ -18,7 +18,2499 @@ var (
 	_ easyjson.Marshaler
 )
 
-func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer(in *jlexer.Lexer, out *Unsqueeze) {
+func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer(in *jlexer.Lexer, out *softmaxBenchmarkArgs) {
+	isTopLevel := in.IsStart()
+	if in.IsNull() {
+		if isTopLevel {
+			in.Consumed()
+		}
+		in.Skip()
+		return
+	}
+	in.Delim('{')
+	for !in.IsDelim('}') {
+		key := in.UnsafeString()
+		in.WantColon()
+		if in.IsNull() {
+			in.Skip()
+			in.WantComma()
+			continue
+		}
+		switch key {
+		case "batch_size":
+			out.BatchSize = int64(in.Int64())
+		case "input_0":
+			out.Input0 = int64(in.Int64())
+		case "input_1":
+			out.Input1 = int64(in.Int64())
+		case "input_2":
+			out.Input2 = int64(in.Int64())
+		case "input_3":
+			out.Input3 = int64(in.Int64())
+		case "input_4":
+			out.Input4 = int64(in.Int64())
+		case "input_5":
+			out.Input5 = int64(in.Int64())
+		case "input_6":
+			out.Input6 = int64(in.Int64())
+		case "input_7":
+			out.Input7 = int64(in.Int64())
+		case "arg_names":
+			if in.IsNull() {
+				in.Skip()
+				out.ArgNames = nil
+			} else {
+				in.Delim('[')
+				if out.ArgNames == nil {
+					if !in.IsDelim(']') {
+						out.ArgNames = make([]string, 0, 4)
+					} else {
+						out.ArgNames = []string{}
+					}
+				} else {
+					out.ArgNames = (out.ArgNames)[:0]
+				}
+				for !in.IsDelim(']') {
+					var v1 string
+					v1 = string(in.String())
+					out.ArgNames = append(out.ArgNames, v1)
+					in.WantComma()
+				}
+				in.Delim(']')
+			}
+		case "unique_benchmark_id":
+			out.UniqueBenchmarkID = uint64(in.Uint64())
+		case "benchmark_name":
+			out.BenchmarkName = string(in.String())
+		case "algorithms":
+			if in.IsNull() {
+				in.Skip()
+				out.Algorithms = nil
+			} else {
+				in.Delim('[')
+				if out.Algorithms == nil {
+					if !in.IsDelim(']') {
+						out.Algorithms = make([]string, 0, 4)
+					} else {
+						out.Algorithms = []string{}
+					}
+				} else {
+					out.Algorithms = (out.Algorithms)[:0]
+				}
+				for !in.IsDelim(']') {
+					var v2 string
+					v2 = string(in.String())
+					out.Algorithms = append(out.Algorithms, v2)
+					in.WantComma()
+				}
+				in.Delim(']')
+			}
+		case "data_types":
+			if in.IsNull() {
+				in.Skip()
+				out.DataTypes = nil
+			} else {
+				in.Delim('[')
+				if out.DataTypes == nil {
+					if !in.IsDelim(']') {
+						out.DataTypes = make([]pkg.DataType, 0, 2)
+					} else {
+						out.DataTypes = []pkg.DataType{}
+					}
+				} else {
+					out.DataTypes = (out.DataTypes)[:0]
+				}
+				for !in.IsDelim(']') {
+					var v3 pkg.DataType
+					easyjson36987811DecodeGithubComRaiProjectDlperfPkg(in, &v3)
+					out.DataTypes = append(out.DataTypes, v3)
+					in.WantComma()
+				}
+				in.Delim(']')
+			}
+		case "is_training":
+			out.IsTraining = bool(in.Bool())
+		default:
+			in.AddError(&jlexer.LexerError{
+				Offset: in.GetPos(),
+				Reason: "unknown field",
+				Data:   key,
+			})
+		}
+		in.WantComma()
+	}
+	in.Delim('}')
+	if isTopLevel {
+		in.Consumed()
+	}
+}
+func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer(out *jwriter.Writer, in softmaxBenchmarkArgs) {
+	out.RawByte('{')
+	first := true
+	_ = first
+	if in.BatchSize != 0 {
+		const prefix string = ",\"batch_size\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.BatchSize))
+	}
+	if in.Input0 != 0 {
+		const prefix string = ",\"input_0\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.Input0))
+	}
+	if in.Input1 != 0 {
+		const prefix string = ",\"input_1\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.Input1))
+	}
+	if in.Input2 != 0 {
+		const prefix string = ",\"input_2\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.Input2))
+	}
+	if in.Input3 != 0 {
+		const prefix string = ",\"input_3\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.Input3))
+	}
+	if in.Input4 != 0 {
+		const prefix string = ",\"input_4\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.Input4))
+	}
+	if in.Input5 != 0 {
+		const prefix string = ",\"input_5\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.Input5))
+	}
+	if in.Input6 != 0 {
+		const prefix string = ",\"input_6\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.Input6))
+	}
+	if in.Input7 != 0 {
+		const prefix string = ",\"input_7\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.Input7))
+	}
+	if len(in.ArgNames) != 0 {
+		const prefix string = ",\"arg_names\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		{
+			out.RawByte('[')
+			for v4, v5 := range in.ArgNames {
+				if v4 > 0 {
+					out.RawByte(',')
+				}
+				out.String(string(v5))
+			}
+			out.RawByte(']')
+		}
+	}
+	if in.UniqueBenchmarkID != 0 {
+		const prefix string = ",\"unique_benchmark_id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Uint64(uint64(in.UniqueBenchmarkID))
+	}
+	if in.BenchmarkName != "" {
+		const prefix string = ",\"benchmark_name\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.BenchmarkName))
+	}
+	if len(in.Algorithms) != 0 {
+		const prefix string = ",\"algorithms\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		{
+			out.RawByte('[')
+			for v6, v7 := range in.Algorithms {
+				if v6 > 0 {
+					out.RawByte(',')
+				}
+				out.String(string(v7))
+			}
+			out.RawByte(']')
+		}
+	}
+	if len(in.DataTypes) != 0 {
+		const prefix string = ",\"data_types\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		{
+			out.RawByte('[')
+			for v8, v9 := range in.DataTypes {
+				if v8 > 0 {
+					out.RawByte(',')
+				}
+				easyjson36987811EncodeGithubComRaiProjectDlperfPkg(out, v9)
+			}
+			out.RawByte(']')
+		}
+	}
+	if in.IsTraining {
+		const prefix string = ",\"is_training\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Bool(bool(in.IsTraining))
+	}
+	out.RawByte('}')
+}
+
+// MarshalJSON supports json.Marshaler interface
+func (v softmaxBenchmarkArgs) MarshalJSON() ([]byte, error) {
+	w := jwriter.Writer{}
+	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer(&w, v)
+	return w.Buffer.BuildBytes(), w.Error
+}
+
+// MarshalEasyJSON supports easyjson.Marshaler interface
+func (v softmaxBenchmarkArgs) MarshalEasyJSON(w *jwriter.Writer) {
+	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer(w, v)
+}
+
+// UnmarshalJSON supports json.Unmarshaler interface
+func (v *softmaxBenchmarkArgs) UnmarshalJSON(data []byte) error {
+	r := jlexer.Lexer{Data: data}
+	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer(&r, v)
+	return r.Error()
+}
+
+// UnmarshalEasyJSON supports easyjson.Unmarshaler interface
+func (v *softmaxBenchmarkArgs) UnmarshalEasyJSON(l *jlexer.Lexer) {
+	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer(l, v)
+}
+func easyjson36987811DecodeGithubComRaiProjectDlperfPkg(in *jlexer.Lexer, out *pkg.DataType) {
+	isTopLevel := in.IsStart()
+	if in.IsNull() {
+		if isTopLevel {
+			in.Consumed()
+		}
+		in.Skip()
+		return
+	}
+	in.Delim('{')
+	for !in.IsDelim('}') {
+		key := in.UnsafeString()
+		in.WantColon()
+		if in.IsNull() {
+			in.Skip()
+			in.WantComma()
+			continue
+		}
+		switch key {
+		case "name":
+			out.Name = string(in.String())
+		case "ctype":
+			out.CType = string(in.String())
+		default:
+			in.AddError(&jlexer.LexerError{
+				Offset: in.GetPos(),
+				Reason: "unknown field",
+				Data:   key,
+			})
+		}
+		in.WantComma()
+	}
+	in.Delim('}')
+	if isTopLevel {
+		in.Consumed()
+	}
+}
+func easyjson36987811EncodeGithubComRaiProjectDlperfPkg(out *jwriter.Writer, in pkg.DataType) {
+	out.RawByte('{')
+	first := true
+	_ = first
+	{
+		const prefix string = ",\"name\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.Name))
+	}
+	{
+		const prefix string = ",\"ctype\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.CType))
+	}
+	out.RawByte('}')
+}
+func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer1(in *jlexer.Lexer, out *reluBenchmarkArgs) {
+	isTopLevel := in.IsStart()
+	if in.IsNull() {
+		if isTopLevel {
+			in.Consumed()
+		}
+		in.Skip()
+		return
+	}
+	in.Delim('{')
+	for !in.IsDelim('}') {
+		key := in.UnsafeString()
+		in.WantColon()
+		if in.IsNull() {
+			in.Skip()
+			in.WantComma()
+			continue
+		}
+		switch key {
+		case "batch_size":
+			out.BatchSize = int64(in.Int64())
+		case "input_0":
+			out.Input0 = int64(in.Int64())
+		case "input_1":
+			out.Input1 = int64(in.Int64())
+		case "input_2":
+			out.Input2 = int64(in.Int64())
+		case "input_3":
+			out.Input3 = int64(in.Int64())
+		case "input_4":
+			out.Input4 = int64(in.Int64())
+		case "input_5":
+			out.Input5 = int64(in.Int64())
+		case "input_6":
+			out.Input6 = int64(in.Int64())
+		case "input_7":
+			out.Input7 = int64(in.Int64())
+		case "arg_names":
+			if in.IsNull() {
+				in.Skip()
+				out.ArgNames = nil
+			} else {
+				in.Delim('[')
+				if out.ArgNames == nil {
+					if !in.IsDelim(']') {
+						out.ArgNames = make([]string, 0, 4)
+					} else {
+						out.ArgNames = []string{}
+					}
+				} else {
+					out.ArgNames = (out.ArgNames)[:0]
+				}
+				for !in.IsDelim(']') {
+					var v10 string
+					v10 = string(in.String())
+					out.ArgNames = append(out.ArgNames, v10)
+					in.WantComma()
+				}
+				in.Delim(']')
+			}
+		case "unique_benchmark_id":
+			out.UniqueBenchmarkID = uint64(in.Uint64())
+		case "benchmark_name":
+			out.BenchmarkName = string(in.String())
+		case "algorithms":
+			if in.IsNull() {
+				in.Skip()
+				out.Algorithms = nil
+			} else {
+				in.Delim('[')
+				if out.Algorithms == nil {
+					if !in.IsDelim(']') {
+						out.Algorithms = make([]string, 0, 4)
+					} else {
+						out.Algorithms = []string{}
+					}
+				} else {
+					out.Algorithms = (out.Algorithms)[:0]
+				}
+				for !in.IsDelim(']') {
+					var v11 string
+					v11 = string(in.String())
+					out.Algorithms = append(out.Algorithms, v11)
+					in.WantComma()
+				}
+				in.Delim(']')
+			}
+		case "data_types":
+			if in.IsNull() {
+				in.Skip()
+				out.DataTypes = nil
+			} else {
+				in.Delim('[')
+				if out.DataTypes == nil {
+					if !in.IsDelim(']') {
+						out.DataTypes = make([]pkg.DataType, 0, 2)
+					} else {
+						out.DataTypes = []pkg.DataType{}
+					}
+				} else {
+					out.DataTypes = (out.DataTypes)[:0]
+				}
+				for !in.IsDelim(']') {
+					var v12 pkg.DataType
+					easyjson36987811DecodeGithubComRaiProjectDlperfPkg(in, &v12)
+					out.DataTypes = append(out.DataTypes, v12)
+					in.WantComma()
+				}
+				in.Delim(']')
+			}
+		case "is_training":
+			out.IsTraining = bool(in.Bool())
+		default:
+			in.AddError(&jlexer.LexerError{
+				Offset: in.GetPos(),
+				Reason: "unknown field",
+				Data:   key,
+			})
+		}
+		in.WantComma()
+	}
+	in.Delim('}')
+	if isTopLevel {
+		in.Consumed()
+	}
+}
+func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer1(out *jwriter.Writer, in reluBenchmarkArgs) {
+	out.RawByte('{')
+	first := true
+	_ = first
+	if in.BatchSize != 0 {
+		const prefix string = ",\"batch_size\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.BatchSize))
+	}
+	if in.Input0 != 0 {
+		const prefix string = ",\"input_0\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.Input0))
+	}
+	if in.Input1 != 0 {
+		const prefix string = ",\"input_1\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.Input1))
+	}
+	if in.Input2 != 0 {
+		const prefix string = ",\"input_2\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.Input2))
+	}
+	if in.Input3 != 0 {
+		const prefix string = ",\"input_3\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.Input3))
+	}
+	if in.Input4 != 0 {
+		const prefix string = ",\"input_4\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.Input4))
+	}
+	if in.Input5 != 0 {
+		const prefix string = ",\"input_5\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.Input5))
+	}
+	if in.Input6 != 0 {
+		const prefix string = ",\"input_6\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.Input6))
+	}
+	if in.Input7 != 0 {
+		const prefix string = ",\"input_7\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.Input7))
+	}
+	if len(in.ArgNames) != 0 {
+		const prefix string = ",\"arg_names\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		{
+			out.RawByte('[')
+			for v13, v14 := range in.ArgNames {
+				if v13 > 0 {
+					out.RawByte(',')
+				}
+				out.String(string(v14))
+			}
+			out.RawByte(']')
+		}
+	}
+	if in.UniqueBenchmarkID != 0 {
+		const prefix string = ",\"unique_benchmark_id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Uint64(uint64(in.UniqueBenchmarkID))
+	}
+	if in.BenchmarkName != "" {
+		const prefix string = ",\"benchmark_name\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.BenchmarkName))
+	}
+	if len(in.Algorithms) != 0 {
+		const prefix string = ",\"algorithms\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		{
+			out.RawByte('[')
+			for v15, v16 := range in.Algorithms {
+				if v15 > 0 {
+					out.RawByte(',')
+				}
+				out.String(string(v16))
+			}
+			out.RawByte(']')
+		}
+	}
+	if len(in.DataTypes) != 0 {
+		const prefix string = ",\"data_types\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		{
+			out.RawByte('[')
+			for v17, v18 := range in.DataTypes {
+				if v17 > 0 {
+					out.RawByte(',')
+				}
+				easyjson36987811EncodeGithubComRaiProjectDlperfPkg(out, v18)
+			}
+			out.RawByte(']')
+		}
+	}
+	if in.IsTraining {
+		const prefix string = ",\"is_training\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Bool(bool(in.IsTraining))
+	}
+	out.RawByte('}')
+}
+
+// MarshalJSON supports json.Marshaler interface
+func (v reluBenchmarkArgs) MarshalJSON() ([]byte, error) {
+	w := jwriter.Writer{}
+	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer1(&w, v)
+	return w.Buffer.BuildBytes(), w.Error
+}
+
+// MarshalEasyJSON supports easyjson.Marshaler interface
+func (v reluBenchmarkArgs) MarshalEasyJSON(w *jwriter.Writer) {
+	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer1(w, v)
+}
+
+// UnmarshalJSON supports json.Unmarshaler interface
+func (v *reluBenchmarkArgs) UnmarshalJSON(data []byte) error {
+	r := jlexer.Lexer{Data: data}
+	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer1(&r, v)
+	return r.Error()
+}
+
+// UnmarshalEasyJSON supports easyjson.Unmarshaler interface
+func (v *reluBenchmarkArgs) UnmarshalEasyJSON(l *jlexer.Lexer) {
+	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer1(l, v)
+}
+func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer2(in *jlexer.Lexer, out *poolingBenchmarkArgs) {
+	isTopLevel := in.IsStart()
+	if in.IsNull() {
+		if isTopLevel {
+			in.Consumed()
+		}
+		in.Skip()
+		return
+	}
+	in.Delim('{')
+	for !in.IsDelim('}') {
+		key := in.UnsafeString()
+		in.WantColon()
+		if in.IsNull() {
+			in.Skip()
+			in.WantComma()
+			continue
+		}
+		switch key {
+		case "input_0":
+			out.Input0 = int64(in.Int64())
+		case "input_1":
+			out.Input1 = int64(in.Int64())
+		case "input_2":
+			out.Input2 = int64(in.Int64())
+		case "input_3":
+			out.Input3 = int64(in.Int64())
+		case "filter_height":
+			out.FilterHeight = int64(in.Int64())
+		case "filter_width":
+			out.FilterWidth = int64(in.Int64())
+		case "pad_height":
+			out.PadHeight = int64(in.Int64())
+		case "pad_width":
+			out.PadWidth = int64(in.Int64())
+		case "stride_height":
+			out.StrideHeight = int64(in.Int64())
+		case "stride_width":
+			out.StrideWidth = int64(in.Int64())
+		case "batch_size":
+			out.BatchSize = int64(in.Int64())
+		case "arg_names":
+			if in.IsNull() {
+				in.Skip()
+				out.ArgNames = nil
+			} else {
+				in.Delim('[')
+				if out.ArgNames == nil {
+					if !in.IsDelim(']') {
+						out.ArgNames = make([]string, 0, 4)
+					} else {
+						out.ArgNames = []string{}
+					}
+				} else {
+					out.ArgNames = (out.ArgNames)[:0]
+				}
+				for !in.IsDelim(']') {
+					var v19 string
+					v19 = string(in.String())
+					out.ArgNames = append(out.ArgNames, v19)
+					in.WantComma()
+				}
+				in.Delim(']')
+			}
+		case "unique_benchmark_id":
+			out.UniqueBenchmarkID = uint64(in.Uint64())
+		case "benchmark_name":
+			out.BenchmarkName = string(in.String())
+		case "algorithms":
+			if in.IsNull() {
+				in.Skip()
+				out.Algorithms = nil
+			} else {
+				in.Delim('[')
+				if out.Algorithms == nil {
+					if !in.IsDelim(']') {
+						out.Algorithms = make([]string, 0, 4)
+					} else {
+						out.Algorithms = []string{}
+					}
+				} else {
+					out.Algorithms = (out.Algorithms)[:0]
+				}
+				for !in.IsDelim(']') {
+					var v20 string
+					v20 = string(in.String())
+					out.Algorithms = append(out.Algorithms, v20)
+					in.WantComma()
+				}
+				in.Delim(']')
+			}
+		case "data_types":
+			if in.IsNull() {
+				in.Skip()
+				out.DataTypes = nil
+			} else {
+				in.Delim('[')
+				if out.DataTypes == nil {
+					if !in.IsDelim(']') {
+						out.DataTypes = make([]pkg.DataType, 0, 2)
+					} else {
+						out.DataTypes = []pkg.DataType{}
+					}
+				} else {
+					out.DataTypes = (out.DataTypes)[:0]
+				}
+				for !in.IsDelim(']') {
+					var v21 pkg.DataType
+					easyjson36987811DecodeGithubComRaiProjectDlperfPkg(in, &v21)
+					out.DataTypes = append(out.DataTypes, v21)
+					in.WantComma()
+				}
+				in.Delim(']')
+			}
+		case "is_training":
+			out.IsTraining = bool(in.Bool())
+		default:
+			in.AddError(&jlexer.LexerError{
+				Offset: in.GetPos(),
+				Reason: "unknown field",
+				Data:   key,
+			})
+		}
+		in.WantComma()
+	}
+	in.Delim('}')
+	if isTopLevel {
+		in.Consumed()
+	}
+}
+func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer2(out *jwriter.Writer, in poolingBenchmarkArgs) {
+	out.RawByte('{')
+	first := true
+	_ = first
+	if in.Input0 != 0 {
+		const prefix string = ",\"input_0\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.Input0))
+	}
+	if in.Input1 != 0 {
+		const prefix string = ",\"input_1\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.Input1))
+	}
+	if in.Input2 != 0 {
+		const prefix string = ",\"input_2\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.Input2))
+	}
+	if in.Input3 != 0 {
+		const prefix string = ",\"input_3\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.Input3))
+	}
+	if in.FilterHeight != 0 {
+		const prefix string = ",\"filter_height\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.FilterHeight))
+	}
+	if in.FilterWidth != 0 {
+		const prefix string = ",\"filter_width\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.FilterWidth))
+	}
+	if in.PadHeight != 0 {
+		const prefix string = ",\"pad_height\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.PadHeight))
+	}
+	if in.PadWidth != 0 {
+		const prefix string = ",\"pad_width\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.PadWidth))
+	}
+	if in.StrideHeight != 0 {
+		const prefix string = ",\"stride_height\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.StrideHeight))
+	}
+	if in.StrideWidth != 0 {
+		const prefix string = ",\"stride_width\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.StrideWidth))
+	}
+	if in.BatchSize != 0 {
+		const prefix string = ",\"batch_size\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.BatchSize))
+	}
+	if len(in.ArgNames) != 0 {
+		const prefix string = ",\"arg_names\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		{
+			out.RawByte('[')
+			for v22, v23 := range in.ArgNames {
+				if v22 > 0 {
+					out.RawByte(',')
+				}
+				out.String(string(v23))
+			}
+			out.RawByte(']')
+		}
+	}
+	if in.UniqueBenchmarkID != 0 {
+		const prefix string = ",\"unique_benchmark_id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Uint64(uint64(in.UniqueBenchmarkID))
+	}
+	if in.BenchmarkName != "" {
+		const prefix string = ",\"benchmark_name\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.BenchmarkName))
+	}
+	if len(in.Algorithms) != 0 {
+		const prefix string = ",\"algorithms\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		{
+			out.RawByte('[')
+			for v24, v25 := range in.Algorithms {
+				if v24 > 0 {
+					out.RawByte(',')
+				}
+				out.String(string(v25))
+			}
+			out.RawByte(']')
+		}
+	}
+	if len(in.DataTypes) != 0 {
+		const prefix string = ",\"data_types\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		{
+			out.RawByte('[')
+			for v26, v27 := range in.DataTypes {
+				if v26 > 0 {
+					out.RawByte(',')
+				}
+				easyjson36987811EncodeGithubComRaiProjectDlperfPkg(out, v27)
+			}
+			out.RawByte(']')
+		}
+	}
+	if in.IsTraining {
+		const prefix string = ",\"is_training\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Bool(bool(in.IsTraining))
+	}
+	out.RawByte('}')
+}
+
+// MarshalJSON supports json.Marshaler interface
+func (v poolingBenchmarkArgs) MarshalJSON() ([]byte, error) {
+	w := jwriter.Writer{}
+	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer2(&w, v)
+	return w.Buffer.BuildBytes(), w.Error
+}
+
+// MarshalEasyJSON supports easyjson.Marshaler interface
+func (v poolingBenchmarkArgs) MarshalEasyJSON(w *jwriter.Writer) {
+	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer2(w, v)
+}
+
+// UnmarshalJSON supports json.Unmarshaler interface
+func (v *poolingBenchmarkArgs) UnmarshalJSON(data []byte) error {
+	r := jlexer.Lexer{Data: data}
+	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer2(&r, v)
+	return r.Error()
+}
+
+// UnmarshalEasyJSON supports easyjson.Unmarshaler interface
+func (v *poolingBenchmarkArgs) UnmarshalEasyJSON(l *jlexer.Lexer) {
+	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer2(l, v)
+}
+func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer3(in *jlexer.Lexer, out *gemmBenchmarkArgs) {
+	isTopLevel := in.IsStart()
+	if in.IsNull() {
+		if isTopLevel {
+			in.Consumed()
+		}
+		in.Skip()
+		return
+	}
+	in.Delim('{')
+	for !in.IsDelim('}') {
+		key := in.UnsafeString()
+		in.WantColon()
+		if in.IsNull() {
+			in.Skip()
+			in.WantComma()
+			continue
+		}
+		switch key {
+		case "batch_size":
+			out.BatchSize = int64(in.Int64())
+		case "input_0":
+			out.Input0 = int64(in.Int64())
+		case "input_1":
+			out.Input1 = int64(in.Int64())
+		case "input_2":
+			out.Input2 = int64(in.Int64())
+		case "input_3":
+			out.Input3 = int64(in.Int64())
+		case "input_4":
+			out.Input4 = int64(in.Int64())
+		case "input_5":
+			out.Input5 = int64(in.Int64())
+		case "input_6":
+			out.Input6 = int64(in.Int64())
+		case "input_7":
+			out.Input7 = int64(in.Int64())
+		case "arg_names":
+			if in.IsNull() {
+				in.Skip()
+				out.ArgNames = nil
+			} else {
+				in.Delim('[')
+				if out.ArgNames == nil {
+					if !in.IsDelim(']') {
+						out.ArgNames = make([]string, 0, 4)
+					} else {
+						out.ArgNames = []string{}
+					}
+				} else {
+					out.ArgNames = (out.ArgNames)[:0]
+				}
+				for !in.IsDelim(']') {
+					var v28 string
+					v28 = string(in.String())
+					out.ArgNames = append(out.ArgNames, v28)
+					in.WantComma()
+				}
+				in.Delim(']')
+			}
+		case "unique_benchmark_id":
+			out.UniqueBenchmarkID = uint64(in.Uint64())
+		case "benchmark_name":
+			out.BenchmarkName = string(in.String())
+		case "algorithms":
+			if in.IsNull() {
+				in.Skip()
+				out.Algorithms = nil
+			} else {
+				in.Delim('[')
+				if out.Algorithms == nil {
+					if !in.IsDelim(']') {
+						out.Algorithms = make([]string, 0, 4)
+					} else {
+						out.Algorithms = []string{}
+					}
+				} else {
+					out.Algorithms = (out.Algorithms)[:0]
+				}
+				for !in.IsDelim(']') {
+					var v29 string
+					v29 = string(in.String())
+					out.Algorithms = append(out.Algorithms, v29)
+					in.WantComma()
+				}
+				in.Delim(']')
+			}
+		case "data_types":
+			if in.IsNull() {
+				in.Skip()
+				out.DataTypes = nil
+			} else {
+				in.Delim('[')
+				if out.DataTypes == nil {
+					if !in.IsDelim(']') {
+						out.DataTypes = make([]pkg.DataType, 0, 2)
+					} else {
+						out.DataTypes = []pkg.DataType{}
+					}
+				} else {
+					out.DataTypes = (out.DataTypes)[:0]
+				}
+				for !in.IsDelim(']') {
+					var v30 pkg.DataType
+					easyjson36987811DecodeGithubComRaiProjectDlperfPkg(in, &v30)
+					out.DataTypes = append(out.DataTypes, v30)
+					in.WantComma()
+				}
+				in.Delim(']')
+			}
+		case "is_training":
+			out.IsTraining = bool(in.Bool())
+		default:
+			in.AddError(&jlexer.LexerError{
+				Offset: in.GetPos(),
+				Reason: "unknown field",
+				Data:   key,
+			})
+		}
+		in.WantComma()
+	}
+	in.Delim('}')
+	if isTopLevel {
+		in.Consumed()
+	}
+}
+func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer3(out *jwriter.Writer, in gemmBenchmarkArgs) {
+	out.RawByte('{')
+	first := true
+	_ = first
+	if in.BatchSize != 0 {
+		const prefix string = ",\"batch_size\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.BatchSize))
+	}
+	if in.Input0 != 0 {
+		const prefix string = ",\"input_0\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.Input0))
+	}
+	if in.Input1 != 0 {
+		const prefix string = ",\"input_1\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.Input1))
+	}
+	if in.Input2 != 0 {
+		const prefix string = ",\"input_2\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.Input2))
+	}
+	if in.Input3 != 0 {
+		const prefix string = ",\"input_3\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.Input3))
+	}
+	if in.Input4 != 0 {
+		const prefix string = ",\"input_4\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.Input4))
+	}
+	if in.Input5 != 0 {
+		const prefix string = ",\"input_5\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.Input5))
+	}
+	if in.Input6 != 0 {
+		const prefix string = ",\"input_6\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.Input6))
+	}
+	if in.Input7 != 0 {
+		const prefix string = ",\"input_7\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.Input7))
+	}
+	if len(in.ArgNames) != 0 {
+		const prefix string = ",\"arg_names\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		{
+			out.RawByte('[')
+			for v31, v32 := range in.ArgNames {
+				if v31 > 0 {
+					out.RawByte(',')
+				}
+				out.String(string(v32))
+			}
+			out.RawByte(']')
+		}
+	}
+	if in.UniqueBenchmarkID != 0 {
+		const prefix string = ",\"unique_benchmark_id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Uint64(uint64(in.UniqueBenchmarkID))
+	}
+	if in.BenchmarkName != "" {
+		const prefix string = ",\"benchmark_name\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.BenchmarkName))
+	}
+	if len(in.Algorithms) != 0 {
+		const prefix string = ",\"algorithms\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		{
+			out.RawByte('[')
+			for v33, v34 := range in.Algorithms {
+				if v33 > 0 {
+					out.RawByte(',')
+				}
+				out.String(string(v34))
+			}
+			out.RawByte(']')
+		}
+	}
+	if len(in.DataTypes) != 0 {
+		const prefix string = ",\"data_types\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		{
+			out.RawByte('[')
+			for v35, v36 := range in.DataTypes {
+				if v35 > 0 {
+					out.RawByte(',')
+				}
+				easyjson36987811EncodeGithubComRaiProjectDlperfPkg(out, v36)
+			}
+			out.RawByte(']')
+		}
+	}
+	if in.IsTraining {
+		const prefix string = ",\"is_training\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Bool(bool(in.IsTraining))
+	}
+	out.RawByte('}')
+}
+
+// MarshalJSON supports json.Marshaler interface
+func (v gemmBenchmarkArgs) MarshalJSON() ([]byte, error) {
+	w := jwriter.Writer{}
+	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer3(&w, v)
+	return w.Buffer.BuildBytes(), w.Error
+}
+
+// MarshalEasyJSON supports easyjson.Marshaler interface
+func (v gemmBenchmarkArgs) MarshalEasyJSON(w *jwriter.Writer) {
+	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer3(w, v)
+}
+
+// UnmarshalJSON supports json.Unmarshaler interface
+func (v *gemmBenchmarkArgs) UnmarshalJSON(data []byte) error {
+	r := jlexer.Lexer{Data: data}
+	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer3(&r, v)
+	return r.Error()
+}
+
+// UnmarshalEasyJSON supports easyjson.Unmarshaler interface
+func (v *gemmBenchmarkArgs) UnmarshalEasyJSON(l *jlexer.Lexer) {
+	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer3(l, v)
+}
+func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer4(in *jlexer.Lexer, out *dropoutBenchmarkArgs) {
+	isTopLevel := in.IsStart()
+	if in.IsNull() {
+		if isTopLevel {
+			in.Consumed()
+		}
+		in.Skip()
+		return
+	}
+	in.Delim('{')
+	for !in.IsDelim('}') {
+		key := in.UnsafeString()
+		in.WantColon()
+		if in.IsNull() {
+			in.Skip()
+			in.WantComma()
+			continue
+		}
+		switch key {
+		case "batch_size":
+			out.BatchSize = int64(in.Int64())
+		case "input_0":
+			out.Input0 = int64(in.Int64())
+		case "input_1":
+			out.Input1 = int64(in.Int64())
+		case "input_2":
+			out.Input2 = int64(in.Int64())
+		case "input_3":
+			out.Input3 = int64(in.Int64())
+		case "input_4":
+			out.Input4 = int64(in.Int64())
+		case "input_5":
+			out.Input5 = int64(in.Int64())
+		case "input_6":
+			out.Input6 = int64(in.Int64())
+		case "input_7":
+			out.Input7 = int64(in.Int64())
+		case "arg_names":
+			if in.IsNull() {
+				in.Skip()
+				out.ArgNames = nil
+			} else {
+				in.Delim('[')
+				if out.ArgNames == nil {
+					if !in.IsDelim(']') {
+						out.ArgNames = make([]string, 0, 4)
+					} else {
+						out.ArgNames = []string{}
+					}
+				} else {
+					out.ArgNames = (out.ArgNames)[:0]
+				}
+				for !in.IsDelim(']') {
+					var v37 string
+					v37 = string(in.String())
+					out.ArgNames = append(out.ArgNames, v37)
+					in.WantComma()
+				}
+				in.Delim(']')
+			}
+		case "unique_benchmark_id":
+			out.UniqueBenchmarkID = uint64(in.Uint64())
+		case "benchmark_name":
+			out.BenchmarkName = string(in.String())
+		case "algorithms":
+			if in.IsNull() {
+				in.Skip()
+				out.Algorithms = nil
+			} else {
+				in.Delim('[')
+				if out.Algorithms == nil {
+					if !in.IsDelim(']') {
+						out.Algorithms = make([]string, 0, 4)
+					} else {
+						out.Algorithms = []string{}
+					}
+				} else {
+					out.Algorithms = (out.Algorithms)[:0]
+				}
+				for !in.IsDelim(']') {
+					var v38 string
+					v38 = string(in.String())
+					out.Algorithms = append(out.Algorithms, v38)
+					in.WantComma()
+				}
+				in.Delim(']')
+			}
+		case "data_types":
+			if in.IsNull() {
+				in.Skip()
+				out.DataTypes = nil
+			} else {
+				in.Delim('[')
+				if out.DataTypes == nil {
+					if !in.IsDelim(']') {
+						out.DataTypes = make([]pkg.DataType, 0, 2)
+					} else {
+						out.DataTypes = []pkg.DataType{}
+					}
+				} else {
+					out.DataTypes = (out.DataTypes)[:0]
+				}
+				for !in.IsDelim(']') {
+					var v39 pkg.DataType
+					easyjson36987811DecodeGithubComRaiProjectDlperfPkg(in, &v39)
+					out.DataTypes = append(out.DataTypes, v39)
+					in.WantComma()
+				}
+				in.Delim(']')
+			}
+		case "is_training":
+			out.IsTraining = bool(in.Bool())
+		default:
+			in.AddError(&jlexer.LexerError{
+				Offset: in.GetPos(),
+				Reason: "unknown field",
+				Data:   key,
+			})
+		}
+		in.WantComma()
+	}
+	in.Delim('}')
+	if isTopLevel {
+		in.Consumed()
+	}
+}
+func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer4(out *jwriter.Writer, in dropoutBenchmarkArgs) {
+	out.RawByte('{')
+	first := true
+	_ = first
+	if in.BatchSize != 0 {
+		const prefix string = ",\"batch_size\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.BatchSize))
+	}
+	if in.Input0 != 0 {
+		const prefix string = ",\"input_0\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.Input0))
+	}
+	if in.Input1 != 0 {
+		const prefix string = ",\"input_1\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.Input1))
+	}
+	if in.Input2 != 0 {
+		const prefix string = ",\"input_2\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.Input2))
+	}
+	if in.Input3 != 0 {
+		const prefix string = ",\"input_3\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.Input3))
+	}
+	if in.Input4 != 0 {
+		const prefix string = ",\"input_4\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.Input4))
+	}
+	if in.Input5 != 0 {
+		const prefix string = ",\"input_5\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.Input5))
+	}
+	if in.Input6 != 0 {
+		const prefix string = ",\"input_6\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.Input6))
+	}
+	if in.Input7 != 0 {
+		const prefix string = ",\"input_7\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.Input7))
+	}
+	if len(in.ArgNames) != 0 {
+		const prefix string = ",\"arg_names\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		{
+			out.RawByte('[')
+			for v40, v41 := range in.ArgNames {
+				if v40 > 0 {
+					out.RawByte(',')
+				}
+				out.String(string(v41))
+			}
+			out.RawByte(']')
+		}
+	}
+	if in.UniqueBenchmarkID != 0 {
+		const prefix string = ",\"unique_benchmark_id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Uint64(uint64(in.UniqueBenchmarkID))
+	}
+	if in.BenchmarkName != "" {
+		const prefix string = ",\"benchmark_name\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.BenchmarkName))
+	}
+	if len(in.Algorithms) != 0 {
+		const prefix string = ",\"algorithms\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		{
+			out.RawByte('[')
+			for v42, v43 := range in.Algorithms {
+				if v42 > 0 {
+					out.RawByte(',')
+				}
+				out.String(string(v43))
+			}
+			out.RawByte(']')
+		}
+	}
+	if len(in.DataTypes) != 0 {
+		const prefix string = ",\"data_types\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		{
+			out.RawByte('[')
+			for v44, v45 := range in.DataTypes {
+				if v44 > 0 {
+					out.RawByte(',')
+				}
+				easyjson36987811EncodeGithubComRaiProjectDlperfPkg(out, v45)
+			}
+			out.RawByte(']')
+		}
+	}
+	if in.IsTraining {
+		const prefix string = ",\"is_training\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Bool(bool(in.IsTraining))
+	}
+	out.RawByte('}')
+}
+
+// MarshalJSON supports json.Marshaler interface
+func (v dropoutBenchmarkArgs) MarshalJSON() ([]byte, error) {
+	w := jwriter.Writer{}
+	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer4(&w, v)
+	return w.Buffer.BuildBytes(), w.Error
+}
+
+// MarshalEasyJSON supports easyjson.Marshaler interface
+func (v dropoutBenchmarkArgs) MarshalEasyJSON(w *jwriter.Writer) {
+	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer4(w, v)
+}
+
+// UnmarshalJSON supports json.Unmarshaler interface
+func (v *dropoutBenchmarkArgs) UnmarshalJSON(data []byte) error {
+	r := jlexer.Lexer{Data: data}
+	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer4(&r, v)
+	return r.Error()
+}
+
+// UnmarshalEasyJSON supports easyjson.Unmarshaler interface
+func (v *dropoutBenchmarkArgs) UnmarshalEasyJSON(l *jlexer.Lexer) {
+	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer4(l, v)
+}
+func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer5(in *jlexer.Lexer, out *convBenchmarkArgs) {
+	isTopLevel := in.IsStart()
+	if in.IsNull() {
+		if isTopLevel {
+			in.Consumed()
+		}
+		in.Skip()
+		return
+	}
+	in.Delim('{')
+	for !in.IsDelim('}') {
+		key := in.UnsafeString()
+		in.WantColon()
+		if in.IsNull() {
+			in.Skip()
+			in.WantComma()
+			continue
+		}
+		switch key {
+		case "input_0":
+			out.Input0 = int64(in.Int64())
+		case "input_1":
+			out.Input1 = int64(in.Int64())
+		case "input_2":
+			out.Input2 = int64(in.Int64())
+		case "input_3":
+			out.Input3 = int64(in.Int64())
+		case "filter_count":
+			out.FilterCount = int64(in.Int64())
+		case "filter_height":
+			out.FilterHeight = int64(in.Int64())
+		case "filter_width":
+			out.FilterWidth = int64(in.Int64())
+		case "pad_height":
+			out.PadHeight = int64(in.Int64())
+		case "pad_width":
+			out.PadWidth = int64(in.Int64())
+		case "stride_height":
+			out.StrideHeight = int64(in.Int64())
+		case "stride_width":
+			out.StrideWidth = int64(in.Int64())
+		case "dilation_width":
+			out.DilationWidth = int64(in.Int64())
+		case "dilation_height":
+			out.DilationHeight = int64(in.Int64())
+		case "conv_bwd_type":
+			if data := in.Raw(); in.Ok() {
+				in.AddError((out.ConvBwdType).UnmarshalJSON(data))
+			}
+		case "batch_size":
+			out.BatchSize = int64(in.Int64())
+		case "arg_names":
+			if in.IsNull() {
+				in.Skip()
+				out.ArgNames = nil
+			} else {
+				in.Delim('[')
+				if out.ArgNames == nil {
+					if !in.IsDelim(']') {
+						out.ArgNames = make([]string, 0, 4)
+					} else {
+						out.ArgNames = []string{}
+					}
+				} else {
+					out.ArgNames = (out.ArgNames)[:0]
+				}
+				for !in.IsDelim(']') {
+					var v46 string
+					v46 = string(in.String())
+					out.ArgNames = append(out.ArgNames, v46)
+					in.WantComma()
+				}
+				in.Delim(']')
+			}
+		case "unique_benchmark_id":
+			out.UniqueBenchmarkID = uint64(in.Uint64())
+		case "benchmark_name":
+			out.BenchmarkName = string(in.String())
+		case "algorithms":
+			if in.IsNull() {
+				in.Skip()
+				out.Algorithms = nil
+			} else {
+				in.Delim('[')
+				if out.Algorithms == nil {
+					if !in.IsDelim(']') {
+						out.Algorithms = make([]string, 0, 4)
+					} else {
+						out.Algorithms = []string{}
+					}
+				} else {
+					out.Algorithms = (out.Algorithms)[:0]
+				}
+				for !in.IsDelim(']') {
+					var v47 string
+					v47 = string(in.String())
+					out.Algorithms = append(out.Algorithms, v47)
+					in.WantComma()
+				}
+				in.Delim(']')
+			}
+		case "data_types":
+			if in.IsNull() {
+				in.Skip()
+				out.DataTypes = nil
+			} else {
+				in.Delim('[')
+				if out.DataTypes == nil {
+					if !in.IsDelim(']') {
+						out.DataTypes = make([]pkg.DataType, 0, 2)
+					} else {
+						out.DataTypes = []pkg.DataType{}
+					}
+				} else {
+					out.DataTypes = (out.DataTypes)[:0]
+				}
+				for !in.IsDelim(']') {
+					var v48 pkg.DataType
+					easyjson36987811DecodeGithubComRaiProjectDlperfPkg(in, &v48)
+					out.DataTypes = append(out.DataTypes, v48)
+					in.WantComma()
+				}
+				in.Delim(']')
+			}
+		case "is_training":
+			out.IsTraining = bool(in.Bool())
+		default:
+			in.AddError(&jlexer.LexerError{
+				Offset: in.GetPos(),
+				Reason: "unknown field",
+				Data:   key,
+			})
+		}
+		in.WantComma()
+	}
+	in.Delim('}')
+	if isTopLevel {
+		in.Consumed()
+	}
+}
+func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer5(out *jwriter.Writer, in convBenchmarkArgs) {
+	out.RawByte('{')
+	first := true
+	_ = first
+	if in.Input0 != 0 {
+		const prefix string = ",\"input_0\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.Input0))
+	}
+	if in.Input1 != 0 {
+		const prefix string = ",\"input_1\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.Input1))
+	}
+	if in.Input2 != 0 {
+		const prefix string = ",\"input_2\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.Input2))
+	}
+	if in.Input3 != 0 {
+		const prefix string = ",\"input_3\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.Input3))
+	}
+	if in.FilterCount != 0 {
+		const prefix string = ",\"filter_count\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.FilterCount))
+	}
+	if in.FilterHeight != 0 {
+		const prefix string = ",\"filter_height\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.FilterHeight))
+	}
+	if in.FilterWidth != 0 {
+		const prefix string = ",\"filter_width\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.FilterWidth))
+	}
+	if in.PadHeight != 0 {
+		const prefix string = ",\"pad_height\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.PadHeight))
+	}
+	if in.PadWidth != 0 {
+		const prefix string = ",\"pad_width\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.PadWidth))
+	}
+	if in.StrideHeight != 0 {
+		const prefix string = ",\"stride_height\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.StrideHeight))
+	}
+	if in.StrideWidth != 0 {
+		const prefix string = ",\"stride_width\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.StrideWidth))
+	}
+	if in.DilationWidth != 0 {
+		const prefix string = ",\"dilation_width\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.DilationWidth))
+	}
+	if in.DilationHeight != 0 {
+		const prefix string = ",\"dilation_height\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.DilationHeight))
+	}
+	if in.ConvBwdType != 0 {
+		const prefix string = ",\"conv_bwd_type\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Raw((in.ConvBwdType).MarshalJSON())
+	}
+	if in.BatchSize != 0 {
+		const prefix string = ",\"batch_size\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.BatchSize))
+	}
+	if len(in.ArgNames) != 0 {
+		const prefix string = ",\"arg_names\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		{
+			out.RawByte('[')
+			for v49, v50 := range in.ArgNames {
+				if v49 > 0 {
+					out.RawByte(',')
+				}
+				out.String(string(v50))
+			}
+			out.RawByte(']')
+		}
+	}
+	if in.UniqueBenchmarkID != 0 {
+		const prefix string = ",\"unique_benchmark_id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Uint64(uint64(in.UniqueBenchmarkID))
+	}
+	if in.BenchmarkName != "" {
+		const prefix string = ",\"benchmark_name\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.BenchmarkName))
+	}
+	if len(in.Algorithms) != 0 {
+		const prefix string = ",\"algorithms\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		{
+			out.RawByte('[')
+			for v51, v52 := range in.Algorithms {
+				if v51 > 0 {
+					out.RawByte(',')
+				}
+				out.String(string(v52))
+			}
+			out.RawByte(']')
+		}
+	}
+	if len(in.DataTypes) != 0 {
+		const prefix string = ",\"data_types\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		{
+			out.RawByte('[')
+			for v53, v54 := range in.DataTypes {
+				if v53 > 0 {
+					out.RawByte(',')
+				}
+				easyjson36987811EncodeGithubComRaiProjectDlperfPkg(out, v54)
+			}
+			out.RawByte(']')
+		}
+	}
+	if in.IsTraining {
+		const prefix string = ",\"is_training\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Bool(bool(in.IsTraining))
+	}
+	out.RawByte('}')
+}
+
+// MarshalJSON supports json.Marshaler interface
+func (v convBenchmarkArgs) MarshalJSON() ([]byte, error) {
+	w := jwriter.Writer{}
+	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer5(&w, v)
+	return w.Buffer.BuildBytes(), w.Error
+}
+
+// MarshalEasyJSON supports easyjson.Marshaler interface
+func (v convBenchmarkArgs) MarshalEasyJSON(w *jwriter.Writer) {
+	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer5(w, v)
+}
+
+// UnmarshalJSON supports json.Unmarshaler interface
+func (v *convBenchmarkArgs) UnmarshalJSON(data []byte) error {
+	r := jlexer.Lexer{Data: data}
+	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer5(&r, v)
+	return r.Error()
+}
+
+// UnmarshalEasyJSON supports easyjson.Unmarshaler interface
+func (v *convBenchmarkArgs) UnmarshalEasyJSON(l *jlexer.Lexer) {
+	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer5(l, v)
+}
+func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer6(in *jlexer.Lexer, out *batchnormBenchmarkArgs) {
+	isTopLevel := in.IsStart()
+	if in.IsNull() {
+		if isTopLevel {
+			in.Consumed()
+		}
+		in.Skip()
+		return
+	}
+	in.Delim('{')
+	for !in.IsDelim('}') {
+		key := in.UnsafeString()
+		in.WantColon()
+		if in.IsNull() {
+			in.Skip()
+			in.WantComma()
+			continue
+		}
+		switch key {
+		case "is_training":
+			out.IsTraining = bool(in.Bool())
+		case "batch_size":
+			out.BatchSize = int64(in.Int64())
+		case "input_0":
+			out.Input0 = int64(in.Int64())
+		case "input_1":
+			out.Input1 = int64(in.Int64())
+		case "input_2":
+			out.Input2 = int64(in.Int64())
+		case "input_3":
+			out.Input3 = int64(in.Int64())
+		case "input_4":
+			out.Input4 = int64(in.Int64())
+		case "input_5":
+			out.Input5 = int64(in.Int64())
+		case "input_6":
+			out.Input6 = int64(in.Int64())
+		case "input_7":
+			out.Input7 = int64(in.Int64())
+		case "arg_names":
+			if in.IsNull() {
+				in.Skip()
+				out.ArgNames = nil
+			} else {
+				in.Delim('[')
+				if out.ArgNames == nil {
+					if !in.IsDelim(']') {
+						out.ArgNames = make([]string, 0, 4)
+					} else {
+						out.ArgNames = []string{}
+					}
+				} else {
+					out.ArgNames = (out.ArgNames)[:0]
+				}
+				for !in.IsDelim(']') {
+					var v55 string
+					v55 = string(in.String())
+					out.ArgNames = append(out.ArgNames, v55)
+					in.WantComma()
+				}
+				in.Delim(']')
+			}
+		case "unique_benchmark_id":
+			out.UniqueBenchmarkID = uint64(in.Uint64())
+		case "benchmark_name":
+			out.BenchmarkName = string(in.String())
+		case "algorithms":
+			if in.IsNull() {
+				in.Skip()
+				out.Algorithms = nil
+			} else {
+				in.Delim('[')
+				if out.Algorithms == nil {
+					if !in.IsDelim(']') {
+						out.Algorithms = make([]string, 0, 4)
+					} else {
+						out.Algorithms = []string{}
+					}
+				} else {
+					out.Algorithms = (out.Algorithms)[:0]
+				}
+				for !in.IsDelim(']') {
+					var v56 string
+					v56 = string(in.String())
+					out.Algorithms = append(out.Algorithms, v56)
+					in.WantComma()
+				}
+				in.Delim(']')
+			}
+		case "data_types":
+			if in.IsNull() {
+				in.Skip()
+				out.DataTypes = nil
+			} else {
+				in.Delim('[')
+				if out.DataTypes == nil {
+					if !in.IsDelim(']') {
+						out.DataTypes = make([]pkg.DataType, 0, 2)
+					} else {
+						out.DataTypes = []pkg.DataType{}
+					}
+				} else {
+					out.DataTypes = (out.DataTypes)[:0]
+				}
+				for !in.IsDelim(']') {
+					var v57 pkg.DataType
+					easyjson36987811DecodeGithubComRaiProjectDlperfPkg(in, &v57)
+					out.DataTypes = append(out.DataTypes, v57)
+					in.WantComma()
+				}
+				in.Delim(']')
+			}
+		default:
+			in.AddError(&jlexer.LexerError{
+				Offset: in.GetPos(),
+				Reason: "unknown field",
+				Data:   key,
+			})
+		}
+		in.WantComma()
+	}
+	in.Delim('}')
+	if isTopLevel {
+		in.Consumed()
+	}
+}
+func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer6(out *jwriter.Writer, in batchnormBenchmarkArgs) {
+	out.RawByte('{')
+	first := true
+	_ = first
+	{
+		const prefix string = ",\"is_training\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Bool(bool(in.IsTraining))
+	}
+	if in.BatchSize != 0 {
+		const prefix string = ",\"batch_size\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.BatchSize))
+	}
+	if in.Input0 != 0 {
+		const prefix string = ",\"input_0\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.Input0))
+	}
+	if in.Input1 != 0 {
+		const prefix string = ",\"input_1\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.Input1))
+	}
+	if in.Input2 != 0 {
+		const prefix string = ",\"input_2\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.Input2))
+	}
+	if in.Input3 != 0 {
+		const prefix string = ",\"input_3\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.Input3))
+	}
+	if in.Input4 != 0 {
+		const prefix string = ",\"input_4\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.Input4))
+	}
+	if in.Input5 != 0 {
+		const prefix string = ",\"input_5\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.Input5))
+	}
+	if in.Input6 != 0 {
+		const prefix string = ",\"input_6\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.Input6))
+	}
+	if in.Input7 != 0 {
+		const prefix string = ",\"input_7\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.Input7))
+	}
+	if len(in.ArgNames) != 0 {
+		const prefix string = ",\"arg_names\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		{
+			out.RawByte('[')
+			for v58, v59 := range in.ArgNames {
+				if v58 > 0 {
+					out.RawByte(',')
+				}
+				out.String(string(v59))
+			}
+			out.RawByte(']')
+		}
+	}
+	if in.UniqueBenchmarkID != 0 {
+		const prefix string = ",\"unique_benchmark_id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Uint64(uint64(in.UniqueBenchmarkID))
+	}
+	if in.BenchmarkName != "" {
+		const prefix string = ",\"benchmark_name\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.BenchmarkName))
+	}
+	if len(in.Algorithms) != 0 {
+		const prefix string = ",\"algorithms\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		{
+			out.RawByte('[')
+			for v60, v61 := range in.Algorithms {
+				if v60 > 0 {
+					out.RawByte(',')
+				}
+				out.String(string(v61))
+			}
+			out.RawByte(']')
+		}
+	}
+	if len(in.DataTypes) != 0 {
+		const prefix string = ",\"data_types\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		{
+			out.RawByte('[')
+			for v62, v63 := range in.DataTypes {
+				if v62 > 0 {
+					out.RawByte(',')
+				}
+				easyjson36987811EncodeGithubComRaiProjectDlperfPkg(out, v63)
+			}
+			out.RawByte(']')
+		}
+	}
+	out.RawByte('}')
+}
+
+// MarshalJSON supports json.Marshaler interface
+func (v batchnormBenchmarkArgs) MarshalJSON() ([]byte, error) {
+	w := jwriter.Writer{}
+	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer6(&w, v)
+	return w.Buffer.BuildBytes(), w.Error
+}
+
+// MarshalEasyJSON supports easyjson.Marshaler interface
+func (v batchnormBenchmarkArgs) MarshalEasyJSON(w *jwriter.Writer) {
+	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer6(w, v)
+}
+
+// UnmarshalJSON supports json.Unmarshaler interface
+func (v *batchnormBenchmarkArgs) UnmarshalJSON(data []byte) error {
+	r := jlexer.Lexer{Data: data}
+	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer6(&r, v)
+	return r.Error()
+}
+
+// UnmarshalEasyJSON supports easyjson.Unmarshaler interface
+func (v *batchnormBenchmarkArgs) UnmarshalEasyJSON(l *jlexer.Lexer) {
+	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer6(l, v)
+}
+func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer7(in *jlexer.Lexer, out *Unsqueeze) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -54,9 +2546,9 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer(in *jlexer.Lexer, o
 					out.Axes = (out.Axes)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v1 int64
-					v1 = int64(in.Int64())
-					out.Axes = append(out.Axes, v1)
+					var v64 int64
+					v64 = int64(in.Int64())
+					out.Axes = append(out.Axes, v64)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -83,9 +2575,9 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer(in *jlexer.Lexer, o
 					out.InputNames_ = (out.InputNames_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v2 string
-					v2 = string(in.String())
-					out.InputNames_ = append(out.InputNames_, v2)
+					var v65 string
+					v65 = string(in.String())
+					out.InputNames_ = append(out.InputNames_, v65)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -106,9 +2598,9 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer(in *jlexer.Lexer, o
 					out.OutputNames_ = (out.OutputNames_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v3 string
-					v3 = string(in.String())
-					out.OutputNames_ = append(out.OutputNames_, v3)
+					var v66 string
+					v66 = string(in.String())
+					out.OutputNames_ = append(out.OutputNames_, v66)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -129,30 +2621,30 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer(in *jlexer.Lexer, o
 					out.InputShapes_ = (out.InputShapes_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v4 pkg.Shape
+					var v67 pkg.Shape
 					if in.IsNull() {
 						in.Skip()
-						v4 = nil
+						v67 = nil
 					} else {
 						in.Delim('[')
-						if v4 == nil {
+						if v67 == nil {
 							if !in.IsDelim(']') {
-								v4 = make(pkg.Shape, 0, 8)
+								v67 = make(pkg.Shape, 0, 8)
 							} else {
-								v4 = pkg.Shape{}
+								v67 = pkg.Shape{}
 							}
 						} else {
-							v4 = (v4)[:0]
+							v67 = (v67)[:0]
 						}
 						for !in.IsDelim(']') {
-							var v5 int64
-							v5 = int64(in.Int64())
-							v4 = append(v4, v5)
+							var v68 int64
+							v68 = int64(in.Int64())
+							v67 = append(v67, v68)
 							in.WantComma()
 						}
 						in.Delim(']')
 					}
-					out.InputShapes_ = append(out.InputShapes_, v4)
+					out.InputShapes_ = append(out.InputShapes_, v67)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -173,30 +2665,30 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer(in *jlexer.Lexer, o
 					out.OutputShapes_ = (out.OutputShapes_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v6 pkg.Shape
+					var v69 pkg.Shape
 					if in.IsNull() {
 						in.Skip()
-						v6 = nil
+						v69 = nil
 					} else {
 						in.Delim('[')
-						if v6 == nil {
+						if v69 == nil {
 							if !in.IsDelim(']') {
-								v6 = make(pkg.Shape, 0, 8)
+								v69 = make(pkg.Shape, 0, 8)
 							} else {
-								v6 = pkg.Shape{}
+								v69 = pkg.Shape{}
 							}
 						} else {
-							v6 = (v6)[:0]
+							v69 = (v69)[:0]
 						}
 						for !in.IsDelim(']') {
-							var v7 int64
-							v7 = int64(in.Int64())
-							v6 = append(v6, v7)
+							var v70 int64
+							v70 = int64(in.Int64())
+							v69 = append(v69, v70)
 							in.WantComma()
 						}
 						in.Delim(']')
 					}
-					out.OutputShapes_ = append(out.OutputShapes_, v6)
+					out.OutputShapes_ = append(out.OutputShapes_, v69)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -215,7 +2707,7 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer(in *jlexer.Lexer, o
 		in.Consumed()
 	}
 }
-func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer(out *jwriter.Writer, in Unsqueeze) {
+func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer7(out *jwriter.Writer, in Unsqueeze) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -229,11 +2721,11 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer(out *jwriter.Writer
 		}
 		{
 			out.RawByte('[')
-			for v8, v9 := range in.Axes {
-				if v8 > 0 {
+			for v71, v72 := range in.Axes {
+				if v71 > 0 {
 					out.RawByte(',')
 				}
-				out.Int64(int64(v9))
+				out.Int64(int64(v72))
 			}
 			out.RawByte(']')
 		}
@@ -278,11 +2770,11 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer(out *jwriter.Writer
 		}
 		{
 			out.RawByte('[')
-			for v10, v11 := range in.InputNames_ {
-				if v10 > 0 {
+			for v73, v74 := range in.InputNames_ {
+				if v73 > 0 {
 					out.RawByte(',')
 				}
-				out.String(string(v11))
+				out.String(string(v74))
 			}
 			out.RawByte(']')
 		}
@@ -297,11 +2789,11 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer(out *jwriter.Writer
 		}
 		{
 			out.RawByte('[')
-			for v12, v13 := range in.OutputNames_ {
-				if v12 > 0 {
+			for v75, v76 := range in.OutputNames_ {
+				if v75 > 0 {
 					out.RawByte(',')
 				}
-				out.String(string(v13))
+				out.String(string(v76))
 			}
 			out.RawByte(']')
 		}
@@ -316,19 +2808,19 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer(out *jwriter.Writer
 		}
 		{
 			out.RawByte('[')
-			for v14, v15 := range in.InputShapes_ {
-				if v14 > 0 {
+			for v77, v78 := range in.InputShapes_ {
+				if v77 > 0 {
 					out.RawByte(',')
 				}
-				if v15 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
+				if v78 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
 					out.RawString("null")
 				} else {
 					out.RawByte('[')
-					for v16, v17 := range v15 {
-						if v16 > 0 {
+					for v79, v80 := range v78 {
+						if v79 > 0 {
 							out.RawByte(',')
 						}
-						out.Int64(int64(v17))
+						out.Int64(int64(v80))
 					}
 					out.RawByte(']')
 				}
@@ -346,19 +2838,19 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer(out *jwriter.Writer
 		}
 		{
 			out.RawByte('[')
-			for v18, v19 := range in.OutputShapes_ {
-				if v18 > 0 {
+			for v81, v82 := range in.OutputShapes_ {
+				if v81 > 0 {
 					out.RawByte(',')
 				}
-				if v19 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
+				if v82 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
 					out.RawString("null")
 				} else {
 					out.RawByte('[')
-					for v20, v21 := range v19 {
-						if v20 > 0 {
+					for v83, v84 := range v82 {
+						if v83 > 0 {
 							out.RawByte(',')
 						}
-						out.Int64(int64(v21))
+						out.Int64(int64(v84))
 					}
 					out.RawByte(']')
 				}
@@ -372,27 +2864,27 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer(out *jwriter.Writer
 // MarshalJSON supports json.Marshaler interface
 func (v Unsqueeze) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer(&w, v)
+	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer7(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v Unsqueeze) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer(w, v)
+	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer7(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *Unsqueeze) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer(&r, v)
+	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer7(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *Unsqueeze) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer(l, v)
+	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer7(l, v)
 }
-func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer1(in *jlexer.Lexer, out *Transpose) {
+func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer8(in *jlexer.Lexer, out *Transpose) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -428,9 +2920,9 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer1(in *jlexer.Lexer, 
 					out.Permutation = (out.Permutation)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v22 int64
-					v22 = int64(in.Int64())
-					out.Permutation = append(out.Permutation, v22)
+					var v85 int64
+					v85 = int64(in.Int64())
+					out.Permutation = append(out.Permutation, v85)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -457,9 +2949,9 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer1(in *jlexer.Lexer, 
 					out.InputNames_ = (out.InputNames_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v23 string
-					v23 = string(in.String())
-					out.InputNames_ = append(out.InputNames_, v23)
+					var v86 string
+					v86 = string(in.String())
+					out.InputNames_ = append(out.InputNames_, v86)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -480,9 +2972,9 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer1(in *jlexer.Lexer, 
 					out.OutputNames_ = (out.OutputNames_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v24 string
-					v24 = string(in.String())
-					out.OutputNames_ = append(out.OutputNames_, v24)
+					var v87 string
+					v87 = string(in.String())
+					out.OutputNames_ = append(out.OutputNames_, v87)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -503,30 +2995,30 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer1(in *jlexer.Lexer, 
 					out.InputShapes_ = (out.InputShapes_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v25 pkg.Shape
+					var v88 pkg.Shape
 					if in.IsNull() {
 						in.Skip()
-						v25 = nil
+						v88 = nil
 					} else {
 						in.Delim('[')
-						if v25 == nil {
+						if v88 == nil {
 							if !in.IsDelim(']') {
-								v25 = make(pkg.Shape, 0, 8)
+								v88 = make(pkg.Shape, 0, 8)
 							} else {
-								v25 = pkg.Shape{}
+								v88 = pkg.Shape{}
 							}
 						} else {
-							v25 = (v25)[:0]
+							v88 = (v88)[:0]
 						}
 						for !in.IsDelim(']') {
-							var v26 int64
-							v26 = int64(in.Int64())
-							v25 = append(v25, v26)
+							var v89 int64
+							v89 = int64(in.Int64())
+							v88 = append(v88, v89)
 							in.WantComma()
 						}
 						in.Delim(']')
 					}
-					out.InputShapes_ = append(out.InputShapes_, v25)
+					out.InputShapes_ = append(out.InputShapes_, v88)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -547,30 +3039,30 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer1(in *jlexer.Lexer, 
 					out.OutputShapes_ = (out.OutputShapes_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v27 pkg.Shape
+					var v90 pkg.Shape
 					if in.IsNull() {
 						in.Skip()
-						v27 = nil
+						v90 = nil
 					} else {
 						in.Delim('[')
-						if v27 == nil {
+						if v90 == nil {
 							if !in.IsDelim(']') {
-								v27 = make(pkg.Shape, 0, 8)
+								v90 = make(pkg.Shape, 0, 8)
 							} else {
-								v27 = pkg.Shape{}
+								v90 = pkg.Shape{}
 							}
 						} else {
-							v27 = (v27)[:0]
+							v90 = (v90)[:0]
 						}
 						for !in.IsDelim(']') {
-							var v28 int64
-							v28 = int64(in.Int64())
-							v27 = append(v27, v28)
+							var v91 int64
+							v91 = int64(in.Int64())
+							v90 = append(v90, v91)
 							in.WantComma()
 						}
 						in.Delim(']')
 					}
-					out.OutputShapes_ = append(out.OutputShapes_, v27)
+					out.OutputShapes_ = append(out.OutputShapes_, v90)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -589,7 +3081,7 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer1(in *jlexer.Lexer, 
 		in.Consumed()
 	}
 }
-func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer1(out *jwriter.Writer, in Transpose) {
+func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer8(out *jwriter.Writer, in Transpose) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -603,11 +3095,11 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer1(out *jwriter.Write
 		}
 		{
 			out.RawByte('[')
-			for v29, v30 := range in.Permutation {
-				if v29 > 0 {
+			for v92, v93 := range in.Permutation {
+				if v92 > 0 {
 					out.RawByte(',')
 				}
-				out.Int64(int64(v30))
+				out.Int64(int64(v93))
 			}
 			out.RawByte(']')
 		}
@@ -652,11 +3144,11 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer1(out *jwriter.Write
 		}
 		{
 			out.RawByte('[')
-			for v31, v32 := range in.InputNames_ {
-				if v31 > 0 {
+			for v94, v95 := range in.InputNames_ {
+				if v94 > 0 {
 					out.RawByte(',')
 				}
-				out.String(string(v32))
+				out.String(string(v95))
 			}
 			out.RawByte(']')
 		}
@@ -671,11 +3163,11 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer1(out *jwriter.Write
 		}
 		{
 			out.RawByte('[')
-			for v33, v34 := range in.OutputNames_ {
-				if v33 > 0 {
+			for v96, v97 := range in.OutputNames_ {
+				if v96 > 0 {
 					out.RawByte(',')
 				}
-				out.String(string(v34))
+				out.String(string(v97))
 			}
 			out.RawByte(']')
 		}
@@ -690,19 +3182,19 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer1(out *jwriter.Write
 		}
 		{
 			out.RawByte('[')
-			for v35, v36 := range in.InputShapes_ {
-				if v35 > 0 {
+			for v98, v99 := range in.InputShapes_ {
+				if v98 > 0 {
 					out.RawByte(',')
 				}
-				if v36 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
+				if v99 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
 					out.RawString("null")
 				} else {
 					out.RawByte('[')
-					for v37, v38 := range v36 {
-						if v37 > 0 {
+					for v100, v101 := range v99 {
+						if v100 > 0 {
 							out.RawByte(',')
 						}
-						out.Int64(int64(v38))
+						out.Int64(int64(v101))
 					}
 					out.RawByte(']')
 				}
@@ -720,19 +3212,19 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer1(out *jwriter.Write
 		}
 		{
 			out.RawByte('[')
-			for v39, v40 := range in.OutputShapes_ {
-				if v39 > 0 {
+			for v102, v103 := range in.OutputShapes_ {
+				if v102 > 0 {
 					out.RawByte(',')
 				}
-				if v40 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
+				if v103 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
 					out.RawString("null")
 				} else {
 					out.RawByte('[')
-					for v41, v42 := range v40 {
-						if v41 > 0 {
+					for v104, v105 := range v103 {
+						if v104 > 0 {
 							out.RawByte(',')
 						}
-						out.Int64(int64(v42))
+						out.Int64(int64(v105))
 					}
 					out.RawByte(']')
 				}
@@ -746,27 +3238,27 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer1(out *jwriter.Write
 // MarshalJSON supports json.Marshaler interface
 func (v Transpose) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer1(&w, v)
+	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer8(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v Transpose) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer1(w, v)
+	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer8(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *Transpose) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer1(&r, v)
+	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer8(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *Transpose) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer1(l, v)
+	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer8(l, v)
 }
-func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer2(in *jlexer.Lexer, out *TopK) {
+func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer9(in *jlexer.Lexer, out *TopK) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -812,9 +3304,9 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer2(in *jlexer.Lexer, 
 					out.InputNames_ = (out.InputNames_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v43 string
-					v43 = string(in.String())
-					out.InputNames_ = append(out.InputNames_, v43)
+					var v106 string
+					v106 = string(in.String())
+					out.InputNames_ = append(out.InputNames_, v106)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -835,9 +3327,9 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer2(in *jlexer.Lexer, 
 					out.OutputNames_ = (out.OutputNames_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v44 string
-					v44 = string(in.String())
-					out.OutputNames_ = append(out.OutputNames_, v44)
+					var v107 string
+					v107 = string(in.String())
+					out.OutputNames_ = append(out.OutputNames_, v107)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -858,30 +3350,30 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer2(in *jlexer.Lexer, 
 					out.InputShapes_ = (out.InputShapes_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v45 pkg.Shape
+					var v108 pkg.Shape
 					if in.IsNull() {
 						in.Skip()
-						v45 = nil
+						v108 = nil
 					} else {
 						in.Delim('[')
-						if v45 == nil {
+						if v108 == nil {
 							if !in.IsDelim(']') {
-								v45 = make(pkg.Shape, 0, 8)
+								v108 = make(pkg.Shape, 0, 8)
 							} else {
-								v45 = pkg.Shape{}
+								v108 = pkg.Shape{}
 							}
 						} else {
-							v45 = (v45)[:0]
+							v108 = (v108)[:0]
 						}
 						for !in.IsDelim(']') {
-							var v46 int64
-							v46 = int64(in.Int64())
-							v45 = append(v45, v46)
+							var v109 int64
+							v109 = int64(in.Int64())
+							v108 = append(v108, v109)
 							in.WantComma()
 						}
 						in.Delim(']')
 					}
-					out.InputShapes_ = append(out.InputShapes_, v45)
+					out.InputShapes_ = append(out.InputShapes_, v108)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -902,30 +3394,30 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer2(in *jlexer.Lexer, 
 					out.OutputShapes_ = (out.OutputShapes_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v47 pkg.Shape
+					var v110 pkg.Shape
 					if in.IsNull() {
 						in.Skip()
-						v47 = nil
+						v110 = nil
 					} else {
 						in.Delim('[')
-						if v47 == nil {
+						if v110 == nil {
 							if !in.IsDelim(']') {
-								v47 = make(pkg.Shape, 0, 8)
+								v110 = make(pkg.Shape, 0, 8)
 							} else {
-								v47 = pkg.Shape{}
+								v110 = pkg.Shape{}
 							}
 						} else {
-							v47 = (v47)[:0]
+							v110 = (v110)[:0]
 						}
 						for !in.IsDelim(']') {
-							var v48 int64
-							v48 = int64(in.Int64())
-							v47 = append(v47, v48)
+							var v111 int64
+							v111 = int64(in.Int64())
+							v110 = append(v110, v111)
 							in.WantComma()
 						}
 						in.Delim(']')
 					}
-					out.OutputShapes_ = append(out.OutputShapes_, v47)
+					out.OutputShapes_ = append(out.OutputShapes_, v110)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -944,7 +3436,7 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer2(in *jlexer.Lexer, 
 		in.Consumed()
 	}
 }
-func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer2(out *jwriter.Writer, in TopK) {
+func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer9(out *jwriter.Writer, in TopK) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -1008,11 +3500,11 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer2(out *jwriter.Write
 		}
 		{
 			out.RawByte('[')
-			for v49, v50 := range in.InputNames_ {
-				if v49 > 0 {
+			for v112, v113 := range in.InputNames_ {
+				if v112 > 0 {
 					out.RawByte(',')
 				}
-				out.String(string(v50))
+				out.String(string(v113))
 			}
 			out.RawByte(']')
 		}
@@ -1027,11 +3519,11 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer2(out *jwriter.Write
 		}
 		{
 			out.RawByte('[')
-			for v51, v52 := range in.OutputNames_ {
-				if v51 > 0 {
+			for v114, v115 := range in.OutputNames_ {
+				if v114 > 0 {
 					out.RawByte(',')
 				}
-				out.String(string(v52))
+				out.String(string(v115))
 			}
 			out.RawByte(']')
 		}
@@ -1046,19 +3538,19 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer2(out *jwriter.Write
 		}
 		{
 			out.RawByte('[')
-			for v53, v54 := range in.InputShapes_ {
-				if v53 > 0 {
+			for v116, v117 := range in.InputShapes_ {
+				if v116 > 0 {
 					out.RawByte(',')
 				}
-				if v54 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
+				if v117 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
 					out.RawString("null")
 				} else {
 					out.RawByte('[')
-					for v55, v56 := range v54 {
-						if v55 > 0 {
+					for v118, v119 := range v117 {
+						if v118 > 0 {
 							out.RawByte(',')
 						}
-						out.Int64(int64(v56))
+						out.Int64(int64(v119))
 					}
 					out.RawByte(']')
 				}
@@ -1076,19 +3568,19 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer2(out *jwriter.Write
 		}
 		{
 			out.RawByte('[')
-			for v57, v58 := range in.OutputShapes_ {
-				if v57 > 0 {
+			for v120, v121 := range in.OutputShapes_ {
+				if v120 > 0 {
 					out.RawByte(',')
 				}
-				if v58 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
+				if v121 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
 					out.RawString("null")
 				} else {
 					out.RawByte('[')
-					for v59, v60 := range v58 {
-						if v59 > 0 {
+					for v122, v123 := range v121 {
+						if v122 > 0 {
 							out.RawByte(',')
 						}
-						out.Int64(int64(v60))
+						out.Int64(int64(v123))
 					}
 					out.RawByte(']')
 				}
@@ -1102,27 +3594,27 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer2(out *jwriter.Write
 // MarshalJSON supports json.Marshaler interface
 func (v TopK) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer2(&w, v)
+	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer9(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v TopK) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer2(w, v)
+	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer9(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *TopK) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer2(&r, v)
+	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer9(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *TopK) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer2(l, v)
+	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer9(l, v)
 }
-func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer3(in *jlexer.Lexer, out *Squeeze) {
+func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer10(in *jlexer.Lexer, out *Squeeze) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -1158,9 +3650,9 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer3(in *jlexer.Lexer, 
 					out.Axes = (out.Axes)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v61 int64
-					v61 = int64(in.Int64())
-					out.Axes = append(out.Axes, v61)
+					var v124 int64
+					v124 = int64(in.Int64())
+					out.Axes = append(out.Axes, v124)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -1187,9 +3679,9 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer3(in *jlexer.Lexer, 
 					out.InputNames_ = (out.InputNames_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v62 string
-					v62 = string(in.String())
-					out.InputNames_ = append(out.InputNames_, v62)
+					var v125 string
+					v125 = string(in.String())
+					out.InputNames_ = append(out.InputNames_, v125)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -1210,9 +3702,9 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer3(in *jlexer.Lexer, 
 					out.OutputNames_ = (out.OutputNames_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v63 string
-					v63 = string(in.String())
-					out.OutputNames_ = append(out.OutputNames_, v63)
+					var v126 string
+					v126 = string(in.String())
+					out.OutputNames_ = append(out.OutputNames_, v126)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -1233,30 +3725,30 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer3(in *jlexer.Lexer, 
 					out.InputShapes_ = (out.InputShapes_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v64 pkg.Shape
+					var v127 pkg.Shape
 					if in.IsNull() {
 						in.Skip()
-						v64 = nil
+						v127 = nil
 					} else {
 						in.Delim('[')
-						if v64 == nil {
+						if v127 == nil {
 							if !in.IsDelim(']') {
-								v64 = make(pkg.Shape, 0, 8)
+								v127 = make(pkg.Shape, 0, 8)
 							} else {
-								v64 = pkg.Shape{}
+								v127 = pkg.Shape{}
 							}
 						} else {
-							v64 = (v64)[:0]
+							v127 = (v127)[:0]
 						}
 						for !in.IsDelim(']') {
-							var v65 int64
-							v65 = int64(in.Int64())
-							v64 = append(v64, v65)
+							var v128 int64
+							v128 = int64(in.Int64())
+							v127 = append(v127, v128)
 							in.WantComma()
 						}
 						in.Delim(']')
 					}
-					out.InputShapes_ = append(out.InputShapes_, v64)
+					out.InputShapes_ = append(out.InputShapes_, v127)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -1277,30 +3769,30 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer3(in *jlexer.Lexer, 
 					out.OutputShapes_ = (out.OutputShapes_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v66 pkg.Shape
+					var v129 pkg.Shape
 					if in.IsNull() {
 						in.Skip()
-						v66 = nil
+						v129 = nil
 					} else {
 						in.Delim('[')
-						if v66 == nil {
+						if v129 == nil {
 							if !in.IsDelim(']') {
-								v66 = make(pkg.Shape, 0, 8)
+								v129 = make(pkg.Shape, 0, 8)
 							} else {
-								v66 = pkg.Shape{}
+								v129 = pkg.Shape{}
 							}
 						} else {
-							v66 = (v66)[:0]
+							v129 = (v129)[:0]
 						}
 						for !in.IsDelim(']') {
-							var v67 int64
-							v67 = int64(in.Int64())
-							v66 = append(v66, v67)
+							var v130 int64
+							v130 = int64(in.Int64())
+							v129 = append(v129, v130)
 							in.WantComma()
 						}
 						in.Delim(']')
 					}
-					out.OutputShapes_ = append(out.OutputShapes_, v66)
+					out.OutputShapes_ = append(out.OutputShapes_, v129)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -1319,7 +3811,7 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer3(in *jlexer.Lexer, 
 		in.Consumed()
 	}
 }
-func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer3(out *jwriter.Writer, in Squeeze) {
+func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer10(out *jwriter.Writer, in Squeeze) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -1333,11 +3825,11 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer3(out *jwriter.Write
 		}
 		{
 			out.RawByte('[')
-			for v68, v69 := range in.Axes {
-				if v68 > 0 {
+			for v131, v132 := range in.Axes {
+				if v131 > 0 {
 					out.RawByte(',')
 				}
-				out.Int64(int64(v69))
+				out.Int64(int64(v132))
 			}
 			out.RawByte(']')
 		}
@@ -1382,11 +3874,11 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer3(out *jwriter.Write
 		}
 		{
 			out.RawByte('[')
-			for v70, v71 := range in.InputNames_ {
-				if v70 > 0 {
+			for v133, v134 := range in.InputNames_ {
+				if v133 > 0 {
 					out.RawByte(',')
 				}
-				out.String(string(v71))
+				out.String(string(v134))
 			}
 			out.RawByte(']')
 		}
@@ -1401,11 +3893,11 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer3(out *jwriter.Write
 		}
 		{
 			out.RawByte('[')
-			for v72, v73 := range in.OutputNames_ {
-				if v72 > 0 {
+			for v135, v136 := range in.OutputNames_ {
+				if v135 > 0 {
 					out.RawByte(',')
 				}
-				out.String(string(v73))
+				out.String(string(v136))
 			}
 			out.RawByte(']')
 		}
@@ -1420,19 +3912,19 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer3(out *jwriter.Write
 		}
 		{
 			out.RawByte('[')
-			for v74, v75 := range in.InputShapes_ {
-				if v74 > 0 {
+			for v137, v138 := range in.InputShapes_ {
+				if v137 > 0 {
 					out.RawByte(',')
 				}
-				if v75 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
+				if v138 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
 					out.RawString("null")
 				} else {
 					out.RawByte('[')
-					for v76, v77 := range v75 {
-						if v76 > 0 {
+					for v139, v140 := range v138 {
+						if v139 > 0 {
 							out.RawByte(',')
 						}
-						out.Int64(int64(v77))
+						out.Int64(int64(v140))
 					}
 					out.RawByte(']')
 				}
@@ -1450,19 +3942,19 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer3(out *jwriter.Write
 		}
 		{
 			out.RawByte('[')
-			for v78, v79 := range in.OutputShapes_ {
-				if v78 > 0 {
+			for v141, v142 := range in.OutputShapes_ {
+				if v141 > 0 {
 					out.RawByte(',')
 				}
-				if v79 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
+				if v142 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
 					out.RawString("null")
 				} else {
 					out.RawByte('[')
-					for v80, v81 := range v79 {
-						if v80 > 0 {
+					for v143, v144 := range v142 {
+						if v143 > 0 {
 							out.RawByte(',')
 						}
-						out.Int64(int64(v81))
+						out.Int64(int64(v144))
 					}
 					out.RawByte(']')
 				}
@@ -1476,27 +3968,27 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer3(out *jwriter.Write
 // MarshalJSON supports json.Marshaler interface
 func (v Squeeze) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer3(&w, v)
+	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer10(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v Squeeze) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer3(w, v)
+	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer10(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *Squeeze) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer3(&r, v)
+	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer10(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *Squeeze) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer3(l, v)
+	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer10(l, v)
 }
-func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer4(in *jlexer.Lexer, out *Softmax) {
+func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer11(in *jlexer.Lexer, out *Softmax) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -1538,9 +4030,9 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer4(in *jlexer.Lexer, 
 					out.InputNames_ = (out.InputNames_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v82 string
-					v82 = string(in.String())
-					out.InputNames_ = append(out.InputNames_, v82)
+					var v145 string
+					v145 = string(in.String())
+					out.InputNames_ = append(out.InputNames_, v145)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -1561,9 +4053,9 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer4(in *jlexer.Lexer, 
 					out.OutputNames_ = (out.OutputNames_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v83 string
-					v83 = string(in.String())
-					out.OutputNames_ = append(out.OutputNames_, v83)
+					var v146 string
+					v146 = string(in.String())
+					out.OutputNames_ = append(out.OutputNames_, v146)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -1584,30 +4076,30 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer4(in *jlexer.Lexer, 
 					out.InputShapes_ = (out.InputShapes_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v84 pkg.Shape
+					var v147 pkg.Shape
 					if in.IsNull() {
 						in.Skip()
-						v84 = nil
+						v147 = nil
 					} else {
 						in.Delim('[')
-						if v84 == nil {
+						if v147 == nil {
 							if !in.IsDelim(']') {
-								v84 = make(pkg.Shape, 0, 8)
+								v147 = make(pkg.Shape, 0, 8)
 							} else {
-								v84 = pkg.Shape{}
+								v147 = pkg.Shape{}
 							}
 						} else {
-							v84 = (v84)[:0]
+							v147 = (v147)[:0]
 						}
 						for !in.IsDelim(']') {
-							var v85 int64
-							v85 = int64(in.Int64())
-							v84 = append(v84, v85)
+							var v148 int64
+							v148 = int64(in.Int64())
+							v147 = append(v147, v148)
 							in.WantComma()
 						}
 						in.Delim(']')
 					}
-					out.InputShapes_ = append(out.InputShapes_, v84)
+					out.InputShapes_ = append(out.InputShapes_, v147)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -1628,30 +4120,30 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer4(in *jlexer.Lexer, 
 					out.OutputShapes_ = (out.OutputShapes_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v86 pkg.Shape
+					var v149 pkg.Shape
 					if in.IsNull() {
 						in.Skip()
-						v86 = nil
+						v149 = nil
 					} else {
 						in.Delim('[')
-						if v86 == nil {
+						if v149 == nil {
 							if !in.IsDelim(']') {
-								v86 = make(pkg.Shape, 0, 8)
+								v149 = make(pkg.Shape, 0, 8)
 							} else {
-								v86 = pkg.Shape{}
+								v149 = pkg.Shape{}
 							}
 						} else {
-							v86 = (v86)[:0]
+							v149 = (v149)[:0]
 						}
 						for !in.IsDelim(']') {
-							var v87 int64
-							v87 = int64(in.Int64())
-							v86 = append(v86, v87)
+							var v150 int64
+							v150 = int64(in.Int64())
+							v149 = append(v149, v150)
 							in.WantComma()
 						}
 						in.Delim(']')
 					}
-					out.OutputShapes_ = append(out.OutputShapes_, v86)
+					out.OutputShapes_ = append(out.OutputShapes_, v149)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -1670,7 +4162,7 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer4(in *jlexer.Lexer, 
 		in.Consumed()
 	}
 }
-func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer4(out *jwriter.Writer, in Softmax) {
+func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer11(out *jwriter.Writer, in Softmax) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -1714,11 +4206,11 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer4(out *jwriter.Write
 		}
 		{
 			out.RawByte('[')
-			for v88, v89 := range in.InputNames_ {
-				if v88 > 0 {
+			for v151, v152 := range in.InputNames_ {
+				if v151 > 0 {
 					out.RawByte(',')
 				}
-				out.String(string(v89))
+				out.String(string(v152))
 			}
 			out.RawByte(']')
 		}
@@ -1733,11 +4225,11 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer4(out *jwriter.Write
 		}
 		{
 			out.RawByte('[')
-			for v90, v91 := range in.OutputNames_ {
-				if v90 > 0 {
+			for v153, v154 := range in.OutputNames_ {
+				if v153 > 0 {
 					out.RawByte(',')
 				}
-				out.String(string(v91))
+				out.String(string(v154))
 			}
 			out.RawByte(']')
 		}
@@ -1752,19 +4244,19 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer4(out *jwriter.Write
 		}
 		{
 			out.RawByte('[')
-			for v92, v93 := range in.InputShapes_ {
-				if v92 > 0 {
+			for v155, v156 := range in.InputShapes_ {
+				if v155 > 0 {
 					out.RawByte(',')
 				}
-				if v93 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
+				if v156 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
 					out.RawString("null")
 				} else {
 					out.RawByte('[')
-					for v94, v95 := range v93 {
-						if v94 > 0 {
+					for v157, v158 := range v156 {
+						if v157 > 0 {
 							out.RawByte(',')
 						}
-						out.Int64(int64(v95))
+						out.Int64(int64(v158))
 					}
 					out.RawByte(']')
 				}
@@ -1782,19 +4274,19 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer4(out *jwriter.Write
 		}
 		{
 			out.RawByte('[')
-			for v96, v97 := range in.OutputShapes_ {
-				if v96 > 0 {
+			for v159, v160 := range in.OutputShapes_ {
+				if v159 > 0 {
 					out.RawByte(',')
 				}
-				if v97 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
+				if v160 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
 					out.RawString("null")
 				} else {
 					out.RawByte('[')
-					for v98, v99 := range v97 {
-						if v98 > 0 {
+					for v161, v162 := range v160 {
+						if v161 > 0 {
 							out.RawByte(',')
 						}
-						out.Int64(int64(v99))
+						out.Int64(int64(v162))
 					}
 					out.RawByte(']')
 				}
@@ -1808,27 +4300,27 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer4(out *jwriter.Write
 // MarshalJSON supports json.Marshaler interface
 func (v Softmax) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer4(&w, v)
+	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer11(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v Softmax) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer4(w, v)
+	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer11(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *Softmax) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer4(&r, v)
+	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer11(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *Softmax) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer4(l, v)
+	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer11(l, v)
 }
-func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer5(in *jlexer.Lexer, out *Shape) {
+func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer12(in *jlexer.Lexer, out *Shape) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -1870,9 +4362,9 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer5(in *jlexer.Lexer, 
 					out.InputNames_ = (out.InputNames_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v100 string
-					v100 = string(in.String())
-					out.InputNames_ = append(out.InputNames_, v100)
+					var v163 string
+					v163 = string(in.String())
+					out.InputNames_ = append(out.InputNames_, v163)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -1893,9 +4385,9 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer5(in *jlexer.Lexer, 
 					out.OutputNames_ = (out.OutputNames_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v101 string
-					v101 = string(in.String())
-					out.OutputNames_ = append(out.OutputNames_, v101)
+					var v164 string
+					v164 = string(in.String())
+					out.OutputNames_ = append(out.OutputNames_, v164)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -1916,30 +4408,30 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer5(in *jlexer.Lexer, 
 					out.InputShapes_ = (out.InputShapes_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v102 pkg.Shape
+					var v165 pkg.Shape
 					if in.IsNull() {
 						in.Skip()
-						v102 = nil
+						v165 = nil
 					} else {
 						in.Delim('[')
-						if v102 == nil {
+						if v165 == nil {
 							if !in.IsDelim(']') {
-								v102 = make(pkg.Shape, 0, 8)
+								v165 = make(pkg.Shape, 0, 8)
 							} else {
-								v102 = pkg.Shape{}
+								v165 = pkg.Shape{}
 							}
 						} else {
-							v102 = (v102)[:0]
+							v165 = (v165)[:0]
 						}
 						for !in.IsDelim(']') {
-							var v103 int64
-							v103 = int64(in.Int64())
-							v102 = append(v102, v103)
+							var v166 int64
+							v166 = int64(in.Int64())
+							v165 = append(v165, v166)
 							in.WantComma()
 						}
 						in.Delim(']')
 					}
-					out.InputShapes_ = append(out.InputShapes_, v102)
+					out.InputShapes_ = append(out.InputShapes_, v165)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -1960,30 +4452,30 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer5(in *jlexer.Lexer, 
 					out.OutputShapes_ = (out.OutputShapes_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v104 pkg.Shape
+					var v167 pkg.Shape
 					if in.IsNull() {
 						in.Skip()
-						v104 = nil
+						v167 = nil
 					} else {
 						in.Delim('[')
-						if v104 == nil {
+						if v167 == nil {
 							if !in.IsDelim(']') {
-								v104 = make(pkg.Shape, 0, 8)
+								v167 = make(pkg.Shape, 0, 8)
 							} else {
-								v104 = pkg.Shape{}
+								v167 = pkg.Shape{}
 							}
 						} else {
-							v104 = (v104)[:0]
+							v167 = (v167)[:0]
 						}
 						for !in.IsDelim(']') {
-							var v105 int64
-							v105 = int64(in.Int64())
-							v104 = append(v104, v105)
+							var v168 int64
+							v168 = int64(in.Int64())
+							v167 = append(v167, v168)
 							in.WantComma()
 						}
 						in.Delim(']')
 					}
-					out.OutputShapes_ = append(out.OutputShapes_, v104)
+					out.OutputShapes_ = append(out.OutputShapes_, v167)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -2002,7 +4494,7 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer5(in *jlexer.Lexer, 
 		in.Consumed()
 	}
 }
-func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer5(out *jwriter.Writer, in Shape) {
+func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer12(out *jwriter.Writer, in Shape) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -2046,11 +4538,11 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer5(out *jwriter.Write
 		}
 		{
 			out.RawByte('[')
-			for v106, v107 := range in.InputNames_ {
-				if v106 > 0 {
+			for v169, v170 := range in.InputNames_ {
+				if v169 > 0 {
 					out.RawByte(',')
 				}
-				out.String(string(v107))
+				out.String(string(v170))
 			}
 			out.RawByte(']')
 		}
@@ -2065,11 +4557,11 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer5(out *jwriter.Write
 		}
 		{
 			out.RawByte('[')
-			for v108, v109 := range in.OutputNames_ {
-				if v108 > 0 {
+			for v171, v172 := range in.OutputNames_ {
+				if v171 > 0 {
 					out.RawByte(',')
 				}
-				out.String(string(v109))
+				out.String(string(v172))
 			}
 			out.RawByte(']')
 		}
@@ -2084,19 +4576,19 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer5(out *jwriter.Write
 		}
 		{
 			out.RawByte('[')
-			for v110, v111 := range in.InputShapes_ {
-				if v110 > 0 {
+			for v173, v174 := range in.InputShapes_ {
+				if v173 > 0 {
 					out.RawByte(',')
 				}
-				if v111 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
+				if v174 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
 					out.RawString("null")
 				} else {
 					out.RawByte('[')
-					for v112, v113 := range v111 {
-						if v112 > 0 {
+					for v175, v176 := range v174 {
+						if v175 > 0 {
 							out.RawByte(',')
 						}
-						out.Int64(int64(v113))
+						out.Int64(int64(v176))
 					}
 					out.RawByte(']')
 				}
@@ -2114,19 +4606,19 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer5(out *jwriter.Write
 		}
 		{
 			out.RawByte('[')
-			for v114, v115 := range in.OutputShapes_ {
-				if v114 > 0 {
+			for v177, v178 := range in.OutputShapes_ {
+				if v177 > 0 {
 					out.RawByte(',')
 				}
-				if v115 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
+				if v178 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
 					out.RawString("null")
 				} else {
 					out.RawByte('[')
-					for v116, v117 := range v115 {
-						if v116 > 0 {
+					for v179, v180 := range v178 {
+						if v179 > 0 {
 							out.RawByte(',')
 						}
-						out.Int64(int64(v117))
+						out.Int64(int64(v180))
 					}
 					out.RawByte(']')
 				}
@@ -2140,27 +4632,27 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer5(out *jwriter.Write
 // MarshalJSON supports json.Marshaler interface
 func (v Shape) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer5(&w, v)
+	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer12(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v Shape) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer5(w, v)
+	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer12(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *Shape) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer5(&r, v)
+	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer12(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *Shape) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer5(l, v)
+	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer12(l, v)
 }
-func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer6(in *jlexer.Lexer, out *Scale) {
+func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer13(in *jlexer.Lexer, out *Scale) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -2202,9 +4694,9 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer6(in *jlexer.Lexer, 
 					out.InputNames_ = (out.InputNames_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v118 string
-					v118 = string(in.String())
-					out.InputNames_ = append(out.InputNames_, v118)
+					var v181 string
+					v181 = string(in.String())
+					out.InputNames_ = append(out.InputNames_, v181)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -2225,9 +4717,9 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer6(in *jlexer.Lexer, 
 					out.OutputNames_ = (out.OutputNames_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v119 string
-					v119 = string(in.String())
-					out.OutputNames_ = append(out.OutputNames_, v119)
+					var v182 string
+					v182 = string(in.String())
+					out.OutputNames_ = append(out.OutputNames_, v182)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -2248,30 +4740,30 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer6(in *jlexer.Lexer, 
 					out.InputShapes_ = (out.InputShapes_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v120 pkg.Shape
+					var v183 pkg.Shape
 					if in.IsNull() {
 						in.Skip()
-						v120 = nil
+						v183 = nil
 					} else {
 						in.Delim('[')
-						if v120 == nil {
+						if v183 == nil {
 							if !in.IsDelim(']') {
-								v120 = make(pkg.Shape, 0, 8)
+								v183 = make(pkg.Shape, 0, 8)
 							} else {
-								v120 = pkg.Shape{}
+								v183 = pkg.Shape{}
 							}
 						} else {
-							v120 = (v120)[:0]
+							v183 = (v183)[:0]
 						}
 						for !in.IsDelim(']') {
-							var v121 int64
-							v121 = int64(in.Int64())
-							v120 = append(v120, v121)
+							var v184 int64
+							v184 = int64(in.Int64())
+							v183 = append(v183, v184)
 							in.WantComma()
 						}
 						in.Delim(']')
 					}
-					out.InputShapes_ = append(out.InputShapes_, v120)
+					out.InputShapes_ = append(out.InputShapes_, v183)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -2292,30 +4784,30 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer6(in *jlexer.Lexer, 
 					out.OutputShapes_ = (out.OutputShapes_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v122 pkg.Shape
+					var v185 pkg.Shape
 					if in.IsNull() {
 						in.Skip()
-						v122 = nil
+						v185 = nil
 					} else {
 						in.Delim('[')
-						if v122 == nil {
+						if v185 == nil {
 							if !in.IsDelim(']') {
-								v122 = make(pkg.Shape, 0, 8)
+								v185 = make(pkg.Shape, 0, 8)
 							} else {
-								v122 = pkg.Shape{}
+								v185 = pkg.Shape{}
 							}
 						} else {
-							v122 = (v122)[:0]
+							v185 = (v185)[:0]
 						}
 						for !in.IsDelim(']') {
-							var v123 int64
-							v123 = int64(in.Int64())
-							v122 = append(v122, v123)
+							var v186 int64
+							v186 = int64(in.Int64())
+							v185 = append(v185, v186)
 							in.WantComma()
 						}
 						in.Delim(']')
 					}
-					out.OutputShapes_ = append(out.OutputShapes_, v122)
+					out.OutputShapes_ = append(out.OutputShapes_, v185)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -2334,7 +4826,7 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer6(in *jlexer.Lexer, 
 		in.Consumed()
 	}
 }
-func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer6(out *jwriter.Writer, in Scale) {
+func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer13(out *jwriter.Writer, in Scale) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -2378,11 +4870,11 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer6(out *jwriter.Write
 		}
 		{
 			out.RawByte('[')
-			for v124, v125 := range in.InputNames_ {
-				if v124 > 0 {
+			for v187, v188 := range in.InputNames_ {
+				if v187 > 0 {
 					out.RawByte(',')
 				}
-				out.String(string(v125))
+				out.String(string(v188))
 			}
 			out.RawByte(']')
 		}
@@ -2397,11 +4889,11 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer6(out *jwriter.Write
 		}
 		{
 			out.RawByte('[')
-			for v126, v127 := range in.OutputNames_ {
-				if v126 > 0 {
+			for v189, v190 := range in.OutputNames_ {
+				if v189 > 0 {
 					out.RawByte(',')
 				}
-				out.String(string(v127))
+				out.String(string(v190))
 			}
 			out.RawByte(']')
 		}
@@ -2416,19 +4908,19 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer6(out *jwriter.Write
 		}
 		{
 			out.RawByte('[')
-			for v128, v129 := range in.InputShapes_ {
-				if v128 > 0 {
+			for v191, v192 := range in.InputShapes_ {
+				if v191 > 0 {
 					out.RawByte(',')
 				}
-				if v129 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
+				if v192 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
 					out.RawString("null")
 				} else {
 					out.RawByte('[')
-					for v130, v131 := range v129 {
-						if v130 > 0 {
+					for v193, v194 := range v192 {
+						if v193 > 0 {
 							out.RawByte(',')
 						}
-						out.Int64(int64(v131))
+						out.Int64(int64(v194))
 					}
 					out.RawByte(']')
 				}
@@ -2446,19 +4938,19 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer6(out *jwriter.Write
 		}
 		{
 			out.RawByte('[')
-			for v132, v133 := range in.OutputShapes_ {
-				if v132 > 0 {
+			for v195, v196 := range in.OutputShapes_ {
+				if v195 > 0 {
 					out.RawByte(',')
 				}
-				if v133 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
+				if v196 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
 					out.RawString("null")
 				} else {
 					out.RawByte('[')
-					for v134, v135 := range v133 {
-						if v134 > 0 {
+					for v197, v198 := range v196 {
+						if v197 > 0 {
 							out.RawByte(',')
 						}
-						out.Int64(int64(v135))
+						out.Int64(int64(v198))
 					}
 					out.RawByte(']')
 				}
@@ -2472,27 +4964,27 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer6(out *jwriter.Write
 // MarshalJSON supports json.Marshaler interface
 func (v Scale) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer6(&w, v)
+	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer13(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v Scale) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer6(w, v)
+	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer13(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *Scale) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer6(&r, v)
+	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer13(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *Scale) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer6(l, v)
+	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer13(l, v)
 }
-func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer7(in *jlexer.Lexer, out *Reshape) {
+func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer14(in *jlexer.Lexer, out *Reshape) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -2534,9 +5026,9 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer7(in *jlexer.Lexer, 
 					out.InputNames_ = (out.InputNames_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v136 string
-					v136 = string(in.String())
-					out.InputNames_ = append(out.InputNames_, v136)
+					var v199 string
+					v199 = string(in.String())
+					out.InputNames_ = append(out.InputNames_, v199)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -2557,9 +5049,9 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer7(in *jlexer.Lexer, 
 					out.OutputNames_ = (out.OutputNames_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v137 string
-					v137 = string(in.String())
-					out.OutputNames_ = append(out.OutputNames_, v137)
+					var v200 string
+					v200 = string(in.String())
+					out.OutputNames_ = append(out.OutputNames_, v200)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -2580,30 +5072,30 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer7(in *jlexer.Lexer, 
 					out.InputShapes_ = (out.InputShapes_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v138 pkg.Shape
+					var v201 pkg.Shape
 					if in.IsNull() {
 						in.Skip()
-						v138 = nil
+						v201 = nil
 					} else {
 						in.Delim('[')
-						if v138 == nil {
+						if v201 == nil {
 							if !in.IsDelim(']') {
-								v138 = make(pkg.Shape, 0, 8)
+								v201 = make(pkg.Shape, 0, 8)
 							} else {
-								v138 = pkg.Shape{}
+								v201 = pkg.Shape{}
 							}
 						} else {
-							v138 = (v138)[:0]
+							v201 = (v201)[:0]
 						}
 						for !in.IsDelim(']') {
-							var v139 int64
-							v139 = int64(in.Int64())
-							v138 = append(v138, v139)
+							var v202 int64
+							v202 = int64(in.Int64())
+							v201 = append(v201, v202)
 							in.WantComma()
 						}
 						in.Delim(']')
 					}
-					out.InputShapes_ = append(out.InputShapes_, v138)
+					out.InputShapes_ = append(out.InputShapes_, v201)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -2624,30 +5116,30 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer7(in *jlexer.Lexer, 
 					out.OutputShapes_ = (out.OutputShapes_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v140 pkg.Shape
+					var v203 pkg.Shape
 					if in.IsNull() {
 						in.Skip()
-						v140 = nil
+						v203 = nil
 					} else {
 						in.Delim('[')
-						if v140 == nil {
+						if v203 == nil {
 							if !in.IsDelim(']') {
-								v140 = make(pkg.Shape, 0, 8)
+								v203 = make(pkg.Shape, 0, 8)
 							} else {
-								v140 = pkg.Shape{}
+								v203 = pkg.Shape{}
 							}
 						} else {
-							v140 = (v140)[:0]
+							v203 = (v203)[:0]
 						}
 						for !in.IsDelim(']') {
-							var v141 int64
-							v141 = int64(in.Int64())
-							v140 = append(v140, v141)
+							var v204 int64
+							v204 = int64(in.Int64())
+							v203 = append(v203, v204)
 							in.WantComma()
 						}
 						in.Delim(']')
 					}
-					out.OutputShapes_ = append(out.OutputShapes_, v140)
+					out.OutputShapes_ = append(out.OutputShapes_, v203)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -2666,7 +5158,7 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer7(in *jlexer.Lexer, 
 		in.Consumed()
 	}
 }
-func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer7(out *jwriter.Writer, in Reshape) {
+func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer14(out *jwriter.Writer, in Reshape) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -2710,11 +5202,11 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer7(out *jwriter.Write
 		}
 		{
 			out.RawByte('[')
-			for v142, v143 := range in.InputNames_ {
-				if v142 > 0 {
+			for v205, v206 := range in.InputNames_ {
+				if v205 > 0 {
 					out.RawByte(',')
 				}
-				out.String(string(v143))
+				out.String(string(v206))
 			}
 			out.RawByte(']')
 		}
@@ -2729,11 +5221,11 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer7(out *jwriter.Write
 		}
 		{
 			out.RawByte('[')
-			for v144, v145 := range in.OutputNames_ {
-				if v144 > 0 {
+			for v207, v208 := range in.OutputNames_ {
+				if v207 > 0 {
 					out.RawByte(',')
 				}
-				out.String(string(v145))
+				out.String(string(v208))
 			}
 			out.RawByte(']')
 		}
@@ -2748,19 +5240,19 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer7(out *jwriter.Write
 		}
 		{
 			out.RawByte('[')
-			for v146, v147 := range in.InputShapes_ {
-				if v146 > 0 {
+			for v209, v210 := range in.InputShapes_ {
+				if v209 > 0 {
 					out.RawByte(',')
 				}
-				if v147 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
+				if v210 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
 					out.RawString("null")
 				} else {
 					out.RawByte('[')
-					for v148, v149 := range v147 {
-						if v148 > 0 {
+					for v211, v212 := range v210 {
+						if v211 > 0 {
 							out.RawByte(',')
 						}
-						out.Int64(int64(v149))
+						out.Int64(int64(v212))
 					}
 					out.RawByte(']')
 				}
@@ -2778,19 +5270,19 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer7(out *jwriter.Write
 		}
 		{
 			out.RawByte('[')
-			for v150, v151 := range in.OutputShapes_ {
-				if v150 > 0 {
+			for v213, v214 := range in.OutputShapes_ {
+				if v213 > 0 {
 					out.RawByte(',')
 				}
-				if v151 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
+				if v214 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
 					out.RawString("null")
 				} else {
 					out.RawByte('[')
-					for v152, v153 := range v151 {
-						if v152 > 0 {
+					for v215, v216 := range v214 {
+						if v215 > 0 {
 							out.RawByte(',')
 						}
-						out.Int64(int64(v153))
+						out.Int64(int64(v216))
 					}
 					out.RawByte(']')
 				}
@@ -2804,27 +5296,27 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer7(out *jwriter.Write
 // MarshalJSON supports json.Marshaler interface
 func (v Reshape) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer7(&w, v)
+	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer14(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v Reshape) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer7(w, v)
+	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer14(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *Reshape) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer7(&r, v)
+	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer14(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *Reshape) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer7(l, v)
+	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer14(l, v)
 }
-func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer8(in *jlexer.Lexer, out *Relu) {
+func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer15(in *jlexer.Lexer, out *Relu) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -2866,9 +5358,9 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer8(in *jlexer.Lexer, 
 					out.InputNames_ = (out.InputNames_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v154 string
-					v154 = string(in.String())
-					out.InputNames_ = append(out.InputNames_, v154)
+					var v217 string
+					v217 = string(in.String())
+					out.InputNames_ = append(out.InputNames_, v217)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -2889,9 +5381,9 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer8(in *jlexer.Lexer, 
 					out.OutputNames_ = (out.OutputNames_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v155 string
-					v155 = string(in.String())
-					out.OutputNames_ = append(out.OutputNames_, v155)
+					var v218 string
+					v218 = string(in.String())
+					out.OutputNames_ = append(out.OutputNames_, v218)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -2912,30 +5404,30 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer8(in *jlexer.Lexer, 
 					out.InputShapes_ = (out.InputShapes_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v156 pkg.Shape
+					var v219 pkg.Shape
 					if in.IsNull() {
 						in.Skip()
-						v156 = nil
+						v219 = nil
 					} else {
 						in.Delim('[')
-						if v156 == nil {
+						if v219 == nil {
 							if !in.IsDelim(']') {
-								v156 = make(pkg.Shape, 0, 8)
+								v219 = make(pkg.Shape, 0, 8)
 							} else {
-								v156 = pkg.Shape{}
+								v219 = pkg.Shape{}
 							}
 						} else {
-							v156 = (v156)[:0]
+							v219 = (v219)[:0]
 						}
 						for !in.IsDelim(']') {
-							var v157 int64
-							v157 = int64(in.Int64())
-							v156 = append(v156, v157)
+							var v220 int64
+							v220 = int64(in.Int64())
+							v219 = append(v219, v220)
 							in.WantComma()
 						}
 						in.Delim(']')
 					}
-					out.InputShapes_ = append(out.InputShapes_, v156)
+					out.InputShapes_ = append(out.InputShapes_, v219)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -2956,30 +5448,30 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer8(in *jlexer.Lexer, 
 					out.OutputShapes_ = (out.OutputShapes_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v158 pkg.Shape
+					var v221 pkg.Shape
 					if in.IsNull() {
 						in.Skip()
-						v158 = nil
+						v221 = nil
 					} else {
 						in.Delim('[')
-						if v158 == nil {
+						if v221 == nil {
 							if !in.IsDelim(']') {
-								v158 = make(pkg.Shape, 0, 8)
+								v221 = make(pkg.Shape, 0, 8)
 							} else {
-								v158 = pkg.Shape{}
+								v221 = pkg.Shape{}
 							}
 						} else {
-							v158 = (v158)[:0]
+							v221 = (v221)[:0]
 						}
 						for !in.IsDelim(']') {
-							var v159 int64
-							v159 = int64(in.Int64())
-							v158 = append(v158, v159)
+							var v222 int64
+							v222 = int64(in.Int64())
+							v221 = append(v221, v222)
 							in.WantComma()
 						}
 						in.Delim(']')
 					}
-					out.OutputShapes_ = append(out.OutputShapes_, v158)
+					out.OutputShapes_ = append(out.OutputShapes_, v221)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -2998,7 +5490,7 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer8(in *jlexer.Lexer, 
 		in.Consumed()
 	}
 }
-func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer8(out *jwriter.Writer, in Relu) {
+func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer15(out *jwriter.Writer, in Relu) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -3042,11 +5534,11 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer8(out *jwriter.Write
 		}
 		{
 			out.RawByte('[')
-			for v160, v161 := range in.InputNames_ {
-				if v160 > 0 {
+			for v223, v224 := range in.InputNames_ {
+				if v223 > 0 {
 					out.RawByte(',')
 				}
-				out.String(string(v161))
+				out.String(string(v224))
 			}
 			out.RawByte(']')
 		}
@@ -3061,11 +5553,11 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer8(out *jwriter.Write
 		}
 		{
 			out.RawByte('[')
-			for v162, v163 := range in.OutputNames_ {
-				if v162 > 0 {
+			for v225, v226 := range in.OutputNames_ {
+				if v225 > 0 {
 					out.RawByte(',')
 				}
-				out.String(string(v163))
+				out.String(string(v226))
 			}
 			out.RawByte(']')
 		}
@@ -3080,19 +5572,19 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer8(out *jwriter.Write
 		}
 		{
 			out.RawByte('[')
-			for v164, v165 := range in.InputShapes_ {
-				if v164 > 0 {
+			for v227, v228 := range in.InputShapes_ {
+				if v227 > 0 {
 					out.RawByte(',')
 				}
-				if v165 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
+				if v228 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
 					out.RawString("null")
 				} else {
 					out.RawByte('[')
-					for v166, v167 := range v165 {
-						if v166 > 0 {
+					for v229, v230 := range v228 {
+						if v229 > 0 {
 							out.RawByte(',')
 						}
-						out.Int64(int64(v167))
+						out.Int64(int64(v230))
 					}
 					out.RawByte(']')
 				}
@@ -3110,19 +5602,19 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer8(out *jwriter.Write
 		}
 		{
 			out.RawByte('[')
-			for v168, v169 := range in.OutputShapes_ {
-				if v168 > 0 {
+			for v231, v232 := range in.OutputShapes_ {
+				if v231 > 0 {
 					out.RawByte(',')
 				}
-				if v169 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
+				if v232 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
 					out.RawString("null")
 				} else {
 					out.RawByte('[')
-					for v170, v171 := range v169 {
-						if v170 > 0 {
+					for v233, v234 := range v232 {
+						if v233 > 0 {
 							out.RawByte(',')
 						}
-						out.Int64(int64(v171))
+						out.Int64(int64(v234))
 					}
 					out.RawByte(']')
 				}
@@ -3136,27 +5628,27 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer8(out *jwriter.Write
 // MarshalJSON supports json.Marshaler interface
 func (v Relu) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer8(&w, v)
+	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer15(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v Relu) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer8(w, v)
+	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer15(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *Relu) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer8(&r, v)
+	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer15(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *Relu) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer8(l, v)
+	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer15(l, v)
 }
-func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer9(in *jlexer.Lexer, out *Reduce) {
+func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer16(in *jlexer.Lexer, out *Reduce) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -3192,9 +5684,9 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer9(in *jlexer.Lexer, 
 					out.Axes = (out.Axes)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v172 int64
-					v172 = int64(in.Int64())
-					out.Axes = append(out.Axes, v172)
+					var v235 int64
+					v235 = int64(in.Int64())
+					out.Axes = append(out.Axes, v235)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -3223,9 +5715,9 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer9(in *jlexer.Lexer, 
 					out.InputNames_ = (out.InputNames_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v173 string
-					v173 = string(in.String())
-					out.InputNames_ = append(out.InputNames_, v173)
+					var v236 string
+					v236 = string(in.String())
+					out.InputNames_ = append(out.InputNames_, v236)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -3246,9 +5738,9 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer9(in *jlexer.Lexer, 
 					out.OutputNames_ = (out.OutputNames_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v174 string
-					v174 = string(in.String())
-					out.OutputNames_ = append(out.OutputNames_, v174)
+					var v237 string
+					v237 = string(in.String())
+					out.OutputNames_ = append(out.OutputNames_, v237)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -3269,30 +5761,30 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer9(in *jlexer.Lexer, 
 					out.InputShapes_ = (out.InputShapes_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v175 pkg.Shape
+					var v238 pkg.Shape
 					if in.IsNull() {
 						in.Skip()
-						v175 = nil
+						v238 = nil
 					} else {
 						in.Delim('[')
-						if v175 == nil {
+						if v238 == nil {
 							if !in.IsDelim(']') {
-								v175 = make(pkg.Shape, 0, 8)
+								v238 = make(pkg.Shape, 0, 8)
 							} else {
-								v175 = pkg.Shape{}
+								v238 = pkg.Shape{}
 							}
 						} else {
-							v175 = (v175)[:0]
+							v238 = (v238)[:0]
 						}
 						for !in.IsDelim(']') {
-							var v176 int64
-							v176 = int64(in.Int64())
-							v175 = append(v175, v176)
+							var v239 int64
+							v239 = int64(in.Int64())
+							v238 = append(v238, v239)
 							in.WantComma()
 						}
 						in.Delim(']')
 					}
-					out.InputShapes_ = append(out.InputShapes_, v175)
+					out.InputShapes_ = append(out.InputShapes_, v238)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -3311,1113 +5803,6 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer9(in *jlexer.Lexer, 
 					}
 				} else {
 					out.OutputShapes_ = (out.OutputShapes_)[:0]
-				}
-				for !in.IsDelim(']') {
-					var v177 pkg.Shape
-					if in.IsNull() {
-						in.Skip()
-						v177 = nil
-					} else {
-						in.Delim('[')
-						if v177 == nil {
-							if !in.IsDelim(']') {
-								v177 = make(pkg.Shape, 0, 8)
-							} else {
-								v177 = pkg.Shape{}
-							}
-						} else {
-							v177 = (v177)[:0]
-						}
-						for !in.IsDelim(']') {
-							var v178 int64
-							v178 = int64(in.Int64())
-							v177 = append(v177, v178)
-							in.WantComma()
-						}
-						in.Delim(']')
-					}
-					out.OutputShapes_ = append(out.OutputShapes_, v177)
-					in.WantComma()
-				}
-				in.Delim(']')
-			}
-		default:
-			in.AddError(&jlexer.LexerError{
-				Offset: in.GetPos(),
-				Reason: "unknown field",
-				Data:   key,
-			})
-		}
-		in.WantComma()
-	}
-	in.Delim('}')
-	if isTopLevel {
-		in.Consumed()
-	}
-}
-func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer9(out *jwriter.Writer, in Reduce) {
-	out.RawByte('{')
-	first := true
-	_ = first
-	if len(in.Axes) != 0 {
-		const prefix string = ",\"axes\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		{
-			out.RawByte('[')
-			for v179, v180 := range in.Axes {
-				if v179 > 0 {
-					out.RawByte(',')
-				}
-				out.Int64(int64(v180))
-			}
-			out.RawByte(']')
-		}
-	}
-	if in.KeepDims {
-		const prefix string = ",\"keepdims\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.Bool(bool(in.KeepDims))
-	}
-	if in.Name_ != "" {
-		const prefix string = ",\"name\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.String(string(in.Name_))
-	}
-	if in.OperatorType_ != "" {
-		const prefix string = ",\"operator_type\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.String(string(in.OperatorType_))
-	}
-	if in.OnnxOperatorType_ != "" {
-		const prefix string = ",\"onnx_operator_type\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.String(string(in.OnnxOperatorType_))
-	}
-	if len(in.InputNames_) != 0 {
-		const prefix string = ",\"input_names\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		{
-			out.RawByte('[')
-			for v181, v182 := range in.InputNames_ {
-				if v181 > 0 {
-					out.RawByte(',')
-				}
-				out.String(string(v182))
-			}
-			out.RawByte(']')
-		}
-	}
-	if len(in.OutputNames_) != 0 {
-		const prefix string = ",\"output_names\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		{
-			out.RawByte('[')
-			for v183, v184 := range in.OutputNames_ {
-				if v183 > 0 {
-					out.RawByte(',')
-				}
-				out.String(string(v184))
-			}
-			out.RawByte(']')
-		}
-	}
-	if len(in.InputShapes_) != 0 {
-		const prefix string = ",\"input_shapes\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		{
-			out.RawByte('[')
-			for v185, v186 := range in.InputShapes_ {
-				if v185 > 0 {
-					out.RawByte(',')
-				}
-				if v186 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-					out.RawString("null")
-				} else {
-					out.RawByte('[')
-					for v187, v188 := range v186 {
-						if v187 > 0 {
-							out.RawByte(',')
-						}
-						out.Int64(int64(v188))
-					}
-					out.RawByte(']')
-				}
-			}
-			out.RawByte(']')
-		}
-	}
-	if len(in.OutputShapes_) != 0 {
-		const prefix string = ",\"output_shapes\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		{
-			out.RawByte('[')
-			for v189, v190 := range in.OutputShapes_ {
-				if v189 > 0 {
-					out.RawByte(',')
-				}
-				if v190 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-					out.RawString("null")
-				} else {
-					out.RawByte('[')
-					for v191, v192 := range v190 {
-						if v191 > 0 {
-							out.RawByte(',')
-						}
-						out.Int64(int64(v192))
-					}
-					out.RawByte(']')
-				}
-			}
-			out.RawByte(']')
-		}
-	}
-	out.RawByte('}')
-}
-
-// MarshalJSON supports json.Marshaler interface
-func (v Reduce) MarshalJSON() ([]byte, error) {
-	w := jwriter.Writer{}
-	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer9(&w, v)
-	return w.Buffer.BuildBytes(), w.Error
-}
-
-// MarshalEasyJSON supports easyjson.Marshaler interface
-func (v Reduce) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer9(w, v)
-}
-
-// UnmarshalJSON supports json.Unmarshaler interface
-func (v *Reduce) UnmarshalJSON(data []byte) error {
-	r := jlexer.Lexer{Data: data}
-	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer9(&r, v)
-	return r.Error()
-}
-
-// UnmarshalEasyJSON supports easyjson.Unmarshaler interface
-func (v *Reduce) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer9(l, v)
-}
-func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer10(in *jlexer.Lexer, out *Pooling) {
-	isTopLevel := in.IsStart()
-	if in.IsNull() {
-		if isTopLevel {
-			in.Consumed()
-		}
-		in.Skip()
-		return
-	}
-	out.Base = new(Base)
-	in.Delim('{')
-	for !in.IsDelim('}') {
-		key := in.UnsafeString()
-		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
-		switch key {
-		case "kernel_shape":
-			if in.IsNull() {
-				in.Skip()
-				out.KernelShape = nil
-			} else {
-				in.Delim('[')
-				if out.KernelShape == nil {
-					if !in.IsDelim(']') {
-						out.KernelShape = make(pkg.Shape, 0, 8)
-					} else {
-						out.KernelShape = pkg.Shape{}
-					}
-				} else {
-					out.KernelShape = (out.KernelShape)[:0]
-				}
-				for !in.IsDelim(']') {
-					var v193 int64
-					v193 = int64(in.Int64())
-					out.KernelShape = append(out.KernelShape, v193)
-					in.WantComma()
-				}
-				in.Delim(']')
-			}
-		case "pads":
-			if in.IsNull() {
-				in.Skip()
-				out.Pads = nil
-			} else {
-				in.Delim('[')
-				if out.Pads == nil {
-					if !in.IsDelim(']') {
-						out.Pads = make(pkg.Shape, 0, 8)
-					} else {
-						out.Pads = pkg.Shape{}
-					}
-				} else {
-					out.Pads = (out.Pads)[:0]
-				}
-				for !in.IsDelim(']') {
-					var v194 int64
-					v194 = int64(in.Int64())
-					out.Pads = append(out.Pads, v194)
-					in.WantComma()
-				}
-				in.Delim(']')
-			}
-		case "strides":
-			if in.IsNull() {
-				in.Skip()
-				out.Strides = nil
-			} else {
-				in.Delim('[')
-				if out.Strides == nil {
-					if !in.IsDelim(']') {
-						out.Strides = make(pkg.Shape, 0, 8)
-					} else {
-						out.Strides = pkg.Shape{}
-					}
-				} else {
-					out.Strides = (out.Strides)[:0]
-				}
-				for !in.IsDelim(']') {
-					var v195 int64
-					v195 = int64(in.Int64())
-					out.Strides = append(out.Strides, v195)
-					in.WantComma()
-				}
-				in.Delim(']')
-			}
-		case "name":
-			out.Name_ = string(in.String())
-		case "operator_type":
-			out.OperatorType_ = string(in.String())
-		case "onnx_operator_type":
-			out.OnnxOperatorType_ = string(in.String())
-		case "input_names":
-			if in.IsNull() {
-				in.Skip()
-				out.InputNames_ = nil
-			} else {
-				in.Delim('[')
-				if out.InputNames_ == nil {
-					if !in.IsDelim(']') {
-						out.InputNames_ = make([]string, 0, 4)
-					} else {
-						out.InputNames_ = []string{}
-					}
-				} else {
-					out.InputNames_ = (out.InputNames_)[:0]
-				}
-				for !in.IsDelim(']') {
-					var v196 string
-					v196 = string(in.String())
-					out.InputNames_ = append(out.InputNames_, v196)
-					in.WantComma()
-				}
-				in.Delim(']')
-			}
-		case "output_names":
-			if in.IsNull() {
-				in.Skip()
-				out.OutputNames_ = nil
-			} else {
-				in.Delim('[')
-				if out.OutputNames_ == nil {
-					if !in.IsDelim(']') {
-						out.OutputNames_ = make([]string, 0, 4)
-					} else {
-						out.OutputNames_ = []string{}
-					}
-				} else {
-					out.OutputNames_ = (out.OutputNames_)[:0]
-				}
-				for !in.IsDelim(']') {
-					var v197 string
-					v197 = string(in.String())
-					out.OutputNames_ = append(out.OutputNames_, v197)
-					in.WantComma()
-				}
-				in.Delim(']')
-			}
-		case "input_shapes":
-			if in.IsNull() {
-				in.Skip()
-				out.InputShapes_ = nil
-			} else {
-				in.Delim('[')
-				if out.InputShapes_ == nil {
-					if !in.IsDelim(']') {
-						out.InputShapes_ = make([]pkg.Shape, 0, 2)
-					} else {
-						out.InputShapes_ = []pkg.Shape{}
-					}
-				} else {
-					out.InputShapes_ = (out.InputShapes_)[:0]
-				}
-				for !in.IsDelim(']') {
-					var v198 pkg.Shape
-					if in.IsNull() {
-						in.Skip()
-						v198 = nil
-					} else {
-						in.Delim('[')
-						if v198 == nil {
-							if !in.IsDelim(']') {
-								v198 = make(pkg.Shape, 0, 8)
-							} else {
-								v198 = pkg.Shape{}
-							}
-						} else {
-							v198 = (v198)[:0]
-						}
-						for !in.IsDelim(']') {
-							var v199 int64
-							v199 = int64(in.Int64())
-							v198 = append(v198, v199)
-							in.WantComma()
-						}
-						in.Delim(']')
-					}
-					out.InputShapes_ = append(out.InputShapes_, v198)
-					in.WantComma()
-				}
-				in.Delim(']')
-			}
-		case "output_shapes":
-			if in.IsNull() {
-				in.Skip()
-				out.OutputShapes_ = nil
-			} else {
-				in.Delim('[')
-				if out.OutputShapes_ == nil {
-					if !in.IsDelim(']') {
-						out.OutputShapes_ = make([]pkg.Shape, 0, 2)
-					} else {
-						out.OutputShapes_ = []pkg.Shape{}
-					}
-				} else {
-					out.OutputShapes_ = (out.OutputShapes_)[:0]
-				}
-				for !in.IsDelim(']') {
-					var v200 pkg.Shape
-					if in.IsNull() {
-						in.Skip()
-						v200 = nil
-					} else {
-						in.Delim('[')
-						if v200 == nil {
-							if !in.IsDelim(']') {
-								v200 = make(pkg.Shape, 0, 8)
-							} else {
-								v200 = pkg.Shape{}
-							}
-						} else {
-							v200 = (v200)[:0]
-						}
-						for !in.IsDelim(']') {
-							var v201 int64
-							v201 = int64(in.Int64())
-							v200 = append(v200, v201)
-							in.WantComma()
-						}
-						in.Delim(']')
-					}
-					out.OutputShapes_ = append(out.OutputShapes_, v200)
-					in.WantComma()
-				}
-				in.Delim(']')
-			}
-		default:
-			in.AddError(&jlexer.LexerError{
-				Offset: in.GetPos(),
-				Reason: "unknown field",
-				Data:   key,
-			})
-		}
-		in.WantComma()
-	}
-	in.Delim('}')
-	if isTopLevel {
-		in.Consumed()
-	}
-}
-func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer10(out *jwriter.Writer, in Pooling) {
-	out.RawByte('{')
-	first := true
-	_ = first
-	if len(in.KernelShape) != 0 {
-		const prefix string = ",\"kernel_shape\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		{
-			out.RawByte('[')
-			for v202, v203 := range in.KernelShape {
-				if v202 > 0 {
-					out.RawByte(',')
-				}
-				out.Int64(int64(v203))
-			}
-			out.RawByte(']')
-		}
-	}
-	if len(in.Pads) != 0 {
-		const prefix string = ",\"pads\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		{
-			out.RawByte('[')
-			for v204, v205 := range in.Pads {
-				if v204 > 0 {
-					out.RawByte(',')
-				}
-				out.Int64(int64(v205))
-			}
-			out.RawByte(']')
-		}
-	}
-	if len(in.Strides) != 0 {
-		const prefix string = ",\"strides\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		{
-			out.RawByte('[')
-			for v206, v207 := range in.Strides {
-				if v206 > 0 {
-					out.RawByte(',')
-				}
-				out.Int64(int64(v207))
-			}
-			out.RawByte(']')
-		}
-	}
-	if in.Name_ != "" {
-		const prefix string = ",\"name\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.String(string(in.Name_))
-	}
-	if in.OperatorType_ != "" {
-		const prefix string = ",\"operator_type\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.String(string(in.OperatorType_))
-	}
-	if in.OnnxOperatorType_ != "" {
-		const prefix string = ",\"onnx_operator_type\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.String(string(in.OnnxOperatorType_))
-	}
-	if len(in.InputNames_) != 0 {
-		const prefix string = ",\"input_names\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		{
-			out.RawByte('[')
-			for v208, v209 := range in.InputNames_ {
-				if v208 > 0 {
-					out.RawByte(',')
-				}
-				out.String(string(v209))
-			}
-			out.RawByte(']')
-		}
-	}
-	if len(in.OutputNames_) != 0 {
-		const prefix string = ",\"output_names\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		{
-			out.RawByte('[')
-			for v210, v211 := range in.OutputNames_ {
-				if v210 > 0 {
-					out.RawByte(',')
-				}
-				out.String(string(v211))
-			}
-			out.RawByte(']')
-		}
-	}
-	if len(in.InputShapes_) != 0 {
-		const prefix string = ",\"input_shapes\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		{
-			out.RawByte('[')
-			for v212, v213 := range in.InputShapes_ {
-				if v212 > 0 {
-					out.RawByte(',')
-				}
-				if v213 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-					out.RawString("null")
-				} else {
-					out.RawByte('[')
-					for v214, v215 := range v213 {
-						if v214 > 0 {
-							out.RawByte(',')
-						}
-						out.Int64(int64(v215))
-					}
-					out.RawByte(']')
-				}
-			}
-			out.RawByte(']')
-		}
-	}
-	if len(in.OutputShapes_) != 0 {
-		const prefix string = ",\"output_shapes\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		{
-			out.RawByte('[')
-			for v216, v217 := range in.OutputShapes_ {
-				if v216 > 0 {
-					out.RawByte(',')
-				}
-				if v217 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-					out.RawString("null")
-				} else {
-					out.RawByte('[')
-					for v218, v219 := range v217 {
-						if v218 > 0 {
-							out.RawByte(',')
-						}
-						out.Int64(int64(v219))
-					}
-					out.RawByte(']')
-				}
-			}
-			out.RawByte(']')
-		}
-	}
-	out.RawByte('}')
-}
-
-// MarshalJSON supports json.Marshaler interface
-func (v Pooling) MarshalJSON() ([]byte, error) {
-	w := jwriter.Writer{}
-	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer10(&w, v)
-	return w.Buffer.BuildBytes(), w.Error
-}
-
-// MarshalEasyJSON supports easyjson.Marshaler interface
-func (v Pooling) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer10(w, v)
-}
-
-// UnmarshalJSON supports json.Unmarshaler interface
-func (v *Pooling) UnmarshalJSON(data []byte) error {
-	r := jlexer.Lexer{Data: data}
-	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer10(&r, v)
-	return r.Error()
-}
-
-// UnmarshalEasyJSON supports easyjson.Unmarshaler interface
-func (v *Pooling) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer10(l, v)
-}
-func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer11(in *jlexer.Lexer, out *NonMaxSuppression) {
-	isTopLevel := in.IsStart()
-	if in.IsNull() {
-		if isTopLevel {
-			in.Consumed()
-		}
-		in.Skip()
-		return
-	}
-	out.Base = new(Base)
-	in.Delim('{')
-	for !in.IsDelim('}') {
-		key := in.UnsafeString()
-		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
-		switch key {
-		case "name":
-			out.Name_ = string(in.String())
-		case "operator_type":
-			out.OperatorType_ = string(in.String())
-		case "onnx_operator_type":
-			out.OnnxOperatorType_ = string(in.String())
-		case "input_names":
-			if in.IsNull() {
-				in.Skip()
-				out.InputNames_ = nil
-			} else {
-				in.Delim('[')
-				if out.InputNames_ == nil {
-					if !in.IsDelim(']') {
-						out.InputNames_ = make([]string, 0, 4)
-					} else {
-						out.InputNames_ = []string{}
-					}
-				} else {
-					out.InputNames_ = (out.InputNames_)[:0]
-				}
-				for !in.IsDelim(']') {
-					var v220 string
-					v220 = string(in.String())
-					out.InputNames_ = append(out.InputNames_, v220)
-					in.WantComma()
-				}
-				in.Delim(']')
-			}
-		case "output_names":
-			if in.IsNull() {
-				in.Skip()
-				out.OutputNames_ = nil
-			} else {
-				in.Delim('[')
-				if out.OutputNames_ == nil {
-					if !in.IsDelim(']') {
-						out.OutputNames_ = make([]string, 0, 4)
-					} else {
-						out.OutputNames_ = []string{}
-					}
-				} else {
-					out.OutputNames_ = (out.OutputNames_)[:0]
-				}
-				for !in.IsDelim(']') {
-					var v221 string
-					v221 = string(in.String())
-					out.OutputNames_ = append(out.OutputNames_, v221)
-					in.WantComma()
-				}
-				in.Delim(']')
-			}
-		case "input_shapes":
-			if in.IsNull() {
-				in.Skip()
-				out.InputShapes_ = nil
-			} else {
-				in.Delim('[')
-				if out.InputShapes_ == nil {
-					if !in.IsDelim(']') {
-						out.InputShapes_ = make([]pkg.Shape, 0, 2)
-					} else {
-						out.InputShapes_ = []pkg.Shape{}
-					}
-				} else {
-					out.InputShapes_ = (out.InputShapes_)[:0]
-				}
-				for !in.IsDelim(']') {
-					var v222 pkg.Shape
-					if in.IsNull() {
-						in.Skip()
-						v222 = nil
-					} else {
-						in.Delim('[')
-						if v222 == nil {
-							if !in.IsDelim(']') {
-								v222 = make(pkg.Shape, 0, 8)
-							} else {
-								v222 = pkg.Shape{}
-							}
-						} else {
-							v222 = (v222)[:0]
-						}
-						for !in.IsDelim(']') {
-							var v223 int64
-							v223 = int64(in.Int64())
-							v222 = append(v222, v223)
-							in.WantComma()
-						}
-						in.Delim(']')
-					}
-					out.InputShapes_ = append(out.InputShapes_, v222)
-					in.WantComma()
-				}
-				in.Delim(']')
-			}
-		case "output_shapes":
-			if in.IsNull() {
-				in.Skip()
-				out.OutputShapes_ = nil
-			} else {
-				in.Delim('[')
-				if out.OutputShapes_ == nil {
-					if !in.IsDelim(']') {
-						out.OutputShapes_ = make([]pkg.Shape, 0, 2)
-					} else {
-						out.OutputShapes_ = []pkg.Shape{}
-					}
-				} else {
-					out.OutputShapes_ = (out.OutputShapes_)[:0]
-				}
-				for !in.IsDelim(']') {
-					var v224 pkg.Shape
-					if in.IsNull() {
-						in.Skip()
-						v224 = nil
-					} else {
-						in.Delim('[')
-						if v224 == nil {
-							if !in.IsDelim(']') {
-								v224 = make(pkg.Shape, 0, 8)
-							} else {
-								v224 = pkg.Shape{}
-							}
-						} else {
-							v224 = (v224)[:0]
-						}
-						for !in.IsDelim(']') {
-							var v225 int64
-							v225 = int64(in.Int64())
-							v224 = append(v224, v225)
-							in.WantComma()
-						}
-						in.Delim(']')
-					}
-					out.OutputShapes_ = append(out.OutputShapes_, v224)
-					in.WantComma()
-				}
-				in.Delim(']')
-			}
-		default:
-			in.AddError(&jlexer.LexerError{
-				Offset: in.GetPos(),
-				Reason: "unknown field",
-				Data:   key,
-			})
-		}
-		in.WantComma()
-	}
-	in.Delim('}')
-	if isTopLevel {
-		in.Consumed()
-	}
-}
-func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer11(out *jwriter.Writer, in NonMaxSuppression) {
-	out.RawByte('{')
-	first := true
-	_ = first
-	if in.Name_ != "" {
-		const prefix string = ",\"name\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.String(string(in.Name_))
-	}
-	if in.OperatorType_ != "" {
-		const prefix string = ",\"operator_type\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.String(string(in.OperatorType_))
-	}
-	if in.OnnxOperatorType_ != "" {
-		const prefix string = ",\"onnx_operator_type\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.String(string(in.OnnxOperatorType_))
-	}
-	if len(in.InputNames_) != 0 {
-		const prefix string = ",\"input_names\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		{
-			out.RawByte('[')
-			for v226, v227 := range in.InputNames_ {
-				if v226 > 0 {
-					out.RawByte(',')
-				}
-				out.String(string(v227))
-			}
-			out.RawByte(']')
-		}
-	}
-	if len(in.OutputNames_) != 0 {
-		const prefix string = ",\"output_names\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		{
-			out.RawByte('[')
-			for v228, v229 := range in.OutputNames_ {
-				if v228 > 0 {
-					out.RawByte(',')
-				}
-				out.String(string(v229))
-			}
-			out.RawByte(']')
-		}
-	}
-	if len(in.InputShapes_) != 0 {
-		const prefix string = ",\"input_shapes\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		{
-			out.RawByte('[')
-			for v230, v231 := range in.InputShapes_ {
-				if v230 > 0 {
-					out.RawByte(',')
-				}
-				if v231 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-					out.RawString("null")
-				} else {
-					out.RawByte('[')
-					for v232, v233 := range v231 {
-						if v232 > 0 {
-							out.RawByte(',')
-						}
-						out.Int64(int64(v233))
-					}
-					out.RawByte(']')
-				}
-			}
-			out.RawByte(']')
-		}
-	}
-	if len(in.OutputShapes_) != 0 {
-		const prefix string = ",\"output_shapes\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		{
-			out.RawByte('[')
-			for v234, v235 := range in.OutputShapes_ {
-				if v234 > 0 {
-					out.RawByte(',')
-				}
-				if v235 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-					out.RawString("null")
-				} else {
-					out.RawByte('[')
-					for v236, v237 := range v235 {
-						if v236 > 0 {
-							out.RawByte(',')
-						}
-						out.Int64(int64(v237))
-					}
-					out.RawByte(']')
-				}
-			}
-			out.RawByte(']')
-		}
-	}
-	out.RawByte('}')
-}
-
-// MarshalJSON supports json.Marshaler interface
-func (v NonMaxSuppression) MarshalJSON() ([]byte, error) {
-	w := jwriter.Writer{}
-	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer11(&w, v)
-	return w.Buffer.BuildBytes(), w.Error
-}
-
-// MarshalEasyJSON supports easyjson.Marshaler interface
-func (v NonMaxSuppression) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer11(w, v)
-}
-
-// UnmarshalJSON supports json.Unmarshaler interface
-func (v *NonMaxSuppression) UnmarshalJSON(data []byte) error {
-	r := jlexer.Lexer{Data: data}
-	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer11(&r, v)
-	return r.Error()
-}
-
-// UnmarshalEasyJSON supports easyjson.Unmarshaler interface
-func (v *NonMaxSuppression) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer11(l, v)
-}
-func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer12(in *jlexer.Lexer, out *MatMul) {
-	isTopLevel := in.IsStart()
-	if in.IsNull() {
-		if isTopLevel {
-			in.Consumed()
-		}
-		in.Skip()
-		return
-	}
-	out.Base = new(Base)
-	in.Delim('{')
-	for !in.IsDelim('}') {
-		key := in.UnsafeString()
-		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
-		switch key {
-		case "name":
-			out.Name_ = string(in.String())
-		case "operator_type":
-			out.OperatorType_ = string(in.String())
-		case "onnx_operator_type":
-			out.OnnxOperatorType_ = string(in.String())
-		case "input_names":
-			if in.IsNull() {
-				in.Skip()
-				out.InputNames_ = nil
-			} else {
-				in.Delim('[')
-				if out.InputNames_ == nil {
-					if !in.IsDelim(']') {
-						out.InputNames_ = make([]string, 0, 4)
-					} else {
-						out.InputNames_ = []string{}
-					}
-				} else {
-					out.InputNames_ = (out.InputNames_)[:0]
-				}
-				for !in.IsDelim(']') {
-					var v238 string
-					v238 = string(in.String())
-					out.InputNames_ = append(out.InputNames_, v238)
-					in.WantComma()
-				}
-				in.Delim(']')
-			}
-		case "output_names":
-			if in.IsNull() {
-				in.Skip()
-				out.OutputNames_ = nil
-			} else {
-				in.Delim('[')
-				if out.OutputNames_ == nil {
-					if !in.IsDelim(']') {
-						out.OutputNames_ = make([]string, 0, 4)
-					} else {
-						out.OutputNames_ = []string{}
-					}
-				} else {
-					out.OutputNames_ = (out.OutputNames_)[:0]
-				}
-				for !in.IsDelim(']') {
-					var v239 string
-					v239 = string(in.String())
-					out.OutputNames_ = append(out.OutputNames_, v239)
-					in.WantComma()
-				}
-				in.Delim(']')
-			}
-		case "input_shapes":
-			if in.IsNull() {
-				in.Skip()
-				out.InputShapes_ = nil
-			} else {
-				in.Delim('[')
-				if out.InputShapes_ == nil {
-					if !in.IsDelim(']') {
-						out.InputShapes_ = make([]pkg.Shape, 0, 2)
-					} else {
-						out.InputShapes_ = []pkg.Shape{}
-					}
-				} else {
-					out.InputShapes_ = (out.InputShapes_)[:0]
 				}
 				for !in.IsDelim(']') {
 					var v240 pkg.Shape
@@ -4443,51 +5828,7 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer12(in *jlexer.Lexer,
 						}
 						in.Delim(']')
 					}
-					out.InputShapes_ = append(out.InputShapes_, v240)
-					in.WantComma()
-				}
-				in.Delim(']')
-			}
-		case "output_shapes":
-			if in.IsNull() {
-				in.Skip()
-				out.OutputShapes_ = nil
-			} else {
-				in.Delim('[')
-				if out.OutputShapes_ == nil {
-					if !in.IsDelim(']') {
-						out.OutputShapes_ = make([]pkg.Shape, 0, 2)
-					} else {
-						out.OutputShapes_ = []pkg.Shape{}
-					}
-				} else {
-					out.OutputShapes_ = (out.OutputShapes_)[:0]
-				}
-				for !in.IsDelim(']') {
-					var v242 pkg.Shape
-					if in.IsNull() {
-						in.Skip()
-						v242 = nil
-					} else {
-						in.Delim('[')
-						if v242 == nil {
-							if !in.IsDelim(']') {
-								v242 = make(pkg.Shape, 0, 8)
-							} else {
-								v242 = pkg.Shape{}
-							}
-						} else {
-							v242 = (v242)[:0]
-						}
-						for !in.IsDelim(']') {
-							var v243 int64
-							v243 = int64(in.Int64())
-							v242 = append(v242, v243)
-							in.WantComma()
-						}
-						in.Delim(']')
-					}
-					out.OutputShapes_ = append(out.OutputShapes_, v242)
+					out.OutputShapes_ = append(out.OutputShapes_, v240)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -4506,10 +5847,39 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer12(in *jlexer.Lexer,
 		in.Consumed()
 	}
 }
-func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer12(out *jwriter.Writer, in MatMul) {
+func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer16(out *jwriter.Writer, in Reduce) {
 	out.RawByte('{')
 	first := true
 	_ = first
+	if len(in.Axes) != 0 {
+		const prefix string = ",\"axes\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		{
+			out.RawByte('[')
+			for v242, v243 := range in.Axes {
+				if v242 > 0 {
+					out.RawByte(',')
+				}
+				out.Int64(int64(v243))
+			}
+			out.RawByte(']')
+		}
+	}
+	if in.KeepDims {
+		const prefix string = ",\"keepdims\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Bool(bool(in.KeepDims))
+	}
 	if in.Name_ != "" {
 		const prefix string = ",\"name\":"
 		if first {
@@ -4642,29 +6012,1151 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer12(out *jwriter.Writ
 }
 
 // MarshalJSON supports json.Marshaler interface
+func (v Reduce) MarshalJSON() ([]byte, error) {
+	w := jwriter.Writer{}
+	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer16(&w, v)
+	return w.Buffer.BuildBytes(), w.Error
+}
+
+// MarshalEasyJSON supports easyjson.Marshaler interface
+func (v Reduce) MarshalEasyJSON(w *jwriter.Writer) {
+	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer16(w, v)
+}
+
+// UnmarshalJSON supports json.Unmarshaler interface
+func (v *Reduce) UnmarshalJSON(data []byte) error {
+	r := jlexer.Lexer{Data: data}
+	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer16(&r, v)
+	return r.Error()
+}
+
+// UnmarshalEasyJSON supports easyjson.Unmarshaler interface
+func (v *Reduce) UnmarshalEasyJSON(l *jlexer.Lexer) {
+	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer16(l, v)
+}
+func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer17(in *jlexer.Lexer, out *Pooling) {
+	isTopLevel := in.IsStart()
+	if in.IsNull() {
+		if isTopLevel {
+			in.Consumed()
+		}
+		in.Skip()
+		return
+	}
+	out.Base = new(Base)
+	in.Delim('{')
+	for !in.IsDelim('}') {
+		key := in.UnsafeString()
+		in.WantColon()
+		if in.IsNull() {
+			in.Skip()
+			in.WantComma()
+			continue
+		}
+		switch key {
+		case "kernel_shape":
+			if in.IsNull() {
+				in.Skip()
+				out.KernelShape = nil
+			} else {
+				in.Delim('[')
+				if out.KernelShape == nil {
+					if !in.IsDelim(']') {
+						out.KernelShape = make(pkg.Shape, 0, 8)
+					} else {
+						out.KernelShape = pkg.Shape{}
+					}
+				} else {
+					out.KernelShape = (out.KernelShape)[:0]
+				}
+				for !in.IsDelim(']') {
+					var v256 int64
+					v256 = int64(in.Int64())
+					out.KernelShape = append(out.KernelShape, v256)
+					in.WantComma()
+				}
+				in.Delim(']')
+			}
+		case "pads":
+			if in.IsNull() {
+				in.Skip()
+				out.Pads = nil
+			} else {
+				in.Delim('[')
+				if out.Pads == nil {
+					if !in.IsDelim(']') {
+						out.Pads = make(pkg.Shape, 0, 8)
+					} else {
+						out.Pads = pkg.Shape{}
+					}
+				} else {
+					out.Pads = (out.Pads)[:0]
+				}
+				for !in.IsDelim(']') {
+					var v257 int64
+					v257 = int64(in.Int64())
+					out.Pads = append(out.Pads, v257)
+					in.WantComma()
+				}
+				in.Delim(']')
+			}
+		case "strides":
+			if in.IsNull() {
+				in.Skip()
+				out.Strides = nil
+			} else {
+				in.Delim('[')
+				if out.Strides == nil {
+					if !in.IsDelim(']') {
+						out.Strides = make(pkg.Shape, 0, 8)
+					} else {
+						out.Strides = pkg.Shape{}
+					}
+				} else {
+					out.Strides = (out.Strides)[:0]
+				}
+				for !in.IsDelim(']') {
+					var v258 int64
+					v258 = int64(in.Int64())
+					out.Strides = append(out.Strides, v258)
+					in.WantComma()
+				}
+				in.Delim(']')
+			}
+		case "name":
+			out.Name_ = string(in.String())
+		case "operator_type":
+			out.OperatorType_ = string(in.String())
+		case "onnx_operator_type":
+			out.OnnxOperatorType_ = string(in.String())
+		case "input_names":
+			if in.IsNull() {
+				in.Skip()
+				out.InputNames_ = nil
+			} else {
+				in.Delim('[')
+				if out.InputNames_ == nil {
+					if !in.IsDelim(']') {
+						out.InputNames_ = make([]string, 0, 4)
+					} else {
+						out.InputNames_ = []string{}
+					}
+				} else {
+					out.InputNames_ = (out.InputNames_)[:0]
+				}
+				for !in.IsDelim(']') {
+					var v259 string
+					v259 = string(in.String())
+					out.InputNames_ = append(out.InputNames_, v259)
+					in.WantComma()
+				}
+				in.Delim(']')
+			}
+		case "output_names":
+			if in.IsNull() {
+				in.Skip()
+				out.OutputNames_ = nil
+			} else {
+				in.Delim('[')
+				if out.OutputNames_ == nil {
+					if !in.IsDelim(']') {
+						out.OutputNames_ = make([]string, 0, 4)
+					} else {
+						out.OutputNames_ = []string{}
+					}
+				} else {
+					out.OutputNames_ = (out.OutputNames_)[:0]
+				}
+				for !in.IsDelim(']') {
+					var v260 string
+					v260 = string(in.String())
+					out.OutputNames_ = append(out.OutputNames_, v260)
+					in.WantComma()
+				}
+				in.Delim(']')
+			}
+		case "input_shapes":
+			if in.IsNull() {
+				in.Skip()
+				out.InputShapes_ = nil
+			} else {
+				in.Delim('[')
+				if out.InputShapes_ == nil {
+					if !in.IsDelim(']') {
+						out.InputShapes_ = make([]pkg.Shape, 0, 2)
+					} else {
+						out.InputShapes_ = []pkg.Shape{}
+					}
+				} else {
+					out.InputShapes_ = (out.InputShapes_)[:0]
+				}
+				for !in.IsDelim(']') {
+					var v261 pkg.Shape
+					if in.IsNull() {
+						in.Skip()
+						v261 = nil
+					} else {
+						in.Delim('[')
+						if v261 == nil {
+							if !in.IsDelim(']') {
+								v261 = make(pkg.Shape, 0, 8)
+							} else {
+								v261 = pkg.Shape{}
+							}
+						} else {
+							v261 = (v261)[:0]
+						}
+						for !in.IsDelim(']') {
+							var v262 int64
+							v262 = int64(in.Int64())
+							v261 = append(v261, v262)
+							in.WantComma()
+						}
+						in.Delim(']')
+					}
+					out.InputShapes_ = append(out.InputShapes_, v261)
+					in.WantComma()
+				}
+				in.Delim(']')
+			}
+		case "output_shapes":
+			if in.IsNull() {
+				in.Skip()
+				out.OutputShapes_ = nil
+			} else {
+				in.Delim('[')
+				if out.OutputShapes_ == nil {
+					if !in.IsDelim(']') {
+						out.OutputShapes_ = make([]pkg.Shape, 0, 2)
+					} else {
+						out.OutputShapes_ = []pkg.Shape{}
+					}
+				} else {
+					out.OutputShapes_ = (out.OutputShapes_)[:0]
+				}
+				for !in.IsDelim(']') {
+					var v263 pkg.Shape
+					if in.IsNull() {
+						in.Skip()
+						v263 = nil
+					} else {
+						in.Delim('[')
+						if v263 == nil {
+							if !in.IsDelim(']') {
+								v263 = make(pkg.Shape, 0, 8)
+							} else {
+								v263 = pkg.Shape{}
+							}
+						} else {
+							v263 = (v263)[:0]
+						}
+						for !in.IsDelim(']') {
+							var v264 int64
+							v264 = int64(in.Int64())
+							v263 = append(v263, v264)
+							in.WantComma()
+						}
+						in.Delim(']')
+					}
+					out.OutputShapes_ = append(out.OutputShapes_, v263)
+					in.WantComma()
+				}
+				in.Delim(']')
+			}
+		default:
+			in.AddError(&jlexer.LexerError{
+				Offset: in.GetPos(),
+				Reason: "unknown field",
+				Data:   key,
+			})
+		}
+		in.WantComma()
+	}
+	in.Delim('}')
+	if isTopLevel {
+		in.Consumed()
+	}
+}
+func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer17(out *jwriter.Writer, in Pooling) {
+	out.RawByte('{')
+	first := true
+	_ = first
+	if len(in.KernelShape) != 0 {
+		const prefix string = ",\"kernel_shape\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		{
+			out.RawByte('[')
+			for v265, v266 := range in.KernelShape {
+				if v265 > 0 {
+					out.RawByte(',')
+				}
+				out.Int64(int64(v266))
+			}
+			out.RawByte(']')
+		}
+	}
+	if len(in.Pads) != 0 {
+		const prefix string = ",\"pads\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		{
+			out.RawByte('[')
+			for v267, v268 := range in.Pads {
+				if v267 > 0 {
+					out.RawByte(',')
+				}
+				out.Int64(int64(v268))
+			}
+			out.RawByte(']')
+		}
+	}
+	if len(in.Strides) != 0 {
+		const prefix string = ",\"strides\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		{
+			out.RawByte('[')
+			for v269, v270 := range in.Strides {
+				if v269 > 0 {
+					out.RawByte(',')
+				}
+				out.Int64(int64(v270))
+			}
+			out.RawByte(']')
+		}
+	}
+	if in.Name_ != "" {
+		const prefix string = ",\"name\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.Name_))
+	}
+	if in.OperatorType_ != "" {
+		const prefix string = ",\"operator_type\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.OperatorType_))
+	}
+	if in.OnnxOperatorType_ != "" {
+		const prefix string = ",\"onnx_operator_type\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.OnnxOperatorType_))
+	}
+	if len(in.InputNames_) != 0 {
+		const prefix string = ",\"input_names\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		{
+			out.RawByte('[')
+			for v271, v272 := range in.InputNames_ {
+				if v271 > 0 {
+					out.RawByte(',')
+				}
+				out.String(string(v272))
+			}
+			out.RawByte(']')
+		}
+	}
+	if len(in.OutputNames_) != 0 {
+		const prefix string = ",\"output_names\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		{
+			out.RawByte('[')
+			for v273, v274 := range in.OutputNames_ {
+				if v273 > 0 {
+					out.RawByte(',')
+				}
+				out.String(string(v274))
+			}
+			out.RawByte(']')
+		}
+	}
+	if len(in.InputShapes_) != 0 {
+		const prefix string = ",\"input_shapes\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		{
+			out.RawByte('[')
+			for v275, v276 := range in.InputShapes_ {
+				if v275 > 0 {
+					out.RawByte(',')
+				}
+				if v276 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
+					out.RawString("null")
+				} else {
+					out.RawByte('[')
+					for v277, v278 := range v276 {
+						if v277 > 0 {
+							out.RawByte(',')
+						}
+						out.Int64(int64(v278))
+					}
+					out.RawByte(']')
+				}
+			}
+			out.RawByte(']')
+		}
+	}
+	if len(in.OutputShapes_) != 0 {
+		const prefix string = ",\"output_shapes\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		{
+			out.RawByte('[')
+			for v279, v280 := range in.OutputShapes_ {
+				if v279 > 0 {
+					out.RawByte(',')
+				}
+				if v280 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
+					out.RawString("null")
+				} else {
+					out.RawByte('[')
+					for v281, v282 := range v280 {
+						if v281 > 0 {
+							out.RawByte(',')
+						}
+						out.Int64(int64(v282))
+					}
+					out.RawByte(']')
+				}
+			}
+			out.RawByte(']')
+		}
+	}
+	out.RawByte('}')
+}
+
+// MarshalJSON supports json.Marshaler interface
+func (v Pooling) MarshalJSON() ([]byte, error) {
+	w := jwriter.Writer{}
+	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer17(&w, v)
+	return w.Buffer.BuildBytes(), w.Error
+}
+
+// MarshalEasyJSON supports easyjson.Marshaler interface
+func (v Pooling) MarshalEasyJSON(w *jwriter.Writer) {
+	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer17(w, v)
+}
+
+// UnmarshalJSON supports json.Unmarshaler interface
+func (v *Pooling) UnmarshalJSON(data []byte) error {
+	r := jlexer.Lexer{Data: data}
+	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer17(&r, v)
+	return r.Error()
+}
+
+// UnmarshalEasyJSON supports easyjson.Unmarshaler interface
+func (v *Pooling) UnmarshalEasyJSON(l *jlexer.Lexer) {
+	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer17(l, v)
+}
+func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer18(in *jlexer.Lexer, out *NonMaxSuppression) {
+	isTopLevel := in.IsStart()
+	if in.IsNull() {
+		if isTopLevel {
+			in.Consumed()
+		}
+		in.Skip()
+		return
+	}
+	out.Base = new(Base)
+	in.Delim('{')
+	for !in.IsDelim('}') {
+		key := in.UnsafeString()
+		in.WantColon()
+		if in.IsNull() {
+			in.Skip()
+			in.WantComma()
+			continue
+		}
+		switch key {
+		case "name":
+			out.Name_ = string(in.String())
+		case "operator_type":
+			out.OperatorType_ = string(in.String())
+		case "onnx_operator_type":
+			out.OnnxOperatorType_ = string(in.String())
+		case "input_names":
+			if in.IsNull() {
+				in.Skip()
+				out.InputNames_ = nil
+			} else {
+				in.Delim('[')
+				if out.InputNames_ == nil {
+					if !in.IsDelim(']') {
+						out.InputNames_ = make([]string, 0, 4)
+					} else {
+						out.InputNames_ = []string{}
+					}
+				} else {
+					out.InputNames_ = (out.InputNames_)[:0]
+				}
+				for !in.IsDelim(']') {
+					var v283 string
+					v283 = string(in.String())
+					out.InputNames_ = append(out.InputNames_, v283)
+					in.WantComma()
+				}
+				in.Delim(']')
+			}
+		case "output_names":
+			if in.IsNull() {
+				in.Skip()
+				out.OutputNames_ = nil
+			} else {
+				in.Delim('[')
+				if out.OutputNames_ == nil {
+					if !in.IsDelim(']') {
+						out.OutputNames_ = make([]string, 0, 4)
+					} else {
+						out.OutputNames_ = []string{}
+					}
+				} else {
+					out.OutputNames_ = (out.OutputNames_)[:0]
+				}
+				for !in.IsDelim(']') {
+					var v284 string
+					v284 = string(in.String())
+					out.OutputNames_ = append(out.OutputNames_, v284)
+					in.WantComma()
+				}
+				in.Delim(']')
+			}
+		case "input_shapes":
+			if in.IsNull() {
+				in.Skip()
+				out.InputShapes_ = nil
+			} else {
+				in.Delim('[')
+				if out.InputShapes_ == nil {
+					if !in.IsDelim(']') {
+						out.InputShapes_ = make([]pkg.Shape, 0, 2)
+					} else {
+						out.InputShapes_ = []pkg.Shape{}
+					}
+				} else {
+					out.InputShapes_ = (out.InputShapes_)[:0]
+				}
+				for !in.IsDelim(']') {
+					var v285 pkg.Shape
+					if in.IsNull() {
+						in.Skip()
+						v285 = nil
+					} else {
+						in.Delim('[')
+						if v285 == nil {
+							if !in.IsDelim(']') {
+								v285 = make(pkg.Shape, 0, 8)
+							} else {
+								v285 = pkg.Shape{}
+							}
+						} else {
+							v285 = (v285)[:0]
+						}
+						for !in.IsDelim(']') {
+							var v286 int64
+							v286 = int64(in.Int64())
+							v285 = append(v285, v286)
+							in.WantComma()
+						}
+						in.Delim(']')
+					}
+					out.InputShapes_ = append(out.InputShapes_, v285)
+					in.WantComma()
+				}
+				in.Delim(']')
+			}
+		case "output_shapes":
+			if in.IsNull() {
+				in.Skip()
+				out.OutputShapes_ = nil
+			} else {
+				in.Delim('[')
+				if out.OutputShapes_ == nil {
+					if !in.IsDelim(']') {
+						out.OutputShapes_ = make([]pkg.Shape, 0, 2)
+					} else {
+						out.OutputShapes_ = []pkg.Shape{}
+					}
+				} else {
+					out.OutputShapes_ = (out.OutputShapes_)[:0]
+				}
+				for !in.IsDelim(']') {
+					var v287 pkg.Shape
+					if in.IsNull() {
+						in.Skip()
+						v287 = nil
+					} else {
+						in.Delim('[')
+						if v287 == nil {
+							if !in.IsDelim(']') {
+								v287 = make(pkg.Shape, 0, 8)
+							} else {
+								v287 = pkg.Shape{}
+							}
+						} else {
+							v287 = (v287)[:0]
+						}
+						for !in.IsDelim(']') {
+							var v288 int64
+							v288 = int64(in.Int64())
+							v287 = append(v287, v288)
+							in.WantComma()
+						}
+						in.Delim(']')
+					}
+					out.OutputShapes_ = append(out.OutputShapes_, v287)
+					in.WantComma()
+				}
+				in.Delim(']')
+			}
+		default:
+			in.AddError(&jlexer.LexerError{
+				Offset: in.GetPos(),
+				Reason: "unknown field",
+				Data:   key,
+			})
+		}
+		in.WantComma()
+	}
+	in.Delim('}')
+	if isTopLevel {
+		in.Consumed()
+	}
+}
+func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer18(out *jwriter.Writer, in NonMaxSuppression) {
+	out.RawByte('{')
+	first := true
+	_ = first
+	if in.Name_ != "" {
+		const prefix string = ",\"name\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.Name_))
+	}
+	if in.OperatorType_ != "" {
+		const prefix string = ",\"operator_type\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.OperatorType_))
+	}
+	if in.OnnxOperatorType_ != "" {
+		const prefix string = ",\"onnx_operator_type\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.OnnxOperatorType_))
+	}
+	if len(in.InputNames_) != 0 {
+		const prefix string = ",\"input_names\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		{
+			out.RawByte('[')
+			for v289, v290 := range in.InputNames_ {
+				if v289 > 0 {
+					out.RawByte(',')
+				}
+				out.String(string(v290))
+			}
+			out.RawByte(']')
+		}
+	}
+	if len(in.OutputNames_) != 0 {
+		const prefix string = ",\"output_names\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		{
+			out.RawByte('[')
+			for v291, v292 := range in.OutputNames_ {
+				if v291 > 0 {
+					out.RawByte(',')
+				}
+				out.String(string(v292))
+			}
+			out.RawByte(']')
+		}
+	}
+	if len(in.InputShapes_) != 0 {
+		const prefix string = ",\"input_shapes\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		{
+			out.RawByte('[')
+			for v293, v294 := range in.InputShapes_ {
+				if v293 > 0 {
+					out.RawByte(',')
+				}
+				if v294 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
+					out.RawString("null")
+				} else {
+					out.RawByte('[')
+					for v295, v296 := range v294 {
+						if v295 > 0 {
+							out.RawByte(',')
+						}
+						out.Int64(int64(v296))
+					}
+					out.RawByte(']')
+				}
+			}
+			out.RawByte(']')
+		}
+	}
+	if len(in.OutputShapes_) != 0 {
+		const prefix string = ",\"output_shapes\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		{
+			out.RawByte('[')
+			for v297, v298 := range in.OutputShapes_ {
+				if v297 > 0 {
+					out.RawByte(',')
+				}
+				if v298 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
+					out.RawString("null")
+				} else {
+					out.RawByte('[')
+					for v299, v300 := range v298 {
+						if v299 > 0 {
+							out.RawByte(',')
+						}
+						out.Int64(int64(v300))
+					}
+					out.RawByte(']')
+				}
+			}
+			out.RawByte(']')
+		}
+	}
+	out.RawByte('}')
+}
+
+// MarshalJSON supports json.Marshaler interface
+func (v NonMaxSuppression) MarshalJSON() ([]byte, error) {
+	w := jwriter.Writer{}
+	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer18(&w, v)
+	return w.Buffer.BuildBytes(), w.Error
+}
+
+// MarshalEasyJSON supports easyjson.Marshaler interface
+func (v NonMaxSuppression) MarshalEasyJSON(w *jwriter.Writer) {
+	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer18(w, v)
+}
+
+// UnmarshalJSON supports json.Unmarshaler interface
+func (v *NonMaxSuppression) UnmarshalJSON(data []byte) error {
+	r := jlexer.Lexer{Data: data}
+	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer18(&r, v)
+	return r.Error()
+}
+
+// UnmarshalEasyJSON supports easyjson.Unmarshaler interface
+func (v *NonMaxSuppression) UnmarshalEasyJSON(l *jlexer.Lexer) {
+	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer18(l, v)
+}
+func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer19(in *jlexer.Lexer, out *MatMul) {
+	isTopLevel := in.IsStart()
+	if in.IsNull() {
+		if isTopLevel {
+			in.Consumed()
+		}
+		in.Skip()
+		return
+	}
+	out.Base = new(Base)
+	in.Delim('{')
+	for !in.IsDelim('}') {
+		key := in.UnsafeString()
+		in.WantColon()
+		if in.IsNull() {
+			in.Skip()
+			in.WantComma()
+			continue
+		}
+		switch key {
+		case "name":
+			out.Name_ = string(in.String())
+		case "operator_type":
+			out.OperatorType_ = string(in.String())
+		case "onnx_operator_type":
+			out.OnnxOperatorType_ = string(in.String())
+		case "input_names":
+			if in.IsNull() {
+				in.Skip()
+				out.InputNames_ = nil
+			} else {
+				in.Delim('[')
+				if out.InputNames_ == nil {
+					if !in.IsDelim(']') {
+						out.InputNames_ = make([]string, 0, 4)
+					} else {
+						out.InputNames_ = []string{}
+					}
+				} else {
+					out.InputNames_ = (out.InputNames_)[:0]
+				}
+				for !in.IsDelim(']') {
+					var v301 string
+					v301 = string(in.String())
+					out.InputNames_ = append(out.InputNames_, v301)
+					in.WantComma()
+				}
+				in.Delim(']')
+			}
+		case "output_names":
+			if in.IsNull() {
+				in.Skip()
+				out.OutputNames_ = nil
+			} else {
+				in.Delim('[')
+				if out.OutputNames_ == nil {
+					if !in.IsDelim(']') {
+						out.OutputNames_ = make([]string, 0, 4)
+					} else {
+						out.OutputNames_ = []string{}
+					}
+				} else {
+					out.OutputNames_ = (out.OutputNames_)[:0]
+				}
+				for !in.IsDelim(']') {
+					var v302 string
+					v302 = string(in.String())
+					out.OutputNames_ = append(out.OutputNames_, v302)
+					in.WantComma()
+				}
+				in.Delim(']')
+			}
+		case "input_shapes":
+			if in.IsNull() {
+				in.Skip()
+				out.InputShapes_ = nil
+			} else {
+				in.Delim('[')
+				if out.InputShapes_ == nil {
+					if !in.IsDelim(']') {
+						out.InputShapes_ = make([]pkg.Shape, 0, 2)
+					} else {
+						out.InputShapes_ = []pkg.Shape{}
+					}
+				} else {
+					out.InputShapes_ = (out.InputShapes_)[:0]
+				}
+				for !in.IsDelim(']') {
+					var v303 pkg.Shape
+					if in.IsNull() {
+						in.Skip()
+						v303 = nil
+					} else {
+						in.Delim('[')
+						if v303 == nil {
+							if !in.IsDelim(']') {
+								v303 = make(pkg.Shape, 0, 8)
+							} else {
+								v303 = pkg.Shape{}
+							}
+						} else {
+							v303 = (v303)[:0]
+						}
+						for !in.IsDelim(']') {
+							var v304 int64
+							v304 = int64(in.Int64())
+							v303 = append(v303, v304)
+							in.WantComma()
+						}
+						in.Delim(']')
+					}
+					out.InputShapes_ = append(out.InputShapes_, v303)
+					in.WantComma()
+				}
+				in.Delim(']')
+			}
+		case "output_shapes":
+			if in.IsNull() {
+				in.Skip()
+				out.OutputShapes_ = nil
+			} else {
+				in.Delim('[')
+				if out.OutputShapes_ == nil {
+					if !in.IsDelim(']') {
+						out.OutputShapes_ = make([]pkg.Shape, 0, 2)
+					} else {
+						out.OutputShapes_ = []pkg.Shape{}
+					}
+				} else {
+					out.OutputShapes_ = (out.OutputShapes_)[:0]
+				}
+				for !in.IsDelim(']') {
+					var v305 pkg.Shape
+					if in.IsNull() {
+						in.Skip()
+						v305 = nil
+					} else {
+						in.Delim('[')
+						if v305 == nil {
+							if !in.IsDelim(']') {
+								v305 = make(pkg.Shape, 0, 8)
+							} else {
+								v305 = pkg.Shape{}
+							}
+						} else {
+							v305 = (v305)[:0]
+						}
+						for !in.IsDelim(']') {
+							var v306 int64
+							v306 = int64(in.Int64())
+							v305 = append(v305, v306)
+							in.WantComma()
+						}
+						in.Delim(']')
+					}
+					out.OutputShapes_ = append(out.OutputShapes_, v305)
+					in.WantComma()
+				}
+				in.Delim(']')
+			}
+		default:
+			in.AddError(&jlexer.LexerError{
+				Offset: in.GetPos(),
+				Reason: "unknown field",
+				Data:   key,
+			})
+		}
+		in.WantComma()
+	}
+	in.Delim('}')
+	if isTopLevel {
+		in.Consumed()
+	}
+}
+func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer19(out *jwriter.Writer, in MatMul) {
+	out.RawByte('{')
+	first := true
+	_ = first
+	if in.Name_ != "" {
+		const prefix string = ",\"name\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.Name_))
+	}
+	if in.OperatorType_ != "" {
+		const prefix string = ",\"operator_type\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.OperatorType_))
+	}
+	if in.OnnxOperatorType_ != "" {
+		const prefix string = ",\"onnx_operator_type\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.OnnxOperatorType_))
+	}
+	if len(in.InputNames_) != 0 {
+		const prefix string = ",\"input_names\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		{
+			out.RawByte('[')
+			for v307, v308 := range in.InputNames_ {
+				if v307 > 0 {
+					out.RawByte(',')
+				}
+				out.String(string(v308))
+			}
+			out.RawByte(']')
+		}
+	}
+	if len(in.OutputNames_) != 0 {
+		const prefix string = ",\"output_names\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		{
+			out.RawByte('[')
+			for v309, v310 := range in.OutputNames_ {
+				if v309 > 0 {
+					out.RawByte(',')
+				}
+				out.String(string(v310))
+			}
+			out.RawByte(']')
+		}
+	}
+	if len(in.InputShapes_) != 0 {
+		const prefix string = ",\"input_shapes\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		{
+			out.RawByte('[')
+			for v311, v312 := range in.InputShapes_ {
+				if v311 > 0 {
+					out.RawByte(',')
+				}
+				if v312 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
+					out.RawString("null")
+				} else {
+					out.RawByte('[')
+					for v313, v314 := range v312 {
+						if v313 > 0 {
+							out.RawByte(',')
+						}
+						out.Int64(int64(v314))
+					}
+					out.RawByte(']')
+				}
+			}
+			out.RawByte(']')
+		}
+	}
+	if len(in.OutputShapes_) != 0 {
+		const prefix string = ",\"output_shapes\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		{
+			out.RawByte('[')
+			for v315, v316 := range in.OutputShapes_ {
+				if v315 > 0 {
+					out.RawByte(',')
+				}
+				if v316 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
+					out.RawString("null")
+				} else {
+					out.RawByte('[')
+					for v317, v318 := range v316 {
+						if v317 > 0 {
+							out.RawByte(',')
+						}
+						out.Int64(int64(v318))
+					}
+					out.RawByte(']')
+				}
+			}
+			out.RawByte(']')
+		}
+	}
+	out.RawByte('}')
+}
+
+// MarshalJSON supports json.Marshaler interface
 func (v MatMul) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer12(&w, v)
+	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer19(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v MatMul) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer12(w, v)
+	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer19(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *MatMul) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer12(&r, v)
+	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer19(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *MatMul) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer12(l, v)
+	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer19(l, v)
 }
-func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer13(in *jlexer.Lexer, out *LRN) {
+func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer20(in *jlexer.Lexer, out *LRN) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -4708,9 +7200,9 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer13(in *jlexer.Lexer,
 					out.InputNames_ = (out.InputNames_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v256 string
-					v256 = string(in.String())
-					out.InputNames_ = append(out.InputNames_, v256)
+					var v319 string
+					v319 = string(in.String())
+					out.InputNames_ = append(out.InputNames_, v319)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -4731,9 +7223,9 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer13(in *jlexer.Lexer,
 					out.OutputNames_ = (out.OutputNames_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v257 string
-					v257 = string(in.String())
-					out.OutputNames_ = append(out.OutputNames_, v257)
+					var v320 string
+					v320 = string(in.String())
+					out.OutputNames_ = append(out.OutputNames_, v320)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -4754,30 +7246,30 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer13(in *jlexer.Lexer,
 					out.InputShapes_ = (out.InputShapes_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v258 pkg.Shape
+					var v321 pkg.Shape
 					if in.IsNull() {
 						in.Skip()
-						v258 = nil
+						v321 = nil
 					} else {
 						in.Delim('[')
-						if v258 == nil {
+						if v321 == nil {
 							if !in.IsDelim(']') {
-								v258 = make(pkg.Shape, 0, 8)
+								v321 = make(pkg.Shape, 0, 8)
 							} else {
-								v258 = pkg.Shape{}
+								v321 = pkg.Shape{}
 							}
 						} else {
-							v258 = (v258)[:0]
+							v321 = (v321)[:0]
 						}
 						for !in.IsDelim(']') {
-							var v259 int64
-							v259 = int64(in.Int64())
-							v258 = append(v258, v259)
+							var v322 int64
+							v322 = int64(in.Int64())
+							v321 = append(v321, v322)
 							in.WantComma()
 						}
 						in.Delim(']')
 					}
-					out.InputShapes_ = append(out.InputShapes_, v258)
+					out.InputShapes_ = append(out.InputShapes_, v321)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -4798,30 +7290,30 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer13(in *jlexer.Lexer,
 					out.OutputShapes_ = (out.OutputShapes_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v260 pkg.Shape
+					var v323 pkg.Shape
 					if in.IsNull() {
 						in.Skip()
-						v260 = nil
+						v323 = nil
 					} else {
 						in.Delim('[')
-						if v260 == nil {
+						if v323 == nil {
 							if !in.IsDelim(']') {
-								v260 = make(pkg.Shape, 0, 8)
+								v323 = make(pkg.Shape, 0, 8)
 							} else {
-								v260 = pkg.Shape{}
+								v323 = pkg.Shape{}
 							}
 						} else {
-							v260 = (v260)[:0]
+							v323 = (v323)[:0]
 						}
 						for !in.IsDelim(']') {
-							var v261 int64
-							v261 = int64(in.Int64())
-							v260 = append(v260, v261)
+							var v324 int64
+							v324 = int64(in.Int64())
+							v323 = append(v323, v324)
 							in.WantComma()
 						}
 						in.Delim(']')
 					}
-					out.OutputShapes_ = append(out.OutputShapes_, v260)
+					out.OutputShapes_ = append(out.OutputShapes_, v323)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -4840,7 +7332,7 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer13(in *jlexer.Lexer,
 		in.Consumed()
 	}
 }
-func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer13(out *jwriter.Writer, in LRN) {
+func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer20(out *jwriter.Writer, in LRN) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -4894,11 +7386,11 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer13(out *jwriter.Writ
 		}
 		{
 			out.RawByte('[')
-			for v262, v263 := range in.InputNames_ {
-				if v262 > 0 {
+			for v325, v326 := range in.InputNames_ {
+				if v325 > 0 {
 					out.RawByte(',')
 				}
-				out.String(string(v263))
+				out.String(string(v326))
 			}
 			out.RawByte(']')
 		}
@@ -4913,11 +7405,11 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer13(out *jwriter.Writ
 		}
 		{
 			out.RawByte('[')
-			for v264, v265 := range in.OutputNames_ {
-				if v264 > 0 {
+			for v327, v328 := range in.OutputNames_ {
+				if v327 > 0 {
 					out.RawByte(',')
 				}
-				out.String(string(v265))
+				out.String(string(v328))
 			}
 			out.RawByte(']')
 		}
@@ -4932,19 +7424,19 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer13(out *jwriter.Writ
 		}
 		{
 			out.RawByte('[')
-			for v266, v267 := range in.InputShapes_ {
-				if v266 > 0 {
+			for v329, v330 := range in.InputShapes_ {
+				if v329 > 0 {
 					out.RawByte(',')
 				}
-				if v267 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
+				if v330 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
 					out.RawString("null")
 				} else {
 					out.RawByte('[')
-					for v268, v269 := range v267 {
-						if v268 > 0 {
+					for v331, v332 := range v330 {
+						if v331 > 0 {
 							out.RawByte(',')
 						}
-						out.Int64(int64(v269))
+						out.Int64(int64(v332))
 					}
 					out.RawByte(']')
 				}
@@ -4962,19 +7454,19 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer13(out *jwriter.Writ
 		}
 		{
 			out.RawByte('[')
-			for v270, v271 := range in.OutputShapes_ {
-				if v270 > 0 {
+			for v333, v334 := range in.OutputShapes_ {
+				if v333 > 0 {
 					out.RawByte(',')
 				}
-				if v271 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
+				if v334 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
 					out.RawString("null")
 				} else {
 					out.RawByte('[')
-					for v272, v273 := range v271 {
-						if v272 > 0 {
+					for v335, v336 := range v334 {
+						if v335 > 0 {
 							out.RawByte(',')
 						}
-						out.Int64(int64(v273))
+						out.Int64(int64(v336))
 					}
 					out.RawByte(']')
 				}
@@ -4988,27 +7480,27 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer13(out *jwriter.Writ
 // MarshalJSON supports json.Marshaler interface
 func (v LRN) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer13(&w, v)
+	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer20(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v LRN) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer13(w, v)
+	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer20(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *LRN) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer13(&r, v)
+	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer20(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *LRN) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer13(l, v)
+	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer20(l, v)
 }
-func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer14(in *jlexer.Lexer, out *Identity) {
+func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer21(in *jlexer.Lexer, out *Identity) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -5050,9 +7542,9 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer14(in *jlexer.Lexer,
 					out.InputNames_ = (out.InputNames_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v274 string
-					v274 = string(in.String())
-					out.InputNames_ = append(out.InputNames_, v274)
+					var v337 string
+					v337 = string(in.String())
+					out.InputNames_ = append(out.InputNames_, v337)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -5073,9 +7565,9 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer14(in *jlexer.Lexer,
 					out.OutputNames_ = (out.OutputNames_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v275 string
-					v275 = string(in.String())
-					out.OutputNames_ = append(out.OutputNames_, v275)
+					var v338 string
+					v338 = string(in.String())
+					out.OutputNames_ = append(out.OutputNames_, v338)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -5096,30 +7588,30 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer14(in *jlexer.Lexer,
 					out.InputShapes_ = (out.InputShapes_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v276 pkg.Shape
+					var v339 pkg.Shape
 					if in.IsNull() {
 						in.Skip()
-						v276 = nil
+						v339 = nil
 					} else {
 						in.Delim('[')
-						if v276 == nil {
+						if v339 == nil {
 							if !in.IsDelim(']') {
-								v276 = make(pkg.Shape, 0, 8)
+								v339 = make(pkg.Shape, 0, 8)
 							} else {
-								v276 = pkg.Shape{}
+								v339 = pkg.Shape{}
 							}
 						} else {
-							v276 = (v276)[:0]
+							v339 = (v339)[:0]
 						}
 						for !in.IsDelim(']') {
-							var v277 int64
-							v277 = int64(in.Int64())
-							v276 = append(v276, v277)
+							var v340 int64
+							v340 = int64(in.Int64())
+							v339 = append(v339, v340)
 							in.WantComma()
 						}
 						in.Delim(']')
 					}
-					out.InputShapes_ = append(out.InputShapes_, v276)
+					out.InputShapes_ = append(out.InputShapes_, v339)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -5140,30 +7632,30 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer14(in *jlexer.Lexer,
 					out.OutputShapes_ = (out.OutputShapes_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v278 pkg.Shape
+					var v341 pkg.Shape
 					if in.IsNull() {
 						in.Skip()
-						v278 = nil
+						v341 = nil
 					} else {
 						in.Delim('[')
-						if v278 == nil {
+						if v341 == nil {
 							if !in.IsDelim(']') {
-								v278 = make(pkg.Shape, 0, 8)
+								v341 = make(pkg.Shape, 0, 8)
 							} else {
-								v278 = pkg.Shape{}
+								v341 = pkg.Shape{}
 							}
 						} else {
-							v278 = (v278)[:0]
+							v341 = (v341)[:0]
 						}
 						for !in.IsDelim(']') {
-							var v279 int64
-							v279 = int64(in.Int64())
-							v278 = append(v278, v279)
+							var v342 int64
+							v342 = int64(in.Int64())
+							v341 = append(v341, v342)
 							in.WantComma()
 						}
 						in.Delim(']')
 					}
-					out.OutputShapes_ = append(out.OutputShapes_, v278)
+					out.OutputShapes_ = append(out.OutputShapes_, v341)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -5182,7 +7674,7 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer14(in *jlexer.Lexer,
 		in.Consumed()
 	}
 }
-func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer14(out *jwriter.Writer, in Identity) {
+func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer21(out *jwriter.Writer, in Identity) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -5226,11 +7718,11 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer14(out *jwriter.Writ
 		}
 		{
 			out.RawByte('[')
-			for v280, v281 := range in.InputNames_ {
-				if v280 > 0 {
+			for v343, v344 := range in.InputNames_ {
+				if v343 > 0 {
 					out.RawByte(',')
 				}
-				out.String(string(v281))
+				out.String(string(v344))
 			}
 			out.RawByte(']')
 		}
@@ -5245,11 +7737,11 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer14(out *jwriter.Writ
 		}
 		{
 			out.RawByte('[')
-			for v282, v283 := range in.OutputNames_ {
-				if v282 > 0 {
+			for v345, v346 := range in.OutputNames_ {
+				if v345 > 0 {
 					out.RawByte(',')
 				}
-				out.String(string(v283))
+				out.String(string(v346))
 			}
 			out.RawByte(']')
 		}
@@ -5264,19 +7756,19 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer14(out *jwriter.Writ
 		}
 		{
 			out.RawByte('[')
-			for v284, v285 := range in.InputShapes_ {
-				if v284 > 0 {
+			for v347, v348 := range in.InputShapes_ {
+				if v347 > 0 {
 					out.RawByte(',')
 				}
-				if v285 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
+				if v348 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
 					out.RawString("null")
 				} else {
 					out.RawByte('[')
-					for v286, v287 := range v285 {
-						if v286 > 0 {
+					for v349, v350 := range v348 {
+						if v349 > 0 {
 							out.RawByte(',')
 						}
-						out.Int64(int64(v287))
+						out.Int64(int64(v350))
 					}
 					out.RawByte(']')
 				}
@@ -5294,19 +7786,19 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer14(out *jwriter.Writ
 		}
 		{
 			out.RawByte('[')
-			for v288, v289 := range in.OutputShapes_ {
-				if v288 > 0 {
+			for v351, v352 := range in.OutputShapes_ {
+				if v351 > 0 {
 					out.RawByte(',')
 				}
-				if v289 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
+				if v352 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
 					out.RawString("null")
 				} else {
 					out.RawByte('[')
-					for v290, v291 := range v289 {
-						if v290 > 0 {
+					for v353, v354 := range v352 {
+						if v353 > 0 {
 							out.RawByte(',')
 						}
-						out.Int64(int64(v291))
+						out.Int64(int64(v354))
 					}
 					out.RawByte(']')
 				}
@@ -5320,27 +7812,27 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer14(out *jwriter.Writ
 // MarshalJSON supports json.Marshaler interface
 func (v Identity) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer14(&w, v)
+	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer21(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v Identity) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer14(w, v)
+	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer21(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *Identity) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer14(&r, v)
+	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer21(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *Identity) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer14(l, v)
+	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer21(l, v)
 }
-func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer15(in *jlexer.Lexer, out *GlobalPooling) {
+func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer22(in *jlexer.Lexer, out *GlobalPooling) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -5382,9 +7874,9 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer15(in *jlexer.Lexer,
 					out.InputNames_ = (out.InputNames_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v292 string
-					v292 = string(in.String())
-					out.InputNames_ = append(out.InputNames_, v292)
+					var v355 string
+					v355 = string(in.String())
+					out.InputNames_ = append(out.InputNames_, v355)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -5405,9 +7897,9 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer15(in *jlexer.Lexer,
 					out.OutputNames_ = (out.OutputNames_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v293 string
-					v293 = string(in.String())
-					out.OutputNames_ = append(out.OutputNames_, v293)
+					var v356 string
+					v356 = string(in.String())
+					out.OutputNames_ = append(out.OutputNames_, v356)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -5428,30 +7920,30 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer15(in *jlexer.Lexer,
 					out.InputShapes_ = (out.InputShapes_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v294 pkg.Shape
+					var v357 pkg.Shape
 					if in.IsNull() {
 						in.Skip()
-						v294 = nil
+						v357 = nil
 					} else {
 						in.Delim('[')
-						if v294 == nil {
+						if v357 == nil {
 							if !in.IsDelim(']') {
-								v294 = make(pkg.Shape, 0, 8)
+								v357 = make(pkg.Shape, 0, 8)
 							} else {
-								v294 = pkg.Shape{}
+								v357 = pkg.Shape{}
 							}
 						} else {
-							v294 = (v294)[:0]
+							v357 = (v357)[:0]
 						}
 						for !in.IsDelim(']') {
-							var v295 int64
-							v295 = int64(in.Int64())
-							v294 = append(v294, v295)
+							var v358 int64
+							v358 = int64(in.Int64())
+							v357 = append(v357, v358)
 							in.WantComma()
 						}
 						in.Delim(']')
 					}
-					out.InputShapes_ = append(out.InputShapes_, v294)
+					out.InputShapes_ = append(out.InputShapes_, v357)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -5472,30 +7964,30 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer15(in *jlexer.Lexer,
 					out.OutputShapes_ = (out.OutputShapes_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v296 pkg.Shape
+					var v359 pkg.Shape
 					if in.IsNull() {
 						in.Skip()
-						v296 = nil
+						v359 = nil
 					} else {
 						in.Delim('[')
-						if v296 == nil {
+						if v359 == nil {
 							if !in.IsDelim(']') {
-								v296 = make(pkg.Shape, 0, 8)
+								v359 = make(pkg.Shape, 0, 8)
 							} else {
-								v296 = pkg.Shape{}
+								v359 = pkg.Shape{}
 							}
 						} else {
-							v296 = (v296)[:0]
+							v359 = (v359)[:0]
 						}
 						for !in.IsDelim(']') {
-							var v297 int64
-							v297 = int64(in.Int64())
-							v296 = append(v296, v297)
+							var v360 int64
+							v360 = int64(in.Int64())
+							v359 = append(v359, v360)
 							in.WantComma()
 						}
 						in.Delim(']')
 					}
-					out.OutputShapes_ = append(out.OutputShapes_, v296)
+					out.OutputShapes_ = append(out.OutputShapes_, v359)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -5514,7 +8006,7 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer15(in *jlexer.Lexer,
 		in.Consumed()
 	}
 }
-func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer15(out *jwriter.Writer, in GlobalPooling) {
+func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer22(out *jwriter.Writer, in GlobalPooling) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -5558,11 +8050,11 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer15(out *jwriter.Writ
 		}
 		{
 			out.RawByte('[')
-			for v298, v299 := range in.InputNames_ {
-				if v298 > 0 {
+			for v361, v362 := range in.InputNames_ {
+				if v361 > 0 {
 					out.RawByte(',')
 				}
-				out.String(string(v299))
+				out.String(string(v362))
 			}
 			out.RawByte(']')
 		}
@@ -5577,11 +8069,11 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer15(out *jwriter.Writ
 		}
 		{
 			out.RawByte('[')
-			for v300, v301 := range in.OutputNames_ {
-				if v300 > 0 {
+			for v363, v364 := range in.OutputNames_ {
+				if v363 > 0 {
 					out.RawByte(',')
 				}
-				out.String(string(v301))
+				out.String(string(v364))
 			}
 			out.RawByte(']')
 		}
@@ -5596,19 +8088,19 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer15(out *jwriter.Writ
 		}
 		{
 			out.RawByte('[')
-			for v302, v303 := range in.InputShapes_ {
-				if v302 > 0 {
+			for v365, v366 := range in.InputShapes_ {
+				if v365 > 0 {
 					out.RawByte(',')
 				}
-				if v303 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
+				if v366 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
 					out.RawString("null")
 				} else {
 					out.RawByte('[')
-					for v304, v305 := range v303 {
-						if v304 > 0 {
+					for v367, v368 := range v366 {
+						if v367 > 0 {
 							out.RawByte(',')
 						}
-						out.Int64(int64(v305))
+						out.Int64(int64(v368))
 					}
 					out.RawByte(']')
 				}
@@ -5626,19 +8118,19 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer15(out *jwriter.Writ
 		}
 		{
 			out.RawByte('[')
-			for v306, v307 := range in.OutputShapes_ {
-				if v306 > 0 {
+			for v369, v370 := range in.OutputShapes_ {
+				if v369 > 0 {
 					out.RawByte(',')
 				}
-				if v307 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
+				if v370 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
 					out.RawString("null")
 				} else {
 					out.RawByte('[')
-					for v308, v309 := range v307 {
-						if v308 > 0 {
+					for v371, v372 := range v370 {
+						if v371 > 0 {
 							out.RawByte(',')
 						}
-						out.Int64(int64(v309))
+						out.Int64(int64(v372))
 					}
 					out.RawByte(']')
 				}
@@ -5652,27 +8144,27 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer15(out *jwriter.Writ
 // MarshalJSON supports json.Marshaler interface
 func (v GlobalPooling) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer15(&w, v)
+	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer22(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v GlobalPooling) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer15(w, v)
+	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer22(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *GlobalPooling) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer15(&r, v)
+	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer22(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *GlobalPooling) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer15(l, v)
+	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer22(l, v)
 }
-func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer16(in *jlexer.Lexer, out *Gemm) {
+func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer23(in *jlexer.Lexer, out *Gemm) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -5722,9 +8214,9 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer16(in *jlexer.Lexer,
 					out.InputNames_ = (out.InputNames_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v310 string
-					v310 = string(in.String())
-					out.InputNames_ = append(out.InputNames_, v310)
+					var v373 string
+					v373 = string(in.String())
+					out.InputNames_ = append(out.InputNames_, v373)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -5745,9 +8237,9 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer16(in *jlexer.Lexer,
 					out.OutputNames_ = (out.OutputNames_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v311 string
-					v311 = string(in.String())
-					out.OutputNames_ = append(out.OutputNames_, v311)
+					var v374 string
+					v374 = string(in.String())
+					out.OutputNames_ = append(out.OutputNames_, v374)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -5768,30 +8260,30 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer16(in *jlexer.Lexer,
 					out.InputShapes_ = (out.InputShapes_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v312 pkg.Shape
+					var v375 pkg.Shape
 					if in.IsNull() {
 						in.Skip()
-						v312 = nil
+						v375 = nil
 					} else {
 						in.Delim('[')
-						if v312 == nil {
+						if v375 == nil {
 							if !in.IsDelim(']') {
-								v312 = make(pkg.Shape, 0, 8)
+								v375 = make(pkg.Shape, 0, 8)
 							} else {
-								v312 = pkg.Shape{}
+								v375 = pkg.Shape{}
 							}
 						} else {
-							v312 = (v312)[:0]
+							v375 = (v375)[:0]
 						}
 						for !in.IsDelim(']') {
-							var v313 int64
-							v313 = int64(in.Int64())
-							v312 = append(v312, v313)
+							var v376 int64
+							v376 = int64(in.Int64())
+							v375 = append(v375, v376)
 							in.WantComma()
 						}
 						in.Delim(']')
 					}
-					out.InputShapes_ = append(out.InputShapes_, v312)
+					out.InputShapes_ = append(out.InputShapes_, v375)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -5812,30 +8304,30 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer16(in *jlexer.Lexer,
 					out.OutputShapes_ = (out.OutputShapes_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v314 pkg.Shape
+					var v377 pkg.Shape
 					if in.IsNull() {
 						in.Skip()
-						v314 = nil
+						v377 = nil
 					} else {
 						in.Delim('[')
-						if v314 == nil {
+						if v377 == nil {
 							if !in.IsDelim(']') {
-								v314 = make(pkg.Shape, 0, 8)
+								v377 = make(pkg.Shape, 0, 8)
 							} else {
-								v314 = pkg.Shape{}
+								v377 = pkg.Shape{}
 							}
 						} else {
-							v314 = (v314)[:0]
+							v377 = (v377)[:0]
 						}
 						for !in.IsDelim(']') {
-							var v315 int64
-							v315 = int64(in.Int64())
-							v314 = append(v314, v315)
+							var v378 int64
+							v378 = int64(in.Int64())
+							v377 = append(v377, v378)
 							in.WantComma()
 						}
 						in.Delim(']')
 					}
-					out.OutputShapes_ = append(out.OutputShapes_, v314)
+					out.OutputShapes_ = append(out.OutputShapes_, v377)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -5854,7 +8346,7 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer16(in *jlexer.Lexer,
 		in.Consumed()
 	}
 }
-func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer16(out *jwriter.Writer, in Gemm) {
+func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer23(out *jwriter.Writer, in Gemm) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -5938,11 +8430,11 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer16(out *jwriter.Writ
 		}
 		{
 			out.RawByte('[')
-			for v316, v317 := range in.InputNames_ {
-				if v316 > 0 {
+			for v379, v380 := range in.InputNames_ {
+				if v379 > 0 {
 					out.RawByte(',')
 				}
-				out.String(string(v317))
+				out.String(string(v380))
 			}
 			out.RawByte(']')
 		}
@@ -5957,11 +8449,11 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer16(out *jwriter.Writ
 		}
 		{
 			out.RawByte('[')
-			for v318, v319 := range in.OutputNames_ {
-				if v318 > 0 {
+			for v381, v382 := range in.OutputNames_ {
+				if v381 > 0 {
 					out.RawByte(',')
 				}
-				out.String(string(v319))
+				out.String(string(v382))
 			}
 			out.RawByte(']')
 		}
@@ -5976,19 +8468,19 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer16(out *jwriter.Writ
 		}
 		{
 			out.RawByte('[')
-			for v320, v321 := range in.InputShapes_ {
-				if v320 > 0 {
+			for v383, v384 := range in.InputShapes_ {
+				if v383 > 0 {
 					out.RawByte(',')
 				}
-				if v321 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
+				if v384 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
 					out.RawString("null")
 				} else {
 					out.RawByte('[')
-					for v322, v323 := range v321 {
-						if v322 > 0 {
+					for v385, v386 := range v384 {
+						if v385 > 0 {
 							out.RawByte(',')
 						}
-						out.Int64(int64(v323))
+						out.Int64(int64(v386))
 					}
 					out.RawByte(']')
 				}
@@ -6006,19 +8498,19 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer16(out *jwriter.Writ
 		}
 		{
 			out.RawByte('[')
-			for v324, v325 := range in.OutputShapes_ {
-				if v324 > 0 {
+			for v387, v388 := range in.OutputShapes_ {
+				if v387 > 0 {
 					out.RawByte(',')
 				}
-				if v325 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
+				if v388 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
 					out.RawString("null")
 				} else {
 					out.RawByte('[')
-					for v326, v327 := range v325 {
-						if v326 > 0 {
+					for v389, v390 := range v388 {
+						if v389 > 0 {
 							out.RawByte(',')
 						}
-						out.Int64(int64(v327))
+						out.Int64(int64(v390))
 					}
 					out.RawByte(']')
 				}
@@ -6032,27 +8524,27 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer16(out *jwriter.Writ
 // MarshalJSON supports json.Marshaler interface
 func (v Gemm) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer16(&w, v)
+	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer23(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v Gemm) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer16(w, v)
+	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer23(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *Gemm) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer16(&r, v)
+	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer23(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *Gemm) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer16(l, v)
+	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer23(l, v)
 }
-func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer17(in *jlexer.Lexer, out *Gather) {
+func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer24(in *jlexer.Lexer, out *Gather) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -6096,9 +8588,9 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer17(in *jlexer.Lexer,
 					out.InputNames_ = (out.InputNames_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v328 string
-					v328 = string(in.String())
-					out.InputNames_ = append(out.InputNames_, v328)
+					var v391 string
+					v391 = string(in.String())
+					out.InputNames_ = append(out.InputNames_, v391)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -6119,9 +8611,9 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer17(in *jlexer.Lexer,
 					out.OutputNames_ = (out.OutputNames_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v329 string
-					v329 = string(in.String())
-					out.OutputNames_ = append(out.OutputNames_, v329)
+					var v392 string
+					v392 = string(in.String())
+					out.OutputNames_ = append(out.OutputNames_, v392)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -6142,30 +8634,30 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer17(in *jlexer.Lexer,
 					out.InputShapes_ = (out.InputShapes_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v330 pkg.Shape
+					var v393 pkg.Shape
 					if in.IsNull() {
 						in.Skip()
-						v330 = nil
+						v393 = nil
 					} else {
 						in.Delim('[')
-						if v330 == nil {
+						if v393 == nil {
 							if !in.IsDelim(']') {
-								v330 = make(pkg.Shape, 0, 8)
+								v393 = make(pkg.Shape, 0, 8)
 							} else {
-								v330 = pkg.Shape{}
+								v393 = pkg.Shape{}
 							}
 						} else {
-							v330 = (v330)[:0]
+							v393 = (v393)[:0]
 						}
 						for !in.IsDelim(']') {
-							var v331 int64
-							v331 = int64(in.Int64())
-							v330 = append(v330, v331)
+							var v394 int64
+							v394 = int64(in.Int64())
+							v393 = append(v393, v394)
 							in.WantComma()
 						}
 						in.Delim(']')
 					}
-					out.InputShapes_ = append(out.InputShapes_, v330)
+					out.InputShapes_ = append(out.InputShapes_, v393)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -6186,30 +8678,30 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer17(in *jlexer.Lexer,
 					out.OutputShapes_ = (out.OutputShapes_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v332 pkg.Shape
+					var v395 pkg.Shape
 					if in.IsNull() {
 						in.Skip()
-						v332 = nil
+						v395 = nil
 					} else {
 						in.Delim('[')
-						if v332 == nil {
+						if v395 == nil {
 							if !in.IsDelim(']') {
-								v332 = make(pkg.Shape, 0, 8)
+								v395 = make(pkg.Shape, 0, 8)
 							} else {
-								v332 = pkg.Shape{}
+								v395 = pkg.Shape{}
 							}
 						} else {
-							v332 = (v332)[:0]
+							v395 = (v395)[:0]
 						}
 						for !in.IsDelim(']') {
-							var v333 int64
-							v333 = int64(in.Int64())
-							v332 = append(v332, v333)
+							var v396 int64
+							v396 = int64(in.Int64())
+							v395 = append(v395, v396)
 							in.WantComma()
 						}
 						in.Delim(']')
 					}
-					out.OutputShapes_ = append(out.OutputShapes_, v332)
+					out.OutputShapes_ = append(out.OutputShapes_, v395)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -6228,7 +8720,7 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer17(in *jlexer.Lexer,
 		in.Consumed()
 	}
 }
-func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer17(out *jwriter.Writer, in Gather) {
+func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer24(out *jwriter.Writer, in Gather) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -6282,11 +8774,11 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer17(out *jwriter.Writ
 		}
 		{
 			out.RawByte('[')
-			for v334, v335 := range in.InputNames_ {
-				if v334 > 0 {
+			for v397, v398 := range in.InputNames_ {
+				if v397 > 0 {
 					out.RawByte(',')
 				}
-				out.String(string(v335))
+				out.String(string(v398))
 			}
 			out.RawByte(']')
 		}
@@ -6301,11 +8793,11 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer17(out *jwriter.Writ
 		}
 		{
 			out.RawByte('[')
-			for v336, v337 := range in.OutputNames_ {
-				if v336 > 0 {
+			for v399, v400 := range in.OutputNames_ {
+				if v399 > 0 {
 					out.RawByte(',')
 				}
-				out.String(string(v337))
+				out.String(string(v400))
 			}
 			out.RawByte(']')
 		}
@@ -6320,19 +8812,19 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer17(out *jwriter.Writ
 		}
 		{
 			out.RawByte('[')
-			for v338, v339 := range in.InputShapes_ {
-				if v338 > 0 {
+			for v401, v402 := range in.InputShapes_ {
+				if v401 > 0 {
 					out.RawByte(',')
 				}
-				if v339 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
+				if v402 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
 					out.RawString("null")
 				} else {
 					out.RawByte('[')
-					for v340, v341 := range v339 {
-						if v340 > 0 {
+					for v403, v404 := range v402 {
+						if v403 > 0 {
 							out.RawByte(',')
 						}
-						out.Int64(int64(v341))
+						out.Int64(int64(v404))
 					}
 					out.RawByte(']')
 				}
@@ -6350,19 +8842,19 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer17(out *jwriter.Writ
 		}
 		{
 			out.RawByte('[')
-			for v342, v343 := range in.OutputShapes_ {
-				if v342 > 0 {
+			for v405, v406 := range in.OutputShapes_ {
+				if v405 > 0 {
 					out.RawByte(',')
 				}
-				if v343 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
+				if v406 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
 					out.RawString("null")
 				} else {
 					out.RawByte('[')
-					for v344, v345 := range v343 {
-						if v344 > 0 {
+					for v407, v408 := range v406 {
+						if v407 > 0 {
 							out.RawByte(',')
 						}
-						out.Int64(int64(v345))
+						out.Int64(int64(v408))
 					}
 					out.RawByte(']')
 				}
@@ -6376,27 +8868,27 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer17(out *jwriter.Writ
 // MarshalJSON supports json.Marshaler interface
 func (v Gather) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer17(&w, v)
+	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer24(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v Gather) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer17(w, v)
+	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer24(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *Gather) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer17(&r, v)
+	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer24(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *Gather) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer17(l, v)
+	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer24(l, v)
 }
-func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer18(in *jlexer.Lexer, out *Flatten) {
+func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer25(in *jlexer.Lexer, out *Flatten) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -6440,9 +8932,9 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer18(in *jlexer.Lexer,
 					out.InputNames_ = (out.InputNames_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v346 string
-					v346 = string(in.String())
-					out.InputNames_ = append(out.InputNames_, v346)
+					var v409 string
+					v409 = string(in.String())
+					out.InputNames_ = append(out.InputNames_, v409)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -6463,9 +8955,9 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer18(in *jlexer.Lexer,
 					out.OutputNames_ = (out.OutputNames_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v347 string
-					v347 = string(in.String())
-					out.OutputNames_ = append(out.OutputNames_, v347)
+					var v410 string
+					v410 = string(in.String())
+					out.OutputNames_ = append(out.OutputNames_, v410)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -6486,30 +8978,30 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer18(in *jlexer.Lexer,
 					out.InputShapes_ = (out.InputShapes_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v348 pkg.Shape
+					var v411 pkg.Shape
 					if in.IsNull() {
 						in.Skip()
-						v348 = nil
+						v411 = nil
 					} else {
 						in.Delim('[')
-						if v348 == nil {
+						if v411 == nil {
 							if !in.IsDelim(']') {
-								v348 = make(pkg.Shape, 0, 8)
+								v411 = make(pkg.Shape, 0, 8)
 							} else {
-								v348 = pkg.Shape{}
+								v411 = pkg.Shape{}
 							}
 						} else {
-							v348 = (v348)[:0]
+							v411 = (v411)[:0]
 						}
 						for !in.IsDelim(']') {
-							var v349 int64
-							v349 = int64(in.Int64())
-							v348 = append(v348, v349)
+							var v412 int64
+							v412 = int64(in.Int64())
+							v411 = append(v411, v412)
 							in.WantComma()
 						}
 						in.Delim(']')
 					}
-					out.InputShapes_ = append(out.InputShapes_, v348)
+					out.InputShapes_ = append(out.InputShapes_, v411)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -6530,30 +9022,30 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer18(in *jlexer.Lexer,
 					out.OutputShapes_ = (out.OutputShapes_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v350 pkg.Shape
+					var v413 pkg.Shape
 					if in.IsNull() {
 						in.Skip()
-						v350 = nil
+						v413 = nil
 					} else {
 						in.Delim('[')
-						if v350 == nil {
+						if v413 == nil {
 							if !in.IsDelim(']') {
-								v350 = make(pkg.Shape, 0, 8)
+								v413 = make(pkg.Shape, 0, 8)
 							} else {
-								v350 = pkg.Shape{}
+								v413 = pkg.Shape{}
 							}
 						} else {
-							v350 = (v350)[:0]
+							v413 = (v413)[:0]
 						}
 						for !in.IsDelim(']') {
-							var v351 int64
-							v351 = int64(in.Int64())
-							v350 = append(v350, v351)
+							var v414 int64
+							v414 = int64(in.Int64())
+							v413 = append(v413, v414)
 							in.WantComma()
 						}
 						in.Delim(']')
 					}
-					out.OutputShapes_ = append(out.OutputShapes_, v350)
+					out.OutputShapes_ = append(out.OutputShapes_, v413)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -6572,7 +9064,7 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer18(in *jlexer.Lexer,
 		in.Consumed()
 	}
 }
-func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer18(out *jwriter.Writer, in Flatten) {
+func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer25(out *jwriter.Writer, in Flatten) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -6626,11 +9118,11 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer18(out *jwriter.Writ
 		}
 		{
 			out.RawByte('[')
-			for v352, v353 := range in.InputNames_ {
-				if v352 > 0 {
+			for v415, v416 := range in.InputNames_ {
+				if v415 > 0 {
 					out.RawByte(',')
 				}
-				out.String(string(v353))
+				out.String(string(v416))
 			}
 			out.RawByte(']')
 		}
@@ -6645,11 +9137,11 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer18(out *jwriter.Writ
 		}
 		{
 			out.RawByte('[')
-			for v354, v355 := range in.OutputNames_ {
-				if v354 > 0 {
+			for v417, v418 := range in.OutputNames_ {
+				if v417 > 0 {
 					out.RawByte(',')
 				}
-				out.String(string(v355))
+				out.String(string(v418))
 			}
 			out.RawByte(']')
 		}
@@ -6664,19 +9156,19 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer18(out *jwriter.Writ
 		}
 		{
 			out.RawByte('[')
-			for v356, v357 := range in.InputShapes_ {
-				if v356 > 0 {
+			for v419, v420 := range in.InputShapes_ {
+				if v419 > 0 {
 					out.RawByte(',')
 				}
-				if v357 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
+				if v420 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
 					out.RawString("null")
 				} else {
 					out.RawByte('[')
-					for v358, v359 := range v357 {
-						if v358 > 0 {
+					for v421, v422 := range v420 {
+						if v421 > 0 {
 							out.RawByte(',')
 						}
-						out.Int64(int64(v359))
+						out.Int64(int64(v422))
 					}
 					out.RawByte(']')
 				}
@@ -6694,19 +9186,19 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer18(out *jwriter.Writ
 		}
 		{
 			out.RawByte('[')
-			for v360, v361 := range in.OutputShapes_ {
-				if v360 > 0 {
+			for v423, v424 := range in.OutputShapes_ {
+				if v423 > 0 {
 					out.RawByte(',')
 				}
-				if v361 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
+				if v424 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
 					out.RawString("null")
 				} else {
 					out.RawByte('[')
-					for v362, v363 := range v361 {
-						if v362 > 0 {
+					for v425, v426 := range v424 {
+						if v425 > 0 {
 							out.RawByte(',')
 						}
-						out.Int64(int64(v363))
+						out.Int64(int64(v426))
 					}
 					out.RawByte(']')
 				}
@@ -6720,27 +9212,27 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer18(out *jwriter.Writ
 // MarshalJSON supports json.Marshaler interface
 func (v Flatten) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer18(&w, v)
+	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer25(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v Flatten) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer18(w, v)
+	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer25(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *Flatten) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer18(&r, v)
+	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer25(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *Flatten) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer18(l, v)
+	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer25(l, v)
 }
-func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer19(in *jlexer.Lexer, out *Exp) {
+func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer26(in *jlexer.Lexer, out *Exp) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -6786,9 +9278,9 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer19(in *jlexer.Lexer,
 					out.InputNames_ = (out.InputNames_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v364 string
-					v364 = string(in.String())
-					out.InputNames_ = append(out.InputNames_, v364)
+					var v427 string
+					v427 = string(in.String())
+					out.InputNames_ = append(out.InputNames_, v427)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -6809,9 +9301,9 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer19(in *jlexer.Lexer,
 					out.OutputNames_ = (out.OutputNames_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v365 string
-					v365 = string(in.String())
-					out.OutputNames_ = append(out.OutputNames_, v365)
+					var v428 string
+					v428 = string(in.String())
+					out.OutputNames_ = append(out.OutputNames_, v428)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -6832,30 +9324,30 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer19(in *jlexer.Lexer,
 					out.InputShapes_ = (out.InputShapes_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v366 pkg.Shape
+					var v429 pkg.Shape
 					if in.IsNull() {
 						in.Skip()
-						v366 = nil
+						v429 = nil
 					} else {
 						in.Delim('[')
-						if v366 == nil {
+						if v429 == nil {
 							if !in.IsDelim(']') {
-								v366 = make(pkg.Shape, 0, 8)
+								v429 = make(pkg.Shape, 0, 8)
 							} else {
-								v366 = pkg.Shape{}
+								v429 = pkg.Shape{}
 							}
 						} else {
-							v366 = (v366)[:0]
+							v429 = (v429)[:0]
 						}
 						for !in.IsDelim(']') {
-							var v367 int64
-							v367 = int64(in.Int64())
-							v366 = append(v366, v367)
+							var v430 int64
+							v430 = int64(in.Int64())
+							v429 = append(v429, v430)
 							in.WantComma()
 						}
 						in.Delim(']')
 					}
-					out.InputShapes_ = append(out.InputShapes_, v366)
+					out.InputShapes_ = append(out.InputShapes_, v429)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -6876,30 +9368,30 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer19(in *jlexer.Lexer,
 					out.OutputShapes_ = (out.OutputShapes_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v368 pkg.Shape
+					var v431 pkg.Shape
 					if in.IsNull() {
 						in.Skip()
-						v368 = nil
+						v431 = nil
 					} else {
 						in.Delim('[')
-						if v368 == nil {
+						if v431 == nil {
 							if !in.IsDelim(']') {
-								v368 = make(pkg.Shape, 0, 8)
+								v431 = make(pkg.Shape, 0, 8)
 							} else {
-								v368 = pkg.Shape{}
+								v431 = pkg.Shape{}
 							}
 						} else {
-							v368 = (v368)[:0]
+							v431 = (v431)[:0]
 						}
 						for !in.IsDelim(']') {
-							var v369 int64
-							v369 = int64(in.Int64())
-							v368 = append(v368, v369)
+							var v432 int64
+							v432 = int64(in.Int64())
+							v431 = append(v431, v432)
 							in.WantComma()
 						}
 						in.Delim(']')
 					}
-					out.OutputShapes_ = append(out.OutputShapes_, v368)
+					out.OutputShapes_ = append(out.OutputShapes_, v431)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -6918,7 +9410,7 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer19(in *jlexer.Lexer,
 		in.Consumed()
 	}
 }
-func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer19(out *jwriter.Writer, in Exp) {
+func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer26(out *jwriter.Writer, in Exp) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -6982,11 +9474,11 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer19(out *jwriter.Writ
 		}
 		{
 			out.RawByte('[')
-			for v370, v371 := range in.InputNames_ {
-				if v370 > 0 {
+			for v433, v434 := range in.InputNames_ {
+				if v433 > 0 {
 					out.RawByte(',')
 				}
-				out.String(string(v371))
+				out.String(string(v434))
 			}
 			out.RawByte(']')
 		}
@@ -7001,11 +9493,11 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer19(out *jwriter.Writ
 		}
 		{
 			out.RawByte('[')
-			for v372, v373 := range in.OutputNames_ {
-				if v372 > 0 {
+			for v435, v436 := range in.OutputNames_ {
+				if v435 > 0 {
 					out.RawByte(',')
 				}
-				out.String(string(v373))
+				out.String(string(v436))
 			}
 			out.RawByte(']')
 		}
@@ -7020,19 +9512,19 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer19(out *jwriter.Writ
 		}
 		{
 			out.RawByte('[')
-			for v374, v375 := range in.InputShapes_ {
-				if v374 > 0 {
+			for v437, v438 := range in.InputShapes_ {
+				if v437 > 0 {
 					out.RawByte(',')
 				}
-				if v375 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
+				if v438 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
 					out.RawString("null")
 				} else {
 					out.RawByte('[')
-					for v376, v377 := range v375 {
-						if v376 > 0 {
+					for v439, v440 := range v438 {
+						if v439 > 0 {
 							out.RawByte(',')
 						}
-						out.Int64(int64(v377))
+						out.Int64(int64(v440))
 					}
 					out.RawByte(']')
 				}
@@ -7050,19 +9542,19 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer19(out *jwriter.Writ
 		}
 		{
 			out.RawByte('[')
-			for v378, v379 := range in.OutputShapes_ {
-				if v378 > 0 {
+			for v441, v442 := range in.OutputShapes_ {
+				if v441 > 0 {
 					out.RawByte(',')
 				}
-				if v379 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
+				if v442 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
 					out.RawString("null")
 				} else {
 					out.RawByte('[')
-					for v380, v381 := range v379 {
-						if v380 > 0 {
+					for v443, v444 := range v442 {
+						if v443 > 0 {
 							out.RawByte(',')
 						}
-						out.Int64(int64(v381))
+						out.Int64(int64(v444))
 					}
 					out.RawByte(']')
 				}
@@ -7076,27 +9568,27 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer19(out *jwriter.Writ
 // MarshalJSON supports json.Marshaler interface
 func (v Exp) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer19(&w, v)
+	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer26(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v Exp) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer19(w, v)
+	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer26(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *Exp) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer19(&r, v)
+	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer26(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *Exp) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer19(l, v)
+	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer26(l, v)
 }
-func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer20(in *jlexer.Lexer, out *ElementWise) {
+func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer27(in *jlexer.Lexer, out *ElementWise) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -7142,9 +9634,9 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer20(in *jlexer.Lexer,
 					out.InputNames_ = (out.InputNames_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v382 string
-					v382 = string(in.String())
-					out.InputNames_ = append(out.InputNames_, v382)
+					var v445 string
+					v445 = string(in.String())
+					out.InputNames_ = append(out.InputNames_, v445)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -7165,9 +9657,9 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer20(in *jlexer.Lexer,
 					out.OutputNames_ = (out.OutputNames_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v383 string
-					v383 = string(in.String())
-					out.OutputNames_ = append(out.OutputNames_, v383)
+					var v446 string
+					v446 = string(in.String())
+					out.OutputNames_ = append(out.OutputNames_, v446)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -7188,30 +9680,30 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer20(in *jlexer.Lexer,
 					out.InputShapes_ = (out.InputShapes_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v384 pkg.Shape
+					var v447 pkg.Shape
 					if in.IsNull() {
 						in.Skip()
-						v384 = nil
+						v447 = nil
 					} else {
 						in.Delim('[')
-						if v384 == nil {
+						if v447 == nil {
 							if !in.IsDelim(']') {
-								v384 = make(pkg.Shape, 0, 8)
+								v447 = make(pkg.Shape, 0, 8)
 							} else {
-								v384 = pkg.Shape{}
+								v447 = pkg.Shape{}
 							}
 						} else {
-							v384 = (v384)[:0]
+							v447 = (v447)[:0]
 						}
 						for !in.IsDelim(']') {
-							var v385 int64
-							v385 = int64(in.Int64())
-							v384 = append(v384, v385)
+							var v448 int64
+							v448 = int64(in.Int64())
+							v447 = append(v447, v448)
 							in.WantComma()
 						}
 						in.Delim(']')
 					}
-					out.InputShapes_ = append(out.InputShapes_, v384)
+					out.InputShapes_ = append(out.InputShapes_, v447)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -7232,30 +9724,30 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer20(in *jlexer.Lexer,
 					out.OutputShapes_ = (out.OutputShapes_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v386 pkg.Shape
+					var v449 pkg.Shape
 					if in.IsNull() {
 						in.Skip()
-						v386 = nil
+						v449 = nil
 					} else {
 						in.Delim('[')
-						if v386 == nil {
+						if v449 == nil {
 							if !in.IsDelim(']') {
-								v386 = make(pkg.Shape, 0, 8)
+								v449 = make(pkg.Shape, 0, 8)
 							} else {
-								v386 = pkg.Shape{}
+								v449 = pkg.Shape{}
 							}
 						} else {
-							v386 = (v386)[:0]
+							v449 = (v449)[:0]
 						}
 						for !in.IsDelim(']') {
-							var v387 int64
-							v387 = int64(in.Int64())
-							v386 = append(v386, v387)
+							var v450 int64
+							v450 = int64(in.Int64())
+							v449 = append(v449, v450)
 							in.WantComma()
 						}
 						in.Delim(']')
 					}
-					out.OutputShapes_ = append(out.OutputShapes_, v386)
+					out.OutputShapes_ = append(out.OutputShapes_, v449)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -7274,7 +9766,7 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer20(in *jlexer.Lexer,
 		in.Consumed()
 	}
 }
-func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer20(out *jwriter.Writer, in ElementWise) {
+func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer27(out *jwriter.Writer, in ElementWise) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -7338,11 +9830,11 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer20(out *jwriter.Writ
 		}
 		{
 			out.RawByte('[')
-			for v388, v389 := range in.InputNames_ {
-				if v388 > 0 {
+			for v451, v452 := range in.InputNames_ {
+				if v451 > 0 {
 					out.RawByte(',')
 				}
-				out.String(string(v389))
+				out.String(string(v452))
 			}
 			out.RawByte(']')
 		}
@@ -7357,11 +9849,11 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer20(out *jwriter.Writ
 		}
 		{
 			out.RawByte('[')
-			for v390, v391 := range in.OutputNames_ {
-				if v390 > 0 {
+			for v453, v454 := range in.OutputNames_ {
+				if v453 > 0 {
 					out.RawByte(',')
 				}
-				out.String(string(v391))
+				out.String(string(v454))
 			}
 			out.RawByte(']')
 		}
@@ -7376,19 +9868,19 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer20(out *jwriter.Writ
 		}
 		{
 			out.RawByte('[')
-			for v392, v393 := range in.InputShapes_ {
-				if v392 > 0 {
+			for v455, v456 := range in.InputShapes_ {
+				if v455 > 0 {
 					out.RawByte(',')
 				}
-				if v393 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
+				if v456 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
 					out.RawString("null")
 				} else {
 					out.RawByte('[')
-					for v394, v395 := range v393 {
-						if v394 > 0 {
+					for v457, v458 := range v456 {
+						if v457 > 0 {
 							out.RawByte(',')
 						}
-						out.Int64(int64(v395))
+						out.Int64(int64(v458))
 					}
 					out.RawByte(']')
 				}
@@ -7406,19 +9898,19 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer20(out *jwriter.Writ
 		}
 		{
 			out.RawByte('[')
-			for v396, v397 := range in.OutputShapes_ {
-				if v396 > 0 {
+			for v459, v460 := range in.OutputShapes_ {
+				if v459 > 0 {
 					out.RawByte(',')
 				}
-				if v397 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
+				if v460 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
 					out.RawString("null")
 				} else {
 					out.RawByte('[')
-					for v398, v399 := range v397 {
-						if v398 > 0 {
+					for v461, v462 := range v460 {
+						if v461 > 0 {
 							out.RawByte(',')
 						}
-						out.Int64(int64(v399))
+						out.Int64(int64(v462))
 					}
 					out.RawByte(']')
 				}
@@ -7432,27 +9924,27 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer20(out *jwriter.Writ
 // MarshalJSON supports json.Marshaler interface
 func (v ElementWise) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer20(&w, v)
+	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer27(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v ElementWise) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer20(w, v)
+	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer27(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *ElementWise) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer20(&r, v)
+	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer27(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *ElementWise) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer20(l, v)
+	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer27(l, v)
 }
-func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer21(in *jlexer.Lexer, out *Dropout) {
+func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer28(in *jlexer.Lexer, out *Dropout) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -7494,9 +9986,9 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer21(in *jlexer.Lexer,
 					out.InputNames_ = (out.InputNames_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v400 string
-					v400 = string(in.String())
-					out.InputNames_ = append(out.InputNames_, v400)
+					var v463 string
+					v463 = string(in.String())
+					out.InputNames_ = append(out.InputNames_, v463)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -7517,9 +10009,9 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer21(in *jlexer.Lexer,
 					out.OutputNames_ = (out.OutputNames_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v401 string
-					v401 = string(in.String())
-					out.OutputNames_ = append(out.OutputNames_, v401)
+					var v464 string
+					v464 = string(in.String())
+					out.OutputNames_ = append(out.OutputNames_, v464)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -7540,30 +10032,30 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer21(in *jlexer.Lexer,
 					out.InputShapes_ = (out.InputShapes_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v402 pkg.Shape
+					var v465 pkg.Shape
 					if in.IsNull() {
 						in.Skip()
-						v402 = nil
+						v465 = nil
 					} else {
 						in.Delim('[')
-						if v402 == nil {
+						if v465 == nil {
 							if !in.IsDelim(']') {
-								v402 = make(pkg.Shape, 0, 8)
+								v465 = make(pkg.Shape, 0, 8)
 							} else {
-								v402 = pkg.Shape{}
+								v465 = pkg.Shape{}
 							}
 						} else {
-							v402 = (v402)[:0]
+							v465 = (v465)[:0]
 						}
 						for !in.IsDelim(']') {
-							var v403 int64
-							v403 = int64(in.Int64())
-							v402 = append(v402, v403)
+							var v466 int64
+							v466 = int64(in.Int64())
+							v465 = append(v465, v466)
 							in.WantComma()
 						}
 						in.Delim(']')
 					}
-					out.InputShapes_ = append(out.InputShapes_, v402)
+					out.InputShapes_ = append(out.InputShapes_, v465)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -7584,30 +10076,30 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer21(in *jlexer.Lexer,
 					out.OutputShapes_ = (out.OutputShapes_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v404 pkg.Shape
+					var v467 pkg.Shape
 					if in.IsNull() {
 						in.Skip()
-						v404 = nil
+						v467 = nil
 					} else {
 						in.Delim('[')
-						if v404 == nil {
+						if v467 == nil {
 							if !in.IsDelim(']') {
-								v404 = make(pkg.Shape, 0, 8)
+								v467 = make(pkg.Shape, 0, 8)
 							} else {
-								v404 = pkg.Shape{}
+								v467 = pkg.Shape{}
 							}
 						} else {
-							v404 = (v404)[:0]
+							v467 = (v467)[:0]
 						}
 						for !in.IsDelim(']') {
-							var v405 int64
-							v405 = int64(in.Int64())
-							v404 = append(v404, v405)
+							var v468 int64
+							v468 = int64(in.Int64())
+							v467 = append(v467, v468)
 							in.WantComma()
 						}
 						in.Delim(']')
 					}
-					out.OutputShapes_ = append(out.OutputShapes_, v404)
+					out.OutputShapes_ = append(out.OutputShapes_, v467)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -7626,7 +10118,7 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer21(in *jlexer.Lexer,
 		in.Consumed()
 	}
 }
-func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer21(out *jwriter.Writer, in Dropout) {
+func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer28(out *jwriter.Writer, in Dropout) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -7670,11 +10162,11 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer21(out *jwriter.Writ
 		}
 		{
 			out.RawByte('[')
-			for v406, v407 := range in.InputNames_ {
-				if v406 > 0 {
+			for v469, v470 := range in.InputNames_ {
+				if v469 > 0 {
 					out.RawByte(',')
 				}
-				out.String(string(v407))
+				out.String(string(v470))
 			}
 			out.RawByte(']')
 		}
@@ -7689,11 +10181,11 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer21(out *jwriter.Writ
 		}
 		{
 			out.RawByte('[')
-			for v408, v409 := range in.OutputNames_ {
-				if v408 > 0 {
+			for v471, v472 := range in.OutputNames_ {
+				if v471 > 0 {
 					out.RawByte(',')
 				}
-				out.String(string(v409))
+				out.String(string(v472))
 			}
 			out.RawByte(']')
 		}
@@ -7708,19 +10200,19 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer21(out *jwriter.Writ
 		}
 		{
 			out.RawByte('[')
-			for v410, v411 := range in.InputShapes_ {
-				if v410 > 0 {
+			for v473, v474 := range in.InputShapes_ {
+				if v473 > 0 {
 					out.RawByte(',')
 				}
-				if v411 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
+				if v474 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
 					out.RawString("null")
 				} else {
 					out.RawByte('[')
-					for v412, v413 := range v411 {
-						if v412 > 0 {
+					for v475, v476 := range v474 {
+						if v475 > 0 {
 							out.RawByte(',')
 						}
-						out.Int64(int64(v413))
+						out.Int64(int64(v476))
 					}
 					out.RawByte(']')
 				}
@@ -7738,19 +10230,19 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer21(out *jwriter.Writ
 		}
 		{
 			out.RawByte('[')
-			for v414, v415 := range in.OutputShapes_ {
-				if v414 > 0 {
+			for v477, v478 := range in.OutputShapes_ {
+				if v477 > 0 {
 					out.RawByte(',')
 				}
-				if v415 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
+				if v478 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
 					out.RawString("null")
 				} else {
 					out.RawByte('[')
-					for v416, v417 := range v415 {
-						if v416 > 0 {
+					for v479, v480 := range v478 {
+						if v479 > 0 {
 							out.RawByte(',')
 						}
-						out.Int64(int64(v417))
+						out.Int64(int64(v480))
 					}
 					out.RawByte(']')
 				}
@@ -7764,27 +10256,27 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer21(out *jwriter.Writ
 // MarshalJSON supports json.Marshaler interface
 func (v Dropout) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer21(&w, v)
+	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer28(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v Dropout) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer21(w, v)
+	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer28(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *Dropout) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer21(&r, v)
+	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer28(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *Dropout) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer21(l, v)
+	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer28(l, v)
 }
-func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer22(in *jlexer.Lexer, out *Conv) {
+func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer29(in *jlexer.Lexer, out *Conv) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -7822,9 +10314,9 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer22(in *jlexer.Lexer,
 					out.Dilations = (out.Dilations)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v418 int64
-					v418 = int64(in.Int64())
-					out.Dilations = append(out.Dilations, v418)
+					var v481 int64
+					v481 = int64(in.Int64())
+					out.Dilations = append(out.Dilations, v481)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -7847,9 +10339,9 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer22(in *jlexer.Lexer,
 					out.KernelShape = (out.KernelShape)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v419 int64
-					v419 = int64(in.Int64())
-					out.KernelShape = append(out.KernelShape, v419)
+					var v482 int64
+					v482 = int64(in.Int64())
+					out.KernelShape = append(out.KernelShape, v482)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -7870,9 +10362,9 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer22(in *jlexer.Lexer,
 					out.Pads = (out.Pads)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v420 int64
-					v420 = int64(in.Int64())
-					out.Pads = append(out.Pads, v420)
+					var v483 int64
+					v483 = int64(in.Int64())
+					out.Pads = append(out.Pads, v483)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -7893,9 +10385,9 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer22(in *jlexer.Lexer,
 					out.Strides = (out.Strides)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v421 int64
-					v421 = int64(in.Int64())
-					out.Strides = append(out.Strides, v421)
+					var v484 int64
+					v484 = int64(in.Int64())
+					out.Strides = append(out.Strides, v484)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -7922,9 +10414,9 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer22(in *jlexer.Lexer,
 					out.InputNames_ = (out.InputNames_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v422 string
-					v422 = string(in.String())
-					out.InputNames_ = append(out.InputNames_, v422)
+					var v485 string
+					v485 = string(in.String())
+					out.InputNames_ = append(out.InputNames_, v485)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -7945,9 +10437,9 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer22(in *jlexer.Lexer,
 					out.OutputNames_ = (out.OutputNames_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v423 string
-					v423 = string(in.String())
-					out.OutputNames_ = append(out.OutputNames_, v423)
+					var v486 string
+					v486 = string(in.String())
+					out.OutputNames_ = append(out.OutputNames_, v486)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -7968,30 +10460,30 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer22(in *jlexer.Lexer,
 					out.InputShapes_ = (out.InputShapes_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v424 pkg.Shape
+					var v487 pkg.Shape
 					if in.IsNull() {
 						in.Skip()
-						v424 = nil
+						v487 = nil
 					} else {
 						in.Delim('[')
-						if v424 == nil {
+						if v487 == nil {
 							if !in.IsDelim(']') {
-								v424 = make(pkg.Shape, 0, 8)
+								v487 = make(pkg.Shape, 0, 8)
 							} else {
-								v424 = pkg.Shape{}
+								v487 = pkg.Shape{}
 							}
 						} else {
-							v424 = (v424)[:0]
+							v487 = (v487)[:0]
 						}
 						for !in.IsDelim(']') {
-							var v425 int64
-							v425 = int64(in.Int64())
-							v424 = append(v424, v425)
+							var v488 int64
+							v488 = int64(in.Int64())
+							v487 = append(v487, v488)
 							in.WantComma()
 						}
 						in.Delim(']')
 					}
-					out.InputShapes_ = append(out.InputShapes_, v424)
+					out.InputShapes_ = append(out.InputShapes_, v487)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -8012,30 +10504,30 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer22(in *jlexer.Lexer,
 					out.OutputShapes_ = (out.OutputShapes_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v426 pkg.Shape
+					var v489 pkg.Shape
 					if in.IsNull() {
 						in.Skip()
-						v426 = nil
+						v489 = nil
 					} else {
 						in.Delim('[')
-						if v426 == nil {
+						if v489 == nil {
 							if !in.IsDelim(']') {
-								v426 = make(pkg.Shape, 0, 8)
+								v489 = make(pkg.Shape, 0, 8)
 							} else {
-								v426 = pkg.Shape{}
+								v489 = pkg.Shape{}
 							}
 						} else {
-							v426 = (v426)[:0]
+							v489 = (v489)[:0]
 						}
 						for !in.IsDelim(']') {
-							var v427 int64
-							v427 = int64(in.Int64())
-							v426 = append(v426, v427)
+							var v490 int64
+							v490 = int64(in.Int64())
+							v489 = append(v489, v490)
 							in.WantComma()
 						}
 						in.Delim(']')
 					}
-					out.OutputShapes_ = append(out.OutputShapes_, v426)
+					out.OutputShapes_ = append(out.OutputShapes_, v489)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -8054,7 +10546,7 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer22(in *jlexer.Lexer,
 		in.Consumed()
 	}
 }
-func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer22(out *jwriter.Writer, in Conv) {
+func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer29(out *jwriter.Writer, in Conv) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -8078,11 +10570,11 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer22(out *jwriter.Writ
 		}
 		{
 			out.RawByte('[')
-			for v428, v429 := range in.Dilations {
-				if v428 > 0 {
+			for v491, v492 := range in.Dilations {
+				if v491 > 0 {
 					out.RawByte(',')
 				}
-				out.Int64(int64(v429))
+				out.Int64(int64(v492))
 			}
 			out.RawByte(']')
 		}
@@ -8107,11 +10599,11 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer22(out *jwriter.Writ
 		}
 		{
 			out.RawByte('[')
-			for v430, v431 := range in.KernelShape {
-				if v430 > 0 {
+			for v493, v494 := range in.KernelShape {
+				if v493 > 0 {
 					out.RawByte(',')
 				}
-				out.Int64(int64(v431))
+				out.Int64(int64(v494))
 			}
 			out.RawByte(']')
 		}
@@ -8126,11 +10618,11 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer22(out *jwriter.Writ
 		}
 		{
 			out.RawByte('[')
-			for v432, v433 := range in.Pads {
-				if v432 > 0 {
+			for v495, v496 := range in.Pads {
+				if v495 > 0 {
 					out.RawByte(',')
 				}
-				out.Int64(int64(v433))
+				out.Int64(int64(v496))
 			}
 			out.RawByte(']')
 		}
@@ -8145,11 +10637,11 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer22(out *jwriter.Writ
 		}
 		{
 			out.RawByte('[')
-			for v434, v435 := range in.Strides {
-				if v434 > 0 {
+			for v497, v498 := range in.Strides {
+				if v497 > 0 {
 					out.RawByte(',')
 				}
-				out.Int64(int64(v435))
+				out.Int64(int64(v498))
 			}
 			out.RawByte(']')
 		}
@@ -8194,11 +10686,11 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer22(out *jwriter.Writ
 		}
 		{
 			out.RawByte('[')
-			for v436, v437 := range in.InputNames_ {
-				if v436 > 0 {
+			for v499, v500 := range in.InputNames_ {
+				if v499 > 0 {
 					out.RawByte(',')
 				}
-				out.String(string(v437))
+				out.String(string(v500))
 			}
 			out.RawByte(']')
 		}
@@ -8213,11 +10705,11 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer22(out *jwriter.Writ
 		}
 		{
 			out.RawByte('[')
-			for v438, v439 := range in.OutputNames_ {
-				if v438 > 0 {
+			for v501, v502 := range in.OutputNames_ {
+				if v501 > 0 {
 					out.RawByte(',')
 				}
-				out.String(string(v439))
+				out.String(string(v502))
 			}
 			out.RawByte(']')
 		}
@@ -8232,19 +10724,19 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer22(out *jwriter.Writ
 		}
 		{
 			out.RawByte('[')
-			for v440, v441 := range in.InputShapes_ {
-				if v440 > 0 {
+			for v503, v504 := range in.InputShapes_ {
+				if v503 > 0 {
 					out.RawByte(',')
 				}
-				if v441 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
+				if v504 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
 					out.RawString("null")
 				} else {
 					out.RawByte('[')
-					for v442, v443 := range v441 {
-						if v442 > 0 {
+					for v505, v506 := range v504 {
+						if v505 > 0 {
 							out.RawByte(',')
 						}
-						out.Int64(int64(v443))
+						out.Int64(int64(v506))
 					}
 					out.RawByte(']')
 				}
@@ -8262,19 +10754,19 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer22(out *jwriter.Writ
 		}
 		{
 			out.RawByte('[')
-			for v444, v445 := range in.OutputShapes_ {
-				if v444 > 0 {
+			for v507, v508 := range in.OutputShapes_ {
+				if v507 > 0 {
 					out.RawByte(',')
 				}
-				if v445 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
+				if v508 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
 					out.RawString("null")
 				} else {
 					out.RawByte('[')
-					for v446, v447 := range v445 {
-						if v446 > 0 {
+					for v509, v510 := range v508 {
+						if v509 > 0 {
 							out.RawByte(',')
 						}
-						out.Int64(int64(v447))
+						out.Int64(int64(v510))
 					}
 					out.RawByte(']')
 				}
@@ -8288,27 +10780,27 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer22(out *jwriter.Writ
 // MarshalJSON supports json.Marshaler interface
 func (v Conv) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer22(&w, v)
+	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer29(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v Conv) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer22(w, v)
+	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer29(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *Conv) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer22(&r, v)
+	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer29(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *Conv) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer22(l, v)
+	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer29(l, v)
 }
-func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer23(in *jlexer.Lexer, out *ConstantOfShape) {
+func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer30(in *jlexer.Lexer, out *ConstantOfShape) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -8350,9 +10842,9 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer23(in *jlexer.Lexer,
 					out.InputNames_ = (out.InputNames_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v448 string
-					v448 = string(in.String())
-					out.InputNames_ = append(out.InputNames_, v448)
+					var v511 string
+					v511 = string(in.String())
+					out.InputNames_ = append(out.InputNames_, v511)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -8373,9 +10865,9 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer23(in *jlexer.Lexer,
 					out.OutputNames_ = (out.OutputNames_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v449 string
-					v449 = string(in.String())
-					out.OutputNames_ = append(out.OutputNames_, v449)
+					var v512 string
+					v512 = string(in.String())
+					out.OutputNames_ = append(out.OutputNames_, v512)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -8396,30 +10888,30 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer23(in *jlexer.Lexer,
 					out.InputShapes_ = (out.InputShapes_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v450 pkg.Shape
+					var v513 pkg.Shape
 					if in.IsNull() {
 						in.Skip()
-						v450 = nil
+						v513 = nil
 					} else {
 						in.Delim('[')
-						if v450 == nil {
+						if v513 == nil {
 							if !in.IsDelim(']') {
-								v450 = make(pkg.Shape, 0, 8)
+								v513 = make(pkg.Shape, 0, 8)
 							} else {
-								v450 = pkg.Shape{}
+								v513 = pkg.Shape{}
 							}
 						} else {
-							v450 = (v450)[:0]
+							v513 = (v513)[:0]
 						}
 						for !in.IsDelim(']') {
-							var v451 int64
-							v451 = int64(in.Int64())
-							v450 = append(v450, v451)
+							var v514 int64
+							v514 = int64(in.Int64())
+							v513 = append(v513, v514)
 							in.WantComma()
 						}
 						in.Delim(']')
 					}
-					out.InputShapes_ = append(out.InputShapes_, v450)
+					out.InputShapes_ = append(out.InputShapes_, v513)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -8440,30 +10932,30 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer23(in *jlexer.Lexer,
 					out.OutputShapes_ = (out.OutputShapes_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v452 pkg.Shape
+					var v515 pkg.Shape
 					if in.IsNull() {
 						in.Skip()
-						v452 = nil
+						v515 = nil
 					} else {
 						in.Delim('[')
-						if v452 == nil {
+						if v515 == nil {
 							if !in.IsDelim(']') {
-								v452 = make(pkg.Shape, 0, 8)
+								v515 = make(pkg.Shape, 0, 8)
 							} else {
-								v452 = pkg.Shape{}
+								v515 = pkg.Shape{}
 							}
 						} else {
-							v452 = (v452)[:0]
+							v515 = (v515)[:0]
 						}
 						for !in.IsDelim(']') {
-							var v453 int64
-							v453 = int64(in.Int64())
-							v452 = append(v452, v453)
+							var v516 int64
+							v516 = int64(in.Int64())
+							v515 = append(v515, v516)
 							in.WantComma()
 						}
 						in.Delim(']')
 					}
-					out.OutputShapes_ = append(out.OutputShapes_, v452)
+					out.OutputShapes_ = append(out.OutputShapes_, v515)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -8482,7 +10974,7 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer23(in *jlexer.Lexer,
 		in.Consumed()
 	}
 }
-func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer23(out *jwriter.Writer, in ConstantOfShape) {
+func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer30(out *jwriter.Writer, in ConstantOfShape) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -8526,11 +11018,11 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer23(out *jwriter.Writ
 		}
 		{
 			out.RawByte('[')
-			for v454, v455 := range in.InputNames_ {
-				if v454 > 0 {
+			for v517, v518 := range in.InputNames_ {
+				if v517 > 0 {
 					out.RawByte(',')
 				}
-				out.String(string(v455))
+				out.String(string(v518))
 			}
 			out.RawByte(']')
 		}
@@ -8545,11 +11037,11 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer23(out *jwriter.Writ
 		}
 		{
 			out.RawByte('[')
-			for v456, v457 := range in.OutputNames_ {
-				if v456 > 0 {
+			for v519, v520 := range in.OutputNames_ {
+				if v519 > 0 {
 					out.RawByte(',')
 				}
-				out.String(string(v457))
+				out.String(string(v520))
 			}
 			out.RawByte(']')
 		}
@@ -8564,19 +11056,19 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer23(out *jwriter.Writ
 		}
 		{
 			out.RawByte('[')
-			for v458, v459 := range in.InputShapes_ {
-				if v458 > 0 {
+			for v521, v522 := range in.InputShapes_ {
+				if v521 > 0 {
 					out.RawByte(',')
 				}
-				if v459 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
+				if v522 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
 					out.RawString("null")
 				} else {
 					out.RawByte('[')
-					for v460, v461 := range v459 {
-						if v460 > 0 {
+					for v523, v524 := range v522 {
+						if v523 > 0 {
 							out.RawByte(',')
 						}
-						out.Int64(int64(v461))
+						out.Int64(int64(v524))
 					}
 					out.RawByte(']')
 				}
@@ -8594,19 +11086,19 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer23(out *jwriter.Writ
 		}
 		{
 			out.RawByte('[')
-			for v462, v463 := range in.OutputShapes_ {
-				if v462 > 0 {
+			for v525, v526 := range in.OutputShapes_ {
+				if v525 > 0 {
 					out.RawByte(',')
 				}
-				if v463 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
+				if v526 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
 					out.RawString("null")
 				} else {
 					out.RawByte('[')
-					for v464, v465 := range v463 {
-						if v464 > 0 {
+					for v527, v528 := range v526 {
+						if v527 > 0 {
 							out.RawByte(',')
 						}
-						out.Int64(int64(v465))
+						out.Int64(int64(v528))
 					}
 					out.RawByte(']')
 				}
@@ -8620,27 +11112,27 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer23(out *jwriter.Writ
 // MarshalJSON supports json.Marshaler interface
 func (v ConstantOfShape) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer23(&w, v)
+	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer30(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v ConstantOfShape) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer23(w, v)
+	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer30(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *ConstantOfShape) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer23(&r, v)
+	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer30(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *ConstantOfShape) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer23(l, v)
+	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer30(l, v)
 }
-func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer24(in *jlexer.Lexer, out *ConstantInput) {
+func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer31(in *jlexer.Lexer, out *ConstantInput) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -8682,9 +11174,9 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer24(in *jlexer.Lexer,
 					out.InputNames_ = (out.InputNames_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v466 string
-					v466 = string(in.String())
-					out.InputNames_ = append(out.InputNames_, v466)
+					var v529 string
+					v529 = string(in.String())
+					out.InputNames_ = append(out.InputNames_, v529)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -8705,9 +11197,9 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer24(in *jlexer.Lexer,
 					out.OutputNames_ = (out.OutputNames_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v467 string
-					v467 = string(in.String())
-					out.OutputNames_ = append(out.OutputNames_, v467)
+					var v530 string
+					v530 = string(in.String())
+					out.OutputNames_ = append(out.OutputNames_, v530)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -8728,30 +11220,30 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer24(in *jlexer.Lexer,
 					out.InputShapes_ = (out.InputShapes_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v468 pkg.Shape
+					var v531 pkg.Shape
 					if in.IsNull() {
 						in.Skip()
-						v468 = nil
+						v531 = nil
 					} else {
 						in.Delim('[')
-						if v468 == nil {
+						if v531 == nil {
 							if !in.IsDelim(']') {
-								v468 = make(pkg.Shape, 0, 8)
+								v531 = make(pkg.Shape, 0, 8)
 							} else {
-								v468 = pkg.Shape{}
+								v531 = pkg.Shape{}
 							}
 						} else {
-							v468 = (v468)[:0]
+							v531 = (v531)[:0]
 						}
 						for !in.IsDelim(']') {
-							var v469 int64
-							v469 = int64(in.Int64())
-							v468 = append(v468, v469)
+							var v532 int64
+							v532 = int64(in.Int64())
+							v531 = append(v531, v532)
 							in.WantComma()
 						}
 						in.Delim(']')
 					}
-					out.InputShapes_ = append(out.InputShapes_, v468)
+					out.InputShapes_ = append(out.InputShapes_, v531)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -8772,30 +11264,30 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer24(in *jlexer.Lexer,
 					out.OutputShapes_ = (out.OutputShapes_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v470 pkg.Shape
+					var v533 pkg.Shape
 					if in.IsNull() {
 						in.Skip()
-						v470 = nil
+						v533 = nil
 					} else {
 						in.Delim('[')
-						if v470 == nil {
+						if v533 == nil {
 							if !in.IsDelim(']') {
-								v470 = make(pkg.Shape, 0, 8)
+								v533 = make(pkg.Shape, 0, 8)
 							} else {
-								v470 = pkg.Shape{}
+								v533 = pkg.Shape{}
 							}
 						} else {
-							v470 = (v470)[:0]
+							v533 = (v533)[:0]
 						}
 						for !in.IsDelim(']') {
-							var v471 int64
-							v471 = int64(in.Int64())
-							v470 = append(v470, v471)
+							var v534 int64
+							v534 = int64(in.Int64())
+							v533 = append(v533, v534)
 							in.WantComma()
 						}
 						in.Delim(']')
 					}
-					out.OutputShapes_ = append(out.OutputShapes_, v470)
+					out.OutputShapes_ = append(out.OutputShapes_, v533)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -8814,7 +11306,7 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer24(in *jlexer.Lexer,
 		in.Consumed()
 	}
 }
-func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer24(out *jwriter.Writer, in ConstantInput) {
+func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer31(out *jwriter.Writer, in ConstantInput) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -8858,11 +11350,11 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer24(out *jwriter.Writ
 		}
 		{
 			out.RawByte('[')
-			for v472, v473 := range in.InputNames_ {
-				if v472 > 0 {
+			for v535, v536 := range in.InputNames_ {
+				if v535 > 0 {
 					out.RawByte(',')
 				}
-				out.String(string(v473))
+				out.String(string(v536))
 			}
 			out.RawByte(']')
 		}
@@ -8877,11 +11369,11 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer24(out *jwriter.Writ
 		}
 		{
 			out.RawByte('[')
-			for v474, v475 := range in.OutputNames_ {
-				if v474 > 0 {
+			for v537, v538 := range in.OutputNames_ {
+				if v537 > 0 {
 					out.RawByte(',')
 				}
-				out.String(string(v475))
+				out.String(string(v538))
 			}
 			out.RawByte(']')
 		}
@@ -8896,19 +11388,19 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer24(out *jwriter.Writ
 		}
 		{
 			out.RawByte('[')
-			for v476, v477 := range in.InputShapes_ {
-				if v476 > 0 {
+			for v539, v540 := range in.InputShapes_ {
+				if v539 > 0 {
 					out.RawByte(',')
 				}
-				if v477 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
+				if v540 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
 					out.RawString("null")
 				} else {
 					out.RawByte('[')
-					for v478, v479 := range v477 {
-						if v478 > 0 {
+					for v541, v542 := range v540 {
+						if v541 > 0 {
 							out.RawByte(',')
 						}
-						out.Int64(int64(v479))
+						out.Int64(int64(v542))
 					}
 					out.RawByte(']')
 				}
@@ -8926,19 +11418,19 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer24(out *jwriter.Writ
 		}
 		{
 			out.RawByte('[')
-			for v480, v481 := range in.OutputShapes_ {
-				if v480 > 0 {
+			for v543, v544 := range in.OutputShapes_ {
+				if v543 > 0 {
 					out.RawByte(',')
 				}
-				if v481 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
+				if v544 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
 					out.RawString("null")
 				} else {
 					out.RawByte('[')
-					for v482, v483 := range v481 {
-						if v482 > 0 {
+					for v545, v546 := range v544 {
+						if v545 > 0 {
 							out.RawByte(',')
 						}
-						out.Int64(int64(v483))
+						out.Int64(int64(v546))
 					}
 					out.RawByte(']')
 				}
@@ -8952,27 +11444,27 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer24(out *jwriter.Writ
 // MarshalJSON supports json.Marshaler interface
 func (v ConstantInput) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer24(&w, v)
+	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer31(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v ConstantInput) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer24(w, v)
+	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer31(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *ConstantInput) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer24(&r, v)
+	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer31(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *ConstantInput) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer24(l, v)
+	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer31(l, v)
 }
-func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer25(in *jlexer.Lexer, out *Constant) {
+func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer32(in *jlexer.Lexer, out *Constant) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -9014,9 +11506,9 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer25(in *jlexer.Lexer,
 					out.InputNames_ = (out.InputNames_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v484 string
-					v484 = string(in.String())
-					out.InputNames_ = append(out.InputNames_, v484)
+					var v547 string
+					v547 = string(in.String())
+					out.InputNames_ = append(out.InputNames_, v547)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -9037,9 +11529,9 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer25(in *jlexer.Lexer,
 					out.OutputNames_ = (out.OutputNames_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v485 string
-					v485 = string(in.String())
-					out.OutputNames_ = append(out.OutputNames_, v485)
+					var v548 string
+					v548 = string(in.String())
+					out.OutputNames_ = append(out.OutputNames_, v548)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -9060,30 +11552,30 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer25(in *jlexer.Lexer,
 					out.InputShapes_ = (out.InputShapes_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v486 pkg.Shape
+					var v549 pkg.Shape
 					if in.IsNull() {
 						in.Skip()
-						v486 = nil
+						v549 = nil
 					} else {
 						in.Delim('[')
-						if v486 == nil {
+						if v549 == nil {
 							if !in.IsDelim(']') {
-								v486 = make(pkg.Shape, 0, 8)
+								v549 = make(pkg.Shape, 0, 8)
 							} else {
-								v486 = pkg.Shape{}
+								v549 = pkg.Shape{}
 							}
 						} else {
-							v486 = (v486)[:0]
+							v549 = (v549)[:0]
 						}
 						for !in.IsDelim(']') {
-							var v487 int64
-							v487 = int64(in.Int64())
-							v486 = append(v486, v487)
+							var v550 int64
+							v550 = int64(in.Int64())
+							v549 = append(v549, v550)
 							in.WantComma()
 						}
 						in.Delim(']')
 					}
-					out.InputShapes_ = append(out.InputShapes_, v486)
+					out.InputShapes_ = append(out.InputShapes_, v549)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -9104,30 +11596,30 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer25(in *jlexer.Lexer,
 					out.OutputShapes_ = (out.OutputShapes_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v488 pkg.Shape
+					var v551 pkg.Shape
 					if in.IsNull() {
 						in.Skip()
-						v488 = nil
+						v551 = nil
 					} else {
 						in.Delim('[')
-						if v488 == nil {
+						if v551 == nil {
 							if !in.IsDelim(']') {
-								v488 = make(pkg.Shape, 0, 8)
+								v551 = make(pkg.Shape, 0, 8)
 							} else {
-								v488 = pkg.Shape{}
+								v551 = pkg.Shape{}
 							}
 						} else {
-							v488 = (v488)[:0]
+							v551 = (v551)[:0]
 						}
 						for !in.IsDelim(']') {
-							var v489 int64
-							v489 = int64(in.Int64())
-							v488 = append(v488, v489)
+							var v552 int64
+							v552 = int64(in.Int64())
+							v551 = append(v551, v552)
 							in.WantComma()
 						}
 						in.Delim(']')
 					}
-					out.OutputShapes_ = append(out.OutputShapes_, v488)
+					out.OutputShapes_ = append(out.OutputShapes_, v551)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -9146,7 +11638,7 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer25(in *jlexer.Lexer,
 		in.Consumed()
 	}
 }
-func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer25(out *jwriter.Writer, in Constant) {
+func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer32(out *jwriter.Writer, in Constant) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -9190,11 +11682,11 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer25(out *jwriter.Writ
 		}
 		{
 			out.RawByte('[')
-			for v490, v491 := range in.InputNames_ {
-				if v490 > 0 {
+			for v553, v554 := range in.InputNames_ {
+				if v553 > 0 {
 					out.RawByte(',')
 				}
-				out.String(string(v491))
+				out.String(string(v554))
 			}
 			out.RawByte(']')
 		}
@@ -9209,11 +11701,11 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer25(out *jwriter.Writ
 		}
 		{
 			out.RawByte('[')
-			for v492, v493 := range in.OutputNames_ {
-				if v492 > 0 {
+			for v555, v556 := range in.OutputNames_ {
+				if v555 > 0 {
 					out.RawByte(',')
 				}
-				out.String(string(v493))
+				out.String(string(v556))
 			}
 			out.RawByte(']')
 		}
@@ -9228,19 +11720,19 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer25(out *jwriter.Writ
 		}
 		{
 			out.RawByte('[')
-			for v494, v495 := range in.InputShapes_ {
-				if v494 > 0 {
+			for v557, v558 := range in.InputShapes_ {
+				if v557 > 0 {
 					out.RawByte(',')
 				}
-				if v495 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
+				if v558 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
 					out.RawString("null")
 				} else {
 					out.RawByte('[')
-					for v496, v497 := range v495 {
-						if v496 > 0 {
+					for v559, v560 := range v558 {
+						if v559 > 0 {
 							out.RawByte(',')
 						}
-						out.Int64(int64(v497))
+						out.Int64(int64(v560))
 					}
 					out.RawByte(']')
 				}
@@ -9258,19 +11750,19 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer25(out *jwriter.Writ
 		}
 		{
 			out.RawByte('[')
-			for v498, v499 := range in.OutputShapes_ {
-				if v498 > 0 {
+			for v561, v562 := range in.OutputShapes_ {
+				if v561 > 0 {
 					out.RawByte(',')
 				}
-				if v499 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
+				if v562 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
 					out.RawString("null")
 				} else {
 					out.RawByte('[')
-					for v500, v501 := range v499 {
-						if v500 > 0 {
+					for v563, v564 := range v562 {
+						if v563 > 0 {
 							out.RawByte(',')
 						}
-						out.Int64(int64(v501))
+						out.Int64(int64(v564))
 					}
 					out.RawByte(']')
 				}
@@ -9284,27 +11776,27 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer25(out *jwriter.Writ
 // MarshalJSON supports json.Marshaler interface
 func (v Constant) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer25(&w, v)
+	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer32(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v Constant) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer25(w, v)
+	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer32(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *Constant) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer25(&r, v)
+	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer32(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *Constant) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer25(l, v)
+	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer32(l, v)
 }
-func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer26(in *jlexer.Lexer, out *Concat) {
+func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer33(in *jlexer.Lexer, out *Concat) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -9348,9 +11840,9 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer26(in *jlexer.Lexer,
 					out.InputNames_ = (out.InputNames_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v502 string
-					v502 = string(in.String())
-					out.InputNames_ = append(out.InputNames_, v502)
+					var v565 string
+					v565 = string(in.String())
+					out.InputNames_ = append(out.InputNames_, v565)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -9371,9 +11863,9 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer26(in *jlexer.Lexer,
 					out.OutputNames_ = (out.OutputNames_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v503 string
-					v503 = string(in.String())
-					out.OutputNames_ = append(out.OutputNames_, v503)
+					var v566 string
+					v566 = string(in.String())
+					out.OutputNames_ = append(out.OutputNames_, v566)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -9394,30 +11886,30 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer26(in *jlexer.Lexer,
 					out.InputShapes_ = (out.InputShapes_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v504 pkg.Shape
+					var v567 pkg.Shape
 					if in.IsNull() {
 						in.Skip()
-						v504 = nil
+						v567 = nil
 					} else {
 						in.Delim('[')
-						if v504 == nil {
+						if v567 == nil {
 							if !in.IsDelim(']') {
-								v504 = make(pkg.Shape, 0, 8)
+								v567 = make(pkg.Shape, 0, 8)
 							} else {
-								v504 = pkg.Shape{}
+								v567 = pkg.Shape{}
 							}
 						} else {
-							v504 = (v504)[:0]
+							v567 = (v567)[:0]
 						}
 						for !in.IsDelim(']') {
-							var v505 int64
-							v505 = int64(in.Int64())
-							v504 = append(v504, v505)
+							var v568 int64
+							v568 = int64(in.Int64())
+							v567 = append(v567, v568)
 							in.WantComma()
 						}
 						in.Delim(']')
 					}
-					out.InputShapes_ = append(out.InputShapes_, v504)
+					out.InputShapes_ = append(out.InputShapes_, v567)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -9438,30 +11930,30 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer26(in *jlexer.Lexer,
 					out.OutputShapes_ = (out.OutputShapes_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v506 pkg.Shape
+					var v569 pkg.Shape
 					if in.IsNull() {
 						in.Skip()
-						v506 = nil
+						v569 = nil
 					} else {
 						in.Delim('[')
-						if v506 == nil {
+						if v569 == nil {
 							if !in.IsDelim(']') {
-								v506 = make(pkg.Shape, 0, 8)
+								v569 = make(pkg.Shape, 0, 8)
 							} else {
-								v506 = pkg.Shape{}
+								v569 = pkg.Shape{}
 							}
 						} else {
-							v506 = (v506)[:0]
+							v569 = (v569)[:0]
 						}
 						for !in.IsDelim(']') {
-							var v507 int64
-							v507 = int64(in.Int64())
-							v506 = append(v506, v507)
+							var v570 int64
+							v570 = int64(in.Int64())
+							v569 = append(v569, v570)
 							in.WantComma()
 						}
 						in.Delim(']')
 					}
-					out.OutputShapes_ = append(out.OutputShapes_, v506)
+					out.OutputShapes_ = append(out.OutputShapes_, v569)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -9480,7 +11972,7 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer26(in *jlexer.Lexer,
 		in.Consumed()
 	}
 }
-func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer26(out *jwriter.Writer, in Concat) {
+func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer33(out *jwriter.Writer, in Concat) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -9534,11 +12026,11 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer26(out *jwriter.Writ
 		}
 		{
 			out.RawByte('[')
-			for v508, v509 := range in.InputNames_ {
-				if v508 > 0 {
+			for v571, v572 := range in.InputNames_ {
+				if v571 > 0 {
 					out.RawByte(',')
 				}
-				out.String(string(v509))
+				out.String(string(v572))
 			}
 			out.RawByte(']')
 		}
@@ -9553,11 +12045,11 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer26(out *jwriter.Writ
 		}
 		{
 			out.RawByte('[')
-			for v510, v511 := range in.OutputNames_ {
-				if v510 > 0 {
+			for v573, v574 := range in.OutputNames_ {
+				if v573 > 0 {
 					out.RawByte(',')
 				}
-				out.String(string(v511))
+				out.String(string(v574))
 			}
 			out.RawByte(']')
 		}
@@ -9572,19 +12064,19 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer26(out *jwriter.Writ
 		}
 		{
 			out.RawByte('[')
-			for v512, v513 := range in.InputShapes_ {
-				if v512 > 0 {
+			for v575, v576 := range in.InputShapes_ {
+				if v575 > 0 {
 					out.RawByte(',')
 				}
-				if v513 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
+				if v576 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
 					out.RawString("null")
 				} else {
 					out.RawByte('[')
-					for v514, v515 := range v513 {
-						if v514 > 0 {
+					for v577, v578 := range v576 {
+						if v577 > 0 {
 							out.RawByte(',')
 						}
-						out.Int64(int64(v515))
+						out.Int64(int64(v578))
 					}
 					out.RawByte(']')
 				}
@@ -9602,19 +12094,19 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer26(out *jwriter.Writ
 		}
 		{
 			out.RawByte('[')
-			for v516, v517 := range in.OutputShapes_ {
-				if v516 > 0 {
+			for v579, v580 := range in.OutputShapes_ {
+				if v579 > 0 {
 					out.RawByte(',')
 				}
-				if v517 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
+				if v580 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
 					out.RawString("null")
 				} else {
 					out.RawByte('[')
-					for v518, v519 := range v517 {
-						if v518 > 0 {
+					for v581, v582 := range v580 {
+						if v581 > 0 {
 							out.RawByte(',')
 						}
-						out.Int64(int64(v519))
+						out.Int64(int64(v582))
 					}
 					out.RawByte(']')
 				}
@@ -9628,27 +12120,27 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer26(out *jwriter.Writ
 // MarshalJSON supports json.Marshaler interface
 func (v Concat) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer26(&w, v)
+	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer33(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v Concat) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer26(w, v)
+	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer33(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *Concat) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer26(&r, v)
+	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer33(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *Concat) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer26(l, v)
+	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer33(l, v)
 }
-func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer27(in *jlexer.Lexer, out *Clip) {
+func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer34(in *jlexer.Lexer, out *Clip) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -9694,9 +12186,9 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer27(in *jlexer.Lexer,
 					out.InputNames_ = (out.InputNames_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v520 string
-					v520 = string(in.String())
-					out.InputNames_ = append(out.InputNames_, v520)
+					var v583 string
+					v583 = string(in.String())
+					out.InputNames_ = append(out.InputNames_, v583)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -9717,9 +12209,9 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer27(in *jlexer.Lexer,
 					out.OutputNames_ = (out.OutputNames_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v521 string
-					v521 = string(in.String())
-					out.OutputNames_ = append(out.OutputNames_, v521)
+					var v584 string
+					v584 = string(in.String())
+					out.OutputNames_ = append(out.OutputNames_, v584)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -9740,30 +12232,30 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer27(in *jlexer.Lexer,
 					out.InputShapes_ = (out.InputShapes_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v522 pkg.Shape
+					var v585 pkg.Shape
 					if in.IsNull() {
 						in.Skip()
-						v522 = nil
+						v585 = nil
 					} else {
 						in.Delim('[')
-						if v522 == nil {
+						if v585 == nil {
 							if !in.IsDelim(']') {
-								v522 = make(pkg.Shape, 0, 8)
+								v585 = make(pkg.Shape, 0, 8)
 							} else {
-								v522 = pkg.Shape{}
+								v585 = pkg.Shape{}
 							}
 						} else {
-							v522 = (v522)[:0]
+							v585 = (v585)[:0]
 						}
 						for !in.IsDelim(']') {
-							var v523 int64
-							v523 = int64(in.Int64())
-							v522 = append(v522, v523)
+							var v586 int64
+							v586 = int64(in.Int64())
+							v585 = append(v585, v586)
 							in.WantComma()
 						}
 						in.Delim(']')
 					}
-					out.InputShapes_ = append(out.InputShapes_, v522)
+					out.InputShapes_ = append(out.InputShapes_, v585)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -9784,30 +12276,30 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer27(in *jlexer.Lexer,
 					out.OutputShapes_ = (out.OutputShapes_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v524 pkg.Shape
+					var v587 pkg.Shape
 					if in.IsNull() {
 						in.Skip()
-						v524 = nil
+						v587 = nil
 					} else {
 						in.Delim('[')
-						if v524 == nil {
+						if v587 == nil {
 							if !in.IsDelim(']') {
-								v524 = make(pkg.Shape, 0, 8)
+								v587 = make(pkg.Shape, 0, 8)
 							} else {
-								v524 = pkg.Shape{}
+								v587 = pkg.Shape{}
 							}
 						} else {
-							v524 = (v524)[:0]
+							v587 = (v587)[:0]
 						}
 						for !in.IsDelim(']') {
-							var v525 int64
-							v525 = int64(in.Int64())
-							v524 = append(v524, v525)
+							var v588 int64
+							v588 = int64(in.Int64())
+							v587 = append(v587, v588)
 							in.WantComma()
 						}
 						in.Delim(']')
 					}
-					out.OutputShapes_ = append(out.OutputShapes_, v524)
+					out.OutputShapes_ = append(out.OutputShapes_, v587)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -9826,7 +12318,7 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer27(in *jlexer.Lexer,
 		in.Consumed()
 	}
 }
-func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer27(out *jwriter.Writer, in Clip) {
+func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer34(out *jwriter.Writer, in Clip) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -9890,11 +12382,11 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer27(out *jwriter.Writ
 		}
 		{
 			out.RawByte('[')
-			for v526, v527 := range in.InputNames_ {
-				if v526 > 0 {
+			for v589, v590 := range in.InputNames_ {
+				if v589 > 0 {
 					out.RawByte(',')
 				}
-				out.String(string(v527))
+				out.String(string(v590))
 			}
 			out.RawByte(']')
 		}
@@ -9909,11 +12401,11 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer27(out *jwriter.Writ
 		}
 		{
 			out.RawByte('[')
-			for v528, v529 := range in.OutputNames_ {
-				if v528 > 0 {
+			for v591, v592 := range in.OutputNames_ {
+				if v591 > 0 {
 					out.RawByte(',')
 				}
-				out.String(string(v529))
+				out.String(string(v592))
 			}
 			out.RawByte(']')
 		}
@@ -9928,19 +12420,19 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer27(out *jwriter.Writ
 		}
 		{
 			out.RawByte('[')
-			for v530, v531 := range in.InputShapes_ {
-				if v530 > 0 {
+			for v593, v594 := range in.InputShapes_ {
+				if v593 > 0 {
 					out.RawByte(',')
 				}
-				if v531 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
+				if v594 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
 					out.RawString("null")
 				} else {
 					out.RawByte('[')
-					for v532, v533 := range v531 {
-						if v532 > 0 {
+					for v595, v596 := range v594 {
+						if v595 > 0 {
 							out.RawByte(',')
 						}
-						out.Int64(int64(v533))
+						out.Int64(int64(v596))
 					}
 					out.RawByte(']')
 				}
@@ -9958,19 +12450,19 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer27(out *jwriter.Writ
 		}
 		{
 			out.RawByte('[')
-			for v534, v535 := range in.OutputShapes_ {
-				if v534 > 0 {
+			for v597, v598 := range in.OutputShapes_ {
+				if v597 > 0 {
 					out.RawByte(',')
 				}
-				if v535 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
+				if v598 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
 					out.RawString("null")
 				} else {
 					out.RawByte('[')
-					for v536, v537 := range v535 {
-						if v536 > 0 {
+					for v599, v600 := range v598 {
+						if v599 > 0 {
 							out.RawByte(',')
 						}
-						out.Int64(int64(v537))
+						out.Int64(int64(v600))
 					}
 					out.RawByte(']')
 				}
@@ -9984,27 +12476,27 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer27(out *jwriter.Writ
 // MarshalJSON supports json.Marshaler interface
 func (v Clip) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer27(&w, v)
+	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer34(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v Clip) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer27(w, v)
+	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer34(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *Clip) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer27(&r, v)
+	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer34(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *Clip) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer27(l, v)
+	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer34(l, v)
 }
-func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer28(in *jlexer.Lexer, out *Cast) {
+func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer35(in *jlexer.Lexer, out *Cast) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -10046,9 +12538,9 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer28(in *jlexer.Lexer,
 					out.InputNames_ = (out.InputNames_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v538 string
-					v538 = string(in.String())
-					out.InputNames_ = append(out.InputNames_, v538)
+					var v601 string
+					v601 = string(in.String())
+					out.InputNames_ = append(out.InputNames_, v601)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -10069,9 +12561,9 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer28(in *jlexer.Lexer,
 					out.OutputNames_ = (out.OutputNames_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v539 string
-					v539 = string(in.String())
-					out.OutputNames_ = append(out.OutputNames_, v539)
+					var v602 string
+					v602 = string(in.String())
+					out.OutputNames_ = append(out.OutputNames_, v602)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -10092,30 +12584,30 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer28(in *jlexer.Lexer,
 					out.InputShapes_ = (out.InputShapes_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v540 pkg.Shape
+					var v603 pkg.Shape
 					if in.IsNull() {
 						in.Skip()
-						v540 = nil
+						v603 = nil
 					} else {
 						in.Delim('[')
-						if v540 == nil {
+						if v603 == nil {
 							if !in.IsDelim(']') {
-								v540 = make(pkg.Shape, 0, 8)
+								v603 = make(pkg.Shape, 0, 8)
 							} else {
-								v540 = pkg.Shape{}
+								v603 = pkg.Shape{}
 							}
 						} else {
-							v540 = (v540)[:0]
+							v603 = (v603)[:0]
 						}
 						for !in.IsDelim(']') {
-							var v541 int64
-							v541 = int64(in.Int64())
-							v540 = append(v540, v541)
+							var v604 int64
+							v604 = int64(in.Int64())
+							v603 = append(v603, v604)
 							in.WantComma()
 						}
 						in.Delim(']')
 					}
-					out.InputShapes_ = append(out.InputShapes_, v540)
+					out.InputShapes_ = append(out.InputShapes_, v603)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -10136,30 +12628,30 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer28(in *jlexer.Lexer,
 					out.OutputShapes_ = (out.OutputShapes_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v542 pkg.Shape
+					var v605 pkg.Shape
 					if in.IsNull() {
 						in.Skip()
-						v542 = nil
+						v605 = nil
 					} else {
 						in.Delim('[')
-						if v542 == nil {
+						if v605 == nil {
 							if !in.IsDelim(']') {
-								v542 = make(pkg.Shape, 0, 8)
+								v605 = make(pkg.Shape, 0, 8)
 							} else {
-								v542 = pkg.Shape{}
+								v605 = pkg.Shape{}
 							}
 						} else {
-							v542 = (v542)[:0]
+							v605 = (v605)[:0]
 						}
 						for !in.IsDelim(']') {
-							var v543 int64
-							v543 = int64(in.Int64())
-							v542 = append(v542, v543)
+							var v606 int64
+							v606 = int64(in.Int64())
+							v605 = append(v605, v606)
 							in.WantComma()
 						}
 						in.Delim(']')
 					}
-					out.OutputShapes_ = append(out.OutputShapes_, v542)
+					out.OutputShapes_ = append(out.OutputShapes_, v605)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -10178,7 +12670,7 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer28(in *jlexer.Lexer,
 		in.Consumed()
 	}
 }
-func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer28(out *jwriter.Writer, in Cast) {
+func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer35(out *jwriter.Writer, in Cast) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -10222,11 +12714,11 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer28(out *jwriter.Writ
 		}
 		{
 			out.RawByte('[')
-			for v544, v545 := range in.InputNames_ {
-				if v544 > 0 {
+			for v607, v608 := range in.InputNames_ {
+				if v607 > 0 {
 					out.RawByte(',')
 				}
-				out.String(string(v545))
+				out.String(string(v608))
 			}
 			out.RawByte(']')
 		}
@@ -10241,11 +12733,11 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer28(out *jwriter.Writ
 		}
 		{
 			out.RawByte('[')
-			for v546, v547 := range in.OutputNames_ {
-				if v546 > 0 {
+			for v609, v610 := range in.OutputNames_ {
+				if v609 > 0 {
 					out.RawByte(',')
 				}
-				out.String(string(v547))
+				out.String(string(v610))
 			}
 			out.RawByte(']')
 		}
@@ -10260,19 +12752,19 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer28(out *jwriter.Writ
 		}
 		{
 			out.RawByte('[')
-			for v548, v549 := range in.InputShapes_ {
-				if v548 > 0 {
+			for v611, v612 := range in.InputShapes_ {
+				if v611 > 0 {
 					out.RawByte(',')
 				}
-				if v549 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
+				if v612 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
 					out.RawString("null")
 				} else {
 					out.RawByte('[')
-					for v550, v551 := range v549 {
-						if v550 > 0 {
+					for v613, v614 := range v612 {
+						if v613 > 0 {
 							out.RawByte(',')
 						}
-						out.Int64(int64(v551))
+						out.Int64(int64(v614))
 					}
 					out.RawByte(']')
 				}
@@ -10290,19 +12782,19 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer28(out *jwriter.Writ
 		}
 		{
 			out.RawByte('[')
-			for v552, v553 := range in.OutputShapes_ {
-				if v552 > 0 {
+			for v615, v616 := range in.OutputShapes_ {
+				if v615 > 0 {
 					out.RawByte(',')
 				}
-				if v553 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
+				if v616 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
 					out.RawString("null")
 				} else {
 					out.RawByte('[')
-					for v554, v555 := range v553 {
-						if v554 > 0 {
+					for v617, v618 := range v616 {
+						if v617 > 0 {
 							out.RawByte(',')
 						}
-						out.Int64(int64(v555))
+						out.Int64(int64(v618))
 					}
 					out.RawByte(']')
 				}
@@ -10316,27 +12808,27 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer28(out *jwriter.Writ
 // MarshalJSON supports json.Marshaler interface
 func (v Cast) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer28(&w, v)
+	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer35(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v Cast) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer28(w, v)
+	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer35(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *Cast) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer28(&r, v)
+	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer35(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *Cast) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer28(l, v)
+	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer35(l, v)
 }
-func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer29(in *jlexer.Lexer, out *BatchNorm) {
+func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer36(in *jlexer.Lexer, out *BatchNorm) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -10380,9 +12872,9 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer29(in *jlexer.Lexer,
 					out.InputNames_ = (out.InputNames_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v556 string
-					v556 = string(in.String())
-					out.InputNames_ = append(out.InputNames_, v556)
+					var v619 string
+					v619 = string(in.String())
+					out.InputNames_ = append(out.InputNames_, v619)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -10403,9 +12895,9 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer29(in *jlexer.Lexer,
 					out.OutputNames_ = (out.OutputNames_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v557 string
-					v557 = string(in.String())
-					out.OutputNames_ = append(out.OutputNames_, v557)
+					var v620 string
+					v620 = string(in.String())
+					out.OutputNames_ = append(out.OutputNames_, v620)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -10426,30 +12918,30 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer29(in *jlexer.Lexer,
 					out.InputShapes_ = (out.InputShapes_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v558 pkg.Shape
+					var v621 pkg.Shape
 					if in.IsNull() {
 						in.Skip()
-						v558 = nil
+						v621 = nil
 					} else {
 						in.Delim('[')
-						if v558 == nil {
+						if v621 == nil {
 							if !in.IsDelim(']') {
-								v558 = make(pkg.Shape, 0, 8)
+								v621 = make(pkg.Shape, 0, 8)
 							} else {
-								v558 = pkg.Shape{}
+								v621 = pkg.Shape{}
 							}
 						} else {
-							v558 = (v558)[:0]
+							v621 = (v621)[:0]
 						}
 						for !in.IsDelim(']') {
-							var v559 int64
-							v559 = int64(in.Int64())
-							v558 = append(v558, v559)
+							var v622 int64
+							v622 = int64(in.Int64())
+							v621 = append(v621, v622)
 							in.WantComma()
 						}
 						in.Delim(']')
 					}
-					out.InputShapes_ = append(out.InputShapes_, v558)
+					out.InputShapes_ = append(out.InputShapes_, v621)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -10470,30 +12962,30 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer29(in *jlexer.Lexer,
 					out.OutputShapes_ = (out.OutputShapes_)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v560 pkg.Shape
+					var v623 pkg.Shape
 					if in.IsNull() {
 						in.Skip()
-						v560 = nil
+						v623 = nil
 					} else {
 						in.Delim('[')
-						if v560 == nil {
+						if v623 == nil {
 							if !in.IsDelim(']') {
-								v560 = make(pkg.Shape, 0, 8)
+								v623 = make(pkg.Shape, 0, 8)
 							} else {
-								v560 = pkg.Shape{}
+								v623 = pkg.Shape{}
 							}
 						} else {
-							v560 = (v560)[:0]
+							v623 = (v623)[:0]
 						}
 						for !in.IsDelim(']') {
-							var v561 int64
-							v561 = int64(in.Int64())
-							v560 = append(v560, v561)
+							var v624 int64
+							v624 = int64(in.Int64())
+							v623 = append(v623, v624)
 							in.WantComma()
 						}
 						in.Delim(']')
 					}
-					out.OutputShapes_ = append(out.OutputShapes_, v560)
+					out.OutputShapes_ = append(out.OutputShapes_, v623)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -10512,7 +13004,7 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer29(in *jlexer.Lexer,
 		in.Consumed()
 	}
 }
-func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer29(out *jwriter.Writer, in BatchNorm) {
+func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer36(out *jwriter.Writer, in BatchNorm) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -10566,11 +13058,11 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer29(out *jwriter.Writ
 		}
 		{
 			out.RawByte('[')
-			for v562, v563 := range in.InputNames_ {
-				if v562 > 0 {
+			for v625, v626 := range in.InputNames_ {
+				if v625 > 0 {
 					out.RawByte(',')
 				}
-				out.String(string(v563))
+				out.String(string(v626))
 			}
 			out.RawByte(']')
 		}
@@ -10585,11 +13077,11 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer29(out *jwriter.Writ
 		}
 		{
 			out.RawByte('[')
-			for v564, v565 := range in.OutputNames_ {
-				if v564 > 0 {
+			for v627, v628 := range in.OutputNames_ {
+				if v627 > 0 {
 					out.RawByte(',')
 				}
-				out.String(string(v565))
+				out.String(string(v628))
 			}
 			out.RawByte(']')
 		}
@@ -10604,19 +13096,19 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer29(out *jwriter.Writ
 		}
 		{
 			out.RawByte('[')
-			for v566, v567 := range in.InputShapes_ {
-				if v566 > 0 {
+			for v629, v630 := range in.InputShapes_ {
+				if v629 > 0 {
 					out.RawByte(',')
 				}
-				if v567 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
+				if v630 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
 					out.RawString("null")
 				} else {
 					out.RawByte('[')
-					for v568, v569 := range v567 {
-						if v568 > 0 {
+					for v631, v632 := range v630 {
+						if v631 > 0 {
 							out.RawByte(',')
 						}
-						out.Int64(int64(v569))
+						out.Int64(int64(v632))
 					}
 					out.RawByte(']')
 				}
@@ -10634,19 +13126,19 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer29(out *jwriter.Writ
 		}
 		{
 			out.RawByte('[')
-			for v570, v571 := range in.OutputShapes_ {
-				if v570 > 0 {
+			for v633, v634 := range in.OutputShapes_ {
+				if v633 > 0 {
 					out.RawByte(',')
 				}
-				if v571 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
+				if v634 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
 					out.RawString("null")
 				} else {
 					out.RawByte('[')
-					for v572, v573 := range v571 {
-						if v572 > 0 {
+					for v635, v636 := range v634 {
+						if v635 > 0 {
 							out.RawByte(',')
 						}
-						out.Int64(int64(v573))
+						out.Int64(int64(v636))
 					}
 					out.RawByte(']')
 				}
@@ -10660,23 +13152,762 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer29(out *jwriter.Writ
 // MarshalJSON supports json.Marshaler interface
 func (v BatchNorm) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer29(&w, v)
+	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer36(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v BatchNorm) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer29(w, v)
+	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer36(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *BatchNorm) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer29(&r, v)
+	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer36(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *BatchNorm) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer29(l, v)
+	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer36(l, v)
+}
+func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer37(in *jlexer.Lexer, out *BaseBenchmarkInputArgs) {
+	isTopLevel := in.IsStart()
+	if in.IsNull() {
+		if isTopLevel {
+			in.Consumed()
+		}
+		in.Skip()
+		return
+	}
+	in.Delim('{')
+	for !in.IsDelim('}') {
+		key := in.UnsafeString()
+		in.WantColon()
+		if in.IsNull() {
+			in.Skip()
+			in.WantComma()
+			continue
+		}
+		switch key {
+		case "input_0":
+			out.Input0 = int64(in.Int64())
+		case "input_1":
+			out.Input1 = int64(in.Int64())
+		case "input_2":
+			out.Input2 = int64(in.Int64())
+		case "input_3":
+			out.Input3 = int64(in.Int64())
+		case "input_4":
+			out.Input4 = int64(in.Int64())
+		case "input_5":
+			out.Input5 = int64(in.Int64())
+		case "input_6":
+			out.Input6 = int64(in.Int64())
+		case "input_7":
+			out.Input7 = int64(in.Int64())
+		case "batch_size":
+			out.BatchSize = int64(in.Int64())
+		default:
+			in.AddError(&jlexer.LexerError{
+				Offset: in.GetPos(),
+				Reason: "unknown field",
+				Data:   key,
+			})
+		}
+		in.WantComma()
+	}
+	in.Delim('}')
+	if isTopLevel {
+		in.Consumed()
+	}
+}
+func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer37(out *jwriter.Writer, in BaseBenchmarkInputArgs) {
+	out.RawByte('{')
+	first := true
+	_ = first
+	if in.Input0 != 0 {
+		const prefix string = ",\"input_0\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.Input0))
+	}
+	if in.Input1 != 0 {
+		const prefix string = ",\"input_1\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.Input1))
+	}
+	if in.Input2 != 0 {
+		const prefix string = ",\"input_2\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.Input2))
+	}
+	if in.Input3 != 0 {
+		const prefix string = ",\"input_3\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.Input3))
+	}
+	if in.Input4 != 0 {
+		const prefix string = ",\"input_4\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.Input4))
+	}
+	if in.Input5 != 0 {
+		const prefix string = ",\"input_5\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.Input5))
+	}
+	if in.Input6 != 0 {
+		const prefix string = ",\"input_6\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.Input6))
+	}
+	if in.Input7 != 0 {
+		const prefix string = ",\"input_7\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.Input7))
+	}
+	if in.BatchSize != 0 {
+		const prefix string = ",\"batch_size\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.BatchSize))
+	}
+	out.RawByte('}')
+}
+
+// MarshalJSON supports json.Marshaler interface
+func (v BaseBenchmarkInputArgs) MarshalJSON() ([]byte, error) {
+	w := jwriter.Writer{}
+	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer37(&w, v)
+	return w.Buffer.BuildBytes(), w.Error
+}
+
+// MarshalEasyJSON supports easyjson.Marshaler interface
+func (v BaseBenchmarkInputArgs) MarshalEasyJSON(w *jwriter.Writer) {
+	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer37(w, v)
+}
+
+// UnmarshalJSON supports json.Unmarshaler interface
+func (v *BaseBenchmarkInputArgs) UnmarshalJSON(data []byte) error {
+	r := jlexer.Lexer{Data: data}
+	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer37(&r, v)
+	return r.Error()
+}
+
+// UnmarshalEasyJSON supports easyjson.Unmarshaler interface
+func (v *BaseBenchmarkInputArgs) UnmarshalEasyJSON(l *jlexer.Lexer) {
+	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer37(l, v)
+}
+func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer38(in *jlexer.Lexer, out *BaseBenchmarkArgs) {
+	isTopLevel := in.IsStart()
+	if in.IsNull() {
+		if isTopLevel {
+			in.Consumed()
+		}
+		in.Skip()
+		return
+	}
+	in.Delim('{')
+	for !in.IsDelim('}') {
+		key := in.UnsafeString()
+		in.WantColon()
+		if in.IsNull() {
+			in.Skip()
+			in.WantComma()
+			continue
+		}
+		switch key {
+		case "arg_names":
+			if in.IsNull() {
+				in.Skip()
+				out.ArgNames = nil
+			} else {
+				in.Delim('[')
+				if out.ArgNames == nil {
+					if !in.IsDelim(']') {
+						out.ArgNames = make([]string, 0, 4)
+					} else {
+						out.ArgNames = []string{}
+					}
+				} else {
+					out.ArgNames = (out.ArgNames)[:0]
+				}
+				for !in.IsDelim(']') {
+					var v637 string
+					v637 = string(in.String())
+					out.ArgNames = append(out.ArgNames, v637)
+					in.WantComma()
+				}
+				in.Delim(']')
+			}
+		case "unique_benchmark_id":
+			out.UniqueBenchmarkID = uint64(in.Uint64())
+		case "benchmark_name":
+			out.BenchmarkName = string(in.String())
+		case "algorithms":
+			if in.IsNull() {
+				in.Skip()
+				out.Algorithms = nil
+			} else {
+				in.Delim('[')
+				if out.Algorithms == nil {
+					if !in.IsDelim(']') {
+						out.Algorithms = make([]string, 0, 4)
+					} else {
+						out.Algorithms = []string{}
+					}
+				} else {
+					out.Algorithms = (out.Algorithms)[:0]
+				}
+				for !in.IsDelim(']') {
+					var v638 string
+					v638 = string(in.String())
+					out.Algorithms = append(out.Algorithms, v638)
+					in.WantComma()
+				}
+				in.Delim(']')
+			}
+		case "data_types":
+			if in.IsNull() {
+				in.Skip()
+				out.DataTypes = nil
+			} else {
+				in.Delim('[')
+				if out.DataTypes == nil {
+					if !in.IsDelim(']') {
+						out.DataTypes = make([]pkg.DataType, 0, 2)
+					} else {
+						out.DataTypes = []pkg.DataType{}
+					}
+				} else {
+					out.DataTypes = (out.DataTypes)[:0]
+				}
+				for !in.IsDelim(']') {
+					var v639 pkg.DataType
+					easyjson36987811DecodeGithubComRaiProjectDlperfPkg(in, &v639)
+					out.DataTypes = append(out.DataTypes, v639)
+					in.WantComma()
+				}
+				in.Delim(']')
+			}
+		case "is_training":
+			out.IsTraining = bool(in.Bool())
+		case "batch_size":
+			out.BatchSize = int64(in.Int64())
+		default:
+			in.AddError(&jlexer.LexerError{
+				Offset: in.GetPos(),
+				Reason: "unknown field",
+				Data:   key,
+			})
+		}
+		in.WantComma()
+	}
+	in.Delim('}')
+	if isTopLevel {
+		in.Consumed()
+	}
+}
+func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer38(out *jwriter.Writer, in BaseBenchmarkArgs) {
+	out.RawByte('{')
+	first := true
+	_ = first
+	if len(in.ArgNames) != 0 {
+		const prefix string = ",\"arg_names\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		{
+			out.RawByte('[')
+			for v640, v641 := range in.ArgNames {
+				if v640 > 0 {
+					out.RawByte(',')
+				}
+				out.String(string(v641))
+			}
+			out.RawByte(']')
+		}
+	}
+	if in.UniqueBenchmarkID != 0 {
+		const prefix string = ",\"unique_benchmark_id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Uint64(uint64(in.UniqueBenchmarkID))
+	}
+	if in.BenchmarkName != "" {
+		const prefix string = ",\"benchmark_name\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.BenchmarkName))
+	}
+	if len(in.Algorithms) != 0 {
+		const prefix string = ",\"algorithms\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		{
+			out.RawByte('[')
+			for v642, v643 := range in.Algorithms {
+				if v642 > 0 {
+					out.RawByte(',')
+				}
+				out.String(string(v643))
+			}
+			out.RawByte(']')
+		}
+	}
+	if len(in.DataTypes) != 0 {
+		const prefix string = ",\"data_types\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		{
+			out.RawByte('[')
+			for v644, v645 := range in.DataTypes {
+				if v644 > 0 {
+					out.RawByte(',')
+				}
+				easyjson36987811EncodeGithubComRaiProjectDlperfPkg(out, v645)
+			}
+			out.RawByte(']')
+		}
+	}
+	if in.IsTraining {
+		const prefix string = ",\"is_training\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Bool(bool(in.IsTraining))
+	}
+	if in.BatchSize != 0 {
+		const prefix string = ",\"batch_size\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.BatchSize))
+	}
+	out.RawByte('}')
+}
+
+// MarshalJSON supports json.Marshaler interface
+func (v BaseBenchmarkArgs) MarshalJSON() ([]byte, error) {
+	w := jwriter.Writer{}
+	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer38(&w, v)
+	return w.Buffer.BuildBytes(), w.Error
+}
+
+// MarshalEasyJSON supports easyjson.Marshaler interface
+func (v BaseBenchmarkArgs) MarshalEasyJSON(w *jwriter.Writer) {
+	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer38(w, v)
+}
+
+// UnmarshalJSON supports json.Unmarshaler interface
+func (v *BaseBenchmarkArgs) UnmarshalJSON(data []byte) error {
+	r := jlexer.Lexer{Data: data}
+	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer38(&r, v)
+	return r.Error()
+}
+
+// UnmarshalEasyJSON supports easyjson.Unmarshaler interface
+func (v *BaseBenchmarkArgs) UnmarshalEasyJSON(l *jlexer.Lexer) {
+	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer38(l, v)
+}
+func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer39(in *jlexer.Lexer, out *Base) {
+	isTopLevel := in.IsStart()
+	if in.IsNull() {
+		if isTopLevel {
+			in.Consumed()
+		}
+		in.Skip()
+		return
+	}
+	in.Delim('{')
+	for !in.IsDelim('}') {
+		key := in.UnsafeString()
+		in.WantColon()
+		if in.IsNull() {
+			in.Skip()
+			in.WantComma()
+			continue
+		}
+		switch key {
+		case "name":
+			out.Name_ = string(in.String())
+		case "operator_type":
+			out.OperatorType_ = string(in.String())
+		case "onnx_operator_type":
+			out.OnnxOperatorType_ = string(in.String())
+		case "input_names":
+			if in.IsNull() {
+				in.Skip()
+				out.InputNames_ = nil
+			} else {
+				in.Delim('[')
+				if out.InputNames_ == nil {
+					if !in.IsDelim(']') {
+						out.InputNames_ = make([]string, 0, 4)
+					} else {
+						out.InputNames_ = []string{}
+					}
+				} else {
+					out.InputNames_ = (out.InputNames_)[:0]
+				}
+				for !in.IsDelim(']') {
+					var v646 string
+					v646 = string(in.String())
+					out.InputNames_ = append(out.InputNames_, v646)
+					in.WantComma()
+				}
+				in.Delim(']')
+			}
+		case "output_names":
+			if in.IsNull() {
+				in.Skip()
+				out.OutputNames_ = nil
+			} else {
+				in.Delim('[')
+				if out.OutputNames_ == nil {
+					if !in.IsDelim(']') {
+						out.OutputNames_ = make([]string, 0, 4)
+					} else {
+						out.OutputNames_ = []string{}
+					}
+				} else {
+					out.OutputNames_ = (out.OutputNames_)[:0]
+				}
+				for !in.IsDelim(']') {
+					var v647 string
+					v647 = string(in.String())
+					out.OutputNames_ = append(out.OutputNames_, v647)
+					in.WantComma()
+				}
+				in.Delim(']')
+			}
+		case "input_shapes":
+			if in.IsNull() {
+				in.Skip()
+				out.InputShapes_ = nil
+			} else {
+				in.Delim('[')
+				if out.InputShapes_ == nil {
+					if !in.IsDelim(']') {
+						out.InputShapes_ = make([]pkg.Shape, 0, 2)
+					} else {
+						out.InputShapes_ = []pkg.Shape{}
+					}
+				} else {
+					out.InputShapes_ = (out.InputShapes_)[:0]
+				}
+				for !in.IsDelim(']') {
+					var v648 pkg.Shape
+					if in.IsNull() {
+						in.Skip()
+						v648 = nil
+					} else {
+						in.Delim('[')
+						if v648 == nil {
+							if !in.IsDelim(']') {
+								v648 = make(pkg.Shape, 0, 8)
+							} else {
+								v648 = pkg.Shape{}
+							}
+						} else {
+							v648 = (v648)[:0]
+						}
+						for !in.IsDelim(']') {
+							var v649 int64
+							v649 = int64(in.Int64())
+							v648 = append(v648, v649)
+							in.WantComma()
+						}
+						in.Delim(']')
+					}
+					out.InputShapes_ = append(out.InputShapes_, v648)
+					in.WantComma()
+				}
+				in.Delim(']')
+			}
+		case "output_shapes":
+			if in.IsNull() {
+				in.Skip()
+				out.OutputShapes_ = nil
+			} else {
+				in.Delim('[')
+				if out.OutputShapes_ == nil {
+					if !in.IsDelim(']') {
+						out.OutputShapes_ = make([]pkg.Shape, 0, 2)
+					} else {
+						out.OutputShapes_ = []pkg.Shape{}
+					}
+				} else {
+					out.OutputShapes_ = (out.OutputShapes_)[:0]
+				}
+				for !in.IsDelim(']') {
+					var v650 pkg.Shape
+					if in.IsNull() {
+						in.Skip()
+						v650 = nil
+					} else {
+						in.Delim('[')
+						if v650 == nil {
+							if !in.IsDelim(']') {
+								v650 = make(pkg.Shape, 0, 8)
+							} else {
+								v650 = pkg.Shape{}
+							}
+						} else {
+							v650 = (v650)[:0]
+						}
+						for !in.IsDelim(']') {
+							var v651 int64
+							v651 = int64(in.Int64())
+							v650 = append(v650, v651)
+							in.WantComma()
+						}
+						in.Delim(']')
+					}
+					out.OutputShapes_ = append(out.OutputShapes_, v650)
+					in.WantComma()
+				}
+				in.Delim(']')
+			}
+		default:
+			in.AddError(&jlexer.LexerError{
+				Offset: in.GetPos(),
+				Reason: "unknown field",
+				Data:   key,
+			})
+		}
+		in.WantComma()
+	}
+	in.Delim('}')
+	if isTopLevel {
+		in.Consumed()
+	}
+}
+func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer39(out *jwriter.Writer, in Base) {
+	out.RawByte('{')
+	first := true
+	_ = first
+	if in.Name_ != "" {
+		const prefix string = ",\"name\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.Name_))
+	}
+	if in.OperatorType_ != "" {
+		const prefix string = ",\"operator_type\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.OperatorType_))
+	}
+	if in.OnnxOperatorType_ != "" {
+		const prefix string = ",\"onnx_operator_type\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.OnnxOperatorType_))
+	}
+	if len(in.InputNames_) != 0 {
+		const prefix string = ",\"input_names\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		{
+			out.RawByte('[')
+			for v652, v653 := range in.InputNames_ {
+				if v652 > 0 {
+					out.RawByte(',')
+				}
+				out.String(string(v653))
+			}
+			out.RawByte(']')
+		}
+	}
+	if len(in.OutputNames_) != 0 {
+		const prefix string = ",\"output_names\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		{
+			out.RawByte('[')
+			for v654, v655 := range in.OutputNames_ {
+				if v654 > 0 {
+					out.RawByte(',')
+				}
+				out.String(string(v655))
+			}
+			out.RawByte(']')
+		}
+	}
+	if len(in.InputShapes_) != 0 {
+		const prefix string = ",\"input_shapes\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		{
+			out.RawByte('[')
+			for v656, v657 := range in.InputShapes_ {
+				if v656 > 0 {
+					out.RawByte(',')
+				}
+				if v657 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
+					out.RawString("null")
+				} else {
+					out.RawByte('[')
+					for v658, v659 := range v657 {
+						if v658 > 0 {
+							out.RawByte(',')
+						}
+						out.Int64(int64(v659))
+					}
+					out.RawByte(']')
+				}
+			}
+			out.RawByte(']')
+		}
+	}
+	if len(in.OutputShapes_) != 0 {
+		const prefix string = ",\"output_shapes\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		{
+			out.RawByte('[')
+			for v660, v661 := range in.OutputShapes_ {
+				if v660 > 0 {
+					out.RawByte(',')
+				}
+				if v661 == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
+					out.RawString("null")
+				} else {
+					out.RawByte('[')
+					for v662, v663 := range v661 {
+						if v662 > 0 {
+							out.RawByte(',')
+						}
+						out.Int64(int64(v663))
+					}
+					out.RawByte(']')
+				}
+			}
+			out.RawByte(']')
+		}
+	}
+	out.RawByte('}')
+}
+
+// MarshalJSON supports json.Marshaler interface
+func (v Base) MarshalJSON() ([]byte, error) {
+	w := jwriter.Writer{}
+	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer39(&w, v)
+	return w.Buffer.BuildBytes(), w.Error
+}
+
+// MarshalEasyJSON supports easyjson.Marshaler interface
+func (v Base) MarshalEasyJSON(w *jwriter.Writer) {
+	easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer39(w, v)
+}
+
+// UnmarshalJSON supports json.Unmarshaler interface
+func (v *Base) UnmarshalJSON(data []byte) error {
+	r := jlexer.Lexer{Data: data}
+	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer39(&r, v)
+	return r.Error()
+}
+
+// UnmarshalEasyJSON supports easyjson.Unmarshaler interface
+func (v *Base) UnmarshalEasyJSON(l *jlexer.Lexer) {
+	easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer39(l, v)
 }
