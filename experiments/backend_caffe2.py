@@ -20,7 +20,7 @@ class BackendCaffe2(backend.Backend):
     def version(self):
         return torch.__version__
 
-    def load(self, model):
+    def load(self, model, enable_profiling=False):
         self.model = onnx.load(model.path)
         self.inputs = []
         initializers = set()
@@ -33,6 +33,15 @@ class BackendCaffe2(backend.Backend):
         for i in self.model.graph.output:
             self.outputs.append(i.name)
         self.session = caffe2.python.onnx.backend.prepare(self.model, self.device)
+        self.enable_profiling = enable_profiling
+        if enable_profiling:
+            self.session.net.AddObserver("ProfileObserver")
+            self.session.net.AddObserver("TimeObserver")
+
+    def __del__(self):
+        if self.enable_profiling:
+            profile_observer = self.session.net.GetObserver("ProfileObserver")
+            profile_observer.dump()
 
     def forward_once(self, img):
         start = time.time()

@@ -156,7 +156,7 @@ var benchinfoCmd = &cobra.Command{
 					flops = dlperf.FlopsInformation{
 						MultiplyAdds: int64(*bs[0].Flops),
 					}
-				} else {
+				} else if config.App.IsDebug {
 					pp.Println("cannot get flops for " + bs[0].Name + " using builtin flops computation")
 				}
 
@@ -165,13 +165,13 @@ var benchinfoCmd = &cobra.Command{
 					totalFlops = totalFlops.Add(flops)
 				}
 				if !benchInfoShort {
-					for _, b := range bs {
-						benchmarkInfo = append(benchmarkInfo, bench{
-							Benchmark: b,
-							Layer:     lyr,
-							Flops:     flops,
-						})
-					}
+					benchmarkInfo = append(benchmarkInfo, bench{
+						Benchmark: bs[0],
+						Layer:     lyr,
+						Flops:     flops,
+					})
+					// generate latex table output
+					// fmt.Println("\\texttt{"+strings.ReplaceAll(lyr.Name(), "_", "\\_")+"}", " & ", lyr.OperatorType(), " & ", float64(bs[0].RealTime.Nanoseconds())/float64(time.Microsecond), "&", utils.Flops(uint64(flops.Total())), " \\\\")
 				}
 			}
 

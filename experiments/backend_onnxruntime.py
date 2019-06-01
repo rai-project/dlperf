@@ -16,13 +16,22 @@ class BackendOnnxruntime(backend.Backend):
     def version(self):
         return onnxruntime.__version__
 
-    def load(self, model):
+    def load(self, model, enable_profiling=False):
         self.model = model
-        self.session = onnxruntime.InferenceSession(model.path, None)
+        self.enable_profiling = enable_profiling
+        options = rt.SessionOptions()
+        if enable_profiling:
+            options.enable_profiling = True
+        self.session = onnxruntime.InferenceSession(model.path, options)
         self.inputs = [meta.name for meta in self.session.get_inputs()]
         self.outputs = [meta.name for meta in self.session.get_outputs()]
         utils.debug("inputs of onnxruntime is {}".format(self.inputs))
         utils.debug("outputs of onnxruntime is {}".format(self.outputs))
+
+    def __del__(self):
+        if self.enable_profiling:
+            prof_file = self.session.end_profiling()
+            print("profile file = {}".format(prof_file))
 
     def forward_once(self, img):
         start = time.time()
