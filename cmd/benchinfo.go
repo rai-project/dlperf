@@ -79,8 +79,11 @@ var benchinfoCmd = &cobra.Command{
 			case "concat":
 				debugPrint("Concat is skipped for now")
 				continue
+			case "unsqueeze":
+				debugPrint("Unsqueeze is skipped for now")
+				continue
 			case "flatten":
-				debugPrint("Faltten is skipped for now")
+				debugPrint("Flatten is skipped for now")
 				continue
 			case "globalpooling":
 				debugPrint("GlobalPooling is skipped for now")

@@ -45,11 +45,18 @@ func (bench) Header() []string {
 	// return append(base, flopsInfo...)
 }
 
-func (l bench) Row(humanFlops bool) []string {
+func getTerminalWidth() int {
 	termWidth, err := terminal.Width()
 	if err != nil {
 		termWidth = 80
 	}
+	termWidth = uint(float64(termWidth) * 0.75)
+
+	return int(termWidth)
+}
+
+func (l bench) Row(humanFlops bool) []string {
+	termWidth := getTerminalWidth()
 
 	ms := float64(l.Benchmark.RealTime.Nanoseconds()) / float64(time.Millisecond)
 	realTime := fmt.Sprintf("%f", ms)
@@ -61,7 +68,7 @@ func (l bench) Row(humanFlops bool) []string {
 	benchmarkName = strings.Split(benchmarkName, "/")[0]
 	// benchmarkName = strings.ReplaceAll(benchmarkName, "__Batch_Size_", "")
 
-	if uint(len(benchmarkName)) > termWidth/2 {
+	if len(benchmarkName) > termWidth/2 {
 		benchmarkName = benchmarkName[0:termWidth/2] + "..."
 	}
 	layerName := ""
