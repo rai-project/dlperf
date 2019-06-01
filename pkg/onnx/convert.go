@@ -238,10 +238,13 @@ if betaAttr == nil {
 }
 
 func (o Onnx) mkMatMul(node *onnx.NodeProto) dlperf.Layer {
-
-	return &layer.MatMul{
-		Base: o.mkBase(node, "MatMul"),
-	}
+	return &layer.Gemm{
+		Base:   o.mkBase(node, "Gemm"),
+		Alpha: float64(1.0),
+    Beta: float64(0.0),
+    TransA: 0,
+    TransB: 0,
+  }
 }
 
 func (o Onnx) mkReduceMin(node *onnx.NodeProto) dlperf.Layer {
