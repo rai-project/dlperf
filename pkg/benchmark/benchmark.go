@@ -83,11 +83,10 @@ func (w *Benchmark) UnmarshalJSON(data []byte) error {
 				continue
 			}
 		}
-		if k == "batch_size" {
-			continue
-		}
 		w.Attributes[k] = v
 	}
+
+	delete(w.Attributes, "batch_size") // we do not care about batchsize in filter
 
 	// if strings.HasPrefix(w.Name, "LAYER_CUDNN_CONV_FWD_FLOAT<CUDNN_CONVOLUTION_FWD_ALGO_IMPLICIT_PRECOMP_GEMM>/W:14/H:14/C:5") {
 	// 	pp.Println(elems)

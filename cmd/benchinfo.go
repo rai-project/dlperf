@@ -32,6 +32,8 @@ var benchinfoCmd = &cobra.Command{
 	RunE: func(cmd *cobra.Command, args []string) error {
 		modelPath = expandModelPath(modelPath)
 
+    dlperf.SetBatchSize(batchSize)
+
 		benchSuite, err := benchmark.New(benchmarkResultsFolder)
 		if err != nil {
 			return err
@@ -197,8 +199,7 @@ var benchinfoCmd = &cobra.Command{
 					filter = filterBenchmarks(true, benchInfoDataType, "", dlperf.BwdBenchmarkArgsOption.ConvBwdType(dlperf.ConvBwdTypeFilter))
 					bs, err = getBenchmarkTime(filter)
 					if err != nil {
-						pp.Println(err)
-						pp.Println("unable to get conv filter")
+						pp.Println("unable to get conv filter because of " + err.Error())
 						continue
 					}
 					addLayerInfos(bs)
