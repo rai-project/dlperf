@@ -11,6 +11,7 @@ import (
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 
+	"github.com/rai-project/config"
 	dlperf "github.com/rai-project/dlperf/pkg"
 	"github.com/rai-project/dlperf/pkg/benchmark"
 	"github.com/rai-project/dlperf/pkg/onnx"
@@ -52,37 +53,40 @@ var benchinfoCmd = &cobra.Command{
 
 		totalTime := time.Duration(0)
 
+		debugPrint := func(val ...interface{}) {
+			if config.App.IsDebug {
+				fmt.Println(val...)
+			}
+		}
+
 		for _, nd := range nds {
 			lyr := nd.Layer()
 			switch strings.ToLower(lyr.OperatorType()) {
 			case "constantinput":
 				continue
 			case "lrn":
-				fmt.Println("LRN is not supported by CUDNN")
+				debugPrint("LRN is not supported by CUDNN")
 				continue
 			case "reshape":
-				fmt.Println("Reshape is not supported by CUDNN")
-				continue
-			case "gemm":
-				fmt.Println("Gemm is not supported by CUDNN")
+				debugPrint("Reshape is not supported by CUDNN")
 				continue
 			// case "dropout":
 			// 	fmt.Println("Dropout is skipped for now")
 			// 	continue
 			case "concat":
-				fmt.Println("Concat is skipped for now")
+				debugPrint("Concat is skipped for now")
 				continue
 			case "flatten":
-				fmt.Println("Faltten is skipped for now")
+				debugPrint("Faltten is skipped for now")
 				continue
 			case "globalpooling":
-				fmt.Println("GlobalPooling is skipped for now")
+				debugPrint("GlobalPooling is skipped for now")
 				continue
 			case "identity":
-				fmt.Println("Identity is skipped for now")
+				debugPrint("Identity is skipped for now")
 				continue
 			case "elementwise":
-				fmt.Println("Elementwise is not supported by CUDNN")
+				debugPrint("Elementwise is not supported by CUDNN")
 				continue
 			}
 			// if lyr.OperatorType() != "Conv" && lyr.OperatorType() != "Relu" {
@@ -130,8 +134,8 @@ var benchinfoCmd = &cobra.Command{
 					// log.WithField("filter", pp.Sprint(filter)).Error("unable to find benchmark within benchmark suite")
 					// pp.ColoringEnabled = true
 					// continue
-					pp.Println(lyr.OperatorType())
-					pp.Println(lyr.Name())
+					// pp.Println(lyr.OperatorType())
+					// pp.Println(lyr.Name())
 					pp.Println(filter)
 					return nil, errors.New("no benchmarks")
 				}
@@ -155,7 +159,7 @@ var benchinfoCmd = &cobra.Command{
 			}
 
 			switch strings.ToLower(lyr.OperatorType()) {
-			case "relu", "pooling", "softmax", "dropout":
+			case "relu", "pooling", "softmax", "dropout", "gemm", "matmul":
 				filter := filterBenchmarks(false, benchInfoDataType, "")
 				bs, err := getBenchmarkTime(filter)
 				if err != nil {

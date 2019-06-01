@@ -5,9 +5,6 @@ import (
 	"regexp"
 
 	"sort"
-	"github.com/google/go-cmp/cmp"
-	"github.com/k0kubun/pp"
-	"github.com/spf13/cast"
 )
 
 func (bs Benchmarks) Len() int { return len(bs)}
@@ -44,37 +41,6 @@ func (s Suite) Filter(filter Benchmark) (Benchmarks, error) {
 	return s.Benchmarks.Filter(filter)
 }
 
-func isSameScalar(a, b interface{}) bool {
-	if cmp.Equal(a, b) {
-		return true
-	}
-
-	a0, err := cast.ToFloat64E(a)
-	if err != nil {
-		pp.Println(a)
-		return false
-	}
-	// if a0 < 0 {
-	// 	// panic("a0 < 0")
-	// 	a0 = float64(0)
-	// }
-
-	b0, err := cast.ToFloat64E(b)
-	if err != nil {
-		pp.Println(b)
-		return false
-	}
-	// if b0 < 0 {
-	// 	// panic("b0 < 0")
-	// 	b0 = float64(0)
-	// }
-
-	floatEquals := func(a, b float64) bool {
-		const EPSILON float64 = 0.0001
-		return (a-b) < EPSILON && (b-a) < EPSILON
-	}
-	return floatEquals(a0, b0)
-}
 
 func (bs Benchmarks) Filter(filter Benchmark) (Benchmarks, error) {
 	benches := []Benchmark{}
@@ -101,6 +67,7 @@ next:
 		if filter.TimeUnit != "" && b.TimeUnit != filter.TimeUnit {
 			continue
 		}
+
 		for k, filterVal := range filter.Attributes {
 			val, ok := b.Attributes[k]
 			if !ok {
