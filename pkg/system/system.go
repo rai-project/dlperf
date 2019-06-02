@@ -5,15 +5,21 @@ const (
 	GBps = float64(8)
 )
 
-type Machine struct {
+type NumaMachine struct {
 	CPU []CPU
 	GPU []GPU
 }
 
+type Machine struct {
+	Numa []NumaMachine
+}
+
 type CPU struct {
+	Interconnect Interconnect
 }
 
 type GPU struct {
+	Interconnect Interconnect
 }
 
 type Interconnect interface {

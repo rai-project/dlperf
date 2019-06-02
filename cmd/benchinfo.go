@@ -18,10 +18,11 @@ import (
 )
 
 var (
-	benchmarkResultsFolder string
-	benchInfoTraining      bool
-	benchInfoShort         bool
-	benchInfoDataType      string
+	benchmarkResultsFolder      string
+	benchInfoTraining           bool
+	benchInfoShort              bool
+	benchInfoDataType           string
+	enableReadFlopsFromDatabase bool
 )
 
 // benchinfoCmd represents the benchinfo command
@@ -152,12 +153,14 @@ var benchinfoCmd = &cobra.Command{
 				bs.Sort()
 
 				flops := lyr.Information().Flops()
-				if bs[0].Flops != nil && *bs[0].Flops != -1 {
-					flops = dlperf.FlopsInformation{
-						MultiplyAdds: int64(*bs[0].Flops),
+				if enableReadFlopsFromDatabase {
+					if bs[0].Flops != nil && *bs[0].Flops != -1 {
+						flops = dlperf.FlopsInformation{
+							MultiplyAdds: int64(*bs[0].Flops),
+						}
+					} else if config.App.IsDebug {
+						pp.Println("cannot get flops for " + bs[0].Name + " using builtin flops computation")
 					}
-				} else if config.App.IsDebug {
-					pp.Println("cannot get flops for " + bs[0].Name + " using builtin flops computation")
 				}
 
 				if len(bs) > 0 {

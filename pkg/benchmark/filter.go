@@ -1,11 +1,12 @@
 package benchmark
 
 import (
-  "fmt"
-  "reflect"
+	"fmt"
+	"reflect"
 	"regexp"
-	"github.com/spf13/cast"
+
 	"github.com/k0kubun/pp"
+	"github.com/spf13/cast"
 )
 
 func (bs Benchmarks) Len() int             { return len(bs) }
@@ -51,9 +52,9 @@ func (bs Benchmarks) Filter(filter Benchmark) (Benchmarks, error) {
 		if err != nil {
 			return benches, err
 		}
-  }
-  
-	delete(filter.Attributes, "batch_size") // we do not care about batchsize in filter
+	}
+
+	delete(filter.Attributes, "batch_size")    // we do not care about batchsize in filter
 	delete(filter.Attributes, "conv_bwd_type") // we do not care about conv_bwd_type since it's encoded in name
 
 next:
@@ -75,21 +76,21 @@ next:
 			val, ok := b.Attributes[k]
 			if !ok {
 				continue next
-      }
-      
-      if k == "conv_bwd_type" {
-        filterVal = int(reflect.ValueOf(filterVal).Int())
-        val = cast.ToInt(val)
-      }
+			}
+
+			if k == "conv_bwd_type" {
+				filterVal = int(reflect.ValueOf(filterVal).Int())
+				val = cast.ToInt(val)
+			}
 			if !isSameScalar(filterVal, val) {
 				continue next
-      }
-      if false {
-      if k == "conv_bwd_type" {
-        pp.Println(filterVal)
-        pp.Println(val)
-      }
-    }
+			}
+			if false {
+				if k == "conv_bwd_type" {
+					pp.Println(filterVal)
+					pp.Println(val)
+				}
+			}
 		}
 		benches = append(benches, b)
 	}
