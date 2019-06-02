@@ -237,14 +237,14 @@ func (c Conv) BwdBenchmarkArgs(iopts ...dlperf.BwdBenchmarkArgsOptionFunc) inter
 
 func (c Conv) FwdBenchmarkFilter(datatype, algorithm string, opts ...dlperf.FwdBenchmarkArgsOptionFunc) benchmark.Benchmark {
 	return benchmark.Benchmark{
-		Name:       mkFwdBenchmarkFilterName(&c, datatype, algorithm, opts...),
+		Name:       mkFwdBenchmarkFilterName(&c, datatype, algorithm),
 		Attributes: benchmarkAttributes(c.FwdBenchmarkArgs(opts...)),
 	}
 }
 
 func (c Conv) BwdBenchmarkFilter(datatype, algorithm string, opts ...dlperf.BwdBenchmarkArgsOptionFunc) benchmark.Benchmark {
 	return benchmark.Benchmark{
-		Name:       mkBwdBenchmarkFilterName(&c, datatype, algorithm, opts...),
+		Name:       mkBwdBenchmarkFilterName(&c, datatype, algorithm),
 		Attributes: benchmarkAttributes(c.BwdBenchmarkArgs(opts...)),
 	}
 }
@@ -325,6 +325,7 @@ func (c Conv) Information() dlperf.LayerInformation {
 
 	info.flops = dlperf.FlopsInformation{
 		MultiplyAdds: int64(kernelH*kernelW*hOut*wOut*cIn*cOut*nIn) / c.Group,
+		// Additions: int64(cOut*hOut*wOut*nIn), // bias
 	}
 
 	return info
