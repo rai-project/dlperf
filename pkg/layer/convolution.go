@@ -323,6 +323,8 @@ func (c Conv) Information() dlperf.LayerInformation {
 	kernelH := c.Dilations[0]*(c.KernelShape[0]-1) + 1
 	kernelW := c.Dilations[1]*(c.KernelShape[1]-1) + 1
 
+	// expand
+	// see https://arxiv.org/pdf/1802.09941.pdf Page 17 Table 6
 	info.flops = dlperf.FlopsInformation{
 		MultiplyAdds: int64(kernelH*kernelW*hOut*wOut*cIn*cOut*nIn) / c.Group,
 	}
