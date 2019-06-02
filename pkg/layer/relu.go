@@ -227,8 +227,10 @@ func (c Relu) Information() dlperf.LayerInformation {
 		numOps *= s
 	}
 
+	// count as comparison + multiply
 	info.flops = dlperf.FlopsInformation{
 		Comparisons: numOps,
+		MultiplyAdds: numOps,
 	}
 
 	return info
