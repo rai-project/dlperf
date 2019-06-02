@@ -154,14 +154,15 @@ func (o Onnx) mkConv(node *onnx.NodeProto) dlperf.Layer {
 
 	dilations := []int64{1, 1}
 	dilationsAttr := getNodeAttributeFromName(node, "dilations")
+
 	if dilationsAttr.GetInts() != nil {
 		dilations = dilationsAttr.GetInts()
 	}
 
 	group := int64(1)
 	groupAttr := getNodeAttributeFromName(node, "group")
-	if groupAttr.GetInts() != nil {
-		group = groupAttr.GetInts()[0]
+	if groupAttr.GetI() != 0 {
+		group = groupAttr.GetI()
 	}
 
 	kernelShapeAttr := getNodeAttributeFromName(node, "kernel_shape")
