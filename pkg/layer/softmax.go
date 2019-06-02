@@ -127,7 +127,7 @@ func (c Softmax) FwdBenchmarkFilter(datatype, algorithm string, opts ...dlperf.F
 		alg = "CUDNN_SOFTMAX_FAST, " + algorithm
 	}
 	return benchmark.Benchmark{
-		Name:       mkFwdBenchmarkFilterName(&c, datatype, alg),
+		Name:       mkFwdBenchmarkFilterName(&c, datatype, alg, opts...),
 		Attributes: benchmarkAttributes(c.FwdBenchmarkArgs(opts...)),
 	}
 }
@@ -140,7 +140,7 @@ func (c Softmax) BwdBenchmarkFilter(datatype, algorithm string, opts ...dlperf.B
 		alg = "CUDNN_SOFTMAX_FAST, " + algorithm
 	}
 	return benchmark.Benchmark{
-		Name:       mkBwdBenchmarkFilterName(&c, datatype, alg),
+		Name:       mkBwdBenchmarkFilterName(&c, datatype, alg, opts...),
 		Attributes: benchmarkAttributes(c.BwdBenchmarkArgs(opts...)),
 	}
 }

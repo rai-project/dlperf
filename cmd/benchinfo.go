@@ -32,7 +32,7 @@ var benchinfoCmd = &cobra.Command{
 	RunE: func(cmd *cobra.Command, args []string) error {
 		modelPath = expandModelPath(modelPath)
 
-    dlperf.SetBatchSize(batchSize)
+		dlperf.SetBatchSize(batchSize)
 
 		benchSuite, err := benchmark.New(benchmarkResultsFolder)
 		if err != nil {
@@ -54,6 +54,7 @@ var benchinfoCmd = &cobra.Command{
 		benchmarkInfo := []bench{}
 
 		totalTime := time.Duration(0)
+		totalFlops := dlperf.FlopsInformation{}
 
 		debugPrint := func(val ...interface{}) {
 			if config.App.IsDebug {
@@ -78,8 +79,11 @@ var benchinfoCmd = &cobra.Command{
 			case "concat":
 				debugPrint("Concat is skipped for now")
 				continue
+			case "unsqueeze":
+				debugPrint("Unsqueeze is skipped for now")
+				continue
 			case "flatten":
-				debugPrint("Faltten is skipped for now")
+				debugPrint("Flatten is skipped for now")
 				continue
 			case "globalpooling":
 				debugPrint("GlobalPooling is skipped for now")
@@ -147,18 +151,27 @@ var benchinfoCmd = &cobra.Command{
 			addLayerInfos := func(bs benchmark.Benchmarks) {
 				bs.Sort()
 
-				info := lyr.Information()
+				flops := lyr.Information().Flops()
+				if bs[0].Flops != nil && *bs[0].Flops != -1 {
+					flops = dlperf.FlopsInformation{
+						MultiplyAdds: int64(*bs[0].Flops),
+					}
+				} else if config.App.IsDebug {
+					pp.Println("cannot get flops for " + bs[0].Name + " using builtin flops computation")
+				}
+
 				if len(bs) > 0 {
 					totalTime = totalTime + bs[0].RealTime
+					totalFlops = totalFlops.Add(flops)
 				}
 				if !benchInfoShort {
-					for _, b := range bs {
-						benchmarkInfo = append(benchmarkInfo, bench{
-							Benchmark: b,
-							Layer:     lyr,
-							Flops:     info.Flops(),
-						})
-					}
+					benchmarkInfo = append(benchmarkInfo, bench{
+						Benchmark: bs[0],
+						Layer:     lyr,
+						Flops:     flops,
+					})
+					// generate latex table output
+					// fmt.Println("\\texttt{"+strings.ReplaceAll(lyr.Name(), "_", "\\_")+"}", " & ", lyr.OperatorType(), " & ", float64(bs[0].RealTime.Nanoseconds())/float64(time.Microsecond), "&", utils.Flops(uint64(flops.Total())), " \\\\")
 				}
 			}
 
@@ -247,7 +260,7 @@ var benchinfoCmd = &cobra.Command{
 				RealTime: totalTime,
 			},
 			Layer: nil,
-			Flops: dlperf.FlopsInformation{},
+			Flops: totalFlops,
 		})
 
 		if benchSuite.GPUInformation != nil && len(benchSuite.GPUInformation.GPUS) != 0 {
@@ -255,6 +268,7 @@ var benchinfoCmd = &cobra.Command{
 				fmt.Println(gpu.ProductName)
 			}
 		}
+
 		writer := NewWriter(bench{}, humanFlops)
 		defer writer.Close()
 

@@ -4,6 +4,7 @@ import (
 	"math"
 	"strings"
 
+	"github.com/k0kubun/pp"
 	"github.com/mitchellh/hashstructure"
 	dlperf "github.com/rai-project/dlperf/pkg"
 	"github.com/rai-project/dlperf/pkg/benchmark"
@@ -170,14 +171,14 @@ func (c Pooling) BwdBenchmarkArgs(opts ...dlperf.BwdBenchmarkArgsOptionFunc) int
 
 func (c Pooling) FwdBenchmarkFilter(datatype, algorithm string, opts ...dlperf.FwdBenchmarkArgsOptionFunc) benchmark.Benchmark {
 	return benchmark.Benchmark{
-		Name:       mkFwdBenchmarkFilterName(&c, datatype, algorithm),
+		Name:       mkFwdBenchmarkFilterName(&c, datatype, algorithm, opts...),
 		Attributes: benchmarkAttributes(c.FwdBenchmarkArgs(opts...)),
 	}
 }
 
 func (c Pooling) BwdBenchmarkFilter(datatype, algorithm string, opts ...dlperf.BwdBenchmarkArgsOptionFunc) benchmark.Benchmark {
 	return benchmark.Benchmark{
-		Name:       mkBwdBenchmarkFilterName(&c, datatype, algorithm),
+		Name:       mkBwdBenchmarkFilterName(&c, datatype, algorithm, opts...),
 		Attributes: benchmarkAttributes(c.BwdBenchmarkArgs(opts...)),
 	}
 }
@@ -229,11 +230,13 @@ func (c Pooling) Information() dlperf.LayerInformation {
 	wOut := outputShape[3]
 
 	flops := dlperf.FlopsInformation{}
-	switch c.OnnxOperatorType() {
+	switch strings.ToLower(c.OnnxOperatorType()) {
 	case "maxpool":
 		flops.Comparisons = hOut * wOut * nOut * cOut * c.KernelShape[0] * c.KernelShape[1]
 	case "averagepool":
 		flops.Additions = hOut * wOut * nOut * cOut * c.KernelShape[0] * c.KernelShape[1]
+	default:
+		pp.Println("unhandeled " + c.OnnxOperatorType())
 	}
 
 	info.flops = flops

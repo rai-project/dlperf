@@ -8,6 +8,8 @@ import (
 	dlperf "github.com/rai-project/dlperf/pkg"
 	"github.com/rai-project/dlperf/pkg/benchmark"
 	"github.com/rai-project/dlperf/pkg/onnx"
+	"github.com/rai-project/utils"
+	terminal "github.com/wayneashleyberry/terminal-dimensions"
 )
 
 type pattern struct {
@@ -34,7 +36,7 @@ type bench struct {
 }
 
 func (bench) Header() []string {
-	base := []string{"LayerName", "LayerType", "BenchmarkName", "RealTime(ms)"}
+	base := []string{"LayerName", "LayerType", "BenchmarkName", "RealTime(ms)", "Flops"}
 	return base
 	// flopsInfo := dlperf.FlopsInformation{}.Header()
 	// for ii, f := range flopsInfo {
@@ -44,20 +46,47 @@ func (bench) Header() []string {
 	// return append(base, flopsInfo...)
 }
 
+func getTerminalWidth() int {
+	termWidth, err := terminal.Width()
+	if err != nil {
+		termWidth = 80
+	}
+	termWidth = uint(float64(termWidth) * 0.75)
+
+	return int(termWidth)
+}
+
 func (l bench) Row(humanFlops bool) []string {
+	termWidth := getTerminalWidth()
+
 	ms := float64(l.Benchmark.RealTime.Nanoseconds()) / float64(time.Millisecond)
 	realTime := fmt.Sprintf("%f", ms)
 	benchmarkName := l.Benchmark.Name
-	if len(benchmarkName) > 10 {
-		benchmarkName = benchmarkName[0:10] + "..."
+
+	benchmarkName = strings.TrimPrefix(benchmarkName, "LAYER_CUDNN_")
+	benchmarkName = strings.TrimPrefix(benchmarkName, "LAYER_CUBLAS_")
+	benchmarkName = strings.ReplaceAll(benchmarkName, "_FLOAT32_", "")
+	benchmarkName = strings.Split(benchmarkName, "/")[0]
+	// benchmarkName = strings.ReplaceAll(benchmarkName, "__Batch_Size_", "")
+
+	if len(benchmarkName) > termWidth/2 {
+		benchmarkName = benchmarkName[0:termWidth/2] + "..."
 	}
 	layerName := ""
 	operatorType := ""
+	flops := int64(0)
 	if l.Layer != nil {
 		layerName = l.Layer.Name()
 		operatorType = l.Layer.OperatorType()
 	}
-	base := []string{layerName, operatorType, benchmarkName, realTime}
+	flops = l.Flops.Total()
+
+	flopsString := fmt.Sprintf("%v", flops)
+	if humanFlops {
+		flopsString = utils.Flops(uint64(flops))
+	}
+
+	base := []string{layerName, operatorType, benchmarkName, realTime, flopsString}
 	return base
 	// flops := l.flops.Row(humanFlops)
 	// flops = append(flops, flopsToString(l.flops.Total(), humanFlops))
