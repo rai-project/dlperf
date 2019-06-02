@@ -161,6 +161,7 @@ type convBenchmarkArgs struct {
 	DilationHeight    int64              `args:"dilation_width" hash:"dilation_width" json:"dilation_height,omitempty"`
 	ConvBwdType       dlperf.ConvBwdType `args:"conv_bwd_type" hash:"conv_bwd_type" json:"conv_bwd_type,omitempty"`
 	BatchSize         int64              `args:"batch_size" hash:"batch_size" json:"batch_size,omitempty"`
+	Group             int64              `args:"group" hash:"group" json:"group,omitempty"`
 }
 
 func (c Conv) FwdBenchmarkArgs(opts ...dlperf.FwdBenchmarkArgsOptionFunc) interface{} {
@@ -182,6 +183,7 @@ func (c Conv) FwdBenchmarkArgs(opts ...dlperf.FwdBenchmarkArgsOptionFunc) interf
 		DilationWidth:     c.Dilations[1],
 		BatchSize:         dlperf.GetBatchSize(),
 		BaseBenchmarkArgs: mkBaseBenchmarkFWDArgs(&c, opts...),
+		Group:             c.Group,
 	}
 
 	hash, err := hashstructure.Hash(
@@ -219,6 +221,7 @@ func (c Conv) BwdBenchmarkArgs(iopts ...dlperf.BwdBenchmarkArgsOptionFunc) inter
 		BaseBenchmarkArgs: mkBaseBenchmarkBWDArgs(&c, iopts...),
 		ConvBwdType:       opts.ConvBwdType,
 		BatchSize:         dlperf.GetBatchSize(),
+		Group:             c.Group,
 	}
 
 	hash, err := hashstructure.Hash(
