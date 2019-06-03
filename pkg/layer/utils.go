@@ -257,3 +257,14 @@ func benchmarkAttributes(st interface{}) map[string]interface{} {
 	}
 	return attrs
 }
+
+func outerProductString(as, bs []string) [][]string {
+	res := [][]string{}
+
+	for _, a := range as {
+		for _, b := range bs {
+			res = append(res, []string{a, b})
+		}
+	}
+	return res
+}

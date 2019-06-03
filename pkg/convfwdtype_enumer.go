@@ -8,9 +8,9 @@ import (
 	"fmt"
 )
 
-const _ConvFwdTypeName = "ConvFwdTypeUndefinedConvFwdTypeConvConvFwdTypeBias"
+const _ConvFwdTypeName = "ConvFwdTypeUndefinedConvFwdTypeConvConvFwdTypeBiasConvFwdTypeConvFusedActivation"
 
-var _ConvFwdTypeIndex = [...]uint8{0, 20, 35, 50}
+var _ConvFwdTypeIndex = [...]uint8{0, 20, 35, 50, 80}
 
 func (i ConvFwdType) String() string {
 	if i < 0 || i >= ConvFwdType(len(_ConvFwdTypeIndex)-1) {
@@ -19,12 +19,13 @@ func (i ConvFwdType) String() string {
 	return _ConvFwdTypeName[_ConvFwdTypeIndex[i]:_ConvFwdTypeIndex[i+1]]
 }
 
-var _ConvFwdTypeValues = []ConvFwdType{0, 1, 2}
+var _ConvFwdTypeValues = []ConvFwdType{0, 1, 2, 3}
 
 var _ConvFwdTypeNameToValueMap = map[string]ConvFwdType{
 	_ConvFwdTypeName[0:20]:  0,
 	_ConvFwdTypeName[20:35]: 1,
 	_ConvFwdTypeName[35:50]: 2,
+	_ConvFwdTypeName[50:80]: 3,
 }
 
 // ConvFwdTypeString retrieves an enum value from the enum constants string name.

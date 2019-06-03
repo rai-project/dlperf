@@ -6,7 +6,7 @@ const (
 	ConvFwdTypeUndefined           ConvFwdType = 0
 	ConvFwdTypeConv                ConvFwdType = 1
 	ConvFwdTypeBias                ConvFwdType = 2
-	ConvFwdTypeConvFusedActivation ConvFwdType = 2
+	ConvFwdTypeConvFusedActivation ConvFwdType = 3
 )
 
 type fwdBenchmarkArgsOptions struct {

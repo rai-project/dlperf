@@ -7,8 +7,8 @@ namespace [[ .BenchmarkName ]]__BatchSize_[[$.BatchSize]]__[[.UniqueBenchmarkID]
   }})
 
 
-static std::map<string, double> input_args__[[.UniqueBenchmarkID]]{{
-  [[ . | make_counters ]]
+static const std::map<string, double> input_args__[[.UniqueBenchmarkID]]{{
+[[ . | make_counters ]]
 }};
 
 #define BENCHMARK_[[ .BenchmarkName ]]_INPUT_ARG_NAMES() \

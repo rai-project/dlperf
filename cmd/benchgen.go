@@ -79,6 +79,8 @@ var benchgenCmd = &cobra.Command{
 						b = l.FwdBenchmarkGenerator(dlperf.FwdBenchmarkArgsOption.ConvFwdType(dlperf.ConvFwdTypeConv))
 						b += "\n"
 						b = l.FwdBenchmarkGenerator(dlperf.FwdBenchmarkArgsOption.ConvFwdType(dlperf.ConvFwdTypeBias))
+						b += "\n"
+						b = l.FwdBenchmarkGenerator(dlperf.FwdBenchmarkArgsOption.ConvFwdType(dlperf.ConvFwdTypeConvFusedActivation))
 						// b += "\n"
 						// b += l.FwdBenchmarkFusedActivationGenerator()
 					case "relu":

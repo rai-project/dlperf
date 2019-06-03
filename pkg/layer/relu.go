@@ -59,6 +59,25 @@ func (c Relu) BwdBenchmarkAlgorithms(...dlperf.BwdBenchmarkArgsOptionFunc) []str
 	return c.BenchmarkAlgorithms()
 }
 
+func allReluAlgorithms() []string {
+	algs := []string{
+		"CUDNN_ACTIVATION_SIGMOID",
+		"CUDNN_ACTIVATION_TANH",
+		"CUDNN_ACTIVATION_RELU",
+		"CUDNN_ACTIVATION_CLIPPED_RELU",
+		"CUDNN_ACTIVATION_ELU",
+		"ACTIVATION_PRELU",
+		"ACTIVATION_LEAKY_RELU",
+		"CUDNN_ACTIVATION_IDENTITY",
+	}
+
+	for ii, alg := range algs {
+		algs[ii] = substituteReluAlgorithm(alg)
+	}
+
+	return algs
+}
+
 func (c Relu) BenchmarkAlgorithms() []string {
 	switch strings.ToLower(c.OnnxOperatorType()) {
 	case "sigmoid":
@@ -104,7 +123,7 @@ type reluBenchmarkArgs struct {
 	BatchSize              int64 `json:"batch_size,omitempty"`
 }
 
-func (c Relu) substituteAlgorithm(alg string) string {
+func substituteReluAlgorithm(alg string) string {
 	// substitution because cudnn does not support certain algorithms
 	switch strings.ToUpper(alg) {
 	case "ACTIVATION_PRELU", "ACTIVATION_LEAKY_RELU":
@@ -122,7 +141,7 @@ func (c Relu) FwdBenchmarkArgs(opts ...dlperf.FwdBenchmarkArgsOptionFunc) interf
 
 	// substitution because cudnn does not support certain algorithms
 	for ii, alg := range res.Algorithms {
-		res.Algorithms[ii] = c.substituteAlgorithm(alg)
+		res.Algorithms[ii] = substituteReluAlgorithm(alg)
 	}
 
 	hash, err := hashstructure.Hash(
@@ -148,7 +167,7 @@ func (c Relu) BwdBenchmarkArgs(opts ...dlperf.BwdBenchmarkArgsOptionFunc) interf
 
 	// substitution because cudnn does not support certain algorithms
 	for ii, alg := range res.Algorithms {
-		res.Algorithms[ii] = c.substituteAlgorithm(alg)
+		res.Algorithms[ii] = substituteReluAlgorithm(alg)
 	}
 
 	hash, err := hashstructure.Hash(
@@ -229,7 +248,7 @@ func (c Relu) Information() dlperf.LayerInformation {
 
 	// count as comparison + multiply
 	info.flops = dlperf.FlopsInformation{
-		Comparisons: numOps,
+		Comparisons:  numOps,
 		MultiplyAdds: numOps,
 	}
 

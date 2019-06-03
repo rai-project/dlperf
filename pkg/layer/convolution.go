@@ -68,10 +68,17 @@ func (c *Conv) InferShape(inputLayers dlperf.Layers) {
 
 func (c Conv) FwdBenchmarkName(iopts ...dlperf.FwdBenchmarkArgsOptionFunc) string {
 	opts := dlperf.CreateFwdBenchmarkArgsOption(iopts...)
-	if opts.ConvFwdType == dlperf.ConvFwdTypeBias {
+	switch opts.ConvFwdType {
+
+	case dlperf.ConvFwdTypeBias:
 		return "LAYER_CUDNN_ADD_TENSOR"
+	case dlperf.ConvFwdTypeConv:
+		return "LAYER_CUDNN_CONV_FWD"
+	case dlperf.ConvFwdTypeConvFusedActivation:
+		return "LAYER_CUDNN_CONV_BIAS_ACTIVATION_FWD"
+	default:
+		panic("unknown conv fwd type")
 	}
-	return "LAYER_CUDNN_CONV_FWD"
 }
 
 func (c Conv) BwdBenchmarkName(iopts ...dlperf.BwdBenchmarkArgsOptionFunc) string {
@@ -104,8 +111,12 @@ func (c Conv) BwdTiming(system string /* hardware/software struct */) string {
 	return ""
 }
 
-func (c Conv) FwdBenchmarkAlgorithms(...dlperf.FwdBenchmarkArgsOptionFunc) []string {
-	return []string{
+func (c Conv) FwdBenchmarkAlgorithms(iopts ...dlperf.FwdBenchmarkArgsOptionFunc) []string {
+	opts := dlperf.CreateFwdBenchmarkArgsOption(iopts...)
+	if opts.ConvFwdType == dlperf.ConvFwdTypeBias {
+		return []string{}
+	}
+	convAlgs := []string{
 		"CUDNN_CONVOLUTION_FWD_ALGO_IMPLICIT_GEMM",
 		"CUDNN_CONVOLUTION_FWD_ALGO_IMPLICIT_PRECOMP_GEMM",
 		"CUDNN_CONVOLUTION_FWD_ALGO_GEMM",
@@ -115,6 +126,23 @@ func (c Conv) FwdBenchmarkAlgorithms(...dlperf.FwdBenchmarkArgsOptionFunc) []str
 		"CUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD",
 		"CUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD_NONFUSED",
 	}
+
+	if opts.ConvFwdType == dlperf.ConvFwdTypeConv {
+		return convAlgs
+	}
+
+	if opts.ConvFwdType == dlperf.ConvFwdTypeConvFusedActivation {
+		outers := outerProductString(convAlgs, allReluAlgorithms())
+		algs := make([]string, len(outers))
+		for ii, outer := range outers {
+			algs[ii] = strings.Join(outer, ", ")
+		}
+		return algs
+	}
+
+	panic("invalid conv type")
+
+	return nil
 }
 
 func (c Conv) BwdBenchmarkAlgorithms(iopts ...dlperf.BwdBenchmarkArgsOptionFunc) []string {
@@ -188,6 +216,7 @@ func (c Conv) FwdBenchmarkArgs(iopts ...dlperf.FwdBenchmarkArgsOptionFunc) inter
 			Alpha:             1.0,
 			Beta:              0.0,
 			BatchSize:         dlperf.GetBatchSize(),
+			ConvFwdType:       opts.ConvFwdType,
 			BaseBenchmarkArgs: mkBaseBenchmarkFWDArgs(&c, iopts...),
 		}
 	} else {
@@ -206,6 +235,7 @@ func (c Conv) FwdBenchmarkArgs(iopts ...dlperf.FwdBenchmarkArgsOptionFunc) inter
 			DilationHeight:    c.Dilations[0],
 			DilationWidth:     c.Dilations[1],
 			BatchSize:         dlperf.GetBatchSize(),
+			ConvFwdType:       opts.ConvFwdType,
 			BaseBenchmarkArgs: mkBaseBenchmarkFWDArgs(&c, iopts...),
 			Group:             c.Group,
 		}
@@ -294,10 +324,15 @@ func (c Conv) FwdBenchmarkGenerator(iopts ...dlperf.FwdBenchmarkArgsOptionFunc) 
 	var templString string
 	opts := dlperf.CreateFwdBenchmarkArgsOption(iopts...)
 
-	if opts.ConvFwdType == dlperf.ConvFwdTypeBias {
+	switch opts.ConvFwdType {
+	case dlperf.ConvFwdTypeBias:
 		templString = _escFSMustString(false, "/scope/add_tensor.tmpl")
-	} else {
+	case dlperf.ConvFwdTypeConv:
 		templString = _escFSMustString(false, "/scope/conv_fwd.tmpl")
+	case dlperf.ConvFwdTypeConvFusedActivation:
+		templString = _escFSMustString(false, "/scope/cudnn_conv_bias_activation_fwd.tmpl")
+	default:
+		panic("invalid fwd convolution algorithm")
 	}
 	return templateExecFWD(&c, templateBasePrefix+templString+templateBaseSuffix, iopts...)
 }
@@ -311,6 +346,8 @@ func (c Conv) BwdBenchmarkGenerator(iopts ...dlperf.BwdBenchmarkArgsOptionFunc) 
 		templString = _escFSMustString(false, "/scope/conv_bwd.tmpl")
 	case dlperf.ConvBwdTypeBias:
 		templString = _escFSMustString(false, "/scope/conv_bias.tmpl")
+	default:
+		panic("invalid bwd convolution algorithm")
 	}
 
 	return templateExecBWD(&c, templateBasePrefix+templString+templateBaseSuffix, iopts...)
