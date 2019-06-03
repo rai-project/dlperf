@@ -1,7 +1,6 @@
 package layer
 
 import (
-	"github.com/k0kubun/pp"
 	"github.com/mitchellh/hashstructure"
 	dlperf "github.com/rai-project/dlperf/pkg"
 	"github.com/rai-project/dlperf/pkg/benchmark"
@@ -51,10 +50,50 @@ func (c *Gemm) InferShape(inputLayers dlperf.Layers) {
 }
 
 func (c Gemm) FwdBenchmarkName(opts ...dlperf.FwdBenchmarkArgsOptionFunc) string {
+	aShape := c.InputShapes()[0]
+	var am int64
+	if c.TransA == 0 {
+		am = aShape[0]
+	} else {
+		am = aShape[1]
+	}
+
+	bShape := c.InputShapes()[1]
+	var bn int64
+	if c.TransB == 0 {
+		bn = bShape[1]
+	} else {
+		bn = bShape[0]
+	}
+
+	if am == 1 || bn == 1 {
+		return "LAYER_CUBLAS_GEMV_FWD"
+	}
+
 	return "LAYER_CUBLAS_GEMM_FWD"
 }
 
 func (c Gemm) BwdBenchmarkName(opts ...dlperf.BwdBenchmarkArgsOptionFunc) string {
+	aShape := c.InputShapes()[0]
+	var am int64
+	if c.TransA == 0 {
+		am = aShape[0]
+	} else {
+		am = aShape[1]
+	}
+
+	bShape := c.InputShapes()[1]
+	var bn int64
+	if c.TransB == 0 {
+		bn = bShape[1]
+	} else {
+		bn = bShape[0]
+	}
+
+	if am == 1 || bn == 1 {
+		return "LAYER_CUBLAS_GEMV_BWD"
+	}
+
 	return "LAYER_CUBLAS_GEMM_BWD"
 }
 
@@ -86,12 +125,6 @@ type gemmBenchmarkArgs struct {
 }
 
 func (c Gemm) mkGemmBenchmarkInputArgs() BaseBenchmarkInputArgs {
-	if false {
-
-		pp.Println(c.InputShapes())
-		pp.Println(c.TransA)
-		pp.Println(c.TransB)
-	}
 
 	aShape := c.InputShapes()[0]
 	var am, ak int64
@@ -110,6 +143,27 @@ func (c Gemm) mkGemmBenchmarkInputArgs() BaseBenchmarkInputArgs {
 	} else {
 		bn = bShape[0]
 	}
+
+	if am == 1 {
+		return BaseBenchmarkInputArgs{
+			Input0:    bn,
+			Input1:    ak,
+			Input2:    c.TransB,
+			Input3:    cast.ToInt64(c.Alpha),
+			Input4:    cast.ToInt64(c.Beta),
+			Input5:    -1,
+			BatchSize: dlperf.GetBatchSize(),
+		}
+	} else if bn == 1 {
+    return BaseBenchmarkInputArgs{
+			Input0:    am,
+			Input1:    ak,
+			Input2:    c.TransB,
+			Input3:    cast.ToInt64(c.Alpha),
+			Input4:    cast.ToInt64(c.Beta),
+			Input5:    -1,
+			BatchSize: dlperf.GetBatchSize(),
+  }
 
 	return BaseBenchmarkInputArgs{
 		Input0:    am,
