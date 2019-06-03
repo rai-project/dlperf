@@ -100,9 +100,17 @@ func readModels(modelPath string) ([]*onnx.Onnx, error) {
 
 	// is a directory
 
-	modelPaths, err := zglob.Glob(filepath.Join(modelPath, "**", "*.onnx"))
+	modelPaths0, err := zglob.Glob(filepath.Join(modelPath, "**", "*.onnx"))
 	if err != nil {
 		return nil, err
+	}
+	modelPaths := []string{}
+	for _, modelPath := range modelPaths0 {
+		modelName := getModelName(modelPath)
+		if strings.HasPrefix(modelName, ".") || strings.HasPrefix(filepath.Base(modelPath), ".") {
+			continue
+		}
+		modelPaths = append(modelPaths, modelPath)
 	}
 
 	models := []*onnx.Onnx{}
@@ -111,15 +119,11 @@ func readModels(modelPath string) ([]*onnx.Onnx, error) {
 	var mut sync.Mutex
 	g, _ := errgroup.WithContext(context.Background())
 	for ii := range modelPaths {
-		idx := ii
 		modelPath := modelPaths[ii]
-		modelName := getModelName(modelPath)
-		if strings.HasPrefix(modelName, ".") || strings.HasPrefix(filepath.Base(modelPath), ".") {
-			continue
-		}
+
 		g.Go(func() error {
 
-			path := modelPaths[idx]
+			path := modelPath
 
 			defer modelReadProgress.Increment()
 			defer func() {
