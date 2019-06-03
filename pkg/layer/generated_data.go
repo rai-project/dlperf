@@ -192,14 +192,13 @@ var _escData = map[string]*_escFile{
 
 	"/scope/add_tensor.tmpl": {
 		local:   "codegen/scope/add_tensor.tmpl",
-		size:    421,
-		modtime: 1559598941,
+		size:    358,
+		modtime: 1559602928,
 		compressed: `
-H4sIAAAAAAAC/5yRzUrDQBSF9/MUdxGkguQBYhWapGCRRmja1TAMt5mLDXZ+nN4I9efdZSopKLpxec6F
-75wzI6SEiO6RIDPIyMdAUNxAXiPj+hjoAEoJJhv2yATTbjDOlcjdrvHRLr0hzbBN2vlotfWGbsWBkfsO
-XnxvQErI8pJct7MYnxq0BErp5I5x+cl8hyEEiumoT/y2fyUtZZafVTolY+P654HOzEWt1GQ7qqJoGZku
-IJWgS3gT8EeHhQ376bciVRoMSl39XDT5gl0LgHLeVHfL2epe/06d1bWuHjbNer5q/7VkjPpIP0POpPf/
-DAAA///2ix2wpQEAAA==
+H4sIAAAAAAAC/5yQT0vDQBDF7/kU7xCkXvIB4h9okoJFjNC0p2VYxmSwQbOu6VSof767jJKCoBeP8x7v
+7W9f4hxGDveCtGNlPURBfoGsYuX1IcoORMlOWfsWL099B+eQZoWEdjvw+FDzICDypk757Et8xz5GGc30
+BWu7bfpX8c6l2fEyy4RN6J/3cuxcVkSzu+nK80ZZ5QQGIad4S/AHw3KIj+c/QEr7AYguZ9/hswQoFnV5
+dTNfXfvfW+ZV5cvbTb1erJp/kU9Pfdi0Ejob8DMAAP//aCQdLmYBAAA=
 `,
 	},
 
