@@ -17,7 +17,7 @@ const (
 )
 
 var (
-	Accelerator = []Accelerator{
+	Accelerators = []Accelerator{
 		CPUAccelerator,
 		GPUAccelerator,
 	}

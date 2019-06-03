@@ -1815,6 +1815,10 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer5(in *jlexer.Lexer, 
 			out.DilationWidth = int64(in.Int64())
 		case "dilation_height":
 			out.DilationHeight = int64(in.Int64())
+		case "conv_fwd_type":
+			if data := in.Raw(); in.Ok() {
+				in.AddError((out.ConvFwdType).UnmarshalJSON(data))
+			}
 		case "conv_bwd_type":
 			if data := in.Raw(); in.Ok() {
 				in.AddError((out.ConvBwdType).UnmarshalJSON(data))
@@ -1823,6 +1827,12 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer5(in *jlexer.Lexer, 
 			out.BatchSize = int64(in.Int64())
 		case "group":
 			out.Group = int64(in.Int64())
+		case "bias_dim":
+			out.BiasDim = int64(in.Int64())
+		case "alpha":
+			out.Alpha = float64(in.Float64())
+		case "beta":
+			out.Beta = float64(in.Float64())
 		case "arg_names":
 			if in.IsNull() {
 				in.Skip()
@@ -2046,6 +2056,16 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer5(out *jwriter.Write
 		}
 		out.Int64(int64(in.DilationHeight))
 	}
+	if in.ConvFwdType != 0 {
+		const prefix string = ",\"conv_fwd_type\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Raw((in.ConvFwdType).MarshalJSON())
+	}
 	if in.ConvBwdType != 0 {
 		const prefix string = ",\"conv_bwd_type\":"
 		if first {
@@ -2075,6 +2095,36 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer5(out *jwriter.Write
 			out.RawString(prefix)
 		}
 		out.Int64(int64(in.Group))
+	}
+	if in.BiasDim != 0 {
+		const prefix string = ",\"bias_dim\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.BiasDim))
+	}
+	if in.Alpha != 0 {
+		const prefix string = ",\"alpha\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Float64(float64(in.Alpha))
+	}
+	if in.Beta != 0 {
+		const prefix string = ",\"beta\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Float64(float64(in.Beta))
 	}
 	if len(in.ArgNames) != 0 {
 		const prefix string = ",\"arg_names\":"

@@ -126,6 +126,7 @@ func mkTemplateCounters(st interface{}) string {
 func mkTemplateArguments(st interface{}) string {
 	defer recovery()
 	res := []string{}
+	ii := 0
 	for _, field := range structs.New(st).Fields() {
 		if field.IsExported() && structs.IsStruct(field.Value()) {
 			args := mkTemplateArguments(field.Value())
@@ -138,7 +139,8 @@ func mkTemplateArguments(st interface{}) string {
 		if tag == "" || tag == "-" {
 			continue
 		}
-		res = append(res, fmt.Sprintf(`      %v /* %s */, \`, field.Value(), field.Name()))
+		res = append(res, fmt.Sprintf(`      %v /* %s , idx = %d*/, \`, field.Value(), field.Name(), ii))
+		ii++
 	}
 	return strings.Join(res, "\n")
 }

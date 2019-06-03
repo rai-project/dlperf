@@ -190,16 +190,30 @@ func _escFSMustString(useLocal bool, name string) string {
 
 var _escData = map[string]*_escFile{
 
+	"/scope/add_tensor.tmpl": {
+		local:   "codegen/scope/add_tensor.tmpl",
+		size:    421,
+		modtime: 1559598941,
+		compressed: `
+H4sIAAAAAAAC/5yRzUrDQBSF9/MUdxGkguQBYhWapGCRRmja1TAMt5mLDXZ+nN4I9efdZSopKLpxec6F
+75wzI6SEiO6RIDPIyMdAUNxAXiPj+hjoAEoJJhv2yATTbjDOlcjdrvHRLr0hzbBN2vlotfWGbsWBkfsO
+XnxvQErI8pJct7MYnxq0BErp5I5x+cl8hyEEiumoT/y2fyUtZZafVTolY+P654HOzEWt1GQ7qqJoGZku
+IJWgS3gT8EeHhQ376bciVRoMSl39XDT5gl0LgHLeVHfL2epe/06d1bWuHjbNer5q/7VkjPpIP0POpPf/
+DAAA///2ix2wpQEAAA==
+`,
+	},
+
 	"/scope/base_prefix.tmpl": {
 		local:   "codegen/scope/base_prefix.tmpl",
-		size:    512,
-		modtime: 1559286151,
+		size:    618,
+		modtime: 1559599773,
 		compressed: `
-H4sIAAAAAAAC/5yQUUvDMBSF3/MrLptIC9IfMJ/SrejQRVnXpyyE2N5ucTTVJvXBrP9dgnYoDETf7uGc
-w3c5U11XWEPGaHqfSc4hSdGU+0Z1B6YaBCGIUQ3aF1UinLOlTJUr97l+R8n5RXJSweI8KYx+7fHUWi6E
-AE/ItMJaG4Q0Y/PbFV3fnWXLJXssNpKub/Iohi0BoN3ORt7DloQ8HKFRB5Sq2/UNGmfDvwDDEP+dIBld
-Zd8wIWAjH0qjgiM8t9rA5AomIESgWKecLuGt1dVvJLpYyPlDwTbZOv/HatHTqGaz3CmHlxDgGIMn8Hkm
-Zdsbh51NtLHYucj/WGl0v0aKr8lAPgIAAP//YNEh1gACAAA=
+H4sIAAAAAAAC/5yRQWvqQBSF9/MrDvp4JCD5AfHxINHQSmtajK5iGMbkqlObic1MumjMfy8jVVxYpN3N
+4d7Dd8+ZvlwXtEYUB+FjxNMUXkgq35ai3sWiJGQZU6IkvRc54dqY81CYfJvID+Jp+sc7KztKU2+h5FtD
+Z9dknGVoGesXtJaKEEbx6H4azB6usvkkfl7MeTC7SxwXSwYE9UY7bYsls/s4oBQ74qLeNCUpo+29QNe5
+jDFthJE5tCl8vxT7f9rUUm0GKKpm9Ur/IdW+Mdaqvzu0bRlwycmrRhmqj5iuG/48Bo+DaXSRxS5op7Wm
+k8IBL5VU6A3QQ5bZKF9J3itZ3CIF4zEfPS3ieTRLfvE1zuqkfD8xwtBfWDi5sFUcn96pBE8qTbVxbvfo
+DlnHPgMAAP//sBjCI2oCAAA=
 `,
 	},
 
@@ -269,6 +283,21 @@ K7Qdh/rhauV6gU+DmeO7HnVXfjMQZdK0a8xywTTCOK4SKS0ld0pUmiv5+JqYYq2ohrhNUibWquB6k006
 AKVmmsewUzyph/aMKcp4k7Hi5QBICK2zl9QfUOU5FnWRTpmONz5/QxpFPeMc1aU6EUq+rfA8c2ET0n8+
 RaORr5nG/wcIvIP3DsCtXh1/XOFeZLkYX8Bb9UaAkMF1OwZHx89G06UZzCf9hu7+BIeixD/X/q5y2i7A
 dOZY86XpPdHrYqZtU8sNnWDm+b9aSCv9efutokx4CsMh/PBe29dXAAAA///HOrW9OwMAAA==
+`,
+	},
+
+	"/scope/cudnn_conv_bias_activation_fwd.tmpl": {
+		local:   "codegen/scope/cudnn_conv_bias_activation_fwd.tmpl",
+		size:    900,
+		modtime: 1559599334,
+		compressed: `
+H4sIAAAAAAAC/7RS24riQBB99ysKVxYXJL67rhATF2UxkVyeQtP0pivabNIdk46Lc/n3IUYTnHFgHJi3
+7lOXc6pORREUTG4RBpxppo85wuQXGDbTLDjmWAIhPYAoApEA7rssw2EZQj9AWarCUgUuWZr0m+xvIuGY
+gBXajkP9cLNxvcCnwcLxXY+6G79piJI36RqzPGUaYRpXXEpLyYNKKy2U/P2fm+lWUQ1xB1KWblUh9C4b
+wanAjLU4sDq0VhypBtYCNFMcZz2AUjMtYjgowWvugTFHGe8yVvw7zUEIrdHr4Z6gynMs6iCdMx3vfPGA
+NIoGRvurQzUQSrGvsO25sgkZ/r38JhNfM43fTyLwBzz2AO5d6bnihu5VlqfTK/FWbRwQMnpva6/2Mzo7
+1RpE12awnA0buT8vajEt8evFvKW9nAnAfOFYy7Xp/aG32U3bppYbOsHC8z9lWUf9fP/Ro+QigfEYPnj4
+3eslAAD//6gWG62EAwAA
 `,
 	},
 

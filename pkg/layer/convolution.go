@@ -164,31 +164,51 @@ type convBenchmarkArgs struct {
 	StrideWidth       int64              `args:"stride_width" hash:"stride_width" json:"stride_width,omitempty"`
 	DilationWidth     int64              `args:"dilation_height" hash:"dilation_height" json:"dilation_width,omitempty"`
 	DilationHeight    int64              `args:"dilation_width" hash:"dilation_width" json:"dilation_height,omitempty"`
+	ConvFwdType       dlperf.ConvFwdType `args:"conv_fwd_type" hash:"conv_fwd_type" json:"conv_fwd_type,omitempty"`
 	ConvBwdType       dlperf.ConvBwdType `args:"conv_bwd_type" hash:"conv_bwd_type" json:"conv_bwd_type,omitempty"`
 	BatchSize         int64              `args:"batch_size" hash:"batch_size" json:"batch_size,omitempty"`
 	Group             int64              `args:"-" hash:"-" json:"group,omitempty"`
+	BiasDim           int64              `args:"bias_dim" hash:"bias_dim" json:"bias_dim,omitempty"`
+	Alpha             float64            `args:"alpha" hash:"alpha" json:"alpha,omitempty"`
+	Beta              float64            `args:"beta" hash:"beta" json:"beta,omitempty"`
 }
 
-func (c Conv) FwdBenchmarkArgs(opts ...dlperf.FwdBenchmarkArgsOptionFunc) interface{} {
+func (c Conv) FwdBenchmarkArgs(iopts ...dlperf.FwdBenchmarkArgsOptionFunc) interface{} {
+	opts := dlperf.CreateFwdBenchmarkArgsOption(iopts...)
 	inShapes := c.InputShapes()
 
-	res := convBenchmarkArgs{
-		Input0:            inShapes[0][0],
-		Input1:            inShapes[0][1],
-		Input2:            inShapes[0][2],
-		Input3:            inShapes[0][3],
-		FilterCount:       inShapes[1][0],
-		FilterHeight:      c.KernelShape[0],
-		FilterWidth:       c.KernelShape[1],
-		PadHeight:         c.Pads[0],
-		PadWidth:          c.Pads[2],
-		StrideHeight:      c.Strides[0],
-		StrideWidth:       c.Strides[1],
-		DilationHeight:    c.Dilations[0],
-		DilationWidth:     c.Dilations[1],
-		BatchSize:         dlperf.GetBatchSize(),
-		BaseBenchmarkArgs: mkBaseBenchmarkFWDArgs(&c, opts...),
-		Group:             c.Group,
+	var res convBenchmarkArgs
+	if opts.ConvFwdType == dlperf.ConvFwdTypeBias {
+		res = convBenchmarkArgs{
+			Input0:            inShapes[0][0],
+			Input1:            inShapes[0][1],
+			Input2:            inShapes[0][2],
+			Input3:            inShapes[0][3],
+			BiasDim:           inShapes[2][0],
+			Alpha:             1.0,
+			Beta:              0.0,
+			BatchSize:         dlperf.GetBatchSize(),
+			BaseBenchmarkArgs: mkBaseBenchmarkFWDArgs(&c, iopts...),
+		}
+	} else {
+		res = convBenchmarkArgs{
+			Input0:            inShapes[0][0],
+			Input1:            inShapes[0][1],
+			Input2:            inShapes[0][2],
+			Input3:            inShapes[0][3],
+			FilterCount:       inShapes[1][0],
+			FilterHeight:      c.KernelShape[0],
+			FilterWidth:       c.KernelShape[1],
+			PadHeight:         c.Pads[0],
+			PadWidth:          c.Pads[2],
+			StrideHeight:      c.Strides[0],
+			StrideWidth:       c.Strides[1],
+			DilationHeight:    c.Dilations[0],
+			DilationWidth:     c.Dilations[1],
+			BatchSize:         dlperf.GetBatchSize(),
+			BaseBenchmarkArgs: mkBaseBenchmarkFWDArgs(&c, iopts...),
+			Group:             c.Group,
+		}
 	}
 
 	hash, err := hashstructure.Hash(
@@ -270,9 +290,16 @@ func (c Conv) DataTypes() []dlperf.DataType {
 	return dts
 }
 
-func (c Conv) FwdBenchmarkGenerator(opts ...dlperf.FwdBenchmarkArgsOptionFunc) string {
-	templString := _escFSMustString(false, "/scope/conv_fwd.tmpl")
-	return templateExecFWD(&c, templateBasePrefix+templString+templateBaseSuffix, opts...)
+func (c Conv) FwdBenchmarkGenerator(iopts ...dlperf.FwdBenchmarkArgsOptionFunc) string {
+	var templString string
+	opts := dlperf.CreateFwdBenchmarkArgsOption(iopts...)
+
+	if opts.ConvFwdType == dlperf.ConvFwdTypeBias {
+		templString = _escFSMustString(false, "/scope/add_tensor.tmpl")
+	} else {
+		templString = _escFSMustString(false, "/scope/conv_fwd.tmpl")
+	}
+	return templateExecFWD(&c, templateBasePrefix+templString+templateBaseSuffix, iopts...)
 }
 
 func (c Conv) BwdBenchmarkGenerator(iopts ...dlperf.BwdBenchmarkArgsOptionFunc) string {

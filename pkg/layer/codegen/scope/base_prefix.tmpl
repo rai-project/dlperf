@@ -6,11 +6,14 @@ namespace [[ .BenchmarkName ]]__BatchSize_[[$.BatchSize]]__[[.UniqueBenchmarkID]
 [[ . | make_arguments ]]
   }})
 
+
+static std::map<string, double> input_args__[[.UniqueBenchmarkID]]{{
+  [[ . | make_counters ]]
+}};
+
 #define BENCHMARK_[[ .BenchmarkName ]]_INPUT_ARG_NAMES() \
   ArgNames({[[ .ArgNames | join ", " ]]})
 
 static void BENCHMARK_[[ .BenchmarkName ]]_ADD_COUNTERS__BatchSize_[[$.BatchSize]]__[[.UniqueBenchmarkID]](benchmark::State& state) {
-  state.counters.insert({
-[[ . | make_counters ]]
-  });
+  state.counters.insert(input_args__[[.UniqueBenchmarkID]]);
 }
