@@ -15,13 +15,13 @@ func loadGPUs(name string) ([]InstanceInformation, error) {
 		return nil, err
 	}
 	res := make([]InstanceInformation, 0, len(infos))
-	for ii, info := range infos {
+	for _, info := range infos {
 		if info.GpusPerVM > 0 {
 			res = append(res, info)
 		}
 	}
 
-	return nil, res
+	return res, nil
 }
 
 func load(name string) ([]InstanceInformation, error) {
@@ -37,7 +37,7 @@ func load(name string) ([]InstanceInformation, error) {
 	}
 
 	var infos InstanceInformations
-	err = json.Unmarshal(&infos, bts)
+	err = json.Unmarshal(bts, &infos)
 	if err != nil {
 		return nil, errors.Wrapf(err, "failed to unmarshal %v", name)
 	}

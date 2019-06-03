@@ -155,7 +155,7 @@ func (c Gemm) mkGemmBenchmarkInputArgs() BaseBenchmarkInputArgs {
 			BatchSize: dlperf.GetBatchSize(),
 		}
 	} else if bn == 1 {
-    return BaseBenchmarkInputArgs{
+		return BaseBenchmarkInputArgs{
 			Input0:    am,
 			Input1:    ak,
 			Input2:    c.TransB,
@@ -163,7 +163,8 @@ func (c Gemm) mkGemmBenchmarkInputArgs() BaseBenchmarkInputArgs {
 			Input4:    cast.ToInt64(c.Beta),
 			Input5:    -1,
 			BatchSize: dlperf.GetBatchSize(),
-  }
+		}
+	}
 
 	return BaseBenchmarkInputArgs{
 		Input0:    am,
