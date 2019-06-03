@@ -1,6 +1,8 @@
 package onnx
 
 import (
+	"errors"
+
 	"github.com/cevaris/ordered_map"
 
 	"github.com/rai-project/onnx"
@@ -38,14 +40,22 @@ func New(protoFileName string, batchSize int64) (*Onnx, error) {
 	}
 
 	inputs := map[string]*onnx.ValueInfoProto{}
+	if len(graph.Input) == 0 {
+		return nil, errors.New("the onnx model has no input")
+	}
+	input0 := graph.Input[0]
+	input0Shape := getValueInfoDimensions(input0)
+	if len(input0Shape) != 4 {
+		return nil, errors.New("supports image input")
+	}
+	dim := input0.GetType().GetTensorType().GetShape().GetDim()[0]
+	val := onnx.TensorShapeProto_Dimension_DimValue{DimValue: batchSize}
+	dim.Value = &val
+
 	for _, i := range graph.Input {
 		// Assume the input is image and len(shape) == 4 && shape[0] == 1
 		shape := getValueInfoDimensions(i)
-		if len(shape) == 4 && shape[0] == 1 {
-			dim := i.GetType().GetTensorType().GetShape().GetDim()[0]
-			val := onnx.TensorShapeProto_Dimension_DimValue{DimValue: batchSize}
-			dim.Value = &val
-		}
+
 		inputs[i.Name] = i
 	}
 

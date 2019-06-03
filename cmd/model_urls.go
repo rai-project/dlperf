@@ -188,7 +188,7 @@ var onnxModelURLs = []modelURLInfo{
 	},
 	modelURLInfo{
 		URL:  "https://s3.amazonaws.com/onnx-model-zoo/resnet/resnet34v2/resnet34v2.tar.gz",
-		Name: "ResNet32-v2",
+		Name: "ResNet34-v2",
 	},
 	modelURLInfo{
 		URL:  "https://s3.amazonaws.com/onnx-model-zoo/resnet/resnet50v2/resnet50v2.tar.gz",
