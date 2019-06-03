@@ -205,40 +205,30 @@ func (c Conv) FwdBenchmarkArgs(iopts ...dlperf.FwdBenchmarkArgsOptionFunc) inter
 	opts := dlperf.CreateFwdBenchmarkArgsOption(iopts...)
 	inShapes := c.InputShapes()
 
-	var res convBenchmarkArgs
+	res := convBenchmarkArgs{
+		Input0:            inShapes[0][0],
+		Input1:            inShapes[0][1],
+		Input2:            inShapes[0][2],
+		Input3:            inShapes[0][3],
+		FilterCount:       inShapes[1][0],
+		FilterHeight:      c.KernelShape[0],
+		FilterWidth:       c.KernelShape[1],
+		PadHeight:         c.Pads[0],
+		PadWidth:          c.Pads[2],
+		StrideHeight:      c.Strides[0],
+		StrideWidth:       c.Strides[1],
+		DilationHeight:    c.Dilations[0],
+		DilationWidth:     c.Dilations[1],
+		BatchSize:         dlperf.GetBatchSize(),
+		ConvFwdType:       opts.ConvFwdType,
+		BaseBenchmarkArgs: mkBaseBenchmarkFWDArgs(&c, iopts...),
+		Group:             c.Group,
+	}
+
 	if opts.ConvFwdType == dlperf.ConvFwdTypeBias {
-		res = convBenchmarkArgs{
-			Input0:            inShapes[0][0],
-			Input1:            inShapes[0][1],
-			Input2:            inShapes[0][2],
-			Input3:            inShapes[0][3],
-			BiasDim:           inShapes[2][0],
-			Alpha:             1.0,
-			Beta:              0.0,
-			BatchSize:         dlperf.GetBatchSize(),
-			ConvFwdType:       opts.ConvFwdType,
-			BaseBenchmarkArgs: mkBaseBenchmarkFWDArgs(&c, iopts...),
-		}
-	} else {
-		res = convBenchmarkArgs{
-			Input0:            inShapes[0][0],
-			Input1:            inShapes[0][1],
-			Input2:            inShapes[0][2],
-			Input3:            inShapes[0][3],
-			FilterCount:       inShapes[1][0],
-			FilterHeight:      c.KernelShape[0],
-			FilterWidth:       c.KernelShape[1],
-			PadHeight:         c.Pads[0],
-			PadWidth:          c.Pads[2],
-			StrideHeight:      c.Strides[0],
-			StrideWidth:       c.Strides[1],
-			DilationHeight:    c.Dilations[0],
-			DilationWidth:     c.Dilations[1],
-			BatchSize:         dlperf.GetBatchSize(),
-			ConvFwdType:       opts.ConvFwdType,
-			BaseBenchmarkArgs: mkBaseBenchmarkFWDArgs(&c, iopts...),
-			Group:             c.Group,
-		}
+		res.BiasDim = inShapes[2][0]
+		res.Alpha = 1.0
+		res.Beta = 0.0
 	}
 
 	hash, err := hashstructure.Hash(
