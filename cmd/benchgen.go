@@ -4,10 +4,10 @@ import (
 	"bytes"
 	"context"
 	"fmt"
-	"io/ioutil"
 	"strings"
 	"sync"
 
+	"github.com/Unknwon/com"
 	"github.com/k0kubun/pp"
 	dlperf "github.com/rai-project/dlperf/pkg"
 	perflayer "github.com/rai-project/dlperf/pkg/layer"
@@ -177,7 +177,7 @@ var benchgenCmd = &cobra.Command{
 			return nil
 		}
 
-		err = ioutil.WriteFile(outputFileName, prog.Bytes(), 0644)
+		err = com.WriteFile(outputFileName, prog.Bytes())
 		if err != nil {
 			return err
 		}
