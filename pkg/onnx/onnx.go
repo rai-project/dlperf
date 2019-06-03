@@ -40,6 +40,8 @@ func New(protoFileName string, batchSize int64) (*Onnx, error) {
 	}
 
 	inputs := map[string]*onnx.ValueInfoProto{}
+
+	// Assume the input is image and len(shape) == 4
 	if len(graph.Input) == 0 {
 		return nil, errors.New("the onnx model has no input")
 	}
@@ -53,9 +55,6 @@ func New(protoFileName string, batchSize int64) (*Onnx, error) {
 	dim.Value = &val
 
 	for _, i := range graph.Input {
-		// Assume the input is image and len(shape) == 4 && shape[0] == 1
-		shape := getValueInfoDimensions(i)
-
 		inputs[i.Name] = i
 	}
 
