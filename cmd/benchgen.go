@@ -76,7 +76,11 @@ var benchgenCmd = &cobra.Command{
 					switch strings.ToLower(lyr.OperatorType()) {
 					case "conv":
 						l := lyr.(*perflayer.Conv)
-						b = l.FwdBenchmarkGenerator()
+						b = l.FwdBenchmarkGenerator(dlperf.FwdBenchmarkArgsOption.ConvFwdType(dlperf.ConvFwdTypeConv))
+						b += "\n"
+						b = l.FwdBenchmarkGenerator(dlperf.FwdBenchmarkArgsOption.ConvFwdType(dlperf.ConvFwdTypeBias))
+						// b += "\n"
+						// b += l.FwdBenchmarkFusedActivationGenerator()
 					case "relu":
 						l := lyr.(*perflayer.Relu)
 						b = l.FwdBenchmarkGenerator()

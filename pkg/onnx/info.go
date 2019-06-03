@@ -94,13 +94,15 @@ func (o *Onnx) Information() ([]dlperf.LayerInformation, error) {
 		if !ok {
 			panic("invalid type for " + pp.Sprint(nd0))
 		}
-		layer := o.mkLayer(nd.NodeProto)
+		resLayers := o.mkLayer(nd.NodeProto)
 
-		if layer == nil {
+		if resLayers == nil || len(resLayers) == 0 {
 			continue
 		}
 
-		layers.Set(nd.name, layer)
+		for _, layer := range resLayers {
+			layers.Set(nd.name, layer)
+		}
 	}
 
 	iter := layers.IterFunc()

@@ -22,6 +22,7 @@ type Conv struct {
 	KernelShape dlperf.Shape `json:"kernel_shape,omitempty"`
 	Pads        dlperf.Shape `json:"pads,omitempty"`
 	Strides     dlperf.Shape `json:"strides,omitempty"`
+	HasBias     bool `json:"has_bias,omitempty"`
 }
 
 func (Conv) OperatorType() string {
@@ -161,7 +162,7 @@ type convBenchmarkArgs struct {
 	DilationHeight    int64              `args:"dilation_width" hash:"dilation_width" json:"dilation_height,omitempty"`
 	ConvBwdType       dlperf.ConvBwdType `args:"conv_bwd_type" hash:"conv_bwd_type" json:"conv_bwd_type,omitempty"`
 	BatchSize         int64              `args:"batch_size" hash:"batch_size" json:"batch_size,omitempty"`
-	Group             int64              `args:"group" hash:"group" json:"group,omitempty"`
+	Group             int64              `args:"-" hash:"-" json:"group,omitempty"`
 }
 
 func (c Conv) FwdBenchmarkArgs(opts ...dlperf.FwdBenchmarkArgsOptionFunc) interface{} {
@@ -265,9 +266,9 @@ func (c Conv) DataTypes() []dlperf.DataType {
 	return dts
 }
 
-func (c Conv) FwdBenchmarkGenerator() string {
+func (c Conv) FwdBenchmarkGenerator(opts ...dlperf.FwdBenchmarkArgsOptionFunc) string {
 	templString := _escFSMustString(false, "/scope/conv_fwd.tmpl")
-	return templateExecFWD(&c, templateBasePrefix+templString+templateBaseSuffix)
+	return templateExecFWD(&c, templateBasePrefix+templString+templateBaseSuffix, opts...)
 }
 
 func (c Conv) BwdBenchmarkGenerator(iopts ...dlperf.BwdBenchmarkArgsOptionFunc) string {
@@ -296,6 +297,35 @@ func (c Conv) Shape() dlperf.ShapeInformation {
 	return c.Information().Shape()
 }
 
+func (c Conv) Flops(algorithm string) dlperf.FlopsInformation {
+
+	if algorithm == "" {
+
+	}
+	inputShapes := c.InputShapes()[0]
+	outputShapes := c.OutputShapes()[0]
+
+	nIn := inputShapes[0]
+	cIn := inputShapes[1]
+
+	cOut := outputShapes[1]
+	hOut := outputShapes[2]
+	wOut := outputShapes[3]
+
+	kernelH := c.Dilations[0]*(c.KernelShape[0]-1) + 1
+	kernelW := c.Dilations[1]*(c.KernelShape[1]-1) + 1
+
+	// expand
+	// see https://arxiv.org/pdf/1802.09941.pdf Page 17 Table 6
+	flops := dlperf.FlopsInformation{
+		MultiplyAdds: int64(kernelH*kernelW*hOut*wOut*cIn*cOut*nIn) / c.Group,
+		// Additions: int64(cOut*hOut*wOut*nIn), // bias
+	}
+
+	return flops
+
+}
+
 func (c Conv) Information() dlperf.LayerInformation {
 	info := &Information{
 		Base: c.Base,
@@ -313,25 +343,7 @@ func (c Conv) Information() dlperf.LayerInformation {
 	checkNumber(c.InputShapes, []int{2, 3}, c.OperatorType(), "number of inputs")
 	checkNumber(c.OutputShapes, []int{1}, c.OperatorType(), "number of outputs")
 
-	inputShapes := c.InputShapes()[0]
-	outputShapes := c.OutputShapes()[0]
-
-	nIn := inputShapes[0]
-	cIn := inputShapes[1]
-
-	cOut := outputShapes[1]
-	hOut := outputShapes[2]
-	wOut := outputShapes[3]
-
-	kernelH := c.Dilations[0]*(c.KernelShape[0]-1) + 1
-	kernelW := c.Dilations[1]*(c.KernelShape[1]-1) + 1
-
-	// expand
-	// see https://arxiv.org/pdf/1802.09941.pdf Page 17 Table 6
-	info.flops = dlperf.FlopsInformation{
-		MultiplyAdds: int64(kernelH*kernelW*hOut*wOut*cIn*cOut*nIn) / c.Group,
-		// Additions: int64(cOut*hOut*wOut*nIn), // bias
-	}
+	info.flops = c.Flops("")
 
 	return info
 }

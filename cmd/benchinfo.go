@@ -14,6 +14,7 @@ import (
 	"github.com/rai-project/config"
 	dlperf "github.com/rai-project/dlperf/pkg"
 	"github.com/rai-project/dlperf/pkg/benchmark"
+	perflayer "github.com/rai-project/dlperf/pkg/layer"
 	"github.com/rai-project/dlperf/pkg/onnx"
 )
 
@@ -196,12 +197,23 @@ var benchinfoCmd = &cobra.Command{
 					addLayerInfos(bs)
 				}
 			case "conv":
+				l := lyr.(*perflayer.Conv)
+
 				filter := filterBenchmarks(false, benchInfoDataType, "")
 				bs, err := getBenchmarkTime(filter)
 				if err != nil {
 					continue
 				}
 				addLayerInfos(bs)
+
+				if l.HasBias {
+					filter := filterBenchmarks(false, benchInfoDataType, "", dlperf.FwdBenchmarkArgsOption.ConvFwdType(dlperf.ConvFwdTypeBias))
+					bs, err := getBenchmarkTime(filter)
+					if err != nil {
+						continue
+					}
+					addLayerInfos(bs)
+				}
 
 				if benchInfoTraining {
 					filter := filterBenchmarks(true, benchInfoDataType, "", dlperf.BwdBenchmarkArgsOption.ConvBwdType(dlperf.ConvBwdTypeData))
@@ -220,13 +232,15 @@ var benchinfoCmd = &cobra.Command{
 					}
 					addLayerInfos(bs)
 
-					filter = filterBenchmarks(true, benchInfoDataType, "", dlperf.BwdBenchmarkArgsOption.ConvBwdType(dlperf.ConvBwdTypeBias))
-					bs, err = getBenchmarkTime(filter)
-					if err != nil {
-						pp.Println("unable to get conv bias")
-						continue
+					if l.HasBias {
+						filter = filterBenchmarks(true, benchInfoDataType, "", dlperf.BwdBenchmarkArgsOption.ConvBwdType(dlperf.ConvBwdTypeBias))
+						bs, err = getBenchmarkTime(filter)
+						if err != nil {
+							pp.Println("unable to get conv bias")
+							continue
+						}
+						addLayerInfos(bs)
 					}
-					addLayerInfos(bs)
 				}
 
 			case "batchnorm":
