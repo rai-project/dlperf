@@ -196,9 +196,6 @@ type convBenchmarkArgs struct {
 	ConvBwdType       dlperf.ConvBwdType `args:"conv_bwd_type" hash:"conv_bwd_type" json:"conv_bwd_type,omitempty"`
 	BatchSize         int64              `args:"batch_size" hash:"batch_size" json:"batch_size,omitempty"`
 	Group             int64              `args:"-" hash:"-" json:"group,omitempty"`
-	BiasDim           int64              `args:"bias_dim" hash:"bias_dim" json:"bias_dim,omitempty"`
-	Alpha             float64            `args:"alpha" hash:"alpha" json:"alpha,omitempty"`
-	Beta              float64            `args:"beta" hash:"beta" json:"beta,omitempty"`
 }
 
 func (c Conv) FwdBenchmarkArgs(iopts ...dlperf.FwdBenchmarkArgsOptionFunc) interface{} {
@@ -223,12 +220,6 @@ func (c Conv) FwdBenchmarkArgs(iopts ...dlperf.FwdBenchmarkArgsOptionFunc) inter
 		ConvFwdType:       opts.ConvFwdType,
 		BaseBenchmarkArgs: mkBaseBenchmarkFWDArgs(&c, iopts...),
 		Group:             c.Group,
-	}
-
-	if opts.ConvFwdType == dlperf.ConvFwdTypeBias {
-		res.BiasDim = inShapes[2][0]
-		res.Alpha = 1.0
-		res.Beta = 0.0
 	}
 
 	hash, err := hashstructure.Hash(

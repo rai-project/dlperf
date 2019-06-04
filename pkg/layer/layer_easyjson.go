@@ -1827,12 +1827,6 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer5(in *jlexer.Lexer, 
 			out.BatchSize = int64(in.Int64())
 		case "group":
 			out.Group = int64(in.Int64())
-		case "bias_dim":
-			out.BiasDim = int64(in.Int64())
-		case "alpha":
-			out.Alpha = float64(in.Float64())
-		case "beta":
-			out.Beta = float64(in.Float64())
 		case "arg_names":
 			if in.IsNull() {
 				in.Skip()
@@ -2095,36 +2089,6 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer5(out *jwriter.Write
 			out.RawString(prefix)
 		}
 		out.Int64(int64(in.Group))
-	}
-	if in.BiasDim != 0 {
-		const prefix string = ",\"bias_dim\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.Int64(int64(in.BiasDim))
-	}
-	if in.Alpha != 0 {
-		const prefix string = ",\"alpha\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.Float64(float64(in.Alpha))
-	}
-	if in.Beta != 0 {
-		const prefix string = ",\"beta\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.Float64(float64(in.Beta))
 	}
 	if len(in.ArgNames) != 0 {
 		const prefix string = ",\"arg_names\":"
