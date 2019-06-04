@@ -16,6 +16,6 @@
 {"name":"Pooling160","type":"Pooling","inputs":["ReLU114_Output_0"],"outputs":["Pooling160_Output_0"],"input_dimensions":{"input_shapes":[[1,16,14,14]],"output_shapes":[[1,16,4,4]]}},
 {"name":"Pooling160_Output_0_reshape0_shape","type":"ConstantInput","input_dimensions":{"input_shapes":[[1,256]],"output_shapes":[[1,256]]}},
 {"name":"Times212_reshape0","type":"Reshape","inputs":["Pooling160_Output_0","Pooling160_Output_0_reshape0_shape"],"outputs":["Pooling160_Output_0_reshape0"],"input_dimensions":{"input_shapes":[[1,16,4,4],[1,256]],"output_shapes":[[1,256]]}},
-{"name":"Times212","type":"MatMul","inputs":["Pooling160_Output_0_reshape0","Parameter193_reshape1"],"outputs":["Times212_Output_0"],"input_dimensions":{"input_shapes":[[1,256],[256,10]],"output_shapes":[[1,10]]}},
+{"name":"Times212","type":"Gemm","inputs":["Pooling160_Output_0_reshape0","Parameter193_reshape1"],"outputs":["Times212_Output_0"],"input_dimensions":{"input_shapes":[[1,256],[256,10]],"output_shapes":[[1,10]]}},
 {"name":"Parameter194","type":"ConstantInput","input_dimensions":{"input_shapes":[[1,10]],"output_shapes":[[1,10]]}},
 {"name":"Plus214","type":"ElementWise","inputs":["Times212_Output_0","Parameter194"],"outputs":["Plus214_Output_0"],"input_dimensions":{"input_shapes":[[1,10],[1,10]],"output_shapes":[[1,10]]}}]

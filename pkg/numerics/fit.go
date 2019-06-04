@@ -1,6 +1,7 @@
 package numerics
 
 // github.com/maorshutman/lm
+// https://github.com/go-hep/hep/tree/master/fit
 
 // type Fit struct {
 
