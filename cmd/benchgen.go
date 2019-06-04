@@ -105,7 +105,7 @@ var benchgenCmd = &cobra.Command{
 						l := lyr.(*perflayer.ElementWise)
 						b = l.FwdBenchmarkGenerator()
 					default:
-						pp.Println(lyr.OperatorType())
+						// pp.Println(lyr.OperatorType())
 					}
 					if b == "" {
 						return nil

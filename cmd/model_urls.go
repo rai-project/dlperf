@@ -164,15 +164,15 @@ var onnxModelURLs = []modelURLInfo{
 	},
 	modelURLInfo{
 		URL:  "https://s3.amazonaws.com/onnx-model-zoo/resnet/resnet18v1/resnet18v1.tar.gz",
-		Name: "ResNet18-v1",
+		Name: "ResNet018-v1",
 	},
 	modelURLInfo{
 		URL:  "https://s3.amazonaws.com/onnx-model-zoo/resnet/resnet34v1/resnet34v1.tar.gz",
-		Name: "ResNet34-v1",
+		Name: "ResNet034-v1",
 	},
 	modelURLInfo{
 		URL:  "https://s3.amazonaws.com/onnx-model-zoo/resnet/resnet50v1/resnet50v1.tar.gz",
-		Name: "ResNet50-v1",
+		Name: "ResNet050-v1",
 	},
 	modelURLInfo{
 		URL:  "https://s3.amazonaws.com/onnx-model-zoo/resnet/resnet101v1/resnet101v1.tar.gz",
@@ -184,15 +184,15 @@ var onnxModelURLs = []modelURLInfo{
 	},
 	modelURLInfo{
 		URL:  "https://s3.amazonaws.com/onnx-model-zoo/resnet/resnet18v2/resnet18v2.tar.gz",
-		Name: "ResNet18-v2",
+		Name: "ResNet018-v2",
 	},
 	modelURLInfo{
 		URL:  "https://s3.amazonaws.com/onnx-model-zoo/resnet/resnet34v2/resnet34v2.tar.gz",
-		Name: "ResNet34-v2",
+		Name: "ResNet034-v2",
 	},
 	modelURLInfo{
 		URL:  "https://s3.amazonaws.com/onnx-model-zoo/resnet/resnet50v2/resnet50v2.tar.gz",
-		Name: "ResNet50-v2",
+		Name: "ResNet050-v2",
 	},
 	modelURLInfo{
 		URL:  "https://s3.amazonaws.com/onnx-model-zoo/resnet/resnet101v2/resnet101v2.tar.gz",

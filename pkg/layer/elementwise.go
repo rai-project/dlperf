@@ -23,6 +23,25 @@ func (ElementWise) Description() string {
 	return ``
 }
 
+func (c ElementWise) getOperatorName() string {
+	switch strings.ToLower(c.OnnxOperatorType()) {
+	case "add", "sum", "sub":
+		return "ADD"
+	case "mul", "div": // NOT SURE ABOUT DIV
+		return "MUL"
+	case "min":
+		return "MIN"
+	case "max":
+		return "MAX"
+	case "sqrt":
+		return "SQRT"
+	case "not":
+		return "NOT"
+	default:
+		panic("operator not supported")
+	}
+}
+
 // multidirectionalBroadcastShapeInference
 func (c *ElementWise) InferShape(inputLayers dlperf.Layers) {
 	inputShapes := getOutputShapes(inputLayers)
@@ -31,12 +50,12 @@ func (c *ElementWise) InferShape(inputLayers dlperf.Layers) {
 	c.SetOutputShapes(outputShapes)
 }
 
-func (c ElementWise) FwdBenchmarkName(iopts ...dlperf.FwdBenchmarkArgsOptionFunc) string {
-	return "LAYER_CUDNN_OP_TENSOR_FWD"
+func (c ElementWise) FwdBenchmarkName(opts ...dlperf.FwdBenchmarkArgsOptionFunc) string {
+	return "LAYER_CUDNN_OP_TENSOR_" + c.getOperatorName() + "_FWD"
 }
 
-func (c ElementWise) BwdBenchmarkName(iopts ...dlperf.BwdBenchmarkArgsOptionFunc) string {
-	return "LAYER_CUDNN_OP_TENSOR_BWD"
+func (c ElementWise) BwdBenchmarkName(opts ...dlperf.BwdBenchmarkArgsOptionFunc) string {
+	return "LAYER_CUDNN_OP_TENSOR_" + c.getOperatorName() + "_BWD"
 }
 
 func (c ElementWise) FwdCUDNNName() string {
@@ -56,26 +75,11 @@ func (c ElementWise) BwdTiming(system string /* hardware/software struct */) str
 }
 
 func (c ElementWise) FwdBenchmarkAlgorithms(...dlperf.FwdBenchmarkArgsOptionFunc) []string {
-	switch strings.ToLower(c.OnnxOperatorType()) {
-	case "add", "sum", "sub":
-		return []string{"CUDNN_OP_TENSOR_ADD"}
-	case "mul", "div": // NOT SURE ABOUT DIV
-		return []string{"CUDNN_OP_TENSOR_MUL"}
-	case "min":
-		return []string{"CUDNN_OP_TENSOR_MIN"}
-	case "max":
-		return []string{"CUDNN_OP_TENSOR_MAX"}
-	case "sqrt":
-		return []string{"CUDNN_OP_TENSOR_SQRT"}
-	case "not":
-		return []string{"CUDNN_OP_TENSOR_NOT"}
-	default:
-		panic("operator not supported")
-	}
+	return []string{}
 }
 
 func (c ElementWise) BwdBenchmarkAlgorithms(...dlperf.BwdBenchmarkArgsOptionFunc) []string {
-	return c.FwdBenchmarkAlgorithms()
+	return []string{}
 }
 
 //easyjson:json
@@ -91,7 +95,7 @@ func (c ElementWise) FwdBenchmarkArgs(opts ...dlperf.FwdBenchmarkArgsOptionFunc)
 		BaseBenchmarkInputArgs: mkBaseBenchmarkInputArgs(&c),
 		BaseBenchmarkArgs:      mkBaseBenchmarkFWDArgs(&c, opts...),
 		BatchSize:              dlperf.GetBatchSize(),
-		Operator:               c.FwdBenchmarkAlgorithms()[0],
+		Operator:               c.getOperatorName(),
 	}
 
 	hash, err := hashstructure.Hash(
@@ -113,7 +117,7 @@ func (c ElementWise) BwdBenchmarkArgs(opts ...dlperf.BwdBenchmarkArgsOptionFunc)
 		BaseBenchmarkInputArgs: mkBaseBenchmarkInputArgs(&c),
 		BaseBenchmarkArgs:      mkBaseBenchmarkBWDArgs(&c, opts...),
 		BatchSize:              dlperf.GetBatchSize(),
-		Operator:               c.BwdBenchmarkAlgorithms()[0],
+		Operator:               c.getOperatorName(),
 	}
 
 	hash, err := hashstructure.Hash(
