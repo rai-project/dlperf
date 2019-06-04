@@ -203,7 +203,7 @@ var benchinfoCmd = &cobra.Command{
 				}
 				addLayerInfos(bs)
 
-				if l.HasBias {
+				if l.HasBias() {
 					filter := filterBenchmarks(false, benchInfoDataType, "", dlperf.FwdBenchmarkArgsOption.ConvFwdType(dlperf.ConvFwdTypeBias))
 					bs, err := getBenchmarkTime(filter)
 					if err != nil {
@@ -229,7 +229,7 @@ var benchinfoCmd = &cobra.Command{
 					}
 					addLayerInfos(bs)
 
-					if l.HasBias {
+					if l.HasBias() {
 						filter = filterBenchmarks(true, benchInfoDataType, "", dlperf.BwdBenchmarkArgsOption.ConvBwdType(dlperf.ConvBwdTypeBias))
 						bs, err = getBenchmarkTime(filter)
 						if err != nil {

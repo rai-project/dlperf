@@ -22,7 +22,6 @@ type Conv struct {
 	KernelShape dlperf.Shape `json:"kernel_shape,omitempty"`
 	Pads        dlperf.Shape `json:"pads,omitempty"`
 	Strides     dlperf.Shape `json:"strides,omitempty"`
-	HasBias     bool         `json:"has_bias,omitempty"`
 }
 
 func (Conv) OperatorType() string {
@@ -31,6 +30,10 @@ func (Conv) OperatorType() string {
 
 func (Conv) Description() string {
 	return ``
+}
+
+func (c Conv) HasBias() bool {
+	return len(c.node.Input) == 3
 }
 
 func (c *Conv) InferShape(inputLayers dlperf.Layers) {
