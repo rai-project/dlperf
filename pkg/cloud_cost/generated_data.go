@@ -193,7 +193,7 @@ var _escData = map[string]*_escFile{
 	"/aws_instances.json": {
 		local:   "_fixtures/aws_instances.json",
 		size:    140630,
-		modtime: 1559432254,
+		modtime: 1559442457,
 		compressed: `
 H4sIAAAAAAAC/+x9S28jydHtfn4FofU4kRH5np3hC881YAMNXNsb4y6KrGKP8LUekNjwPDD//YPUj5HI
 alWcrGAp2c3NLEY6TUqKSkZGnMdv361WF7d3N/37ze7+4ofVf75brVar3x7/u1pdbLrd8Pbm7peLH1YX
@@ -331,7 +331,7 @@ FHK3MqNM3wwnjGY4YFSAGGDEdgRxbhyO2DgopmtMZxaYnBQmGxG1BIDDGSNqBxDr7LrabEtU7bqO0Jd8
 	"/azure_instances.json": {
 		local:   "_fixtures/azure_instances.json",
 		size:    70021,
-		modtime: 1559432218,
+		modtime: 1559442457,
 		compressed: `
 H4sIAAAAAAAC/+ydUW8bNxLHv0qwzzKPM5wluX5T7bvcw+UQIL2+FIGhOmpgnCUZWrlBGuS7H+QkV69E
 UuRqd0TBfGwM1PIPoz9nhv8Zfqke1qsPj7ebtrr89Ut1O9vMP67Wn6vL6vV8OV/P7l89PK4fVu28mlSb
@@ -393,7 +393,7 @@ Ha0mQRpDHNHWmXDcfpJ0ju8nVXu7nj3cLT/+fLfYIoC6bgi0okaRqb7+LwAA//9AJEvbhREBAA==
 	"/google_instances.json": {
 		local:   "_fixtures/google_instances.json",
 		size:    17469,
-		modtime: 1559432228,
+		modtime: 1559442457,
 		compressed: `
 H4sIAAAAAAAC/+SbwY/aOBTG7/NXRDmXrN+z/WzPtSv1tFIP1V6qPWRMOkU7ARSCutNR//dVGAbCCBy/
 kEWBnUMP4M8l5qdPnz+bl7skSZfVYrr29Sq9T77eJUmSvGz+TZLU53XxuKie0/sk/aMoF9VzsljWs3L2

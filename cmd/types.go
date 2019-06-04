@@ -65,7 +65,7 @@ func (l bench) Row(humanFlops bool) []string {
 
 	benchmarkName = strings.TrimPrefix(benchmarkName, "LAYER_CUDNN_")
 	benchmarkName = strings.TrimPrefix(benchmarkName, "LAYER_CUBLAS_")
-	benchmarkName = strings.ReplaceAll(benchmarkName, "_FLOAT32_", "")
+	benchmarkName = strings.Replace(benchmarkName, "_FLOAT32_", "", -1)
 	benchmarkName = strings.Split(benchmarkName, "/")[0]
 	// benchmarkName = strings.ReplaceAll(benchmarkName, "__Batch_Size_", "")
 

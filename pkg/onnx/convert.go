@@ -125,30 +125,30 @@ func (o Onnx) mkBatchNorm(node *onnx.NodeProto) []dlperf.Layer {
 	spatial = spatialAttr.GetI()
 
 	base := o.mkBase(node, "BatchNorm")
-	return [] dlperf.Layer{
-    &layer.BatchNorm{
-		Base:    base,
-		Spatial: spatial,
-  },
-}
+	return []dlperf.Layer{
+		&layer.BatchNorm{
+			Base:    base,
+			Spatial: spatial,
+		},
+	}
 }
 
 func (o Onnx) mkConcat(node *onnx.NodeProto) []dlperf.Layer {
 	axisAttr := getNodeAttributeFromName(node, "axis")
-	return [] dlperf.Layer{
-    &layer.Concat{
-		Base: o.mkBase(node, "Concat"),
-		Axis: axisAttr.GetI(),
-  },
-}
+	return []dlperf.Layer{
+		&layer.Concat{
+			Base: o.mkBase(node, "Concat"),
+			Axis: axisAttr.GetI(),
+		},
+	}
 }
 
 func (o Onnx) mkNonMaxSuppression(node *onnx.NodeProto) []dlperf.Layer {
-	return [] dlperf.Layer{
-    &layer.NonMaxSuppression{
-		Base: o.mkBase(node, "NonMaxSuppression"),
-  },
-}
+	return []dlperf.Layer{
+		&layer.NonMaxSuppression{
+			Base: o.mkBase(node, "NonMaxSuppression"),
+		},
+	}
 }
 
 func (o Onnx) mkConv(node *onnx.NodeProto) []dlperf.Layer {
@@ -188,31 +188,30 @@ func (o Onnx) mkConv(node *onnx.NodeProto) []dlperf.Layer {
 	stridesAttr := getNodeAttributeFromName(node, "strides")
 	if stridesAttr.GetInts() != nil {
 		strides = stridesAttr.GetInts()
-  }
+	}
 
+	hasBias := len(node.GetInput()) == 3
 
-  hasBias := len(node.GetInput()) == 3 
-
-  return [] dlperf.Layer{
-    &layer.Conv{
-      Base:        o.mkBase(node, "Conv"),
-      AutoPad:     autoPad,
-      Dilations:   dilations,
-      Group:       group,
-      KernelShape: kernelShapeAttr.GetInts(),
-      Pads:        pads,
-      Strides:     strides,
-      HasBias : hasBias,
-    },
-}
+	return []dlperf.Layer{
+		&layer.Conv{
+			Base:        o.mkBase(node, "Conv"),
+			AutoPad:     autoPad,
+			Dilations:   dilations,
+			Group:       group,
+			KernelShape: kernelShapeAttr.GetInts(),
+			Pads:        pads,
+			Strides:     strides,
+			HasBias:     hasBias,
+		},
+	}
 }
 
 func (o Onnx) mkDropout(node *onnx.NodeProto) []dlperf.Layer {
-	return [] dlperf.Layer{
-    &layer.Dropout{
-		Base: o.mkBase(node, "Dropout"),
-  },
-}
+	return []dlperf.Layer{
+		&layer.Dropout{
+			Base: o.mkBase(node, "Dropout"),
+		},
+	}
 }
 
 func (o Onnx) mkElementWise(node *onnx.NodeProto) []dlperf.Layer {
@@ -220,64 +219,63 @@ func (o Onnx) mkElementWise(node *onnx.NodeProto) []dlperf.Layer {
 	axisAttr := getNodeAttributeFromName(node, "axis")
 
 	return []dlperf.Layer{
-    &layer.ElementWise{
-		Base:      o.mkBase(node, "ElementWise"),
-		Broadcast: boardcastAttr.GetI(),
-		Axis:      axisAttr.GetI(),
-  },
-}
+		&layer.ElementWise{
+			Base:      o.mkBase(node, "ElementWise"),
+			Broadcast: boardcastAttr.GetI(),
+			Axis:      axisAttr.GetI(),
+		},
+	}
 }
 
 func (o Onnx) mkGemm(node *onnx.NodeProto) []dlperf.Layer {
 	transAAttr := getNodeAttributeFromName(node, "transA")
 	transBAttr := getNodeAttributeFromName(node, "transB")
 
-alphaAttr := getNodeAttributeFromName(node, "alpha")
-alpha := alphaAttr.GetF()
-if alphaAttr == nil {
-	alpha = 1.0
-}
+	alphaAttr := getNodeAttributeFromName(node, "alpha")
+	alpha := alphaAttr.GetF()
+	if alphaAttr == nil {
+		alpha = 1.0
+	}
 
-betaAttr := getNodeAttributeFromName(node, "beta")
-beta := betaAttr.GetF()
-if betaAttr == nil {
-	beta = 1.0
-}
-
+	betaAttr := getNodeAttributeFromName(node, "beta")
+	beta := betaAttr.GetF()
+	if betaAttr == nil {
+		beta = 1.0
+	}
 
 	return []dlperf.Layer{
-    &layer.Gemm{
-		Base:   o.mkBase(node, "Gemm"),
-		Alpha: float64(alpha),
-		Beta: float64(beta),
-		TransA: transAAttr.GetI(),
-		TransB: transBAttr.GetI(),
-  },
-}
+		&layer.Gemm{
+			Base:   o.mkBase(node, "Gemm"),
+			Alpha:  float64(alpha),
+			Beta:   float64(beta),
+			TransA: transAAttr.GetI(),
+			TransB: transBAttr.GetI(),
+		},
+	}
 }
 
 func (o Onnx) mkMatMul(node *onnx.NodeProto) []dlperf.Layer {
 	return []dlperf.Layer{
-    &layer.Gemm{
-		Base:   o.mkBase(node, "Gemm"),
-		Alpha: float64(1.0),
-    Beta: float64(0.0),
-    TransA: 0,
-    TransB: 0,
-  },
-}
+		&layer.Gemm{
+			Base:   o.mkBase(node, "Gemm"),
+			Alpha:  float64(1.0),
+			Beta:   float64(0.0),
+			TransA: 0,
+			TransB: 0,
+		},
+	}
 }
 
 func (o Onnx) mkReduceMin(node *onnx.NodeProto) []dlperf.Layer {
 	axesAttr := getNodeAttributeFromName(node, "axes")
 	keepDimsAttr := getNodeAttributeFromName(node, "keepdims")
 	return []dlperf.Layer{
-    &layer.Reduce{
-		Base:     o.mkBase(node, "ReduceMin"),
-		Axes:     axesAttr.GetInts(),
-		KeepDims: keepDimsAttr.GetI() == 1,
-  },
-}
+		&layer.Reduce{
+			Base:     o.mkBase(node, "ReduceMin"),
+			Axes:     axesAttr.GetInts(),
+			KeepDims: keepDimsAttr.GetI() == 1,
+		},
+	}
 }
 
 func (o Onnx) mkTopK(node *onnx.NodeProto) []dlperf.Layer {
@@ -293,11 +291,11 @@ func (o Onnx) mkTopK(node *onnx.NodeProto) []dlperf.Layer {
 	pp.Println(node.Input)
 
 	return []dlperf.Layer{
-    &layer.TopK{
-		Base: o.mkBase(node, "TopK"),
-		Axis: axis,
-  },
-}
+		&layer.TopK{
+			Base: o.mkBase(node, "TopK"),
+			Axis: axis,
+		},
+	}
 }
 
 func (o Onnx) mkPooling(node *onnx.NodeProto) []dlperf.Layer {
@@ -321,21 +319,21 @@ func (o Onnx) mkPooling(node *onnx.NodeProto) []dlperf.Layer {
 	}
 
 	return []dlperf.Layer{
-    &layer.Pooling{
-		Base:        o.mkBase(node, "Pooling"),
-		KernelShape: kernelShapeAttr.GetInts(),
-		Pads:        pads,
-		Strides:     stridesShapeAttr.GetInts(),
-  },
-}
+		&layer.Pooling{
+			Base:        o.mkBase(node, "Pooling"),
+			KernelShape: kernelShapeAttr.GetInts(),
+			Pads:        pads,
+			Strides:     stridesShapeAttr.GetInts(),
+		},
+	}
 }
 
 func (o Onnx) mkGlobalPooling(node *onnx.NodeProto) []dlperf.Layer {
 	return []dlperf.Layer{
-    &layer.GlobalPooling{
-		Base: o.mkBase(node, "GlobalPooling"),
-  },
-}
+		&layer.GlobalPooling{
+			Base: o.mkBase(node, "GlobalPooling"),
+		},
+	}
 }
 
 func (o Onnx) mkLRN(node *onnx.NodeProto) []dlperf.Layer {
@@ -346,27 +344,27 @@ func (o Onnx) mkLRN(node *onnx.NodeProto) []dlperf.Layer {
 	}
 
 	return []dlperf.Layer{
-    &layer.LRN{
-		Base: o.mkBase(node, "LRN"),
-		Size: size,
-  },
-}
+		&layer.LRN{
+			Base: o.mkBase(node, "LRN"),
+			Size: size,
+		},
+	}
 }
 
 func (o Onnx) mkRelu(node *onnx.NodeProto) []dlperf.Layer {
 	return []dlperf.Layer{
-    &layer.Relu{
-		Base: o.mkBase(node, "Relu"),
-  },
-}
+		&layer.Relu{
+			Base: o.mkBase(node, "Relu"),
+		},
+	}
 }
 
 func (o Onnx) mkReshape(node *onnx.NodeProto) []dlperf.Layer {
 	return []dlperf.Layer{
-    &layer.Reshape{
-		Base: o.mkBase(node, "Reshape"),
-  },
-}
+		&layer.Reshape{
+			Base: o.mkBase(node, "Reshape"),
+		},
+	}
 }
 
 func (o Onnx) mkFlatten(node *onnx.NodeProto) []dlperf.Layer {
@@ -376,102 +374,102 @@ func (o Onnx) mkFlatten(node *onnx.NodeProto) []dlperf.Layer {
 		axis = axisAttr.GetInts()[0]
 	}
 	return []dlperf.Layer{
-    &layer.Flatten{
-		Base: o.mkBase(node, "Flatten"),
-		Axis: axis,
-  },
-}
+		&layer.Flatten{
+			Base: o.mkBase(node, "Flatten"),
+			Axis: axis,
+		},
+	}
 }
 
 func (o Onnx) mkTranspose(node *onnx.NodeProto) []dlperf.Layer {
 	permAttr := getNodeAttributeFromName(node, "perm")
 	perm := permAttr.GetInts()
 	return []dlperf.Layer{
-    &layer.Transpose{
-		Base:        o.mkBase(node, "Transpose"),
-		Permutation: perm,
-  },
-}
+		&layer.Transpose{
+			Base:        o.mkBase(node, "Transpose"),
+			Permutation: perm,
+		},
+	}
 }
 
 func (o Onnx) mkIdentity(node *onnx.NodeProto) []dlperf.Layer {
 	return []dlperf.Layer{
-    &layer.Identity{
-		Base: o.mkBase(node, "Identity"),
-  },
-}
+		&layer.Identity{
+			Base: o.mkBase(node, "Identity"),
+		},
+	}
 }
 
 func (o Onnx) mkCast(node *onnx.NodeProto) []dlperf.Layer {
 	return []dlperf.Layer{
-    &layer.Cast{
-		Base: o.mkBase(node, "Cast"),
-  },
-}
+		&layer.Cast{
+			Base: o.mkBase(node, "Cast"),
+		},
+	}
 }
 
 func (o Onnx) mkExp(node *onnx.NodeProto) []dlperf.Layer {
 	return []dlperf.Layer{
-    &layer.Exp{
-		Base: o.mkBase(node, "Exp"),
-  },
-}
+		&layer.Exp{
+			Base: o.mkBase(node, "Exp"),
+		},
+	}
 }
 
 func (o Onnx) mkClip(node *onnx.NodeProto) []dlperf.Layer {
 	minAttr := getNodeAttributeFromName(node, "min")
 	maxAttr := getNodeAttributeFromName(node, "min")
 	return []dlperf.Layer{
-    &layer.Clip{
-		Base: o.mkBase(node, "Clip"),
-		Min:  minAttr.GetF(),
-		Max:  maxAttr.GetF(),
-  },
-}
+		&layer.Clip{
+			Base: o.mkBase(node, "Clip"),
+			Min:  minAttr.GetF(),
+			Max:  maxAttr.GetF(),
+		},
+	}
 }
 
 func (o Onnx) mkScale(node *onnx.NodeProto) []dlperf.Layer {
 	return []dlperf.Layer{
-    &layer.Scale{
-		Base: o.mkBase(node, "Scale"),
-  },
-}
+		&layer.Scale{
+			Base: o.mkBase(node, "Scale"),
+		},
+	}
 }
 
 func (o Onnx) mkSoftMax(node *onnx.NodeProto) []dlperf.Layer {
 	return []dlperf.Layer{
-    &layer.Softmax{
-		Base: o.mkBase(node, "Softmax"),
-  },
-}
+		&layer.Softmax{
+			Base: o.mkBase(node, "Softmax"),
+		},
+	}
 }
 
 func (o Onnx) mkSqueeze(node *onnx.NodeProto) []dlperf.Layer {
 	axesAttr := getNodeAttributeFromName(node, "axes")
 	return []dlperf.Layer{
-    &layer.Squeeze{
-		Base: o.mkBase(node, "Squeeze"),
-		Axes: axesAttr.GetInts(),
-  },
-}
+		&layer.Squeeze{
+			Base: o.mkBase(node, "Squeeze"),
+			Axes: axesAttr.GetInts(),
+		},
+	}
 }
 
 func (o Onnx) mkUnsqueeze(node *onnx.NodeProto) []dlperf.Layer {
 	axesAttr := getNodeAttributeFromName(node, "axes")
 	return []dlperf.Layer{
-    &layer.Unsqueeze{
-		Base: o.mkBase(node, "Unsqueeze"),
-		Axes: axesAttr.GetInts(),
-  },
-}
+		&layer.Unsqueeze{
+			Base: o.mkBase(node, "Unsqueeze"),
+			Axes: axesAttr.GetInts(),
+		},
+	}
 }
 
 func (o Onnx) mkShape(node *onnx.NodeProto) []dlperf.Layer {
 	return []dlperf.Layer{
-    &layer.Shape{
-		Base: o.mkBase(node, "Shape"),
-  },
-}
+		&layer.Shape{
+			Base: o.mkBase(node, "Shape"),
+		},
+	}
 }
 
 func (o Onnx) mkGather(node *onnx.NodeProto) []dlperf.Layer {
@@ -480,11 +478,11 @@ func (o Onnx) mkGather(node *onnx.NodeProto) []dlperf.Layer {
 	axis := getNodeAttributeFromName(node, "axis").GetI()
 
 	return []dlperf.Layer{
-    &layer.Gather{
-		Base: base,
-		Axis: axis,
-  },
-}
+		&layer.Gather{
+			Base: base,
+			Axis: axis,
+		},
+	}
 }
 
 func (o Onnx) mkSlice(node *onnx.NodeProto) []dlperf.Layer {
@@ -492,11 +490,11 @@ func (o Onnx) mkSlice(node *onnx.NodeProto) []dlperf.Layer {
 
 	println("todo slice operator")
 	return []dlperf.Layer{
-    &layer.Gather{
-		Base: base,
-		// Axis: axis,
-  },
-}
+		&layer.Gather{
+			Base: base,
+			// Axis: axis,
+		},
+	}
 }
 
 func (o Onnx) mkConstant(node *onnx.NodeProto) []dlperf.Layer {
@@ -507,20 +505,20 @@ func (o Onnx) mkConstant(node *onnx.NodeProto) []dlperf.Layer {
 	base.SetOutputShapes(dims)
 
 	return []dlperf.Layer{
-    &layer.Constant{
-		Base: base,
-  },
-}
+		&layer.Constant{
+			Base: base,
+		},
+	}
 }
 
 func (o Onnx) mkConstantOfShape(node *onnx.NodeProto) []dlperf.Layer {
 	base := o.mkBase(node, "ConstantOfShape")
 
 	return []dlperf.Layer{
-    &layer.ConstantOfShape{
-		Base: base,
-  },
-}
+		&layer.ConstantOfShape{
+			Base: base,
+		},
+	}
 }
 
 func (o Onnx) mkConstantInput(node *onnx.NodeProto) []dlperf.Layer {
@@ -531,10 +529,10 @@ func (o Onnx) mkConstantInput(node *onnx.NodeProto) []dlperf.Layer {
 	base.SetOutputShapes(dims)
 
 	return []dlperf.Layer{
-    &layer.ConstantInput{
-		Base: base,
-  },
-}
+		&layer.ConstantInput{
+			Base: base,
+		},
+	}
 }
 
 func dummy() {

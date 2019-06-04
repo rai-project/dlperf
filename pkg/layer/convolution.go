@@ -69,7 +69,6 @@ func (c *Conv) InferShape(inputLayers dlperf.Layers) {
 func (c Conv) FwdBenchmarkName(iopts ...dlperf.FwdBenchmarkArgsOptionFunc) string {
 	opts := dlperf.CreateFwdBenchmarkArgsOption(iopts...)
 	switch opts.ConvFwdType {
-
 	case dlperf.ConvFwdTypeBias:
 		return "LAYER_CUDNN_ADD_TENSOR"
 	case dlperf.ConvFwdTypeConv:

@@ -79,8 +79,8 @@ var benchgenCmd = &cobra.Command{
 						b = l.FwdBenchmarkGenerator(dlperf.FwdBenchmarkArgsOption.ConvFwdType(dlperf.ConvFwdTypeConv))
 						b += "\n"
 						b += l.FwdBenchmarkGenerator(dlperf.FwdBenchmarkArgsOption.ConvFwdType(dlperf.ConvFwdTypeBias))
-						b += "\n"
-						b += l.FwdBenchmarkGenerator(dlperf.FwdBenchmarkArgsOption.ConvFwdType(dlperf.ConvFwdTypeConvFusedActivation))
+						// b += "\n"
+						// b += l.FwdBenchmarkGenerator(dlperf.FwdBenchmarkArgsOption.ConvFwdType(dlperf.ConvFwdTypeConvFusedActivation))
 					case "relu":
 						l := lyr.(*perflayer.Relu)
 						b = l.FwdBenchmarkGenerator()
@@ -101,8 +101,11 @@ var benchgenCmd = &cobra.Command{
 					case "gemm":
 						l := lyr.(*perflayer.Gemm)
 						b = l.FwdBenchmarkGenerator()
+					case "elementwise":
+						l := lyr.(*perflayer.ElementWise)
+						b = l.FwdBenchmarkGenerator()
 					default:
-						// pp.Println(lyr.OperatorType())
+						pp.Println(lyr.OperatorType())
 					}
 					if b == "" {
 						return nil
@@ -149,6 +152,9 @@ var benchgenCmd = &cobra.Command{
 						b = l.BwdBenchmarkGenerator()
 					case "gemm":
 						l := lyr.(*perflayer.Gemm)
+						b = l.BwdBenchmarkGenerator()
+					case "elementwise":
+						l := lyr.(*perflayer.ElementWise)
 						b = l.BwdBenchmarkGenerator()
 					default:
 						// pp.Println(lyr.OperatorType())

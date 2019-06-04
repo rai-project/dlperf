@@ -43,9 +43,9 @@ func New(path string) (Suite, error) {
 	bts, err := ioutil.ReadFile(path)
 	if err != nil {
 		return Suite{}, errors.Wrapf(err, "unable to read benchmark file %s", path)
-  }
-  // replace inf with 0
-	btss := strings.ReplaceAll(string(bts), "inf,", "0,")
+	}
+	// replace inf with 0
+	btss := strings.Replace(string(bts), "inf,", "0,", -1)
 	var suite Suite
 	err = json.Unmarshal([]byte(btss), &suite)
 	if err != nil {
