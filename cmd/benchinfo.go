@@ -93,9 +93,6 @@ var benchinfoCmd = &cobra.Command{
 			case "identity":
 				debugPrint("Identity is skipped for now")
 				continue
-			case "elementwise":
-				debugPrint("Elementwise is not supported by CUDNN")
-				continue
 			}
 			// if lyr.OperatorType() != "Conv" && lyr.OperatorType() != "Relu" {
 			// 	pp.Println(lyr.OperatorType())
@@ -180,7 +177,7 @@ var benchinfoCmd = &cobra.Command{
 			}
 
 			switch strings.ToLower(lyr.OperatorType()) {
-			case "relu", "pooling", "softmax", "dropout", "gemm", "matmul":
+			case "relu", "pooling", "softmax", "dropout", "gemm", "matmul", "elementwise":
 				filter := filterBenchmarks(false, benchInfoDataType, "")
 				bs, err := getBenchmarkTime(filter)
 				if err != nil {
