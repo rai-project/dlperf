@@ -1,8 +1,10 @@
 package cmd
 
 import (
+	"fmt"
 	"os"
 	"path/filepath"
+	"runtime/debug"
 	"strings"
 
 	sourcepath "github.com/GeertJohan/go-sourcepath"
@@ -19,6 +21,7 @@ import (
 func runLayerStats(cmd *cobra.Command, args []string) error {
 	defer func() {
 		if r := recover(); r != nil {
+			fmt.Println(string(debug.Stack()))
 			pp.Println("[PANIC] while computing layer stats " + modelPath + " [error = " + repr.String(r) + "]")
 		}
 	}()

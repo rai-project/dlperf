@@ -27,7 +27,7 @@ func getTensorProtoDimensions(tensor *onnx.TensorProto) dlperf.Shape {
 	if isInt32 && len(tensor.GetInt32Data()) > 0 {
 		return toInt64Slice(tensor.GetInt32Data())
 	}
-	if isInt32 && len(tensor.GetRawData()) > 0 {
+	if isInt32 && len(tensor.GetRawData()) > 0 && len(tensor.Dims) > 0 {
 		dim := tensor.Dims[0]
 		rawdata := tensor.GetRawData()
 		for ii := int64(0); ii < dim; ii++ {
@@ -41,7 +41,7 @@ func getTensorProtoDimensions(tensor *onnx.TensorProto) dlperf.Shape {
 	if isInt64 && len(tensor.GetInt64Data()) > 0 {
 		return tensor.GetInt64Data()
 	}
-	if isInt64 && len(tensor.GetRawData()) > 0 {
+	if isInt64 && len(tensor.GetRawData()) > 0 && len(tensor.Dims) > 0 {
 		dim := tensor.Dims[0]
 		rawdata := tensor.GetRawData()
 		for ii := int64(0); ii < dim; ii++ {
