@@ -221,14 +221,20 @@ func findModelNameFile(dir string, level int) (string, error) {
 func iGetModelName(modelPath, suffix string) string {
 	name, err := findModelNameFile(filepath.Dir(modelPath), 4 /* levels */)
 	if err == nil {
-		return name
+		return removeSpace(name)
 	}
 	name = strings.TrimSuffix(filepath.Base(modelPath), ".onnx")
 	if name != "model" && name != "model_inferred" {
-		return name + suffix
+		return removeSpace(name + suffix)
 	}
 	if suffix == "" && name == "model_inferred" {
 		suffix = "_inferred"
 	}
 	return iGetModelName(path.Dir(modelPath), suffix)
+}
+
+func removeSpace(s string) string {
+	s = strings.TrimSuffix(s, "\n")
+	s = strings.TrimSpace(s)
+	return s
 }

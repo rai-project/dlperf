@@ -50,6 +50,14 @@ Get information per layer using
 go run main.go weightsinfo --model_path ~/onnx_models/bvlc_alexnet/model.onnx --output_file=out
 ```
 
+## Store the recalled benchmark in json
+
+Store the recalled benchmarks in json using
+
+```
+go run main.go benchinfo --model_path ~/data/carml/ --benchmark_database results/v100/8.json --short=false --batch_size=8 --human=true -o assets/benchinfo/v100 -f json
+```
+
 ## Find Patterns
 
 `model_path` and `output_path` can be a folder or a file.

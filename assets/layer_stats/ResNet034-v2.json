@@ -299,7 +299,7 @@
 {"name":"resnetv23_relu1_fwd","type":"Relu","inputs":["resnetv23_batchnorm2_fwd"],"outputs":["resnetv23_relu1_fwd"],"input_dimensions":{"input_shapes":[[1,512,7,7]],"output_shapes":[[1,512,7,7]]}},
 {"name":"resnetv23_pool1_fwd","type":"GlobalPooling","inputs":["resnetv23_relu1_fwd"],"outputs":["resnetv23_pool1_fwd"],"input_dimensions":{"input_shapes":[[1,512,7,7]],"output_shapes":[[1,512,1,1]]}},
 {"name":"reshape_attr_tensor300","type":"ConstantInput","input_dimensions":{"input_shapes":[[0,-1]],"output_shapes":[[0,-1]]}},
-{"name":"resnetv23_flatten0_reshape0","type":"Reshape","inputs":["resnetv23_pool1_fwd","reshape_attr_tensor300"],"outputs":["resnetv23_flatten0_reshape0"],"input_dimensions":{"input_shapes":[[1,512,1,1],[0,-1]],"output_shapes":[[0,-1]]}},
+{"name":"resnetv23_flatten0_reshape0","type":"Reshape","inputs":["resnetv23_pool1_fwd","reshape_attr_tensor300"],"outputs":["resnetv23_flatten0_reshape0"],"input_dimensions":{"input_shapes":[[1,512,1,1],[0,-1]],"output_shapes":[[1,512]]}},
 {"name":"resnetv23_dense0_weight","type":"ConstantInput","input_dimensions":{"input_shapes":[[1000,512]],"output_shapes":[[1000,512]]}},
 {"name":"resnetv23_dense0_bias","type":"ConstantInput","input_dimensions":{"input_shapes":[[1000]],"output_shapes":[[1000]]}},
-{"name":"resnetv23_dense0_fwd","type":"Gemm","inputs":["resnetv23_flatten0_reshape0","resnetv23_dense0_weight","resnetv23_dense0_bias"],"outputs":["resnetv23_dense0_fwd"],"input_dimensions":{"input_shapes":[[0,-1],[1000,512],[1000]],"output_shapes":[[0,1000]]}}]
+{"name":"resnetv23_dense0_fwd","type":"Gemm","inputs":["resnetv23_flatten0_reshape0","resnetv23_dense0_weight","resnetv23_dense0_bias"],"outputs":["resnetv23_dense0_fwd"],"input_dimensions":{"input_shapes":[[1,512],[1000,512],[1000]],"output_shapes":[[1,1000]]}}]
