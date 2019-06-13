@@ -82,6 +82,30 @@ func expandModelPath(modelPath string) string {
 	return modelPath
 }
 
+func getModelsIn(modelPath string) ([]string, error) {
+	if !com.IsFile(modelPath) && !com.IsDir(modelPath) {
+		return nil, errors.Errorf("file %v does not exist", modelPath)
+	}
+
+	if com.IsFile(modelPath) {
+		return []string{modelPath}, nil
+	}
+
+	modelPaths0, err := zglob.Glob(filepath.Join(modelPath, "**", "*.onnx"))
+	if err != nil {
+		return nil, err
+	}
+	modelPaths := []string{}
+	for _, modelPath := range modelPaths0 {
+		modelName := getModelName(modelPath)
+		if strings.HasPrefix(modelName, ".") || strings.HasPrefix(filepath.Base(modelPath), ".") {
+			continue
+		}
+		modelPaths = append(modelPaths, modelPath)
+	}
+	return modelPaths, nil
+}
+
 func readModels(modelPath string) ([]*onnx.Onnx, error) {
 	if !com.IsFile(modelPath) && !com.IsDir(modelPath) {
 		return nil, errors.Errorf("file %v does not exist", modelPath)
