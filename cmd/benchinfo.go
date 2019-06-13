@@ -306,16 +306,14 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 		}
 	}
 
-	if outputFormat != "json" {
-		benchmarkInfo = append(benchmarkInfo, bench{
-			Benchmark: benchmark.Benchmark{
-				Name:     "Total",
-				RealTime: totalTime,
-			},
-			Layer: nil,
-			Flops: totalFlops,
-		})
-	}
+	benchmarkInfo = append(benchmarkInfo, bench{
+		Benchmark: benchmark.Benchmark{
+			Name:     "Total",
+			RealTime: totalTime,
+		},
+		Layer: nil,
+		Flops: totalFlops,
+	})
 
 	if benchSuite.GPUInformation != nil && len(benchSuite.GPUInformation.GPUS) != 0 {
 		for _, gpu := range benchSuite.GPUInformation.GPUS {
