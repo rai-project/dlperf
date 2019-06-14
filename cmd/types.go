@@ -77,6 +77,9 @@ func (l bench) Row(humanFlops bool) []string {
 	flops := int64(0)
 	if l.Layer != nil {
 		layerName = l.Layer.Name()
+		if len(layerName) > 15 {
+			layerName = layerName[0:14] + "..."
+		}
 		operatorType = l.Layer.OperatorType()
 	}
 	flops = l.Flops.Total()

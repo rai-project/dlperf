@@ -82,6 +82,30 @@ func expandModelPath(modelPath string) string {
 	return modelPath
 }
 
+func getModelsIn(modelPath string) ([]string, error) {
+	if !com.IsFile(modelPath) && !com.IsDir(modelPath) {
+		return nil, errors.Errorf("file %v does not exist", modelPath)
+	}
+
+	if com.IsFile(modelPath) {
+		return []string{modelPath}, nil
+	}
+
+	modelPaths0, err := zglob.Glob(filepath.Join(modelPath, "**", "*.onnx"))
+	if err != nil {
+		return nil, err
+	}
+	modelPaths := []string{}
+	for _, modelPath := range modelPaths0 {
+		modelName := getModelName(modelPath)
+		if strings.HasPrefix(modelName, ".") || strings.HasPrefix(filepath.Base(modelPath), ".") {
+			continue
+		}
+		modelPaths = append(modelPaths, modelPath)
+	}
+	return modelPaths, nil
+}
+
 func readModels(modelPath string) ([]*onnx.Onnx, error) {
 	if !com.IsFile(modelPath) && !com.IsDir(modelPath) {
 		return nil, errors.Errorf("file %v does not exist", modelPath)
@@ -197,14 +221,20 @@ func findModelNameFile(dir string, level int) (string, error) {
 func iGetModelName(modelPath, suffix string) string {
 	name, err := findModelNameFile(filepath.Dir(modelPath), 4 /* levels */)
 	if err == nil {
-		return name
+		return removeSpace(name)
 	}
 	name = strings.TrimSuffix(filepath.Base(modelPath), ".onnx")
 	if name != "model" && name != "model_inferred" {
-		return name + suffix
+		return removeSpace(name + suffix)
 	}
 	if suffix == "" && name == "model_inferred" {
 		suffix = "_inferred"
 	}
 	return iGetModelName(path.Dir(modelPath), suffix)
+}
+
+func removeSpace(s string) string {
+	s = strings.TrimSuffix(s, "\n")
+	s = strings.TrimSpace(s)
+	return s
 }

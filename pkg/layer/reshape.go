@@ -1,6 +1,8 @@
 package layer
 
-import dlperf "github.com/rai-project/dlperf/pkg"
+import (
+	dlperf "github.com/rai-project/dlperf/pkg"
+)
 
 // https://github.com/onnx/onnx/blob/master/docs/Operators.md#Reshape
 
@@ -24,7 +26,42 @@ func (c *Reshape) InferShape(inputLayers dlperf.Layers) {
 		c.SetOutputShapes(inputShapes)
 		return
 	}
-	c.SetOutputShapes([]dlperf.Shape{inputShapes[1]})
+	if len(inputShapes) != 2 {
+		panic("expecting only 2 inputs for reshape layer")
+	}
+
+	inputTensor := inputShapes[0]
+	resizeTensor := inputShapes[1]
+
+	negativeOneDim := -1
+	resShape := make([]int64, len(resizeTensor))
+	for ii, val := range resizeTensor {
+		if val == 0 {
+			resShape[ii] = inputTensor[ii]
+		}
+		if val > 0 {
+			resShape[ii] = val
+		}
+		if val == -1 {
+			if negativeOneDim != -1 {
+				panic("Target shape may not have multiple -1 dimensions")
+			}
+			negativeOneDim = ii
+		}
+	}
+
+	if negativeOneDim != -1 && negativeOneDim == len(inputTensor)-1 {
+		panic("-1 dimension only supported at last position for now")
+	}
+	if negativeOneDim != -1 {
+		accum := int64(1)
+		for _, val := range inputTensor[negativeOneDim:] {
+			accum *= val
+		}
+		resShape[negativeOneDim] = accum
+	}
+
+	c.SetOutputShapes([]dlperf.Shape{resShape})
 }
 
 func (c Reshape) Information() dlperf.LayerInformation {

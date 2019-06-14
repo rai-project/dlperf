@@ -190,8 +190,6 @@ func (o Onnx) mkConv(node *onnx.NodeProto) []dlperf.Layer {
 		strides = stridesAttr.GetInts()
 	}
 
-	hasBias := len(node.GetInput()) == 3
-
 	return []dlperf.Layer{
 		&layer.Conv{
 			Base:        o.mkBase(node, "Conv"),
@@ -201,7 +199,6 @@ func (o Onnx) mkConv(node *onnx.NodeProto) []dlperf.Layer {
 			KernelShape: kernelShapeAttr.GetInts(),
 			Pads:        pads,
 			Strides:     strides,
-			HasBias:     hasBias,
 		},
 	}
 }

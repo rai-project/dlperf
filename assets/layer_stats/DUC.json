@@ -891,5 +891,5 @@
 {"name":"fc1_cityscapes_c3","type":"Conv","inputs":["conv5_3_relu","fc1_cityscapes_c3_weight","fc1_cityscapes_c3_bias"],"outputs":["fc1_cityscapes_c3"],"input_dimensions":{"input_shapes":[[1,2048,100,100],[304,2048,3,3],[304]],"output_shapes":[[1,304,100,100]]}},
 {"name":"fc1_cityscapes","type":"ElementWise","inputs":["fc1_cityscapes_c0","fc1_cityscapes_c1","fc1_cityscapes_c2","fc1_cityscapes_c3"],"outputs":["fc1_cityscapes"],"input_dimensions":{"input_shapes":[[1,304,100,100],[1,304,100,100],[1,304,100,100],[1,304,100,100]],"output_shapes":[[1,304,100,100]]}},
 {"name":"reshape_attr_tensor892","type":"ConstantInput","input_dimensions":{"input_shapes":[[0,19,-1]],"output_shapes":[[0,19,-1]]}},
-{"name":"cls_score_reshape","type":"Reshape","inputs":["fc1_cityscapes","reshape_attr_tensor892"],"outputs":["cls_score_reshape"],"input_dimensions":{"input_shapes":[[1,304,100,100],[0,19,-1]],"output_shapes":[[0,19,-1]]}},
-{"name":"seg_loss","type":"Softmax","inputs":["cls_score_reshape"],"outputs":["seg_loss"],"input_dimensions":{"input_shapes":[[0,19,-1]],"output_shapes":[[0,19,-1]]}}]
+{"name":"cls_score_reshape","type":"Reshape","inputs":["fc1_cityscapes","reshape_attr_tensor892"],"outputs":["cls_score_reshape"],"input_dimensions":{"input_shapes":[[1,304,100,100],[0,19,-1]],"output_shapes":[[1,19,10000]]}},
+{"name":"seg_loss","type":"Softmax","inputs":["cls_score_reshape"],"outputs":["seg_loss"],"input_dimensions":{"input_shapes":[[1,19,10000]],"output_shapes":[[1,19,10000]]}}]

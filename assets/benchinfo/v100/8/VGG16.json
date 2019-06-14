@@ -1,0 +1,4668 @@
+[{
+  "layer": {
+    "auto_pad": "VALID",
+    "dilation": [
+      1,
+      1
+    ],
+    "group": 1,
+    "kernel_shape": [
+      3,
+      3
+    ],
+    "pads": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "strides": [
+      1,
+      1
+    ],
+    "name": "vgg0_conv0_fwd",
+    "operator_type": "Conv",
+    "onnx_operator_type": "Conv",
+    "input_names": [
+      "data",
+      "vgg0_conv0_weight",
+      "vgg0_conv0_bias"
+    ],
+    "output_names": [
+      "vgg0_conv0_fwd"
+    ],
+    "input_shapes": [
+      [
+        8,
+        3,
+        224,
+        224
+      ],
+      [
+        64,
+        3,
+        3,
+        3
+      ],
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        8,
+        64,
+        224,
+        224
+      ]
+    ]
+  },
+  "benchmark": {
+    "CPUTime": 182005,
+    "Flops": 693633024,
+    "Iterations": 4041,
+    "Name": "LAYER_CUDNN_CONV_FWD_FLOAT32__BatchSize_8__763807211610466035\u003cCUDNN_CONVOLUTION_FWD_ALGO_IMPLICIT_PRECOMP_GEMM\u003e/input[0]:8/input[1]:3/input[2]:224/input[3]:224/filter_count:64/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/conv_fwd_type:1/conv_bwd_type:0/batch_size:8/manual_time",
+    "RealTime": 171812,
+    "TimeUnit": "ns",
+    "advised_convolution_algorithm": 1,
+    "advised_determinism": 1,
+    "advised_memory": 301064,
+    "advised_time": 0.18636800348758698,
+    "conv_bwd_type": 0,
+    "conv_fwd_type": 1,
+    "convolution_algorithm": 1,
+    "dilation_height": 1,
+    "dilation_width": 1,
+    "filter_count": 64,
+    "filter_height": 3,
+    "filter_width": 3,
+    "group": 1,
+    "input[0]": 8,
+    "input[1]": 3,
+    "input[2]": 224,
+    "input[3]": 224,
+    "input_batch_size": 8,
+    "input_channels": 3,
+    "input_height": 224,
+    "input_size": 1204224,
+    "input_width": 224,
+    "items_per_second": 448571537786.4011,
+    "math_type": 0,
+    "num_filters": 64,
+    "output_batch_size": 8,
+    "output_channels": 64,
+    "output_height": 224,
+    "output_size": 25690112,
+    "output_width": 224,
+    "pad_height": 1,
+    "pad_width": 1,
+    "predicted_advised_flops": 4037143840077.61,
+    "predicted_advised_flops_count": 693633024,
+    "predicted_flops": 4037143840077.61,
+    "predicted_flops_count": 693633024,
+    "stride_height": 1,
+    "stride_width": 1,
+    "workspace_bytes": 301064,
+    "workspace_megabytes": 0.28711700439453125
+  },
+  "flops_information": {
+    "multiply_adds": 693633024,
+    "additions": 0,
+    "divisions": 0,
+    "exponentiations": 0,
+    "comparisons": 0,
+    "general": 0
+  }
+},
+{
+  "layer": {
+    "auto_pad": "VALID",
+    "dilation": [
+      1,
+      1
+    ],
+    "group": 1,
+    "kernel_shape": [
+      3,
+      3
+    ],
+    "pads": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "strides": [
+      1,
+      1
+    ],
+    "name": "vgg0_conv0_fwd",
+    "operator_type": "Conv",
+    "onnx_operator_type": "Conv",
+    "input_names": [
+      "data",
+      "vgg0_conv0_weight",
+      "vgg0_conv0_bias"
+    ],
+    "output_names": [
+      "vgg0_conv0_fwd"
+    ],
+    "input_shapes": [
+      [
+        8,
+        3,
+        224,
+        224
+      ],
+      [
+        64,
+        3,
+        3,
+        3
+      ],
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        8,
+        64,
+        224,
+        224
+      ]
+    ]
+  },
+  "benchmark": {
+    "CPUTime": 179069,
+    "Flops": null,
+    "Iterations": 4141,
+    "Name": "LAYER_CUDNN_ADD_TENSOR_FLOAT32__BatchSize_8__2394993727843847808/input[0]:8/input[1]:3/input[2]:224/input[3]:224/filter_count:64/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/conv_fwd_type:2/conv_bwd_type:0/batch_size:8/manual_time",
+    "RealTime": 169187,
+    "TimeUnit": "ns",
+    "bias_dim": 64,
+    "conv_bwd_type": 0,
+    "conv_fwd_type": 2,
+    "dilation_height": 1,
+    "dilation_width": 1,
+    "filter_count": 64,
+    "filter_height": 3,
+    "filter_width": 3,
+    "input[0]": 8,
+    "input[1]": 3,
+    "input[2]": 224,
+    "input[3]": 224,
+    "input_batch_size": 8,
+    "input_channels": 3,
+    "input_height": 224,
+    "input_size": 1204224,
+    "input_width": 224,
+    "items_per_second": 7117671361.072352,
+    "num_filters": 64,
+    "output_batch_size": 8,
+    "output_channels": 64,
+    "output_height": 224,
+    "output_size": 25690112,
+    "output_width": 224,
+    "pad_height": 1,
+    "pad_width": 1,
+    "stride_height": 1,
+    "stride_width": 1
+  },
+  "flops_information": {
+    "multiply_adds": 693633024,
+    "additions": 0,
+    "divisions": 0,
+    "exponentiations": 0,
+    "comparisons": 0,
+    "general": 0
+  }
+},
+{
+  "layer": {
+    "name": "vgg0_relu0_fwd",
+    "operator_type": "Relu",
+    "onnx_operator_type": "Relu",
+    "input_names": [
+      "vgg0_conv0_fwd"
+    ],
+    "output_names": [
+      "vgg0_relu0_fwd"
+    ],
+    "input_shapes": [
+      [
+        8,
+        64,
+        224,
+        224
+      ]
+    ],
+    "output_shapes": [
+      [
+        8,
+        64,
+        224,
+        224
+      ]
+    ]
+  },
+  "benchmark": {
+    "CPUTime": 289925,
+    "Flops": 25690112,
+    "Iterations": 2501,
+    "Name": "LAYER_CUDNN_ACTIVATION_FWD_FLOAT32__BatchSize_8__7398989864926418640\u003cCUDNN_ACTIVATION_RELU\u003e/input[0]:8/input[1]:64/input[2]:224/input[3]:224/input[4]:-1/input[5]:-1/input[6]:-1/input[7]:-1/batch_size:8/manual_time",
+    "RealTime": 279936,
+    "TimeUnit": "ns",
+    "activation_mode": 1,
+    "input[0]": 8,
+    "input[1]": 64,
+    "input[2]": 224,
+    "input[3]": 224,
+    "input[4]": -1,
+    "input[5]": -1,
+    "input[6]": -1,
+    "input[7]": -1,
+    "input_batch_size": 8,
+    "input_channels": 64,
+    "input_height": 224,
+    "input_size": 25690112,
+    "input_width": 224,
+    "items_per_second": 91771224630.66154,
+    "output_batch_size": 8,
+    "output_channels": 64,
+    "output_height": 224,
+    "output_size": 25690112,
+    "output_width": 224,
+    "predicted_flops": 91771224630.66154,
+    "predicted_flops_count": 25690112
+  },
+  "flops_information": {
+    "multiply_adds": 25690112,
+    "additions": 0,
+    "divisions": 0,
+    "exponentiations": 0,
+    "comparisons": 25690112,
+    "general": 0
+  }
+},
+{
+  "layer": {
+    "auto_pad": "VALID",
+    "dilation": [
+      1,
+      1
+    ],
+    "group": 1,
+    "kernel_shape": [
+      3,
+      3
+    ],
+    "pads": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "strides": [
+      1,
+      1
+    ],
+    "name": "vgg0_conv1_fwd",
+    "operator_type": "Conv",
+    "onnx_operator_type": "Conv",
+    "input_names": [
+      "vgg0_relu0_fwd",
+      "vgg0_conv1_weight",
+      "vgg0_conv1_bias"
+    ],
+    "output_names": [
+      "vgg0_conv1_fwd"
+    ],
+    "input_shapes": [
+      [
+        8,
+        64,
+        224,
+        224
+      ],
+      [
+        64,
+        64,
+        3,
+        3
+      ],
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        8,
+        64,
+        224,
+        224
+      ]
+    ]
+  },
+  "benchmark": {
+    "CPUTime": 1177512,
+    "Flops": -1,
+    "Iterations": 600,
+    "Name": "LAYER_CUDNN_CONV_FWD_FLOAT32__BatchSize_8__11970163043652284987\u003cCUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD\u003e/input[0]:8/input[1]:64/input[2]:224/input[3]:224/filter_count:64/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/conv_fwd_type:1/conv_bwd_type:0/batch_size:8/manual_time",
+    "RealTime": 1166818,
+    "TimeUnit": "ns",
+    "advised_convolution_algorithm": 6,
+    "advised_determinism": 1,
+    "advised_memory": 409856,
+    "advised_time": 1.210368037223816,
+    "conv_bwd_type": 0,
+    "conv_fwd_type": 1,
+    "convolution_algorithm": 6,
+    "dilation_height": 1,
+    "dilation_width": 1,
+    "filter_count": 64,
+    "filter_height": 3,
+    "filter_width": 3,
+    "group": 1,
+    "input[0]": 8,
+    "input[1]": 64,
+    "input[2]": 224,
+    "input[3]": 224,
+    "input_batch_size": 8,
+    "input_channels": 64,
+    "input_height": 224,
+    "input_size": 25690112,
+    "input_width": 224,
+    "items_per_second": 1409102168035.9949,
+    "math_type": 0,
+    "num_filters": 64,
+    "output_batch_size": 8,
+    "output_channels": 64,
+    "output_height": 224,
+    "output_size": 25690112,
+    "output_width": 224,
+    "pad_height": 1,
+    "pad_width": 1,
+    "predicted_advised_flops": -857.0309610001864,
+    "predicted_advised_flops_count": -1,
+    "predicted_flops": -857.0309610001864,
+    "predicted_flops_count": -1,
+    "stride_height": 1,
+    "stride_width": 1,
+    "workspace_bytes": 409856,
+    "workspace_megabytes": 0.390869140625
+  },
+  "flops_information": {
+    "multiply_adds": 14797504512,
+    "additions": 0,
+    "divisions": 0,
+    "exponentiations": 0,
+    "comparisons": 0,
+    "general": 0
+  }
+},
+{
+  "layer": {
+    "auto_pad": "VALID",
+    "dilation": [
+      1,
+      1
+    ],
+    "group": 1,
+    "kernel_shape": [
+      3,
+      3
+    ],
+    "pads": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "strides": [
+      1,
+      1
+    ],
+    "name": "vgg0_conv1_fwd",
+    "operator_type": "Conv",
+    "onnx_operator_type": "Conv",
+    "input_names": [
+      "vgg0_relu0_fwd",
+      "vgg0_conv1_weight",
+      "vgg0_conv1_bias"
+    ],
+    "output_names": [
+      "vgg0_conv1_fwd"
+    ],
+    "input_shapes": [
+      [
+        8,
+        64,
+        224,
+        224
+      ],
+      [
+        64,
+        64,
+        3,
+        3
+      ],
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        8,
+        64,
+        224,
+        224
+      ]
+    ]
+  },
+  "benchmark": {
+    "CPUTime": 178866,
+    "Flops": null,
+    "Iterations": 4142,
+    "Name": "LAYER_CUDNN_ADD_TENSOR_FLOAT32__BatchSize_8__10212936185322445384/input[0]:8/input[1]:64/input[2]:224/input[3]:224/filter_count:64/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/conv_fwd_type:2/conv_bwd_type:0/batch_size:8/manual_time",
+    "RealTime": 168989,
+    "TimeUnit": "ns",
+    "bias_dim": 64,
+    "conv_bwd_type": 0,
+    "conv_fwd_type": 2,
+    "dilation_height": 1,
+    "dilation_width": 1,
+    "filter_count": 64,
+    "filter_height": 3,
+    "filter_width": 3,
+    "input[0]": 8,
+    "input[1]": 64,
+    "input[2]": 224,
+    "input[3]": 224,
+    "input_batch_size": 8,
+    "input_channels": 64,
+    "input_height": 224,
+    "input_size": 25690112,
+    "input_width": 224,
+    "items_per_second": 152021686799.46503,
+    "num_filters": 64,
+    "output_batch_size": 8,
+    "output_channels": 64,
+    "output_height": 224,
+    "output_size": 25690112,
+    "output_width": 224,
+    "pad_height": 1,
+    "pad_width": 1,
+    "stride_height": 1,
+    "stride_width": 1
+  },
+  "flops_information": {
+    "multiply_adds": 14797504512,
+    "additions": 0,
+    "divisions": 0,
+    "exponentiations": 0,
+    "comparisons": 0,
+    "general": 0
+  }
+},
+{
+  "layer": {
+    "name": "vgg0_relu1_fwd",
+    "operator_type": "Relu",
+    "onnx_operator_type": "Relu",
+    "input_names": [
+      "vgg0_conv1_fwd"
+    ],
+    "output_names": [
+      "vgg0_relu1_fwd"
+    ],
+    "input_shapes": [
+      [
+        8,
+        64,
+        224,
+        224
+      ]
+    ],
+    "output_shapes": [
+      [
+        8,
+        64,
+        224,
+        224
+      ]
+    ]
+  },
+  "benchmark": {
+    "CPUTime": 289925,
+    "Flops": 25690112,
+    "Iterations": 2501,
+    "Name": "LAYER_CUDNN_ACTIVATION_FWD_FLOAT32__BatchSize_8__7398989864926418640\u003cCUDNN_ACTIVATION_RELU\u003e/input[0]:8/input[1]:64/input[2]:224/input[3]:224/input[4]:-1/input[5]:-1/input[6]:-1/input[7]:-1/batch_size:8/manual_time",
+    "RealTime": 279936,
+    "TimeUnit": "ns",
+    "activation_mode": 1,
+    "input[0]": 8,
+    "input[1]": 64,
+    "input[2]": 224,
+    "input[3]": 224,
+    "input[4]": -1,
+    "input[5]": -1,
+    "input[6]": -1,
+    "input[7]": -1,
+    "input_batch_size": 8,
+    "input_channels": 64,
+    "input_height": 224,
+    "input_size": 25690112,
+    "input_width": 224,
+    "items_per_second": 91771224630.66154,
+    "output_batch_size": 8,
+    "output_channels": 64,
+    "output_height": 224,
+    "output_size": 25690112,
+    "output_width": 224,
+    "predicted_flops": 91771224630.66154,
+    "predicted_flops_count": 25690112
+  },
+  "flops_information": {
+    "multiply_adds": 25690112,
+    "additions": 0,
+    "divisions": 0,
+    "exponentiations": 0,
+    "comparisons": 25690112,
+    "general": 0
+  }
+},
+{
+  "layer": {
+    "kernel_shape": [
+      2,
+      2
+    ],
+    "pads": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "strides": [
+      2,
+      2
+    ],
+    "name": "vgg0_pool0_fwd",
+    "operator_type": "Pooling",
+    "onnx_operator_type": "MaxPool",
+    "input_names": [
+      "vgg0_relu1_fwd"
+    ],
+    "output_names": [
+      "vgg0_pool0_fwd"
+    ],
+    "input_shapes": [
+      [
+        8,
+        64,
+        224,
+        224
+      ]
+    ],
+    "output_shapes": [
+      [
+        8,
+        64,
+        112,
+        112
+      ]
+    ]
+  },
+  "benchmark": {
+    "CPUTime": 176385,
+    "Flops": 25690112,
+    "Iterations": 4204,
+    "Name": "LAYER_CUDNN_POOLING_FWD_FLOAT32__BatchSize_8__13053183506076938602\u003cCUDNN_POOLING_MAX\u003e/input[0]:8/input[1]:64/input[2]:224/input[3]:224/filter_height:2/filter_width:2/pad_height:0/pad_width:0/stride_height:2/stride_width:2/batch_size:8/manual_time",
+    "RealTime": 166481,
+    "TimeUnit": "ns",
+    "filter_height": 2,
+    "filter_width": 2,
+    "horizontal_padding": 0,
+    "horizontal_stride": 2,
+    "input[0]": 8,
+    "input[1]": 64,
+    "input[2]": 224,
+    "input[3]": 224,
+    "input_batch_size": 8,
+    "input_channels": 64,
+    "input_height": 224,
+    "input_size": 25690112,
+    "input_width": 224,
+    "items_per_second": 154312472433.15024,
+    "output_batch_size": 8,
+    "output_channels": 64,
+    "output_height": 112,
+    "output_size": 6422528,
+    "output_width": 112,
+    "pad_height": 0,
+    "pad_width": 0,
+    "pooling_mode": 0,
+    "predicted_flops": 154312472433.15024,
+    "predicted_flops_count": 25690112,
+    "stride_height": 2,
+    "stride_width": 2,
+    "vertical_padding": 0,
+    "vertical_stride": 2,
+    "window_height": 2,
+    "window_width": 2
+  },
+  "flops_information": {
+    "multiply_adds": 0,
+    "additions": 0,
+    "divisions": 0,
+    "exponentiations": 0,
+    "comparisons": 25690112,
+    "general": 0
+  }
+},
+{
+  "layer": {
+    "auto_pad": "VALID",
+    "dilation": [
+      1,
+      1
+    ],
+    "group": 1,
+    "kernel_shape": [
+      3,
+      3
+    ],
+    "pads": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "strides": [
+      1,
+      1
+    ],
+    "name": "vgg0_conv2_fwd",
+    "operator_type": "Conv",
+    "onnx_operator_type": "Conv",
+    "input_names": [
+      "vgg0_pool0_fwd",
+      "vgg0_conv2_weight",
+      "vgg0_conv2_bias"
+    ],
+    "output_names": [
+      "vgg0_conv2_fwd"
+    ],
+    "input_shapes": [
+      [
+        8,
+        64,
+        112,
+        112
+      ],
+      [
+        128,
+        64,
+        3,
+        3
+      ],
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        8,
+        128,
+        112,
+        112
+      ]
+    ]
+  },
+  "benchmark": {
+    "CPUTime": 588631,
+    "Flops": -1,
+    "Iterations": 1209,
+    "Name": "LAYER_CUDNN_CONV_FWD_FLOAT32__BatchSize_8__9631367922701912066\u003cCUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD\u003e/input[0]:8/input[1]:64/input[2]:112/input[3]:112/filter_count:128/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/conv_fwd_type:1/conv_bwd_type:0/batch_size:8/manual_time",
+    "RealTime": 578222,
+    "TimeUnit": "ns",
+    "advised_convolution_algorithm": 6,
+    "advised_determinism": 1,
+    "advised_memory": 819712,
+    "advised_time": 0.6062080264091492,
+    "conv_bwd_type": 0,
+    "conv_fwd_type": 1,
+    "convolution_algorithm": 6,
+    "dilation_height": 1,
+    "dilation_width": 1,
+    "filter_count": 128,
+    "filter_height": 3,
+    "filter_width": 3,
+    "group": 1,
+    "input[0]": 8,
+    "input[1]": 64,
+    "input[2]": 112,
+    "input[3]": 112,
+    "input_batch_size": 8,
+    "input_channels": 64,
+    "input_height": 112,
+    "input_size": 6422528,
+    "input_width": 112,
+    "items_per_second": 1421743757190.3103,
+    "math_type": 0,
+    "num_filters": 128,
+    "output_batch_size": 8,
+    "output_channels": 128,
+    "output_height": 112,
+    "output_size": 12845056,
+    "output_width": 112,
+    "pad_height": 1,
+    "pad_width": 1,
+    "predicted_advised_flops": -1729.4394205909728,
+    "predicted_advised_flops_count": -1,
+    "predicted_flops": -1729.4394205909728,
+    "predicted_flops_count": -1,
+    "stride_height": 1,
+    "stride_width": 1,
+    "workspace_bytes": 819712,
+    "workspace_megabytes": 0.78173828125
+  },
+  "flops_information": {
+    "multiply_adds": 7398752256,
+    "additions": 0,
+    "divisions": 0,
+    "exponentiations": 0,
+    "comparisons": 0,
+    "general": 0
+  }
+},
+{
+  "layer": {
+    "auto_pad": "VALID",
+    "dilation": [
+      1,
+      1
+    ],
+    "group": 1,
+    "kernel_shape": [
+      3,
+      3
+    ],
+    "pads": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "strides": [
+      1,
+      1
+    ],
+    "name": "vgg0_conv2_fwd",
+    "operator_type": "Conv",
+    "onnx_operator_type": "Conv",
+    "input_names": [
+      "vgg0_pool0_fwd",
+      "vgg0_conv2_weight",
+      "vgg0_conv2_bias"
+    ],
+    "output_names": [
+      "vgg0_conv2_fwd"
+    ],
+    "input_shapes": [
+      [
+        8,
+        64,
+        112,
+        112
+      ],
+      [
+        128,
+        64,
+        3,
+        3
+      ],
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        8,
+        128,
+        112,
+        112
+      ]
+    ]
+  },
+  "benchmark": {
+    "CPUTime": 99113,
+    "Flops": null,
+    "Iterations": 7841,
+    "Name": "LAYER_CUDNN_ADD_TENSOR_FLOAT32__BatchSize_8__12541489906015985777/input[0]:8/input[1]:64/input[2]:112/input[3]:112/filter_count:128/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/conv_fwd_type:2/conv_bwd_type:0/batch_size:8/manual_time",
+    "RealTime": 89264,
+    "TimeUnit": "ns",
+    "bias_dim": 128,
+    "conv_bwd_type": 0,
+    "conv_fwd_type": 2,
+    "dilation_height": 1,
+    "dilation_width": 1,
+    "filter_count": 128,
+    "filter_height": 3,
+    "filter_width": 3,
+    "input[0]": 8,
+    "input[1]": 64,
+    "input[2]": 112,
+    "input[3]": 112,
+    "input_batch_size": 8,
+    "input_channels": 64,
+    "input_height": 112,
+    "input_size": 6422528,
+    "input_width": 112,
+    "items_per_second": 71949561221.47063,
+    "num_filters": 128,
+    "output_batch_size": 8,
+    "output_channels": 128,
+    "output_height": 112,
+    "output_size": 12845056,
+    "output_width": 112,
+    "pad_height": 1,
+    "pad_width": 1,
+    "stride_height": 1,
+    "stride_width": 1
+  },
+  "flops_information": {
+    "multiply_adds": 7398752256,
+    "additions": 0,
+    "divisions": 0,
+    "exponentiations": 0,
+    "comparisons": 0,
+    "general": 0
+  }
+},
+{
+  "layer": {
+    "name": "vgg0_relu2_fwd",
+    "operator_type": "Relu",
+    "onnx_operator_type": "Relu",
+    "input_names": [
+      "vgg0_conv2_fwd"
+    ],
+    "output_names": [
+      "vgg0_relu2_fwd"
+    ],
+    "input_shapes": [
+      [
+        8,
+        128,
+        112,
+        112
+      ]
+    ],
+    "output_shapes": [
+      [
+        8,
+        128,
+        112,
+        112
+      ]
+    ]
+  },
+  "benchmark": {
+    "CPUTime": 152098,
+    "Flops": 12845056,
+    "Iterations": 4922,
+    "Name": "LAYER_CUDNN_ACTIVATION_FWD_FLOAT32__BatchSize_8__11494204409581170513\u003cCUDNN_ACTIVATION_RELU\u003e/input[0]:8/input[1]:128/input[2]:112/input[3]:112/input[4]:-1/input[5]:-1/input[6]:-1/input[7]:-1/batch_size:8/manual_time",
+    "RealTime": 142194,
+    "TimeUnit": "ns",
+    "activation_mode": 1,
+    "input[0]": 8,
+    "input[1]": 128,
+    "input[2]": 112,
+    "input[3]": 112,
+    "input[4]": -1,
+    "input[5]": -1,
+    "input[6]": -1,
+    "input[7]": -1,
+    "input_batch_size": 8,
+    "input_channels": 128,
+    "input_height": 112,
+    "input_size": 12845056,
+    "input_width": 112,
+    "items_per_second": 90334522642.12521,
+    "output_batch_size": 8,
+    "output_channels": 128,
+    "output_height": 112,
+    "output_size": 12845056,
+    "output_width": 112,
+    "predicted_flops": 90334522642.12521,
+    "predicted_flops_count": 12845056
+  },
+  "flops_information": {
+    "multiply_adds": 12845056,
+    "additions": 0,
+    "divisions": 0,
+    "exponentiations": 0,
+    "comparisons": 12845056,
+    "general": 0
+  }
+},
+{
+  "layer": {
+    "auto_pad": "VALID",
+    "dilation": [
+      1,
+      1
+    ],
+    "group": 1,
+    "kernel_shape": [
+      3,
+      3
+    ],
+    "pads": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "strides": [
+      1,
+      1
+    ],
+    "name": "vgg0_conv3_fwd",
+    "operator_type": "Conv",
+    "onnx_operator_type": "Conv",
+    "input_names": [
+      "vgg0_relu2_fwd",
+      "vgg0_conv3_weight",
+      "vgg0_conv3_bias"
+    ],
+    "output_names": [
+      "vgg0_conv3_fwd"
+    ],
+    "input_shapes": [
+      [
+        8,
+        128,
+        112,
+        112
+      ],
+      [
+        128,
+        128,
+        3,
+        3
+      ],
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        8,
+        128,
+        112,
+        112
+      ]
+    ]
+  },
+  "benchmark": {
+    "CPUTime": 1077073,
+    "Flops": -1,
+    "Iterations": 656,
+    "Name": "LAYER_CUDNN_CONV_FWD_FLOAT32__BatchSize_8__15709551630518411587\u003cCUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD\u003e/input[0]:8/input[1]:128/input[2]:112/input[3]:112/filter_count:128/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/conv_fwd_type:1/conv_bwd_type:0/batch_size:8/manual_time",
+    "RealTime": 1066673,
+    "TimeUnit": "ns",
+    "advised_convolution_algorithm": 6,
+    "advised_determinism": 1,
+    "advised_memory": 1638912,
+    "advised_time": 1.1059199571609497,
+    "conv_bwd_type": 0,
+    "conv_fwd_type": 1,
+    "convolution_algorithm": 6,
+    "dilation_height": 1,
+    "dilation_width": 1,
+    "filter_count": 128,
+    "filter_height": 3,
+    "filter_width": 3,
+    "group": 1,
+    "input[0]": 8,
+    "input[1]": 128,
+    "input[2]": 112,
+    "input[3]": 112,
+    "input_batch_size": 8,
+    "input_channels": 128,
+    "input_height": 112,
+    "input_size": 12845056,
+    "input_width": 112,
+    "items_per_second": 1541396172007.0544,
+    "math_type": 0,
+    "num_filters": 128,
+    "output_batch_size": 8,
+    "output_channels": 128,
+    "output_height": 112,
+    "output_size": 12845056,
+    "output_width": 112,
+    "pad_height": 1,
+    "pad_width": 1,
+    "predicted_advised_flops": -937.4935845982386,
+    "predicted_advised_flops_count": -1,
+    "predicted_flops": -937.4935845982386,
+    "predicted_flops_count": -1,
+    "stride_height": 1,
+    "stride_width": 1,
+    "workspace_bytes": 1638912,
+    "workspace_megabytes": 1.56298828125
+  },
+  "flops_information": {
+    "multiply_adds": 14797504512,
+    "additions": 0,
+    "divisions": 0,
+    "exponentiations": 0,
+    "comparisons": 0,
+    "general": 0
+  }
+},
+{
+  "layer": {
+    "auto_pad": "VALID",
+    "dilation": [
+      1,
+      1
+    ],
+    "group": 1,
+    "kernel_shape": [
+      3,
+      3
+    ],
+    "pads": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "strides": [
+      1,
+      1
+    ],
+    "name": "vgg0_conv3_fwd",
+    "operator_type": "Conv",
+    "onnx_operator_type": "Conv",
+    "input_names": [
+      "vgg0_relu2_fwd",
+      "vgg0_conv3_weight",
+      "vgg0_conv3_bias"
+    ],
+    "output_names": [
+      "vgg0_conv3_fwd"
+    ],
+    "input_shapes": [
+      [
+        8,
+        128,
+        112,
+        112
+      ],
+      [
+        128,
+        128,
+        3,
+        3
+      ],
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        8,
+        128,
+        112,
+        112
+      ]
+    ]
+  },
+  "benchmark": {
+    "CPUTime": 99174,
+    "Flops": null,
+    "Iterations": 7842,
+    "Name": "LAYER_CUDNN_ADD_TENSOR_FLOAT32__BatchSize_8__17412786970432817456/input[0]:8/input[1]:128/input[2]:112/input[3]:112/filter_count:128/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/conv_fwd_type:2/conv_bwd_type:0/batch_size:8/manual_time",
+    "RealTime": 89307,
+    "TimeUnit": "ns",
+    "bias_dim": 128,
+    "conv_bwd_type": 0,
+    "conv_fwd_type": 2,
+    "dilation_height": 1,
+    "dilation_width": 1,
+    "filter_count": 128,
+    "filter_height": 3,
+    "filter_width": 3,
+    "input[0]": 8,
+    "input[1]": 128,
+    "input[2]": 112,
+    "input[3]": 112,
+    "input_batch_size": 8,
+    "input_channels": 128,
+    "input_height": 112,
+    "input_size": 12845056,
+    "input_width": 112,
+    "items_per_second": 143828931849.7227,
+    "num_filters": 128,
+    "output_batch_size": 8,
+    "output_channels": 128,
+    "output_height": 112,
+    "output_size": 12845056,
+    "output_width": 112,
+    "pad_height": 1,
+    "pad_width": 1,
+    "stride_height": 1,
+    "stride_width": 1
+  },
+  "flops_information": {
+    "multiply_adds": 14797504512,
+    "additions": 0,
+    "divisions": 0,
+    "exponentiations": 0,
+    "comparisons": 0,
+    "general": 0
+  }
+},
+{
+  "layer": {
+    "name": "vgg0_relu3_fwd",
+    "operator_type": "Relu",
+    "onnx_operator_type": "Relu",
+    "input_names": [
+      "vgg0_conv3_fwd"
+    ],
+    "output_names": [
+      "vgg0_relu3_fwd"
+    ],
+    "input_shapes": [
+      [
+        8,
+        128,
+        112,
+        112
+      ]
+    ],
+    "output_shapes": [
+      [
+        8,
+        128,
+        112,
+        112
+      ]
+    ]
+  },
+  "benchmark": {
+    "CPUTime": 152098,
+    "Flops": 12845056,
+    "Iterations": 4922,
+    "Name": "LAYER_CUDNN_ACTIVATION_FWD_FLOAT32__BatchSize_8__11494204409581170513\u003cCUDNN_ACTIVATION_RELU\u003e/input[0]:8/input[1]:128/input[2]:112/input[3]:112/input[4]:-1/input[5]:-1/input[6]:-1/input[7]:-1/batch_size:8/manual_time",
+    "RealTime": 142194,
+    "TimeUnit": "ns",
+    "activation_mode": 1,
+    "input[0]": 8,
+    "input[1]": 128,
+    "input[2]": 112,
+    "input[3]": 112,
+    "input[4]": -1,
+    "input[5]": -1,
+    "input[6]": -1,
+    "input[7]": -1,
+    "input_batch_size": 8,
+    "input_channels": 128,
+    "input_height": 112,
+    "input_size": 12845056,
+    "input_width": 112,
+    "items_per_second": 90334522642.12521,
+    "output_batch_size": 8,
+    "output_channels": 128,
+    "output_height": 112,
+    "output_size": 12845056,
+    "output_width": 112,
+    "predicted_flops": 90334522642.12521,
+    "predicted_flops_count": 12845056
+  },
+  "flops_information": {
+    "multiply_adds": 12845056,
+    "additions": 0,
+    "divisions": 0,
+    "exponentiations": 0,
+    "comparisons": 12845056,
+    "general": 0
+  }
+},
+{
+  "layer": {
+    "kernel_shape": [
+      2,
+      2
+    ],
+    "pads": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "strides": [
+      2,
+      2
+    ],
+    "name": "vgg0_pool1_fwd",
+    "operator_type": "Pooling",
+    "onnx_operator_type": "MaxPool",
+    "input_names": [
+      "vgg0_relu3_fwd"
+    ],
+    "output_names": [
+      "vgg0_pool1_fwd"
+    ],
+    "input_shapes": [
+      [
+        8,
+        128,
+        112,
+        112
+      ]
+    ],
+    "output_shapes": [
+      [
+        8,
+        128,
+        56,
+        56
+      ]
+    ]
+  },
+  "benchmark": {
+    "CPUTime": 98915,
+    "Flops": 12845056,
+    "Iterations": 7867,
+    "Name": "LAYER_CUDNN_POOLING_FWD_FLOAT32__BatchSize_8__7947798230750171919\u003cCUDNN_POOLING_MAX\u003e/input[0]:8/input[1]:128/input[2]:112/input[3]:112/filter_height:2/filter_width:2/pad_height:0/pad_width:0/stride_height:2/stride_width:2/batch_size:8/manual_time",
+    "RealTime": 88944,
+    "TimeUnit": "ns",
+    "filter_height": 2,
+    "filter_width": 2,
+    "horizontal_padding": 0,
+    "horizontal_stride": 2,
+    "input[0]": 8,
+    "input[1]": 128,
+    "input[2]": 112,
+    "input[3]": 112,
+    "input_batch_size": 8,
+    "input_channels": 128,
+    "input_height": 112,
+    "input_size": 12845056,
+    "input_width": 112,
+    "items_per_second": 144416852294.45532,
+    "output_batch_size": 8,
+    "output_channels": 128,
+    "output_height": 56,
+    "output_size": 3211264,
+    "output_width": 56,
+    "pad_height": 0,
+    "pad_width": 0,
+    "pooling_mode": 0,
+    "predicted_flops": 144416852294.45532,
+    "predicted_flops_count": 12845056,
+    "stride_height": 2,
+    "stride_width": 2,
+    "vertical_padding": 0,
+    "vertical_stride": 2,
+    "window_height": 2,
+    "window_width": 2
+  },
+  "flops_information": {
+    "multiply_adds": 0,
+    "additions": 0,
+    "divisions": 0,
+    "exponentiations": 0,
+    "comparisons": 12845056,
+    "general": 0
+  }
+},
+{
+  "layer": {
+    "auto_pad": "VALID",
+    "dilation": [
+      1,
+      1
+    ],
+    "group": 1,
+    "kernel_shape": [
+      3,
+      3
+    ],
+    "pads": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "strides": [
+      1,
+      1
+    ],
+    "name": "vgg0_conv4_fwd",
+    "operator_type": "Conv",
+    "onnx_operator_type": "Conv",
+    "input_names": [
+      "vgg0_pool1_fwd",
+      "vgg0_conv4_weight",
+      "vgg0_conv4_bias"
+    ],
+    "output_names": [
+      "vgg0_conv4_fwd"
+    ],
+    "input_shapes": [
+      [
+        8,
+        128,
+        56,
+        56
+      ],
+      [
+        256,
+        128,
+        3,
+        3
+      ],
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        8,
+        256,
+        56,
+        56
+      ]
+    ]
+  },
+  "benchmark": {
+    "CPUTime": 618025,
+    "Flops": -1,
+    "Iterations": 1150,
+    "Name": "LAYER_CUDNN_CONV_FWD_FLOAT32__BatchSize_8__5661654798735103151\u003cCUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD\u003e/input[0]:8/input[1]:128/input[2]:56/input[3]:56/filter_count:256/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/conv_fwd_type:1/conv_bwd_type:0/batch_size:8/manual_time",
+    "RealTime": 607742,
+    "TimeUnit": "ns",
+    "advised_convolution_algorithm": 6,
+    "advised_determinism": 1,
+    "advised_memory": 3277824,
+    "advised_time": 0.634880006313324,
+    "conv_bwd_type": 0,
+    "conv_fwd_type": 1,
+    "convolution_algorithm": 6,
+    "dilation_height": 1,
+    "dilation_width": 1,
+    "filter_count": 256,
+    "filter_height": 3,
+    "filter_width": 3,
+    "group": 1,
+    "input[0]": 8,
+    "input[1]": 128,
+    "input[2]": 56,
+    "input[3]": 56,
+    "input_batch_size": 8,
+    "input_channels": 128,
+    "input_height": 56,
+    "input_size": 3211264,
+    "input_width": 56,
+    "items_per_second": 1352684673864.9211,
+    "math_type": 0,
+    "num_filters": 256,
+    "output_batch_size": 8,
+    "output_channels": 256,
+    "output_height": 56,
+    "output_size": 6422528,
+    "output_width": 56,
+    "pad_height": 1,
+    "pad_width": 1,
+    "predicted_advised_flops": -1645.4344791598724,
+    "predicted_advised_flops_count": -1,
+    "predicted_flops": -1645.4344791598724,
+    "predicted_flops_count": -1,
+    "stride_height": 1,
+    "stride_width": 1,
+    "workspace_bytes": 3277824,
+    "workspace_megabytes": 3.1259765625
+  },
+  "flops_information": {
+    "multiply_adds": 7398752256,
+    "additions": 0,
+    "divisions": 0,
+    "exponentiations": 0,
+    "comparisons": 0,
+    "general": 0
+  }
+},
+{
+  "layer": {
+    "auto_pad": "VALID",
+    "dilation": [
+      1,
+      1
+    ],
+    "group": 1,
+    "kernel_shape": [
+      3,
+      3
+    ],
+    "pads": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "strides": [
+      1,
+      1
+    ],
+    "name": "vgg0_conv4_fwd",
+    "operator_type": "Conv",
+    "onnx_operator_type": "Conv",
+    "input_names": [
+      "vgg0_pool1_fwd",
+      "vgg0_conv4_weight",
+      "vgg0_conv4_bias"
+    ],
+    "output_names": [
+      "vgg0_conv4_fwd"
+    ],
+    "input_shapes": [
+      [
+        8,
+        128,
+        56,
+        56
+      ],
+      [
+        256,
+        128,
+        3,
+        3
+      ],
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        8,
+        256,
+        56,
+        56
+      ]
+    ]
+  },
+  "benchmark": {
+    "CPUTime": 58075,
+    "Flops": null,
+    "Iterations": 14510,
+    "Name": "LAYER_CUDNN_ADD_TENSOR_FLOAT32__BatchSize_8__7293317420599114972/input[0]:8/input[1]:128/input[2]:56/input[3]:56/filter_count:256/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/conv_fwd_type:2/conv_bwd_type:0/batch_size:8/manual_time",
+    "RealTime": 48262,
+    "TimeUnit": "ns",
+    "bias_dim": 256,
+    "conv_bwd_type": 0,
+    "conv_fwd_type": 2,
+    "dilation_height": 1,
+    "dilation_width": 1,
+    "filter_count": 256,
+    "filter_height": 3,
+    "filter_width": 3,
+    "input[0]": 8,
+    "input[1]": 128,
+    "input[2]": 56,
+    "input[3]": 56,
+    "input_batch_size": 8,
+    "input_channels": 128,
+    "input_height": 56,
+    "input_size": 3211264,
+    "input_width": 56,
+    "items_per_second": 66538086587.11273,
+    "num_filters": 256,
+    "output_batch_size": 8,
+    "output_channels": 256,
+    "output_height": 56,
+    "output_size": 6422528,
+    "output_width": 56,
+    "pad_height": 1,
+    "pad_width": 1,
+    "stride_height": 1,
+    "stride_width": 1
+  },
+  "flops_information": {
+    "multiply_adds": 7398752256,
+    "additions": 0,
+    "divisions": 0,
+    "exponentiations": 0,
+    "comparisons": 0,
+    "general": 0
+  }
+},
+{
+  "layer": {
+    "name": "vgg0_relu4_fwd",
+    "operator_type": "Relu",
+    "onnx_operator_type": "Relu",
+    "input_names": [
+      "vgg0_conv4_fwd"
+    ],
+    "output_names": [
+      "vgg0_relu4_fwd"
+    ],
+    "input_shapes": [
+      [
+        8,
+        256,
+        56,
+        56
+      ]
+    ],
+    "output_shapes": [
+      [
+        8,
+        256,
+        56,
+        56
+      ]
+    ]
+  },
+  "benchmark": {
+    "CPUTime": 83987,
+    "Flops": 6422528,
+    "Iterations": 9443,
+    "Name": "LAYER_CUDNN_ACTIVATION_FWD_FLOAT32__BatchSize_8__12392619029784752570\u003cCUDNN_ACTIVATION_CLIPPED_RELU\u003e/input[0]:8/input[1]:256/input[2]:56/input[3]:56/input[4]:-1/input[5]:-1/input[6]:-1/input[7]:-1/batch_size:8/manual_time",
+    "RealTime": 74110,
+    "TimeUnit": "ns",
+    "activation_mode": 3,
+    "input[0]": 8,
+    "input[1]": 256,
+    "input[2]": 56,
+    "input[3]": 56,
+    "input[4]": -1,
+    "input[5]": -1,
+    "input[6]": -1,
+    "input[7]": -1,
+    "input_batch_size": 8,
+    "input_channels": 256,
+    "input_height": 56,
+    "input_size": 6422528,
+    "input_width": 56,
+    "items_per_second": 86661924383.11224,
+    "output_batch_size": 8,
+    "output_channels": 256,
+    "output_height": 56,
+    "output_size": 6422528,
+    "output_width": 56,
+    "predicted_flops": 86661924383.11224,
+    "predicted_flops_count": 6422528
+  },
+  "flops_information": {
+    "multiply_adds": 6422528,
+    "additions": 0,
+    "divisions": 0,
+    "exponentiations": 0,
+    "comparisons": 6422528,
+    "general": 0
+  }
+},
+{
+  "layer": {
+    "auto_pad": "VALID",
+    "dilation": [
+      1,
+      1
+    ],
+    "group": 1,
+    "kernel_shape": [
+      3,
+      3
+    ],
+    "pads": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "strides": [
+      1,
+      1
+    ],
+    "name": "vgg0_conv5_fwd",
+    "operator_type": "Conv",
+    "onnx_operator_type": "Conv",
+    "input_names": [
+      "vgg0_relu4_fwd",
+      "vgg0_conv5_weight",
+      "vgg0_conv5_bias"
+    ],
+    "output_names": [
+      "vgg0_conv5_fwd"
+    ],
+    "input_shapes": [
+      [
+        8,
+        256,
+        56,
+        56
+      ],
+      [
+        256,
+        256,
+        3,
+        3
+      ],
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        8,
+        256,
+        56,
+        56
+      ]
+    ]
+  },
+  "benchmark": {
+    "CPUTime": 1175731,
+    "Flops": -1,
+    "Iterations": 596,
+    "Name": "LAYER_CUDNN_CONV_FWD_FLOAT32__BatchSize_8__10977826504040494159\u003cCUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD\u003e/input[0]:8/input[1]:256/input[2]:56/input[3]:56/filter_count:256/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/conv_fwd_type:1/conv_bwd_type:0/batch_size:8/manual_time",
+    "RealTime": 1165207,
+    "TimeUnit": "ns",
+    "advised_convolution_algorithm": 6,
+    "advised_determinism": 1,
+    "advised_memory": 6554624,
+    "advised_time": 1.201151967048645,
+    "conv_bwd_type": 0,
+    "conv_fwd_type": 1,
+    "convolution_algorithm": 6,
+    "dilation_height": 1,
+    "dilation_width": 1,
+    "filter_count": 256,
+    "filter_height": 3,
+    "filter_width": 3,
+    "group": 1,
+    "input[0]": 8,
+    "input[1]": 256,
+    "input[2]": 56,
+    "input[3]": 56,
+    "input_batch_size": 8,
+    "input_channels": 256,
+    "input_height": 56,
+    "input_size": 6422528,
+    "input_width": 56,
+    "items_per_second": 1411051308303.5679,
+    "math_type": 0,
+    "num_filters": 256,
+    "output_batch_size": 8,
+    "output_channels": 256,
+    "output_height": 56,
+    "output_size": 6422528,
+    "output_width": 56,
+    "pad_height": 1,
+    "pad_width": 1,
+    "predicted_advised_flops": -858.2164488906567,
+    "predicted_advised_flops_count": -1,
+    "predicted_flops": -858.2164488906567,
+    "predicted_flops_count": -1,
+    "stride_height": 1,
+    "stride_width": 1,
+    "workspace_bytes": 6554624,
+    "workspace_megabytes": 6.2509765625
+  },
+  "flops_information": {
+    "multiply_adds": 14797504512,
+    "additions": 0,
+    "divisions": 0,
+    "exponentiations": 0,
+    "comparisons": 0,
+    "general": 0
+  }
+},
+{
+  "layer": {
+    "auto_pad": "VALID",
+    "dilation": [
+      1,
+      1
+    ],
+    "group": 1,
+    "kernel_shape": [
+      3,
+      3
+    ],
+    "pads": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "strides": [
+      1,
+      1
+    ],
+    "name": "vgg0_conv5_fwd",
+    "operator_type": "Conv",
+    "onnx_operator_type": "Conv",
+    "input_names": [
+      "vgg0_relu4_fwd",
+      "vgg0_conv5_weight",
+      "vgg0_conv5_bias"
+    ],
+    "output_names": [
+      "vgg0_conv5_fwd"
+    ],
+    "input_shapes": [
+      [
+        8,
+        256,
+        56,
+        56
+      ],
+      [
+        256,
+        256,
+        3,
+        3
+      ],
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        8,
+        256,
+        56,
+        56
+      ]
+    ]
+  },
+  "benchmark": {
+    "CPUTime": 58091,
+    "Flops": null,
+    "Iterations": 14487,
+    "Name": "LAYER_CUDNN_ADD_TENSOR_FLOAT32__BatchSize_8__12969310903298432060/input[0]:8/input[1]:256/input[2]:56/input[3]:56/filter_count:256/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/conv_fwd_type:2/conv_bwd_type:0/batch_size:8/manual_time",
+    "RealTime": 48289,
+    "TimeUnit": "ns",
+    "bias_dim": 256,
+    "conv_bwd_type": 0,
+    "conv_fwd_type": 2,
+    "dilation_height": 1,
+    "dilation_width": 1,
+    "filter_count": 256,
+    "filter_height": 3,
+    "filter_width": 3,
+    "input[0]": 8,
+    "input[1]": 256,
+    "input[2]": 56,
+    "input[3]": 56,
+    "input_batch_size": 8,
+    "input_channels": 256,
+    "input_height": 56,
+    "input_size": 6422528,
+    "input_width": 56,
+    "items_per_second": 133001121376.36348,
+    "num_filters": 256,
+    "output_batch_size": 8,
+    "output_channels": 256,
+    "output_height": 56,
+    "output_size": 6422528,
+    "output_width": 56,
+    "pad_height": 1,
+    "pad_width": 1,
+    "stride_height": 1,
+    "stride_width": 1
+  },
+  "flops_information": {
+    "multiply_adds": 14797504512,
+    "additions": 0,
+    "divisions": 0,
+    "exponentiations": 0,
+    "comparisons": 0,
+    "general": 0
+  }
+},
+{
+  "layer": {
+    "name": "vgg0_relu5_fwd",
+    "operator_type": "Relu",
+    "onnx_operator_type": "Relu",
+    "input_names": [
+      "vgg0_conv5_fwd"
+    ],
+    "output_names": [
+      "vgg0_relu5_fwd"
+    ],
+    "input_shapes": [
+      [
+        8,
+        256,
+        56,
+        56
+      ]
+    ],
+    "output_shapes": [
+      [
+        8,
+        256,
+        56,
+        56
+      ]
+    ]
+  },
+  "benchmark": {
+    "CPUTime": 83987,
+    "Flops": 6422528,
+    "Iterations": 9443,
+    "Name": "LAYER_CUDNN_ACTIVATION_FWD_FLOAT32__BatchSize_8__12392619029784752570\u003cCUDNN_ACTIVATION_CLIPPED_RELU\u003e/input[0]:8/input[1]:256/input[2]:56/input[3]:56/input[4]:-1/input[5]:-1/input[6]:-1/input[7]:-1/batch_size:8/manual_time",
+    "RealTime": 74110,
+    "TimeUnit": "ns",
+    "activation_mode": 3,
+    "input[0]": 8,
+    "input[1]": 256,
+    "input[2]": 56,
+    "input[3]": 56,
+    "input[4]": -1,
+    "input[5]": -1,
+    "input[6]": -1,
+    "input[7]": -1,
+    "input_batch_size": 8,
+    "input_channels": 256,
+    "input_height": 56,
+    "input_size": 6422528,
+    "input_width": 56,
+    "items_per_second": 86661924383.11224,
+    "output_batch_size": 8,
+    "output_channels": 256,
+    "output_height": 56,
+    "output_size": 6422528,
+    "output_width": 56,
+    "predicted_flops": 86661924383.11224,
+    "predicted_flops_count": 6422528
+  },
+  "flops_information": {
+    "multiply_adds": 6422528,
+    "additions": 0,
+    "divisions": 0,
+    "exponentiations": 0,
+    "comparisons": 6422528,
+    "general": 0
+  }
+},
+{
+  "layer": {
+    "auto_pad": "VALID",
+    "dilation": [
+      1,
+      1
+    ],
+    "group": 1,
+    "kernel_shape": [
+      3,
+      3
+    ],
+    "pads": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "strides": [
+      1,
+      1
+    ],
+    "name": "vgg0_conv6_fwd",
+    "operator_type": "Conv",
+    "onnx_operator_type": "Conv",
+    "input_names": [
+      "vgg0_relu5_fwd",
+      "vgg0_conv6_weight",
+      "vgg0_conv6_bias"
+    ],
+    "output_names": [
+      "vgg0_conv6_fwd"
+    ],
+    "input_shapes": [
+      [
+        8,
+        256,
+        56,
+        56
+      ],
+      [
+        256,
+        256,
+        3,
+        3
+      ],
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        8,
+        256,
+        56,
+        56
+      ]
+    ]
+  },
+  "benchmark": {
+    "CPUTime": 1175731,
+    "Flops": -1,
+    "Iterations": 596,
+    "Name": "LAYER_CUDNN_CONV_FWD_FLOAT32__BatchSize_8__10977826504040494159\u003cCUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD\u003e/input[0]:8/input[1]:256/input[2]:56/input[3]:56/filter_count:256/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/conv_fwd_type:1/conv_bwd_type:0/batch_size:8/manual_time",
+    "RealTime": 1165207,
+    "TimeUnit": "ns",
+    "advised_convolution_algorithm": 6,
+    "advised_determinism": 1,
+    "advised_memory": 6554624,
+    "advised_time": 1.201151967048645,
+    "conv_bwd_type": 0,
+    "conv_fwd_type": 1,
+    "convolution_algorithm": 6,
+    "dilation_height": 1,
+    "dilation_width": 1,
+    "filter_count": 256,
+    "filter_height": 3,
+    "filter_width": 3,
+    "group": 1,
+    "input[0]": 8,
+    "input[1]": 256,
+    "input[2]": 56,
+    "input[3]": 56,
+    "input_batch_size": 8,
+    "input_channels": 256,
+    "input_height": 56,
+    "input_size": 6422528,
+    "input_width": 56,
+    "items_per_second": 1411051308303.5679,
+    "math_type": 0,
+    "num_filters": 256,
+    "output_batch_size": 8,
+    "output_channels": 256,
+    "output_height": 56,
+    "output_size": 6422528,
+    "output_width": 56,
+    "pad_height": 1,
+    "pad_width": 1,
+    "predicted_advised_flops": -858.2164488906567,
+    "predicted_advised_flops_count": -1,
+    "predicted_flops": -858.2164488906567,
+    "predicted_flops_count": -1,
+    "stride_height": 1,
+    "stride_width": 1,
+    "workspace_bytes": 6554624,
+    "workspace_megabytes": 6.2509765625
+  },
+  "flops_information": {
+    "multiply_adds": 14797504512,
+    "additions": 0,
+    "divisions": 0,
+    "exponentiations": 0,
+    "comparisons": 0,
+    "general": 0
+  }
+},
+{
+  "layer": {
+    "auto_pad": "VALID",
+    "dilation": [
+      1,
+      1
+    ],
+    "group": 1,
+    "kernel_shape": [
+      3,
+      3
+    ],
+    "pads": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "strides": [
+      1,
+      1
+    ],
+    "name": "vgg0_conv6_fwd",
+    "operator_type": "Conv",
+    "onnx_operator_type": "Conv",
+    "input_names": [
+      "vgg0_relu5_fwd",
+      "vgg0_conv6_weight",
+      "vgg0_conv6_bias"
+    ],
+    "output_names": [
+      "vgg0_conv6_fwd"
+    ],
+    "input_shapes": [
+      [
+        8,
+        256,
+        56,
+        56
+      ],
+      [
+        256,
+        256,
+        3,
+        3
+      ],
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        8,
+        256,
+        56,
+        56
+      ]
+    ]
+  },
+  "benchmark": {
+    "CPUTime": 58091,
+    "Flops": null,
+    "Iterations": 14487,
+    "Name": "LAYER_CUDNN_ADD_TENSOR_FLOAT32__BatchSize_8__12969310903298432060/input[0]:8/input[1]:256/input[2]:56/input[3]:56/filter_count:256/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/conv_fwd_type:2/conv_bwd_type:0/batch_size:8/manual_time",
+    "RealTime": 48289,
+    "TimeUnit": "ns",
+    "bias_dim": 256,
+    "conv_bwd_type": 0,
+    "conv_fwd_type": 2,
+    "dilation_height": 1,
+    "dilation_width": 1,
+    "filter_count": 256,
+    "filter_height": 3,
+    "filter_width": 3,
+    "input[0]": 8,
+    "input[1]": 256,
+    "input[2]": 56,
+    "input[3]": 56,
+    "input_batch_size": 8,
+    "input_channels": 256,
+    "input_height": 56,
+    "input_size": 6422528,
+    "input_width": 56,
+    "items_per_second": 133001121376.36348,
+    "num_filters": 256,
+    "output_batch_size": 8,
+    "output_channels": 256,
+    "output_height": 56,
+    "output_size": 6422528,
+    "output_width": 56,
+    "pad_height": 1,
+    "pad_width": 1,
+    "stride_height": 1,
+    "stride_width": 1
+  },
+  "flops_information": {
+    "multiply_adds": 14797504512,
+    "additions": 0,
+    "divisions": 0,
+    "exponentiations": 0,
+    "comparisons": 0,
+    "general": 0
+  }
+},
+{
+  "layer": {
+    "name": "vgg0_relu6_fwd",
+    "operator_type": "Relu",
+    "onnx_operator_type": "Relu",
+    "input_names": [
+      "vgg0_conv6_fwd"
+    ],
+    "output_names": [
+      "vgg0_relu6_fwd"
+    ],
+    "input_shapes": [
+      [
+        8,
+        256,
+        56,
+        56
+      ]
+    ],
+    "output_shapes": [
+      [
+        8,
+        256,
+        56,
+        56
+      ]
+    ]
+  },
+  "benchmark": {
+    "CPUTime": 83987,
+    "Flops": 6422528,
+    "Iterations": 9443,
+    "Name": "LAYER_CUDNN_ACTIVATION_FWD_FLOAT32__BatchSize_8__12392619029784752570\u003cCUDNN_ACTIVATION_CLIPPED_RELU\u003e/input[0]:8/input[1]:256/input[2]:56/input[3]:56/input[4]:-1/input[5]:-1/input[6]:-1/input[7]:-1/batch_size:8/manual_time",
+    "RealTime": 74110,
+    "TimeUnit": "ns",
+    "activation_mode": 3,
+    "input[0]": 8,
+    "input[1]": 256,
+    "input[2]": 56,
+    "input[3]": 56,
+    "input[4]": -1,
+    "input[5]": -1,
+    "input[6]": -1,
+    "input[7]": -1,
+    "input_batch_size": 8,
+    "input_channels": 256,
+    "input_height": 56,
+    "input_size": 6422528,
+    "input_width": 56,
+    "items_per_second": 86661924383.11224,
+    "output_batch_size": 8,
+    "output_channels": 256,
+    "output_height": 56,
+    "output_size": 6422528,
+    "output_width": 56,
+    "predicted_flops": 86661924383.11224,
+    "predicted_flops_count": 6422528
+  },
+  "flops_information": {
+    "multiply_adds": 6422528,
+    "additions": 0,
+    "divisions": 0,
+    "exponentiations": 0,
+    "comparisons": 6422528,
+    "general": 0
+  }
+},
+{
+  "layer": {
+    "kernel_shape": [
+      2,
+      2
+    ],
+    "pads": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "strides": [
+      2,
+      2
+    ],
+    "name": "vgg0_pool2_fwd",
+    "operator_type": "Pooling",
+    "onnx_operator_type": "MaxPool",
+    "input_names": [
+      "vgg0_relu6_fwd"
+    ],
+    "output_names": [
+      "vgg0_pool2_fwd"
+    ],
+    "input_shapes": [
+      [
+        8,
+        256,
+        56,
+        56
+      ]
+    ],
+    "output_shapes": [
+      [
+        8,
+        256,
+        28,
+        28
+      ]
+    ]
+  },
+  "benchmark": {
+    "CPUTime": 57268,
+    "Flops": 6422528,
+    "Iterations": 14771,
+    "Name": "LAYER_CUDNN_POOLING_FWD_FLOAT32__BatchSize_8__11031391345291000699\u003cCUDNN_POOLING_MAX_DETERMINISTIC\u003e/input[0]:8/input[1]:256/input[2]:56/input[3]:56/filter_height:2/filter_width:2/pad_height:0/pad_width:0/stride_height:2/stride_width:2/batch_size:8/manual_time",
+    "RealTime": 47400,
+    "TimeUnit": "ns",
+    "filter_height": 2,
+    "filter_width": 2,
+    "horizontal_padding": 0,
+    "horizontal_stride": 2,
+    "input[0]": 8,
+    "input[1]": 256,
+    "input[2]": 56,
+    "input[3]": 56,
+    "input_batch_size": 8,
+    "input_channels": 256,
+    "input_height": 56,
+    "input_size": 6422528,
+    "input_width": 56,
+    "items_per_second": 135494535904.77507,
+    "output_batch_size": 8,
+    "output_channels": 256,
+    "output_height": 28,
+    "output_size": 1605632,
+    "output_width": 28,
+    "pad_height": 0,
+    "pad_width": 0,
+    "pooling_mode": 3,
+    "predicted_flops": 135494535904.77507,
+    "predicted_flops_count": 6422528,
+    "stride_height": 2,
+    "stride_width": 2,
+    "vertical_padding": 0,
+    "vertical_stride": 2,
+    "window_height": 2,
+    "window_width": 2
+  },
+  "flops_information": {
+    "multiply_adds": 0,
+    "additions": 0,
+    "divisions": 0,
+    "exponentiations": 0,
+    "comparisons": 6422528,
+    "general": 0
+  }
+},
+{
+  "layer": {
+    "auto_pad": "VALID",
+    "dilation": [
+      1,
+      1
+    ],
+    "group": 1,
+    "kernel_shape": [
+      3,
+      3
+    ],
+    "pads": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "strides": [
+      1,
+      1
+    ],
+    "name": "vgg0_conv7_fwd",
+    "operator_type": "Conv",
+    "onnx_operator_type": "Conv",
+    "input_names": [
+      "vgg0_pool2_fwd",
+      "vgg0_conv7_weight",
+      "vgg0_conv7_bias"
+    ],
+    "output_names": [
+      "vgg0_conv7_fwd"
+    ],
+    "input_shapes": [
+      [
+        8,
+        256,
+        28,
+        28
+      ],
+      [
+        512,
+        256,
+        3,
+        3
+      ],
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        8,
+        512,
+        28,
+        28
+      ]
+    ]
+  },
+  "benchmark": {
+    "CPUTime": 687783,
+    "Flops": -1,
+    "Iterations": 1025,
+    "Name": "LAYER_CUDNN_CONV_FWD_FLOAT32__BatchSize_8__5443265593537323245\u003cCUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD\u003e/input[0]:8/input[1]:256/input[2]:28/input[3]:28/filter_count:512/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/conv_fwd_type:1/conv_bwd_type:0/batch_size:8/manual_time",
+    "RealTime": 677528,
+    "TimeUnit": "ns",
+    "advised_convolution_algorithm": 6,
+    "advised_determinism": 1,
+    "advised_memory": 13109248,
+    "advised_time": 0.7147520184516907,
+    "conv_bwd_type": 0,
+    "conv_fwd_type": 1,
+    "convolution_algorithm": 6,
+    "dilation_height": 1,
+    "dilation_width": 1,
+    "filter_count": 512,
+    "filter_height": 3,
+    "filter_width": 3,
+    "group": 1,
+    "input[0]": 8,
+    "input[1]": 256,
+    "input[2]": 28,
+    "input[3]": 28,
+    "input_batch_size": 8,
+    "input_channels": 256,
+    "input_height": 28,
+    "input_size": 1605632,
+    "input_width": 28,
+    "items_per_second": 1213356728478.8064,
+    "math_type": 0,
+    "num_filters": 512,
+    "output_batch_size": 8,
+    "output_channels": 512,
+    "output_height": 28,
+    "output_size": 3211264,
+    "output_width": 28,
+    "pad_height": 1,
+    "pad_width": 1,
+    "predicted_advised_flops": -1475.9529956491701,
+    "predicted_advised_flops_count": -1,
+    "predicted_flops": -1475.9529956491701,
+    "predicted_flops_count": -1,
+    "stride_height": 1,
+    "stride_width": 1,
+    "workspace_bytes": 13109248,
+    "workspace_megabytes": 12.501953125
+  },
+  "flops_information": {
+    "multiply_adds": 7398752256,
+    "additions": 0,
+    "divisions": 0,
+    "exponentiations": 0,
+    "comparisons": 0,
+    "general": 0
+  }
+},
+{
+  "layer": {
+    "auto_pad": "VALID",
+    "dilation": [
+      1,
+      1
+    ],
+    "group": 1,
+    "kernel_shape": [
+      3,
+      3
+    ],
+    "pads": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "strides": [
+      1,
+      1
+    ],
+    "name": "vgg0_conv7_fwd",
+    "operator_type": "Conv",
+    "onnx_operator_type": "Conv",
+    "input_names": [
+      "vgg0_pool2_fwd",
+      "vgg0_conv7_weight",
+      "vgg0_conv7_bias"
+    ],
+    "output_names": [
+      "vgg0_conv7_fwd"
+    ],
+    "input_shapes": [
+      [
+        8,
+        256,
+        28,
+        28
+      ],
+      [
+        512,
+        256,
+        3,
+        3
+      ],
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        8,
+        512,
+        28,
+        28
+      ]
+    ]
+  },
+  "benchmark": {
+    "CPUTime": 37793,
+    "Flops": null,
+    "Iterations": 25040,
+    "Name": "LAYER_CUDNN_ADD_TENSOR_FLOAT32__BatchSize_8__6930883353338071198/input[0]:8/input[1]:256/input[2]:28/input[3]:28/filter_count:512/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/conv_fwd_type:2/conv_bwd_type:0/batch_size:8/manual_time",
+    "RealTime": 27982,
+    "TimeUnit": "ns",
+    "bias_dim": 512,
+    "conv_bwd_type": 0,
+    "conv_fwd_type": 2,
+    "dilation_height": 1,
+    "dilation_width": 1,
+    "filter_count": 512,
+    "filter_height": 3,
+    "filter_width": 3,
+    "input[0]": 8,
+    "input[1]": 256,
+    "input[2]": 28,
+    "input[3]": 28,
+    "input_batch_size": 8,
+    "input_channels": 256,
+    "input_height": 28,
+    "input_size": 1605632,
+    "input_width": 28,
+    "items_per_second": 57379044467.24032,
+    "num_filters": 512,
+    "output_batch_size": 8,
+    "output_channels": 512,
+    "output_height": 28,
+    "output_size": 3211264,
+    "output_width": 28,
+    "pad_height": 1,
+    "pad_width": 1,
+    "stride_height": 1,
+    "stride_width": 1
+  },
+  "flops_information": {
+    "multiply_adds": 7398752256,
+    "additions": 0,
+    "divisions": 0,
+    "exponentiations": 0,
+    "comparisons": 0,
+    "general": 0
+  }
+},
+{
+  "layer": {
+    "name": "vgg0_relu7_fwd",
+    "operator_type": "Relu",
+    "onnx_operator_type": "Relu",
+    "input_names": [
+      "vgg0_conv7_fwd"
+    ],
+    "output_names": [
+      "vgg0_relu7_fwd"
+    ],
+    "input_shapes": [
+      [
+        8,
+        512,
+        28,
+        28
+      ]
+    ],
+    "output_shapes": [
+      [
+        8,
+        512,
+        28,
+        28
+      ]
+    ]
+  },
+  "benchmark": {
+    "CPUTime": 50295,
+    "Flops": 3211264,
+    "Iterations": 17334,
+    "Name": "LAYER_CUDNN_ACTIVATION_FWD_FLOAT32__BatchSize_8__13952687925410928534\u003cCUDNN_ACTIVATION_CLIPPED_RELU\u003e/input[0]:8/input[1]:512/input[2]:28/input[3]:28/input[4]:-1/input[5]:-1/input[6]:-1/input[7]:-1/batch_size:8/manual_time",
+    "RealTime": 40412,
+    "TimeUnit": "ns",
+    "activation_mode": 3,
+    "input[0]": 8,
+    "input[1]": 512,
+    "input[2]": 28,
+    "input[3]": 28,
+    "input[4]": -1,
+    "input[5]": -1,
+    "input[6]": -1,
+    "input[7]": -1,
+    "input_batch_size": 8,
+    "input_channels": 512,
+    "input_height": 28,
+    "input_size": 3211264,
+    "input_width": 28,
+    "items_per_second": 79461457861.66913,
+    "output_batch_size": 8,
+    "output_channels": 512,
+    "output_height": 28,
+    "output_size": 3211264,
+    "output_width": 28,
+    "predicted_flops": 79461457861.66913,
+    "predicted_flops_count": 3211264
+  },
+  "flops_information": {
+    "multiply_adds": 3211264,
+    "additions": 0,
+    "divisions": 0,
+    "exponentiations": 0,
+    "comparisons": 3211264,
+    "general": 0
+  }
+},
+{
+  "layer": {
+    "auto_pad": "VALID",
+    "dilation": [
+      1,
+      1
+    ],
+    "group": 1,
+    "kernel_shape": [
+      3,
+      3
+    ],
+    "pads": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "strides": [
+      1,
+      1
+    ],
+    "name": "vgg0_conv8_fwd",
+    "operator_type": "Conv",
+    "onnx_operator_type": "Conv",
+    "input_names": [
+      "vgg0_relu7_fwd",
+      "vgg0_conv8_weight",
+      "vgg0_conv8_bias"
+    ],
+    "output_names": [
+      "vgg0_conv8_fwd"
+    ],
+    "input_shapes": [
+      [
+        8,
+        512,
+        28,
+        28
+      ],
+      [
+        512,
+        512,
+        3,
+        3
+      ],
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        8,
+        512,
+        28,
+        28
+      ]
+    ]
+  },
+  "benchmark": {
+    "CPUTime": 1335644,
+    "Flops": -1,
+    "Iterations": 515,
+    "Name": "LAYER_CUDNN_CONV_FWD_FLOAT32__BatchSize_8__6787617046775088307\u003cCUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD\u003e/input[0]:8/input[1]:512/input[2]:28/input[3]:28/filter_count:512/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/conv_fwd_type:1/conv_bwd_type:0/batch_size:8/manual_time",
+    "RealTime": 1325121,
+    "TimeUnit": "ns",
+    "advised_convolution_algorithm": 6,
+    "advised_determinism": 1,
+    "advised_memory": 26216448,
+    "advised_time": 1.371135950088501,
+    "conv_bwd_type": 0,
+    "conv_fwd_type": 1,
+    "convolution_algorithm": 6,
+    "dilation_height": 1,
+    "dilation_width": 1,
+    "filter_count": 512,
+    "filter_height": 3,
+    "filter_width": 3,
+    "group": 1,
+    "input[0]": 8,
+    "input[1]": 512,
+    "input[2]": 28,
+    "input[3]": 28,
+    "input_batch_size": 8,
+    "input_channels": 512,
+    "input_height": 28,
+    "input_size": 3211264,
+    "input_width": 28,
+    "items_per_second": 1240766987167.8218,
+    "math_type": 0,
+    "num_filters": 512,
+    "output_batch_size": 8,
+    "output_channels": 512,
+    "output_height": 28,
+    "output_size": 3211264,
+    "output_width": 28,
+    "pad_height": 1,
+    "pad_width": 1,
+    "predicted_advised_flops": -754.6477093792823,
+    "predicted_advised_flops_count": -1,
+    "predicted_flops": -754.6477093792823,
+    "predicted_flops_count": -1,
+    "stride_height": 1,
+    "stride_width": 1,
+    "workspace_bytes": 26216448,
+    "workspace_megabytes": 25.001953125
+  },
+  "flops_information": {
+    "multiply_adds": 14797504512,
+    "additions": 0,
+    "divisions": 0,
+    "exponentiations": 0,
+    "comparisons": 0,
+    "general": 0
+  }
+},
+{
+  "layer": {
+    "auto_pad": "VALID",
+    "dilation": [
+      1,
+      1
+    ],
+    "group": 1,
+    "kernel_shape": [
+      3,
+      3
+    ],
+    "pads": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "strides": [
+      1,
+      1
+    ],
+    "name": "vgg0_conv8_fwd",
+    "operator_type": "Conv",
+    "onnx_operator_type": "Conv",
+    "input_names": [
+      "vgg0_relu7_fwd",
+      "vgg0_conv8_weight",
+      "vgg0_conv8_bias"
+    ],
+    "output_names": [
+      "vgg0_conv8_fwd"
+    ],
+    "input_shapes": [
+      [
+        8,
+        512,
+        28,
+        28
+      ],
+      [
+        512,
+        512,
+        3,
+        3
+      ],
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        8,
+        512,
+        28,
+        28
+      ]
+    ]
+  },
+  "benchmark": {
+    "CPUTime": 37784,
+    "Flops": null,
+    "Iterations": 24948,
+    "Name": "LAYER_CUDNN_ADD_TENSOR_FLOAT32__BatchSize_8__8473339331307498688/input[0]:8/input[1]:512/input[2]:28/input[3]:28/filter_count:512/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/conv_fwd_type:2/conv_bwd_type:0/batch_size:8/manual_time",
+    "RealTime": 27972,
+    "TimeUnit": "ns",
+    "bias_dim": 512,
+    "conv_bwd_type": 0,
+    "conv_fwd_type": 2,
+    "dilation_height": 1,
+    "dilation_width": 1,
+    "filter_count": 512,
+    "filter_height": 3,
+    "filter_width": 3,
+    "input[0]": 8,
+    "input[1]": 512,
+    "input[2]": 28,
+    "input[3]": 28,
+    "input_batch_size": 8,
+    "input_channels": 512,
+    "input_height": 28,
+    "input_size": 3211264,
+    "input_width": 28,
+    "items_per_second": 114801787405.16571,
+    "num_filters": 512,
+    "output_batch_size": 8,
+    "output_channels": 512,
+    "output_height": 28,
+    "output_size": 3211264,
+    "output_width": 28,
+    "pad_height": 1,
+    "pad_width": 1,
+    "stride_height": 1,
+    "stride_width": 1
+  },
+  "flops_information": {
+    "multiply_adds": 14797504512,
+    "additions": 0,
+    "divisions": 0,
+    "exponentiations": 0,
+    "comparisons": 0,
+    "general": 0
+  }
+},
+{
+  "layer": {
+    "name": "vgg0_relu8_fwd",
+    "operator_type": "Relu",
+    "onnx_operator_type": "Relu",
+    "input_names": [
+      "vgg0_conv8_fwd"
+    ],
+    "output_names": [
+      "vgg0_relu8_fwd"
+    ],
+    "input_shapes": [
+      [
+        8,
+        512,
+        28,
+        28
+      ]
+    ],
+    "output_shapes": [
+      [
+        8,
+        512,
+        28,
+        28
+      ]
+    ]
+  },
+  "benchmark": {
+    "CPUTime": 50295,
+    "Flops": 3211264,
+    "Iterations": 17334,
+    "Name": "LAYER_CUDNN_ACTIVATION_FWD_FLOAT32__BatchSize_8__13952687925410928534\u003cCUDNN_ACTIVATION_CLIPPED_RELU\u003e/input[0]:8/input[1]:512/input[2]:28/input[3]:28/input[4]:-1/input[5]:-1/input[6]:-1/input[7]:-1/batch_size:8/manual_time",
+    "RealTime": 40412,
+    "TimeUnit": "ns",
+    "activation_mode": 3,
+    "input[0]": 8,
+    "input[1]": 512,
+    "input[2]": 28,
+    "input[3]": 28,
+    "input[4]": -1,
+    "input[5]": -1,
+    "input[6]": -1,
+    "input[7]": -1,
+    "input_batch_size": 8,
+    "input_channels": 512,
+    "input_height": 28,
+    "input_size": 3211264,
+    "input_width": 28,
+    "items_per_second": 79461457861.66913,
+    "output_batch_size": 8,
+    "output_channels": 512,
+    "output_height": 28,
+    "output_size": 3211264,
+    "output_width": 28,
+    "predicted_flops": 79461457861.66913,
+    "predicted_flops_count": 3211264
+  },
+  "flops_information": {
+    "multiply_adds": 3211264,
+    "additions": 0,
+    "divisions": 0,
+    "exponentiations": 0,
+    "comparisons": 3211264,
+    "general": 0
+  }
+},
+{
+  "layer": {
+    "auto_pad": "VALID",
+    "dilation": [
+      1,
+      1
+    ],
+    "group": 1,
+    "kernel_shape": [
+      3,
+      3
+    ],
+    "pads": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "strides": [
+      1,
+      1
+    ],
+    "name": "vgg0_conv9_fwd",
+    "operator_type": "Conv",
+    "onnx_operator_type": "Conv",
+    "input_names": [
+      "vgg0_relu8_fwd",
+      "vgg0_conv9_weight",
+      "vgg0_conv9_bias"
+    ],
+    "output_names": [
+      "vgg0_conv9_fwd"
+    ],
+    "input_shapes": [
+      [
+        8,
+        512,
+        28,
+        28
+      ],
+      [
+        512,
+        512,
+        3,
+        3
+      ],
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        8,
+        512,
+        28,
+        28
+      ]
+    ]
+  },
+  "benchmark": {
+    "CPUTime": 1335644,
+    "Flops": -1,
+    "Iterations": 515,
+    "Name": "LAYER_CUDNN_CONV_FWD_FLOAT32__BatchSize_8__6787617046775088307\u003cCUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD\u003e/input[0]:8/input[1]:512/input[2]:28/input[3]:28/filter_count:512/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/conv_fwd_type:1/conv_bwd_type:0/batch_size:8/manual_time",
+    "RealTime": 1325121,
+    "TimeUnit": "ns",
+    "advised_convolution_algorithm": 6,
+    "advised_determinism": 1,
+    "advised_memory": 26216448,
+    "advised_time": 1.371135950088501,
+    "conv_bwd_type": 0,
+    "conv_fwd_type": 1,
+    "convolution_algorithm": 6,
+    "dilation_height": 1,
+    "dilation_width": 1,
+    "filter_count": 512,
+    "filter_height": 3,
+    "filter_width": 3,
+    "group": 1,
+    "input[0]": 8,
+    "input[1]": 512,
+    "input[2]": 28,
+    "input[3]": 28,
+    "input_batch_size": 8,
+    "input_channels": 512,
+    "input_height": 28,
+    "input_size": 3211264,
+    "input_width": 28,
+    "items_per_second": 1240766987167.8218,
+    "math_type": 0,
+    "num_filters": 512,
+    "output_batch_size": 8,
+    "output_channels": 512,
+    "output_height": 28,
+    "output_size": 3211264,
+    "output_width": 28,
+    "pad_height": 1,
+    "pad_width": 1,
+    "predicted_advised_flops": -754.6477093792823,
+    "predicted_advised_flops_count": -1,
+    "predicted_flops": -754.6477093792823,
+    "predicted_flops_count": -1,
+    "stride_height": 1,
+    "stride_width": 1,
+    "workspace_bytes": 26216448,
+    "workspace_megabytes": 25.001953125
+  },
+  "flops_information": {
+    "multiply_adds": 14797504512,
+    "additions": 0,
+    "divisions": 0,
+    "exponentiations": 0,
+    "comparisons": 0,
+    "general": 0
+  }
+},
+{
+  "layer": {
+    "auto_pad": "VALID",
+    "dilation": [
+      1,
+      1
+    ],
+    "group": 1,
+    "kernel_shape": [
+      3,
+      3
+    ],
+    "pads": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "strides": [
+      1,
+      1
+    ],
+    "name": "vgg0_conv9_fwd",
+    "operator_type": "Conv",
+    "onnx_operator_type": "Conv",
+    "input_names": [
+      "vgg0_relu8_fwd",
+      "vgg0_conv9_weight",
+      "vgg0_conv9_bias"
+    ],
+    "output_names": [
+      "vgg0_conv9_fwd"
+    ],
+    "input_shapes": [
+      [
+        8,
+        512,
+        28,
+        28
+      ],
+      [
+        512,
+        512,
+        3,
+        3
+      ],
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        8,
+        512,
+        28,
+        28
+      ]
+    ]
+  },
+  "benchmark": {
+    "CPUTime": 37784,
+    "Flops": null,
+    "Iterations": 24948,
+    "Name": "LAYER_CUDNN_ADD_TENSOR_FLOAT32__BatchSize_8__8473339331307498688/input[0]:8/input[1]:512/input[2]:28/input[3]:28/filter_count:512/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/conv_fwd_type:2/conv_bwd_type:0/batch_size:8/manual_time",
+    "RealTime": 27972,
+    "TimeUnit": "ns",
+    "bias_dim": 512,
+    "conv_bwd_type": 0,
+    "conv_fwd_type": 2,
+    "dilation_height": 1,
+    "dilation_width": 1,
+    "filter_count": 512,
+    "filter_height": 3,
+    "filter_width": 3,
+    "input[0]": 8,
+    "input[1]": 512,
+    "input[2]": 28,
+    "input[3]": 28,
+    "input_batch_size": 8,
+    "input_channels": 512,
+    "input_height": 28,
+    "input_size": 3211264,
+    "input_width": 28,
+    "items_per_second": 114801787405.16571,
+    "num_filters": 512,
+    "output_batch_size": 8,
+    "output_channels": 512,
+    "output_height": 28,
+    "output_size": 3211264,
+    "output_width": 28,
+    "pad_height": 1,
+    "pad_width": 1,
+    "stride_height": 1,
+    "stride_width": 1
+  },
+  "flops_information": {
+    "multiply_adds": 14797504512,
+    "additions": 0,
+    "divisions": 0,
+    "exponentiations": 0,
+    "comparisons": 0,
+    "general": 0
+  }
+},
+{
+  "layer": {
+    "name": "vgg0_relu9_fwd",
+    "operator_type": "Relu",
+    "onnx_operator_type": "Relu",
+    "input_names": [
+      "vgg0_conv9_fwd"
+    ],
+    "output_names": [
+      "vgg0_relu9_fwd"
+    ],
+    "input_shapes": [
+      [
+        8,
+        512,
+        28,
+        28
+      ]
+    ],
+    "output_shapes": [
+      [
+        8,
+        512,
+        28,
+        28
+      ]
+    ]
+  },
+  "benchmark": {
+    "CPUTime": 50295,
+    "Flops": 3211264,
+    "Iterations": 17334,
+    "Name": "LAYER_CUDNN_ACTIVATION_FWD_FLOAT32__BatchSize_8__13952687925410928534\u003cCUDNN_ACTIVATION_CLIPPED_RELU\u003e/input[0]:8/input[1]:512/input[2]:28/input[3]:28/input[4]:-1/input[5]:-1/input[6]:-1/input[7]:-1/batch_size:8/manual_time",
+    "RealTime": 40412,
+    "TimeUnit": "ns",
+    "activation_mode": 3,
+    "input[0]": 8,
+    "input[1]": 512,
+    "input[2]": 28,
+    "input[3]": 28,
+    "input[4]": -1,
+    "input[5]": -1,
+    "input[6]": -1,
+    "input[7]": -1,
+    "input_batch_size": 8,
+    "input_channels": 512,
+    "input_height": 28,
+    "input_size": 3211264,
+    "input_width": 28,
+    "items_per_second": 79461457861.66913,
+    "output_batch_size": 8,
+    "output_channels": 512,
+    "output_height": 28,
+    "output_size": 3211264,
+    "output_width": 28,
+    "predicted_flops": 79461457861.66913,
+    "predicted_flops_count": 3211264
+  },
+  "flops_information": {
+    "multiply_adds": 3211264,
+    "additions": 0,
+    "divisions": 0,
+    "exponentiations": 0,
+    "comparisons": 3211264,
+    "general": 0
+  }
+},
+{
+  "layer": {
+    "kernel_shape": [
+      2,
+      2
+    ],
+    "pads": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "strides": [
+      2,
+      2
+    ],
+    "name": "vgg0_pool3_fwd",
+    "operator_type": "Pooling",
+    "onnx_operator_type": "MaxPool",
+    "input_names": [
+      "vgg0_relu9_fwd"
+    ],
+    "output_names": [
+      "vgg0_pool3_fwd"
+    ],
+    "input_shapes": [
+      [
+        8,
+        512,
+        28,
+        28
+      ]
+    ],
+    "output_shapes": [
+      [
+        8,
+        512,
+        14,
+        14
+      ]
+    ]
+  },
+  "benchmark": {
+    "CPUTime": 39238,
+    "Flops": 3211264,
+    "Iterations": 23816,
+    "Name": "LAYER_CUDNN_POOLING_FWD_FLOAT32__BatchSize_8__5074236947717706857\u003cCUDNN_POOLING_MAX_DETERMINISTIC\u003e/input[0]:8/input[1]:512/input[2]:28/input[3]:28/filter_height:2/filter_width:2/pad_height:0/pad_width:0/stride_height:2/stride_width:2/batch_size:8/manual_time",
+    "RealTime": 29400,
+    "TimeUnit": "ns",
+    "filter_height": 2,
+    "filter_width": 2,
+    "horizontal_padding": 0,
+    "horizontal_stride": 2,
+    "input[0]": 8,
+    "input[1]": 512,
+    "input[2]": 28,
+    "input[3]": 28,
+    "input_batch_size": 8,
+    "input_channels": 512,
+    "input_height": 28,
+    "input_size": 3211264,
+    "input_width": 28,
+    "items_per_second": 109223899187.19034,
+    "output_batch_size": 8,
+    "output_channels": 512,
+    "output_height": 14,
+    "output_size": 802816,
+    "output_width": 14,
+    "pad_height": 0,
+    "pad_width": 0,
+    "pooling_mode": 3,
+    "predicted_flops": 109223899187.19034,
+    "predicted_flops_count": 3211264,
+    "stride_height": 2,
+    "stride_width": 2,
+    "vertical_padding": 0,
+    "vertical_stride": 2,
+    "window_height": 2,
+    "window_width": 2
+  },
+  "flops_information": {
+    "multiply_adds": 0,
+    "additions": 0,
+    "divisions": 0,
+    "exponentiations": 0,
+    "comparisons": 3211264,
+    "general": 0
+  }
+},
+{
+  "layer": {
+    "auto_pad": "VALID",
+    "dilation": [
+      1,
+      1
+    ],
+    "group": 1,
+    "kernel_shape": [
+      3,
+      3
+    ],
+    "pads": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "strides": [
+      1,
+      1
+    ],
+    "name": "vgg0_conv10_fwd",
+    "operator_type": "Conv",
+    "onnx_operator_type": "Conv",
+    "input_names": [
+      "vgg0_pool3_fwd",
+      "vgg0_conv10_weight",
+      "vgg0_conv10_bias"
+    ],
+    "output_names": [
+      "vgg0_conv10_fwd"
+    ],
+    "input_shapes": [
+      [
+        8,
+        512,
+        14,
+        14
+      ],
+      [
+        512,
+        512,
+        3,
+        3
+      ],
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        8,
+        512,
+        14,
+        14
+      ]
+    ]
+  },
+  "benchmark": {
+    "CPUTime": 446519,
+    "Flops": -1,
+    "Iterations": 1610,
+    "Name": "LAYER_CUDNN_CONV_FWD_FLOAT32__BatchSize_8__6192756707660362447\u003cCUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD\u003e/input[0]:8/input[1]:512/input[2]:14/input[3]:14/filter_count:512/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/conv_fwd_type:1/conv_bwd_type:0/batch_size:8/manual_time",
+    "RealTime": 436324,
+    "TimeUnit": "ns",
+    "advised_convolution_algorithm": 6,
+    "advised_determinism": 1,
+    "advised_memory": 26216448,
+    "advised_time": 0.4700160026550293,
+    "conv_bwd_type": 0,
+    "conv_fwd_type": 1,
+    "convolution_algorithm": 6,
+    "dilation_height": 1,
+    "dilation_width": 1,
+    "filter_count": 512,
+    "filter_height": 3,
+    "filter_width": 3,
+    "group": 1,
+    "input[0]": 8,
+    "input[1]": 512,
+    "input[2]": 14,
+    "input[3]": 14,
+    "input_batch_size": 8,
+    "input_channels": 512,
+    "input_height": 14,
+    "input_size": 802816,
+    "input_width": 14,
+    "items_per_second": 942055271069.3967,
+    "math_type": 0,
+    "num_filters": 512,
+    "output_batch_size": 8,
+    "output_channels": 512,
+    "output_height": 14,
+    "output_size": 802816,
+    "output_width": 14,
+    "pad_height": 1,
+    "pad_width": 1,
+    "predicted_advised_flops": -2291.872236362274,
+    "predicted_advised_flops_count": -1,
+    "predicted_flops": -2291.872236362274,
+    "predicted_flops_count": -1,
+    "stride_height": 1,
+    "stride_width": 1,
+    "workspace_bytes": 26216448,
+    "workspace_megabytes": 25.001953125
+  },
+  "flops_information": {
+    "multiply_adds": 3699376128,
+    "additions": 0,
+    "divisions": 0,
+    "exponentiations": 0,
+    "comparisons": 0,
+    "general": 0
+  }
+},
+{
+  "layer": {
+    "auto_pad": "VALID",
+    "dilation": [
+      1,
+      1
+    ],
+    "group": 1,
+    "kernel_shape": [
+      3,
+      3
+    ],
+    "pads": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "strides": [
+      1,
+      1
+    ],
+    "name": "vgg0_conv10_fwd",
+    "operator_type": "Conv",
+    "onnx_operator_type": "Conv",
+    "input_names": [
+      "vgg0_pool3_fwd",
+      "vgg0_conv10_weight",
+      "vgg0_conv10_bias"
+    ],
+    "output_names": [
+      "vgg0_conv10_fwd"
+    ],
+    "input_shapes": [
+      [
+        8,
+        512,
+        14,
+        14
+      ],
+      [
+        512,
+        512,
+        3,
+        3
+      ],
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        8,
+        512,
+        14,
+        14
+      ]
+    ]
+  },
+  "benchmark": {
+    "CPUTime": 21790,
+    "Flops": null,
+    "Iterations": 56101,
+    "Name": "LAYER_CUDNN_ADD_TENSOR_FLOAT32__BatchSize_8__9102966639053560508/input[0]:8/input[1]:512/input[2]:14/input[3]:14/filter_count:512/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/conv_fwd_type:2/conv_bwd_type:0/batch_size:8/manual_time",
+    "RealTime": 12478,
+    "TimeUnit": "ns",
+    "bias_dim": 512,
+    "conv_bwd_type": 0,
+    "conv_fwd_type": 2,
+    "dilation_height": 1,
+    "dilation_width": 1,
+    "filter_count": 512,
+    "filter_height": 3,
+    "filter_width": 3,
+    "input[0]": 8,
+    "input[1]": 512,
+    "input[2]": 14,
+    "input[3]": 14,
+    "input_batch_size": 8,
+    "input_channels": 512,
+    "input_height": 14,
+    "input_size": 802816,
+    "input_width": 14,
+    "items_per_second": 64336784945.91051,
+    "num_filters": 512,
+    "output_batch_size": 8,
+    "output_channels": 512,
+    "output_height": 14,
+    "output_size": 802816,
+    "output_width": 14,
+    "pad_height": 1,
+    "pad_width": 1,
+    "stride_height": 1,
+    "stride_width": 1
+  },
+  "flops_information": {
+    "multiply_adds": 3699376128,
+    "additions": 0,
+    "divisions": 0,
+    "exponentiations": 0,
+    "comparisons": 0,
+    "general": 0
+  }
+},
+{
+  "layer": {
+    "name": "vgg0_relu10_fwd",
+    "operator_type": "Relu",
+    "onnx_operator_type": "Relu",
+    "input_names": [
+      "vgg0_conv10_fwd"
+    ],
+    "output_names": [
+      "vgg0_relu10_fwd"
+    ],
+    "input_shapes": [
+      [
+        8,
+        512,
+        14,
+        14
+      ]
+    ],
+    "output_shapes": [
+      [
+        8,
+        512,
+        14,
+        14
+      ]
+    ]
+  },
+  "benchmark": {
+    "CPUTime": 20667,
+    "Flops": 802816,
+    "Iterations": 63622,
+    "Name": "LAYER_CUDNN_ACTIVATION_FWD_FLOAT32__BatchSize_8__13358678634010433774\u003cCUDNN_ACTIVATION_RELU\u003e/input[0]:8/input[1]:512/input[2]:14/input[3]:14/input[4]:-1/input[5]:-1/input[6]:-1/input[7]:-1/batch_size:8/manual_time",
+    "RealTime": 10988,
+    "TimeUnit": "ns",
+    "activation_mode": 1,
+    "input[0]": 8,
+    "input[1]": 512,
+    "input[2]": 14,
+    "input[3]": 14,
+    "input[4]": -1,
+    "input[5]": -1,
+    "input[6]": -1,
+    "input[7]": -1,
+    "input_batch_size": 8,
+    "input_channels": 512,
+    "input_height": 14,
+    "input_size": 802816,
+    "input_width": 14,
+    "items_per_second": 73059540737.29645,
+    "output_batch_size": 8,
+    "output_channels": 512,
+    "output_height": 14,
+    "output_size": 802816,
+    "output_width": 14,
+    "predicted_flops": 73059540737.29645,
+    "predicted_flops_count": 802816
+  },
+  "flops_information": {
+    "multiply_adds": 802816,
+    "additions": 0,
+    "divisions": 0,
+    "exponentiations": 0,
+    "comparisons": 802816,
+    "general": 0
+  }
+},
+{
+  "layer": {
+    "auto_pad": "VALID",
+    "dilation": [
+      1,
+      1
+    ],
+    "group": 1,
+    "kernel_shape": [
+      3,
+      3
+    ],
+    "pads": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "strides": [
+      1,
+      1
+    ],
+    "name": "vgg0_conv11_fwd",
+    "operator_type": "Conv",
+    "onnx_operator_type": "Conv",
+    "input_names": [
+      "vgg0_relu10_fwd",
+      "vgg0_conv11_weight",
+      "vgg0_conv11_bias"
+    ],
+    "output_names": [
+      "vgg0_conv11_fwd"
+    ],
+    "input_shapes": [
+      [
+        8,
+        512,
+        14,
+        14
+      ],
+      [
+        512,
+        512,
+        3,
+        3
+      ],
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        8,
+        512,
+        14,
+        14
+      ]
+    ]
+  },
+  "benchmark": {
+    "CPUTime": 446519,
+    "Flops": -1,
+    "Iterations": 1610,
+    "Name": "LAYER_CUDNN_CONV_FWD_FLOAT32__BatchSize_8__6192756707660362447\u003cCUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD\u003e/input[0]:8/input[1]:512/input[2]:14/input[3]:14/filter_count:512/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/conv_fwd_type:1/conv_bwd_type:0/batch_size:8/manual_time",
+    "RealTime": 436324,
+    "TimeUnit": "ns",
+    "advised_convolution_algorithm": 6,
+    "advised_determinism": 1,
+    "advised_memory": 26216448,
+    "advised_time": 0.4700160026550293,
+    "conv_bwd_type": 0,
+    "conv_fwd_type": 1,
+    "convolution_algorithm": 6,
+    "dilation_height": 1,
+    "dilation_width": 1,
+    "filter_count": 512,
+    "filter_height": 3,
+    "filter_width": 3,
+    "group": 1,
+    "input[0]": 8,
+    "input[1]": 512,
+    "input[2]": 14,
+    "input[3]": 14,
+    "input_batch_size": 8,
+    "input_channels": 512,
+    "input_height": 14,
+    "input_size": 802816,
+    "input_width": 14,
+    "items_per_second": 942055271069.3967,
+    "math_type": 0,
+    "num_filters": 512,
+    "output_batch_size": 8,
+    "output_channels": 512,
+    "output_height": 14,
+    "output_size": 802816,
+    "output_width": 14,
+    "pad_height": 1,
+    "pad_width": 1,
+    "predicted_advised_flops": -2291.872236362274,
+    "predicted_advised_flops_count": -1,
+    "predicted_flops": -2291.872236362274,
+    "predicted_flops_count": -1,
+    "stride_height": 1,
+    "stride_width": 1,
+    "workspace_bytes": 26216448,
+    "workspace_megabytes": 25.001953125
+  },
+  "flops_information": {
+    "multiply_adds": 3699376128,
+    "additions": 0,
+    "divisions": 0,
+    "exponentiations": 0,
+    "comparisons": 0,
+    "general": 0
+  }
+},
+{
+  "layer": {
+    "auto_pad": "VALID",
+    "dilation": [
+      1,
+      1
+    ],
+    "group": 1,
+    "kernel_shape": [
+      3,
+      3
+    ],
+    "pads": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "strides": [
+      1,
+      1
+    ],
+    "name": "vgg0_conv11_fwd",
+    "operator_type": "Conv",
+    "onnx_operator_type": "Conv",
+    "input_names": [
+      "vgg0_relu10_fwd",
+      "vgg0_conv11_weight",
+      "vgg0_conv11_bias"
+    ],
+    "output_names": [
+      "vgg0_conv11_fwd"
+    ],
+    "input_shapes": [
+      [
+        8,
+        512,
+        14,
+        14
+      ],
+      [
+        512,
+        512,
+        3,
+        3
+      ],
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        8,
+        512,
+        14,
+        14
+      ]
+    ]
+  },
+  "benchmark": {
+    "CPUTime": 21790,
+    "Flops": null,
+    "Iterations": 56101,
+    "Name": "LAYER_CUDNN_ADD_TENSOR_FLOAT32__BatchSize_8__9102966639053560508/input[0]:8/input[1]:512/input[2]:14/input[3]:14/filter_count:512/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/conv_fwd_type:2/conv_bwd_type:0/batch_size:8/manual_time",
+    "RealTime": 12478,
+    "TimeUnit": "ns",
+    "bias_dim": 512,
+    "conv_bwd_type": 0,
+    "conv_fwd_type": 2,
+    "dilation_height": 1,
+    "dilation_width": 1,
+    "filter_count": 512,
+    "filter_height": 3,
+    "filter_width": 3,
+    "input[0]": 8,
+    "input[1]": 512,
+    "input[2]": 14,
+    "input[3]": 14,
+    "input_batch_size": 8,
+    "input_channels": 512,
+    "input_height": 14,
+    "input_size": 802816,
+    "input_width": 14,
+    "items_per_second": 64336784945.91051,
+    "num_filters": 512,
+    "output_batch_size": 8,
+    "output_channels": 512,
+    "output_height": 14,
+    "output_size": 802816,
+    "output_width": 14,
+    "pad_height": 1,
+    "pad_width": 1,
+    "stride_height": 1,
+    "stride_width": 1
+  },
+  "flops_information": {
+    "multiply_adds": 3699376128,
+    "additions": 0,
+    "divisions": 0,
+    "exponentiations": 0,
+    "comparisons": 0,
+    "general": 0
+  }
+},
+{
+  "layer": {
+    "name": "vgg0_relu11_fwd",
+    "operator_type": "Relu",
+    "onnx_operator_type": "Relu",
+    "input_names": [
+      "vgg0_conv11_fwd"
+    ],
+    "output_names": [
+      "vgg0_relu11_fwd"
+    ],
+    "input_shapes": [
+      [
+        8,
+        512,
+        14,
+        14
+      ]
+    ],
+    "output_shapes": [
+      [
+        8,
+        512,
+        14,
+        14
+      ]
+    ]
+  },
+  "benchmark": {
+    "CPUTime": 20667,
+    "Flops": 802816,
+    "Iterations": 63622,
+    "Name": "LAYER_CUDNN_ACTIVATION_FWD_FLOAT32__BatchSize_8__13358678634010433774\u003cCUDNN_ACTIVATION_RELU\u003e/input[0]:8/input[1]:512/input[2]:14/input[3]:14/input[4]:-1/input[5]:-1/input[6]:-1/input[7]:-1/batch_size:8/manual_time",
+    "RealTime": 10988,
+    "TimeUnit": "ns",
+    "activation_mode": 1,
+    "input[0]": 8,
+    "input[1]": 512,
+    "input[2]": 14,
+    "input[3]": 14,
+    "input[4]": -1,
+    "input[5]": -1,
+    "input[6]": -1,
+    "input[7]": -1,
+    "input_batch_size": 8,
+    "input_channels": 512,
+    "input_height": 14,
+    "input_size": 802816,
+    "input_width": 14,
+    "items_per_second": 73059540737.29645,
+    "output_batch_size": 8,
+    "output_channels": 512,
+    "output_height": 14,
+    "output_size": 802816,
+    "output_width": 14,
+    "predicted_flops": 73059540737.29645,
+    "predicted_flops_count": 802816
+  },
+  "flops_information": {
+    "multiply_adds": 802816,
+    "additions": 0,
+    "divisions": 0,
+    "exponentiations": 0,
+    "comparisons": 802816,
+    "general": 0
+  }
+},
+{
+  "layer": {
+    "auto_pad": "VALID",
+    "dilation": [
+      1,
+      1
+    ],
+    "group": 1,
+    "kernel_shape": [
+      3,
+      3
+    ],
+    "pads": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "strides": [
+      1,
+      1
+    ],
+    "name": "vgg0_conv12_fwd",
+    "operator_type": "Conv",
+    "onnx_operator_type": "Conv",
+    "input_names": [
+      "vgg0_relu11_fwd",
+      "vgg0_conv12_weight",
+      "vgg0_conv12_bias"
+    ],
+    "output_names": [
+      "vgg0_conv12_fwd"
+    ],
+    "input_shapes": [
+      [
+        8,
+        512,
+        14,
+        14
+      ],
+      [
+        512,
+        512,
+        3,
+        3
+      ],
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        8,
+        512,
+        14,
+        14
+      ]
+    ]
+  },
+  "benchmark": {
+    "CPUTime": 446519,
+    "Flops": -1,
+    "Iterations": 1610,
+    "Name": "LAYER_CUDNN_CONV_FWD_FLOAT32__BatchSize_8__6192756707660362447\u003cCUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD\u003e/input[0]:8/input[1]:512/input[2]:14/input[3]:14/filter_count:512/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/conv_fwd_type:1/conv_bwd_type:0/batch_size:8/manual_time",
+    "RealTime": 436324,
+    "TimeUnit": "ns",
+    "advised_convolution_algorithm": 6,
+    "advised_determinism": 1,
+    "advised_memory": 26216448,
+    "advised_time": 0.4700160026550293,
+    "conv_bwd_type": 0,
+    "conv_fwd_type": 1,
+    "convolution_algorithm": 6,
+    "dilation_height": 1,
+    "dilation_width": 1,
+    "filter_count": 512,
+    "filter_height": 3,
+    "filter_width": 3,
+    "group": 1,
+    "input[0]": 8,
+    "input[1]": 512,
+    "input[2]": 14,
+    "input[3]": 14,
+    "input_batch_size": 8,
+    "input_channels": 512,
+    "input_height": 14,
+    "input_size": 802816,
+    "input_width": 14,
+    "items_per_second": 942055271069.3967,
+    "math_type": 0,
+    "num_filters": 512,
+    "output_batch_size": 8,
+    "output_channels": 512,
+    "output_height": 14,
+    "output_size": 802816,
+    "output_width": 14,
+    "pad_height": 1,
+    "pad_width": 1,
+    "predicted_advised_flops": -2291.872236362274,
+    "predicted_advised_flops_count": -1,
+    "predicted_flops": -2291.872236362274,
+    "predicted_flops_count": -1,
+    "stride_height": 1,
+    "stride_width": 1,
+    "workspace_bytes": 26216448,
+    "workspace_megabytes": 25.001953125
+  },
+  "flops_information": {
+    "multiply_adds": 3699376128,
+    "additions": 0,
+    "divisions": 0,
+    "exponentiations": 0,
+    "comparisons": 0,
+    "general": 0
+  }
+},
+{
+  "layer": {
+    "auto_pad": "VALID",
+    "dilation": [
+      1,
+      1
+    ],
+    "group": 1,
+    "kernel_shape": [
+      3,
+      3
+    ],
+    "pads": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "strides": [
+      1,
+      1
+    ],
+    "name": "vgg0_conv12_fwd",
+    "operator_type": "Conv",
+    "onnx_operator_type": "Conv",
+    "input_names": [
+      "vgg0_relu11_fwd",
+      "vgg0_conv12_weight",
+      "vgg0_conv12_bias"
+    ],
+    "output_names": [
+      "vgg0_conv12_fwd"
+    ],
+    "input_shapes": [
+      [
+        8,
+        512,
+        14,
+        14
+      ],
+      [
+        512,
+        512,
+        3,
+        3
+      ],
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        8,
+        512,
+        14,
+        14
+      ]
+    ]
+  },
+  "benchmark": {
+    "CPUTime": 21790,
+    "Flops": null,
+    "Iterations": 56101,
+    "Name": "LAYER_CUDNN_ADD_TENSOR_FLOAT32__BatchSize_8__9102966639053560508/input[0]:8/input[1]:512/input[2]:14/input[3]:14/filter_count:512/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/conv_fwd_type:2/conv_bwd_type:0/batch_size:8/manual_time",
+    "RealTime": 12478,
+    "TimeUnit": "ns",
+    "bias_dim": 512,
+    "conv_bwd_type": 0,
+    "conv_fwd_type": 2,
+    "dilation_height": 1,
+    "dilation_width": 1,
+    "filter_count": 512,
+    "filter_height": 3,
+    "filter_width": 3,
+    "input[0]": 8,
+    "input[1]": 512,
+    "input[2]": 14,
+    "input[3]": 14,
+    "input_batch_size": 8,
+    "input_channels": 512,
+    "input_height": 14,
+    "input_size": 802816,
+    "input_width": 14,
+    "items_per_second": 64336784945.91051,
+    "num_filters": 512,
+    "output_batch_size": 8,
+    "output_channels": 512,
+    "output_height": 14,
+    "output_size": 802816,
+    "output_width": 14,
+    "pad_height": 1,
+    "pad_width": 1,
+    "stride_height": 1,
+    "stride_width": 1
+  },
+  "flops_information": {
+    "multiply_adds": 3699376128,
+    "additions": 0,
+    "divisions": 0,
+    "exponentiations": 0,
+    "comparisons": 0,
+    "general": 0
+  }
+},
+{
+  "layer": {
+    "name": "vgg0_relu12_fwd",
+    "operator_type": "Relu",
+    "onnx_operator_type": "Relu",
+    "input_names": [
+      "vgg0_conv12_fwd"
+    ],
+    "output_names": [
+      "vgg0_relu12_fwd"
+    ],
+    "input_shapes": [
+      [
+        8,
+        512,
+        14,
+        14
+      ]
+    ],
+    "output_shapes": [
+      [
+        8,
+        512,
+        14,
+        14
+      ]
+    ]
+  },
+  "benchmark": {
+    "CPUTime": 20667,
+    "Flops": 802816,
+    "Iterations": 63622,
+    "Name": "LAYER_CUDNN_ACTIVATION_FWD_FLOAT32__BatchSize_8__13358678634010433774\u003cCUDNN_ACTIVATION_RELU\u003e/input[0]:8/input[1]:512/input[2]:14/input[3]:14/input[4]:-1/input[5]:-1/input[6]:-1/input[7]:-1/batch_size:8/manual_time",
+    "RealTime": 10988,
+    "TimeUnit": "ns",
+    "activation_mode": 1,
+    "input[0]": 8,
+    "input[1]": 512,
+    "input[2]": 14,
+    "input[3]": 14,
+    "input[4]": -1,
+    "input[5]": -1,
+    "input[6]": -1,
+    "input[7]": -1,
+    "input_batch_size": 8,
+    "input_channels": 512,
+    "input_height": 14,
+    "input_size": 802816,
+    "input_width": 14,
+    "items_per_second": 73059540737.29645,
+    "output_batch_size": 8,
+    "output_channels": 512,
+    "output_height": 14,
+    "output_size": 802816,
+    "output_width": 14,
+    "predicted_flops": 73059540737.29645,
+    "predicted_flops_count": 802816
+  },
+  "flops_information": {
+    "multiply_adds": 802816,
+    "additions": 0,
+    "divisions": 0,
+    "exponentiations": 0,
+    "comparisons": 802816,
+    "general": 0
+  }
+},
+{
+  "layer": {
+    "kernel_shape": [
+      2,
+      2
+    ],
+    "pads": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "strides": [
+      2,
+      2
+    ],
+    "name": "vgg0_pool4_fwd",
+    "operator_type": "Pooling",
+    "onnx_operator_type": "MaxPool",
+    "input_names": [
+      "vgg0_relu12_fwd"
+    ],
+    "output_names": [
+      "vgg0_pool4_fwd"
+    ],
+    "input_shapes": [
+      [
+        8,
+        512,
+        14,
+        14
+      ]
+    ],
+    "output_shapes": [
+      [
+        8,
+        512,
+        7,
+        7
+      ]
+    ]
+  },
+  "benchmark": {
+    "CPUTime": 18231,
+    "Flops": 802816,
+    "Iterations": 78704,
+    "Name": "LAYER_CUDNN_POOLING_FWD_FLOAT32__BatchSize_8__5595772329805832725\u003cCUDNN_POOLING_MAX\u003e/input[0]:8/input[1]:512/input[2]:14/input[3]:14/filter_height:2/filter_width:2/pad_height:0/pad_width:0/stride_height:2/stride_width:2/batch_size:8/manual_time",
+    "RealTime": 8888,
+    "TimeUnit": "ns",
+    "filter_height": 2,
+    "filter_width": 2,
+    "horizontal_padding": 0,
+    "horizontal_stride": 2,
+    "input[0]": 8,
+    "input[1]": 512,
+    "input[2]": 14,
+    "input[3]": 14,
+    "input_batch_size": 8,
+    "input_channels": 512,
+    "input_height": 14,
+    "input_size": 802816,
+    "input_width": 14,
+    "items_per_second": 90317515626.35709,
+    "output_batch_size": 8,
+    "output_channels": 512,
+    "output_height": 7,
+    "output_size": 200704,
+    "output_width": 7,
+    "pad_height": 0,
+    "pad_width": 0,
+    "pooling_mode": 0,
+    "predicted_flops": 90317515626.35709,
+    "predicted_flops_count": 802816,
+    "stride_height": 2,
+    "stride_width": 2,
+    "vertical_padding": 0,
+    "vertical_stride": 2,
+    "window_height": 2,
+    "window_width": 2
+  },
+  "flops_information": {
+    "multiply_adds": 0,
+    "additions": 0,
+    "divisions": 0,
+    "exponentiations": 0,
+    "comparisons": 802816,
+    "general": 0
+  }
+},
+{
+  "layer": {
+    "alpha": 1,
+    "beta": 1,
+    "transb": 1,
+    "name": "vgg0_dense0_fwd",
+    "operator_type": "Gemm",
+    "onnx_operator_type": "Gemm",
+    "input_names": [
+      "flatten_60",
+      "vgg0_dense0_weight",
+      "vgg0_dense0_bias"
+    ],
+    "output_names": [
+      "vgg0_dense0_fwd"
+    ],
+    "input_shapes": [
+      [
+        8,
+        512,
+        7,
+        7
+      ],
+      [
+        4096,
+        25088
+      ],
+      [
+        4096
+      ]
+    ],
+    "output_shapes": [
+      [
+        8,
+        4096
+      ]
+    ]
+  },
+  "benchmark": {
+    "CPUTime": 75124,
+    "Flops": 33554432,
+    "Iterations": 10736,
+    "K": 512,
+    "M": 8,
+    "N": 4096,
+    "Name": "LAYER_CUBLAS_GEMM_FWD_FLOAT32__BatchSize_8__12171390929365517729/input[0]:8/input[1]:4096/input[2]:512/input[3]:0/input[4]:1/input[5]:1/input[6]:1/input[7]:-1/batch_size:8/manual_time",
+    "RealTime": 65291,
+    "TimeUnit": "ns",
+    "alpha": 1,
+    "beta": 1,
+    "input[0]": 8,
+    "input[1]": 4096,
+    "input[2]": 512,
+    "input[3]": 0,
+    "input[4]": 1,
+    "input[5]": 1,
+    "input[6]": 1,
+    "input[7]": -1,
+    "items_per_second": 256959878811.93857,
+    "lda": 8,
+    "ldb": 4096,
+    "predicted_flops": 513919757623.87714,
+    "predicted_flops_count": 33554432,
+    "transA": 0,
+    "transB": 1
+  },
+  "flops_information": {
+    "multiply_adds": 16777216,
+    "additions": 32768,
+    "divisions": 0,
+    "exponentiations": 0,
+    "comparisons": 0,
+    "general": 0
+  }
+},
+{
+  "layer": {
+    "name": "vgg0_dense0_relu_fwd",
+    "operator_type": "Relu",
+    "onnx_operator_type": "Relu",
+    "input_names": [
+      "vgg0_dense0_fwd"
+    ],
+    "output_names": [
+      "vgg0_dense0_relu_fwd"
+    ],
+    "input_shapes": [
+      [
+        8,
+        4096
+      ]
+    ],
+    "output_shapes": [
+      [
+        8,
+        4096
+      ]
+    ]
+  },
+  "benchmark": {
+    "CPUTime": 16444,
+    "Flops": 32768,
+    "Iterations": 98022,
+    "Name": "LAYER_CUDNN_ACTIVATION_FWD_FLOAT32__BatchSize_8__1165084478259635542\u003cCUDNN_ACTIVATION_CLIPPED_RELU\u003e/input[0]:8/input[1]:4096/input[2]:-1/input[3]:-1/input[4]:-1/input[5]:-1/input[6]:-1/input[7]:-1/batch_size:8/manual_time",
+    "RealTime": 7142,
+    "TimeUnit": "ns",
+    "activation_mode": 3,
+    "input[0]": 8,
+    "input[1]": 4096,
+    "input[2]": -1,
+    "input[3]": -1,
+    "input[4]": -1,
+    "input[5]": -1,
+    "input[6]": -1,
+    "input[7]": -1,
+    "input_batch_size": 8,
+    "input_channels": 4096,
+    "input_height": 1,
+    "input_size": 32768,
+    "input_width": 1,
+    "items_per_second": 4587957486.694495,
+    "output_batch_size": 8,
+    "output_channels": 4096,
+    "output_height": 1,
+    "output_size": 32768,
+    "output_width": 1,
+    "predicted_flops": 4587957486.694495,
+    "predicted_flops_count": 32768
+  },
+  "flops_information": {
+    "multiply_adds": 32768,
+    "additions": 0,
+    "divisions": 0,
+    "exponentiations": 0,
+    "comparisons": 32768,
+    "general": 0
+  }
+},
+{
+  "layer": {
+    "name": "vgg0_dropout0_fwd",
+    "operator_type": "Dropout",
+    "onnx_operator_type": "Dropout",
+    "input_names": [
+      "vgg0_dense0_relu_fwd"
+    ],
+    "output_names": [
+      "vgg0_dropout0_fwd"
+    ],
+    "input_shapes": [
+      [
+        8,
+        4096
+      ]
+    ],
+    "output_shapes": [
+      [
+        8,
+        4096
+      ]
+    ]
+  },
+  "benchmark": {
+    "CPUTime": 22304,
+    "Flops": 32768,
+    "Iterations": 54414,
+    "Name": "LAYER_CUDNN_DROPOUT_FWD_FLOAT32__BatchSize_8__14636460039493195140/input[0]:8/input[1]:4096/input[2]:-1/input[3]:-1/input[4]:-1/input[5]:-1/input[6]:-1/input[7]:-1/batch_size:8/manual_time",
+    "RealTime": 12833,
+    "TimeUnit": "ns",
+    "dropout": 0.5,
+    "input[0]": 8,
+    "input[1]": 4096,
+    "input[2]": -1,
+    "input[3]": -1,
+    "input[4]": -1,
+    "input[5]": -1,
+    "input[6]": -1,
+    "input[7]": -1,
+    "input_batch_size": 8,
+    "input_channels": 4096,
+    "input_height": 1,
+    "input_size": 32768,
+    "input_width": 1,
+    "items_per_second": 2553306772.2244124,
+    "output_batch_size": 8,
+    "output_channels": 4096,
+    "output_height": 1,
+    "output_size": 32768,
+    "output_width": 1,
+    "predicted_flops": 2553306772.2244124,
+    "predicted_flops_count": 32768
+  },
+  "flops_information": {
+    "multiply_adds": 0,
+    "additions": 0,
+    "divisions": 0,
+    "exponentiations": 0,
+    "comparisons": 32768,
+    "general": 0
+  }
+},
+{
+  "layer": {
+    "alpha": 1,
+    "beta": 1,
+    "transb": 1,
+    "name": "vgg0_dense1_fwd",
+    "operator_type": "Gemm",
+    "onnx_operator_type": "Gemm",
+    "input_names": [
+      "flatten_65",
+      "vgg0_dense1_weight",
+      "vgg0_dense1_bias"
+    ],
+    "output_names": [
+      "vgg0_dense1_fwd"
+    ],
+    "input_shapes": [
+      [
+        8,
+        4096
+      ],
+      [
+        4096,
+        4096
+      ],
+      [
+        4096
+      ]
+    ],
+    "output_shapes": [
+      [
+        8,
+        4096
+      ]
+    ]
+  },
+  "benchmark": {
+    "CPUTime": 322132,
+    "Flops": 268435456,
+    "Iterations": 2242,
+    "K": 4096,
+    "M": 8,
+    "N": 4096,
+    "Name": "LAYER_CUBLAS_GEMM_FWD_FLOAT32__BatchSize_8__13079116168267917823/input[0]:8/input[1]:4096/input[2]:4096/input[3]:0/input[4]:1/input[5]:1/input[6]:1/input[7]:-1/batch_size:8/manual_time",
+    "RealTime": 312212,
+    "TimeUnit": "ns",
+    "alpha": 1,
+    "beta": 1,
+    "input[0]": 8,
+    "input[1]": 4096,
+    "input[2]": 4096,
+    "input[3]": 0,
+    "input[4]": 1,
+    "input[5]": 1,
+    "input[6]": 1,
+    "input[7]": -1,
+    "items_per_second": 429892493678.86847,
+    "lda": 8,
+    "ldb": 4096,
+    "predicted_flops": 859784987357.7369,
+    "predicted_flops_count": 268435456,
+    "transA": 0,
+    "transB": 1
+  },
+  "flops_information": {
+    "multiply_adds": 134217728,
+    "additions": 32768,
+    "divisions": 0,
+    "exponentiations": 0,
+    "comparisons": 0,
+    "general": 0
+  }
+},
+{
+  "layer": {
+    "name": "vgg0_dense1_relu_fwd",
+    "operator_type": "Relu",
+    "onnx_operator_type": "Relu",
+    "input_names": [
+      "vgg0_dense1_fwd"
+    ],
+    "output_names": [
+      "vgg0_dense1_relu_fwd"
+    ],
+    "input_shapes": [
+      [
+        8,
+        4096
+      ]
+    ],
+    "output_shapes": [
+      [
+        8,
+        4096
+      ]
+    ]
+  },
+  "benchmark": {
+    "CPUTime": 16444,
+    "Flops": 32768,
+    "Iterations": 98022,
+    "Name": "LAYER_CUDNN_ACTIVATION_FWD_FLOAT32__BatchSize_8__1165084478259635542\u003cCUDNN_ACTIVATION_CLIPPED_RELU\u003e/input[0]:8/input[1]:4096/input[2]:-1/input[3]:-1/input[4]:-1/input[5]:-1/input[6]:-1/input[7]:-1/batch_size:8/manual_time",
+    "RealTime": 7142,
+    "TimeUnit": "ns",
+    "activation_mode": 3,
+    "input[0]": 8,
+    "input[1]": 4096,
+    "input[2]": -1,
+    "input[3]": -1,
+    "input[4]": -1,
+    "input[5]": -1,
+    "input[6]": -1,
+    "input[7]": -1,
+    "input_batch_size": 8,
+    "input_channels": 4096,
+    "input_height": 1,
+    "input_size": 32768,
+    "input_width": 1,
+    "items_per_second": 4587957486.694495,
+    "output_batch_size": 8,
+    "output_channels": 4096,
+    "output_height": 1,
+    "output_size": 32768,
+    "output_width": 1,
+    "predicted_flops": 4587957486.694495,
+    "predicted_flops_count": 32768
+  },
+  "flops_information": {
+    "multiply_adds": 32768,
+    "additions": 0,
+    "divisions": 0,
+    "exponentiations": 0,
+    "comparisons": 32768,
+    "general": 0
+  }
+},
+{
+  "layer": {
+    "name": "vgg0_dropout1_fwd",
+    "operator_type": "Dropout",
+    "onnx_operator_type": "Dropout",
+    "input_names": [
+      "vgg0_dense1_relu_fwd"
+    ],
+    "output_names": [
+      "vgg0_dropout1_fwd"
+    ],
+    "input_shapes": [
+      [
+        8,
+        4096
+      ]
+    ],
+    "output_shapes": [
+      [
+        8,
+        4096
+      ]
+    ]
+  },
+  "benchmark": {
+    "CPUTime": 22304,
+    "Flops": 32768,
+    "Iterations": 54414,
+    "Name": "LAYER_CUDNN_DROPOUT_FWD_FLOAT32__BatchSize_8__14636460039493195140/input[0]:8/input[1]:4096/input[2]:-1/input[3]:-1/input[4]:-1/input[5]:-1/input[6]:-1/input[7]:-1/batch_size:8/manual_time",
+    "RealTime": 12833,
+    "TimeUnit": "ns",
+    "dropout": 0.5,
+    "input[0]": 8,
+    "input[1]": 4096,
+    "input[2]": -1,
+    "input[3]": -1,
+    "input[4]": -1,
+    "input[5]": -1,
+    "input[6]": -1,
+    "input[7]": -1,
+    "input_batch_size": 8,
+    "input_channels": 4096,
+    "input_height": 1,
+    "input_size": 32768,
+    "input_width": 1,
+    "items_per_second": 2553306772.2244124,
+    "output_batch_size": 8,
+    "output_channels": 4096,
+    "output_height": 1,
+    "output_size": 32768,
+    "output_width": 1,
+    "predicted_flops": 2553306772.2244124,
+    "predicted_flops_count": 32768
+  },
+  "flops_information": {
+    "multiply_adds": 0,
+    "additions": 0,
+    "divisions": 0,
+    "exponentiations": 0,
+    "comparisons": 32768,
+    "general": 0
+  }
+},
+{
+  "layer": {
+    "alpha": 1,
+    "beta": 1,
+    "transb": 1,
+    "name": "vgg0_dense2_fwd",
+    "operator_type": "Gemm",
+    "onnx_operator_type": "Gemm",
+    "input_names": [
+      "flatten_70",
+      "vgg0_dense2_weight",
+      "vgg0_dense2_bias"
+    ],
+    "output_names": [
+      "vgg0_dense2_fwd"
+    ],
+    "input_shapes": [
+      [
+        8,
+        4096
+      ],
+      [
+        1000,
+        4096
+      ],
+      [
+        1000
+      ]
+    ],
+    "output_shapes": [
+      [
+        8,
+        1000
+      ]
+    ]
+  },
+  "benchmark": {
+    "CPUTime": 148474,
+    "Flops": 65536000,
+    "Iterations": 5061,
+    "K": 4096,
+    "M": 8,
+    "N": 1000,
+    "Name": "LAYER_CUBLAS_GEMM_FWD_FLOAT32__BatchSize_8__1844235861953239520/input[0]:8/input[1]:1000/input[2]:4096/input[3]:0/input[4]:1/input[5]:1/input[6]:1/input[7]:-1/batch_size:8/manual_time",
+    "RealTime": 138627,
+    "TimeUnit": "ns",
+    "alpha": 1,
+    "beta": 1,
+    "input[0]": 8,
+    "input[1]": 1000,
+    "input[2]": 4096,
+    "input[3]": 0,
+    "input[4]": 1,
+    "input[5]": 1,
+    "input[6]": 1,
+    "input[7]": -1,
+    "items_per_second": 236374519962.7169,
+    "lda": 8,
+    "ldb": 1000,
+    "predicted_flops": 472749039925.4338,
+    "predicted_flops_count": 65536000,
+    "transA": 0,
+    "transB": 1
+  },
+  "flops_information": {
+    "multiply_adds": 32768000,
+    "additions": 8000,
+    "divisions": 0,
+    "exponentiations": 0,
+    "comparisons": 0,
+    "general": 0
+  }
+},
+{
+  "layer": null,
+  "benchmark": {
+    "CPUTime": 0,
+    "Flops": null,
+    "Iterations": 0,
+    "Name": "Total",
+    "RealTime": 13459353,
+    "TimeUnit": ""
+  },
+  "flops_information": {
+    "multiply_adds": 245838299136,
+    "additions": 73536,
+    "divisions": 0,
+    "exponentiations": 0,
+    "comparisons": 157483008,
+    "general": 0
+  }
+}]

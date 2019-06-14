@@ -1,15 +1,15 @@
 package cmd
 
 import (
+	"fmt"
 	"os"
 	"path/filepath"
-	"strings"
+	"runtime/debug"
 
 	sourcepath "github.com/GeertJohan/go-sourcepath"
 	"github.com/Unknwon/com"
 	"github.com/alecthomas/repr"
 	"github.com/k0kubun/pp"
-	zglob "github.com/mattn/go-zglob"
 	"github.com/pkg/errors"
 	"github.com/rai-project/dlperf/pkg/onnx"
 	"github.com/spf13/cobra"
@@ -19,6 +19,7 @@ import (
 func runLayerStats(cmd *cobra.Command, args []string) error {
 	defer func() {
 		if r := recover(); r != nil {
+			fmt.Println(string(debug.Stack()))
 			pp.Println("[PANIC] while computing layer stats " + modelPath + " [error = " + repr.String(r) + "]")
 		}
 	}()
@@ -28,7 +29,7 @@ func runLayerStats(cmd *cobra.Command, args []string) error {
 		if !com.IsDir(baseOutputFileName) {
 			os.MkdirAll(baseOutputFileName, os.ModePerm)
 		}
-		modelPaths, err := zglob.Glob(filepath.Join(modelPath, "**", "*.onnx"))
+		modelPaths, err := getModelsIn(modelPath)
 		if err != nil {
 			return errors.Wrapf(err, "unable to glob %s", modelPath)
 		}
@@ -38,9 +39,6 @@ func runLayerStats(cmd *cobra.Command, args []string) error {
 			progress.Increment()
 			modelPath = path
 			modelName := getModelName(modelPath)
-			if strings.HasPrefix(modelName, ".") || strings.HasPrefix(filepath.Base(modelPath), ".") {
-				continue
-			}
 			outputFileName = filepath.Join(baseOutputFileName, modelName+"."+outputFormat)
 			if true {
 				pp.Println("processing " + modelName + " from " + modelPath + " to " + outputFileName)

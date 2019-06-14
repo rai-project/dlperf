@@ -420,4 +420,4 @@
 {"name":"mobilenetv20_output_pred_weight","type":"ConstantInput","input_dimensions":{"input_shapes":[[1000,1280,1,1]],"output_shapes":[[1000,1280,1,1]]}},
 {"name":"mobilenetv20_output_pred_fwd","type":"Conv","inputs":["mobilenetv20_features_pool0_fwd","mobilenetv20_output_pred_weight"],"outputs":["mobilenetv20_output_pred_fwd"],"input_dimensions":{"input_shapes":[[1,1280,1,1],[1000,1280,1,1]],"output_shapes":[[1,1000,1,1]]}},
 {"name":"reshape_attr_tensor421","type":"ConstantInput","input_dimensions":{"input_shapes":[[0,-1]],"output_shapes":[[0,-1]]}},
-{"name":"mobilenetv20_output_flatten0_reshape0","type":"Reshape","inputs":["mobilenetv20_output_pred_fwd","reshape_attr_tensor421"],"outputs":["mobilenetv20_output_flatten0_reshape0"],"input_dimensions":{"input_shapes":[[1,1000,1,1],[0,-1]],"output_shapes":[[0,-1]]}}]
+{"name":"mobilenetv20_output_flatten0_reshape0","type":"Reshape","inputs":["mobilenetv20_output_pred_fwd","reshape_attr_tensor421"],"outputs":["mobilenetv20_output_flatten0_reshape0"],"input_dimensions":{"input_shapes":[[1,1000,1,1],[0,-1]],"output_shapes":[[1,1000]]}}]

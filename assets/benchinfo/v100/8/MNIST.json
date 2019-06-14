@@ -1,0 +1,755 @@
+[{
+  "layer": {
+    "auto_pad": "SAME_UPPER",
+    "dilation": [
+      1,
+      1
+    ],
+    "group": 1,
+    "kernel_shape": [
+      5,
+      5
+    ],
+    "pads": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "strides": [
+      1,
+      1
+    ],
+    "name": "Convolution28",
+    "operator_type": "Conv",
+    "onnx_operator_type": "Conv",
+    "input_names": [
+      "Input3",
+      "Parameter5"
+    ],
+    "output_names": [
+      "Convolution28_Output_0"
+    ],
+    "input_shapes": [
+      [
+        8,
+        1,
+        28,
+        28
+      ],
+      [
+        8,
+        1,
+        5,
+        5
+      ]
+    ],
+    "output_shapes": [
+      [
+        8,
+        8,
+        28,
+        28
+      ]
+    ]
+  },
+  "benchmark": {
+    "CPUTime": 22708,
+    "Flops": 921600,
+    "Iterations": 53377,
+    "Name": "LAYER_CUDNN_CONV_FWD_FLOAT32__BatchSize_8__13946453589384498751\u003cCUDNN_CONVOLUTION_FWD_ALGO_IMPLICIT_GEMM\u003e/input[0]:8/input[1]:1/input[2]:28/input[3]:28/filter_count:8/filter_height:5/filter_width:5/pad_height:0/pad_width:0/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/conv_fwd_type:1/conv_bwd_type:0/batch_size:8/manual_time",
+    "RealTime": 13142,
+    "TimeUnit": "ns",
+    "advised_convolution_algorithm": 0,
+    "advised_determinism": 1,
+    "advised_memory": 0,
+    "advised_time": 0.020479999482631683,
+    "conv_bwd_type": 0,
+    "conv_fwd_type": 1,
+    "convolution_algorithm": 0,
+    "dilation_height": 1,
+    "dilation_width": 1,
+    "filter_count": 8,
+    "filter_height": 5,
+    "filter_width": 5,
+    "group": 1,
+    "input[0]": 8,
+    "input[1]": 1,
+    "input[2]": 28,
+    "input[3]": 28,
+    "input_batch_size": 8,
+    "input_channels": 1,
+    "input_height": 28,
+    "input_size": 6272,
+    "input_width": 28,
+    "items_per_second": 3817718257.528586,
+    "math_type": 0,
+    "num_filters": 8,
+    "output_batch_size": 8,
+    "output_channels": 8,
+    "output_height": 24,
+    "output_size": 36864,
+    "output_width": 24,
+    "pad_height": 0,
+    "pad_width": 0,
+    "predicted_advised_flops": 70121355750.52505,
+    "predicted_advised_flops_count": 921600,
+    "predicted_flops": 70121355750.52505,
+    "predicted_flops_count": 921600,
+    "stride_height": 1,
+    "stride_width": 1,
+    "workspace_bytes": 0,
+    "workspace_megabytes": 0
+  },
+  "flops_information": {
+    "multiply_adds": 1254400,
+    "additions": 0,
+    "divisions": 0,
+    "exponentiations": 0,
+    "comparisons": 0,
+    "general": 0
+  }
+},
+{
+  "layer": {
+    "name": "Plus30",
+    "operator_type": "ElementWise",
+    "onnx_operator_type": "Add",
+    "input_names": [
+      "Convolution28_Output_0",
+      "Parameter6"
+    ],
+    "output_names": [
+      "Plus30_Output_0"
+    ],
+    "input_shapes": [
+      [
+        8,
+        8,
+        28,
+        28
+      ],
+      [
+        8,
+        1,
+        1
+      ]
+    ],
+    "output_shapes": [
+      [
+        8,
+        8,
+        28,
+        28
+      ]
+    ]
+  },
+  "benchmark": {
+    "CPUTime": 17042,
+    "Flops": null,
+    "Iterations": 92090,
+    "Name": "LAYER_CUDNN_OP_TENSOR_ADD_FWD_FLOAT32__BatchSize_8__9386201358171253770/input[0]:8/input[1]:8/input[2]:28/input[3]:28/input[4]:-1/input[5]:-1/input[6]:-1/input[7]:-1/batch_size:8/manual_time",
+    "RealTime": 7583,
+    "TimeUnit": "ns",
+    "alpha": 1,
+    "beta": 0,
+    "input[0]": 8,
+    "input[1]": 8,
+    "input[2]": 28,
+    "input[3]": 28,
+    "input[4]": -1,
+    "input[5]": -1,
+    "input[6]": -1,
+    "input[7]": -1,
+    "input_c": 8,
+    "input_h": 28,
+    "input_n": 8,
+    "input_size": 50176,
+    "input_w": 28,
+    "items_per_second": 6616746802.704237,
+    "op_type": 0
+  },
+  "flops_information": {
+    "multiply_adds": 0,
+    "additions": 50176,
+    "divisions": 0,
+    "exponentiations": 0,
+    "comparisons": 0,
+    "general": 0
+  }
+},
+{
+  "layer": {
+    "name": "ReLU32",
+    "operator_type": "Relu",
+    "onnx_operator_type": "Relu",
+    "input_names": [
+      "Plus30_Output_0"
+    ],
+    "output_names": [
+      "ReLU32_Output_0"
+    ],
+    "input_shapes": [
+      [
+        8,
+        8,
+        28,
+        28
+      ]
+    ],
+    "output_shapes": [
+      [
+        8,
+        8,
+        28,
+        28
+      ]
+    ]
+  },
+  "benchmark": {
+    "CPUTime": 16634,
+    "Flops": 50176,
+    "Iterations": 96719,
+    "Name": "LAYER_CUDNN_ACTIVATION_FWD_FLOAT32__BatchSize_8__17569505880347722081\u003cCUDNN_ACTIVATION_CLIPPED_RELU\u003e/input[0]:8/input[1]:8/input[2]:28/input[3]:28/input[4]:-1/input[5]:-1/input[6]:-1/input[7]:-1/batch_size:8/manual_time",
+    "RealTime": 7207,
+    "TimeUnit": "ns",
+    "activation_mode": 3,
+    "input[0]": 8,
+    "input[1]": 8,
+    "input[2]": 28,
+    "input[3]": 28,
+    "input[4]": -1,
+    "input[5]": -1,
+    "input[6]": -1,
+    "input[7]": -1,
+    "input_batch_size": 8,
+    "input_channels": 8,
+    "input_height": 28,
+    "input_size": 50176,
+    "input_width": 28,
+    "items_per_second": 6961512932.022896,
+    "output_batch_size": 8,
+    "output_channels": 8,
+    "output_height": 28,
+    "output_size": 50176,
+    "output_width": 28,
+    "predicted_flops": 6961512932.022896,
+    "predicted_flops_count": 50176
+  },
+  "flops_information": {
+    "multiply_adds": 50176,
+    "additions": 0,
+    "divisions": 0,
+    "exponentiations": 0,
+    "comparisons": 50176,
+    "general": 0
+  }
+},
+{
+  "layer": {
+    "kernel_shape": [
+      2,
+      2
+    ],
+    "pads": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "strides": [
+      2,
+      2
+    ],
+    "name": "Pooling66",
+    "operator_type": "Pooling",
+    "onnx_operator_type": "MaxPool",
+    "input_names": [
+      "ReLU32_Output_0"
+    ],
+    "output_names": [
+      "Pooling66_Output_0"
+    ],
+    "input_shapes": [
+      [
+        8,
+        8,
+        28,
+        28
+      ]
+    ],
+    "output_shapes": [
+      [
+        8,
+        8,
+        14,
+        14
+      ]
+    ]
+  },
+  "benchmark": {
+    "CPUTime": 16130,
+    "Flops": 50176,
+    "Iterations": 108282,
+    "Name": "LAYER_CUDNN_POOLING_FWD_FLOAT32__BatchSize_8__16917048488370273554\u003cCUDNN_POOLING_MAX\u003e/input[0]:8/input[1]:8/input[2]:28/input[3]:28/filter_height:2/filter_width:2/pad_height:0/pad_width:0/stride_height:2/stride_width:2/batch_size:8/manual_time",
+    "RealTime": 6439,
+    "TimeUnit": "ns",
+    "filter_height": 2,
+    "filter_width": 2,
+    "horizontal_padding": 0,
+    "horizontal_stride": 2,
+    "input[0]": 8,
+    "input[1]": 8,
+    "input[2]": 28,
+    "input[3]": 28,
+    "input_batch_size": 8,
+    "input_channels": 8,
+    "input_height": 28,
+    "input_size": 50176,
+    "input_width": 28,
+    "items_per_second": 7791730639.756949,
+    "output_batch_size": 8,
+    "output_channels": 8,
+    "output_height": 14,
+    "output_size": 12544,
+    "output_width": 14,
+    "pad_height": 0,
+    "pad_width": 0,
+    "pooling_mode": 0,
+    "predicted_flops": 7791730639.756949,
+    "predicted_flops_count": 50176,
+    "stride_height": 2,
+    "stride_width": 2,
+    "vertical_padding": 0,
+    "vertical_stride": 2,
+    "window_height": 2,
+    "window_width": 2
+  },
+  "flops_information": {
+    "multiply_adds": 0,
+    "additions": 0,
+    "divisions": 0,
+    "exponentiations": 0,
+    "comparisons": 50176,
+    "general": 0
+  }
+},
+{
+  "layer": {
+    "auto_pad": "SAME_UPPER",
+    "dilation": [
+      1,
+      1
+    ],
+    "group": 1,
+    "kernel_shape": [
+      5,
+      5
+    ],
+    "pads": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "strides": [
+      1,
+      1
+    ],
+    "name": "Convolution110",
+    "operator_type": "Conv",
+    "onnx_operator_type": "Conv",
+    "input_names": [
+      "Pooling66_Output_0",
+      "Parameter87"
+    ],
+    "output_names": [
+      "Convolution110_Output_0"
+    ],
+    "input_shapes": [
+      [
+        8,
+        8,
+        14,
+        14
+      ],
+      [
+        16,
+        8,
+        5,
+        5
+      ]
+    ],
+    "output_shapes": [
+      [
+        8,
+        16,
+        14,
+        14
+      ]
+    ]
+  },
+  "benchmark": {
+    "CPUTime": 30749,
+    "Flops": 2560000,
+    "Iterations": 33872,
+    "Name": "LAYER_CUDNN_CONV_FWD_FLOAT32__BatchSize_8__8127672266342740887\u003cCUDNN_CONVOLUTION_FWD_ALGO_IMPLICIT_GEMM\u003e/input[0]:8/input[1]:8/input[2]:14/input[3]:14/filter_count:16/filter_height:5/filter_width:5/pad_height:0/pad_width:0/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/conv_fwd_type:1/conv_bwd_type:0/batch_size:8/manual_time",
+    "RealTime": 20713,
+    "TimeUnit": "ns",
+    "advised_convolution_algorithm": 4,
+    "advised_determinism": 1,
+    "advised_memory": 0,
+    "advised_time": 0.028672000393271446,
+    "conv_bwd_type": 0,
+    "conv_fwd_type": 1,
+    "convolution_algorithm": 0,
+    "dilation_height": 1,
+    "dilation_width": 1,
+    "filter_count": 16,
+    "filter_height": 5,
+    "filter_width": 5,
+    "group": 1,
+    "input[0]": 8,
+    "input[1]": 8,
+    "input[2]": 14,
+    "input[3]": 14,
+    "input_batch_size": 8,
+    "input_channels": 8,
+    "input_height": 14,
+    "input_size": 12544,
+    "input_width": 14,
+    "items_per_second": 9689451850.59681,
+    "math_type": 0,
+    "num_filters": 16,
+    "output_batch_size": 8,
+    "output_channels": 16,
+    "output_height": 10,
+    "output_size": 12800,
+    "output_width": 10,
+    "pad_height": 0,
+    "pad_width": 0,
+    "predicted_advised_flops": 32746440722.728012,
+    "predicted_advised_flops_count": 678298.6014229059,
+    "predicted_flops": 123589947073.93889,
+    "predicted_flops_count": 2560000,
+    "stride_height": 1,
+    "stride_width": 1,
+    "workspace_bytes": 0,
+    "workspace_megabytes": 0
+  },
+  "flops_information": {
+    "multiply_adds": 5017600,
+    "additions": 0,
+    "divisions": 0,
+    "exponentiations": 0,
+    "comparisons": 0,
+    "general": 0
+  }
+},
+{
+  "layer": {
+    "name": "Plus112",
+    "operator_type": "ElementWise",
+    "onnx_operator_type": "Add",
+    "input_names": [
+      "Convolution110_Output_0",
+      "Parameter88"
+    ],
+    "output_names": [
+      "Plus112_Output_0"
+    ],
+    "input_shapes": [
+      [
+        8,
+        16,
+        14,
+        14
+      ],
+      [
+        16,
+        1,
+        1
+      ]
+    ],
+    "output_shapes": [
+      [
+        8,
+        16,
+        14,
+        14
+      ]
+    ]
+  },
+  "benchmark": {
+    "CPUTime": 17071,
+    "Flops": null,
+    "Iterations": 92778,
+    "Name": "LAYER_CUDNN_OP_TENSOR_ADD_FWD_FLOAT32__BatchSize_8__5221178606736482534/input[0]:8/input[1]:16/input[2]:14/input[3]:14/input[4]:-1/input[5]:-1/input[6]:-1/input[7]:-1/batch_size:8/manual_time",
+    "RealTime": 7551,
+    "TimeUnit": "ns",
+    "alpha": 1,
+    "beta": 0,
+    "input[0]": 8,
+    "input[1]": 16,
+    "input[2]": 14,
+    "input[3]": 14,
+    "input[4]": -1,
+    "input[5]": -1,
+    "input[6]": -1,
+    "input[7]": -1,
+    "input_c": 16,
+    "input_h": 14,
+    "input_n": 8,
+    "input_size": 25088,
+    "input_w": 14,
+    "items_per_second": 3322215056.468094,
+    "op_type": 0
+  },
+  "flops_information": {
+    "multiply_adds": 0,
+    "additions": 25088,
+    "divisions": 0,
+    "exponentiations": 0,
+    "comparisons": 0,
+    "general": 0
+  }
+},
+{
+  "layer": {
+    "name": "ReLU114",
+    "operator_type": "Relu",
+    "onnx_operator_type": "Relu",
+    "input_names": [
+      "Plus112_Output_0"
+    ],
+    "output_names": [
+      "ReLU114_Output_0"
+    ],
+    "input_shapes": [
+      [
+        8,
+        16,
+        14,
+        14
+      ]
+    ],
+    "output_shapes": [
+      [
+        8,
+        16,
+        14,
+        14
+      ]
+    ]
+  },
+  "benchmark": {
+    "CPUTime": 16465,
+    "Flops": 25088,
+    "Iterations": 96953,
+    "Name": "LAYER_CUDNN_ACTIVATION_FWD_FLOAT32__BatchSize_8__4171541218224819597\u003cCUDNN_ACTIVATION_CLIPPED_RELU\u003e/input[0]:8/input[1]:16/input[2]:14/input[3]:14/input[4]:-1/input[5]:-1/input[6]:-1/input[7]:-1/batch_size:8/manual_time",
+    "RealTime": 7165,
+    "TimeUnit": "ns",
+    "activation_mode": 3,
+    "input[0]": 8,
+    "input[1]": 16,
+    "input[2]": 14,
+    "input[3]": 14,
+    "input[4]": -1,
+    "input[5]": -1,
+    "input[6]": -1,
+    "input[7]": -1,
+    "input_batch_size": 8,
+    "input_channels": 16,
+    "input_height": 14,
+    "input_size": 25088,
+    "input_width": 14,
+    "items_per_second": 3501011036.043576,
+    "output_batch_size": 8,
+    "output_channels": 16,
+    "output_height": 14,
+    "output_size": 25088,
+    "output_width": 14,
+    "predicted_flops": 3501011036.043576,
+    "predicted_flops_count": 25088
+  },
+  "flops_information": {
+    "multiply_adds": 25088,
+    "additions": 0,
+    "divisions": 0,
+    "exponentiations": 0,
+    "comparisons": 25088,
+    "general": 0
+  }
+},
+{
+  "layer": {
+    "kernel_shape": [
+      3,
+      3
+    ],
+    "pads": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "strides": [
+      3,
+      3
+    ],
+    "name": "Pooling160",
+    "operator_type": "Pooling",
+    "onnx_operator_type": "MaxPool",
+    "input_names": [
+      "ReLU114_Output_0"
+    ],
+    "output_names": [
+      "Pooling160_Output_0"
+    ],
+    "input_shapes": [
+      [
+        8,
+        16,
+        14,
+        14
+      ]
+    ],
+    "output_shapes": [
+      [
+        8,
+        16,
+        4,
+        4
+      ]
+    ]
+  },
+  "benchmark": {
+    "CPUTime": 16285,
+    "Flops": 25088,
+    "Iterations": 104210,
+    "Name": "LAYER_CUDNN_POOLING_FWD_FLOAT32__BatchSize_8__4134183325967481422\u003cCUDNN_POOLING_MAX\u003e/input[0]:8/input[1]:16/input[2]:14/input[3]:14/filter_height:3/filter_width:3/pad_height:0/pad_width:0/stride_height:3/stride_width:3/batch_size:8/manual_time",
+    "RealTime": 6687,
+    "TimeUnit": "ns",
+    "filter_height": 3,
+    "filter_width": 3,
+    "horizontal_padding": 0,
+    "horizontal_stride": 3,
+    "input[0]": 8,
+    "input[1]": 16,
+    "input[2]": 14,
+    "input[3]": 14,
+    "input_batch_size": 8,
+    "input_channels": 16,
+    "input_height": 14,
+    "input_size": 25088,
+    "input_width": 14,
+    "items_per_second": 3751551984.493455,
+    "output_batch_size": 8,
+    "output_channels": 16,
+    "output_height": 4,
+    "output_size": 2048,
+    "output_width": 4,
+    "pad_height": 0,
+    "pad_width": 0,
+    "pooling_mode": 0,
+    "predicted_flops": 3751551984.493455,
+    "predicted_flops_count": 25088,
+    "stride_height": 3,
+    "stride_width": 3,
+    "vertical_padding": 0,
+    "vertical_stride": 3,
+    "window_height": 3,
+    "window_width": 3
+  },
+  "flops_information": {
+    "multiply_adds": 0,
+    "additions": 0,
+    "divisions": 0,
+    "exponentiations": 0,
+    "comparisons": 18432,
+    "general": 0
+  }
+},
+{
+  "layer": {
+    "alpha": 1,
+    "name": "Times212",
+    "operator_type": "Gemm",
+    "onnx_operator_type": "MatMul",
+    "input_names": [
+      "Pooling160_Output_0_reshape0",
+      "Parameter193_reshape1"
+    ],
+    "output_names": [
+      "Times212_Output_0"
+    ],
+    "input_shapes": [
+      [
+        1,
+        256
+      ],
+      [
+        256,
+        10
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        10
+      ]
+    ]
+  },
+  "benchmark": {
+    "CPUTime": 15364,
+    "Flops": 2560,
+    "Iterations": 120359,
+    "K": 256,
+    "M": 10,
+    "Name": "LAYER_CUBLAS_GEMV_FWD_FLOAT32__BatchSize_8__9156200191295290746/input[0]:10/input[1]:256/input[2]:0/input[3]:1/input[4]:0/input[5]:-1/input[6]:0/input[7]:0/batch_size:8/manual_time",
+    "RealTime": 5834,
+    "TimeUnit": "ns",
+    "alpha": 1,
+    "beta": 0,
+    "input[0]": 10,
+    "input[1]": 256,
+    "input[2]": 0,
+    "input[3]": 1,
+    "input[4]": 0,
+    "input[5]": -1,
+    "input[6]": 0,
+    "input[7]": 0,
+    "items_per_second": 438748889.87250364,
+    "lda": 10,
+    "predicted_flops": 438748889.87250364,
+    "predicted_flops_count": 2560,
+    "transA": 0
+  },
+  "flops_information": {
+    "multiply_adds": 2560,
+    "additions": 10,
+    "divisions": 0,
+    "exponentiations": 0,
+    "comparisons": 0,
+    "general": 0
+  }
+},
+{
+  "layer": null,
+  "benchmark": {
+    "CPUTime": 0,
+    "Flops": null,
+    "Iterations": 0,
+    "Name": "Total",
+    "RealTime": 82321,
+    "TimeUnit": ""
+  },
+  "flops_information": {
+    "multiply_adds": 6349824,
+    "additions": 75274,
+    "divisions": 0,
+    "exponentiations": 0,
+    "comparisons": 143872,
+    "general": 0
+  }
+}]

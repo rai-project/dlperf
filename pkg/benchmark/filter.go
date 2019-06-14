@@ -78,10 +78,11 @@ next:
 				continue next
 			}
 
-			if k == "conv_bwd_type" {
+			if k == "conv_bwd_type" || k == "conv_fwd_type" {
 				filterVal = int(reflect.ValueOf(filterVal).Int())
 				val = cast.ToInt(val)
 			}
+
 			if !isSameScalar(filterVal, val) {
 				continue next
 			}
