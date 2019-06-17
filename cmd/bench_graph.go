@@ -5,7 +5,6 @@ import (
 	"math"
 	"time"
 
-	"github.com/k0kubun/pp"
 	"github.com/muesli/gamut"
 	"github.com/rai-project/dlperf/pkg/onnx"
 	"gonum.org/v1/gonum/graph/encoding"
@@ -109,7 +108,6 @@ func makeBenchmarkGraph(model *onnx.Onnx, nds []benchmarkGraphNode) *benchmarkGr
 			for _, outputNode := range nd.GetOutput() {
 				inId, ok := graphIds[inputNode]
 				if !ok {
-					pp.Println(nd)
 					continue
 				}
 				outId, ok := graphIds[outputNode]
