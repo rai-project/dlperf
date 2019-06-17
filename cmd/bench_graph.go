@@ -5,6 +5,7 @@ import (
 	"math"
 	"time"
 
+	"github.com/getlantern/deepcopy"
 	"github.com/k0kubun/pp"
 	"github.com/muesli/gamut"
 	"github.com/rai-project/dlperf/pkg/onnx"
@@ -84,15 +85,17 @@ func (b benchmarkGraphNode) forwardRuntime() time.Duration {
 	return accum
 }
 
-func makeBenchmarkGraph(model *onnx.Onnx, nds []benchmarkGraphNode) *benchmarkGraph {
+func makeBenchmarkGraph(model0 *onnx.Onnx, nds []benchmarkGraphNode, timeTransformFunction func(time.Duration) float64) *benchmarkGraph {
+	model := &onnx.Onnx{}
 	graphIds := map[string]int64{}
+
+	deepcopy.Copy(&model, model0)
 
 	colors := mkColors(nds)
 	grph := simple.NewWeightedDirectedGraph(0, math.Inf(1))
 	onnxGrph := model.ToGraph()
-	ndIter := onnxGrph.Nodes()
-	for ndIter.Next() {
-		onnxNode, ok := ndIter.Node().(*onnx.GraphNode)
+	for _, nd := range graph.NodesOf(onnxGrph.Nodes()) {
+		onnxNode, ok := nd.(*onnx.GraphNode)
 		if !ok {
 			pp.Println(onnxNode)
 			panic("invalid node. expecting an onnx node")
@@ -102,25 +105,31 @@ func makeBenchmarkGraph(model *onnx.Onnx, nds []benchmarkGraphNode) *benchmarkGr
 	}
 
 	getWeight := func(grNode graph.Node) float64 {
-		onnxNode, ok := grNode.(*onnx.GraphNode)
+		onnxNode0, ok := grNode.(*onnx.GraphNode)
 		if !ok {
 			pp.Println(grNode)
 			panic(grNode)
 		}
+		onnxNode := new(onnx.GraphNode)
+		deepcopy.Copy(&onnxNode, onnxNode0)
 		for _, nd := range nds {
 			if nd.Name == onnxNode.Name {
 				t := nd.forwardRuntime()
 				onnxNode.SetRuntime(nd.forwardRuntime())
-				return toMicroSeconds(t)
+				return timeTransformFunction(t)
 			}
 		}
 		return math.Inf(1)
 	}
 
-	edgeIter := onnxGrph.Edges()
-	for edgeIter.Next() {
-		onnxEdge := edgeIter.Edge()
+	for _, edge := range graph.EdgesOf(onnxGrph.Edges()) {
+		onnxEdge := edge
 		weight := getWeight(onnxEdge.From())
+		if true {
+			to := onnxEdge.To().(*onnx.GraphNode)
+			from := onnxEdge.From().(*onnx.GraphNode)
+			pp.Println(from.Name + " -> " + to.Name)
+		}
 		grph.SetWeightedEdge(grph.NewWeightedEdge(onnxEdge.From(), onnxEdge.To(), weight))
 	}
 
@@ -129,10 +138,6 @@ func makeBenchmarkGraph(model *onnx.Onnx, nds []benchmarkGraphNode) *benchmarkGr
 		colors:                colors,
 		WeightedDirectedGraph: grph,
 	}
-}
-
-func toMicroSeconds(t time.Duration) float64 {
-	return float64(t) / float64(time.Microsecond)
 }
 
 func (g benchmarkGraph) DOTAttributers() (graph, node, edge encoding.Attributer) {

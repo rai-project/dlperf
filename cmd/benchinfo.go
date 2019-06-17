@@ -21,6 +21,7 @@ import (
 	perflayer "github.com/rai-project/dlperf/pkg/layer"
 	"github.com/rai-project/dlperf/pkg/onnx"
 	"gonum.org/v1/gonum/graph/encoding/dot"
+	"gonum.org/v1/gonum/graph/path"
 )
 
 var (
@@ -324,7 +325,40 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 	if traversalStrategy == "parallel" {
 		// we need to build a new graph with
 		// the benchmark times as weights
-		grph := makeBenchmarkGraph(model, benchmarkInfo)
+		timeTransformFunction := func(d time.Duration) float64 {
+			sec := d / time.Millisecond
+			nsec := d % time.Millisecond
+			ms := float64(sec) + float64(nsec)/float64(time.Millisecond)
+			if ms == 0 {
+				return 0
+			}
+			return 1.0 / ms
+		}
+		grph := makeBenchmarkGraph(model, benchmarkInfo, timeTransformFunction)
+
+		var firstBenchmark, lastBenchmark *benchmarkGraphNode
+		for ii := range benchmarkInfo {
+			bench := benchmarkInfo[ii]
+			if len(bench.Benchmarks) == 0 {
+				continue
+			}
+			if firstBenchmark == nil {
+				firstBenchmark = &bench
+			}
+			lastBenchmark = &bench
+		}
+
+		shortestPath := path.DijkstraFrom(firstBenchmark, grph)
+		path, weight := shortestPath.To(lastBenchmark.ID())
+		pp.Println(firstBenchmark.Layer().Name())
+		pp.Println(lastBenchmark.Layer().Name())
+		pp.Println(weight)
+
+		pp.Println(path)
+		for _, s := range path {
+			g := s.(*onnx.GraphNode)
+			pp.Println(g.Name)
+		}
 
 		if showBenchInfo {
 			dotEnc, err := dot.Marshal(grph, model.GetName(), "", "  ")
