@@ -30,9 +30,10 @@ func (l pattern) Row(humanFlops bool) []string {
 }
 
 type bench struct {
-	Layer     dlperf.Layer            `json:"layer"`
+	Type      string                  `json:"type"`
 	Benchmark benchmark.Benchmark     `json:"benchmark"`
 	Flops     dlperf.FlopsInformation `json:"flops_information"`
+	Layer     dlperf.Layer            `json:"-"`
 }
 
 func (bench) Header() []string {
