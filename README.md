@@ -90,3 +90,12 @@ or
 ```
 go run main.go benchinfo --model_path ~/onnx_models/resnet100/resnet100.onnx --benchmark_database ../microbench/results/cudnn/ip-172-31-26-89.json
 ```
+
+
+## Draw a graph of the layers using benchmark data
+
+You can draw a graph with the runtime data using the following command
+
+```
+go run main.go benchinfo --model_path ~/data/carml/dlperf/ArcFace/resnet100/resnet100.onnx --benchmark_database results/v100/8.json --short=false --batch_size=8 --human=true --strategy=parallel --show
+```
