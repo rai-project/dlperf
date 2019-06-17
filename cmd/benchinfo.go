@@ -30,6 +30,7 @@ var (
 	benchInfoDataType           string
 	enableReadFlopsFromDatabase bool
 	traversalStrategy           string
+	showBenchInfo               bool
 	defaultTraversalStrategy    = "parallel"
 )
 
@@ -102,37 +103,14 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 	for _, nd := range nds {
 		lyr := nd.Layer()
 		switch strings.ToLower(lyr.OperatorType()) {
-		case "constantinput":
-			continue
-		case "lrn":
-			debugPrint("LRN is not supported by CUDNN")
-			continue
-		case "reshape":
-			debugPrint("Reshape is not supported by CUDNN")
-			continue
-		// case "dropout":
-		// 	fmt.Println("Dropout is skipped for now")
-		// 	continue
-		case "concat":
-			debugPrint("Concat is skipped for now")
-			continue
-		case "unsqueeze":
-			debugPrint("Unsqueeze is skipped for now")
-			continue
-		case "flatten":
-			debugPrint("Flatten is skipped for now")
-			continue
-		case "globalpooling":
-			debugPrint("GlobalPooling is skipped for now")
-			continue
-		case "identity":
-			debugPrint("Identity is skipped for now")
-			continue
-		case "transpose":
-			debugPrint("Transpose is skipped for now")
-			continue
-		case "scale":
-			debugPrint("Scale is skipped for now")
+		case "constantinput", "lrn", "reshape", "concat", "unsqueeze", "flatten", "globalpooling", "identity", "transpose", "scale":
+			benchmarkInfo = append(benchmarkInfo,
+				benchmarkGraphNode{
+					GraphNode: nd,
+				},
+			)
+
+			debugPrint(lyr.OperatorType() + " layer is skipped for now")
 			continue
 		}
 		// if lyr.OperatorType() != "Conv" && lyr.OperatorType() != "Relu" {
@@ -343,25 +321,26 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 		}
 	}
 
-	writer := NewWriter(bench{}, humanFlops)
-	defer writer.Close()
-
 	if traversalStrategy == "parallel" {
 		// we need to build a new graph with
 		// the benchmark times as weights
 		grph := makeBenchmarkGraph(model, benchmarkInfo)
 
-		dotEnc, err := dot.Marshal(grph, model.GetName(), "", "  ")
-		if err != nil {
-			return err
+		if showBenchInfo {
+			dotEnc, err := dot.Marshal(grph, model.GetName(), "", "  ")
+			if err != nil {
+				return err
+			}
+
+			img, err := dotToImage(dotEnc)
+			if err != nil {
+				return err
+			}
+
+			println(img)
 		}
 
-		img, err := dotToImage(dotEnc)
-		if err != nil {
-			return err
-		}
-
-		println(img)
+		return nil
 
 	}
 
@@ -377,6 +356,9 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 				},
 			},
 		})
+
+	writer := NewWriter(bench{}, humanFlops)
+	defer writer.Close()
 
 	for _, lyr := range benchmarkInfo {
 		for _, bench := range lyr.Benchmarks {
@@ -409,5 +391,6 @@ func init() {
 	benchinfoCmd.PersistentFlags().StringVar(&benchInfoDataType, "datatype", "float32", "compute the information for the specified scalar datatype")
 	benchinfoCmd.PersistentFlags().StringVar(&benchmarkResultsFolder, "benchmark_database", benchmarkResultsFolder, "path to the benchmark results folder")
 	benchinfoCmd.PersistentFlags().StringVar(&traversalStrategy, "strategy", defaultTraversalStrategy, "strategy to traverse the graph either can be `parallel` which would find the shortest path or `serial` to get the total time as if each layer is executed serially")
+	benchinfoCmd.PersistentFlags().BoolVar(&showBenchInfo, "show", false, "generate the benchmark info graph (only for parallel for now)")
 	rootCmd.AddCommand(benchinfoCmd)
 }

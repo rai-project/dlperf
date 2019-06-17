@@ -5,8 +5,10 @@ import (
 	"math"
 	"time"
 
+	"github.com/k0kubun/pp"
 	"github.com/muesli/gamut"
 	"github.com/rai-project/dlperf/pkg/onnx"
+	"gonum.org/v1/gonum/graph"
 	"gonum.org/v1/gonum/graph/encoding"
 	"gonum.org/v1/gonum/graph/simple"
 )
@@ -87,43 +89,41 @@ func makeBenchmarkGraph(model *onnx.Onnx, nds []benchmarkGraphNode) *benchmarkGr
 
 	colors := mkColors(nds)
 	grph := simple.NewWeightedDirectedGraph(0, math.Inf(1))
-	// for _, onnxNode := range model.GetNode() {
-	// 	for _, inputNode := range onnxNode.GetInput() {
-	// 		grph.AddNode(inputNode)
-	// 		graphIds[inputNode.Name] = inputNode.ID()
-	// 	}
-	// 	for _, outputNode := range onnxNode.GetOutput() {
-	// 		grph.AddNode(outputNode)
-	// 		graphIds[outputNode.Name] = outputNode.ID()
-	// 	}
-	// }
-
-	for _, nd := range nds {
-		grph.AddNode(nd)
-		graphIds[nd.Name] = nd.ID()
+	onnxGrph := model.ToGraph()
+	ndIter := onnxGrph.Nodes()
+	for ndIter.Next() {
+		onnxNode, ok := ndIter.Node().(*onnx.GraphNode)
+		if !ok {
+			pp.Println(onnxNode)
+			panic("invalid node. expecting an onnx node")
+		}
+		grph.AddNode(onnxNode)
+		graphIds[onnxNode.Name] = onnxNode.ID()
 	}
 
-	for _, nd := range nds {
-		for _, inputNode := range nd.GetInput() {
-			for _, outputNode := range nd.GetOutput() {
-				inId, ok := graphIds[inputNode]
-				if !ok {
-					continue
-				}
-				outId, ok := graphIds[outputNode]
-				if !ok {
-					continue
-				}
-				if inId == outId {
-					continue
-				}
-				inNd := grph.Node(inId)
-				outNd := grph.Node(outId)
-
-				grph.SetWeightedEdge(grph.NewWeightedEdge(inNd, outNd, toMicroSeconds(nd.forwardRuntime())))
+	getWeight := func(grNode graph.Node) float64 {
+		onnxNode, ok := grNode.(*onnx.GraphNode)
+		if !ok {
+			pp.Println(grNode)
+			panic(grNode)
+		}
+		for _, nd := range nds {
+			if nd.Name == onnxNode.Name {
+				t := nd.forwardRuntime()
+				onnxNode.SetRuntime(nd.forwardRuntime())
+				return toMicroSeconds(t)
 			}
 		}
+		return math.Inf(1)
 	}
+
+	edgeIter := onnxGrph.Edges()
+	for edgeIter.Next() {
+		onnxEdge := edgeIter.Edge()
+		weight := getWeight(onnxEdge.From())
+		grph.SetWeightedEdge(grph.NewWeightedEdge(onnxEdge.From(), onnxEdge.To(), weight))
+	}
+
 	return &benchmarkGraph{
 		nodes:                 nds,
 		colors:                colors,

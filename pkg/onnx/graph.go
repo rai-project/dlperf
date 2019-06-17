@@ -5,12 +5,15 @@ import (
 	"fmt"
 	"image/color"
 	"strings"
+	"time"
 
 	colorful "github.com/lucasb-eyer/go-colorful"
 	"github.com/muesli/gamut"
 	"github.com/pkg/errors"
 	dlperf "github.com/rai-project/dlperf/pkg"
+	"github.com/rai-project/dlperf/pkg/benchmark"
 	"github.com/rai-project/onnx"
+	"github.com/spf13/cast"
 	"gonum.org/v1/gonum/graph/encoding"
 	"gonum.org/v1/gonum/graph/simple"
 	"gonum.org/v1/gonum/graph/topo"
@@ -23,10 +26,12 @@ type Graph struct {
 }
 
 type GraphNode struct {
-	id    int64
-	name  string
-	layer dlperf.Layer
-	color color.Color
+	id         int64
+	name       string
+	benchmarks benchmark.Benchmarks
+	layer      dlperf.Layer
+	color      color.Color
+	runtime    *time.Duration
 	*onnx.NodeProto
 }
 
@@ -94,8 +99,24 @@ func (nd GraphNode) Layer() dlperf.Layer {
 	return nd.layer
 }
 
+func (nd GraphNode) GetRuntime() *time.Duration {
+	return nd.runtime
+}
+
+func (nd *GraphNode) SetRuntime(t time.Duration) {
+	nd.runtime = &t
+}
+
 func (nd GraphNode) DOTID() string {
 	return fmt.Sprintf("\"%s\"", nd.name)
+}
+
+func (nd *GraphNode) SetBenchmarks(bs benchmark.Benchmarks) {
+	nd.benchmarks = bs
+}
+
+func (nd *GraphNode) Benchmarks() benchmark.Benchmarks {
+	return nd.benchmarks
 }
 
 func (nd GraphNode) Attributes() []encoding.Attribute {
@@ -134,6 +155,9 @@ func (nd GraphNode) Attributes() []encoding.Attribute {
 				lbl = fmt.Sprintf(`"{ {%s  | %s} | %s }"`, nd.Name, nd.OpType, string(outputShapesBuf))
 			}
 		}
+		if nd.runtime != nil {
+			lbl = fmt.Sprintf(`"{ {%s  | %s} | %s }"`, nd.Name, nd.OpType, cast.ToString(*nd.runtime))
+		}
 	}
 	attrs := []encoding.Attribute{
 		encoding.Attribute{
@@ -160,6 +184,21 @@ func (nd GraphNode) Attributes() []encoding.Attribute {
 			Key:   "outputs",
 			Value: fmt.Sprintf("\"%s\"", strings.Join(nd.GetOutput(), ";")),
 		},
+	}
+	if nd.runtime != nil {
+		attrs = append(attrs,
+			encoding.Attribute{
+				Key:   "runtime",
+				Value: cast.ToString(*nd.runtime),
+			},
+		)
+	}
+	for _, bench := range nd.benchmarks {
+		benchAttr := encoding.Attribute{
+			Key:   bench.Name,
+			Value: cast.ToString(bench.RealTime),
+		}
+		attrs = append(attrs, benchAttr)
 	}
 	attrs = append(attrs, extraAttrs...)
 	if nd.color != nil {
