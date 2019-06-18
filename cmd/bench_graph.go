@@ -8,8 +8,6 @@ import (
 
 	"github.com/spf13/cast"
 
-	"github.com/getlantern/deepcopy"
-	"github.com/jinzhu/copier"
 	"github.com/k0kubun/pp"
 	"github.com/muesli/gamut"
 	"github.com/rai-project/dlperf/pkg/onnx"
@@ -22,7 +20,7 @@ type benchmarkGraph struct {
 	Root   *benchmarkGraphNode
 	nodes  []benchmarkGraphNode
 	colors map[string]color.Color
-	*simple.WeightedDirectedGraph
+	*onnx.Graph
 }
 
 type benchmarkGraphNode struct {
@@ -91,44 +89,15 @@ func (b benchmarkGraphNode) forwardRuntime() time.Duration {
 
 func makeBenchmarkGraph(model0 *onnx.Onnx, nds []benchmarkGraphNode, timeTransformFunction func(time.Duration) float64) *benchmarkGraph {
 	model := &onnx.Onnx{}
-	graphIds := map[string]int64{}
-	graphNds := map[string]*onnx.GraphNode{}
-
 	// deepcopy.Copy(&model, model0)
 	model = model0
 
-	colors := mkColors(nds)
-	grph := simple.NewWeightedDirectedGraph(0, math.Inf(1))
-	onnxGrph := model.ToGraph()
-	for _, nd := range graph.NodesOf(onnxGrph.Nodes()) {
-		onnxNode, ok := nd.(*onnx.GraphNode)
-		if !ok {
-			pp.Println(onnxNode)
-			panic("invalid node. expecting an onnx node")
-		}
-		if _, ok := graphIds[onnxNode.Name]; ok {
-			continue
-		}
-		newNd := new(onnx.GraphNode)
-		if false {
-			deepcopy.Copy(newNd, onnxNode)
-		} else {
-			copier.Copy(newNd, *onnxNode)
-		}
-		id := grph.NewNode().ID()
-		newNd.SetID(id)
-		grph.AddNode(newNd)
-		graphIds[newNd.Name] = id
-		graphNds[newNd.Name] = newNd
-	}
-
 	getWeight := func(grNode graph.Node) float64 {
-		onnxNode0, ok := grNode.(*onnx.GraphNode)
+		onnxNode, ok := grNode.(*onnx.GraphNode)
 		if !ok {
 			pp.Println(grNode)
 			panic(grNode)
 		}
-		onnxNode := graphNds[onnxNode0.Name]
 		for _, nd := range nds {
 			if nd.Name == onnxNode.Name {
 				t := nd.forwardRuntime()
@@ -139,31 +108,31 @@ func makeBenchmarkGraph(model0 *onnx.Onnx, nds []benchmarkGraphNode, timeTransfo
 		return math.Inf(1)
 	}
 
-	for _, edge := range graph.EdgesOf(onnxGrph.Edges()) {
-		onnxEdge := edge
+	colors := mkColors(nds)
+	net := model.ToGraph(onnx.GraphPruneInputs(true))
 
-		toNd := onnxEdge.To().(*onnx.GraphNode)
-		to := graphNds[toNd.Name]
-		fromNd := onnxEdge.From().(*onnx.GraphNode)
-		from := graphNds[fromNd.Name]
+	for _, edge := range graph.WeightedEdgesOf(net.WeightedEdges()) {
+		onnxEdge := edge.(*onnx.GraphEdge)
+
+		to := onnxEdge.To().(*onnx.GraphNode)
+		from := onnxEdge.From().(*onnx.GraphNode)
 
 		weight := getWeight(from)
 
 		if from.ID() == to.ID() {
 			continue
 		}
+
 		if true {
 			pp.Println(from.Name + idString(from) + " -> " + to.Name + idString(to) + "  " + cast.ToString(weight))
 		}
-		grph.SetWeightedEdge(
-			grph.NewWeightedEdge(from, to, weight),
-		)
+		net.SetWeightedEdge(net.NewWeightedEdge(from, to, weight))
 	}
 
 	return &benchmarkGraph{
-		nodes:                 nds,
-		colors:                colors,
-		WeightedDirectedGraph: grph,
+		nodes:  nds,
+		colors: colors,
+		Graph:  net,
 	}
 }
 

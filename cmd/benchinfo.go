@@ -368,7 +368,7 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 		}
 
 		if showBenchInfo {
-			dotEnc, err := dot.Marshal(net, model.GetName(), "", "  ")
+			dotEnc, err := dot.Marshal(grph, model.GetName(), "", "  ")
 			if err != nil {
 				return err
 			}
