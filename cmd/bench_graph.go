@@ -42,7 +42,7 @@ func (gAttributer) Attributes() []encoding.Attribute {
 	return []encoding.Attribute{
 		encoding.Attribute{
 			Key:   "rankdir",
-			Value: "\"TB\"",
+			Value: "\"LR\"", // or "\"TB\"" for top to bottom view
 		},
 		encoding.Attribute{
 			Key:   "overlap",
@@ -87,10 +87,10 @@ func (b benchmarkGraphNode) forwardRuntime() time.Duration {
 	return accum
 }
 
-func makeBenchmarkGraph(model0 *onnx.Onnx, nds []benchmarkGraphNode, timeTransformFunction func(time.Duration) float64) *benchmarkGraph {
-	model := &onnx.Onnx{}
-	// deepcopy.Copy(&model, model0)
-	model = model0
+func makeBenchmarkGraph(model *onnx.Onnx, net *onnx.Graph, nds []benchmarkGraphNode, timeTransformFunction func(time.Duration) float64) *benchmarkGraph {
+	// model := &onnx.Onnx{}
+	// // deepcopy.Copy(&model, model0)
+	// model = model0
 
 	getWeight := func(grNode graph.Node) float64 {
 		onnxNode, ok := grNode.(*onnx.GraphNode)
@@ -101,7 +101,7 @@ func makeBenchmarkGraph(model0 *onnx.Onnx, nds []benchmarkGraphNode, timeTransfo
 		for _, nd := range nds {
 			if nd.Name == onnxNode.Name {
 				t := nd.forwardRuntime()
-				onnxNode.SetRuntime(nd.forwardRuntime())
+				onnxNode.SetRuntime(t)
 				return timeTransformFunction(t)
 			}
 		}
@@ -109,7 +109,7 @@ func makeBenchmarkGraph(model0 *onnx.Onnx, nds []benchmarkGraphNode, timeTransfo
 	}
 
 	colors := mkColors(nds)
-	net := model.ToGraph(onnx.GraphPruneInputs(true))
+	// net := model.ToGraph(onnx.GraphPruneInputs(true))
 
 	for _, edge := range graph.WeightedEdgesOf(net.WeightedEdges()) {
 		onnxEdge := edge.(*onnx.GraphEdge)

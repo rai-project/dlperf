@@ -9,6 +9,10 @@ type Cast struct {
 	*Base `json:",inline,flatten,omitempty"`
 }
 
+func (Cast) ShortName() string {
+	return "CST"
+}
+
 func (Cast) OperatorType() string {
 	return "Cast"
 }

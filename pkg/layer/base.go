@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/kljensen/snowball"
 	dlperf "github.com/rai-project/dlperf/pkg"
 	"github.com/rai-project/dlperf/pkg/benchmark"
 	"github.com/rai-project/onnx"
@@ -88,6 +89,14 @@ func (b *Base) Name() string {
 		return ""
 	}
 	return b.Name_
+}
+
+func (b *Base) ShortName() string {
+	stemmed, err := snowball.Stem(b.Name(), "english", true)
+	if err == nil {
+		return stemmed
+	}
+	return b.Name()
 }
 
 func (b *Base) SetName(s string) {

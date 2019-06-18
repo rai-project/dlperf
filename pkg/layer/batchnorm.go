@@ -13,6 +13,10 @@ type BatchNorm struct {
 	Spatial int64 `json:"spatial,omitempty"`
 }
 
+func (BatchNorm) ShortName() string {
+	return "BN"
+}
+
 func (BatchNorm) OperatorType() string {
 	return "BatchNorm"
 }

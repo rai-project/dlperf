@@ -8,6 +8,8 @@ import (
 	"strings"
 	"time"
 
+	"github.com/fatih/set"
+	"github.com/kljensen/snowball"
 	colorful "github.com/lucasb-eyer/go-colorful"
 	"github.com/muesli/gamut"
 	"github.com/pkg/errors"
@@ -146,7 +148,7 @@ func (nd GraphNode) Attributes() []encoding.Attribute {
 			}...,
 		)
 	} else {
-		lbl = fmt.Sprintf("\"{%s}  | {%s}\"", nd.Name, nd.OpType)
+		lbl = fmt.Sprintf("\"{%s}  | {%s}\"", nd.Name, shortenOpType(nd.OpType))
 		if nd.layer != nil {
 			var outputShapesBuf []byte
 			var err error
@@ -157,11 +159,11 @@ func (nd GraphNode) Attributes() []encoding.Attribute {
 				outputShapesBuf, err = json.Marshal(outShapes)
 			}
 			if err == nil {
-				lbl = fmt.Sprintf(`"{ {%s  | %s} | %s }"`, nd.Name, nd.OpType, string(outputShapesBuf))
+				lbl = fmt.Sprintf(`"{ {%s  | %s} | %s }"`, nd.Name, shortenOpType(nd.OpType), string(outputShapesBuf))
 			}
 		}
 		if nd.runtime != nil {
-			lbl = fmt.Sprintf(`"{ {%s  | %s} | %s }"`, nd.Name, nd.OpType, cast.ToString(*nd.runtime))
+			lbl = fmt.Sprintf(`"{ {%s  | %s} | %s }"`, nd.Name, shortenOpType(nd.OpType), cast.ToString(*nd.runtime))
 		}
 	}
 	attrs := []encoding.Attribute{
@@ -254,25 +256,75 @@ func (nd GraphNode) Attributes() []encoding.Attribute {
 	return attrs
 }
 
+func shortenOpType(ty string) string {
+	stemmed, err := snowball.Stem(ty, "english", true)
+	if err == nil {
+		return iShortenOpType(stemmed)
+	}
+	return iShortenOpType(ty)
+}
+
+func iShortenOpType(ty0 string) string {
+	ty := strings.ToLower(ty0)
+	switch ty {
+	case "batchnorm", "bn":
+		return "BN"
+	case "conv", "convolution":
+		return "Conv"
+	case "reshap":
+		return "RSHP"
+	case "add":
+		return "ADD"
+	case "sub":
+		return "SUB"
+	case "mul":
+		return "MUL"
+	case "relu":
+		return "RELU"
+	case "prelu":
+		return "PRELU"
+	case "maxpool":
+		return "MXPL"
+	case "flatten":
+		return "FLT"
+	case "gemm":
+		return "GEMM"
+	case "matmul":
+		return "MM"
+	case "ident":
+		return "IDNT"
+	case "dropout":
+		return "DRP"
+	default:
+		fmt.Println(ty0)
+		return ty0
+	}
+}
+
 func (nd GraphEdge) Attributes() []encoding.Attribute {
 	return []encoding.Attribute{}
 }
 
 func (o *Onnx) mkColors() map[string]color.Color {
-	ndColors := map[string]color.Color{}
 	onnxGraph := o.GetGraph()
-	for _, nd := range onnxGraph.GetNode() {
-		ndColors[nd.GetOpType()] = nil
+	onnxNodes := onnxGraph.GetNode()
+
+	s := set.New(set.ThreadSafe)
+	for _, nd := range onnxNodes {
+		s.Add(nd.GetOpType())
 	}
-	colors, err := gamut.Generate(len(ndColors), gamut.PastelGenerator{})
+	colors, err := gamut.Generate(s.Size(), gamut.PastelGenerator{})
 	if err != nil {
-		return ndColors
+		return map[string]color.Color{}
 	}
-	ii := 0
-	for k := range ndColors {
-		color := colors[ii]
-		ndColors[k] = color
-		ii++
+	ndColors := map[string]color.Color{}
+	idx := 0
+	for _, nd := range onnxNodes {
+		if _, ok := ndColors[nd.GetOpType()]; ok {
+			continue
+		}
+		ndColors[nd.GetOpType()] = colors[idx]
+		idx++
 	}
 
 	return ndColors

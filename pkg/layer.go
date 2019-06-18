@@ -15,6 +15,7 @@ type Layers []Layer
 
 type Layer interface {
 	Name() string
+	ShortName() string
 	Node() *onnx.NodeProto
 	WeightTensors() []*onnx.TensorProto
 	OperatorType() string

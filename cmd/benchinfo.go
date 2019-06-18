@@ -335,7 +335,7 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 			}
 			return 1.0 / ms
 		}
-		grph := makeBenchmarkGraph(model, benchmarkInfo, timeTransformFunction)
+		grph := makeBenchmarkGraph(model, net, benchmarkInfo, timeTransformFunction)
 
 		var firstBenchmark, lastBenchmark *benchmarkGraphNode
 		for ii := range benchmarkInfo {
@@ -358,13 +358,14 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 
 			shortestPath := path.DijkstraFrom(firstBenchmark, grph)
 			path, weight := shortestPath.To(lastBenchmark.ID())
-			pp.Println(weight)
+			pp.Println(1 / weight)
 
-			pp.Println(path)
-			for _, s := range path {
-				g := s.(*onnx.GraphNode)
-				pp.Println(g.Name)
-			}
+			// pp.Println(path)
+			// for _, s := range path {
+			// 	g := s.(*onnx.GraphNode)
+			// 	pp.Println(g.Name)
+			// }
+			_ = path
 		}
 
 		if showBenchInfo {
