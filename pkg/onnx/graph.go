@@ -17,6 +17,7 @@ import (
 	"github.com/rai-project/dlperf/pkg/benchmark"
 	"github.com/rai-project/onnx"
 	"github.com/spf13/cast"
+	"gonum.org/v1/gonum/graph"
 	"gonum.org/v1/gonum/graph/encoding"
 	"gonum.org/v1/gonum/graph/simple"
 	"gonum.org/v1/gonum/graph/topo"
@@ -39,7 +40,8 @@ type GraphNode struct {
 }
 
 type GraphEdge struct {
-	simple.WeightedEdge
+	graph.WeightedEdge
+	color color.Color
 }
 
 type GraphNodes []*GraphNode
@@ -84,6 +86,10 @@ func (eAttributer) Attributes() []encoding.Attribute {
 			Key:   "penwidth",
 			Value: "3",
 		},
+		// encoding.Attribute{
+		// 	Key:   "pencolor",
+		// 	Value: "black",
+		// },
 	}
 }
 
@@ -209,13 +215,7 @@ func (nd GraphNode) Attributes() []encoding.Attribute {
 	}
 	attrs = append(attrs, extraAttrs...)
 	if nd.color != nil {
-		toHex := func(clr0 color.Color) string {
-			clr, ok := colorful.MakeColor(clr0)
-			if ok {
-				return fmt.Sprintf(`"%s"`, clr.Hex())
-			}
-			return ""
-		}
+
 		color := nd.color
 		fillColor := color
 		// if nd.layer != nil && len(nd.layer.OutputShapes()) != 0 {
@@ -240,20 +240,28 @@ func (nd GraphNode) Attributes() []encoding.Attribute {
 				},
 				encoding.Attribute{
 					Key:   "color",
-					Value: toHex(gamut.Darker(color, 0.1)),
+					Value: colorToHex(gamut.Darker(color, 0.1)),
 				},
 				encoding.Attribute{
 					Key:   "fontcolor",
-					Value: toHex(gamut.Contrast(color)),
+					Value: colorToHex(gamut.Contrast(color)),
 				},
 				encoding.Attribute{
 					Key:   "fillcolor",
-					Value: toHex(fillColor),
+					Value: colorToHex(fillColor),
 				},
 			}...,
 		)
 	}
 	return attrs
+}
+
+func colorToHex(clr0 color.Color) string {
+	clr, ok := colorful.MakeColor(clr0)
+	if ok {
+		return fmt.Sprintf(`"%s"`, clr.Hex())
+	}
+	return ""
 }
 
 func shortenOpType(ty string) string {
@@ -301,8 +309,41 @@ func iShortenOpType(ty0 string) string {
 	}
 }
 
+func (nd GraphEdge) Color() color.Color {
+	return nd.color
+}
+
+func (nd *GraphEdge) SetColor(clr color.Color) {
+	nd.color = clr
+}
+
+func (nd *GraphEdge) Highlight() {
+	clr, err := colorful.Hex("#C65840")
+	if err != nil {
+		clr, _ = colorful.Hex("#FF0000")
+	}
+	nd.color = &clr
+}
+
 func (nd GraphEdge) Attributes() []encoding.Attribute {
-	return []encoding.Attribute{}
+	attrs := []encoding.Attribute{}
+	if nd.color != nil {
+		attrs = append(attrs,
+			encoding.Attribute{
+				Key:   "penwidth",
+				Value: "5",
+			},
+			encoding.Attribute{
+				Key:   "pencolor",
+				Value: colorToHex(nd.color),
+			},
+			encoding.Attribute{
+				Key:   "color",
+				Value: colorToHex(nd.color),
+			},
+		)
+	}
+	return attrs
 }
 
 func (o *Onnx) mkColors() map[string]color.Color {

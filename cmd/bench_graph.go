@@ -126,7 +126,9 @@ func makeBenchmarkGraph(model *onnx.Onnx, net *onnx.Graph, nds []benchmarkGraphN
 		if true {
 			pp.Println(from.Name + idString(from) + " -> " + to.Name + idString(to) + "  " + cast.ToString(weight))
 		}
-		net.SetWeightedEdge(net.NewWeightedEdge(from, to, weight))
+		net.SetWeightedEdge(&onnx.GraphEdge{
+			WeightedEdge: net.NewWeightedEdge(from, to, weight),
+		})
 	}
 
 	return &benchmarkGraph{

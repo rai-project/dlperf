@@ -335,6 +335,12 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 			}
 			return 1.0 / ms
 		}
+
+		timeTransformFunctionInverse := func(f float64) time.Duration {
+			f = 1.0 / f
+			pp.Println(f)
+			return time.Duration(f * float64(time.Millisecond))
+		}
 		grph := makeBenchmarkGraph(model, net, benchmarkInfo, timeTransformFunction)
 
 		var firstBenchmark, lastBenchmark *benchmarkGraphNode
@@ -357,15 +363,29 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 			}
 
 			shortestPath := path.DijkstraFrom(firstBenchmark, grph)
-			path, weight := shortestPath.To(lastBenchmark.ID())
-			pp.Println(1 / weight)
+			if true {
+				path, weight := shortestPath.To(lastBenchmark.ID())
 
-			// pp.Println(path)
-			// for _, s := range path {
-			// 	g := s.(*onnx.GraphNode)
-			// 	pp.Println(g.Name)
-			// }
-			_ = path
+				pp.Println(timeTransformFunctionInverse(weight))
+
+				// pp.Println(path[0])
+				for ii := 1; ii < len(path); ii++ {
+					grphEdge := net.Edge(path[ii-1].ID(), path[ii].ID())
+					if grphEdge == nil {
+						continue
+					}
+					onnxEdge, ok := grphEdge.(*onnx.GraphEdge)
+					if !ok {
+						pp.Println(grphEdge)
+						continue
+					}
+					onnxEdge.Highlight()
+				}
+				_ = path
+			}
+
+			// weight := shortestPath.WeightTo(lastBenchmark.ID())
+			// pp.Println(timeTransformFunctionInverse(weight))
 		}
 
 		if showBenchInfo {
