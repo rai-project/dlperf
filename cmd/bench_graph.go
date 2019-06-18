@@ -1,10 +1,14 @@
 package cmd
 
 import (
+	"fmt"
 	"image/color"
 	"math"
 	"time"
 
+	"github.com/spf13/cast"
+
+	"github.com/getlantern/deepcopy"
 	"github.com/jinzhu/copier"
 	"github.com/k0kubun/pp"
 	"github.com/muesli/gamut"
@@ -106,10 +110,15 @@ func makeBenchmarkGraph(model0 *onnx.Onnx, nds []benchmarkGraphNode, timeTransfo
 			continue
 		}
 		newNd := new(onnx.GraphNode)
-		// deepcopy.Copy(&newNd, nd)
-		copier.Copy(newNd, *onnxNode)
+		if false {
+			deepcopy.Copy(newNd, onnxNode)
+		} else {
+			copier.Copy(newNd, *onnxNode)
+		}
+		id := grph.NewNode().ID()
+		newNd.SetID(id)
 		grph.AddNode(newNd)
-		graphIds[newNd.Name] = newNd.ID()
+		graphIds[newNd.Name] = id
 		graphNds[newNd.Name] = newNd
 	}
 
@@ -143,8 +152,8 @@ func makeBenchmarkGraph(model0 *onnx.Onnx, nds []benchmarkGraphNode, timeTransfo
 		if from.ID() == to.ID() {
 			continue
 		}
-		if false {
-			pp.Println(from.Name + " -> " + to.Name)
+		if true {
+			pp.Println(from.Name + idString(from) + " -> " + to.Name + idString(to) + "  " + cast.ToString(weight))
 		}
 		grph.SetWeightedEdge(
 			grph.NewWeightedEdge(from, to, weight),
@@ -156,6 +165,10 @@ func makeBenchmarkGraph(model0 *onnx.Onnx, nds []benchmarkGraphNode, timeTransfo
 		colors:                colors,
 		WeightedDirectedGraph: grph,
 	}
+}
+
+func idString(nd graph.Node) string {
+	return fmt.Sprintf("(%d)", nd.ID())
 }
 
 func (g benchmarkGraph) DOTAttributers() (graph, node, edge encoding.Attributer) {

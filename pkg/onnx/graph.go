@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"image/color"
+	"math"
 	"strings"
 	"time"
 
@@ -22,7 +23,7 @@ import (
 type Graph struct {
 	Root   *GraphNode
 	colors map[string]color.Color
-	*simple.DirectedGraph
+	*simple.WeightedDirectedGraph
 }
 
 type GraphNode struct {
@@ -36,7 +37,7 @@ type GraphNode struct {
 }
 
 type GraphEdge struct {
-	simple.Edge
+	simple.WeightedEdge
 }
 
 type GraphNodes []*GraphNode
@@ -89,6 +90,10 @@ func (g Graph) DOTAttributers() (graph, node, edge encoding.Attributer) {
 	node = nAttributer{}
 	edge = eAttributer{}
 	return
+}
+
+func (nd *GraphNode) SetID(id int64) {
+	nd.id = id
 }
 
 func (nd GraphNode) ID() int64 {
@@ -278,7 +283,7 @@ func (o *Onnx) ToGraph(oo ...GraphOption) *Graph {
 	onnxGraph := o.GetGraph()
 	graphIds := map[string]int64{}
 
-	grph := simple.NewDirectedGraph()
+	grph := simple.NewWeightedDirectedGraph(0, math.Inf(1))
 
 	colors := o.mkColors()
 
@@ -392,10 +397,11 @@ func (o *Onnx) ToGraph(oo ...GraphOption) *Graph {
 				}
 				inNd := grph.Node(inId)
 				outNd := grph.Node(outId)
-				grph.SetEdge(&GraphEdge{
-					Edge: simple.Edge{
+				grph.SetWeightedEdge(&GraphEdge{
+					WeightedEdge: simple.WeightedEdge{
 						F: inNd,
 						T: outNd,
+						W: 1,
 					},
 				})
 			}
@@ -406,8 +412,8 @@ func (o *Onnx) ToGraph(oo ...GraphOption) *Graph {
 	inId := graphIds[input.GetName()]
 
 	network := &Graph{
-		Root:          grph.Node(inId).(*GraphNode),
-		DirectedGraph: grph,
+		Root:                  grph.Node(inId).(*GraphNode),
+		WeightedDirectedGraph: grph,
 	}
 
 	o.network = network

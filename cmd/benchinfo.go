@@ -20,6 +20,7 @@ import (
 	"github.com/rai-project/dlperf/pkg/benchmark"
 	perflayer "github.com/rai-project/dlperf/pkg/layer"
 	"github.com/rai-project/dlperf/pkg/onnx"
+	"gonum.org/v1/gonum/graph"
 	"gonum.org/v1/gonum/graph/encoding/dot"
 	"gonum.org/v1/gonum/graph/path"
 )
@@ -349,10 +350,14 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 		}
 
 		if true {
+			pp.Println("firstBenchmark = " + firstBenchmark.Layer().Name() + idString(firstBenchmark))
+			pp.Println("lastBenchmark = " + lastBenchmark.Layer().Name() + idString(lastBenchmark))
+			for _, nd := range graph.NodesOf(grph.From(firstBenchmark.ID())) {
+				pp.Println("children = " + nd.(*onnx.GraphNode).Name + idString(nd))
+			}
+
 			shortestPath := path.DijkstraFrom(firstBenchmark, grph)
 			path, weight := shortestPath.To(lastBenchmark.ID())
-			pp.Println(firstBenchmark.Layer().Name())
-			pp.Println(lastBenchmark.Layer().Name())
 			pp.Println(weight)
 
 			pp.Println(path)
@@ -363,7 +368,7 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 		}
 
 		if showBenchInfo {
-			dotEnc, err := dot.Marshal(grph, model.GetName(), "", "  ")
+			dotEnc, err := dot.Marshal(net, model.GetName(), "", "  ")
 			if err != nil {
 				return err
 			}

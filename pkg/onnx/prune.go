@@ -1,6 +1,7 @@
 package onnx
 
 import (
+	"math"
 	"strings"
 
 	"gonum.org/v1/gonum/graph"
@@ -100,7 +101,7 @@ func (g Graph) doPrune(layerTypes []string) *Graph {
 		return false
 	}
 
-	newgrph := simple.NewDirectedGraph()
+	newgrph := simple.NewWeightedDirectedGraph(0, math.Inf(1))
 
 	nds := g.Nodes()
 	for nds.Next() {
@@ -113,10 +114,11 @@ func (g Graph) doPrune(layerTypes []string) *Graph {
 
 	edgeContract = func(start, end graph.Node) {
 		if !toPrune(start) && !toPrune(end) {
-			newgrph.SetEdge(&GraphEdge{
-				Edge: simple.Edge{
+			newgrph.SetWeightedEdge(&GraphEdge{
+				WeightedEdge: simple.WeightedEdge{
 					F: start,
 					T: end,
+					W: 1,
 				},
 			})
 		}
@@ -158,10 +160,11 @@ func (g Graph) doPrune(layerTypes []string) *Graph {
 			if toPrune(pred) {
 				continue
 			}
-			newgrph.SetEdge(&GraphEdge{
-				Edge: simple.Edge{
+			newgrph.SetWeightedEdge(&GraphEdge{
+				WeightedEdge: simple.WeightedEdge{
 					F: pred,
 					T: nd,
+					W: 1,
 				},
 			})
 		}
@@ -170,16 +173,17 @@ func (g Graph) doPrune(layerTypes []string) *Graph {
 			if toPrune(succ) {
 				continue
 			}
-			newgrph.SetEdge(&GraphEdge{
-				Edge: simple.Edge{
+			newgrph.SetWeightedEdge(&GraphEdge{
+				WeightedEdge: simple.WeightedEdge{
 					F: nd,
 					T: succ,
+					W: 1,
 				},
 			})
 		}
 	}
 	return &Graph{
-		Root:          g.Root,
-		DirectedGraph: newgrph,
+		Root:                  g.Root,
+		WeightedDirectedGraph: newgrph,
 	}
 }
