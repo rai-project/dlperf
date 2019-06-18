@@ -291,6 +291,16 @@ func iShortenOpType(ty0 string) string {
 		return "RELU"
 	case "prelu":
 		return "PRELU"
+	case "unsqueez":
+		return "UNSQ"
+	case "concat":
+		return "CONC"
+	case "averagepool":
+		return "AVGPL"
+	case "lrn":
+		return "LRN"
+	case "softmax":
+		return "SFT"
 	case "maxpool":
 		return "MXPL"
 	case "flatten":
