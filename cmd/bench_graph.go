@@ -42,7 +42,7 @@ func (gAttributer) Attributes() []encoding.Attribute {
 	return []encoding.Attribute{
 		encoding.Attribute{
 			Key:   "rankdir",
-			Value: "\"LR\"", // or "\"TB\"" for top to bottom view
+			Value: "\"TB\"", // or "\"LR\"" for left to right
 		},
 		encoding.Attribute{
 			Key:   "overlap",

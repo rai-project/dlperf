@@ -389,6 +389,16 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 		}
 
 		if showBenchInfo {
+			nodesToRemove := []int64{}
+			for _, nd := range graph.NodesOf(grph.Nodes()) {
+				to := grph.To(nd.ID())
+				if to.Len() == 0 {
+					nodesToRemove = append(nodesToRemove, nd.ID())
+				}
+			}
+			for _, nd := range nodesToRemove {
+				grph.RemoveNode(nd)
+			}
 			dotEnc, err := dot.Marshal(grph, model.GetName(), "", "  ")
 			if err != nil {
 				return err
