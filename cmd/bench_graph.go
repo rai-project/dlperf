@@ -5,7 +5,7 @@ import (
 	"math"
 	"time"
 
-	"github.com/getlantern/deepcopy"
+	"github.com/jinzhu/copier"
 	"github.com/k0kubun/pp"
 	"github.com/muesli/gamut"
 	"github.com/rai-project/dlperf/pkg/onnx"
@@ -88,8 +88,10 @@ func (b benchmarkGraphNode) forwardRuntime() time.Duration {
 func makeBenchmarkGraph(model0 *onnx.Onnx, nds []benchmarkGraphNode, timeTransformFunction func(time.Duration) float64) *benchmarkGraph {
 	model := &onnx.Onnx{}
 	graphIds := map[string]int64{}
+	graphNds := map[string]*onnx.GraphNode{}
 
-	deepcopy.Copy(&model, model0)
+	// deepcopy.Copy(&model, model0)
+	model = model0
 
 	colors := mkColors(nds)
 	grph := simple.NewWeightedDirectedGraph(0, math.Inf(1))
@@ -100,8 +102,15 @@ func makeBenchmarkGraph(model0 *onnx.Onnx, nds []benchmarkGraphNode, timeTransfo
 			pp.Println(onnxNode)
 			panic("invalid node. expecting an onnx node")
 		}
-		grph.AddNode(onnxNode)
-		graphIds[onnxNode.Name] = onnxNode.ID()
+		if _, ok := graphIds[onnxNode.Name]; ok {
+			continue
+		}
+		newNd := new(onnx.GraphNode)
+		// deepcopy.Copy(&newNd, nd)
+		copier.Copy(newNd, *onnxNode)
+		grph.AddNode(newNd)
+		graphIds[newNd.Name] = newNd.ID()
+		graphNds[newNd.Name] = newNd
 	}
 
 	getWeight := func(grNode graph.Node) float64 {
@@ -110,8 +119,7 @@ func makeBenchmarkGraph(model0 *onnx.Onnx, nds []benchmarkGraphNode, timeTransfo
 			pp.Println(grNode)
 			panic(grNode)
 		}
-		onnxNode := new(onnx.GraphNode)
-		deepcopy.Copy(&onnxNode, onnxNode0)
+		onnxNode := graphNds[onnxNode0.Name]
 		for _, nd := range nds {
 			if nd.Name == onnxNode.Name {
 				t := nd.forwardRuntime()
@@ -124,13 +132,23 @@ func makeBenchmarkGraph(model0 *onnx.Onnx, nds []benchmarkGraphNode, timeTransfo
 
 	for _, edge := range graph.EdgesOf(onnxGrph.Edges()) {
 		onnxEdge := edge
-		weight := getWeight(onnxEdge.From())
-		if true {
-			to := onnxEdge.To().(*onnx.GraphNode)
-			from := onnxEdge.From().(*onnx.GraphNode)
+
+		toNd := onnxEdge.To().(*onnx.GraphNode)
+		to := graphNds[toNd.Name]
+		fromNd := onnxEdge.From().(*onnx.GraphNode)
+		from := graphNds[fromNd.Name]
+
+		weight := getWeight(from)
+
+		if from.ID() == to.ID() {
+			continue
+		}
+		if false {
 			pp.Println(from.Name + " -> " + to.Name)
 		}
-		grph.SetWeightedEdge(grph.NewWeightedEdge(onnxEdge.From(), onnxEdge.To(), weight))
+		grph.SetWeightedEdge(
+			grph.NewWeightedEdge(from, to, weight),
+		)
 	}
 
 	return &benchmarkGraph{

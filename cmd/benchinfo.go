@@ -348,16 +348,18 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 			lastBenchmark = &bench
 		}
 
-		shortestPath := path.DijkstraFrom(firstBenchmark, grph)
-		path, weight := shortestPath.To(lastBenchmark.ID())
-		pp.Println(firstBenchmark.Layer().Name())
-		pp.Println(lastBenchmark.Layer().Name())
-		pp.Println(weight)
+		if true {
+			shortestPath := path.DijkstraFrom(firstBenchmark, grph)
+			path, weight := shortestPath.To(lastBenchmark.ID())
+			pp.Println(firstBenchmark.Layer().Name())
+			pp.Println(lastBenchmark.Layer().Name())
+			pp.Println(weight)
 
-		pp.Println(path)
-		for _, s := range path {
-			g := s.(*onnx.GraphNode)
-			pp.Println(g.Name)
+			pp.Println(path)
+			for _, s := range path {
+				g := s.(*onnx.GraphNode)
+				pp.Println(g.Name)
+			}
 		}
 
 		if showBenchInfo {
