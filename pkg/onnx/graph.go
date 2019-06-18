@@ -278,7 +278,7 @@ func iShortenOpType(ty0 string) string {
 	case "batchnorm", "bn":
 		return "BN"
 	case "conv", "convolution":
-		return "Conv"
+		return "CONV"
 	case "reshap":
 		return "RSHP"
 	case "add":
@@ -297,6 +297,8 @@ func iShortenOpType(ty0 string) string {
 		return "CONC"
 	case "averagepool":
 		return "AVGPL"
+	case "globalaveragepool":
+		return "GLBPL"
 	case "lrn":
 		return "LRN"
 	case "softmax":

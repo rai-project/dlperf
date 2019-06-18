@@ -362,7 +362,7 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 				pp.Println("children = " + nd.(*onnx.GraphNode).Name + idString(nd))
 			}
 
-			shortestPath := path.DijkstraFrom(firstBenchmark, grph)
+			shortestPath, _ := path.BellmanFordFrom(firstBenchmark, grph)
 			if true {
 				path, weight := shortestPath.To(lastBenchmark.ID())
 

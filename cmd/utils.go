@@ -45,9 +45,9 @@ func dotToImage(dot []byte) (string, error) {
 	}
 	dotOutputCount++
 
-	img := filepath.Join(os.TempDir(), fmt.Sprintf("dlperf_%d.png", dotOutputCount))
+	img := filepath.Join(os.TempDir(), fmt.Sprintf("dlperf_%d.pdf", dotOutputCount))
 	// img := filepath.Join("/tmp", fmt.Sprintf("dlperf.png"))
-	cmd := exec.Command(dotExe, "-Tpng", "-o", img)
+	cmd := exec.Command(dotExe, "-Tpdf", "-o", img)
 	cmd.Stdin = bytes.NewReader(dot)
 	if err := cmd.Run(); err != nil {
 		bts, e := cmd.CombinedOutput()
