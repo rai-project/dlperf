@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"fmt"
+	"math"
 	"os"
 	"path/filepath"
 	"runtime/debug"
@@ -13,6 +14,7 @@ import (
 	"github.com/alecthomas/repr"
 	"github.com/k0kubun/pp"
 	"github.com/pkg/errors"
+	"github.com/spf13/cast"
 	"github.com/spf13/cobra"
 
 	"github.com/rai-project/config"
@@ -333,12 +335,11 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 			if ms == 0 {
 				return 0
 			}
-			return 1.0 / ms
+			return -ms
 		}
 
 		timeTransformFunctionInverse := func(f float64) time.Duration {
-			f = 1.0 / f
-			pp.Println(f)
+			f = math.Abs(f)
 			return time.Duration(f * float64(time.Millisecond))
 		}
 		grph := makeBenchmarkGraph(model, net, benchmarkInfo, timeTransformFunction)
@@ -362,11 +363,11 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 				pp.Println("children = " + nd.(*onnx.GraphNode).Name + idString(nd))
 			}
 
-			shortestPath := path.DijkstraFrom(firstBenchmark, grph)
+			shortestPath, _ := path.BellmanFordFrom(firstBenchmark, grph)
 			if true {
 				path, weight := shortestPath.To(lastBenchmark.ID())
 
-				pp.Println(timeTransformFunctionInverse(weight))
+				pp.Println(cast.ToString(timeTransformFunctionInverse(weight)))
 
 				// pp.Println(path[0])
 				for ii := 1; ii < len(path); ii++ {
