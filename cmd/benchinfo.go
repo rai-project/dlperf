@@ -327,9 +327,9 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 		// we need to build a new graph with
 		// the benchmark times as weights
 		timeTransformFunction := func(d time.Duration) float64 {
-			sec := d / time.Millisecond
+			msn := d / time.Millisecond
 			nsec := d % time.Millisecond
-			ms := float64(sec) + float64(nsec)/float64(time.Millisecond)
+			ms := float64(msn) + float64(nsec)/float64(time.Millisecond)
 			if ms == 0 {
 				return 0
 			}
@@ -362,7 +362,7 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 				pp.Println("children = " + nd.(*onnx.GraphNode).Name + idString(nd))
 			}
 
-			shortestPath, _ := path.BellmanFordFrom(firstBenchmark, grph)
+			shortestPath := path.DijkstraFrom(firstBenchmark, grph)
 			if true {
 				path, weight := shortestPath.To(lastBenchmark.ID())
 
