@@ -3,7 +3,7 @@
     BENCHMARK_[[ $.BenchmarkName ]]_INPUT_ARG_NAMES()->\
     BENCHMARK_[[ $.BenchmarkName ]]_INPUT_ARGS()->\
     UseManualTime(); \
-[[ else ]] [[ range $algorithm := .Algorithms ]] BENCHMARK_TEMPLATE(b, [[ $algorithm ]])->\
+[[ else ]] [[ range $algorithm := .Algorithms ]] BENCHMARK_CUDNN_TEMPLATE(b, [[ $algorithm ]])->\
     BENCHMARK_[[ $.BenchmarkName ]]_INPUT_ARG_NAMES()->\
     BENCHMARK_[[ $.BenchmarkName ]]_INPUT_ARGS()->\
     UseManualTime(); \
