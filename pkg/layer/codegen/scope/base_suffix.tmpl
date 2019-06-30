@@ -1,5 +1,5 @@
 #define BENCHMARK_[[ .BenchmarkName ]](b) \
-[[ $algorithmLength := len .Algorithms ]] [[ if eq $algorithmLength 0 ]] BENCHMARK(b)->\
+[[ $algorithmLength := len .Algorithms ]] [[ if eq $algorithmLength 0 ]] BENCHMARK_CUDNN(b)->\
     BENCHMARK_[[ $.BenchmarkName ]]_INPUT_ARG_NAMES()->\
     BENCHMARK_[[ $.BenchmarkName ]]_INPUT_ARGS()->\
     UseManualTime(); \

@@ -7,7 +7,7 @@ static void [[ $.BenchmarkName ]]_[[ $datatype.Name | upper ]]__BatchSize_[[$.Ba
 }
 [[ end ]]
 #define BENCHMARK_[[ .BenchmarkName ]]0(b, SOFTMAX_MODE) \
-[[ range $algorithm := .Algorithms ]] BENCHMARK_TEMPLATE(b, SOFTMAX_MODE, [[ $algorithm ]])\
+[[ range $algorithm := .Algorithms ]] BENCHMARK_CUDNN_TEMPLATE(b, SOFTMAX_MODE, [[ $algorithm ]])\
   ->BENCHMARK_[[ $.BenchmarkName ]]_INPUT_ARG_NAMES()\
   ->BENCHMARK_[[ $.BenchmarkName ]]_INPUT_ARGS()\
   ->UseManualTime(); \
