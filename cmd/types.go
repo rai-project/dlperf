@@ -42,7 +42,7 @@ func (b bench) Header(iopts ...writer.Option) []string {
 	opts := writer.NewOptions(iopts...)
 	base := []string{"LayerName", "LayerType", "BenchmarkName", "RealTime(ms)", "Flops"}
 	if opts.ShowMetrics {
-		base = append([]string{"kernels", "metrics"})
+		base = append(base, "kernels", "metrics")
 	}
 	return base
 	// flopsInfo := dlperf.FlopsInformation{}.Header()
