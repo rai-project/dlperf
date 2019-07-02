@@ -72,7 +72,7 @@ func runWeightsCmd(cmd *cobra.Command, args []string) error {
 	}
 
 	outputFileName = filepath.Join(dir, filepath.Base(outputFileName))
-	writer := NewWriter(layerWeights{}, humanFlops)
+	writer := NewWriter(layerWeights{})
 	defer writer.Close()
 
 	for _, info := range infos {

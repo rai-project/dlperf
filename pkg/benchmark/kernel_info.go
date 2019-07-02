@@ -13,14 +13,14 @@ type MetricInfo struct {
 	Name             string
 	KernelName       string
 	CurrentIteration int
-	Value            float64
+	Value            uint64
 }
 
 type KernelInfo struct {
-	Name        string `json:"name,omitempty"`
-	MangledName string `json:"mangled_name,omitempty"`
-	NameHash    uint64
-	Metrics     map[string][]float64 `json:"metrics,omitempty"`
+	Name        string              `json:"name,omitempty"`
+	MangledName string              `json:"mangled_name,omitempty"`
+	NameHash    uint64              `json:"-"`
+	Metrics     map[string][]uint64 `json:"metrics,omitempty"`
 }
 
 type KernelInfos []KernelInfo
@@ -46,7 +46,7 @@ func getMetricInfo(str string, v interface{}) (*MetricInfo, error) {
 		Name:             metricName,
 		KernelName:       kernelName,
 		CurrentIteration: cast.ToInt(currentIter),
-		Value:            cast.ToFloat64(v),
+		Value:            cast.ToUint64(v),
 	}, nil
 }
 
@@ -56,14 +56,14 @@ func getBenchmarkKernelInfo(attrs map[string]interface{}, kernelName string) Ker
 	res := KernelInfo{
 		Name:     kernelName,
 		NameHash: nameHash,
-		Metrics:  map[string][]float64{},
+		Metrics:  map[string][]uint64{},
 	}
 
 	for k, v := range attrs {
 		// get demangled name
 		if strings.HasPrefix(k, "demangled_kernel:") {
-			hash := cast.ToFloat64(v)
-			if hash == float64(nameHash) {
+			hash := cast.ToUint64(v)
+			if hash == nameHash {
 				res.MangledName = strings.TrimPrefix(k, "demangled_kernel:")
 			}
 			continue
@@ -81,7 +81,7 @@ func getBenchmarkKernelInfo(attrs map[string]interface{}, kernelName string) Ker
 				continue
 			}
 			// no metric, we need to create it
-			res.Metrics[metricInfo.Name] = []float64{metricInfo.Value}
+			res.Metrics[metricInfo.Name] = []uint64{metricInfo.Value}
 		}
 	}
 	return res

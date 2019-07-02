@@ -1,15 +1,10 @@
 package cmd
 
 import (
-	"math"
 	"sort"
 )
 
-var (
-	DefaultTrimmedMeanFraction = 0.2
-)
-
-func trimmedMean(data []float64, frac float64) float64 {
+func trimmedMeanFloat64Slice(data []float64, frac float64) float64 {
 
 	// Sum returns the sum of the elements of the slice.
 	total := func(s []float64) float64 {
@@ -69,26 +64,4 @@ func trimmedMean(data []float64, frac float64) float64 {
 	ret := mean(trimmed, nil)
 
 	return ret
-}
-
-func floor(x float64) int {
-	return int(math.Floor(x))
-}
-
-func ceil(x float64) int {
-	return int(math.Ceil(x))
-}
-
-func maxInt(x, y int) int {
-	if x > y {
-		return x
-	}
-	return y
-}
-
-func minInt(x, y int) int {
-	if x > y {
-		return y
-	}
-	return x
 }

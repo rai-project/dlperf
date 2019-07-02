@@ -14,7 +14,6 @@ import (
 	"github.com/alecthomas/repr"
 	"github.com/k0kubun/pp"
 	"github.com/pkg/errors"
-	"github.com/spf13/cast"
 	"github.com/spf13/cobra"
 
 	"github.com/rai-project/config"
@@ -22,6 +21,7 @@ import (
 	"github.com/rai-project/dlperf/pkg/benchmark"
 	perflayer "github.com/rai-project/dlperf/pkg/layer"
 	"github.com/rai-project/dlperf/pkg/onnx"
+	"github.com/rai-project/dlperf/pkg/writer"
 	"gonum.org/v1/gonum/graph"
 	"gonum.org/v1/gonum/graph/encoding/dot"
 	"gonum.org/v1/gonum/graph/path"
@@ -37,6 +37,7 @@ var (
 	showBenchInfo               bool
 	makeGraphPlot               bool
 	showBenchInfoMetrics        bool
+	highlightShortestPath       bool
 	defaultTraversalStrategy    = "parallel"
 )
 
@@ -195,11 +196,10 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 				// fmt.Println("\\texttt{"+strings.ReplaceAll(lyr.Name(), "_", "\\_")+"}", " & ", lyr.OperatorType(),
 				// " & ", float64(bs[0].RealTime.Nanoseconds())/float64(time.Microsecond), "&", utils.Flops(uint64(flops.Total())), " \\\\")
 				return &bench{
-					Type:        ty,
-					Benchmark:   bs[0],
-					Flops:       flops,
-					Layer:       lyr,
-					ShowMetrics: showBenchInfoMetrics,
+					Type:      ty,
+					Benchmark: bs[0],
+					Flops:     flops,
+					Layer:     lyr,
 				}
 			}
 			return nil
@@ -369,10 +369,10 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 			}
 
 			shortestPath, _ := path.BellmanFordFrom(firstBenchmark, grph)
-			if true {
+			if highlightShortestPath {
 				path, weight := shortestPath.To(lastBenchmark.ID())
 
-				pp.Println(cast.ToString(timeTransformFunctionInverse(weight)))
+				totalTime = timeTransformFunctionInverse(weight)
 
 				// pp.Println(path[0])
 				for ii := 1; ii < len(path); ii++ {
@@ -433,7 +433,7 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 			},
 		})
 
-	writer := NewWriter(bench{ShowMetrics: showBenchInfoMetrics}, humanFlops)
+	writer := NewWriter(bench{}, writer.ShowMetrics(showBenchInfoMetrics))
 	defer writer.Close()
 
 	for _, lyr := range benchmarkInfo {

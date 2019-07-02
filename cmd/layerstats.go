@@ -93,7 +93,7 @@ func runLayerStats(cmd *cobra.Command, args []string) error {
 		return err
 	}
 
-	writer := NewWriter(stat{}, humanFlops)
+	writer := NewWriter(stat{})
 	defer writer.Close()
 
 	for _, info := range infos {

@@ -5,6 +5,7 @@ import (
 	"context"
 	"fmt"
 	"io/ioutil"
+	"math"
 	"os"
 	"os/exec"
 	"path"
@@ -237,4 +238,26 @@ func removeSpace(s string) string {
 	s = strings.TrimSuffix(s, "\n")
 	s = strings.TrimSpace(s)
 	return s
+}
+
+func floor(x float64) int {
+	return int(math.Floor(x))
+}
+
+func ceil(x float64) int {
+	return int(math.Ceil(x))
+}
+
+func maxInt(x, y int) int {
+	if x > y {
+		return x
+	}
+	return y
+}
+
+func minInt(x, y int) int {
+	if x > y {
+		return y
+	}
+	return x
 }

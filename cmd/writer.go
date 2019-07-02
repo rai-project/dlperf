@@ -16,6 +16,7 @@ import (
 
 	"github.com/Unknwon/com"
 	"github.com/olekukonko/tablewriter"
+	"github.com/rai-project/dlperf/pkg/writer"
 )
 
 type excel struct {
@@ -24,33 +25,35 @@ type excel struct {
 }
 
 type Writer struct {
-	format         string
 	output         io.Writer
 	outputFileName string
 	tbl            *tablewriter.Table
 	csv            *csv.Writer
 	excel          *excel
 	json           []string
-	humanFlops     bool
+	opts           []writer.Option
 }
 
 type Rower interface {
-	Header() []string
-	Row(humanFlops bool) []string
+	Header(opts ...writer.Option) []string
+	Row(opts ...writer.Option) []string
 }
 
-func NewWriter(rower Rower, humanFlops bool) *Writer {
+func NewWriter(rower Rower, iopts ...writer.Option) *Writer {
+
+	iopts = append([]writer.Option{writer.Format(outputFormat)}, iopts...)
+
 	var output io.Writer = os.Stdout
 	if outputFileName != "" {
 		output = &bytes.Buffer{}
 	}
 	wr := &Writer{
-		format:         outputFormat,
 		output:         output,
 		outputFileName: outputFileName,
-		humanFlops:     humanFlops,
+		opts:           iopts,
 	}
-	switch wr.format {
+	opts := writer.NewOptions(iopts...)
+	switch opts.Format {
 	case "table":
 		wr.tbl = tablewriter.NewWriter(output)
 	case "csv":
@@ -71,21 +74,23 @@ func NewWriter(rower Rower, humanFlops bool) *Writer {
 }
 
 func (w *Writer) Header(rower Rower) error {
-	switch w.format {
+	opts := writer.NewOptions(w.opts...)
+	switch opts.Format {
 	case "table":
-		w.tbl.SetHeader(rower.Header())
+		w.tbl.SetHeader(rower.Header(w.opts...))
 	case "csv":
-		w.csv.Write(rower.Header())
+		w.csv.Write(rower.Header(w.opts...))
 	}
 	return nil
 }
 
 func (w *Writer) Row(rower Rower) error {
-	switch w.format {
+	opts := writer.NewOptions(w.opts...)
+	switch opts.Format {
 	case "table":
-		w.tbl.Append(rower.Row(w.humanFlops))
+		w.tbl.Append(rower.Row(w.opts...))
 	case "csv":
-		w.csv.Write(rower.Row(w.humanFlops))
+		w.csv.Write(rower.Row(w.opts...))
 	case "json", "js":
 		b, err := json.MarshalIndent(rower, "", "  ")
 		if err != nil {
@@ -106,7 +111,8 @@ func (w *Writer) Row(rower Rower) error {
 }
 
 func (w *Writer) Flush() {
-	switch w.format {
+	opts := writer.NewOptions(w.opts...)
+	switch opts.Format {
 	case "table":
 		w.tbl.Render()
 	case "csv":
@@ -132,12 +138,14 @@ func (w *Writer) Flush() {
 }
 
 func (w *Writer) Close() {
+	opts := writer.NewOptions(w.opts...)
+	format := opts.Format
 	w.Flush()
 	if w.outputFileName != "" {
 		com.WriteFile(w.outputFileName, w.output.(*bytes.Buffer).Bytes())
 		return
 	}
-	if w.format == "json" {
+	if format == "json" {
 		fmt.Println(w.json)
 	}
 }

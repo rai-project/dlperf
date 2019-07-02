@@ -9,6 +9,7 @@ import (
 	dlperf "github.com/rai-project/dlperf/pkg"
 	"github.com/rai-project/dlperf/pkg/benchmark"
 	"github.com/rai-project/dlperf/pkg/onnx"
+	"github.com/rai-project/dlperf/pkg/writer"
 	"github.com/rai-project/utils"
 	terminal "github.com/wayneashleyberry/terminal-dimensions"
 )
@@ -17,11 +18,11 @@ type pattern struct {
 	onnx.Pattern
 }
 
-func (pattern) Header() []string {
+func (pattern) Header(opts ...writer.Option) []string {
 	return []string{"Pattern", "Occurrences"}
 }
 
-func (l pattern) Row(humanFlops bool) []string {
+func (l pattern) Row(opts ...writer.Option) []string {
 	opTypes := []string{}
 	for _, nd := range l.Nodes {
 		opTypes = append(opTypes, nd.GetOpType())
@@ -31,16 +32,16 @@ func (l pattern) Row(humanFlops bool) []string {
 }
 
 type bench struct {
-	Type        string                  `json:"type"`
-	Benchmark   benchmark.Benchmark     `json:"benchmark"`
-	Flops       dlperf.FlopsInformation `json:"flops_information"`
-	Layer       dlperf.Layer            `json:"-"`
-	ShowMetrics bool                    `json:"-"`
+	Type      string                  `json:"type"`
+	Benchmark benchmark.Benchmark     `json:"benchmark"`
+	Flops     dlperf.FlopsInformation `json:"flops_information"`
+	Layer     dlperf.Layer            `json:"-"`
 }
 
-func (b bench) Header() []string {
+func (b bench) Header(iopts ...writer.Option) []string {
+	opts := writer.NewOptions(iopts...)
 	base := []string{"LayerName", "LayerType", "BenchmarkName", "RealTime(ms)", "Flops"}
-	if b.ShowMetrics {
+	if opts.ShowMetrics {
 		base = append([]string{"kernels", "metrics"})
 	}
 	return base
@@ -62,23 +63,27 @@ func getTerminalWidth() int {
 	return int(termWidth)
 }
 
-func (l bench) Row(humanFlops bool) []string {
+func (l bench) Row(iopts ...writer.Option) []string {
+	opts := writer.NewOptions(iopts...)
 	termWidth := getTerminalWidth()
 
 	ms := float64(l.Benchmark.RealTime.Nanoseconds()) / float64(time.Millisecond)
 	realTime := fmt.Sprintf("%f", ms)
 	benchmarkName := l.Benchmark.Name
 
-	benchmarkName = strings.TrimPrefix(benchmarkName, "LAYER_CUDNN_")
-	benchmarkName = strings.TrimPrefix(benchmarkName, "LAYER_CUBLAS_")
-	benchmarkName = strings.Replace(benchmarkName, "_FLOAT32_", "", -1)
-	benchmarkName = regexp.MustCompile(`_BatchSize_\d+__`).ReplaceAllString(benchmarkName, "")
-	benchmarkName = strings.Split(benchmarkName, "/")[0]
-	// benchmarkName = strings.ReplaceAll(benchmarkName, "__Batch_Size_", "")
+	if opts.TrimBenchmarkName {
+		benchmarkName = strings.TrimPrefix(benchmarkName, "LAYER_CUDNN_")
+		benchmarkName = strings.TrimPrefix(benchmarkName, "LAYER_CUBLAS_")
+		benchmarkName = strings.Replace(benchmarkName, "_FLOAT32_", "", -1)
+		benchmarkName = regexp.MustCompile(`_BatchSize_\d+__`).ReplaceAllString(benchmarkName, "")
+		benchmarkName = strings.Split(benchmarkName, "/")[0]
+		// benchmarkName = strings.ReplaceAll(benchmarkName, "__Batch_Size_", "")
 
-	if len(benchmarkName) > termWidth/2 {
-		benchmarkName = benchmarkName[0:termWidth/2] + "..."
+		if len(benchmarkName) > termWidth/2 {
+			benchmarkName = benchmarkName[0:termWidth/2] + "..."
+		}
 	}
+
 	layerName := ""
 	operatorType := ""
 	flops := int64(0)
@@ -97,14 +102,14 @@ func (l bench) Row(humanFlops bool) []string {
 	}
 
 	base := []string{layerName, operatorType, benchmarkName, realTime, flopsString}
-	if l.ShowMetrics {
+	if opts.ShowMetrics {
 		kernels := []string{}
 		metrics := []string{}
 		for ii, kernelInfo := range l.Benchmark.KernelInfos {
 			kernels = append(kernels, fmt.Sprintf("%d:%s", ii, kernelInfo.Name))
 			kernelMetrics := []string{}
 			for meticName, metricValues := range kernelInfo.Metrics {
-				mean := trimmedMean(metricValues, DefaultTrimmedMeanFraction)
+				mean := trimmedMeanUint64Slice(metricValues, DefaultTrimmedMeanFraction)
 				kernelMetrics = append(kernelMetrics, fmt.Sprintf("%d:%s:%v", ii, meticName, mean))
 			}
 			metrics = append(metrics, strings.Join(kernelMetrics, ";"))
@@ -126,13 +131,13 @@ type stat struct {
 	dlperf.ShapeInformation `json:"input_dimensions"`
 }
 
-func (stat) Header() []string {
+func (stat) Header(opts ...writer.Option) []string {
 	base := dlperf.ShapeInformation{}.Header()
 	return append([]string{"LayerName", "LayerType", "InputNames", "OutputNames"}, base...)
 }
 
-func (l stat) Row(humanFlops bool) []string {
-	base := l.ShapeInformation.Row()
+func (l stat) Row(opts ...writer.Option) []string {
+	base := l.ShapeInformation.Row(opts...)
 	return append([]string{l.Name, l.Type, strings.Join(l.InputNames, ";"), strings.Join(l.OutputNames, ";")}, base...)
 }
 
@@ -143,15 +148,16 @@ type layerFlops struct {
 	Total                   int64 `json:"total"`
 }
 
-func (layerFlops) Header() []string {
-	base := dlperf.FlopsInformation{}.Header()
+func (layerFlops) Header(opts ...writer.Option) []string {
+	base := dlperf.FlopsInformation{}.Header(opts...)
 	base = append(base, "Total")
 	return append([]string{"LayerName", "LayerType"}, base...)
 }
 
-func (l layerFlops) Row(humanFlops bool) []string {
-	base := l.FlopsInformation.Row(humanFlops)
-	base = append(base, flopsToString(l.FlopsInformation.Total(), humanFlops))
+func (l layerFlops) Row(iopts ...writer.Option) []string {
+	base := l.FlopsInformation.Row(iopts...)
+	opts := writer.NewOptions(iopts...)
+	base = append(base, flopsToString(l.FlopsInformation.Total(), opts.ShowHumanFlops))
 	return append([]string{l.Name, l.Type}, base...)
 }
 
@@ -164,11 +170,11 @@ type layerWeights struct {
 	StandardDeviation float64 `json:"standard_deviation"`
 }
 
-func (layerWeights) Header() []string {
+func (layerWeights) Header(opts ...writer.Option) []string {
 	return []string{"LayerName", "LayerType", "Length", "LayerWeightsMax", "LayerWeightsMin", "LayerWeightsSdev"}
 }
 
-func (l layerWeights) Row(humanFlops bool) []string {
+func (l layerWeights) Row(opts ...writer.Option) []string {
 	return []string{l.Name, l.Type, fmt.Sprint(l.Length), fmt.Sprint(l.Max), fmt.Sprint(l.Min), fmt.Sprint(l.StandardDeviation)}
 }
 
@@ -177,10 +183,11 @@ type netFlopsSummary struct {
 	Value int64  `json:"value"`
 }
 
-func (netFlopsSummary) Header() []string {
+func (netFlopsSummary) Header(opts ...writer.Option) []string {
 	return []string{"Flop Type", "#"}
 }
 
-func (l netFlopsSummary) Row(humanFlops bool) []string {
-	return []string{l.Name, flopsToString(l.Value, humanFlops)}
+func (l netFlopsSummary) Row(iopts ...writer.Option) []string {
+	opts := writer.NewOptions(iopts...)
+	return []string{l.Name, flopsToString(l.Value, opts.ShowHumanFlops)}
 }

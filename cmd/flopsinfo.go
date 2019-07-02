@@ -57,7 +57,7 @@ func runFlopsCmd(cmd *cobra.Command, args []string) error {
 			return err
 		}
 
-		writer := NewWriter(layerFlops{}, humanFlops)
+		writer := NewWriter(layerFlops{})
 		defer writer.Close()
 
 		for _, info := range infos {
@@ -79,7 +79,7 @@ func runFlopsCmd(cmd *cobra.Command, args []string) error {
 
 	info := net.FlopsInformation()
 
-	writer := NewWriter(netFlopsSummary{}, humanFlops)
+	writer := NewWriter(netFlopsSummary{})
 	defer writer.Close()
 
 	writer.Row(netFlopsSummary{Name: "MultipleAdds", Value: info.MultiplyAdds})

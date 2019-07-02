@@ -33,7 +33,7 @@ var patternCmd = &cobra.Command{
 
 		patterns := subseqs.Counts()
 
-		writer := NewWriter(pattern{}, humanFlops)
+		writer := NewWriter(pattern{})
 		defer writer.Close()
 
 		for _, pat := range patterns {

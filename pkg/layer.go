@@ -5,6 +5,7 @@ import (
 	"fmt"
 
 	"github.com/rai-project/dlperf/pkg/benchmark"
+	"github.com/rai-project/dlperf/pkg/writer"
 	"github.com/rai-project/onnx"
 	"github.com/rai-project/utils"
 )
@@ -59,11 +60,11 @@ type ShapeInformation struct {
 	OutputShapes []Shape `json:"output_shapes,omitempty"`
 }
 
-func (ShapeInformation) Header() []string {
+func (ShapeInformation) Header(opts ...writer.Option) []string {
 	return []string{"InputShapes", "OutputShapes"}
 }
 
-func (this ShapeInformation) Row() []string {
+func (this ShapeInformation) Row(opts ...writer.Option) []string {
 	// inputShapes := strings.Trim(strings.Replace(fmt.Sprint(l.Shape.InputShapes), " ", ";", -1), "[]")
 	// outputShapes := strings.Trim(strings.Replace(fmt.Sprint(l.Shape.OutputShapes), " ", ";", -1), "[]")
 
@@ -92,7 +93,7 @@ type FlopsInformation struct {
 	General         int64 `json:"general"`
 }
 
-func (FlopsInformation) Header() []string {
+func (FlopsInformation) Header(opts ...writer.Option) []string {
 	return []string{
 		"MultiplyAdds",
 		"Additions",
@@ -103,11 +104,12 @@ func (FlopsInformation) Header() []string {
 	}
 }
 
-func (this FlopsInformation) Row(humanFlops bool) []string {
+func (this FlopsInformation) Row(iopts ...writer.Option) []string {
+	opts := writer.NewOptions(iopts...)
 	flopsToString := func(e int64) string {
 		return fmt.Sprintf("%v", e)
 	}
-	if humanFlops {
+	if opts.ShowHumanFlops {
 		flopsToString = func(e int64) string {
 			return utils.Flops(uint64(e))
 		}
