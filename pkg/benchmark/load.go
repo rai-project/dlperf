@@ -1,6 +1,8 @@
 package benchmark
 
 import (
+	"bytes"
+	"compress/gzip"
 	"encoding/json"
 	"encoding/xml"
 	"io/ioutil"
@@ -8,6 +10,8 @@ import (
 	"strings"
 
 	"github.com/Unknwon/com"
+	"github.com/h2non/filetype"
+	filetypes "github.com/h2non/filetype/matchers"
 	zglob "github.com/mattn/go-zglob"
 	"github.com/pkg/errors"
 	nvidiasmi "github.com/rai-project/nvidia-smi"
@@ -44,6 +48,20 @@ func New(path string) (Suite, error) {
 	if err != nil {
 		return Suite{}, errors.Wrapf(err, "unable to read benchmark file %s", path)
 	}
+
+	kind, _ := filetype.Match(bts)
+	if kind == filetypes.TypeGz {
+		gzReader, err := gzip.NewReader(bytes.NewBuffer(bts))
+		if err != nil {
+			return Suite{}, errors.Wrapf(err, "cannot create gzip reader ")
+		}
+		bts, err = ioutil.ReadAll(gzReader)
+		if err != nil {
+			return Suite{}, errors.Wrapf(err, "cannot read gzip file")
+		}
+		gzReader.Close()
+	}
+
 	// replace inf with 0
 	btss := strings.Replace(string(bts), "inf,", "0,", -1)
 	var suite Suite

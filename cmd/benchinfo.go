@@ -35,6 +35,7 @@ var (
 	enableReadFlopsFromDatabase bool
 	traversalStrategy           string
 	showBenchInfo               bool
+	makeGraphPlot               bool
 	defaultTraversalStrategy    = "parallel"
 )
 
@@ -356,11 +357,13 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 			lastBenchmark = &bench
 		}
 
-		if true {
-			pp.Println("firstBenchmark = " + firstBenchmark.Layer().Name() + idString(firstBenchmark))
-			pp.Println("lastBenchmark = " + lastBenchmark.Layer().Name() + idString(lastBenchmark))
-			for _, nd := range graph.NodesOf(grph.From(firstBenchmark.ID())) {
-				pp.Println("children = " + nd.(*onnx.GraphNode).Name + idString(nd))
+		if traversalStrategy == "parallel" {
+			if debugMode {
+				pp.Println("firstBenchmark = " + firstBenchmark.Layer().Name() + idString(firstBenchmark))
+				pp.Println("lastBenchmark = " + lastBenchmark.Layer().Name() + idString(lastBenchmark))
+				for _, nd := range graph.NodesOf(grph.From(firstBenchmark.ID())) {
+					pp.Println("children = " + nd.(*onnx.GraphNode).Name + idString(nd))
+				}
 			}
 
 			shortestPath, _ := path.BellmanFordFrom(firstBenchmark, grph)
@@ -465,5 +468,6 @@ func init() {
 	benchinfoCmd.PersistentFlags().StringVar(&benchmarkResultsFolder, "benchmark_database", benchmarkResultsFolder, "path to the benchmark results folder")
 	benchinfoCmd.PersistentFlags().StringVar(&traversalStrategy, "strategy", defaultTraversalStrategy, "strategy to traverse the graph either can be `parallel` which would find the shortest path or `serial` to get the total time as if each layer is executed serially")
 	benchinfoCmd.PersistentFlags().BoolVar(&showBenchInfo, "show", false, "generate the benchmark info graph (only for parallel for now)")
+	benchinfoCmd.PersistentFlags().BoolVar(&makeGraphPlot, "graph", false, "generate a graphviz plot of the results")
 	rootCmd.AddCommand(benchinfoCmd)
 }
