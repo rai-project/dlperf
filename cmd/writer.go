@@ -87,7 +87,7 @@ func (w *Writer) Row(rower Rower) error {
 	case "csv":
 		w.csv.Write(rower.Row(w.humanFlops))
 	case "json", "js":
-		b, err := json.MarshalIndent(data, "", "  ")
+		b, err := json.MarshalIndent(rower, "", "  ")
 		if err != nil {
 			log.WithError(err).Error("failed to marshal json data...")
 			return err
