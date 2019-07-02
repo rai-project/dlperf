@@ -10,11 +10,18 @@ import (
 	"os"
 	"strings"
 
+	"github.com/360EntSecGroup-Skylar/excelize"
+
 	"github.com/k0kubun/pp"
 
 	"github.com/Unknwon/com"
 	"github.com/olekukonko/tablewriter"
 )
+
+type excel struct {
+	*excelize.File
+	sheet int
+}
 
 type Writer struct {
 	format         string
@@ -22,6 +29,7 @@ type Writer struct {
 	outputFileName string
 	tbl            *tablewriter.Table
 	csv            *csv.Writer
+	excel          *excel
 	json           []string
 	humanFlops     bool
 }
@@ -47,6 +55,12 @@ func NewWriter(rower Rower, humanFlops bool) *Writer {
 		wr.tbl = tablewriter.NewWriter(output)
 	case "csv":
 		wr.csv = csv.NewWriter(output)
+	case "xslt", "excel":
+		ex := excelize.NewFile()
+		wr.excel = &excel{
+			File:  ex,
+			sheet: ex.NewSheet("Sheet1"),
+		}
 	case "json":
 		wr.json = []string{}
 	}

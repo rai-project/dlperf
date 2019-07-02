@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"fmt"
+	"regexp"
 	"strings"
 	"time"
 
@@ -30,14 +31,18 @@ func (l pattern) Row(humanFlops bool) []string {
 }
 
 type bench struct {
-	Type      string                  `json:"type"`
-	Benchmark benchmark.Benchmark     `json:"benchmark"`
-	Flops     dlperf.FlopsInformation `json:"flops_information"`
-	Layer     dlperf.Layer            `json:"-"`
+	Type        string                  `json:"type"`
+	Benchmark   benchmark.Benchmark     `json:"benchmark"`
+	Flops       dlperf.FlopsInformation `json:"flops_information"`
+	Layer       dlperf.Layer            `json:"-"`
+	ShowMetrics bool                    `json:"-"`
 }
 
-func (bench) Header() []string {
+func (b bench) Header() []string {
 	base := []string{"LayerName", "LayerType", "BenchmarkName", "RealTime(ms)", "Flops"}
+	if b.ShowMetrics {
+		base = append([]string{"kernels", "metrics"})
+	}
 	return base
 	// flopsInfo := dlperf.FlopsInformation{}.Header()
 	// for ii, f := range flopsInfo {
@@ -67,6 +72,7 @@ func (l bench) Row(humanFlops bool) []string {
 	benchmarkName = strings.TrimPrefix(benchmarkName, "LAYER_CUDNN_")
 	benchmarkName = strings.TrimPrefix(benchmarkName, "LAYER_CUBLAS_")
 	benchmarkName = strings.Replace(benchmarkName, "_FLOAT32_", "", -1)
+	benchmarkName = regexp.MustCompile(`_BatchSize_\d+__`).ReplaceAllString(benchmarkName, "")
 	benchmarkName = strings.Split(benchmarkName, "/")[0]
 	// benchmarkName = strings.ReplaceAll(benchmarkName, "__Batch_Size_", "")
 
@@ -91,6 +97,20 @@ func (l bench) Row(humanFlops bool) []string {
 	}
 
 	base := []string{layerName, operatorType, benchmarkName, realTime, flopsString}
+	if l.ShowMetrics {
+		kernels := []string{}
+		metrics := []string{}
+		for ii, kernelInfo := range l.Benchmark.KernelInfos {
+			kernels = append(kernels, fmt.Sprintf("%d:%s", ii, kernelInfo.Name))
+			kernelMetrics := []string{}
+			for meticName, metricValues := range kernelInfo.Metrics {
+				mean := trimmedMean(metricValues, DefaultTrimmedMeanFraction)
+				kernelMetrics = append(kernelMetrics, fmt.Sprintf("%d:%s:%v", ii, meticName, mean))
+			}
+			metrics = append(metrics, strings.Join(kernelMetrics, ";"))
+		}
+		base = append(base, strings.Join(kernels, ";"), strings.Join(metrics, ";"))
+	}
 	return base
 	// flops := l.flops.Row(humanFlops)
 	// flops = append(flops, flopsToString(l.flops.Total(), humanFlops))

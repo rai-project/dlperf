@@ -37,11 +37,11 @@ type Suite struct {
 type Benchmarks []Benchmark
 
 type Benchmark struct {
-	Name               string                 `json:"name,omitempty"`
-	Iterations         float64                `json:"iterations,omitempty"`
-	RealTime           time.Duration          `json:"real_time,omitempty"`
-	CPUTime            time.Duration          `json:"cpu_time,omitempty"`
-	TimeUnit           string                 `json:"time_unit,omitempty"`
+	Name               string                 `json:"name"`
+	Iterations         float64                `json:"iterations"`
+	RealTime           time.Duration          `json:"real_time"`
+	CPUTime            time.Duration          `json:"cpu_time"`
+	TimeUnit           string                 `json:"time_unit"`
 	Flops              *float64               `json:"predicted_flops_count,omitempty"`
 	CUDADriverVersion  string                 `json:"cuda_driver_version,omitempty"`
 	CUDARuntimeVersion string                 `json:"cuda_runtime_version,omitempty"`
@@ -52,7 +52,7 @@ type Benchmark struct {
 	CUBLASVersion      string                 `json:"cublas_version,omitempty"`
 	CUDNNVersion       string                 `json:"cudnn_version,omitempty"`
 	KernelInfos        KernelInfos            `json:"kernel_infos,omitempty"`
-	Attributes         map[string]interface{} `json:"-,omitempty"`
+	Attributes         map[string]interface{} `json:"-"`
 }
 
 func (s *Suite) Merge(other Suite) {
@@ -122,25 +122,25 @@ func (w *Benchmark) UnmarshalJSON(data []byte) error {
 		w.CPUTime = e
 	}
 
-	if ver, err := getBenchmarkCUDADriverVersion(elems); err != nil {
+	if ver, err := getBenchmarkCUDADriverVersion(elems); err == nil {
 		w.CUDADriverVersion = ver
 	}
-	if ver, err := getBenchmarkCUDARuntimeVersion(elems); err != nil {
+	if ver, err := getBenchmarkCUDARuntimeVersion(elems); err == nil {
 		w.CUDARuntimeVersion = ver
 	}
-	if ver, err := getBenchmarkCUPTIVersion(elems); err != nil {
+	if ver, err := getBenchmarkCUPTIVersion(elems); err == nil {
 		w.CUPTIVersion = ver
 	}
-	if ver, err := getBenchmarkCUDNNVersion(elems); err != nil {
+	if ver, err := getBenchmarkCUDNNVersion(elems); err == nil {
 		w.CUDNNVersion = ver
 	}
-	if ver, err := getBenchmarkComputeCapability(elems); err != nil {
+	if ver, err := getBenchmarkComputeCapability(elems); err == nil {
 		w.ComputeCapability = ver
 	}
-	if ver, err := getBenchmarkCUBLASVersion(elems); err != nil {
+	if ver, err := getBenchmarkCUBLASVersion(elems); err == nil {
 		w.CUBLASVersion = ver
 	}
-	if ver, err := getBenchmarkKernelInfos(elems); err != nil {
+	if ver, err := getBenchmarkKernelInfos(elems); err == nil {
 		w.KernelInfos = ver
 	}
 

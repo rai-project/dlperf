@@ -167,7 +167,6 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 				// pp.Println(lyr.OperatorType())
 				// pp.Println(lyr.Name())
 				pp.Println(filter)
-				panic(filter)
 				return nil, errors.New("no benchmarks")
 			}
 			return bs, nil
@@ -196,10 +195,11 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 				// fmt.Println("\\texttt{"+strings.ReplaceAll(lyr.Name(), "_", "\\_")+"}", " & ", lyr.OperatorType(),
 				// " & ", float64(bs[0].RealTime.Nanoseconds())/float64(time.Microsecond), "&", utils.Flops(uint64(flops.Total())), " \\\\")
 				return &bench{
-					Type:      ty,
-					Benchmark: bs[0],
-					Flops:     flops,
-					Layer:     lyr,
+					Type:        ty,
+					Benchmark:   bs[0],
+					Flops:       flops,
+					Layer:       lyr,
+					ShowMetrics: showBenchInfoMetrics,
 				}
 			}
 			return nil
@@ -418,8 +418,6 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 			println(img)
 		}
 
-		return nil
-
 	}
 
 	benchmarkInfo = append(benchmarkInfo,
@@ -435,7 +433,7 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 			},
 		})
 
-	writer := NewWriter(bench{}, humanFlops)
+	writer := NewWriter(bench{ShowMetrics: showBenchInfoMetrics}, humanFlops)
 	defer writer.Close()
 
 	for _, lyr := range benchmarkInfo {

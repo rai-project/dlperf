@@ -69,7 +69,7 @@ func getBenchmarkKernelInfo(attrs map[string]interface{}, kernelName string) Ker
 			continue
 		}
 
-		if strings.HasPrefix(k, "kernel_metric:"+kernelName+"/current_iter:") {
+		if strings.HasPrefix(k, "kernel_metric:") {
 			metricInfo, err := getMetricInfo(k, v)
 			if err != nil {
 				log.WithError(err).WithField("metric", k).Warn("unable to parse metric")
