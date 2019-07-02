@@ -36,6 +36,7 @@ var (
 	traversalStrategy           string
 	showBenchInfo               bool
 	makeGraphPlot               bool
+	showBenchInfoMetrics        bool
 	defaultTraversalStrategy    = "parallel"
 )
 
@@ -468,6 +469,7 @@ func init() {
 	benchinfoCmd.PersistentFlags().StringVar(&benchmarkResultsFolder, "benchmark_database", benchmarkResultsFolder, "path to the benchmark results folder")
 	benchinfoCmd.PersistentFlags().StringVar(&traversalStrategy, "strategy", defaultTraversalStrategy, "strategy to traverse the graph either can be `parallel` which would find the shortest path or `serial` to get the total time as if each layer is executed serially")
 	benchinfoCmd.PersistentFlags().BoolVar(&showBenchInfo, "show", false, "generate the benchmark info graph (only for parallel for now)")
+	benchinfoCmd.PersistentFlags().BoolVar(&showBenchInfoMetrics, "metrics", false, "grabs the metrics from the benchmarks")
 	benchinfoCmd.PersistentFlags().BoolVar(&makeGraphPlot, "graph", false, "generate a graphviz plot of the results")
 	rootCmd.AddCommand(benchinfoCmd)
 }
