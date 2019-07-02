@@ -167,6 +167,7 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 				// pp.Println(lyr.OperatorType())
 				// pp.Println(lyr.Name())
 				pp.Println(filter)
+				panic(filter)
 				return nil, errors.New("no benchmarks")
 			}
 			return bs, nil
