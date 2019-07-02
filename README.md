@@ -99,3 +99,13 @@ You can draw a graph with the runtime data using the following command
 ```
 go run main.go benchinfo --model_path ~/data/carml/dlperf/ArcFace/resnet100/resnet100.onnx --benchmark_database results/v100/8.json --short=false --batch_size=8 --human=true --strategy=parallel --show
 ```
+
+## Query metrics
+
+You can query both kernels and metrics that are dummed by cudnn|scope using the following command
+
+
+```
+go run main.go benchinfo --model_path ~/data/carml/dlperf/ResNet50-v1/resnet50v1/resnet50v1.onnx --benchmark_database results/v100/profile/8.json.gz --short=false --batch_size=8 --human=true --strategy=parallel --metrics --format=json
+```
+

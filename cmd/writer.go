@@ -87,15 +87,20 @@ func (w *Writer) Row(rower Rower) error {
 	case "csv":
 		w.csv.Write(rower.Row(w.humanFlops))
 	case "json", "js":
-		buf, err := json.MarshalIndent(rower, "", "  ")
+		b, err := json.MarshalIndent(data, "", "  ")
 		if err != nil {
 			log.WithError(err).Error("failed to marshal json data...")
 			return err
 		}
+
+		b = bytes.Replace(b, []byte("\\u003c"), []byte("<"), -1)
+		b = bytes.Replace(b, []byte("\\u003e"), []byte(">"), -1)
+		b = bytes.Replace(b, []byte("\\u0026"), []byte("&"), -1)
+
 		if false {
 			pp.Println(rower)
 		}
-		w.json = append(w.json, string(buf))
+		w.json = append(w.json, string(b))
 	}
 	return nil
 }
