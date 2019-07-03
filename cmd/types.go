@@ -42,7 +42,7 @@ type bench struct {
 func (b bench) Header(iopts ...writer.Option) []string {
 	opts := writer.NewOptions(iopts...)
 	if opts.ShowFlopsMetricsOnly {
-		header := []string{"LayerName", "LayerType", "Flops"}
+		header := []string{"LayerName", "LayerType", "Theoretical Flops"}
 		if len(opts.MetricsFilter) != 0 {
 			for _, filterName := range opts.MetricsFilter {
 				header = append(header, filterName)
@@ -52,7 +52,7 @@ func (b bench) Header(iopts ...writer.Option) []string {
 		header = append(header, "Metrics")
 		return header
 	}
-	base := []string{"LayerName", "LayerType", "BenchmarkName", "RealTime(ms)", "Flops"}
+	base := []string{"LayerName", "LayerType", "BenchmarkName", "RealTime(ms)", "Theoretical Flops"}
 	if opts.ShowMetrics {
 		base = append(base, "Kernels", "Metrics")
 	}
