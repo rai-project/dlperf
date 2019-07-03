@@ -1,5 +1,7 @@
 package writer
 
+import "strings"
+
 type Options struct {
 	Format                string
 	ShowBenchmarkName     bool
@@ -14,6 +16,7 @@ type Options struct {
 	ShowFlopsMetricsOnly  bool
 	AggregateFlopsMetrics bool
 	HideEmptyMetrics      bool
+	MetricFilter          []string
 }
 
 type Option func(*Options)
@@ -96,6 +99,18 @@ func HideEmptyMetrics(b bool) Option {
 	}
 }
 
+func MetricFilter(s []string) Option {
+	if s == nil {
+		s = []string{}
+	}
+	for ii, e := range s {
+		s[ii] = strings.TrimSpace(strings.ToLower(e))
+	}
+	return func(w *Options) {
+		w.MetricFilter = s
+	}
+}
+
 func NewOptions(opts ...Option) Options {
 	res := &Options{
 		Format:                "table",
@@ -111,6 +126,7 @@ func NewOptions(opts ...Option) Options {
 		ShowFlopsMetricsOnly:  false,
 		AggregateFlopsMetrics: false,
 		HideEmptyMetrics:      true,
+		MetricFilter:          []string{},
 	}
 
 	for _, o := range opts {

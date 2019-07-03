@@ -140,10 +140,35 @@ func (l bench) getKernelNames(iopts ...writer.Option) []string {
 func (l bench) getMetrics(iopts ...writer.Option) []string {
 	opts := writer.NewOptions(iopts...)
 
+	showMetric := func(name string) bool {
+		if len(opts.MetricFilter) == 0 {
+			return true
+		}
+		name = strings.ToLower(name)
+		for _, metric := range opts.MetricFilter {
+			if strings.ToLower(metric) == name {
+				return true
+			}
+		}
+		return false
+	}
+
+	getMetricName := func(s string) string {
+		if !strings.Contains(s, ":") {
+			return s
+		}
+		elems := strings.Split(s, ":")
+		return elems[1]
+	}
+
 	makeString := func(mp map[string]uint64) []string {
 		res := []string{}
 		for k, v := range mp {
 			if opts.HideEmptyMetrics && v == 0 {
+				continue
+			}
+			metricName := getMetricName(k)
+			if !showMetric(metricName) {
 				continue
 			}
 			res = append(res, fmt.Sprintf("%v:%v", k, v))

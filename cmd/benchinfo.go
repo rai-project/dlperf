@@ -40,6 +40,8 @@ var (
 	highlightShortestPath       bool
 	showFlopsMetricsOnly        bool
 	aggregateFlops              bool
+	metricFilterString          string
+	metricFilterList            []string
 	defaultTraversalStrategy    = "parallel"
 )
 
@@ -442,6 +444,7 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 		writer.ShowFlopsMetricsOnly(showFlopsMetricsOnly),
 		writer.AggregateFlopsMetrics(aggregateFlops),
 		writer.HideEmptyMetrics(true),
+		writer.MetricFilter(metricFilterList),
 	)
 	defer writer.Close()
 
@@ -464,6 +467,9 @@ var benchinfoCmd = &cobra.Command{
 		if traversalStrategy != "parallel" && traversalStrategy != "serial" {
 			return errors.New("invalid traversal strategy can be either `parallel` or `serial`")
 		}
+		if metricFilterString != "" {
+			metricFilterList = strings.Split(metricFilterString, ",")
+		}
 		return nil
 	},
 	RunE: benchinfo,
@@ -481,5 +487,6 @@ func init() {
 	benchinfoCmd.PersistentFlags().BoolVar(&makeGraphPlot, "graph", false, "generate a graphviz plot of the results")
 	benchinfoCmd.PersistentFlags().BoolVar(&showFlopsMetricsOnly, "flops_only", false, "show a table of only the theoretical and actual flops for each layer")
 	benchinfoCmd.PersistentFlags().BoolVar(&aggregateFlops, "flops_aggregate", false, "sum all the flops within a metric for each layer")
+	benchinfoCmd.PersistentFlags().StringVar(&metricFilterString, "metric_filter", "", "filter using the command seperated list of metrics")
 	rootCmd.AddCommand(benchinfoCmd)
 }
