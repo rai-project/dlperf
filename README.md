@@ -116,5 +116,5 @@ go run main.go benchinfo --model_path ~/data/carml/dlperf/ResNet50-v1/resnet50v1
 ### Fiter only certain metrics
 
 ```
-go run main.go benchinfo --model_path ~/data/carml/dlperf/ResNet50-v1/resnet50v1/resnet50v1.onnx --benchmark_database results/v100/profile/8.json.gz --short=false --batch_size=8 --human=false --strategy=parallel --metrics --output_file=tmp.tbl --flops_only --flops_aggregate=true --filter_metric=flop_count_sp
+go run main.go benchinfo --model_path ~/data/carml/dlperf/ResNet50-v1/resnet50v1/resnet50v1.onnx --benchmark_database results/v100/profile/8.json.gz --short=false --batch_size=8 --human=false --strategy=parallel --metrics --output_file=tmp.tbl --flops_only --flops_aggregate=true --metric_filter=flop_count_sp
 ```
