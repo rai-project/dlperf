@@ -11,8 +11,9 @@ type Options struct {
 	ShowLayerName           bool
 	ShowHumanFlops          bool
 	TrimBenchmarkName       bool
-	TrimLayerkName          bool
+	TrimLayerName           bool
 	ShowMangledKernelName   bool
+	ShowKernelNamesOnly     bool
 	ShowFlopsMetricsOnly    bool
 	AggregateFlopsMetrics   bool
 	HideEmptyMetrics        bool
@@ -70,9 +71,9 @@ func TrimBenchmarkName(b bool) Option {
 	}
 }
 
-func TrimLayerkName(b bool) Option {
+func TrimLayerName(b bool) Option {
 	return func(w *Options) {
-		w.TrimLayerkName = b
+		w.TrimLayerName = b
 	}
 }
 
@@ -85,6 +86,12 @@ func ShowMangledKernelName(b bool) Option {
 func ShowFlopsMetricsOnly(b bool) Option {
 	return func(w *Options) {
 		w.ShowFlopsMetricsOnly = b
+	}
+}
+
+func ShowKernelNamesOnly(b bool) Option {
+	return func(w *Options) {
+		w.ShowKernelNamesOnly = b
 	}
 }
 
@@ -128,10 +135,11 @@ func NewOptions(opts ...Option) Options {
 		ShowSummary:             true,
 		ShowHumanFlops:          true,
 		TrimBenchmarkName:       true,
-		TrimLayerkName:          true,
+		TrimLayerName:           true,
 		ShowMangledKernelName:   true,
 		ShowFlopsMetricsOnly:    false,
 		AggregateFlopsMetrics:   false,
+		ShowKernelNamesOnly:     false,
 		HideEmptyMetrics:        true,
 		TheoreticalFlopsFMAOnly: false,
 		MetricsFilter:           []string{},

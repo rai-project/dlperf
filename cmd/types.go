@@ -41,6 +41,9 @@ type bench struct {
 
 func (b bench) Header(iopts ...writer.Option) []string {
 	opts := writer.NewOptions(iopts...)
+	if opts.ShowKernelNamesOnly {
+		return []string{"LayerName", "LayerType", "Kernels"}
+	}
 	if opts.ShowFlopsMetricsOnly {
 		header := []string{"LayerName", "LayerType", "Theoretical Flops"}
 		if len(opts.MetricsFilter) != 0 {
@@ -101,8 +104,10 @@ func (l bench) Row(iopts ...writer.Option) []string {
 	flops := int64(0)
 	if l.Layer != nil {
 		layerName = l.Layer.Name()
-		if len(layerName) > 15 {
-			layerName = layerName[0:14] + "..."
+		if opts.TrimLayerName {
+			if len(layerName) > 15 {
+				layerName = layerName[0:14] + "..."
+			}
 		}
 		operatorType = l.Layer.OperatorType()
 	}
@@ -115,6 +120,13 @@ func (l bench) Row(iopts ...writer.Option) []string {
 	flopsString := fmt.Sprintf("%v", flops)
 	if opts.ShowHumanFlops {
 		flopsString = utils.Flops(uint64(flops))
+	}
+
+	if opts.ShowKernelNamesOnly {
+		kernels := l.getKernelNames(iopts...)
+		res := []string{layerName, operatorType}
+		res = append(res, kernels...)
+		return res
 	}
 
 	if opts.ShowFlopsMetricsOnly {
@@ -149,6 +161,10 @@ func (l bench) getKernelNames(iopts ...writer.Option) []string {
 		kernelName := kernelInfo.Name
 		if opts.ShowMangledKernelName {
 			kernelName = kernelInfo.MangledName
+		}
+		if opts.ShowKernelNamesOnly {
+			kernels = append(kernels, kernelName)
+			continue
 		}
 		kernels = append(kernels, fmt.Sprintf("%d:%s", ii, kernelName))
 	}

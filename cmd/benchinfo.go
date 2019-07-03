@@ -40,6 +40,8 @@ var (
 	highlightShortestPath       bool
 	showFlopsMetricsOnly        bool
 	aggregateFlops              bool
+	showKernelNamesOnly         bool
+	trimLayerName               bool = true
 	showTotalInformation        bool = true
 	metricFilterString          string
 	metricFilterList            []string
@@ -448,6 +450,8 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 		writer.AggregateFlopsMetrics(aggregateFlops),
 		writer.HideEmptyMetrics(true),
 		writer.MetricsFilter(metricFilterList),
+		writer.TrimLayerName(trimLayerName),
+		writer.ShowKernelNamesOnly(showKernelNamesOnly),
 	)
 	defer writer.Close()
 
@@ -488,9 +492,11 @@ func init() {
 	benchinfoCmd.PersistentFlags().BoolVar(&showBenchInfo, "show", false, "generate the benchmark info graph (only for parallel for now)")
 	benchinfoCmd.PersistentFlags().BoolVar(&showBenchInfoMetrics, "metrics", false, "grabs the metrics from the benchmarks")
 	benchinfoCmd.PersistentFlags().BoolVar(&makeGraphPlot, "graph", false, "generate a graphviz plot of the results")
+	benchinfoCmd.PersistentFlags().BoolVar(&showKernelNamesOnly, "kernels_only", false, "show a table of only the layers and corresponding kernels")
 	benchinfoCmd.PersistentFlags().BoolVar(&showFlopsMetricsOnly, "flops_only", false, "show a table of only the theoretical and actual flops for each layer")
 	benchinfoCmd.PersistentFlags().BoolVar(&aggregateFlops, "flops_aggregate", false, "sum all the flops within a metric for each layer")
 	benchinfoCmd.PersistentFlags().StringVar(&metricFilterString, "metric_filter", "", "filter using the command seperated list of metrics")
 	benchinfoCmd.PersistentFlags().BoolVar(&showTotalInformation, "total", true, "show the total information across all layers")
+	benchinfoCmd.PersistentFlags().BoolVar(&trimLayerName, "trim_layer_name", true, "only show the first few characters of a layer")
 	rootCmd.AddCommand(benchinfoCmd)
 }
