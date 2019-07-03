@@ -125,7 +125,7 @@ func (l bench) Row(iopts ...writer.Option) []string {
 	if opts.ShowKernelNamesOnly {
 		kernels := l.getKernelNames(iopts...)
 		res := []string{layerName, operatorType}
-		res = append(res, kernels...)
+		res = append(res, strings.Join(kernels, ";"))
 		return res
 	}
 
