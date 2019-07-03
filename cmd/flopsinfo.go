@@ -10,6 +10,7 @@ import (
 	zglob "github.com/mattn/go-zglob"
 	"github.com/pkg/errors"
 	"github.com/rai-project/dlperf/pkg/onnx"
+	"github.com/rai-project/dlperf/pkg/writer"
 	"github.com/spf13/cobra"
 )
 
@@ -57,7 +58,10 @@ func runFlopsCmd(cmd *cobra.Command, args []string) error {
 			return err
 		}
 
-		writer := NewWriter(layerFlops{})
+		writer := NewWriter(
+			layerFlops{},
+			writer.ShowHumanFlops(humanFlops),
+		)
 		defer writer.Close()
 
 		for _, info := range infos {
@@ -79,7 +83,10 @@ func runFlopsCmd(cmd *cobra.Command, args []string) error {
 
 	info := net.FlopsInformation()
 
-	writer := NewWriter(netFlopsSummary{})
+	writer := NewWriter(
+		netFlopsSummary{},
+		writer.ShowHumanFlops(humanFlops),
+	)
 	defer writer.Close()
 
 	writer.Row(netFlopsSummary{Name: "MultipleAdds", Value: info.MultiplyAdds})

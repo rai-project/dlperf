@@ -11,6 +11,9 @@ type Options struct {
 	TrimBenchmarkName     bool
 	TrimLayerkName        bool
 	ShowMangledKernelName bool
+	ShowFlopsMetricsOnly  bool
+	AggregateFlopsMetrics bool
+	HideEmptyMetrics      bool
 }
 
 type Option func(*Options)
@@ -75,6 +78,24 @@ func ShowMangledKernelName(b bool) Option {
 	}
 }
 
+func ShowFlopsMetricsOnly(b bool) Option {
+	return func(w *Options) {
+		w.ShowFlopsMetricsOnly = b
+	}
+}
+
+func AggregateFlopsMetrics(b bool) Option {
+	return func(w *Options) {
+		w.AggregateFlopsMetrics = b
+	}
+}
+
+func HideEmptyMetrics(b bool) Option {
+	return func(w *Options) {
+		w.HideEmptyMetrics = b
+	}
+}
+
 func NewOptions(opts ...Option) Options {
 	res := &Options{
 		Format:                "table",
@@ -87,6 +108,9 @@ func NewOptions(opts ...Option) Options {
 		TrimBenchmarkName:     true,
 		TrimLayerkName:        true,
 		ShowMangledKernelName: true,
+		ShowFlopsMetricsOnly:  false,
+		AggregateFlopsMetrics: false,
+		HideEmptyMetrics:      true,
 	}
 
 	for _, o := range opts {

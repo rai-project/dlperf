@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"github.com/rai-project/dlperf/pkg/onnx"
+	"github.com/rai-project/dlperf/pkg/writer"
 	"github.com/spf13/cobra"
 )
 
@@ -33,7 +34,10 @@ var patternCmd = &cobra.Command{
 
 		patterns := subseqs.Counts()
 
-		writer := NewWriter(pattern{})
+		writer := NewWriter(
+			pattern{},
+			writer.ShowHumanFlops(humanFlops),
+		)
 		defer writer.Close()
 
 		for _, pat := range patterns {

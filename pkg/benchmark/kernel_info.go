@@ -54,9 +54,10 @@ func getBenchmarkKernelInfo(attrs map[string]interface{}, kernelName string) Ker
 	nameHash := fnvOfString(kernelName)
 
 	res := KernelInfo{
-		Name:     kernelName,
-		NameHash: nameHash,
-		Metrics:  map[string][]uint64{},
+		Name:        demangleName(kernelName),
+		MangledName: kernelName,
+		NameHash:    nameHash,
+		Metrics:     map[string][]uint64{},
 	}
 
 	for k, v := range attrs {

@@ -3,6 +3,7 @@ package cmd
 import (
 	"fmt"
 	"regexp"
+	"sort"
 	"strings"
 	"time"
 
@@ -40,9 +41,12 @@ type bench struct {
 
 func (b bench) Header(iopts ...writer.Option) []string {
 	opts := writer.NewOptions(iopts...)
+	if opts.ShowFlopsMetricsOnly {
+		return []string{"LayerName", "LayerType", "Flops", "Metrics"}
+	}
 	base := []string{"LayerName", "LayerType", "BenchmarkName", "RealTime(ms)", "Flops"}
 	if opts.ShowMetrics {
-		base = append(base, "kernels", "metrics")
+		base = append(base, "Kernels", "Metrics")
 	}
 	return base
 	// flopsInfo := dlperf.FlopsInformation{}.Header()
@@ -97,30 +101,77 @@ func (l bench) Row(iopts ...writer.Option) []string {
 	flops = l.Flops.Total()
 
 	flopsString := fmt.Sprintf("%v", flops)
-	if humanFlops {
+	if opts.ShowHumanFlops {
 		flopsString = utils.Flops(uint64(flops))
+	}
+
+	if opts.ShowFlopsMetricsOnly {
+		return []string{layerName, operatorType, flopsString, strings.Join(l.getMetrics(iopts...), ";")}
 	}
 
 	base := []string{layerName, operatorType, benchmarkName, realTime, flopsString}
 	if opts.ShowMetrics {
-		kernels := []string{}
-		metrics := []string{}
-		for ii, kernelInfo := range l.Benchmark.KernelInfos {
-			kernels = append(kernels, fmt.Sprintf("%d:%s", ii, kernelInfo.Name))
-			kernelMetrics := []string{}
-			for meticName, metricValues := range kernelInfo.Metrics {
-				mean := trimmedMeanUint64Slice(metricValues, DefaultTrimmedMeanFraction)
-				kernelMetrics = append(kernelMetrics, fmt.Sprintf("%d:%s:%v", ii, meticName, mean))
-			}
-			metrics = append(metrics, strings.Join(kernelMetrics, ";"))
-		}
+		kernels := l.getKernelNames(iopts...)
+		metrics := l.getMetrics(iopts...)
 		base = append(base, strings.Join(kernels, ";"), strings.Join(metrics, ";"))
 	}
+
 	return base
-	// flops := l.flops.Row(humanFlops)
-	// flops = append(flops, flopsToString(l.flops.Total(), humanFlops))
+	// flops := l.flops.Row(opts.ShowHumanFlops)
+	// flops = append(flops, flopsToString(l.flops.Total(), opts.ShowHumanFlops))
 
 	// return append(base, flops...)
+}
+
+func (l bench) getKernelNames(iopts ...writer.Option) []string {
+	opts := writer.NewOptions(iopts...)
+	kernels := []string{}
+	for ii, kernelInfo := range l.Benchmark.KernelInfos {
+		kernelName := kernelInfo.Name
+		if opts.ShowMangledKernelName {
+			kernelName = kernelInfo.MangledName
+		}
+		kernels = append(kernels, fmt.Sprintf("%d:%s", ii, kernelName))
+	}
+	sort.Strings(kernels)
+	return kernels
+}
+
+func (l bench) getMetrics(iopts ...writer.Option) []string {
+	opts := writer.NewOptions(iopts...)
+
+	makeString := func(mp map[string]uint64) []string {
+		res := []string{}
+		for k, v := range mp {
+			if opts.HideEmptyMetrics && v == 0 {
+				continue
+			}
+			res = append(res, fmt.Sprintf("%v:%v", k, v))
+		}
+		return res
+	}
+
+	metrics := map[string]uint64{}
+
+	for ii, kernelInfo := range l.Benchmark.KernelInfos {
+		for metricName, metricValues := range kernelInfo.Metrics {
+			metricMeanValue := trimmedMeanUint64Slice(metricValues, DefaultTrimmedMeanFraction)
+			if opts.AggregateFlopsMetrics {
+				key := fmt.Sprintf("%s", metricName)
+				if _, ok := metrics[key]; !ok {
+					metrics[key] = 0
+				}
+				metrics[key] += metricMeanValue
+			} else {
+				// dependent on the kernel
+				key := fmt.Sprintf("%d:%s", ii, metricName)
+				metrics[key] = metricMeanValue
+			}
+		}
+	}
+	res := makeString(metrics)
+	sort.Strings(res)
+	return res
 }
 
 type stat struct {

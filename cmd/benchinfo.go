@@ -38,6 +38,8 @@ var (
 	makeGraphPlot               bool
 	showBenchInfoMetrics        bool
 	highlightShortestPath       bool
+	showFlopsMetricsOnly        bool
+	aggregateFlops              bool
 	defaultTraversalStrategy    = "parallel"
 )
 
@@ -433,7 +435,14 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 			},
 		})
 
-	writer := NewWriter(bench{}, writer.ShowMetrics(showBenchInfoMetrics))
+	writer := NewWriter(
+		bench{},
+		writer.ShowHumanFlops(humanFlops),
+		writer.ShowMetrics(showBenchInfoMetrics),
+		writer.ShowFlopsMetricsOnly(showFlopsMetricsOnly),
+		writer.AggregateFlopsMetrics(aggregateFlops),
+		writer.HideEmptyMetrics(true),
+	)
 	defer writer.Close()
 
 	for _, lyr := range benchmarkInfo {
@@ -470,5 +479,7 @@ func init() {
 	benchinfoCmd.PersistentFlags().BoolVar(&showBenchInfo, "show", false, "generate the benchmark info graph (only for parallel for now)")
 	benchinfoCmd.PersistentFlags().BoolVar(&showBenchInfoMetrics, "metrics", false, "grabs the metrics from the benchmarks")
 	benchinfoCmd.PersistentFlags().BoolVar(&makeGraphPlot, "graph", false, "generate a graphviz plot of the results")
+	benchinfoCmd.PersistentFlags().BoolVar(&showFlopsMetricsOnly, "flops_only", false, "show a table of only the theoretical and actual flops for each layer")
+	benchinfoCmd.PersistentFlags().BoolVar(&aggregateFlops, "flops_aggregate", false, "sum all the flops within a metric for each layer")
 	rootCmd.AddCommand(benchinfoCmd)
 }

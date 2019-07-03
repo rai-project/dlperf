@@ -12,6 +12,7 @@ import (
 	"github.com/k0kubun/pp"
 	"github.com/pkg/errors"
 	"github.com/rai-project/dlperf/pkg/onnx"
+	"github.com/rai-project/dlperf/pkg/writer"
 	"github.com/spf13/cobra"
 	"gonum.org/v1/gonum/graph/encoding/dot"
 )
@@ -93,7 +94,10 @@ func runLayerStats(cmd *cobra.Command, args []string) error {
 		return err
 	}
 
-	writer := NewWriter(stat{})
+	writer := NewWriter(
+		stat{},
+		writer.ShowHumanFlops(humanFlops),
+	)
 	defer writer.Close()
 
 	for _, info := range infos {
