@@ -16,7 +16,7 @@ type Options struct {
 	ShowFlopsMetricsOnly  bool
 	AggregateFlopsMetrics bool
 	HideEmptyMetrics      bool
-	MetricFilter          []string
+	MetricsFilter         []string
 }
 
 type Option func(*Options)
@@ -99,7 +99,7 @@ func HideEmptyMetrics(b bool) Option {
 	}
 }
 
-func MetricFilter(s []string) Option {
+func MetricsFilter(s []string) Option {
 	if s == nil {
 		s = []string{}
 	}
@@ -107,7 +107,7 @@ func MetricFilter(s []string) Option {
 		s[ii] = strings.TrimSpace(strings.ToLower(e))
 	}
 	return func(w *Options) {
-		w.MetricFilter = s
+		w.MetricsFilter = s
 	}
 }
 
@@ -126,7 +126,7 @@ func NewOptions(opts ...Option) Options {
 		ShowFlopsMetricsOnly:  false,
 		AggregateFlopsMetrics: false,
 		HideEmptyMetrics:      true,
-		MetricFilter:          []string{},
+		MetricsFilter:         []string{},
 	}
 
 	for _, o := range opts {

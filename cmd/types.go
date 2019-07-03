@@ -42,7 +42,15 @@ type bench struct {
 func (b bench) Header(iopts ...writer.Option) []string {
 	opts := writer.NewOptions(iopts...)
 	if opts.ShowFlopsMetricsOnly {
-		return []string{"LayerName", "LayerType", "Flops", "Metrics"}
+		header := []string{"LayerName", "LayerType", "Flops"}
+		if len(opts.MetricsFilter) != 0 {
+			for _, filterName := range opts.MetricsFilter {
+				header = append(header, filterName)
+			}
+			return header
+		}
+		header = append(header, "Metrics")
+		return header
 	}
 	base := []string{"LayerName", "LayerType", "BenchmarkName", "RealTime(ms)", "Flops"}
 	if opts.ShowMetrics {
@@ -106,7 +114,14 @@ func (l bench) Row(iopts ...writer.Option) []string {
 	}
 
 	if opts.ShowFlopsMetricsOnly {
-		return []string{layerName, operatorType, flopsString, strings.Join(l.getMetrics(iopts...), ";")}
+		metrics := l.getMetrics(iopts...)
+		res := []string{layerName, operatorType, flopsString}
+		if len(opts.MetricsFilter) != 0 {
+			res = append(res, metrics...)
+		} else {
+			res = append(res, strings.Join(metrics, ";"))
+		}
+		return res
 	}
 
 	base := []string{layerName, operatorType, benchmarkName, realTime, flopsString}
@@ -139,13 +154,14 @@ func (l bench) getKernelNames(iopts ...writer.Option) []string {
 
 func (l bench) getMetrics(iopts ...writer.Option) []string {
 	opts := writer.NewOptions(iopts...)
+	hasFilter := len(opts.MetricsFilter) != 0
 
 	showMetric := func(name string) bool {
-		if len(opts.MetricFilter) == 0 {
+		if !hasFilter {
 			return true
 		}
 		name = strings.ToLower(name)
-		for _, metric := range opts.MetricFilter {
+		for _, metric := range opts.MetricsFilter {
 			if strings.ToLower(metric) == name {
 				return true
 			}
@@ -171,7 +187,11 @@ func (l bench) getMetrics(iopts ...writer.Option) []string {
 			if !showMetric(metricName) {
 				continue
 			}
-			res = append(res, fmt.Sprintf("%v:%v", k, v))
+			if hasFilter {
+				res = append(res, fmt.Sprintf("%v", v))
+			} else {
+				res = append(res, fmt.Sprintf("%v:%v", k, v))
+			}
 		}
 		return res
 	}

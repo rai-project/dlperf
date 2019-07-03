@@ -444,7 +444,7 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 		writer.ShowFlopsMetricsOnly(showFlopsMetricsOnly),
 		writer.AggregateFlopsMetrics(aggregateFlops),
 		writer.HideEmptyMetrics(true),
-		writer.MetricFilter(metricFilterList),
+		writer.MetricsFilter(metricFilterList),
 	)
 	defer writer.Close()
 
