@@ -40,6 +40,7 @@ var (
 	highlightShortestPath       bool
 	showFlopsMetricsOnly        bool
 	aggregateFlops              bool
+	showTotalInformation        bool = true
 	metricFilterString          string
 	metricFilterList            []string
 	defaultTraversalStrategy    = "parallel"
@@ -424,18 +425,20 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 
 	}
 
-	benchmarkInfo = append(benchmarkInfo,
-		benchmarkGraphNode{
-			Benchmarks: []*bench{
-				&bench{
-					Benchmark: benchmark.Benchmark{
-						Name:     "Total",
-						RealTime: totalTime,
+	if showTotalInformation {
+		benchmarkInfo = append(benchmarkInfo,
+			benchmarkGraphNode{
+				Benchmarks: []*bench{
+					&bench{
+						Benchmark: benchmark.Benchmark{
+							Name:     "Total",
+							RealTime: totalTime,
+						},
+						Flops: totalFlops,
 					},
-					Flops: totalFlops,
 				},
-			},
-		})
+			})
+	}
 
 	writer := NewWriter(
 		bench{},
@@ -488,5 +491,6 @@ func init() {
 	benchinfoCmd.PersistentFlags().BoolVar(&showFlopsMetricsOnly, "flops_only", false, "show a table of only the theoretical and actual flops for each layer")
 	benchinfoCmd.PersistentFlags().BoolVar(&aggregateFlops, "flops_aggregate", false, "sum all the flops within a metric for each layer")
 	benchinfoCmd.PersistentFlags().StringVar(&metricFilterString, "metric_filter", "", "filter using the command seperated list of metrics")
+	benchinfoCmd.PersistentFlags().BoolVar(&showTotalInformation, "total", true, "show the total information across all layers")
 	rootCmd.AddCommand(benchinfoCmd)
 }

@@ -3,20 +3,21 @@ package writer
 import "strings"
 
 type Options struct {
-	Format                string
-	ShowBenchmarkName     bool
-	ShowMetrics           bool
-	ShowSummary           bool
-	ShowKernelName        bool
-	ShowLayerName         bool
-	ShowHumanFlops        bool
-	TrimBenchmarkName     bool
-	TrimLayerkName        bool
-	ShowMangledKernelName bool
-	ShowFlopsMetricsOnly  bool
-	AggregateFlopsMetrics bool
-	HideEmptyMetrics      bool
-	MetricsFilter         []string
+	Format                  string
+	ShowBenchmarkName       bool
+	ShowMetrics             bool
+	ShowSummary             bool
+	ShowKernelName          bool
+	ShowLayerName           bool
+	ShowHumanFlops          bool
+	TrimBenchmarkName       bool
+	TrimLayerkName          bool
+	ShowMangledKernelName   bool
+	ShowFlopsMetricsOnly    bool
+	AggregateFlopsMetrics   bool
+	HideEmptyMetrics        bool
+	TheoreticalFlopsFMAOnly bool
+	MetricsFilter           []string
 }
 
 type Option func(*Options)
@@ -111,22 +112,29 @@ func MetricsFilter(s []string) Option {
 	}
 }
 
+func TheoreticalFlopsFMAOnly(b bool) Option {
+	return func(w *Options) {
+		w.TheoreticalFlopsFMAOnly = b
+	}
+}
+
 func NewOptions(opts ...Option) Options {
 	res := &Options{
-		Format:                "table",
-		ShowBenchmarkName:     true,
-		ShowKernelName:        true,
-		ShowLayerName:         true,
-		ShowMetrics:           true,
-		ShowSummary:           true,
-		ShowHumanFlops:        true,
-		TrimBenchmarkName:     true,
-		TrimLayerkName:        true,
-		ShowMangledKernelName: true,
-		ShowFlopsMetricsOnly:  false,
-		AggregateFlopsMetrics: false,
-		HideEmptyMetrics:      true,
-		MetricsFilter:         []string{},
+		Format:                  "table",
+		ShowBenchmarkName:       true,
+		ShowKernelName:          true,
+		ShowLayerName:           true,
+		ShowMetrics:             true,
+		ShowSummary:             true,
+		ShowHumanFlops:          true,
+		TrimBenchmarkName:       true,
+		TrimLayerkName:          true,
+		ShowMangledKernelName:   true,
+		ShowFlopsMetricsOnly:    false,
+		AggregateFlopsMetrics:   false,
+		HideEmptyMetrics:        true,
+		TheoreticalFlopsFMAOnly: false,
+		MetricsFilter:           []string{},
 	}
 
 	for _, o := range opts {

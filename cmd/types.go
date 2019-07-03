@@ -108,6 +108,10 @@ func (l bench) Row(iopts ...writer.Option) []string {
 	}
 	flops = l.Flops.Total()
 
+	if opts.TheoreticalFlopsFMAOnly {
+		flops = l.Flops.MultiplyAdds
+	}
+
 	flopsString := fmt.Sprintf("%v", flops)
 	if opts.ShowHumanFlops {
 		flopsString = utils.Flops(uint64(flops))
