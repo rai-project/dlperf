@@ -1,8 +1,17 @@
 package cmd
 
+import "github.com/rai-project/dlperf/pkg/writer"
+
 type modelURLInfo struct {
-	URL  string
-	Name string
+	Name string `json:"name,omitempty"`
+	URL  string `json:"url,omitempty"`
+}
+
+func (modelURLInfo) Header(opts ...writer.Option) []string {
+	return []string{"Name", "URL"}
+}
+func (m modelURLInfo) Row(opts ...writer.Option) []string {
+	return []string{m.Name, m.URL}
 }
 
 var ourModelURLs = []modelURLInfo{

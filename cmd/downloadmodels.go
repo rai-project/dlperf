@@ -29,7 +29,7 @@ func opsetName(url string) string {
 // downloadModelsCmd represents the downloadmodels command
 var downloadModelsCmd = &cobra.Command{
 	Use:     "downloadmodels",
-	Aliases: []string{"download"},
+	Aliases: []string{"download", "download_models"},
 	PreRunE: func(cmd *cobra.Command, args []string) error {
 		if outputFileName == "automatic" || outputFileName == "" {
 			outputFileName = filepath.Join(config.App.TempDir, "dlperf")

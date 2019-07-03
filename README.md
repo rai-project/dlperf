@@ -2,12 +2,28 @@
 
 [![Build Status](https://travis-ci.org/rai-project/dlperf.svg?branch=master)](https://travis-ci.org/rai-project/dlperf)
 
+## Show Registered Models
+
+Show the models listed models in [model_urls](cmd/model_urls.go)
+
+```bash
+go run main.go list
+```
+
 ## Download Models
 
 Download the models listed models in [model_urls](cmd/model_urls.go) to `model_dir` using
 
 ```bash
-go run main.go downloadmodels --model_dir ~/onnx_models
+go run main.go downloadmodels -o ~/data/carml/dlperf
+```
+
+## Show Downloaded Models
+
+Show downloaded model paths
+
+```bash
+go run main.go paths --model_path ~/onnx_models
 ```
 
 ## Layer Stats

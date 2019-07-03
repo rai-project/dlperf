@@ -138,13 +138,13 @@ func (w *Writer) Flush() {
 }
 
 func (w *Writer) Close() {
-	opts := writer.NewOptions(w.opts...)
-	format := opts.Format
 	w.Flush()
 	if w.outputFileName != "" {
 		com.WriteFile(w.outputFileName, w.output.(*bytes.Buffer).Bytes())
 		return
 	}
+	opts := writer.NewOptions(w.opts...)
+	format := opts.Format
 	if format == "json" {
 		fmt.Println(w.json)
 	}
