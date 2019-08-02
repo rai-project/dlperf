@@ -20,7 +20,7 @@ func runFlopsCmd(cmd *cobra.Command, args []string) error {
 		if !com.IsDir(baseOutputFileName) {
 			os.MkdirAll(baseOutputFileName, os.ModePerm)
 		}
-		modelPaths, err := zglob.Glob(filepath.Join(modelPath, "**", "*.onnx"))
+		modelPaths, err := getModelsIn(modelPath)
 		if err != nil {
 			return errors.Wrapf(err, "unable to glob %s", modelPath)
 		}

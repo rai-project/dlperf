@@ -98,10 +98,15 @@ func getModelsIn(modelPath string) ([]string, error) {
 	}
 	modelPaths := []string{}
 	for _, modelPath := range modelPaths0 {
-		modelName := getModelName(modelPath)
-		if strings.HasPrefix(modelName, ".") || strings.HasPrefix(filepath.Base(modelPath), ".") {
+    fileName := filepath.BaseName(modelPath)
+    pp.Println(fileName)
+		if strings.HasPrefix(fileName, ".") {
 			continue
-		}
+    }
+		modelName := getModelName(modelPath)
+		if strings.HasPrefix(modelName, ".")  {
+			continue
+    }
 		modelPaths = append(modelPaths, modelPath)
 	}
 	return modelPaths, nil

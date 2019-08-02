@@ -10,8 +10,6 @@ import (
 	"os"
 	"strings"
 
-	"github.com/360EntSecGroup-Skylar/excelize"
-
 	"github.com/k0kubun/pp"
 
 	"github.com/Unknwon/com"
@@ -19,17 +17,12 @@ import (
 	"github.com/rai-project/dlperf/pkg/writer"
 )
 
-type excel struct {
-	*excelize.File
-	sheet int
-}
 
 type Writer struct {
 	output         io.Writer
 	outputFileName string
 	tbl            *tablewriter.Table
 	csv            *csv.Writer
-	excel          *excel
 	json           []string
 	opts           []writer.Option
 }
@@ -58,12 +51,6 @@ func NewWriter(rower Rower, iopts ...writer.Option) *Writer {
 		wr.tbl = tablewriter.NewWriter(output)
 	case "csv":
 		wr.csv = csv.NewWriter(output)
-	case "xslt", "excel":
-		ex := excelize.NewFile()
-		wr.excel = &excel{
-			File:  ex,
-			sheet: ex.NewSheet("Sheet1"),
-		}
 	case "json":
 		wr.json = []string{}
 	}

@@ -150,12 +150,8 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer(out *jwriter.Writer
 	_ = first
 	if in.BatchSize != 0 {
 		const prefix string = ",\"batch_size\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
+		first = false
+		out.RawString(prefix[1:])
 		out.Int64(int64(in.BatchSize))
 	}
 	if in.Input0 != 0 {
@@ -394,22 +390,12 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkg(out *jwriter.Writer, in 
 	_ = first
 	{
 		const prefix string = ",\"name\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
+		out.RawString(prefix[1:])
 		out.String(string(in.Name))
 	}
 	{
 		const prefix string = ",\"ctype\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
+		out.RawString(prefix)
 		out.String(string(in.CType))
 	}
 	out.RawByte('}')
@@ -546,12 +532,8 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer1(out *jwriter.Write
 	_ = first
 	if in.BatchSize != 0 {
 		const prefix string = ",\"batch_size\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
+		first = false
+		out.RawString(prefix[1:])
 		out.Int64(int64(in.BatchSize))
 	}
 	if in.Input0 != 0 {
@@ -883,12 +865,8 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer2(out *jwriter.Write
 	_ = first
 	if in.Input0 != 0 {
 		const prefix string = ",\"input_0\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
+		first = false
+		out.RawString(prefix[1:])
 		out.Int64(int64(in.Input0))
 	}
 	if in.Input1 != 0 {
@@ -1236,12 +1214,8 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer3(out *jwriter.Write
 	_ = first
 	if in.BatchSize != 0 {
 		const prefix string = ",\"batch_size\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
+		first = false
+		out.RawString(prefix[1:])
 		out.Int64(int64(in.BatchSize))
 	}
 	if in.Input0 != 0 {
@@ -1571,12 +1545,8 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer4(out *jwriter.Write
 	_ = first
 	if in.BatchSize != 0 {
 		const prefix string = ",\"batch_size\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
+		first = false
+		out.RawString(prefix[1:])
 		out.Int64(int64(in.BatchSize))
 	}
 	{
@@ -1591,92 +1561,47 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer4(out *jwriter.Write
 	}
 	if in.Input0 != 0 {
 		const prefix string = ",\"input_0\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
+		out.RawString(prefix)
 		out.Int64(int64(in.Input0))
 	}
 	if in.Input1 != 0 {
 		const prefix string = ",\"input_1\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
+		out.RawString(prefix)
 		out.Int64(int64(in.Input1))
 	}
 	if in.Input2 != 0 {
 		const prefix string = ",\"input_2\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
+		out.RawString(prefix)
 		out.Int64(int64(in.Input2))
 	}
 	if in.Input3 != 0 {
 		const prefix string = ",\"input_3\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
+		out.RawString(prefix)
 		out.Int64(int64(in.Input3))
 	}
 	if in.Input4 != 0 {
 		const prefix string = ",\"input_4\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
+		out.RawString(prefix)
 		out.Int64(int64(in.Input4))
 	}
 	if in.Input5 != 0 {
 		const prefix string = ",\"input_5\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
+		out.RawString(prefix)
 		out.Int64(int64(in.Input5))
 	}
 	if in.Input6 != 0 {
 		const prefix string = ",\"input_6\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
+		out.RawString(prefix)
 		out.Int64(int64(in.Input6))
 	}
 	if in.Input7 != 0 {
 		const prefix string = ",\"input_7\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
+		out.RawString(prefix)
 		out.Int64(int64(in.Input7))
 	}
 	if len(in.ArgNames) != 0 {
 		const prefix string = ",\"arg_names\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
+		out.RawString(prefix)
 		{
 			out.RawByte('[')
 			for v40, v41 := range in.ArgNames {
@@ -1690,32 +1615,17 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer4(out *jwriter.Write
 	}
 	if in.UniqueBenchmarkID != 0 {
 		const prefix string = ",\"unique_benchmark_id\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
+		out.RawString(prefix)
 		out.Uint64(uint64(in.UniqueBenchmarkID))
 	}
 	if in.BenchmarkName != "" {
 		const prefix string = ",\"benchmark_name\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
+		out.RawString(prefix)
 		out.String(string(in.BenchmarkName))
 	}
 	if len(in.Algorithms) != 0 {
 		const prefix string = ",\"algorithms\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
+		out.RawString(prefix)
 		{
 			out.RawByte('[')
 			for v42, v43 := range in.Algorithms {
@@ -1729,12 +1639,7 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer4(out *jwriter.Write
 	}
 	if len(in.DataTypes) != 0 {
 		const prefix string = ",\"data_types\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
+		out.RawString(prefix)
 		{
 			out.RawByte('[')
 			for v44, v45 := range in.DataTypes {
@@ -1748,12 +1653,7 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer4(out *jwriter.Write
 	}
 	if in.IsTraining {
 		const prefix string = ",\"is_training\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
+		out.RawString(prefix)
 		out.Bool(bool(in.IsTraining))
 	}
 	out.RawByte('}')
@@ -1914,12 +1814,8 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer5(out *jwriter.Write
 	_ = first
 	if in.BatchSize != 0 {
 		const prefix string = ",\"batch_size\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
+		first = false
+		out.RawString(prefix[1:])
 		out.Int64(int64(in.BatchSize))
 	}
 	if in.Input0 != 0 {
@@ -2267,12 +2163,8 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer6(out *jwriter.Write
 	_ = first
 	if in.Input0 != 0 {
 		const prefix string = ",\"input_0\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
+		first = false
+		out.RawString(prefix[1:])
 		out.Int64(int64(in.Input0))
 	}
 	if in.Input1 != 0 {
@@ -2680,112 +2572,57 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer7(out *jwriter.Write
 	_ = first
 	{
 		const prefix string = ",\"is_training\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
+		out.RawString(prefix[1:])
 		out.Bool(bool(in.IsTraining))
 	}
 	if in.BatchSize != 0 {
 		const prefix string = ",\"batch_size\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
+		out.RawString(prefix)
 		out.Int64(int64(in.BatchSize))
 	}
 	if in.Input0 != 0 {
 		const prefix string = ",\"input_0\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
+		out.RawString(prefix)
 		out.Int64(int64(in.Input0))
 	}
 	if in.Input1 != 0 {
 		const prefix string = ",\"input_1\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
+		out.RawString(prefix)
 		out.Int64(int64(in.Input1))
 	}
 	if in.Input2 != 0 {
 		const prefix string = ",\"input_2\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
+		out.RawString(prefix)
 		out.Int64(int64(in.Input2))
 	}
 	if in.Input3 != 0 {
 		const prefix string = ",\"input_3\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
+		out.RawString(prefix)
 		out.Int64(int64(in.Input3))
 	}
 	if in.Input4 != 0 {
 		const prefix string = ",\"input_4\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
+		out.RawString(prefix)
 		out.Int64(int64(in.Input4))
 	}
 	if in.Input5 != 0 {
 		const prefix string = ",\"input_5\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
+		out.RawString(prefix)
 		out.Int64(int64(in.Input5))
 	}
 	if in.Input6 != 0 {
 		const prefix string = ",\"input_6\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
+		out.RawString(prefix)
 		out.Int64(int64(in.Input6))
 	}
 	if in.Input7 != 0 {
 		const prefix string = ",\"input_7\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
+		out.RawString(prefix)
 		out.Int64(int64(in.Input7))
 	}
 	if len(in.ArgNames) != 0 {
 		const prefix string = ",\"arg_names\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
+		out.RawString(prefix)
 		{
 			out.RawByte('[')
 			for v67, v68 := range in.ArgNames {
@@ -2799,32 +2636,17 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer7(out *jwriter.Write
 	}
 	if in.UniqueBenchmarkID != 0 {
 		const prefix string = ",\"unique_benchmark_id\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
+		out.RawString(prefix)
 		out.Uint64(uint64(in.UniqueBenchmarkID))
 	}
 	if in.BenchmarkName != "" {
 		const prefix string = ",\"benchmark_name\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
+		out.RawString(prefix)
 		out.String(string(in.BenchmarkName))
 	}
 	if len(in.Algorithms) != 0 {
 		const prefix string = ",\"algorithms\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
+		out.RawString(prefix)
 		{
 			out.RawByte('[')
 			for v69, v70 := range in.Algorithms {
@@ -2838,12 +2660,7 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer7(out *jwriter.Write
 	}
 	if len(in.DataTypes) != 0 {
 		const prefix string = ",\"data_types\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
+		out.RawString(prefix)
 		{
 			out.RawByte('[')
 			for v71, v72 := range in.DataTypes {
@@ -3084,12 +2901,8 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer8(out *jwriter.Write
 	_ = first
 	if len(in.Axes) != 0 {
 		const prefix string = ",\"axes\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
+		first = false
+		out.RawString(prefix[1:])
 		{
 			out.RawByte('[')
 			for v80, v81 := range in.Axes {
@@ -3458,12 +3271,8 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer9(out *jwriter.Write
 	_ = first
 	if len(in.Permutation) != 0 {
 		const prefix string = ",\"perm\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
+		first = false
+		out.RawString(prefix[1:])
 		{
 			out.RawByte('[')
 			for v101, v102 := range in.Permutation {
@@ -3813,12 +3622,8 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer10(out *jwriter.Writ
 	_ = first
 	if in.K != 0 {
 		const prefix string = ",\"k\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
+		first = false
+		out.RawString(prefix[1:])
 		out.Int64(int64(in.K))
 	}
 	if in.Axis != 0 {
@@ -4188,12 +3993,8 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer11(out *jwriter.Writ
 	_ = first
 	if len(in.Axes) != 0 {
 		const prefix string = ",\"axes\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
+		first = false
+		out.RawString(prefix[1:])
 		{
 			out.RawByte('[')
 			for v140, v141 := range in.Axes {
@@ -4539,12 +4340,8 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer12(out *jwriter.Writ
 	_ = first
 	if in.Name_ != "" {
 		const prefix string = ",\"name\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
+		first = false
+		out.RawString(prefix[1:])
 		out.String(string(in.Name_))
 	}
 	if in.OperatorType_ != "" {
@@ -4871,12 +4668,8 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer13(out *jwriter.Writ
 	_ = first
 	if in.Name_ != "" {
 		const prefix string = ",\"name\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
+		first = false
+		out.RawString(prefix[1:])
 		out.String(string(in.Name_))
 	}
 	if in.OperatorType_ != "" {
@@ -5203,12 +4996,8 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer14(out *jwriter.Writ
 	_ = first
 	if in.Name_ != "" {
 		const prefix string = ",\"name\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
+		first = false
+		out.RawString(prefix[1:])
 		out.String(string(in.Name_))
 	}
 	if in.OperatorType_ != "" {
@@ -5535,12 +5324,8 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer15(out *jwriter.Writ
 	_ = first
 	if in.Name_ != "" {
 		const prefix string = ",\"name\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
+		first = false
+		out.RawString(prefix[1:])
 		out.String(string(in.Name_))
 	}
 	if in.OperatorType_ != "" {
@@ -5867,12 +5652,8 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer16(out *jwriter.Writ
 	_ = first
 	if in.Name_ != "" {
 		const prefix string = ",\"name\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
+		first = false
+		out.RawString(prefix[1:])
 		out.String(string(in.Name_))
 	}
 	if in.OperatorType_ != "" {
@@ -6224,12 +6005,8 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer17(out *jwriter.Writ
 	_ = first
 	if len(in.Axes) != 0 {
 		const prefix string = ",\"axes\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
+		first = false
+		out.RawString(prefix[1:])
 		{
 			out.RawByte('[')
 			for v251, v252 := range in.Axes {
@@ -6654,12 +6431,8 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer18(out *jwriter.Writ
 	_ = first
 	if len(in.KernelShape) != 0 {
 		const prefix string = ",\"kernel_shape\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
+		first = false
+		out.RawString(prefix[1:])
 		{
 			out.RawByte('[')
 			for v274, v275 := range in.KernelShape {
@@ -7043,12 +6816,8 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer19(out *jwriter.Writ
 	_ = first
 	if in.Name_ != "" {
 		const prefix string = ",\"name\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
+		first = false
+		out.RawString(prefix[1:])
 		out.String(string(in.Name_))
 	}
 	if in.OperatorType_ != "" {
@@ -7377,12 +7146,8 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer20(out *jwriter.Writ
 	_ = first
 	if in.Size != 0 {
 		const prefix string = ",\"size\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
+		first = false
+		out.RawString(prefix[1:])
 		out.Int64(int64(in.Size))
 	}
 	if in.Name_ != "" {
@@ -7719,12 +7484,8 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer21(out *jwriter.Writ
 	_ = first
 	if in.Name_ != "" {
 		const prefix string = ",\"name\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
+		first = false
+		out.RawString(prefix[1:])
 		out.String(string(in.Name_))
 	}
 	if in.OperatorType_ != "" {
@@ -8051,12 +7812,8 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer22(out *jwriter.Writ
 	_ = first
 	if in.Name_ != "" {
 		const prefix string = ",\"name\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
+		first = false
+		out.RawString(prefix[1:])
 		out.String(string(in.Name_))
 	}
 	if in.OperatorType_ != "" {
@@ -8391,12 +8148,8 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer23(out *jwriter.Writ
 	_ = first
 	if in.Alpha != 0 {
 		const prefix string = ",\"alpha\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
+		first = false
+		out.RawString(prefix[1:])
 		out.Float64(float64(in.Alpha))
 	}
 	if in.Beta != 0 {
@@ -8765,12 +8518,8 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer24(out *jwriter.Writ
 	_ = first
 	if in.Axis != 0 {
 		const prefix string = ",\"axis\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
+		first = false
+		out.RawString(prefix[1:])
 		out.Int64(int64(in.Axis))
 	}
 	if in.Name_ != "" {
@@ -9109,12 +8858,8 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer25(out *jwriter.Writ
 	_ = first
 	if in.Axis != 0 {
 		const prefix string = ",\"axis\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
+		first = false
+		out.RawString(prefix[1:])
 		out.Int64(int64(in.Axis))
 	}
 	if in.Name_ != "" {
@@ -9455,12 +9200,8 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer26(out *jwriter.Writ
 	_ = first
 	if in.Broadcast != 0 {
 		const prefix string = ",\"broadcast\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
+		first = false
+		out.RawString(prefix[1:])
 		out.Int64(int64(in.Broadcast))
 	}
 	if in.Axis != 0 {
@@ -9811,12 +9552,8 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer27(out *jwriter.Writ
 	_ = first
 	if in.Broadcast != 0 {
 		const prefix string = ",\"broadcast\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
+		first = false
+		out.RawString(prefix[1:])
 		out.Int64(int64(in.Broadcast))
 	}
 	if in.Axis != 0 {
@@ -10163,12 +9900,8 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer28(out *jwriter.Writ
 	_ = first
 	if in.Name_ != "" {
 		const prefix string = ",\"name\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
+		first = false
+		out.RawString(prefix[1:])
 		out.String(string(in.Name_))
 	}
 	if in.OperatorType_ != "" {
@@ -10591,12 +10324,8 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer29(out *jwriter.Writ
 	_ = first
 	if in.AutoPad != "" {
 		const prefix string = ",\"auto_pad\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
+		first = false
+		out.RawString(prefix[1:])
 		out.String(string(in.AutoPad))
 	}
 	if len(in.Dilations) != 0 {
@@ -11019,12 +10748,8 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer30(out *jwriter.Writ
 	_ = first
 	if in.Name_ != "" {
 		const prefix string = ",\"name\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
+		first = false
+		out.RawString(prefix[1:])
 		out.String(string(in.Name_))
 	}
 	if in.OperatorType_ != "" {
@@ -11351,12 +11076,8 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer31(out *jwriter.Writ
 	_ = first
 	if in.Name_ != "" {
 		const prefix string = ",\"name\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
+		first = false
+		out.RawString(prefix[1:])
 		out.String(string(in.Name_))
 	}
 	if in.OperatorType_ != "" {
@@ -11683,12 +11404,8 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer32(out *jwriter.Writ
 	_ = first
 	if in.Name_ != "" {
 		const prefix string = ",\"name\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
+		first = false
+		out.RawString(prefix[1:])
 		out.String(string(in.Name_))
 	}
 	if in.OperatorType_ != "" {
@@ -12017,12 +11734,8 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer33(out *jwriter.Writ
 	_ = first
 	if in.Axis != 0 {
 		const prefix string = ",\"axis\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
+		first = false
+		out.RawString(prefix[1:])
 		out.Int64(int64(in.Axis))
 	}
 	if in.Name_ != "" {
@@ -12363,12 +12076,8 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer34(out *jwriter.Writ
 	_ = first
 	if in.Min != 0 {
 		const prefix string = ",\"min\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
+		first = false
+		out.RawString(prefix[1:])
 		out.Float32(float32(in.Min))
 	}
 	if in.Max != 0 {
@@ -12715,12 +12424,8 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer35(out *jwriter.Writ
 	_ = first
 	if in.Name_ != "" {
 		const prefix string = ",\"name\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
+		first = false
+		out.RawString(prefix[1:])
 		out.String(string(in.Name_))
 	}
 	if in.OperatorType_ != "" {
@@ -13049,12 +12754,8 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer36(out *jwriter.Writ
 	_ = first
 	if in.Spatial != 0 {
 		const prefix string = ",\"spatial\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
+		first = false
+		out.RawString(prefix[1:])
 		out.Int64(int64(in.Spatial))
 	}
 	if in.Name_ != "" {
@@ -13268,12 +12969,8 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer37(out *jwriter.Writ
 	_ = first
 	if in.Input0 != 0 {
 		const prefix string = ",\"input_0\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
+		first = false
+		out.RawString(prefix[1:])
 		out.Int64(int64(in.Input0))
 	}
 	if in.Input1 != 0 {
@@ -13498,12 +13195,8 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer38(out *jwriter.Writ
 	_ = first
 	if len(in.ArgNames) != 0 {
 		const prefix string = ",\"arg_names\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
+		first = false
+		out.RawString(prefix[1:])
 		{
 			out.RawByte('[')
 			for v631, v632 := range in.ArgNames {
@@ -13798,12 +13491,8 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer39(out *jwriter.Writ
 	_ = first
 	if in.Name_ != "" {
 		const prefix string = ",\"name\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
+		first = false
+		out.RawString(prefix[1:])
 		out.String(string(in.Name_))
 	}
 	if in.OperatorType_ != "" {
