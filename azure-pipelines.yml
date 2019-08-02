@@ -42,3 +42,8 @@ steps:
     curl -sL https://git.io/goreleaser | bash
   workingDirectory: '$(modulePath)'
   displayName: 'Run GoReleaser'
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'dlperf'
+    publishLocation: 'Container'
