@@ -1,5 +1,5 @@
 # DLPerf
-
+[![Build Status](https://dev.azure.com/dakkak/rai/_apis/build/status/rai-project.dlperf?branchName=master)](https://dev.azure.com/dakkak/rai/_build/latest?definitionId=26&branchName=master)
 [![Build Status](https://travis-ci.org/rai-project/dlperf.svg?branch=master)](https://travis-ci.org/rai-project/dlperf)
 
 ## Show Registered Models
