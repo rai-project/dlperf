@@ -7,7 +7,6 @@ import (
 	sourcepath "github.com/GeertJohan/go-sourcepath"
 	"github.com/Unknwon/com"
 	"github.com/k0kubun/pp"
-	zglob "github.com/mattn/go-zglob"
 	"github.com/pkg/errors"
 	"github.com/rai-project/dlperf/pkg/onnx"
 	"github.com/rai-project/dlperf/pkg/writer"

@@ -98,8 +98,7 @@ func getModelsIn(modelPath string) ([]string, error) {
 	}
 	modelPaths := []string{}
 	for _, modelPath := range modelPaths0 {
-    fileName := filepath.BaseName(modelPath)
-    pp.Println(fileName)
+    fileName := filepath.Base(modelPath)
 		if strings.HasPrefix(fileName, ".") {
 			continue
     }
