@@ -75,7 +75,7 @@ func (o Onnx) mkLayer(node *onnx.NodeProto) []dlperf.Layer {
 		ret = o.mkSlice(node)
 	case "constantofshape":
 		ret = o.mkConstantOfShape(node)
-	case "constant_input":
+	case "constant_input", "constantinput":
 		ret = o.mkConstantInput(node)
 	default:
 		panic("unhandeled layer = " + operatorType + " when running the model at " + o.path)

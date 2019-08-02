@@ -1,6 +1,9 @@
 package cmd
 
-import "github.com/rai-project/dlperf/pkg/writer"
+import (
+	"sort"
+	"github.com/rai-project/dlperf/pkg/writer"
+)
 
 type modelURLInfo struct {
 	Name string `json:"name,omitempty"`
@@ -289,3 +292,10 @@ var onnxModelURLs = []modelURLInfo{
 }
 
 var modelURLs = append(ourModelURLs, onnxModelURLs...)
+
+
+func init() {
+	sort.Slice(modelURLs  , func(ii, jj int ) bool {
+		return modelURLs[ii].Name < modelURLs[jj].Name 
+	})
+}

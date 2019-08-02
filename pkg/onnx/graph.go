@@ -135,7 +135,7 @@ func (nd *GraphNode) Benchmarks() benchmark.Benchmarks {
 func (nd GraphNode) Attributes() []encoding.Attribute {
 	var lbl string
 	extraAttrs := []encoding.Attribute{}
-	if nd.OpType == "constant_input" {
+	if strings.ToLower(nd.OpType) == "constant_input" || strings.ToLower(nd.OpType) == "constantinput" {
 		lbl = fmt.Sprintf("\"%s\"", nd.Name)
 		extraAttrs = append(extraAttrs,
 			[]encoding.Attribute{

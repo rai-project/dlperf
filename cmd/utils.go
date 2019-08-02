@@ -10,6 +10,7 @@ import (
 	"os/exec"
 	"path"
 	"path/filepath"
+	"sort"
 	"strings"
 	"sync"
 	"time"
@@ -47,6 +48,10 @@ func dotToImage(dot []byte) (string, error) {
 	dotOutputCount++
 
 	img := filepath.Join(os.TempDir(), fmt.Sprintf("dlperf_%d.pdf", dotOutputCount))
+
+	dotFile := filepath.Join(os.TempDir(), fmt.Sprintf("dlperf_%d.dot", dotOutputCount))
+	com.WriteFile(dotFile, dot)
+
 	// img := filepath.Join("/tmp", fmt.Sprintf("dlperf.png"))
 	cmd := exec.Command(dotExe, "-Tpdf", "-o", img)
 	cmd.Stdin = bytes.NewReader(dot)
@@ -98,16 +103,21 @@ func getModelsIn(modelPath string) ([]string, error) {
 	}
 	modelPaths := []string{}
 	for _, modelPath := range modelPaths0 {
-    fileName := filepath.Base(modelPath)
+		fileName := filepath.Base(modelPath)
 		if strings.HasPrefix(fileName, ".") {
 			continue
-    }
+		}
 		modelName := getModelName(modelPath)
-		if strings.HasPrefix(modelName, ".")  {
+		if strings.HasPrefix(modelName, ".") {
 			continue
-    }
+		}
 		modelPaths = append(modelPaths, modelPath)
 	}
+
+	sort.Slice(modelPaths, func(ii, jj int) bool {
+		return getModelName(modelPaths[ii]) < getModelName(modelPaths[jj])
+	})
+
 	return modelPaths, nil
 }
 

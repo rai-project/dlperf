@@ -4,6 +4,7 @@ import (
 	"os"
 	"path/filepath"
 
+  "strings"
 	sourcepath "github.com/GeertJohan/go-sourcepath"
 	"github.com/Unknwon/com"
 	"github.com/k0kubun/pp"
@@ -64,7 +65,8 @@ func runFlopsCmd(cmd *cobra.Command, args []string) error {
 		defer writer.Close()
 
 		for _, info := range infos {
-			if info.OperatorType() == "constant_input" || info.OperatorType() == "constant" {
+      opType := strings.ToLower(info.OperatorType())
+			if opType == "constant_input" || opType == "constantinput" || opType == "constant" {
 				continue
 			}
 			writer.Row(
