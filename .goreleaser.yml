@@ -4,7 +4,7 @@ env:
 before:
   hooks:
     # you may remove this if you don't use vgo
-    - go mod download
+    - go get -v ./...
     # you may remove this if you don't need go generate
     - go generate ./...
 builds:
