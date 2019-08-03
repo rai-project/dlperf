@@ -1,10 +1,10 @@
 LayerName,LayerType,Theoretical Flops,flop_count_sp
 Convolution28,Conv,313600,1184256
 Plus30,ElementWise,6272,29184
-ReLU32,Relu,18816,6272
-Pooling66,Pooling,6272,1568
+ReLU32,Relu,12544,6272
+Pooling66,Pooling,0,1568
 Convolution110,Conv,1254400,1640000
 Plus112,ElementWise,3136,12544
-ReLU114,Relu,9408,3136
-Pooling160,Pooling,2304,256
+ReLU114,Relu,6272,3136
+Pooling160,Pooling,0,256
 Times212,Gemm,5130,5636
