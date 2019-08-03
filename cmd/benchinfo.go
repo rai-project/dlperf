@@ -85,6 +85,7 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 	modelPath = expandModelPath(modelPath)
 
 	dlperf.SetBatchSize(batchSize)
+	dlperf.IgnoreCompareFlops = showBenchInfoMetrics
 
 	benchSuite, err := benchmark.New(benchmarkResultsFolder)
 	if err != nil {

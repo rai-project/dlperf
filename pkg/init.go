@@ -8,6 +8,7 @@ import (
 
 var (
 	batchSize int64
+	IgnoreCompareFlops bool
 	log       *logrus.Entry
 )
 

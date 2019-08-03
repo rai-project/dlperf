@@ -124,9 +124,15 @@ func (this FlopsInformation) Row(iopts ...writer.Option) []string {
 	}
 }
 
+func (this FlopsInformation) TotalFlops() int64 {
+	return 2*this.MultiplyAdds + this.Additions + this.Divisions + this.Exponentiations 
+}
+
 func (this FlopsInformation) Total() int64 {
-	return 2*this.MultiplyAdds + this.Additions + this.Divisions +
-		this.Exponentiations + this.Comparisons + this.General
+	if IgnoreCompareFlops {
+		return this.TotalFlops()
+	}
+	return this.TotalFlops() + this.Comparisons + this.General
 }
 
 func (this FlopsInformation) Add(other FlopsInformation) FlopsInformation {
