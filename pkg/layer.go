@@ -125,7 +125,7 @@ func (this FlopsInformation) Row(iopts ...writer.Option) []string {
 }
 
 func (this FlopsInformation) Total() int64 {
-	return this.MultiplyAdds + this.Additions + this.Divisions +
+	return 2*this.MultiplyAdds + this.Additions + this.Divisions +
 		this.Exponentiations + this.Comparisons + this.General
 }
 
