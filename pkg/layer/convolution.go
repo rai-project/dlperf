@@ -197,7 +197,7 @@ type convBenchmarkArgs struct {
 	ConvFwdType       dlperf.ConvFwdType `args:"conv_fwd_type" hash:"conv_fwd_type" json:"conv_fwd_type,omitempty"`
 	ConvBwdType       dlperf.ConvBwdType `args:"conv_bwd_type" hash:"conv_bwd_type" json:"conv_bwd_type,omitempty"`
 	BatchSize         int64              `args:"batch_size" hash:"batch_size" json:"batch_size,omitempty"`
-	Group             int64              `args:"-" hash:"-" json:"group,omitempty"`
+	Group             int64              `args:"group" hash:"group" json:"group,omitempty"`
 }
 
 func (c Conv) FwdBenchmarkArgs(iopts ...dlperf.FwdBenchmarkArgsOptionFunc) interface{} {
