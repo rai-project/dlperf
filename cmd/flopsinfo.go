@@ -4,12 +4,13 @@ import (
 	"os"
 	"path/filepath"
 
+  "strings"
 	sourcepath "github.com/GeertJohan/go-sourcepath"
 	"github.com/Unknwon/com"
 	"github.com/k0kubun/pp"
-	zglob "github.com/mattn/go-zglob"
 	"github.com/pkg/errors"
 	"github.com/rai-project/dlperf/pkg/onnx"
+	"github.com/rai-project/dlperf/pkg/writer"
 	"github.com/spf13/cobra"
 )
 
@@ -19,7 +20,7 @@ func runFlopsCmd(cmd *cobra.Command, args []string) error {
 		if !com.IsDir(baseOutputFileName) {
 			os.MkdirAll(baseOutputFileName, os.ModePerm)
 		}
-		modelPaths, err := zglob.Glob(filepath.Join(modelPath, "**", "*.onnx"))
+		modelPaths, err := getModelsIn(modelPath)
 		if err != nil {
 			return errors.Wrapf(err, "unable to glob %s", modelPath)
 		}
@@ -57,11 +58,15 @@ func runFlopsCmd(cmd *cobra.Command, args []string) error {
 			return err
 		}
 
-		writer := NewWriter(layerFlops{}, humanFlops)
+		writer := NewWriter(
+			layerFlops{},
+			writer.ShowHumanFlops(humanFlops),
+		)
 		defer writer.Close()
 
 		for _, info := range infos {
-			if info.OperatorType() == "constant_input" || info.OperatorType() == "constant" {
+      opType := strings.ToLower(info.OperatorType())
+			if opType == "constant_input" || opType == "constantinput" || opType == "constant" {
 				continue
 			}
 			writer.Row(
@@ -79,7 +84,10 @@ func runFlopsCmd(cmd *cobra.Command, args []string) error {
 
 	info := net.FlopsInformation()
 
-	writer := NewWriter(netFlopsSummary{}, humanFlops)
+	writer := NewWriter(
+		netFlopsSummary{},
+		writer.ShowHumanFlops(humanFlops),
+	)
 	defer writer.Close()
 
 	writer.Row(netFlopsSummary{Name: "MultipleAdds", Value: info.MultiplyAdds})

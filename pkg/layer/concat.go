@@ -1,13 +1,15 @@
 package layer
 
-import (
-	"github.com/rai-project/dlperf/pkg"
-)
+import dlperf "github.com/rai-project/dlperf/pkg"
 
 //easyjson:json
 type Concat struct {
 	*Base `json:",inline,flatten,omitempty"`
 	Axis  int64 `json:"axis,omitempty"`
+}
+
+func (Concat) ShortName() string {
+	return "CONC"
 }
 
 func (Concat) Description() string {

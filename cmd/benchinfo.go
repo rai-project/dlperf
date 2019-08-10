@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"fmt"
+	"math"
 	"os"
 	"path/filepath"
 	"runtime/debug"
@@ -20,6 +21,10 @@ import (
 	"github.com/rai-project/dlperf/pkg/benchmark"
 	perflayer "github.com/rai-project/dlperf/pkg/layer"
 	"github.com/rai-project/dlperf/pkg/onnx"
+	"github.com/rai-project/dlperf/pkg/writer"
+	"gonum.org/v1/gonum/graph"
+	"gonum.org/v1/gonum/graph/encoding/dot"
+	"gonum.org/v1/gonum/graph/path"
 )
 
 var (
@@ -28,6 +33,19 @@ var (
 	benchInfoShort              bool
 	benchInfoDataType           string
 	enableReadFlopsFromDatabase bool
+	traversalStrategy           string
+	showBenchInfo               bool
+	makeGraphPlot               bool
+	showBenchInfoMetrics        bool
+	highlightShortestPath       bool
+	showFlopsMetricsOnly        bool
+	aggregateFlops              bool
+	showKernelNamesOnly         bool
+	trimLayerName               bool = true
+	showTotalInformation        bool = true
+	metricFilterString          string
+	metricFilterList            []string
+	defaultTraversalStrategy    = "parallel"
 )
 
 func benchinfo(cmd *cobra.Command, args []string) error {
@@ -67,6 +85,7 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 	modelPath = expandModelPath(modelPath)
 
 	dlperf.SetBatchSize(batchSize)
+	dlperf.IgnoreCompareFlops = showBenchInfoMetrics
 
 	benchSuite, err := benchmark.New(benchmarkResultsFolder)
 	if err != nil {
@@ -85,7 +104,7 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 		return err
 	}
 
-	benchmarkInfo := []bench{}
+	benchmarkInfo := []benchmarkGraphNode{}
 
 	totalTime := time.Duration(0)
 	totalFlops := dlperf.FlopsInformation{}
@@ -99,37 +118,14 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 	for _, nd := range nds {
 		lyr := nd.Layer()
 		switch strings.ToLower(lyr.OperatorType()) {
-		case "constantinput":
-			continue
-		case "lrn":
-			debugPrint("LRN is not supported by CUDNN")
-			continue
-		case "reshape":
-			debugPrint("Reshape is not supported by CUDNN")
-			continue
-		// case "dropout":
-		// 	fmt.Println("Dropout is skipped for now")
-		// 	continue
-		case "concat":
-			debugPrint("Concat is skipped for now")
-			continue
-		case "unsqueeze":
-			debugPrint("Unsqueeze is skipped for now")
-			continue
-		case "flatten":
-			debugPrint("Flatten is skipped for now")
-			continue
-		case "globalpooling":
-			debugPrint("GlobalPooling is skipped for now")
-			continue
-		case "identity":
-			debugPrint("Identity is skipped for now")
-			continue
-		case "transpose":
-			debugPrint("Transpose is skipped for now")
-			continue
-		case "scale":
-			debugPrint("Scale is skipped for now")
+		case "constantinput", "lrn", "reshape", "concat", "unsqueeze", "flatten", "globalpooling", "identity", "transpose", "scale":
+			benchmarkInfo = append(benchmarkInfo,
+				benchmarkGraphNode{
+					GraphNode: nd,
+				},
+			)
+
+			debugPrint(lyr.OperatorType() + " layer is skipped for now")
 			continue
 		}
 		// if lyr.OperatorType() != "Conv" && lyr.OperatorType() != "Relu" {
@@ -185,7 +181,7 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 			return bs, nil
 		}
 
-		addLayerInfos := func(bs benchmark.Benchmarks) {
+		makeLayerInfos := func(bs benchmark.Benchmarks, ty string) *bench {
 			bs.Sort()
 
 			flops := lyr.Information().Flops()
@@ -204,24 +200,28 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 				totalFlops = totalFlops.Add(flops)
 			}
 			if !benchInfoShort {
-				benchmarkInfo = append(benchmarkInfo, bench{
-					Benchmark: bs[0],
-					Layer:     lyr,
-					Flops:     flops,
-				})
 				// generate latex table output
-				// fmt.Println("\\texttt{"+strings.ReplaceAll(lyr.Name(), "_", "\\_")+"}", " & ", lyr.OperatorType(), " & ", float64(bs[0].RealTime.Nanoseconds())/float64(time.Microsecond), "&", utils.Flops(uint64(flops.Total())), " \\\\")
+				// fmt.Println("\\texttt{"+strings.ReplaceAll(lyr.Name(), "_", "\\_")+"}", " & ", lyr.OperatorType(),
+				// " & ", float64(bs[0].RealTime.Nanoseconds())/float64(time.Microsecond), "&", utils.Flops(uint64(flops.Total())), " \\\\")
+				return &bench{
+					Type:      ty,
+					Benchmark: bs[0],
+					Flops:     flops,
+					Layer:     lyr,
+				}
 			}
+			return nil
 		}
 
 		switch strings.ToLower(lyr.OperatorType()) {
 		case "relu", "pooling", "softmax", "dropout", "gemm", "matmul", "elementwise":
+			benches := []*bench{}
 			filter := filterBenchmarks(false, benchInfoDataType, "")
 			bs, err := getBenchmarkTime(filter)
 			if err != nil {
 				continue
 			}
-			addLayerInfos(bs)
+			benches = append(benches, makeLayerInfos(bs, "forward"))
 
 			if benchInfoTraining {
 				filter := filterBenchmarks(true, benchInfoDataType, "")
@@ -229,9 +229,18 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 				if err != nil {
 					continue
 				}
-				addLayerInfos(bs)
+				benches = append(benches, makeLayerInfos(bs, "backward"))
 			}
+
+			benchmarkInfo = append(benchmarkInfo,
+				benchmarkGraphNode{
+					GraphNode:  nd,
+					Benchmarks: benches,
+				},
+			)
+
 		case "conv":
+			benches := []*bench{}
 			l := lyr.(*perflayer.Conv)
 
 			filter := filterBenchmarks(false, benchInfoDataType, "")
@@ -239,7 +248,7 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 			if err != nil {
 				continue
 			}
-			addLayerInfos(bs)
+			benches = append(benches, makeLayerInfos(bs, "forward"))
 
 			if l.HasBias() {
 				filter := filterBenchmarks(false, benchInfoDataType, "", dlperf.FwdBenchmarkArgsOption.ConvFwdType(dlperf.ConvFwdTypeBias))
@@ -247,7 +256,7 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 				if err != nil {
 					continue
 				}
-				addLayerInfos(bs)
+				benches = append(benches, makeLayerInfos(bs, "bias"))
 			}
 
 			if benchInfoTraining {
@@ -257,7 +266,7 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 					pp.Println("unable to get conv data")
 					continue
 				}
-				addLayerInfos(bs)
+				benches = append(benches, makeLayerInfos(bs, "backward_data"))
 
 				filter = filterBenchmarks(true, benchInfoDataType, "", dlperf.BwdBenchmarkArgsOption.ConvBwdType(dlperf.ConvBwdTypeFilter))
 				bs, err = getBenchmarkTime(filter)
@@ -265,7 +274,7 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 					pp.Println("unable to get conv filter because of " + err.Error())
 					continue
 				}
-				addLayerInfos(bs)
+				benches = append(benches, makeLayerInfos(bs, "backward_filter"))
 
 				if l.HasBias() {
 					filter = filterBenchmarks(true, benchInfoDataType, "", dlperf.BwdBenchmarkArgsOption.ConvBwdType(dlperf.ConvBwdTypeBias))
@@ -274,11 +283,19 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 						pp.Println("unable to get conv bias")
 						continue
 					}
-					addLayerInfos(bs)
+					benches = append(benches, makeLayerInfos(bs, "backward_bias"))
 				}
 			}
 
+			benchmarkInfo = append(benchmarkInfo,
+				benchmarkGraphNode{
+					GraphNode:  nd,
+					Benchmarks: benches,
+				},
+			)
+
 		case "batchnorm":
+			benches := []*bench{}
 			var filter *benchmark.Benchmark
 			if benchInfoTraining {
 				filter = filterBenchmarks(false, benchInfoDataType, "", dlperf.FwdBenchmarkArgsOption.IsTraining(true))
@@ -289,7 +306,7 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 			if err != nil {
 				continue
 			}
-			addLayerInfos(bs)
+			benches = append(benches, makeLayerInfos(bs, "forward"))
 
 			if benchInfoTraining {
 				filter := filterBenchmarks(true, benchInfoDataType, "")
@@ -297,24 +314,20 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 				if err != nil {
 					continue
 				}
-				addLayerInfos(bs)
+				benches = append(benches, makeLayerInfos(bs, "backward"))
 			}
+
+			benchmarkInfo = append(benchmarkInfo,
+				benchmarkGraphNode{
+					GraphNode:  nd,
+					Benchmarks: benches,
+				},
+			)
 
 		default:
 			pp.Println(lyr.OperatorType())
 
 		}
-	}
-
-	if outputFormat != "json" {
-		benchmarkInfo = append(benchmarkInfo, bench{
-			Benchmark: benchmark.Benchmark{
-				Name:     "Total",
-				RealTime: totalTime,
-			},
-			Layer: nil,
-			Flops: totalFlops,
-		})
 	}
 
 	if benchSuite.GPUInformation != nil && len(benchSuite.GPUInformation.GPUS) != 0 {
@@ -323,11 +336,130 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 		}
 	}
 
-	writer := NewWriter(bench{}, humanFlops)
+	if traversalStrategy == "parallel" {
+		// we need to build a new graph with
+		// the benchmark times as weights
+		timeTransformFunction := func(d time.Duration) float64 {
+			msn := d / time.Millisecond
+			nsec := d % time.Millisecond
+			ms := float64(msn) + float64(nsec)/float64(time.Millisecond)
+			if ms == 0 {
+				return 0
+			}
+			return -ms
+		}
+
+		timeTransformFunctionInverse := func(f float64) time.Duration {
+			f = math.Abs(f)
+			return time.Duration(f * float64(time.Millisecond))
+		}
+		grph := makeBenchmarkGraph(model, net, benchmarkInfo, timeTransformFunction)
+
+		var firstBenchmark, lastBenchmark *benchmarkGraphNode
+		for ii := range benchmarkInfo {
+			bench := benchmarkInfo[ii]
+			if len(bench.Benchmarks) == 0 {
+				continue
+			}
+			if firstBenchmark == nil {
+				firstBenchmark = &bench
+			}
+			lastBenchmark = &bench
+		}
+
+		if traversalStrategy == "parallel" {
+			if debugMode {
+				pp.Println("firstBenchmark = " + firstBenchmark.Layer().Name() + idString(firstBenchmark))
+				pp.Println("lastBenchmark = " + lastBenchmark.Layer().Name() + idString(lastBenchmark))
+				for _, nd := range graph.NodesOf(grph.From(firstBenchmark.ID())) {
+					pp.Println("children = " + nd.(*onnx.GraphNode).Name + idString(nd))
+				}
+			}
+
+			shortestPath, _ := path.BellmanFordFrom(firstBenchmark, grph)
+			if highlightShortestPath {
+				path, weight := shortestPath.To(lastBenchmark.ID())
+
+				totalTime = timeTransformFunctionInverse(weight)
+
+				// pp.Println(path[0])
+				for ii := 1; ii < len(path); ii++ {
+					grphEdge := net.Edge(path[ii-1].ID(), path[ii].ID())
+					if grphEdge == nil {
+						continue
+					}
+					onnxEdge, ok := grphEdge.(*onnx.GraphEdge)
+					if !ok {
+						pp.Println(grphEdge)
+						continue
+					}
+					onnxEdge.Highlight()
+				}
+				_ = path
+			}
+
+			// weight := shortestPath.WeightTo(lastBenchmark.ID())
+			// pp.Println(timeTransformFunctionInverse(weight))
+		}
+
+		if showBenchInfo {
+			nodesToRemove := []int64{}
+			for _, nd := range graph.NodesOf(grph.Nodes()) {
+				to := grph.To(nd.ID())
+				if to.Len() == 0 {
+					nodesToRemove = append(nodesToRemove, nd.ID())
+				}
+			}
+			for _, nd := range nodesToRemove {
+				grph.RemoveNode(nd)
+			}
+			dotEnc, err := dot.Marshal(grph, model.GetName(), "", "  ")
+			if err != nil {
+				return err
+			}
+
+			img, err := dotToImage(dotEnc)
+			if err != nil {
+				return err
+			}
+
+			println(img)
+		}
+
+	}
+
+	if showTotalInformation {
+		benchmarkInfo = append(benchmarkInfo,
+			benchmarkGraphNode{
+				Benchmarks: []*bench{
+					&bench{
+						Benchmark: benchmark.Benchmark{
+							Name:     "Total",
+							RealTime: totalTime,
+						},
+						Flops: totalFlops,
+					},
+				},
+			})
+	}
+
+	writer := NewWriter(
+		bench{},
+		writer.ShowHumanFlops(humanFlops),
+		writer.ShowMetrics(showBenchInfoMetrics),
+		writer.ShowFlopsMetricsOnly(showFlopsMetricsOnly),
+		writer.AggregateFlopsMetrics(aggregateFlops),
+		writer.HideEmptyMetrics(true),
+		writer.MetricsFilter(metricFilterList),
+		writer.TrimLayerName(trimLayerName),
+		writer.ShowKernelNamesOnly(showKernelNamesOnly),
+	)
 	defer writer.Close()
 
-	for _, bench := range benchmarkInfo {
-		writer.Row(bench)
+	for _, lyr := range benchmarkInfo {
+		for _, bench := range lyr.Benchmarks {
+			writer.Row(bench)
+		}
 	}
 
 	return nil
@@ -338,7 +470,17 @@ var benchinfoCmd = &cobra.Command{
 	Use:     "benchinfo",
 	Aliases: []string{"info", "recall"},
 	Short:   "Prints out the benchmark information",
-	RunE:    benchinfo,
+	PreRunE: func(cmd *cobra.Command, args []string) error {
+		traversalStrategy = strings.TrimSpace(strings.ToLower(traversalStrategy))
+		if traversalStrategy != "parallel" && traversalStrategy != "serial" {
+			return errors.New("invalid traversal strategy can be either `parallel` or `serial`")
+		}
+		if metricFilterString != "" {
+			metricFilterList = strings.Split(metricFilterString, ",")
+		}
+		return nil
+	},
+	RunE: benchinfo,
 }
 
 func init() {
@@ -347,5 +489,15 @@ func init() {
 	benchinfoCmd.PersistentFlags().BoolVar(&benchInfoShort, "short", false, "only get info about the total, rather than reporting per-layer information")
 	benchinfoCmd.PersistentFlags().StringVar(&benchInfoDataType, "datatype", "float32", "compute the information for the specified scalar datatype")
 	benchinfoCmd.PersistentFlags().StringVar(&benchmarkResultsFolder, "benchmark_database", benchmarkResultsFolder, "path to the benchmark results folder")
+	benchinfoCmd.PersistentFlags().StringVar(&traversalStrategy, "strategy", defaultTraversalStrategy, "strategy to traverse the graph either can be `parallel` which would find the shortest path or `serial` to get the total time as if each layer is executed serially")
+	benchinfoCmd.PersistentFlags().BoolVar(&showBenchInfo, "show", false, "generate the benchmark info graph (only for parallel for now)")
+	benchinfoCmd.PersistentFlags().BoolVar(&showBenchInfoMetrics, "metrics", false, "grabs the metrics from the benchmarks")
+	benchinfoCmd.PersistentFlags().BoolVar(&makeGraphPlot, "graph", false, "generate a graphviz plot of the results")
+	benchinfoCmd.PersistentFlags().BoolVar(&showKernelNamesOnly, "kernels_only", false, "show a table of only the layers and corresponding kernels")
+	benchinfoCmd.PersistentFlags().BoolVar(&showFlopsMetricsOnly, "flops_only", false, "show a table of only the theoretical and actual flops for each layer")
+	benchinfoCmd.PersistentFlags().BoolVar(&aggregateFlops, "flops_aggregate", false, "sum all the flops within a metric for each layer")
+	benchinfoCmd.PersistentFlags().StringVar(&metricFilterString, "metric_filter", "", "filter using the command seperated list of metrics")
+	benchinfoCmd.PersistentFlags().BoolVar(&showTotalInformation, "total", true, "show the total information across all layers")
+	benchinfoCmd.PersistentFlags().BoolVar(&trimLayerName, "trim_layer_name", true, "only show the first few characters of a layer")
 	rootCmd.AddCommand(benchinfoCmd)
 }

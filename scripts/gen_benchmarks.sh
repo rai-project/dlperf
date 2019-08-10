@@ -1,4 +1,5 @@
 #!/bin/sh
+set -x
 
 mkdir -p gen
 go run main.go benchgen --model_path ~/data/carml/dlperf -o gen/generated_benchmarks_1.hpp --backward=true --forward=true --batch_size=1

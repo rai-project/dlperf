@@ -1,0 +1,22 @@
+env:
+  - GO111MODULE=on
+  - CGO_ENABLED=0
+before:
+  hooks:
+    # you may remove this if you don't use vgo
+    - go get -v ./...
+    # you may remove this if you don't need go generate
+    - go generate ./...
+builds:
+  - binary: dlperf
+archives:
+  - replacements:
+      darwin: Darwin
+      linux: Linux
+      windows: Windows
+      386: i386
+      amd64: x86_64
+checksum:
+  name_template: "checksums.txt"
+snapshot:
+  name_template: "{{ .Tag }}-next"

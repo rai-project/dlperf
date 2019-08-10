@@ -1,8 +1,6 @@
 package layer
 
-import (
-	"github.com/rai-project/dlperf/pkg"
-)
+import dlperf "github.com/rai-project/dlperf/pkg"
 
 // https://github.com/onnx/onnx/blob/master/docs/Operators.md#Clip
 
@@ -11,6 +9,10 @@ type Clip struct {
 	*Base `json:",inline,flatten,omitempty"`
 	Min   float32 `json:"min,omitempty"`
 	Max   float32 `json:"max,omitempty"`
+}
+
+func (Clip) ShortName() string {
+	return "CLP"
 }
 
 func (Clip) OperatorType() string {

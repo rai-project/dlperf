@@ -1,6 +1,7 @@
 package onnx
 
 import (
+	"math"
 	"sort"
 
 	"github.com/pkg/errors"
@@ -80,7 +81,7 @@ func (grph Graph) FindSubGraphs() ([]Graph, error) {
 			return
 		}
 
-		subgrph := simple.NewDirectedGraph()
+		subgrph := simple.NewWeightedDirectedGraph(0, math.Inf(1))
 
 		visit = func(nd graph.Node) {
 			if nd == nil {
@@ -97,10 +98,11 @@ func (grph Graph) FindSubGraphs() ([]Graph, error) {
 				succ := nds.Node()
 				if dt.Dominates(nd, succ) {
 					visit(succ)
-					subgrph.SetEdge(&GraphEdge{
-						Edge: simple.Edge{
+					subgrph.SetWeightedEdge(&GraphEdge{
+						WeightedEdge: simple.WeightedEdge{
 							F: nd,
 							T: succ,
+							W: 1,
 						},
 					})
 				}
@@ -117,8 +119,8 @@ func (grph Graph) FindSubGraphs() ([]Graph, error) {
 
 		if subgrph.Nodes().Len() != 0 {
 			res = append(res, Graph{
-				Root:          root.(*GraphNode),
-				DirectedGraph: subgrph,
+				Root:                  root.(*GraphNode),
+				WeightedDirectedGraph: subgrph,
 			})
 		}
 	}

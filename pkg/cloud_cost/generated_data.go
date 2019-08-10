@@ -6,8 +6,6 @@ import (
 	"bytes"
 	"compress/gzip"
 	"encoding/base64"
-	"fmt"
-	"io"
 	"io/ioutil"
 	"net/http"
 	"os"
@@ -102,24 +100,7 @@ func (f *_escFile) Close() error {
 }
 
 func (f *_escFile) Readdir(count int) ([]os.FileInfo, error) {
-	if !f.isDir {
-		return nil, fmt.Errorf(" escFile.Readdir: '%s' is not directory", f.name)
-	}
-
-	fis, ok := _escDirs[f.local]
-	if !ok {
-		return nil, fmt.Errorf(" escFile.Readdir: '%s' is directory, but we have no info about content of this dir, local=%s", f.name, f.local)
-	}
-	limit := count
-	if count <= 0 || limit > len(fis) {
-		limit = len(fis)
-	}
-
-	if len(fis) == 0 && count > 0 {
-		return nil, io.EOF
-	}
-
-	return fis[0:limit], nil
+	return nil, nil
 }
 
 func (f *_escFile) Stat() (os.FileInfo, error) {
@@ -210,10 +191,9 @@ func _escFSMustString(useLocal bool, name string) string {
 var _escData = map[string]*_escFile{
 
 	"/aws_instances.json": {
-		name:    "aws_instances.json",
 		local:   "_fixtures/aws_instances.json",
 		size:    140630,
-		modtime: 1559452593,
+		modtime: 1559432254,
 		compressed: `
 H4sIAAAAAAAC/+x9S28jydHtfn4FofU4kRH5np3hC881YAMNXNsb4y6KrGKP8LUekNjwPDD//YPUj5HI
 alWcrGAp2c3NLEY6TUqKSkZGnMdv361WF7d3N/37ze7+4ofVf75brVar3x7/u1pdbLrd8Pbm7peLH1YX
@@ -349,10 +329,9 @@ FHK3MqNM3wwnjGY4YFSAGGDEdgRxbhyO2DgopmtMZxaYnBQmGxG1BIDDGSNqBxDr7LrabEtU7bqO0Jd8
 	},
 
 	"/azure_instances.json": {
-		name:    "azure_instances.json",
 		local:   "_fixtures/azure_instances.json",
 		size:    70021,
-		modtime: 1559452593,
+		modtime: 1559432218,
 		compressed: `
 H4sIAAAAAAAC/+ydUW8bNxLHv0qwzzKPM5wluX5T7bvcw+UQIL2+FIGhOmpgnCUZWrlBGuS7H+QkV69E
 UuRqd0TBfGwM1PIPoz9nhv8Zfqke1qsPj7ebtrr89Ut1O9vMP67Wn6vL6vV8OV/P7l89PK4fVu28mlSb
@@ -412,10 +391,9 @@ Ha0mQRpDHNHWmXDcfpJ0ju8nVXu7nj3cLT/+fLfYIoC6bgi0okaRqb7+LwAA//9AJEvbhREBAA==
 	},
 
 	"/google_instances.json": {
-		name:    "google_instances.json",
 		local:   "_fixtures/google_instances.json",
 		size:    17469,
-		modtime: 1559452593,
+		modtime: 1559432228,
 		compressed: `
 H4sIAAAAAAAC/+SbwY/aOBTG7/NXRDmXrN+z/WzPtSv1tFIP1V6qPWRMOkU7ARSCutNR//dVGAbCCBy/
 kEWBnUMP4M8l5qdPnz+bl7skSZfVYrr29Sq9T77eJUmSvGz+TZLU53XxuKie0/sk/aMoF9VzsljWs3L2
@@ -445,17 +423,7 @@ ZPwLT0i3feEpstGj/yBK322/iHTlq3w5mz9+mZXF6/0q7RQQOkPg0rtfd/8GAAD//xw1KAo9RAAA
 	},
 
 	"/": {
-		name:  "/",
-		local: `_fixtures`,
 		isDir: true,
-	},
-}
-
-var _escDirs = map[string][]os.FileInfo{
-
-	"_fixtures": {
-		_escData["/aws_instances.json"],
-		_escData["/azure_instances.json"],
-		_escData["/google_instances.json"],
+		local: "_fixtures",
 	},
 }

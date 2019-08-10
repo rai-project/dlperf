@@ -14,37 +14,44 @@ import (
 
 	"github.com/Unknwon/com"
 	"github.com/olekukonko/tablewriter"
+	"github.com/rai-project/dlperf/pkg/writer"
 )
 
+
 type Writer struct {
-	format         string
 	output         io.Writer
 	outputFileName string
 	tbl            *tablewriter.Table
 	csv            *csv.Writer
 	json           []string
-	humanFlops     bool
+	opts           []writer.Option
 }
 
 type Rower interface {
-	Header() []string
-	Row(humanFlops bool) []string
+	Header(opts ...writer.Option) []string
+	Row(opts ...writer.Option) []string
 }
 
-func NewWriter(rower Rower, humanFlops bool) *Writer {
+func NewWriter(rower Rower, iopts ...writer.Option) *Writer {
+
+	iopts = append([]writer.Option{writer.Format(outputFormat)}, iopts...)
+
 	var output io.Writer = os.Stdout
 	if outputFileName != "" {
 		output = &bytes.Buffer{}
 	}
 	wr := &Writer{
-		format:         outputFormat,
 		output:         output,
 		outputFileName: outputFileName,
-		humanFlops:     humanFlops,
+		opts:           iopts,
 	}
-	switch wr.format {
+	opts := writer.NewOptions(iopts...)
+	switch opts.Format {
 	case "table":
-		wr.tbl = tablewriter.NewWriter(output)
+    wr.tbl = tablewriter.NewWriter(output)
+    // make it markdown format
+    wr.tbl.SetBorders(tablewriter.Border{Left: true, Top: false, Right: true, Bottom: false})
+    wr.tbl.SetCenterSeparator("|")
 	case "csv":
 		wr.csv = csv.NewWriter(output)
 	case "json":
@@ -57,37 +64,45 @@ func NewWriter(rower Rower, humanFlops bool) *Writer {
 }
 
 func (w *Writer) Header(rower Rower) error {
-	switch w.format {
+	opts := writer.NewOptions(w.opts...)
+	switch opts.Format {
 	case "table":
-		w.tbl.SetHeader(rower.Header())
+		w.tbl.SetHeader(rower.Header(w.opts...))
 	case "csv":
-		w.csv.Write(rower.Header())
+		w.csv.Write(rower.Header(w.opts...))
 	}
 	return nil
 }
 
 func (w *Writer) Row(rower Rower) error {
-	switch w.format {
+	opts := writer.NewOptions(w.opts...)
+	switch opts.Format {
 	case "table":
-		w.tbl.Append(rower.Row(w.humanFlops))
+		w.tbl.Append(rower.Row(w.opts...))
 	case "csv":
-		w.csv.Write(rower.Row(w.humanFlops))
+		w.csv.Write(rower.Row(w.opts...))
 	case "json", "js":
-		buf, err := json.Marshal(rower)
+		b, err := json.MarshalIndent(rower, "", "  ")
 		if err != nil {
 			log.WithError(err).Error("failed to marshal json data...")
 			return err
 		}
+
+		b = bytes.Replace(b, []byte("\\u003c"), []byte("<"), -1)
+		b = bytes.Replace(b, []byte("\\u003e"), []byte(">"), -1)
+		b = bytes.Replace(b, []byte("\\u0026"), []byte("&"), -1)
+
 		if false {
 			pp.Println(rower)
 		}
-		w.json = append(w.json, string(buf))
+		w.json = append(w.json, string(b))
 	}
 	return nil
 }
 
 func (w *Writer) Flush() {
-	switch w.format {
+	opts := writer.NewOptions(w.opts...)
+	switch opts.Format {
 	case "table":
 		w.tbl.Render()
 	case "csv":
@@ -118,7 +133,9 @@ func (w *Writer) Close() {
 		com.WriteFile(w.outputFileName, w.output.(*bytes.Buffer).Bytes())
 		return
 	}
-	if w.format == "json" {
+	opts := writer.NewOptions(w.opts...)
+	format := opts.Format
+	if format == "json" {
 		fmt.Println(w.json)
 	}
 }

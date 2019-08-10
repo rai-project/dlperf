@@ -82,6 +82,15 @@ next:
 				filterVal = int(reflect.ValueOf(filterVal).Int())
 				val = cast.ToInt(val)
 			}
+			
+			if isSameScalar(filterVal, 0) || isSameScalar(val, 0) {
+				continue 
+			}
+
+			if isSameScalar(filterVal, -1) || isSameScalar(val, -1) {
+				continue 
+			}
+
 
 			if !isSameScalar(filterVal, val) {
 				continue next
@@ -127,6 +136,9 @@ func (b Benchmark) IsEqual(other Benchmark) bool {
 		val, ok := b.Attributes[k]
 		if !ok {
 			return false
+		}
+		if isSameScalar(val, 0) || isSameScalar(val, -1) {
+			continue 
 		}
 		if !isSameScalar(filterVal, val) {
 			return false

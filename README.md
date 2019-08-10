@@ -1,13 +1,29 @@
 # DLPerf
-
+[![Build Status](https://dev.azure.com/dakkak/rai/_apis/build/status/rai-project.dlperf?branchName=master)](https://dev.azure.com/dakkak/rai/_build/latest?definitionId=26&branchName=master)
 [![Build Status](https://travis-ci.org/rai-project/dlperf.svg?branch=master)](https://travis-ci.org/rai-project/dlperf)
+
+## Show Registered Models
+
+Show the models listed models in [model_urls](cmd/model_urls.go)
+
+```bash
+go run main.go list
+```
 
 ## Download Models
 
 Download the models listed models in [model_urls](cmd/model_urls.go) to `model_dir` using
 
 ```bash
-go run main.go downloadmodels --model_dir ~/onnx_models
+go run main.go downloadmodels -o ~/data/carml/dlperf
+```
+
+## Show Downloaded Models
+
+Show downloaded model paths
+
+```bash
+go run main.go paths --model_path ~/onnx_models
 ```
 
 ## Layer Stats
@@ -89,4 +105,38 @@ or
 
 ```
 go run main.go benchinfo --model_path ~/onnx_models/resnet100/resnet100.onnx --benchmark_database ../microbench/results/cudnn/ip-172-31-26-89.json
+```
+
+## Draw a graph of the layers using benchmark data
+
+You can draw a graph with the runtime data using the following command
+
+```
+go run main.go benchinfo --model_path ~/data/carml/dlperf/ArcFace/resnet100/resnet100.onnx --benchmark_database results/v100/8.json --short=false --batch_size=8 --human=true --strategy=parallel --show
+```
+
+## Query metrics
+
+You can query both kernels and metrics that are dummed by cudnn|scope using the following command
+
+```
+go run main.go benchinfo --model_path ~/data/carml/dlperf/ResNet50-v1/resnet50v1/resnet50v1.onnx --benchmark_database results/v100/profile/8.json.gz --short=false --batch_size=8 --human=true --strategy=parallel --metrics --format=json
+```
+
+### Show only metric summary
+
+```
+go run main.go benchinfo --model_path ~/data/carml/dlperf/ResNet50-v1/resnet50v1/resnet50v1.onnx --benchmark_database results/v100/profile/8.json.gz --short=false --batch_size=8 --human=false --strategy=parallel --metrics --output_file=tmp.tbl --flops_only --flops_aggregate=true
+```
+
+### Filter only certain metrics
+
+```
+go run main.go benchinfo --model_path ~/data/carml/dlperf/ResNet50-v1/resnet50v1/resnet50v1.onnx --benchmark_database results/v100/profile/8.json.gz --short=false --batch_size=8 --human=false --strategy=parallel --metrics --output_file=tmp.tbl --flops_only --flops_aggregate=true --metric_filter=flop_count_sp --trim_layer_name=false
+```
+
+## Show Layer to kernel name mapping
+
+```
+go run main.go benchinfo --model_path ~/data/carml/dlperf/ResNet50-v1/resnet50v1/resnet50v1.onnx --benchmark_database results/v100/profile/8.json.gz --short=false --batch_size=8 --human=false --strategy=parallel --metrics --output_file=tmp.tbl --trim_layer_name=false --total=false --format=csv --kernels_only=true
 ```

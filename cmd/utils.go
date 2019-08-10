@@ -5,10 +5,12 @@ import (
 	"context"
 	"fmt"
 	"io/ioutil"
+	"math"
 	"os"
 	"os/exec"
 	"path"
 	"path/filepath"
+	"sort"
 	"strings"
 	"sync"
 	"time"
@@ -45,9 +47,13 @@ func dotToImage(dot []byte) (string, error) {
 	}
 	dotOutputCount++
 
-	img := filepath.Join(os.TempDir(), fmt.Sprintf("dlperf_%d.png", dotOutputCount))
+	img := filepath.Join(os.TempDir(), fmt.Sprintf("dlperf_%d.pdf", dotOutputCount))
+
+	dotFile := filepath.Join(os.TempDir(), fmt.Sprintf("dlperf_%d.dot", dotOutputCount))
+	com.WriteFile(dotFile, dot)
+
 	// img := filepath.Join("/tmp", fmt.Sprintf("dlperf.png"))
-	cmd := exec.Command(dotExe, "-Tpng", "-o", img)
+	cmd := exec.Command(dotExe, "-Tpdf", "-o", img)
 	cmd.Stdin = bytes.NewReader(dot)
 	if err := cmd.Run(); err != nil {
 		bts, e := cmd.CombinedOutput()
@@ -97,12 +103,21 @@ func getModelsIn(modelPath string) ([]string, error) {
 	}
 	modelPaths := []string{}
 	for _, modelPath := range modelPaths0 {
+		fileName := filepath.Base(modelPath)
+		if strings.HasPrefix(fileName, ".") {
+			continue
+		}
 		modelName := getModelName(modelPath)
-		if strings.HasPrefix(modelName, ".") || strings.HasPrefix(filepath.Base(modelPath), ".") {
+		if strings.HasPrefix(modelName, ".") {
 			continue
 		}
 		modelPaths = append(modelPaths, modelPath)
 	}
+
+	sort.Slice(modelPaths, func(ii, jj int) bool {
+		return getModelName(modelPaths[ii]) < getModelName(modelPaths[jj])
+	})
+
 	return modelPaths, nil
 }
 
@@ -237,4 +252,26 @@ func removeSpace(s string) string {
 	s = strings.TrimSuffix(s, "\n")
 	s = strings.TrimSpace(s)
 	return s
+}
+
+func floor(x float64) int {
+	return int(math.Floor(x))
+}
+
+func ceil(x float64) int {
+	return int(math.Ceil(x))
+}
+
+func maxInt(x, y int) int {
+	if x > y {
+		return x
+	}
+	return y
+}
+
+func minInt(x, y int) int {
+	if x > y {
+		return y
+	}
+	return x
 }

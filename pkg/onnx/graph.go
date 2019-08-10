@@ -4,13 +4,20 @@ import (
 	"encoding/json"
 	"fmt"
 	"image/color"
+	"math"
 	"strings"
+	"time"
 
+	"github.com/fatih/set"
+	"github.com/kljensen/snowball"
 	colorful "github.com/lucasb-eyer/go-colorful"
 	"github.com/muesli/gamut"
 	"github.com/pkg/errors"
 	dlperf "github.com/rai-project/dlperf/pkg"
+	"github.com/rai-project/dlperf/pkg/benchmark"
 	"github.com/rai-project/onnx"
+	"github.com/spf13/cast"
+	"gonum.org/v1/gonum/graph"
 	"gonum.org/v1/gonum/graph/encoding"
 	"gonum.org/v1/gonum/graph/simple"
 	"gonum.org/v1/gonum/graph/topo"
@@ -19,19 +26,22 @@ import (
 type Graph struct {
 	Root   *GraphNode
 	colors map[string]color.Color
-	*simple.DirectedGraph
+	*simple.WeightedDirectedGraph
 }
 
 type GraphNode struct {
-	id    int64
-	name  string
-	layer dlperf.Layer
-	color color.Color
+	id         int64
+	name       string
+	benchmarks benchmark.Benchmarks
+	layer      dlperf.Layer
+	color      color.Color
+	runtime    *time.Duration
 	*onnx.NodeProto
 }
 
 type GraphEdge struct {
-	simple.Edge
+	graph.WeightedEdge
+	color color.Color
 }
 
 type GraphNodes []*GraphNode
@@ -76,6 +86,10 @@ func (eAttributer) Attributes() []encoding.Attribute {
 			Key:   "penwidth",
 			Value: "3",
 		},
+		// encoding.Attribute{
+		// 	Key:   "pencolor",
+		// 	Value: "black",
+		// },
 	}
 }
 
@@ -86,6 +100,10 @@ func (g Graph) DOTAttributers() (graph, node, edge encoding.Attributer) {
 	return
 }
 
+func (nd *GraphNode) SetID(id int64) {
+	nd.id = id
+}
+
 func (nd GraphNode) ID() int64 {
 	return nd.id
 }
@@ -94,14 +112,30 @@ func (nd GraphNode) Layer() dlperf.Layer {
 	return nd.layer
 }
 
+func (nd GraphNode) GetRuntime() *time.Duration {
+	return nd.runtime
+}
+
+func (nd *GraphNode) SetRuntime(t time.Duration) {
+	nd.runtime = &t
+}
+
 func (nd GraphNode) DOTID() string {
 	return fmt.Sprintf("\"%s\"", nd.name)
+}
+
+func (nd *GraphNode) SetBenchmarks(bs benchmark.Benchmarks) {
+	nd.benchmarks = bs
+}
+
+func (nd *GraphNode) Benchmarks() benchmark.Benchmarks {
+	return nd.benchmarks
 }
 
 func (nd GraphNode) Attributes() []encoding.Attribute {
 	var lbl string
 	extraAttrs := []encoding.Attribute{}
-	if nd.OpType == "constant_input" {
+	if strings.ToLower(nd.OpType) == "constant_input" || strings.ToLower(nd.OpType) == "constantinput" {
 		lbl = fmt.Sprintf("\"%s\"", nd.Name)
 		extraAttrs = append(extraAttrs,
 			[]encoding.Attribute{
@@ -120,7 +154,7 @@ func (nd GraphNode) Attributes() []encoding.Attribute {
 			}...,
 		)
 	} else {
-		lbl = fmt.Sprintf("\"{%s}  | {%s}\"", nd.Name, nd.OpType)
+		lbl = fmt.Sprintf("\"{%s}  | {%s}\"", nd.Name, shortenOpType(nd.OpType))
 		if nd.layer != nil {
 			var outputShapesBuf []byte
 			var err error
@@ -131,8 +165,11 @@ func (nd GraphNode) Attributes() []encoding.Attribute {
 				outputShapesBuf, err = json.Marshal(outShapes)
 			}
 			if err == nil {
-				lbl = fmt.Sprintf(`"{ {%s  | %s} | %s }"`, nd.Name, nd.OpType, string(outputShapesBuf))
+				lbl = fmt.Sprintf(`"{ {%s  | %s} | %s }"`, nd.Name, shortenOpType(nd.OpType), string(outputShapesBuf))
 			}
+		}
+		if nd.runtime != nil {
+			lbl = fmt.Sprintf(`"{ {%s  | %s} | %s }"`, nd.Name, shortenOpType(nd.OpType), cast.ToString(*nd.runtime))
 		}
 	}
 	attrs := []encoding.Attribute{
@@ -161,15 +198,24 @@ func (nd GraphNode) Attributes() []encoding.Attribute {
 			Value: fmt.Sprintf("\"%s\"", strings.Join(nd.GetOutput(), ";")),
 		},
 	}
+	if nd.runtime != nil {
+		attrs = append(attrs,
+			encoding.Attribute{
+				Key:   "runtime",
+				Value: cast.ToString(*nd.runtime),
+			},
+		)
+	}
+	for _, bench := range nd.benchmarks {
+		benchAttr := encoding.Attribute{
+			Key:   bench.Name,
+			Value: cast.ToString(bench.RealTime),
+		}
+		attrs = append(attrs, benchAttr)
+	}
 	attrs = append(attrs, extraAttrs...)
 	if nd.color != nil {
-		toHex := func(clr0 color.Color) string {
-			clr, ok := colorful.MakeColor(clr0)
-			if ok {
-				return fmt.Sprintf(`"%s"`, clr.Hex())
-			}
-			return ""
-		}
+
 		color := nd.color
 		fillColor := color
 		// if nd.layer != nil && len(nd.layer.OutputShapes()) != 0 {
@@ -194,15 +240,15 @@ func (nd GraphNode) Attributes() []encoding.Attribute {
 				},
 				encoding.Attribute{
 					Key:   "color",
-					Value: toHex(gamut.Darker(color, 0.1)),
+					Value: colorToHex(gamut.Darker(color, 0.1)),
 				},
 				encoding.Attribute{
 					Key:   "fontcolor",
-					Value: toHex(gamut.Contrast(color)),
+					Value: colorToHex(gamut.Contrast(color)),
 				},
 				encoding.Attribute{
 					Key:   "fillcolor",
-					Value: toHex(fillColor),
+					Value: colorToHex(fillColor),
 				},
 			}...,
 		)
@@ -210,25 +256,128 @@ func (nd GraphNode) Attributes() []encoding.Attribute {
 	return attrs
 }
 
+func colorToHex(clr0 color.Color) string {
+	clr, ok := colorful.MakeColor(clr0)
+	if ok {
+		return fmt.Sprintf(`"%s"`, clr.Hex())
+	}
+	return ""
+}
+
+func shortenOpType(ty string) string {
+	stemmed, err := snowball.Stem(ty, "english", true)
+	if err == nil {
+		return iShortenOpType(stemmed)
+	}
+	return iShortenOpType(ty)
+}
+
+func iShortenOpType(ty0 string) string {
+	ty := strings.ToLower(ty0)
+	switch ty {
+	case "batchnorm", "bn":
+		return "BN"
+	case "conv", "convolution":
+		return "CONV"
+	case "reshap":
+		return "RSHP"
+	case "add":
+		return "ADD"
+	case "sub":
+		return "SUB"
+	case "mul":
+		return "MUL"
+	case "relu":
+		return "RELU"
+	case "prelu":
+		return "PRELU"
+	case "unsqueez":
+		return "UNSQ"
+	case "concat":
+		return "CONC"
+	case "averagepool":
+		return "AVGPL"
+	case "globalaveragepool":
+		return "GLBPL"
+	case "lrn":
+		return "LRN"
+	case "softmax":
+		return "SFT"
+	case "maxpool":
+		return "MXPL"
+	case "flatten":
+		return "FLT"
+	case "gemm":
+		return "GEMM"
+	case "matmul":
+		return "MM"
+	case "ident":
+		return "IDNT"
+	case "dropout":
+		return "DRP"
+	default:
+		fmt.Println(ty0)
+		return ty0
+	}
+}
+
+func (nd GraphEdge) Color() color.Color {
+	return nd.color
+}
+
+func (nd *GraphEdge) SetColor(clr color.Color) {
+	nd.color = clr
+}
+
+func (nd *GraphEdge) Highlight() {
+	clr, err := colorful.Hex("#C65840")
+	if err != nil {
+		clr, _ = colorful.Hex("#FF0000")
+	}
+	nd.color = &clr
+}
+
 func (nd GraphEdge) Attributes() []encoding.Attribute {
-	return []encoding.Attribute{}
+	attrs := []encoding.Attribute{}
+	if nd.color != nil {
+		attrs = append(attrs,
+			encoding.Attribute{
+				Key:   "penwidth",
+				Value: "5",
+			},
+			encoding.Attribute{
+				Key:   "pencolor",
+				Value: colorToHex(nd.color),
+			},
+			encoding.Attribute{
+				Key:   "color",
+				Value: colorToHex(nd.color),
+			},
+		)
+	}
+	return attrs
 }
 
 func (o *Onnx) mkColors() map[string]color.Color {
-	ndColors := map[string]color.Color{}
 	onnxGraph := o.GetGraph()
-	for _, nd := range onnxGraph.GetNode() {
-		ndColors[nd.GetOpType()] = nil
+	onnxNodes := onnxGraph.GetNode()
+
+	s := set.New(set.ThreadSafe)
+	for _, nd := range onnxNodes {
+		s.Add(nd.GetOpType())
 	}
-	colors, err := gamut.Generate(len(ndColors), gamut.PastelGenerator{})
+	colors, err := gamut.Generate(s.Size(), gamut.PastelGenerator{})
 	if err != nil {
-		return ndColors
+		return map[string]color.Color{}
 	}
-	ii := 0
-	for k := range ndColors {
-		color := colors[ii]
-		ndColors[k] = color
-		ii++
+	ndColors := map[string]color.Color{}
+	idx := 0
+	for _, nd := range onnxNodes {
+		if _, ok := ndColors[nd.GetOpType()]; ok {
+			continue
+		}
+		ndColors[nd.GetOpType()] = colors[idx]
+		idx++
 	}
 
 	return ndColors
@@ -239,7 +388,7 @@ func (o *Onnx) ToGraph(oo ...GraphOption) *Graph {
 	onnxGraph := o.GetGraph()
 	graphIds := map[string]int64{}
 
-	grph := simple.NewDirectedGraph()
+	grph := simple.NewWeightedDirectedGraph(0, math.Inf(1))
 
 	colors := o.mkColors()
 
@@ -353,10 +502,11 @@ func (o *Onnx) ToGraph(oo ...GraphOption) *Graph {
 				}
 				inNd := grph.Node(inId)
 				outNd := grph.Node(outId)
-				grph.SetEdge(&GraphEdge{
-					Edge: simple.Edge{
+				grph.SetWeightedEdge(&GraphEdge{
+					WeightedEdge: simple.WeightedEdge{
 						F: inNd,
 						T: outNd,
+						W: 1,
 					},
 				})
 			}
@@ -367,8 +517,8 @@ func (o *Onnx) ToGraph(oo ...GraphOption) *Graph {
 	inId := graphIds[input.GetName()]
 
 	network := &Graph{
-		Root:          grph.Node(inId).(*GraphNode),
-		DirectedGraph: grph,
+		Root:                  grph.Node(inId).(*GraphNode),
+		WeightedDirectedGraph: grph,
 	}
 
 	o.network = network

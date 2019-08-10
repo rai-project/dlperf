@@ -16,6 +16,7 @@ import (
 	"gonum.org/v1/plot/vg"
 
 	"github.com/rai-project/dlperf/pkg/onnx"
+	"github.com/rai-project/dlperf/pkg/writer"
 )
 
 var numBuckets = 20
@@ -72,7 +73,10 @@ func runWeightsCmd(cmd *cobra.Command, args []string) error {
 	}
 
 	outputFileName = filepath.Join(dir, filepath.Base(outputFileName))
-	writer := NewWriter(layerWeights{}, humanFlops)
+	writer := NewWriter(
+		layerWeights{},
+		writer.ShowHumanFlops(humanFlops),
+	)
 	defer writer.Close()
 
 	for _, info := range infos {

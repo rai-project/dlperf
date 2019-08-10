@@ -4,11 +4,10 @@ import (
 	"reflect"
 
 	"github.com/google/go-cmp/cmp"
+	"github.com/ianlancetaylor/demangle"
 	"github.com/k0kubun/pp"
 	"github.com/spf13/cast"
 )
-
-
 
 // func isSameScalar(a, b interface{}) bool {
 // 	if cmp.Equal(a, b) {
@@ -137,4 +136,12 @@ func indirect(a interface{}) interface{} {
 		v = v.Elem()
 	}
 	return v.Interface()
+}
+
+func demangleName(mangledName string) string {
+	name, err := demangle.ToString(mangledName)
+	if err != nil {
+		return mangledName
+	}
+	return name
 }
