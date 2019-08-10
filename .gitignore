@@ -702,3 +702,4 @@ onnx_models_1.3
 gen/
 tmp.tbl
 *.tbl
+*.table
