@@ -4,16 +4,20 @@ set -x
 
 go build
 
-
 declare -a batch_sizes=(
   1 \
-  8
+  2 \
+  4 \
+  8 \
+  16
 )
 
-
 declare -a machines=(
-  k80 \
-  v100
+  Tesla_K80 \
+  Tesla_V100-SXM2-16GB \
+  Quadro_RTX_6000 \
+  Tesla_P100-PCIE-16GB \
+  Tesla_P4
 )
 
 

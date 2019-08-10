@@ -243,7 +243,7 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 			benches := []*bench{}
 			l := lyr.(*perflayer.Conv)
 
-			filter := filterBenchmarks(false, benchInfoDataType, "")
+			filter := filterBenchmarks(false, benchInfoDataType, "", dlperf.FwdBenchmarkArgsOption.ConvFwdType(dlperf.ConvFwdTypeConv))
 			bs, err := getBenchmarkTime(filter)
 			if err != nil {
 				continue
