@@ -1,0 +1,25 @@
+LayerName,LayerType,Theoretical Flops,dram_read_bytes,dram_write_bytes
+conv_1,Conv,335329344,0,0
+conv_1,Conv,335329344,0,0
+relu_1,Relu,2281152,0,0
+maxpool_1,Pooling,0,0,0
+conv_2,Conv,768000000,0,0
+conv_2,Conv,768000000,0,0
+relu_2,Relu,320000,0,0
+maxpool_2,Pooling,0,0,0
+conv_3,Conv,339738624,0,0
+conv_3,Conv,339738624,0,0
+relu_3,Relu,147456,0,0
+conv_4,Conv,679477248,0,0
+conv_4,Conv,679477248,0,0
+relu_4,Relu,147456,0,0
+conv_5,Conv,679477248,0,0
+conv_5,Conv,679477248,0,0
+relu_5,Relu,147456,0,0
+maxpool_3,Pooling,0,0,0
+gemm_1,Gemm,150999040,0,0
+relu_6,Relu,8192,0,0
+gemm_2,Gemm,8389632,0,0
+relu_7,Relu,2048,0,0
+gemm_3,Gemm,2049000,0,0
+softmax_1,Softmax,3000,0,0

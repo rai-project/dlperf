@@ -1,0 +1,10 @@
+LayerName,LayerType,Theoretical Flops,dram_read_bytes,dram_write_bytes
+Convolution28,Conv,313600,0,0
+Plus30,ElementWise,6272,0,0
+ReLU32,Relu,12544,0,0
+Pooling66,Pooling,0,0,0
+Convolution110,Conv,1254400,0,0
+Plus112,ElementWise,3136,0,0
+ReLU114,Relu,6272,0,0
+Pooling160,Pooling,0,0,0
+Times212,Gemm,5130,0,0
