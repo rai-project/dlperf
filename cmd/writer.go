@@ -17,7 +17,6 @@ import (
 	"github.com/rai-project/dlperf/pkg/writer"
 )
 
-
 type Writer struct {
 	output         io.Writer
 	outputFileName string
@@ -48,10 +47,10 @@ func NewWriter(rower Rower, iopts ...writer.Option) *Writer {
 	opts := writer.NewOptions(iopts...)
 	switch opts.Format {
 	case "table":
-    wr.tbl = tablewriter.NewWriter(output)
-    // make it markdown format
-    wr.tbl.SetBorders(tablewriter.Border{Left: true, Top: false, Right: true, Bottom: false})
-    wr.tbl.SetCenterSeparator("|")
+		wr.tbl = tablewriter.NewWriter(output)
+		// make it markdown format
+		wr.tbl.SetBorders(tablewriter.Border{Left: true, Top: false, Right: true, Bottom: false})
+		wr.tbl.SetCenterSeparator("|")
 	case "csv":
 		wr.csv = csv.NewWriter(output)
 	case "json":

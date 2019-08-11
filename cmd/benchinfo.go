@@ -449,7 +449,7 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 		writer.ShowMetrics(showBenchInfoMetrics),
 		writer.ShowFlopsMetricsOnly(showFlopsMetricsOnly),
 		writer.AggregateFlopsMetrics(aggregateFlops),
-		writer.HideEmptyMetrics(true),
+		writer.HideEmptyMetrics(false),
 		writer.MetricsFilter(metricFilterList),
 		writer.TrimLayerName(trimLayerName),
 		writer.ShowKernelNamesOnly(showKernelNamesOnly),

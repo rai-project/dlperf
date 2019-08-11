@@ -1,9 +1,26 @@
 #!/bin/sh
 set -x
 
+
+go build
+
+declare -a batch_sizes=(
+  1 \
+  2 \
+  4 \
+  8 \
+  16 \
+  32 \
+  64 \
+  128 \
+  256 \
+  512 \
+  1024
+)
+
 mkdir -p gen
-go run main.go benchgen --model_path ~/data/carml/dlperf -o gen/generated_benchmarks_1.hpp --backward=false --forward=true --batch_size=1
-go run main.go benchgen --model_path ~/data/carml/dlperf -o gen/generated_benchmarks_2.hpp --backward=false --forward=true --batch_size=2
-go run main.go benchgen --model_path ~/data/carml/dlperf -o gen/generated_benchmarks_4.hpp --backward=false --forward=true --batch_size=4
-go run main.go benchgen --model_path ~/data/carml/dlperf -o gen/generated_benchmarks_8.hpp --backward=false --forward=true --batch_size=8
-go run main.go benchgen --model_path ~/data/carml/dlperf -o gen/generated_benchmarks_16.hpp --backward=false --forward=true --batch_size=16
+for batch_size in "${batch_sizes[@]}"
+do
+    echo $batch_size
+    go run main.go benchgen --model_path ~/data/carml/dlperf -o gen/generated_benchmarks_${batch_size}.hpp --backward=false --forward=true --batch_size=${batch_size}
+done

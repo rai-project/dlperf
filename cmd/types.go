@@ -7,6 +7,8 @@ import (
 	"strings"
 	"time"
 
+	"github.com/k0kubun/pp"
+
 	dlperf "github.com/rai-project/dlperf/pkg"
 	"github.com/rai-project/dlperf/pkg/benchmark"
 	"github.com/rai-project/dlperf/pkg/onnx"
@@ -133,9 +135,15 @@ func (l bench) Row(iopts ...writer.Option) []string {
 		metrics := l.getMetrics(iopts...)
 		res := []string{layerName, operatorType, flopsString}
 		if len(opts.MetricsFilter) != 0 {
-			res = append(res, metrics...)
+			for _, name := range opts.MetricsFilter {
+				res = append(res, metrics[name])
+			}
 		} else {
-			res = append(res, strings.Join(metrics, ";"))
+			arry := []string{}
+			for _, v := range metrics {
+				arry = append(arry, v)
+			}
+			res = append(res, strings.Join(arry, ";"))
 		}
 		return res
 	}
@@ -143,7 +151,11 @@ func (l bench) Row(iopts ...writer.Option) []string {
 	base := []string{layerName, operatorType, benchmarkName, realTime, flopsString}
 	if opts.ShowMetrics {
 		kernels := l.getKernelNames(iopts...)
-		metrics := l.getMetrics(iopts...)
+		metricsMap := l.getMetrics(iopts...)
+		metrics := []string{}
+		for _, v := range metricsMap {
+			metrics = append(metrics, v)
+		}
 		base = append(base, strings.Join(kernels, ";"), strings.Join(metrics, ";"))
 	}
 
@@ -172,7 +184,7 @@ func (l bench) getKernelNames(iopts ...writer.Option) []string {
 	return kernels
 }
 
-func (l bench) getMetrics(iopts ...writer.Option) []string {
+func (l bench) getMetrics(iopts ...writer.Option) map[string]string {
 	opts := writer.NewOptions(iopts...)
 	hasFilter := len(opts.MetricsFilter) != 0
 
@@ -197,20 +209,24 @@ func (l bench) getMetrics(iopts ...writer.Option) []string {
 		return elems[1]
 	}
 
-	makeString := func(mp map[string]uint64) []string {
-		res := []string{}
-		for k, v := range mp {
-			if opts.HideEmptyMetrics && v == 0 {
-				continue
-			}
-			metricName := getMetricName(k)
+	makeString := func(mp map[string]uint64) map[string]string {
+		res := map[string]string{}
+		for _, metricName := range opts.MetricsFilter {
 			if !showMetric(metricName) {
 				continue
 			}
+			val, ok := mp[metricName]
+			if opts.HideEmptyMetrics && (!ok || val == 0) {
+				continue
+			}
+			if !ok {
+				res[metricName] = "0"
+				continue
+			}
 			if hasFilter {
-				res = append(res, fmt.Sprintf("%v", v))
+				res[metricName] = fmt.Sprintf("%v", val)
 			} else {
-				res = append(res, fmt.Sprintf("%v:%v", k, v))
+				res[metricName] = fmt.Sprintf("%v:%v", metricName, val)
 			}
 		}
 		return res
@@ -222,20 +238,22 @@ func (l bench) getMetrics(iopts ...writer.Option) []string {
 		for metricName, metricValues := range kernelInfo.Metrics {
 			metricMeanValue := trimmedMeanUint64Slice(metricValues, DefaultTrimmedMeanFraction)
 			if opts.AggregateFlopsMetrics {
-				key := fmt.Sprintf("%s", metricName)
+				key := getMetricName(fmt.Sprintf("%s", metricName))
 				if _, ok := metrics[key]; !ok {
 					metrics[key] = 0
 				}
 				metrics[key] += metricMeanValue
 			} else {
 				// dependent on the kernel
-				key := fmt.Sprintf("%d:%s", ii, metricName)
+				key := getMetricName(fmt.Sprintf("%d:%s", ii, metricName))
 				metrics[key] = metricMeanValue
 			}
 		}
 	}
 	res := makeString(metrics)
-	sort.Strings(res)
+	if debugMode {
+		pp.Println(l.Benchmark.KernelInfos)
+	}
 	return res
 }
 

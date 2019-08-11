@@ -140,7 +140,7 @@ func NewOptions(opts ...Option) Options {
 		ShowFlopsMetricsOnly:    false,
 		AggregateFlopsMetrics:   false,
 		ShowKernelNamesOnly:     false,
-		HideEmptyMetrics:        true,
+		HideEmptyMetrics:        false,
 		TheoreticalFlopsFMAOnly: false,
 		MetricsFilter:           []string{},
 	}

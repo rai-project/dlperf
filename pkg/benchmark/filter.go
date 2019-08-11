@@ -5,6 +5,7 @@ import (
 	"reflect"
 	"regexp"
 
+	"strings"
 	"github.com/k0kubun/pp"
 	"github.com/spf13/cast"
 )
@@ -78,7 +79,7 @@ next:
 				continue next
 			}
 
-			if k == "conv_bwd_type" || k == "conv_fwd_type" {
+			if strings.ToLower(k) == "conv_bwd_type" || strings.ToLower(k) == "conv_fwd_type" {
 				filterVal = int(reflect.ValueOf(filterVal).Int())
 				val = cast.ToInt(val)
 			}
