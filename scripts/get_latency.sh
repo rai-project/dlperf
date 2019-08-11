@@ -18,8 +18,10 @@ declare -a machines=(
   Tesla_V100-SXM2-16GB \
   Quadro_RTX_6000 \
   Tesla_P100-PCIE-16GB \
+  Tesla_M60 \
   Tesla_P4
 )
+
 
 for batch_size in "${batch_sizes[@]}"
 do
