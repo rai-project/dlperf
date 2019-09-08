@@ -1,21 +1,23 @@
 package cmd
 
 import (
-	"github.com/rai-project/dlperf/pkg/writer"
+	"fmt"
 	"sort"
+
+	"github.com/rai-project/dlperf/pkg/writer"
 )
 
 type modelURLInfo struct {
 	Name string `json:"name,omitempty"`
 	URL  string `json:"url,omitempty"`
-	Year int `json:"year,omitempty"`
+	Year int    `json:"year,omitempty"`
 }
 
 func (modelURLInfo) Header(opts ...writer.Option) []string {
 	return []string{"Name", "URL", "Year"}
 }
 func (m modelURLInfo) Row(opts ...writer.Option) []string {
-	return []string{m.Name, m.URL, m.Year}
+	return []string{m.Name, m.URL, fmt.Sprintf("%v", m.Year)}
 }
 
 var ourModelURLs = []modelURLInfo{
