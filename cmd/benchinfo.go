@@ -274,13 +274,22 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 
 			// check for conv -> bias -> relu pattern
 			if nextLayer := peekLayer(); l.HasBias() && nextLayer != nil && strings.ToLower(nextLayer.OperatorType()) == "relu" {
+        panic("to do by forcing the use of the relu activation")
 				filter := filterBenchmarks(false, benchInfoDataType, "", dlperf.FwdBenchmarkArgsOption.ConvFwdType(dlperf.ConvFwdTypeConvFusedActivation))
 				bs, err := getBenchmarkTime(filter)
 				if err != nil {
 					continue
 				}
 				benches = append(benches, makeLayerInfos(bs, "forward"))
-			} else {
+      } else if  l.HasBias() { // fuse conv+bias layer
+        panic("to do by forcing the use of the identity activation")
+				filter := filterBenchmarks(false, benchInfoDataType, "", dlperf.FwdBenchmarkArgsOption.ConvFwdType(dlperf.ConvFwdTypeConvFusedActivation))
+				bs, err := getBenchmarkTime(filter)
+				if err != nil {
+					continue
+				}
+				benches = append(benches, makeLayerInfos(bs, "forward"))
+			}else {
 
 				if err := getForwardConv(); err != nil {
 					continue
