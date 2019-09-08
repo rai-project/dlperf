@@ -4,7 +4,6 @@ import (
 	"os"
 	"path/filepath"
 
-  "strings"
 	sourcepath "github.com/GeertJohan/go-sourcepath"
 	"github.com/Unknwon/com"
 	"github.com/k0kubun/pp"
@@ -12,6 +11,7 @@ import (
 	"github.com/rai-project/dlperf/pkg/onnx"
 	"github.com/rai-project/dlperf/pkg/writer"
 	"github.com/spf13/cobra"
+	"strings"
 )
 
 func runFlopsCmd(cmd *cobra.Command, args []string) error {
@@ -65,7 +65,7 @@ func runFlopsCmd(cmd *cobra.Command, args []string) error {
 		defer writer.Close()
 
 		for _, info := range infos {
-      opType := strings.ToLower(info.OperatorType())
+			opType := strings.ToLower(info.OperatorType())
 			if opType == "constant_input" || opType == "constantinput" || opType == "constant" {
 				continue
 			}

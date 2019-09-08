@@ -115,7 +115,17 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 		}
 	}
 
-	for _, nd := range nds {
+	for ii := range nds {
+		nd := nds[ii]
+		peekNLayer := func(offset int) dlperf.Layer {
+			if ii+offset >= len(nds) {
+				return nil
+			}
+			return nds[ii+offset].Layer()
+		}
+		peekLayer := func() dlperf.Layer {
+			return peekNLayer(1)
+		}
 		lyr := nd.Layer()
 		switch strings.ToLower(lyr.OperatorType()) {
 		case "constantinput", "lrn", "reshape", "concat", "unsqueeze", "flatten", "globalpooling", "identity", "transpose", "scale":
@@ -243,20 +253,38 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 			benches := []*bench{}
 			l := lyr.(*perflayer.Conv)
 
-			filter := filterBenchmarks(false, benchInfoDataType, "", dlperf.FwdBenchmarkArgsOption.ConvFwdType(dlperf.ConvFwdTypeConv))
-			bs, err := getBenchmarkTime(filter)
-			if err != nil {
-				continue
-			}
-			benches = append(benches, makeLayerInfos(bs, "forward"))
+			getForwardConv := func() error {
+				filter := filterBenchmarks(false, benchInfoDataType, "", dlperf.FwdBenchmarkArgsOption.ConvFwdType(dlperf.ConvFwdTypeConv))
+				bs, err := getBenchmarkTime(filter)
+				if err != nil {
+					return err
+				}
+				benches = append(benches, makeLayerInfos(bs, "forward"))
 
-			if l.HasBias() {
-				filter := filterBenchmarks(false, benchInfoDataType, "", dlperf.FwdBenchmarkArgsOption.ConvFwdType(dlperf.ConvFwdTypeBias))
+				if l.HasBias() {
+					filter := filterBenchmarks(false, benchInfoDataType, "", dlperf.FwdBenchmarkArgsOption.ConvFwdType(dlperf.ConvFwdTypeBias))
+					bs, err := getBenchmarkTime(filter)
+					if err != nil {
+						return err
+					}
+					benches = append(benches, makeLayerInfos(bs, "bias"))
+				}
+				return nil
+			}
+
+			// check for conv -> bias -> relu pattern
+			if nextLayer := peekLayer(); l.HasBias() && nextLayer != nil && strings.ToLower(nextLayer.OperatorType()) == "relu" {
+				filter := filterBenchmarks(false, benchInfoDataType, "", dlperf.FwdBenchmarkArgsOption.ConvFwdType(dlperf.ConvFwdTypeConvFusedActivation))
 				bs, err := getBenchmarkTime(filter)
 				if err != nil {
 					continue
 				}
-				benches = append(benches, makeLayerInfos(bs, "bias"))
+				benches = append(benches, makeLayerInfos(bs, "forward"))
+			} else {
+
+				if err := getForwardConv(); err != nil {
+					continue
+				}
 			}
 
 			if benchInfoTraining {

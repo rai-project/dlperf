@@ -1,8 +1,8 @@
 package cmd
 
 import (
-	"sort"
 	"github.com/rai-project/dlperf/pkg/writer"
+	"sort"
 )
 
 type modelURLInfo struct {
@@ -293,9 +293,8 @@ var onnxModelURLs = []modelURLInfo{
 
 var modelURLs = append(ourModelURLs, onnxModelURLs...)
 
-
 func init() {
-	sort.Slice(modelURLs  , func(ii, jj int ) bool {
-		return modelURLs[ii].Name < modelURLs[jj].Name 
+	sort.Slice(modelURLs, func(ii, jj int) bool {
+		return modelURLs[ii].Name < modelURLs[jj].Name
 	})
 }
