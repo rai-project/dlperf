@@ -26,7 +26,6 @@ var benchgenCmd = &cobra.Command{
 	Short:   "Generates the benchmark files for layers",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		modelPath = expandModelPath(modelPath)
-
 		models, err := readModels(modelPath)
 		if err != nil {
 			return err

@@ -144,6 +144,9 @@ func getOutputShapes(layers dlperf.Layers) []dlperf.Shape {
 			continue
 		}
 		if isAnyEmpty(layer.OutputShapes()) {
+			if layer.OperatorType() == "ConstantInput" {
+				continue
+			}
 			log.WithField("layer", layer.Name()).Error(" has empty OutputShapes")
 		}
 		outputShapes = append(outputShapes, layer.OutputShapes()[0])

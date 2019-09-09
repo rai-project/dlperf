@@ -159,7 +159,6 @@ func readModels(modelPath string) ([]*onnx.Onnx, error) {
 	g, _ := errgroup.WithContext(context.Background())
 	for ii := range modelPaths {
 		modelPath := modelPaths[ii]
-
 		g.Go(func() error {
 
 			path := modelPath

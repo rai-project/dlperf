@@ -223,7 +223,7 @@ func (c Conv) FwdBenchmarkArgs(iopts ...dlperf.FwdBenchmarkArgsOptionFunc) inter
 		BaseBenchmarkArgs: mkBaseBenchmarkFWDArgs(&c, iopts...),
 		Group:             c.Group,
 	}
-	
+
 	hash, err := hashstructure.Hash(
 		res,
 		&hashstructure.HashOptions{
