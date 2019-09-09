@@ -40,8 +40,8 @@ var (
 	highlightShortestPath       bool
 	showFlopsMetricsOnly        bool
 	aggregateFlops              bool
-  showKernelNamesOnly         bool
-  fuseLayers bool = false
+	showKernelNamesOnly         bool
+	fuseLayers                  bool = false
 	trimLayerName               bool = true
 	showTotalInformation        bool = true
 	metricFilterString          string
@@ -117,7 +117,7 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 	}
 
 	for ii := range nds {
-    nd := nds[ii]
+		nd := nds[ii]
 		peekNLayer := func(offset int) dlperf.Layer {
 			if ii+offset >= len(nds) {
 				return nil
@@ -127,7 +127,7 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 		peekLayer := func() dlperf.Layer {
 			return peekNLayer(1)
 		}
-    lyr := nd.Layer()
+		lyr := nd.Layer()
 		switch strings.ToLower(lyr.OperatorType()) {
 		case "constantinput", "lrn", "reshape", "concat", "unsqueeze", "flatten", "globalpooling", "identity", "transpose", "scale":
 			benchmarkInfo = append(benchmarkInfo,
@@ -185,7 +185,7 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 				// pp.ColoringEnabled = true
 				// continue
 				// pp.Println(lyr.OperatorType())
-        pp.Println(lyr.Name())
+				pp.Println(lyr.Name())
 				pp.Println(filter)
 				return nil, errors.New("no benchmarks")
 			}
@@ -275,6 +275,15 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 
 			// check for conv -> bias -> relu pattern
 			if nextLayer := peekLayer(); l.HasBias() && fuseLayers && nextLayer != nil && strings.ToLower(nextLayer.OperatorType()) == "relu" {
+				panic("to do by forcing the use of the relu activation")
+				filter := filterBenchmarks(false, benchInfoDataType, "", dlperf.FwdBenchmarkArgsOption.ConvFwdType(dlperf.ConvFwdTypeConvFusedActivation))
+				bs, err := getBenchmarkTime(filter)
+				if err != nil {
+					continue
+				}
+				benches = append(benches, makeLayerInfos(bs, "forward"))
+			} else if fuseLayers && l.HasBias() { // fuse conv+bias layer
+				panic("to do by forcing the use of the identity activation")
 				filter := filterBenchmarks(false, benchInfoDataType, "", dlperf.FwdBenchmarkArgsOption.ConvFwdType(dlperf.ConvFwdTypeConvFusedActivation))
 				bs, err := getBenchmarkTime(filter)
 				if err != nil {
@@ -282,8 +291,8 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 				}
 				benches = append(benches, makeLayerInfos(bs, "forward"))
 			} else {
-         err := getForwardConv()
-         if err != nil {
+				err := getForwardConv()
+				if err != nil {
 					continue
 				}
 			}
@@ -526,8 +535,8 @@ func init() {
 	benchinfoCmd.PersistentFlags().BoolVar(&showFlopsMetricsOnly, "flops_only", false, "show a table of only the theoretical and actual flops for each layer")
 	benchinfoCmd.PersistentFlags().BoolVar(&aggregateFlops, "flops_aggregate", false, "sum all the flops within a metric for each layer")
 	benchinfoCmd.PersistentFlags().StringVar(&metricFilterString, "metric_filter", "", "filter using the command seperated list of metrics")
-  benchinfoCmd.PersistentFlags().BoolVar(&showTotalInformation, "total", true, "show the total information across all layers")
-  benchinfoCmd.PersistentFlags().BoolVar(&fuseLayers, "fused", false, "check for fused layers in the database")
+	benchinfoCmd.PersistentFlags().BoolVar(&showTotalInformation, "total", true, "show the total information across all layers")
+	benchinfoCmd.PersistentFlags().BoolVar(&fuseLayers, "fused", false, "check for fused layers in the database")
 	benchinfoCmd.PersistentFlags().BoolVar(&trimLayerName, "trim_layer_name", true, "only show the first few characters of a layer")
 	rootCmd.AddCommand(benchinfoCmd)
 }

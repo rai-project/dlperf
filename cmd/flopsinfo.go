@@ -4,6 +4,8 @@ import (
 	"os"
 	"path/filepath"
 
+	"strings"
+
 	sourcepath "github.com/GeertJohan/go-sourcepath"
 	"github.com/Unknwon/com"
 	"github.com/k0kubun/pp"
@@ -11,7 +13,6 @@ import (
 	"github.com/rai-project/dlperf/pkg/onnx"
 	"github.com/rai-project/dlperf/pkg/writer"
 	"github.com/spf13/cobra"
-	"strings"
 )
 
 func runFlopsCmd(cmd *cobra.Command, args []string) error {
