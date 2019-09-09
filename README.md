@@ -98,14 +98,14 @@ go run main.go benchgen --model_path ~/onnx_models/bvlc_alexnet/model.onnx --for
 Query benchmark database at `benchmark_database` to to get information on the model at `model_path`
 
 ```
-go run main.go benchinfo --model_path ~/onnx_models/vgg19/vgg19.onnx
+go run main.go benchinfo --model_path ~/data/carml/dlperf/BVLC_AlexNet/bvlc_alexnet/model.onnx --benchmark_database results/Tesla_V100-SXM2-16GB/1.json --output_file=testout --short=false --batch_size=1 --human=false --strategy=parallel --total=true --format=json --trim_layer_name=false
 ```
 
-or
+Options:
 
-```
-go run main.go benchinfo --model_path ~/onnx_models/resnet100/resnet100.onnx --benchmark_database ../microbench/results/cudnn/ip-172-31-26-89.json
-```
+- trim_layer_name: limit the layer name length
+- strategy: "parallel" executes the layers on the short path; "serial" serializes the layers
+- total: output total number of all layers
 
 ## Draw a graph of the layers using benchmark data
 
@@ -140,3 +140,10 @@ go run main.go benchinfo --model_path ~/data/carml/dlperf/ResNet50-v1/resnet50v1
 ```
 go run main.go benchinfo --model_path ~/data/carml/dlperf/ResNet50-v1/resnet50v1/resnet50v1.onnx --benchmark_database results/v100/profile/8.json.gz --short=false --batch_size=8 --human=false --strategy=parallel --metrics --output_file=tmp.tbl --trim_layer_name=false --total=false --format=csv --kernels_only=true
 ```
+
+
+## References
+
+- https://github.com/onnx/models
+- https://github.com/rai-project/onnx_examples (private)
+-
