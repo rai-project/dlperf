@@ -16,15 +16,22 @@ import (
 )
 
 var (
-  generateFused bool
-	generateForward  bool
-	generateBackward bool
+	generateFused     bool
+	generateOnlyFused bool
+	generateForward   bool
+	generateBackward  bool
 )
 
 var benchgenCmd = &cobra.Command{
 	Use:     "benchgen",
 	Aliases: []string{"benchmark_generate"},
 	Short:   "Generates the benchmark files for layers",
+	PreRunE: func(cmd *cobra.Command, args []string) error {
+		if generateOnlyFused {
+			generateFused = true
+		}
+		return nil
+	},
 	RunE: func(cmd *cobra.Command, args []string) error {
 		modelPath = expandModelPath(modelPath)
 		models, err := readModels(modelPath)
@@ -72,17 +79,22 @@ var benchgenCmd = &cobra.Command{
 					if lyr.OperatorType() == "ConstantInput" {
 						return nil
 					}
+					if generateOnlyFused && lyr.OperatorType() != "Conv" {
+						return nil
+					}
 					var b string
 					switch strings.ToLower(lyr.OperatorType()) {
 					case "conv":
 						l := lyr.(*perflayer.Conv)
-						b = l.FwdBenchmarkGenerator(dlperf.FwdBenchmarkArgsOption.ConvFwdType(dlperf.ConvFwdTypeConv))
-						b += "\n"
-						b += l.FwdBenchmarkGenerator(dlperf.FwdBenchmarkArgsOption.ConvFwdType(dlperf.ConvFwdTypeBias))
-            if generateFused {
-						b += "\n"
-            b += l.FwdBenchmarkGenerator(dlperf.FwdBenchmarkArgsOption.ConvFwdType(dlperf.ConvFwdTypeConvFusedActivation))
-            }
+						if !generateOnlyFused {
+							b = l.FwdBenchmarkGenerator(dlperf.FwdBenchmarkArgsOption.ConvFwdType(dlperf.ConvFwdTypeConv))
+							b += "\n"
+							b += l.FwdBenchmarkGenerator(dlperf.FwdBenchmarkArgsOption.ConvFwdType(dlperf.ConvFwdTypeBias))
+							b += "\n"
+						}
+						if generateFused {
+							b += l.FwdBenchmarkGenerator(dlperf.FwdBenchmarkArgsOption.ConvFwdType(dlperf.ConvFwdTypeConvFusedActivation))
+						}
 					case "relu":
 						l := lyr.(*perflayer.Relu)
 						b = l.FwdBenchmarkGenerator()
@@ -120,7 +132,7 @@ var benchgenCmd = &cobra.Command{
 			}
 		}
 
-		if generateBackward {
+		if generateBackward && !generateOnlyFused {
 			for ii := range layers {
 				lyr := layers[ii]
 				g.Go(func() error {
@@ -134,9 +146,9 @@ var benchgenCmd = &cobra.Command{
 						l := lyr.(*perflayer.Conv)
 						b = l.BwdBenchmarkGenerator(dlperf.BwdBenchmarkArgsOption.ConvBwdType(dlperf.ConvBwdTypeData))
 						b += "\n"
-            b += l.BwdBenchmarkGenerator(dlperf.BwdBenchmarkArgsOption.ConvBwdType(dlperf.ConvBwdTypeFilter))
+						b += l.BwdBenchmarkGenerator(dlperf.BwdBenchmarkArgsOption.ConvBwdType(dlperf.ConvBwdTypeFilter))
 						b += "\n"
-            b += l.BwdBenchmarkGenerator(dlperf.BwdBenchmarkArgsOption.ConvBwdType(dlperf.ConvBwdTypeBias))
+						b += l.BwdBenchmarkGenerator(dlperf.BwdBenchmarkArgsOption.ConvBwdType(dlperf.ConvBwdTypeBias))
 					case "relu":
 						l := lyr.(*perflayer.Relu)
 						b = l.BwdBenchmarkGenerator()
@@ -193,6 +205,7 @@ var benchgenCmd = &cobra.Command{
 }
 
 func init() {
+	benchgenCmd.PersistentFlags().BoolVar(&generateOnlyFused, "only_fused", false, "generate only fused conv layers")
 	benchgenCmd.PersistentFlags().BoolVar(&generateFused, "fused", false, "generate fused conv layers")
 	benchgenCmd.PersistentFlags().BoolVar(&generateBackward, "backward", false, "generate the backward pass")
 	benchgenCmd.PersistentFlags().BoolVar(&generateForward, "forward", true, "generate the forward pass")
