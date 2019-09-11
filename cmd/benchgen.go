@@ -19,7 +19,9 @@ var (
 	generateFused     bool
 	generateOnlyFused bool
 	generateForward   bool
-	generateBackward  bool
+  generateBackward  bool
+  generateRandomize bool
+  generateRandomizeLength int = 5
 )
 
 var benchgenCmd = &cobra.Command{
@@ -87,13 +89,25 @@ var benchgenCmd = &cobra.Command{
 					case "conv":
 						l := lyr.(*perflayer.Conv)
 						if !generateOnlyFused {
-							b = l.FwdBenchmarkGenerator(dlperf.FwdBenchmarkArgsOption.ConvFwdType(dlperf.ConvFwdTypeConv))
+              b = l.FwdBenchmarkGenerator(
+                  dlperf.FwdBenchmarkArgsOption.ConvFwdType(dlperf.ConvFwdTypeConv),
+                  dlperf.FwdBenchmarkArgsOption.RandomizeConv(generateRandomize),
+                  dlperf.FwdBenchmarkArgsOption.RandomizeConvLength(generateRandomizeLength),
+              )
 							b += "\n"
-							b += l.FwdBenchmarkGenerator(dlperf.FwdBenchmarkArgsOption.ConvFwdType(dlperf.ConvFwdTypeBias))
+							b += l.FwdBenchmarkGenerator(
+                dlperf.FwdBenchmarkArgsOption.ConvFwdType(dlperf.ConvFwdTypeBias),
+                dlperf.FwdBenchmarkArgsOption.RandomizeConv(generateRandomize),
+                dlperf.FwdBenchmarkArgsOption.RandomizeConvLength(generateRandomizeLength),
+              )
 							b += "\n"
 						}
 						if generateFused {
-							b += l.FwdBenchmarkGenerator(dlperf.FwdBenchmarkArgsOption.ConvFwdType(dlperf.ConvFwdTypeConvFusedActivation))
+							b += l.FwdBenchmarkGenerator(
+                dlperf.FwdBenchmarkArgsOption.ConvFwdType(dlperf.ConvFwdTypeConvFusedActivation),
+                dlperf.FwdBenchmarkArgsOption.RandomizeConv(generateRandomize),
+                dlperf.FwdBenchmarkArgsOption.RandomizeConvLength(generateRandomizeLength),
+              )
 						}
 					case "relu":
 						l := lyr.(*perflayer.Relu)
@@ -207,6 +221,7 @@ var benchgenCmd = &cobra.Command{
 func init() {
 	benchgenCmd.PersistentFlags().BoolVar(&generateOnlyFused, "only_fused", false, "generate only fused conv layers")
 	benchgenCmd.PersistentFlags().BoolVar(&generateFused, "fused", false, "generate fused conv layers")
+	benchgenCmd.PersistentFlags().BoolVar(&generateRandomize, "randomize", false, "generate randomized guard suffix to allow for different translation groups")
 	benchgenCmd.PersistentFlags().BoolVar(&generateBackward, "backward", false, "generate the backward pass")
 	benchgenCmd.PersistentFlags().BoolVar(&generateForward, "forward", true, "generate the forward pass")
 	rootCmd.AddCommand(benchgenCmd)

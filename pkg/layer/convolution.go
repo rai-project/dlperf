@@ -4,6 +4,8 @@ import (
 	"math"
 	"strings"
 
+	"math/rand"
+	"github.com/spf13/cast"
 	"github.com/k0kubun/pp"
 	"github.com/mitchellh/hashstructure"
 	dlperf "github.com/rai-project/dlperf/pkg"
@@ -70,31 +72,41 @@ func (c *Conv) InferShape(inputLayers dlperf.Layers) {
 }
 
 func (c Conv) FwdBenchmarkName(iopts ...dlperf.FwdBenchmarkArgsOptionFunc) string {
+	var res string
 	opts := dlperf.CreateFwdBenchmarkArgsOption(iopts...)
+	
 	switch opts.ConvFwdType {
 	case dlperf.ConvFwdTypeBias:
-		return "LAYER_CUDNN_ADD_TENSOR"
+		res = "LAYER_CUDNN_ADD_TENSOR"
 	case dlperf.ConvFwdTypeConv:
-		return "LAYER_CUDNN_CONV_FWD"
+		res = "LAYER_CUDNN_CONV_FWD"
 	case dlperf.ConvFwdTypeConvFusedActivation:
-		return "LAYER_CUDNN_CONV_BIAS_ACTIVATION_FWD"
+		res = "LAYER_CUDNN_CONV_BIAS_ACTIVATION_FWD"
 	default:
 		panic("unknown conv fwd type")
 	}
+	if opts.RandomizeConv {
+		res += "_" + cast.ToString(rand.Intn(opts.RandomizeConvLength))
+	}
+
+	return res
 }
 
 func (c Conv) BwdBenchmarkName(iopts ...dlperf.BwdBenchmarkArgsOptionFunc) string {
+	var res string
 	opts := dlperf.CreateBwdBenchmarkArgsOption(iopts...)
 	switch opts.ConvBwdType {
 	case dlperf.ConvBwdTypeData:
-		return "LAYER_CUDNN_CONV_BWD_DATA"
+		res = "LAYER_CUDNN_CONV_BWD_DATA"
 	case dlperf.ConvBwdTypeFilter:
-		return "LAYER_CUDNN_CONV_BWD_FILTER"
+		res = "LAYER_CUDNN_CONV_BWD_FILTER"
 	case dlperf.ConvBwdTypeBias:
-		return "LAYER_CUDNN_CONV_BWD_BIAS"
+		res = "LAYER_CUDNN_CONV_BWD_BIAS"
 	default:
 		panic("unknown conv bwd type")
 	}
+
+	return res
 }
 
 func (c Conv) FwdCUDNNName() string {
@@ -317,6 +329,8 @@ func (c Conv) FwdBenchmarkGenerator(iopts ...dlperf.FwdBenchmarkArgsOptionFunc) 
 	default:
 		panic("invalid fwd convolution algorithm")
 	}
+
+
 	return templateExecFWD(&c, templateBasePrefix+templString+templateBaseSuffix, iopts...)
 }
 
