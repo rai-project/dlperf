@@ -1,4 +1,5 @@
 # DLPerf
+
 [![Build Status](https://dev.azure.com/dakkak/rai/_apis/build/status/rai-project.dlperf?branchName=master)](https://dev.azure.com/dakkak/rai/_build/latest?definitionId=26&branchName=master)
 [![Build Status](https://travis-ci.org/rai-project/dlperf.svg?branch=master)](https://travis-ci.org/rai-project/dlperf)
 
@@ -90,7 +91,13 @@ Generate the benchmark files of a model or across models at `model_path`.
 Use `--forward` and `--backward` to control whether to generate benchmarks for forward and backward pass.
 
 ```
-go run main.go benchgen --model_path ~/onnx_models/bvlc_alexnet/model.onnx --forward=true --backward=false -o generated_benchmarks.hpp
+go run main.go benchgen --model_path ~/data/carml/dlperf/Emotion-FerPlus/emotion_ferplus/model.onnx --forward=true --backward=false -o test_generated_benchmarks.hpp
+```
+
+or
+
+```
+ ./scripts/gen_benchmarks.sh
 ```
 
 ## Query benchmark database
@@ -140,7 +147,6 @@ go run main.go benchinfo --model_path ~/data/carml/dlperf/ResNet50-v1/resnet50v1
 ```
 go run main.go benchinfo --model_path ~/data/carml/dlperf/ResNet50-v1/resnet50v1/resnet50v1.onnx --benchmark_database results/v100/profile/8.json.gz --short=false --batch_size=8 --human=false --strategy=parallel --metrics --output_file=tmp.tbl --trim_layer_name=false --total=false --format=csv --kernels_only=true
 ```
-
 
 ## References
 

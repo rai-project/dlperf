@@ -22,5 +22,5 @@ mkdir -p gen
 for batch_size in "${batch_sizes[@]}"
 do
     echo $batch_size
-    go run main.go benchgen --model_path ~/data/carml/dlperf -o gen/generated_benchmarks_${batch_size}.hpp --backward=false --forward=true --randomize=true --batch_size=${batch_size}
+    go run main.go benchgen --model_path ~/data/carml/dlperf --only_fused=true -o gen/generated_only_fused_benchmarks_${batch_size}.hpp --backward=false --forward=true --batch_size=${batch_size}
 done

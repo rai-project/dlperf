@@ -45,8 +45,12 @@ func (c ElementWise) getOperatorName() string {
 // multidirectionalBroadcastShapeInference
 func (c *ElementWise) InferShape(inputLayers dlperf.Layers) {
 	inputShapes := getOutputShapes(inputLayers)
+	outputShapes := make([]dlperf.Shape, 1)
 	// outputShapes := multidirectionalBroadcastShapeInference(inputShapes) TODO: NOT correct for mul
-	outputShapes := []dlperf.Shape{inputShapes[0]}
+	outputShapes[0] = inputShapes[0]
+	if len(inputShapes) == 2 && (len(inputShapes[1]) > len(inputShapes[0])) {
+		outputShapes[0] = inputShapes[1]
+	}
 	c.SetOutputShapes(outputShapes)
 }
 
