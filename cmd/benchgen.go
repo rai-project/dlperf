@@ -18,6 +18,7 @@ import (
 var (
 	generateFused     bool
 	generateOnlyFused bool
+	generateAll bool
 	generateForward   bool
   generateBackward  bool
   generateRandomize bool
