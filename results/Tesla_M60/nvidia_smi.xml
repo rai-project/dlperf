@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <!DOCTYPE nvidia_smi_log SYSTEM "nvsmi_device_v10.dtd">
 <nvidia_smi_log>
-	<timestamp>Sat Sep 14 00:12:55 2019</timestamp>
+	<timestamp>Sun Sep 15 19:40:28 2019</timestamp>
 	<driver_version>418.67</driver_version>
 	<cuda_version>10.1</cuda_version>
 	<attached_gpus>1</attached_gpus>
@@ -218,7 +218,7 @@
 			<pending_retirement>No</pending_retirement>
 		</retired_pages>
 		<temperature>
-			<gpu_temp>39 C</gpu_temp>
+			<gpu_temp>40 C</gpu_temp>
 			<gpu_temp_max_threshold>91 C</gpu_temp_max_threshold>
 			<gpu_temp_slow_threshold>88 C</gpu_temp_slow_threshold>
 			<gpu_temp_max_gpu_threshold>N/A</gpu_temp_max_gpu_threshold>
@@ -228,7 +228,7 @@
 		<power_readings>
 			<power_state>P8</power_state>
 			<power_management>Supported</power_management>
-			<power_draw>23.00 W</power_draw>
+			<power_draw>22.88 W</power_draw>
 			<power_limit>150.00 W</power_limit>
 			<default_power_limit>150.00 W</default_power_limit>
 			<enforced_power_limit>150.00 W</enforced_power_limit>
