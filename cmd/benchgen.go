@@ -222,6 +222,7 @@ func init() {
 	benchgenCmd.PersistentFlags().BoolVar(&generateOnlyFused, "only_fused", false, "generate only fused conv layers")
 	benchgenCmd.PersistentFlags().BoolVar(&generateFused, "fused", false, "generate fused conv layers")
 	benchgenCmd.PersistentFlags().BoolVar(&generateRandomize, "randomize", false, "generate randomized guard suffix to allow for different translation groups")
+	benchgenCmd.PersistentFlags().IntVar(&generateRandomizeLength, "randomize_length", generateRandomizeLength, "number of randomized guard suffix to generate")
 	benchgenCmd.PersistentFlags().BoolVar(&generateBackward, "backward", false, "generate the backward pass")
 	benchgenCmd.PersistentFlags().BoolVar(&generateForward, "forward", true, "generate the forward pass")
 	rootCmd.AddCommand(benchgenCmd)
