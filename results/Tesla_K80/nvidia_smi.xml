@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <!DOCTYPE nvidia_smi_log SYSTEM "nvsmi_device_v10.dtd">
 <nvidia_smi_log>
-	<timestamp>Fri Aug  9 01:27:37 2019</timestamp>
+	<timestamp>Sun Sep 15 19:39:49 2019</timestamp>
 	<driver_version>418.67</driver_version>
 	<cuda_version>10.1</cuda_version>
 	<attached_gpus>1</attached_gpus>
@@ -17,10 +17,10 @@
 			<current_dm>N/A</current_dm>
 			<pending_dm>N/A</pending_dm>
 		</driver_model>
-		<serial>0323615069064</serial>
-		<uuid>GPU-c04bdc58-d58a-1787-0143-66fb77e2d9a0</uuid>
+		<serial>0321216030904</serial>
+		<uuid>GPU-765fd9c2-f6fa-7683-901c-6fb739b41c18</uuid>
 		<minor_number>0</minor_number>
-		<vbios_version>80.21.1F.00.01</vbios_version>
+		<vbios_version>80.21.1F.00.02</vbios_version>
 		<multigpu_board>No</multigpu_board>
 		<board_id>0x1e</board_id>
 		<gpu_part_number>900-22080-0000-000</gpu_part_number>
@@ -135,6 +135,16 @@
 			</volatile>
 			<aggregate>
 				<single_bit>
+					<device_memory>1</device_memory>
+					<register_file>0</register_file>
+					<l1_cache>0</l1_cache>
+					<l2_cache>0</l2_cache>
+					<texture_memory>0</texture_memory>
+					<texture_shm>N/A</texture_shm>
+					<cbu>N/A</cbu>
+					<total>1</total>
+				</single_bit>
+				<double_bit>
 					<device_memory>0</device_memory>
 					<register_file>0</register_file>
 					<l1_cache>0</l1_cache>
@@ -143,16 +153,6 @@
 					<texture_shm>N/A</texture_shm>
 					<cbu>N/A</cbu>
 					<total>0</total>
-				</single_bit>
-				<double_bit>
-					<device_memory>7</device_memory>
-					<register_file>0</register_file>
-					<l1_cache>0</l1_cache>
-					<l2_cache>0</l2_cache>
-					<texture_memory>0</texture_memory>
-					<texture_shm>N/A</texture_shm>
-					<cbu>N/A</cbu>
-					<total>7</total>
 				</double_bit>
 			</aggregate>
 		</ecc_errors>
@@ -163,17 +163,14 @@
 				</retired_pagelist>
 			</multiple_single_bit_retirement>
 			<double_bit_retirement>
-				<retired_count>1</retired_count>
+				<retired_count>0</retired_count>
 				<retired_pagelist>
-					<retired_page>
-						<retired_page_address>0x00000000002ce857</retired_page_address>
-					</retired_page>
 				</retired_pagelist>
 			</double_bit_retirement>
 			<pending_retirement>No</pending_retirement>
 		</retired_pages>
 		<temperature>
-			<gpu_temp>40 C</gpu_temp>
+			<gpu_temp>37 C</gpu_temp>
 			<gpu_temp_max_threshold>110 C</gpu_temp_max_threshold>
 			<gpu_temp_slow_threshold>88 C</gpu_temp_slow_threshold>
 			<gpu_temp_max_gpu_threshold>N/A</gpu_temp_max_gpu_threshold>
@@ -183,7 +180,7 @@
 		<power_readings>
 			<power_state>P8</power_state>
 			<power_management>Supported</power_management>
-			<power_draw>26.70 W</power_draw>
+			<power_draw>29.56 W</power_draw>
 			<power_limit>149.00 W</power_limit>
 			<default_power_limit>149.00 W</default_power_limit>
 			<enforced_power_limit>149.00 W</enforced_power_limit>
