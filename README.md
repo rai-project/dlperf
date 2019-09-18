@@ -1,4 +1,5 @@
-# DLPerf
+# DLPerf  [![View notebooks](https://www.wolframcloud.com/obj/user-3ed91f5b-da42-447a-8a46-df433a144012/dev/WDV/badge2.png)](https://www.wolframcloud.com/obj/user-3ed91f5b-da42-447a-8a46-df433a144012/dev/WDV/wdv_api?user=rai-project&repo=dlperf&branch=master)
+
 
 [![Build Status](https://dev.azure.com/dakkak/rai/_apis/build/status/rai-project.dlperf?branchName=master)](https://dev.azure.com/dakkak/rai/_build/latest?definitionId=26&branchName=master)
 [![Build Status](https://travis-ci.org/rai-project/dlperf.svg?branch=master)](https://travis-ci.org/rai-project/dlperf)
