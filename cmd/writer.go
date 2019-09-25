@@ -82,6 +82,7 @@ func (w *Writer) Header(rower Rower) error {
 			}
 		}
 		w.tex = append(w.tex, r)
+		w.tex = append(w.tex, " \\\\\n\\hline\n")
 	case "csv":
 		w.csv.Write(rower.Header(w.opts...))
 	}
