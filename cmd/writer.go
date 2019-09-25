@@ -72,10 +72,10 @@ func (w *Writer) Header(rower Rower) error {
 		w.tbl.SetHeader(rower.Header(w.opts...))
 	case "latex", "tex":
 		var r  string
-		header =  rower.Header(w.opts...)
+		header :=  rower.Header(w.opts...)
 		for ii, entry := range header {
-			r += entry
-			if ii = len(header) {
+			r += `\thead{\textbf{` + texEscape(entry) + `}}`
+			if ii == len(header) {
 				r  += ` \\`
 			} else {
 				r  += ` & `
@@ -88,6 +88,41 @@ func (w *Writer) Header(rower Rower) error {
 	return nil
 }
 
+
+func texEscape(str string)string {
+	text := []byte(str)
+	out := &bytes.Buffer{}
+	for i := 0; i < len(text); i++ {
+		// directly copy normal characters
+		org := i
+
+		for i < len(text) && !texNeedsBackslash(text[i]) {
+			i++
+		}
+		if i > org {
+			out.Write(text[org:i])
+		}
+
+		// escape a character
+		if i >= len(text) {
+			break
+		}
+		out.WriteByte('\\')
+		out.WriteByte(text[i])
+	}
+	return string(out.Bytes())	
+}
+
+
+func texNeedsBackslash(c byte) bool {
+	for _, r := range []byte("_{}%$&\\~") {
+		if c == r {
+			return true
+		}
+	}
+	return false
+}
+
 func (w *Writer) Row(rower Rower) error {
 	opts := writer.NewOptions(w.opts...)
 	switch opts.Format {
@@ -95,10 +130,10 @@ func (w *Writer) Row(rower Rower) error {
 		w.tbl.Append(rower.Row(w.opts...))
 	case "latex", "tex":
 		var r  string
-		row = rower.Row(w.opts...)
-		for ii, entry := range header {
-			r += `\thead{\textbf{` + entry + `}}`
-			if ii = len(header) {
+		row := rower.Row(w.opts...)
+		for ii, entry := range row {
+			r += texEscape(entry)
+			if ii == len(row) {
 				r  += ` \\`
 			} else {
 				r  += ` & `
@@ -133,7 +168,8 @@ func (w *Writer) Flush() {
 		w.tbl.Render()
 	case "csv":
 		w.csv.Flush()
-	case "json":
+	case "tex", "latex":
+		r := ""
 		prevData := ""
 		if com.IsFile(w.outputFileName) && appendOutput {
 			buf, err := ioutil.ReadFile(w.outputFileName)
@@ -142,8 +178,8 @@ func (w *Writer) Flush() {
 			}
 		}
 		prevData = prevData
-		js += strings.Join(w.tex, "\n")
-		w.output.Write([]byte(js))
+		r += strings.Join(w.tex, "\n")
+		w.output.Write([]byte(r))
 	case "json":
 		prevData := ""
 		if com.IsFile(w.outputFileName) && appendOutput {
