@@ -5,20 +5,29 @@ set -x
 go build
 
 declare -a batch_sizes=(
-  1
-  # 2 \
-  # 4 \
-  # 8 \
-  # 16
+  1 \
+  2 \
+  4 \
+  8 \
+  16 \
+  32 \
+  64 \
+  128 \
+  256 \
+  512 \
+  1024
 )
 
 declare -a machines=(
-  # Tesla_K80 \
+  Tesla_K80 \
+  Tesla_M60 \
+  Quadro_RTX_6000 \
+  TITAN_V \
+  TITAN_Xp \
+  Tesla_P100-PCIE-16GB \
   Tesla_V100-SXM2-16GB
-  # Quadro_RTX_6000 \
-  # Tesla_P100-PCIE-16GB \
-  # Tesla_P4
 )
+
 
 metrics="flop_count_sp,flops_sp_add,flops_sp_fma,flops_sp_mul,flops_sp_special,achieved_occupancy,dram_read_bytes,dram_write_bytes"
 
