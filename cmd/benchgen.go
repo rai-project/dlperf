@@ -16,13 +16,13 @@ import (
 )
 
 var (
-	generateFused     bool
-	generateOnlyFused bool
-	generateAll bool
-	generateForward   bool
-  generateBackward  bool
-  generateRandomize bool
-  generateRandomizeLength int = 5
+	generateFused           bool
+	generateOnlyFused       bool
+	generateAll             bool
+	generateForward         bool
+	generateBackward        bool
+	generateRandomize       bool
+	generateRandomizeLength int = 5
 )
 
 var benchgenCmd = &cobra.Command{
@@ -90,25 +90,25 @@ var benchgenCmd = &cobra.Command{
 					case "conv":
 						l := lyr.(*perflayer.Conv)
 						if !generateOnlyFused {
-              b = l.FwdBenchmarkGenerator(
-                  dlperf.FwdBenchmarkArgsOption.ConvFwdType(dlperf.ConvFwdTypeConv),
-                  dlperf.FwdBenchmarkArgsOption.RandomizeConv(generateRandomize),
-                  dlperf.FwdBenchmarkArgsOption.RandomizeConvLength(generateRandomizeLength),
-              )
+							b = l.FwdBenchmarkGenerator(
+								dlperf.FwdBenchmarkArgsOption.ConvFwdType(dlperf.ConvFwdTypeConv),
+								dlperf.FwdBenchmarkArgsOption.RandomizeConv(generateRandomize),
+								dlperf.FwdBenchmarkArgsOption.RandomizeConvLength(generateRandomizeLength),
+							)
 							b += "\n"
 							b += l.FwdBenchmarkGenerator(
-                dlperf.FwdBenchmarkArgsOption.ConvFwdType(dlperf.ConvFwdTypeBias),
-                dlperf.FwdBenchmarkArgsOption.RandomizeConv(generateRandomize),
-                dlperf.FwdBenchmarkArgsOption.RandomizeConvLength(generateRandomizeLength),
-              )
+								dlperf.FwdBenchmarkArgsOption.ConvFwdType(dlperf.ConvFwdTypeBias),
+								dlperf.FwdBenchmarkArgsOption.RandomizeConv(generateRandomize),
+								dlperf.FwdBenchmarkArgsOption.RandomizeConvLength(generateRandomizeLength),
+							)
 							b += "\n"
 						}
 						if generateFused {
 							b += l.FwdBenchmarkGenerator(
-                dlperf.FwdBenchmarkArgsOption.ConvFwdType(dlperf.ConvFwdTypeConvFusedActivation),
-                dlperf.FwdBenchmarkArgsOption.RandomizeConv(generateRandomize),
-                dlperf.FwdBenchmarkArgsOption.RandomizeConvLength(generateRandomizeLength),
-              )
+								dlperf.FwdBenchmarkArgsOption.ConvFwdType(dlperf.ConvFwdTypeConvFusedActivation),
+								dlperf.FwdBenchmarkArgsOption.RandomizeConv(generateRandomize),
+								dlperf.FwdBenchmarkArgsOption.RandomizeConvLength(generateRandomizeLength),
+							)
 						}
 					case "relu":
 						l := lyr.(*perflayer.Relu)

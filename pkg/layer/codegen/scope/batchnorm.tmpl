@@ -2,6 +2,7 @@
 [[ range $datatype := .DataTypes ]]
 template <cudnnBatchNormMode_t batchnorm_mode>
 static void [[ $.BenchmarkName ]]_[[ $datatype.Name | upper ]]__BatchSize_[[$.BatchSize]]__[[$.UniqueBenchmarkID]](benchmark::State& state) {
+  BENCHMARK_[[ $.BenchmarkName ]]_ADD_COUNTERS__BatchSize_[[$.BatchSize]]__[[$.UniqueBenchmarkID]](state);
   [[ $.BenchmarkName ]]_Impl<[[ $datatype.CType ]], batchnorm_mode>(state);
   BENCHMARK_[[ $.BenchmarkName ]]_ADD_COUNTERS__BatchSize_[[$.BatchSize]]__[[$.UniqueBenchmarkID]](state);
 }

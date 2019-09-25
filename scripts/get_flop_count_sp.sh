@@ -38,6 +38,6 @@ do
     for machine in "${machines[@]}"
         do
         echo $machine
-        ./dlperf benchinfo --model_path ~/data/carml/dlperf/ --benchmark_database results/${machine}/profile/${batch_size}.json.gz --short=false --batch_size=${batch_size} --human=false --strategy=parallel --metrics --output_file=./assets/metrics/batchsize_${batch_size}/${machine} --flops_only --flops_aggregate=true --metric_filter=${metrics} --total=false --format=csv --trim_layer_name=false
+        ./dlperf benchinfo --model_path ~/data/carml/dlperf/ResNet50-v1/resnet50v1/resnet50v1.onnx --benchmark_database results/${machine}/profile/${batch_size}.json.gz --short=false --batch_size=${batch_size} --human=false --strategy=parallel --metrics --output_file=./assets/metrics/batchsize_${batch_size}/${machine} --flops_only --flops_aggregate=true --metric_filter=${metrics} --total=false --format=csv --trim_layer_name=false
     done
 done

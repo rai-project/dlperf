@@ -4,6 +4,7 @@
   [[ end ]]
   template <[[ if eq $.ConvBwdType 1 ]] cudnnConvolutionBwdDataAlgo_t [[ else ]] cudnnConvolutionBwdFilterAlgo_t [[ end ]] convolution_algorithm>
   static void [[ $.BenchmarkName ]]_[[ $datatype.Name | upper ]]__BatchSize_[[$.BatchSize]]__[[$.UniqueBenchmarkID]](benchmark::State& state) {
+    BENCHMARK_[[ $.BenchmarkName ]]_ADD_COUNTERS__BatchSize_[[$.BatchSize]]__[[$.UniqueBenchmarkID]](state);
     [[ if eq $datatype.Name "TensorCoreHalf" ]]
       [[ $.BenchmarkName ]]_Impl<[[ $datatype.CType ]], convolution_algorithm, CUDNN_TENSOR_OP_MATH>(state);
     [[ else ]]

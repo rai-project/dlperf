@@ -2056,6 +2056,10 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer6(in *jlexer.Lexer, 
 			out.DilationWidth = int64(in.Int64())
 		case "dilation_height":
 			out.DilationHeight = int64(in.Int64())
+		case "group":
+			out.Group = int64(in.Int64())
+		case "batch_size":
+			out.BatchSize = int64(in.Int64())
 		case "conv_fwd_type":
 			if data := in.Raw(); in.Ok() {
 				in.AddError((out.ConvFwdType).UnmarshalJSON(data))
@@ -2064,10 +2068,6 @@ func easyjson36987811DecodeGithubComRaiProjectDlperfPkgLayer6(in *jlexer.Lexer, 
 			if data := in.Raw(); in.Ok() {
 				in.AddError((out.ConvBwdType).UnmarshalJSON(data))
 			}
-		case "batch_size":
-			out.BatchSize = int64(in.Int64())
-		case "group":
-			out.Group = int64(in.Int64())
 		case "arg_names":
 			if in.IsNull() {
 				in.Skip()
@@ -2287,6 +2287,26 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer6(out *jwriter.Write
 		}
 		out.Int64(int64(in.DilationHeight))
 	}
+	if in.Group != 0 {
+		const prefix string = ",\"group\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.Group))
+	}
+	if in.BatchSize != 0 {
+		const prefix string = ",\"batch_size\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.BatchSize))
+	}
 	if in.ConvFwdType != 0 {
 		const prefix string = ",\"conv_fwd_type\":"
 		if first {
@@ -2306,26 +2326,6 @@ func easyjson36987811EncodeGithubComRaiProjectDlperfPkgLayer6(out *jwriter.Write
 			out.RawString(prefix)
 		}
 		out.Raw((in.ConvBwdType).MarshalJSON())
-	}
-	if in.BatchSize != 0 {
-		const prefix string = ",\"batch_size\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.Int64(int64(in.BatchSize))
-	}
-	if in.Group != 0 {
-		const prefix string = ",\"group\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.Int64(int64(in.Group))
 	}
 	if len(in.ArgNames) != 0 {
 		const prefix string = ",\"arg_names\":"

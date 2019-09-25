@@ -255,7 +255,12 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 			l := lyr.(*perflayer.Conv)
 
 			getForwardConv := func() error {
-				filter := filterBenchmarks(false, benchInfoDataType, "", dlperf.FwdBenchmarkArgsOption.ConvFwdType(dlperf.ConvFwdTypeConv))
+				filter := filterBenchmarks(
+					false,
+					benchInfoDataType,
+					"",
+					dlperf.FwdBenchmarkArgsOption.ConvFwdType(dlperf.ConvFwdTypeConv),
+				)
 				bs, err := getBenchmarkTime(filter)
 				if err != nil {
 					return err
@@ -276,7 +281,12 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 			// check for conv -> bias -> relu pattern
 			if nextLayer := peekLayer(); l.HasBias() && fuseLayers && nextLayer != nil && strings.ToLower(nextLayer.OperatorType()) == "relu" {
 				panic("to do by forcing the use of the relu activation")
-				filter := filterBenchmarks(false, benchInfoDataType, "", dlperf.FwdBenchmarkArgsOption.ConvFwdType(dlperf.ConvFwdTypeConvFusedActivation))
+				filter := filterBenchmarks(
+					false,
+					benchInfoDataType,
+					"",
+					dlperf.FwdBenchmarkArgsOption.ConvFwdType(dlperf.ConvFwdTypeConvFusedActivation),
+				)
 				bs, err := getBenchmarkTime(filter)
 				if err != nil {
 					continue
@@ -284,7 +294,12 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 				benches = append(benches, makeLayerInfos(bs, "forward"))
 			} else if fuseLayers && l.HasBias() { // fuse conv+bias layer
 				panic("to do by forcing the use of the identity activation")
-				filter := filterBenchmarks(false, benchInfoDataType, "", dlperf.FwdBenchmarkArgsOption.ConvFwdType(dlperf.ConvFwdTypeConvFusedActivation))
+				filter := filterBenchmarks(
+					false,
+					benchInfoDataType,
+					"",
+					dlperf.FwdBenchmarkArgsOption.ConvFwdType(dlperf.ConvFwdTypeConvFusedActivation),
+				)
 				bs, err := getBenchmarkTime(filter)
 				if err != nil {
 					continue
