@@ -23,6 +23,7 @@ type Writer struct {
 	tbl            *tablewriter.Table
 	csv            *csv.Writer
 	json           []string
+	tex           []string
 	opts           []writer.Option
 }
 
@@ -51,6 +52,8 @@ func NewWriter(rower Rower, iopts ...writer.Option) *Writer {
 		// make it markdown format
 		wr.tbl.SetBorders(tablewriter.Border{Left: true, Top: false, Right: true, Bottom: false})
 		wr.tbl.SetCenterSeparator("|")
+	case "latex", "tex":
+		wr.tex = []string{}
 	case "csv":
 		wr.csv = csv.NewWriter(output)
 	case "json":
@@ -67,6 +70,18 @@ func (w *Writer) Header(rower Rower) error {
 	switch opts.Format {
 	case "table":
 		w.tbl.SetHeader(rower.Header(w.opts...))
+	case "latex", "tex":
+		var r  string
+		header =  rower.Header(w.opts...)
+		for ii, entry := range header {
+			r += entry
+			if ii = len(header) {
+				r  += ` \\`
+			} else {
+				r  += ` & `
+			}
+		}
+		w.tex = append(w.tex, r)
 	case "csv":
 		w.csv.Write(rower.Header(w.opts...))
 	}
@@ -78,6 +93,18 @@ func (w *Writer) Row(rower Rower) error {
 	switch opts.Format {
 	case "table":
 		w.tbl.Append(rower.Row(w.opts...))
+	case "latex", "tex":
+		var r  string
+		row = rower.Row(w.opts...)
+		for ii, entry := range header {
+			r += `\thead{\textbf{` + entry + `}}`
+			if ii = len(header) {
+				r  += ` \\`
+			} else {
+				r  += ` & `
+			}
+		}
+		w.tex = append(w.tex, r)
 	case "csv":
 		w.csv.Write(rower.Row(w.opts...))
 	case "json", "js":
@@ -106,6 +133,17 @@ func (w *Writer) Flush() {
 		w.tbl.Render()
 	case "csv":
 		w.csv.Flush()
+	case "json":
+		prevData := ""
+		if com.IsFile(w.outputFileName) && appendOutput {
+			buf, err := ioutil.ReadFile(w.outputFileName)
+			if err == nil {
+				prevData = string(buf)
+			}
+		}
+		prevData = prevData
+		js += strings.Join(w.tex, "\n")
+		w.output.Write([]byte(js))
 	case "json":
 		prevData := ""
 		if com.IsFile(w.outputFileName) && appendOutput {
