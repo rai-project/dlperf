@@ -85,7 +85,7 @@ func (c Conv) FwdBenchmarkName(iopts ...dlperf.FwdBenchmarkArgsOptionFunc) strin
 	default:
 		panic("unknown conv fwd type")
 	}
-	if opts.RandomizeConv {
+	if opts.RandomizeConv && opts.ConvFwdType != dlperf.ConvFwdTypeBias {
 		res += "_" + cast.ToString(rand.Intn(opts.RandomizeConvLength))
 	}
 
