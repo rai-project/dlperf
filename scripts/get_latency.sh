@@ -19,13 +19,13 @@ declare -a batch_sizes=(
   1024
 )
 
+  # Tesla_K80 \
+  # Tesla_M60 \
+  # Quadro_RTX_6000 \
+  # TITAN_V \
+  # TITAN_Xp \
+  # Tesla_P100-PCIE-16GB \
 declare -a machines=(
-  Tesla_K80 \
-  Tesla_M60 \
-  Quadro_RTX_6000 \
-  TITAN_V \
-  TITAN_Xp \
-  Tesla_P100-PCIE-16GB \
   Tesla_V100-SXM2-16GB
 )
 
