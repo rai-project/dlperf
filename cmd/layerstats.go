@@ -84,6 +84,11 @@ func runLayerStats(cmd *cobra.Command, args []string) error {
 			return err
 		}
 
+		err = com.WriteFile(outputFileName, dotEnc)
+		if err != nil {
+			return err
+		}
+
 		println(img)
 
 		return nil
