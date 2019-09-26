@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <!DOCTYPE nvidia_smi_log SYSTEM "nvsmi_device_v10.dtd">
 <nvidia_smi_log>
-	<timestamp>Sun Sep 15 19:40:28 2019</timestamp>
+	<timestamp>Wed Sep 25 13:14:53 2019</timestamp>
 	<driver_version>418.67</driver_version>
 	<cuda_version>10.1</cuda_version>
 	<attached_gpus>1</attached_gpus>
@@ -17,10 +17,10 @@
 			<current_dm>N/A</current_dm>
 			<pending_dm>N/A</pending_dm>
 		</driver_model>
-		<serial>0321017015315</serial>
-		<uuid>GPU-495f8f1f-4d37-d7a1-1ee1-048d7ec35d0d</uuid>
+		<serial>0321517123651</serial>
+		<uuid>GPU-7c878559-025b-d399-cb30-d4b7bbdeee20</uuid>
 		<minor_number>0</minor_number>
-		<vbios_version>84.04.A6.00.02</vbios_version>
+		<vbios_version>84.04.A6.00.01</vbios_version>
 		<multigpu_board>No</multigpu_board>
 		<board_id>0x1e</board_id>
 		<gpu_part_number>900-2G402-0000-000</gpu_part_number>
@@ -81,8 +81,8 @@
 		</clocks_throttle_reasons>
 		<fb_memory_usage>
 			<total>7618 MiB</total>
-			<used>1 MiB</used>
-			<free>7617 MiB</free>
+			<used>0 MiB</used>
+			<free>7618 MiB</free>
 		</fb_memory_usage>
 		<bar1_memory_usage>
 			<total>256 MiB</total>
@@ -135,14 +135,14 @@
 			</volatile>
 			<aggregate>
 				<single_bit>
-					<device_memory>66266</device_memory>
+					<device_memory>7</device_memory>
 					<register_file>N/A</register_file>
 					<l1_cache>N/A</l1_cache>
 					<l2_cache>N/A</l2_cache>
 					<texture_memory>N/A</texture_memory>
 					<texture_shm>N/A</texture_shm>
 					<cbu>N/A</cbu>
-					<total>66266</total>
+					<total>7</total>
 				</single_bit>
 				<double_bit>
 					<device_memory>0</device_memory>
@@ -158,56 +158,8 @@
 		</ecc_errors>
 		<retired_pages>
 			<multiple_single_bit_retirement>
-				<retired_count>16</retired_count>
+				<retired_count>0</retired_count>
 				<retired_pagelist>
-					<retired_page>
-						<retired_page_address>0x000000000006ff63</retired_page_address>
-					</retired_page>
-					<retired_page>
-						<retired_page_address>0x00000000000702ab</retired_page_address>
-					</retired_page>
-					<retired_page>
-						<retired_page_address>0x00000000000705eb</retired_page_address>
-					</retired_page>
-					<retired_page>
-						<retired_page_address>0x000000000006e014</retired_page_address>
-					</retired_page>
-					<retired_page>
-						<retired_page_address>0x000000000006fff5</retired_page_address>
-					</retired_page>
-					<retired_page>
-						<retired_page_address>0x00000000000701e1</retired_page_address>
-					</retired_page>
-					<retired_page>
-						<retired_page_address>0x0000000000070321</retired_page_address>
-					</retired_page>
-					<retired_page>
-						<retired_page_address>0x000000000006f8e4</retired_page_address>
-					</retired_page>
-					<retired_page>
-						<retired_page_address>0x0000000000070247</retired_page_address>
-					</retired_page>
-					<retired_page>
-						<retired_page_address>0x000000000006fcfa</retired_page_address>
-					</retired_page>
-					<retired_page>
-						<retired_page_address>0x000000000006f3cb</retired_page_address>
-					</retired_page>
-					<retired_page>
-						<retired_page_address>0x000000000007057e</retired_page_address>
-					</retired_page>
-					<retired_page>
-						<retired_page_address>0x000000000006f511</retired_page_address>
-					</retired_page>
-					<retired_page>
-						<retired_page_address>0x000000000006cfb5</retired_page_address>
-					</retired_page>
-					<retired_page>
-						<retired_page_address>0x000000000006df08</retired_page_address>
-					</retired_page>
-					<retired_page>
-						<retired_page_address>0x000000000007498e</retired_page_address>
-					</retired_page>
 				</retired_pagelist>
 			</multiple_single_bit_retirement>
 			<double_bit_retirement>
@@ -218,7 +170,7 @@
 			<pending_retirement>No</pending_retirement>
 		</retired_pages>
 		<temperature>
-			<gpu_temp>40 C</gpu_temp>
+			<gpu_temp>31 C</gpu_temp>
 			<gpu_temp_max_threshold>91 C</gpu_temp_max_threshold>
 			<gpu_temp_slow_threshold>88 C</gpu_temp_slow_threshold>
 			<gpu_temp_max_gpu_threshold>N/A</gpu_temp_max_gpu_threshold>
@@ -228,7 +180,7 @@
 		<power_readings>
 			<power_state>P8</power_state>
 			<power_management>Supported</power_management>
-			<power_draw>22.88 W</power_draw>
+			<power_draw>23.13 W</power_draw>
 			<power_limit>150.00 W</power_limit>
 			<default_power_limit>150.00 W</default_power_limit>
 			<enforced_power_limit>150.00 W</enforced_power_limit>
