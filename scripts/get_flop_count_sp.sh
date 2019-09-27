@@ -18,7 +18,7 @@ declare -a batch_sizes=(
   1024
 )
 
-declare -a machines=(
+declare -a all_machines=(
   Tesla_K80 \
   Tesla_M60 \
   Quadro_RTX_6000 \
@@ -28,6 +28,10 @@ declare -a machines=(
   Tesla_V100-SXM2-16GB
 )
 
+
+declare -a machines=(
+  Tesla_V100-SXM2-16GB
+)
 
 metrics="flop_count_sp,flops_sp_add,flops_sp_fma,flops_sp_mul,flops_sp_special,achieved_occupancy,dram_read_bytes,dram_write_bytes"
 

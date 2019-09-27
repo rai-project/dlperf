@@ -11,20 +11,26 @@ declare -a batch_sizes=(
   8 \
   16 \
   32 \
-  64 \
-  128 \
-  256 \
-  512 \
-  1024
+  # 64 \
+  # 128 \
+  # 256 \
+  # 512 \
+  # 1024
 )
 
-  # Tesla_K80 \
-  # Tesla_M60 \
-  # Quadro_RTX_6000 \
-  # TITAN_V \
-  # TITAN_Xp \
-  # Tesla_P100-PCIE-16GB \
+declare -a all_machines=(
+  Tesla_K80 \
+  Tesla_M60 \
+  Quadro_RTX_6000 \
+  TITAN_V \
+  TITAN_Xp \
+  Tesla_P100-PCIE-16GB \
+  Tesla_V100-SXM2-16GB
+)
+
+
 declare -a machines=(
+  Quadro_RTX_6000 \
   Tesla_V100-SXM2-16GB
 )
 
