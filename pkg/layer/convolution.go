@@ -11,6 +11,7 @@ import (
 	dlperf "github.com/rai-project/dlperf/pkg"
 	"github.com/rai-project/dlperf/pkg/benchmark"
 	"github.com/spf13/cast"
+	"github.com/rai-project/uuid"
 )
 
 // https://github.com/onnx/onnx/blob/master/docs/Operators.md#Conv
@@ -210,7 +211,7 @@ type convBenchmarkArgs struct {
 	Group             int64              `args:"group" hash:"group" json:"group,omitempty"`
 	BatchSize         int64              `args:"batch_size" hash:"batch_size" json:"batch_size,omitempty"`
 	ConvFwdType       dlperf.ConvFwdType `args:"conv_fwd_type" hash:"conv_fwd_type" json:"conv_fwd_type,omitempty"`
-	ConvBwdType       dlperf.ConvBwdType `args:"conv_bwd_type" hash:"conv_bwd_type" json:"conv_bwd_type,omitempty"`
+  ConvBwdType       dlperf.ConvBwdType `args:"conv_bwd_type" hash:"conv_bwd_type" json:"conv_bwd_type,omitempty"`
 }
 
 //easyjson:json
@@ -227,6 +228,7 @@ type convBiasBenchmarkArgs struct {
 	BatchSize         int64              `args:"batch_size" hash:"batch_size" json:"batch_size,omitempty"`
 	ConvFwdType       dlperf.ConvFwdType `args:"conv_fwd_type" hash:"conv_fwd_type" json:"conv_fwd_type,omitempty"`
 	ConvBwdType       dlperf.ConvBwdType `args:"conv_bwd_type" hash:"conv_bwd_type" json:"conv_bwd_type,omitempty"`
+  UUID string  `args:"-" hash:"uuid" json:"uuid,omitempty"`
 }
 
 func (c Conv) FwdBenchmarkArgs(iopts ...dlperf.FwdBenchmarkArgsOptionFunc) interface{} {
@@ -251,7 +253,8 @@ func (c Conv) FwdBenchmarkArgs(iopts ...dlperf.FwdBenchmarkArgsOptionFunc) inter
 			BiasShape3:        biasShape[3],
       BatchSize:         dlperf.GetBatchSize(),
 			ConvFwdType:       opts.ConvFwdType,
-			BaseBenchmarkArgs: mkBaseBenchmarkFWDArgs(&c, iopts...),
+      BaseBenchmarkArgs: mkBaseBenchmarkFWDArgs(&c, iopts...),
+      UUID: uuid.NewV4(),
 		}
 		hash, err := hashstructure.Hash(
 			e,
@@ -261,8 +264,8 @@ func (c Conv) FwdBenchmarkArgs(iopts ...dlperf.FwdBenchmarkArgsOptionFunc) inter
 		)
 		if err != nil {
 			log.Fatal(err)
-		}
-		e.UniqueBenchmarkID = hash
+    }
+		e.UniqueBenchmarkID = hash 
 		res = e
 	} else {
 		e := convBenchmarkArgs{
