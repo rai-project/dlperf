@@ -26,7 +26,7 @@ declare -a machines=(
   Quadro_RTX_6000 \
   TITAN_V \
   TITAN_Xp \
-  Tesla_P100-PCIE-16GB \
+  Tesla_T4 \
   Tesla_V100-SXM2-16GB \
   GRID_K520 \
 )

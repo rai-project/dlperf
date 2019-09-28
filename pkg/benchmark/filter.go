@@ -11,7 +11,7 @@ import (
 )
 
 func (bs Benchmarks) Len() int             { return len(bs) }
-func (bs Benchmarks) Less(ii, jj int) bool { return bs[ii].RealTime < bs[jj].RealTime }
+func (bs Benchmarks) Less(ii, jj int) bool { return bs[ii].RealTime <= bs[jj].RealTime }
 func (p Benchmarks) Swap(i, j int)         { p[i], p[j] = p[j], p[i] }
 
 func (bs Benchmarks) Merge(other Benchmarks) Benchmarks {
