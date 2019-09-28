@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 set -x
 
@@ -18,21 +18,17 @@ declare -a batch_sizes=(
   # 1024
 )
 
-declare -a all_machines=(
+declare -a machines=(
   Tesla_K80 \
   Tesla_M60 \
   Quadro_RTX_6000 \
   TITAN_V \
   TITAN_Xp \
   Tesla_P100-PCIE-16GB \
-  Tesla_V100-SXM2-16GB
+  Tesla_V100-SXM2-16GB \
+  GRID_K520 \
 )
 
-
-declare -a machines=(
-  Quadro_RTX_6000 \
-  Tesla_V100-SXM2-16GB
-)
 
 
 for batch_size in "${batch_sizes[@]}"
