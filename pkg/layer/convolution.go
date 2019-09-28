@@ -5,11 +5,12 @@ import (
 	"strings"
 
 	"math/rand"
-	"github.com/spf13/cast"
+
 	"github.com/k0kubun/pp"
 	"github.com/mitchellh/hashstructure"
 	dlperf "github.com/rai-project/dlperf/pkg"
 	"github.com/rai-project/dlperf/pkg/benchmark"
+	"github.com/spf13/cast"
 )
 
 // https://github.com/onnx/onnx/blob/master/docs/Operators.md#Conv
@@ -74,7 +75,7 @@ func (c *Conv) InferShape(inputLayers dlperf.Layers) {
 func (c Conv) FwdBenchmarkName(iopts ...dlperf.FwdBenchmarkArgsOptionFunc) string {
 	var res string
 	opts := dlperf.CreateFwdBenchmarkArgsOption(iopts...)
-	
+
 	switch opts.ConvFwdType {
 	case dlperf.ConvFwdTypeBias:
 		res = "LAYER_CUDNN_ADD_TENSOR"
@@ -212,40 +213,88 @@ type convBenchmarkArgs struct {
 	ConvBwdType       dlperf.ConvBwdType `args:"conv_bwd_type" hash:"conv_bwd_type" json:"conv_bwd_type,omitempty"`
 }
 
+//easyjson:json
+type convBiasBenchmarkArgs struct {
+	BaseBenchmarkArgs `json:",inline,flatten,omitempty"`
+	Input0            int64              `args:"input[0]" hash:"input[0]" json:"input_0,omitempty"`
+	Input1            int64              `args:"input[1]" hash:"input[1]" json:"input_1,omitempty"`
+	Input2            int64              `args:"input[2]" hash:"input[2]" json:"input_2,omitempty"`
+	Input3            int64              `args:"input[3]" hash:"input[3]" json:"input_3,omitempty"`
+	BiasShape0        int64              `args:"bias[0]" hash:"bias[0]" json:"bias_0,omitempty"`
+	BiasShape1        int64              `args:"bias[1]" hash:"bias[1]" json:"bias_1,omitempty"`
+	BiasShape2        int64              `args:"bias[2]" hash:"bias[2]" json:"bias_2,omitempty"`
+	BiasShape3        int64              `args:"bias[3]" hash:"bias[3]" json:"bias_3,omitempty"`
+	BatchSize         int64              `args:"batch_size" hash:"batch_size" json:"batch_size,omitempty"`
+	ConvFwdType       dlperf.ConvFwdType `args:"conv_fwd_type" hash:"conv_fwd_type" json:"conv_fwd_type,omitempty"`
+	ConvBwdType       dlperf.ConvBwdType `args:"conv_bwd_type" hash:"conv_bwd_type" json:"conv_bwd_type,omitempty"`
+}
+
 func (c Conv) FwdBenchmarkArgs(iopts ...dlperf.FwdBenchmarkArgsOptionFunc) interface{} {
+	var res interface{}
 	opts := dlperf.CreateFwdBenchmarkArgsOption(iopts...)
 	inShapes := c.InputShapes()
 
-	res := convBenchmarkArgs{
-		Input0:            inShapes[0][0],
-		Input1:            inShapes[0][1],
-		Input2:            inShapes[0][2],
-		Input3:            inShapes[0][3],
-		FilterCount:       inShapes[1][0],
-		FilterHeight:      c.KernelShape[0],
-		FilterWidth:       c.KernelShape[1],
-		PadHeight:         c.Pads[0],
-		PadWidth:          c.Pads[2],
-		StrideHeight:      c.Strides[0],
-		StrideWidth:       c.Strides[1],
-		DilationHeight:    c.Dilations[0],
-		DilationWidth:     c.Dilations[1],
-		BatchSize:         dlperf.GetBatchSize(),
-		ConvFwdType:       opts.ConvFwdType,
-		BaseBenchmarkArgs: mkBaseBenchmarkFWDArgs(&c, iopts...),
-		Group:             c.Group,
+	if opts.ConvFwdType == dlperf.ConvFwdTypeBias && c.HasBias() {
+		outShapes := c.OutputShapes()
+		biasShape := inShapes[2]
+		if len(biasShape) == 1 {
+			biasShape = []int64{1, biasShape[0], 1, 1}
+		}
+		e := convBiasBenchmarkArgs{
+			Input0:            outShapes[0][0],
+			Input1:            outShapes[0][1],
+			Input2:            outShapes[0][2],
+			Input3:            outShapes[0][3],
+			BiasShape0:        biasShape[0],
+			BiasShape1:        biasShape[1],
+			BiasShape2:        biasShape[2],
+			BiasShape3:        biasShape[3],
+			ConvFwdType:       opts.ConvFwdType,
+			BaseBenchmarkArgs: mkBaseBenchmarkFWDArgs(&c, iopts...),
+		}
+		hash, err := hashstructure.Hash(
+			e,
+			&hashstructure.HashOptions{
+				TagName: "hash",
+			},
+		)
+		if err != nil {
+			log.Fatal(err)
+		}
+		e.UniqueBenchmarkID = hash
+		res = e
+	} else {
+		e := convBenchmarkArgs{
+			Input0:            inShapes[0][0],
+			Input1:            inShapes[0][1],
+			Input2:            inShapes[0][2],
+			Input3:            inShapes[0][3],
+			FilterCount:       inShapes[1][0],
+			FilterHeight:      c.KernelShape[0],
+			FilterWidth:       c.KernelShape[1],
+			PadHeight:         c.Pads[0],
+			PadWidth:          c.Pads[2],
+			StrideHeight:      c.Strides[0],
+			StrideWidth:       c.Strides[1],
+			DilationHeight:    c.Dilations[0],
+			DilationWidth:     c.Dilations[1],
+			BatchSize:         dlperf.GetBatchSize(),
+			ConvFwdType:       opts.ConvFwdType,
+			BaseBenchmarkArgs: mkBaseBenchmarkFWDArgs(&c, iopts...),
+			Group:             c.Group,
+		}
+		hash, err := hashstructure.Hash(
+			e,
+			&hashstructure.HashOptions{
+				TagName: "hash",
+			},
+		)
+		if err != nil {
+			log.Fatal(err)
+		}
+		e.UniqueBenchmarkID = hash
+		res = e
 	}
-
-	hash, err := hashstructure.Hash(
-		res,
-		&hashstructure.HashOptions{
-			TagName: "hash",
-		},
-	)
-	if err != nil {
-		log.Fatal(err)
-	}
-	res.UniqueBenchmarkID = hash
 
 	return res
 }
@@ -329,7 +378,6 @@ func (c Conv) FwdBenchmarkGenerator(iopts ...dlperf.FwdBenchmarkArgsOptionFunc) 
 	default:
 		panic("invalid fwd convolution algorithm")
 	}
-
 
 	return templateExecFWD(&c, templateBasePrefix+templString+templateBaseSuffix, iopts...)
 }
