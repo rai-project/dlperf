@@ -249,6 +249,7 @@ func (c Conv) FwdBenchmarkArgs(iopts ...dlperf.FwdBenchmarkArgsOptionFunc) inter
 			BiasShape1:        biasShape[1],
 			BiasShape2:        biasShape[2],
 			BiasShape3:        biasShape[3],
+      BatchSize:         dlperf.GetBatchSize(),
 			ConvFwdType:       opts.ConvFwdType,
 			BaseBenchmarkArgs: mkBaseBenchmarkFWDArgs(&c, iopts...),
 		}
