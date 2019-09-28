@@ -193,11 +193,11 @@ func (c Pooling) BwdBenchmarkGenerator() string {
 	return templateExecBWD(&c, templateBasePrefix+templString+templateBaseSuffix)
 }
 
-func (c Pooling) FwdBenchmarkGeneratorArgNames() []string {
+func (c Pooling) FwdBenchmarkGeneratorArgNames(opts ...dlperf.FwdBenchmarkArgsOptionFunc) []string {
 	return benchmarkArgNames(poolingBenchmarkArgs{})
 }
 
-func (c Pooling) BwdBenchmarkGeneratorArgNames() []string {
+func (c Pooling) BwdBenchmarkGeneratorArgNames(opts ...dlperf.BwdBenchmarkArgsOptionFunc) []string {
 	return benchmarkArgNames(poolingBenchmarkArgs{})
 }
 

@@ -136,11 +136,11 @@ func (c Dropout) BwdBenchmarkGenerator(opts ...dlperf.BwdBenchmarkArgsOptionFunc
 	return templateExecBWD(&c, templateBasePrefix+templString)
 }
 
-func (c Dropout) FwdBenchmarkGeneratorArgNames() []string {
+func (c Dropout) FwdBenchmarkGeneratorArgNames(opts ...dlperf.FwdBenchmarkArgsOptionFunc) []string {
 	return benchmarkArgNames(dropoutBenchmarkArgs{})
 }
 
-func (c Dropout) BwdBenchmarkGeneratorArgNames() []string {
+func (c Dropout) BwdBenchmarkGeneratorArgNames(opts ...dlperf.BwdBenchmarkArgsOptionFunc) []string {
 	return benchmarkArgNames(dropoutBenchmarkArgs{})
 }
 

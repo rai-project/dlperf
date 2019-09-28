@@ -210,11 +210,11 @@ func (c Relu) BwdBenchmarkGenerator() string {
 	return templateExecBWD(&c, templateBasePrefix+templString+templateBaseSuffix)
 }
 
-func (c Relu) FwdBenchmarkGeneratorArgNames() []string {
+func (c Relu) FwdBenchmarkGeneratorArgNames(opts ...dlperf.FwdBenchmarkArgsOptionFunc) []string {
 	return benchmarkArgNames(reluBenchmarkArgs{})
 }
 
-func (c Relu) BwdBenchmarkGeneratorArgNames() []string {
+func (c Relu) BwdBenchmarkGeneratorArgNames(opts ...dlperf.BwdBenchmarkArgsOptionFunc) []string {
 	return benchmarkArgNames(reluBenchmarkArgs{})
 }
 

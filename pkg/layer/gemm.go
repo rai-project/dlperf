@@ -245,11 +245,11 @@ func (c Gemm) BwdBenchmarkGenerator(opts ...dlperf.BwdBenchmarkArgsOptionFunc) s
 	return templateExecBWD(&c, templateBasePrefix+templString)
 }
 
-func (c Gemm) FwdBenchmarkGeneratorArgNames() []string {
+func (c Gemm) FwdBenchmarkGeneratorArgNames(opts ...dlperf.FwdBenchmarkArgsOptionFunc) []string {
 	return benchmarkArgNames(gemmBenchmarkArgs{})
 }
 
-func (c Gemm) BwdBenchmarkGeneratorArgNames() []string {
+func (c Gemm) BwdBenchmarkGeneratorArgNames(opts ...dlperf.BwdBenchmarkArgsOptionFunc) []string {
 	return benchmarkArgNames(gemmBenchmarkArgs{})
 }
 

@@ -52,7 +52,7 @@ type Base struct {
 func mkBaseBenchmarkFWDArgs(c dlperf.Layer, opts ...dlperf.FwdBenchmarkArgsOptionFunc) BaseBenchmarkArgs {
 	return BaseBenchmarkArgs{
 		BenchmarkName: c.FwdBenchmarkName(opts...),
-		ArgNames:      c.FwdBenchmarkGeneratorArgNames(),
+		ArgNames:      c.FwdBenchmarkGeneratorArgNames(opts...),
 		Algorithms:    c.FwdBenchmarkAlgorithms(opts...),
 		DataTypes:     c.DataTypes(),
 		BatchSize:     dlperf.GetBatchSize(),
@@ -62,7 +62,7 @@ func mkBaseBenchmarkFWDArgs(c dlperf.Layer, opts ...dlperf.FwdBenchmarkArgsOptio
 func mkBaseBenchmarkBWDArgs(c dlperf.Layer, opts ...dlperf.BwdBenchmarkArgsOptionFunc) BaseBenchmarkArgs {
 	return BaseBenchmarkArgs{
 		BenchmarkName: c.BwdBenchmarkName(opts...),
-		ArgNames:      c.BwdBenchmarkGeneratorArgNames(),
+		ArgNames:      c.BwdBenchmarkGeneratorArgNames(opts...),
 		Algorithms:    c.BwdBenchmarkAlgorithms(opts...),
 		DataTypes:     c.DataTypes(),
 		BatchSize:     dlperf.GetBatchSize(),
@@ -267,7 +267,7 @@ func (b Base) FwdBenchmarkArgs(...dlperf.FwdBenchmarkArgsOptionFunc) interface{}
 	panic("FwdBenchmarkArgs not implemented")
 	return nil
 }
-func (b Base) FwdBenchmarkGeneratorArgNames() []string {
+func (b Base) FwdBenchmarkGeneratorArgNames(opts ...dlperf.FwdBenchmarkArgsOptionFunc) []string {
 	panic("FwdBenchmarkGeneratorArgNames not implemented")
 	return nil
 }
@@ -295,7 +295,7 @@ func (b Base) BwdBenchmarkArgs(opts ...dlperf.BwdBenchmarkArgsOptionFunc) interf
 	panic("BwdBenchmarkArgs not implemented")
 	return nil
 }
-func (b Base) BwdBenchmarkGeneratorArgNames() []string {
+func (b Base) BwdBenchmarkGeneratorArgNames(...dlperf.BwdBenchmarkArgsOptionFunc) []string {
 	panic("BwdBenchmarkGeneratorArgNames not implemented")
 	return nil
 }

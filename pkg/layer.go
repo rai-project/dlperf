@@ -34,13 +34,13 @@ type Layer interface {
 	FwdBenchmarkName(...FwdBenchmarkArgsOptionFunc) string
 	FwdBenchmarkFilter(string, string, ...FwdBenchmarkArgsOptionFunc) benchmark.Benchmark
 	FwdBenchmarkArgs(...FwdBenchmarkArgsOptionFunc) interface{}
-	FwdBenchmarkGeneratorArgNames() []string
+	FwdBenchmarkGeneratorArgNames(...FwdBenchmarkArgsOptionFunc) []string
 	FwdBenchmarkAlgorithms(...FwdBenchmarkArgsOptionFunc) []string
 
 	BwdBenchmarkName(...BwdBenchmarkArgsOptionFunc) string
 	BwdBenchmarkFilter(string, string, ...BwdBenchmarkArgsOptionFunc) benchmark.Benchmark
 	BwdBenchmarkArgs(...BwdBenchmarkArgsOptionFunc) interface{}
-	BwdBenchmarkGeneratorArgNames() []string
+	BwdBenchmarkGeneratorArgNames(...BwdBenchmarkArgsOptionFunc) []string
 	BwdBenchmarkAlgorithms(...BwdBenchmarkArgsOptionFunc) []string
 }
 
@@ -125,7 +125,7 @@ func (this FlopsInformation) Row(iopts ...writer.Option) []string {
 }
 
 func (this FlopsInformation) TotalFlops() int64 {
-	return 2*this.MultiplyAdds + this.Additions + this.Divisions + this.Exponentiations 
+	return 2*this.MultiplyAdds + this.Additions + this.Divisions + this.Exponentiations
 }
 
 func (this FlopsInformation) Total() int64 {

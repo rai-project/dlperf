@@ -162,11 +162,11 @@ func (c ElementWise) BwdBenchmarkGenerator(opts ...dlperf.BwdBenchmarkArgsOption
 	return templateExecBWD(&c, templateBasePrefix+templString+templateBaseSuffix)
 }
 
-func (c ElementWise) FwdBenchmarkGeneratorArgNames() []string {
+func (c ElementWise) FwdBenchmarkGeneratorArgNames(opts ...dlperf.FwdBenchmarkArgsOptionFunc) []string {
 	return benchmarkArgNames(elementWiseBenchmarkArgs{})
 }
 
-func (c ElementWise) BwdBenchmarkGeneratorArgNames() []string {
+func (c ElementWise) BwdBenchmarkGeneratorArgNames(opts ...dlperf.BwdBenchmarkArgsOptionFunc) []string {
 	return benchmarkArgNames(elementWiseBenchmarkArgs{})
 }
 

@@ -155,11 +155,11 @@ func (c Softmax) BwdBenchmarkGenerator() string {
 	return templateExecBWD(&c, templateBasePrefix+templString)
 }
 
-func (c Softmax) FwdBenchmarkGeneratorArgNames() []string {
+func (c Softmax) FwdBenchmarkGeneratorArgNames(opts ...dlperf.FwdBenchmarkArgsOptionFunc) []string {
 	return benchmarkArgNames(softmaxBenchmarkArgs{})
 }
 
-func (c Softmax) BwdBenchmarkGeneratorArgNames() []string {
+func (c Softmax) BwdBenchmarkGeneratorArgNames(opts ...dlperf.BwdBenchmarkArgsOptionFunc) []string {
 	return benchmarkArgNames(softmaxBenchmarkArgs{})
 }
 

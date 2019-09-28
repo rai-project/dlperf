@@ -398,11 +398,16 @@ func (c Conv) BwdBenchmarkGenerator(iopts ...dlperf.BwdBenchmarkArgsOptionFunc) 
 	return templateExecBWD(&c, templateBasePrefix+templString+templateBaseSuffix, iopts...)
 }
 
-func (c Conv) FwdBenchmarkGeneratorArgNames() []string {
+func (c Conv) FwdBenchmarkGeneratorArgNames(iopts ...dlperf.FwdBenchmarkArgsOptionFunc) []string {
+	opts := dlperf.CreateFwdBenchmarkArgsOption(iopts...)
+
+	if opts.ConvFwdType == dlperf.ConvFwdTypeBias {
+		return benchmarkArgNames(convBiasBenchmarkArgs{})
+	}
 	return benchmarkArgNames(convBenchmarkArgs{})
 }
 
-func (c Conv) BwdBenchmarkGeneratorArgNames() []string {
+func (c Conv) BwdBenchmarkGeneratorArgNames(opts ...dlperf.BwdBenchmarkArgsOptionFunc) []string {
 	return benchmarkArgNames(convBenchmarkArgs{})
 }
 

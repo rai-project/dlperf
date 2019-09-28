@@ -157,11 +157,11 @@ func (c BatchNorm) BwdBenchmarkGenerator(opts ...dlperf.BwdBenchmarkArgsOptionFu
 	return templateExecBWD(&c, templateBasePrefix+templString+templateBaseSuffix)
 }
 
-func (c BatchNorm) FwdBenchmarkGeneratorArgNames() []string {
+func (c BatchNorm) FwdBenchmarkGeneratorArgNames(opts ...dlperf.FwdBenchmarkArgsOptionFunc) []string {
 	return benchmarkArgNames(batchnormBenchmarkArgs{})
 }
 
-func (c BatchNorm) BwdBenchmarkGeneratorArgNames() []string {
+func (c BatchNorm) BwdBenchmarkGeneratorArgNames(opts ...dlperf.BwdBenchmarkArgsOptionFunc) []string {
 	return benchmarkArgNames(batchnormBenchmarkArgs{})
 }
 
