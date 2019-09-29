@@ -1,0 +1,166 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      5534,        158]
+NotebookOptionsPosition[      4671,        134]
+NotebookOutlinePosition[      5013,        149]
+CellTagsIndexPosition[      4970,        146]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Merge JSON DBs", "Title",
+ CellChangeTimes->{{3.77875976643333*^9, 
+  3.778759771808507*^9}},ExpressionUUID->"9f038f9d-346e-44d5-90af-\
+ca873edb482e"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"baseDir", "=", 
+   RowBox[{"ParentDirectory", "[", 
+    RowBox[{"NotebookDirectory", "[", "]"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"resultsDir", "=", 
+   RowBox[{"FileNameJoin", "[", 
+    RowBox[{"{", 
+     RowBox[{"baseDir", ",", "\"\<results\>\""}], "}"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"machines", "=", 
+   RowBox[{"{", 
+    RowBox[{
+    "\"\<Tesla_K80\>\"", ",", "\"\<Tesla_M60\>\"", ",", "\"\<GRID_K520\>\"", 
+     ",", "\"\<TITAN_Xp\>\"", ",", "\"\<TITAN_V\>\"", ",", 
+     "\"\<Tesla_V100-SXM2-16GB\>\"", ",", "\"\<Quadro_RTX_6000\>\"", ",", 
+     "\"\<Tesla_T4\>\""}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"batchSizes", "=", 
+   RowBox[{"ToString", "/@", 
+    RowBox[{"{", 
+     RowBox[{"1", ",", "2", ",", "4", ",", "8", ",", "16", ",", "32"}], 
+     "}"}]}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.778759835333362*^9, 3.7787598965473623`*^9}},
+ CellLabel->"In[11]:=",ExpressionUUID->"70807123-cc0c-4d25-8509-fa9d917554f7"],
+
+Cell[CellGroupData[{
+
+Cell["Big Database", "Section",
+ CellChangeTimes->{{3.778759929654008*^9, 
+  3.77875993137114*^9}},ExpressionUUID->"25297783-b922-436c-9682-\
+a8aa4378be73"],
+
+Cell[BoxData[
+ RowBox[{"Do", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"addTensorDir", "=", 
+     RowBox[{"FileNameJoin", "[", 
+      RowBox[{"{", 
+       RowBox[{"resultsDir", ",", "\"\<__add_tensor\>\"", ",", "machine"}], 
+       "}"}], "]"}]}], ";", "\[IndentingNewLine]", 
+    RowBox[{"addTensorFile", "=", 
+     RowBox[{"FileNameJoin", "[", 
+      RowBox[{"{", 
+       RowBox[{"addTensorDir", ",", 
+        RowBox[{"batchSize", "<>", "\"\<.json\>\""}]}], "}"}], "]"}]}], ";", 
+    "\[IndentingNewLine]", 
+    RowBox[{"allDir", "=", 
+     RowBox[{"FileNameJoin", "[", 
+      RowBox[{"{", 
+       RowBox[{"resultsDir", ",", "machine"}], "}"}], "]"}]}], ";", 
+    "\[IndentingNewLine]", 
+    RowBox[{"allFile", "=", 
+     RowBox[{"FileNameJoin", "[", 
+      RowBox[{"{", 
+       RowBox[{"allDir", ",", 
+        RowBox[{"batchSize", "<>", "\"\<.json\>\""}]}], "}"}], "]"}]}], ";", 
+    "\[IndentingNewLine]", 
+    RowBox[{"addTensorBenchmarks", "=", 
+     RowBox[{
+      RowBox[{"Import", "[", 
+       RowBox[{"addTensorFile", ",", "\"\<RawJSON\>\""}], "]"}], "[", 
+      "\"\<benchmarks\>\"", "]"}]}], ";", "\[IndentingNewLine]", 
+    RowBox[{"allData", "=", 
+     RowBox[{"Import", "[", 
+      RowBox[{"allFile", ",", "\"\<RawJSON\>\""}], "]"}]}], ";", 
+    "\[IndentingNewLine]", 
+    RowBox[{"allBenchmarks", "=", 
+     RowBox[{"allData", "[", "\"\<benchmarks\>\"", "]"}]}], ";", 
+    "\[IndentingNewLine]", 
+    RowBox[{"AssociateTo", "[", 
+     RowBox[{"allData", ",", 
+      RowBox[{"\"\<benchmarks\>\"", "\[Rule]", 
+       RowBox[{"Join", "[", 
+        RowBox[{"allBenchmarks", ",", "addTensorBenchmarks"}], "]"}]}]}], 
+     "]"}], ";", "\[IndentingNewLine]", 
+    RowBox[{"Export", "[", 
+     RowBox[{"allFile", ",", "allData", ",", "\"\<RawJSON\>\""}], "]"}]}], 
+   ",", "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{"batchSize", ",", "batchSizes"}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{"machine", ",", "machines"}], "}"}]}], "\[IndentingNewLine]", 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.77875993314143*^9, 3.7787602839919243`*^9}},
+ CellLabel->"In[28]:=",ExpressionUUID->"864a20a8-1e37-423e-859c-a9c6458b7122"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Length", "[", 
+  RowBox[{"allData", "[", "\"\<benchmarks\>\"", "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.7787602131112547`*^9, 3.7787602211715403`*^9}},
+ CellLabel->"In[26]:=",ExpressionUUID->"1cac2424-b6b1-452d-960d-0835d6024be5"],
+
+Cell[BoxData["4112"], "Output",
+ CellChangeTimes->{{3.7787601912663803`*^9, 3.778760229048335*^9}},
+ CellLabel->"Out[26]=",ExpressionUUID->"96a3a569-e8ef-4e33-9d90-8d3ef60c0e95"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{943, 993},
+WindowMargins->{{20, Automatic}, {Automatic, 44}},
+FrontEndVersion->"12.1 for Mac OS X x86 (64-bit) (September 26, 2019)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 156, 3, 146, "Title",ExpressionUUID->"9f038f9d-346e-44d5-90af-ca873edb482e"],
+Cell[739, 27, 1056, 27, 198, "Input",ExpressionUUID->"70807123-cc0c-4d25-8509-fa9d917554f7"],
+Cell[CellGroupData[{
+Cell[1820, 58, 156, 3, 100, "Section",ExpressionUUID->"25297783-b922-436c-9682-a8aa4378be73"],
+Cell[1979, 63, 2187, 54, 504, "Input",ExpressionUUID->"864a20a8-1e37-423e-859c-a9c6458b7122"],
+Cell[CellGroupData[{
+Cell[4191, 121, 259, 4, 44, "Input",ExpressionUUID->"1cac2424-b6b1-452d-960d-0835d6024be5"],
+Cell[4453, 127, 178, 2, 50, "Output",ExpressionUUID->"96a3a569-e8ef-4e33-9d90-8d3ef60c0e95"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
