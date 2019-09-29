@@ -120,7 +120,7 @@ Options:
 You can draw a graph with the runtime data using the following command
 
 ```
-go run main.go benchinfo --model_path ~/data/carml/dlperf/ArcFace/resnet100/resnet100.onnx --benchmark_database results/v100/8.json --short=false --batch_size=8 --human=true --strategy=parallel --show
+go run main.go benchinfo --model_path ~/data/carml/dlperf/ArcFace/resnet100/resnet100.onnx --benchmark_database results/v100/8.json --short=false --batch_size=8 --human=true --strategy=parallel --show --highlight_fast_path
 ```
 
 ## Query metrics

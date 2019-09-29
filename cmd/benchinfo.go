@@ -554,5 +554,6 @@ func init() {
 	benchinfoCmd.PersistentFlags().BoolVar(&showTotalInformation, "total", true, "show the total information across all layers")
 	benchinfoCmd.PersistentFlags().BoolVar(&fuseLayers, "fused", false, "check for fused layers in the database")
 	benchinfoCmd.PersistentFlags().BoolVar(&trimLayerName, "trim_layer_name", true, "only show the first few characters of a layer")
+	benchinfoCmd.PersistentFlags().BoolVar(&highlightShortestPath, "highlight_fast_path", true, "highlight the path taken when creating the graph visualization")
 	rootCmd.AddCommand(benchinfoCmd)
 }
