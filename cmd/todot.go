@@ -6,6 +6,7 @@ import (
 	"github.com/rai-project/dlperf/pkg/onnx"
 	"github.com/spf13/cobra"
 	"gonum.org/v1/gonum/graph/encoding/dot"
+	"github.com/spf13/cast"
 )
 
 var (
@@ -45,17 +46,19 @@ var todotCmd = &cobra.Command{
 		dotEnc, err := dot.Marshal(grph, model.GetName(), "", "  ")
 		if err != nil {
 			return err
-		}
-
+    }
+    
 		img, err := dotToImage(dotEnc)
 		if err != nil {
 			return err
-		}
-
-		// err = com.WriteFile(outputFileName, dotEnc)
+    }
+    
+		// err = com.WriteFile("/Users/abduld/.gvm/pkgsets/go1.12/global/src/github.com/rai-project/dlperf/assets/model_plot/"+getModelName(modelPath)+"/batchsize_"+cast.ToString(batchSize)+".dot", dotEnc)
 		// if err != nil {
 		// 	return err
 		// }
+    // com.Copy(img, "/Users/abduld/.gvm/pkgsets/go1.12/global/src/github.com/rai-project/dlperf/assets/model_plot/"+getModelName(modelPath)+"/batchsize_"+cast.ToString(batchSize)+".pdf" )
+
 
 		println(img)
 

@@ -1,0 +1,597 @@
+strict digraph {
+  graph [
+    rankdir="TB"
+    overlap=prism
+    overlap_shrink=true
+    splines=curved
+  ];
+  node [
+    shape=Mrecord
+  ];
+  edge [
+    penwidth=3
+  ];
+
+  // Node definitions.
+  "data_0" [
+    id=0
+    name="data_0"
+    type=constant_input
+    label="data_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "conv1_w_0" [
+    id=1
+    name="conv1_w_0"
+    type=constant_input
+    label="conv1_w_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "conv1_b_0" [
+    id=2
+    name="conv1_b_0"
+    type=constant_input
+    label="conv1_b_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "conv1_1" [
+    id=3
+    name="conv1_1"
+    type=Conv
+    label="{ {conv_1  | CONV} | [16,96,54,54] }"
+    inputs="data_0;conv1_w_0;conv1_b_0"
+    outputs="conv1_1"
+    penwidth=3
+    style=filled
+    color="#8a9cc8"
+    fontcolor="#000000"
+    fillcolor="#9eafdc"
+  ];
+  "conv1_2" [
+    id=4
+    name="conv1_2"
+    type=Relu
+    label="{ {relu_1  | RELU} | [16,96,54,54] }"
+    inputs="conv1_1"
+    outputs="conv1_2"
+    penwidth=3
+    style=filled
+    color="#b686b1"
+    fontcolor="#000000"
+    fillcolor="#c998c4"
+  ];
+  "norm1_1" [
+    id=5
+    name="norm1_1"
+    type=LRN
+    label="{ {lrn_1  | LRN} | [16,96,54,54] }"
+    inputs="conv1_2"
+    outputs="norm1_1"
+    penwidth=3
+    style=filled
+    color="#927fc5"
+    fontcolor="#000000"
+    fillcolor="#a390d6"
+  ];
+  "pool1_1" [
+    id=6
+    name="pool1_1"
+    type=MaxPool
+    label="{ {maxpool_1  | MXPL} | [16,96,26,26] }"
+    inputs="norm1_1"
+    outputs="pool1_1"
+    penwidth=3
+    style=filled
+    color="#adbf81"
+    fontcolor="#000000"
+    fillcolor="#c4d697"
+  ];
+  "conv2_w_0" [
+    id=7
+    name="conv2_w_0"
+    type=constant_input
+    label="conv2_w_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "conv2_b_0" [
+    id=8
+    name="conv2_b_0"
+    type=constant_input
+    label="conv2_b_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "conv2_1" [
+    id=9
+    name="conv2_1"
+    type=Conv
+    label="{ {conv2_2  | CONV} | [16,256,26,26] }"
+    inputs="pool1_1;conv2_w_0;conv2_b_0"
+    outputs="conv2_1"
+    penwidth=3
+    style=filled
+    color="#8a9cc8"
+    fontcolor="#000000"
+    fillcolor="#9eafdc"
+  ];
+  "conv2_2" [
+    id=10
+    name="conv2_2"
+    type=Relu
+    label="{ {relu_2  | RELU} | [16,256,26,26] }"
+    inputs="conv2_1"
+    outputs="conv2_2"
+    penwidth=3
+    style=filled
+    color="#b686b1"
+    fontcolor="#000000"
+    fillcolor="#c998c4"
+  ];
+  "norm2_1" [
+    id=11
+    name="norm2_1"
+    type=LRN
+    label="{ {lrn_2  | LRN} | [16,256,26,26] }"
+    inputs="conv2_2"
+    outputs="norm2_1"
+    penwidth=3
+    style=filled
+    color="#927fc5"
+    fontcolor="#000000"
+    fillcolor="#a390d6"
+  ];
+  "pool2_1" [
+    id=12
+    name="pool2_1"
+    type=MaxPool
+    label="{ {maxpool_2  | MXPL} | [16,256,12,12] }"
+    inputs="norm2_1"
+    outputs="pool2_1"
+    penwidth=3
+    style=filled
+    color="#adbf81"
+    fontcolor="#000000"
+    fillcolor="#c4d697"
+  ];
+  "conv3_w_0" [
+    id=13
+    name="conv3_w_0"
+    type=constant_input
+    label="conv3_w_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "conv3_b_0" [
+    id=14
+    name="conv3_b_0"
+    type=constant_input
+    label="conv3_b_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "conv3_1" [
+    id=15
+    name="conv3_1"
+    type=Conv
+    label="{ {conv_3  | CONV} | [16,384,12,12] }"
+    inputs="pool2_1;conv3_w_0;conv3_b_0"
+    outputs="conv3_1"
+    penwidth=3
+    style=filled
+    color="#8a9cc8"
+    fontcolor="#000000"
+    fillcolor="#9eafdc"
+  ];
+  "conv3_2" [
+    id=16
+    name="conv3_2"
+    type=Relu
+    label="{ {relu_3  | RELU} | [16,384,12,12] }"
+    inputs="conv3_1"
+    outputs="conv3_2"
+    penwidth=3
+    style=filled
+    color="#b686b1"
+    fontcolor="#000000"
+    fillcolor="#c998c4"
+  ];
+  "conv4_w_0" [
+    id=17
+    name="conv4_w_0"
+    type=constant_input
+    label="conv4_w_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "conv4_b_0" [
+    id=18
+    name="conv4_b_0"
+    type=constant_input
+    label="conv4_b_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "conv4_1" [
+    id=19
+    name="conv4_1"
+    type=Conv
+    label="{ {conv4_2  | CONV} | [16,384,12,12] }"
+    inputs="conv3_2;conv4_w_0;conv4_b_0"
+    outputs="conv4_1"
+    penwidth=3
+    style=filled
+    color="#8a9cc8"
+    fontcolor="#000000"
+    fillcolor="#9eafdc"
+  ];
+  "conv4_2" [
+    id=20
+    name="conv4_2"
+    type=Relu
+    label="{ {relu_4  | RELU} | [16,384,12,12] }"
+    inputs="conv4_1"
+    outputs="conv4_2"
+    penwidth=3
+    style=filled
+    color="#b686b1"
+    fontcolor="#000000"
+    fillcolor="#c998c4"
+  ];
+  "conv5_w_0" [
+    id=21
+    name="conv5_w_0"
+    type=constant_input
+    label="conv5_w_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "conv5_b_0" [
+    id=22
+    name="conv5_b_0"
+    type=constant_input
+    label="conv5_b_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "conv5_1" [
+    id=23
+    name="conv5_1"
+    type=Conv
+    label="{ {conv5_2  | CONV} | [16,256,12,12] }"
+    inputs="conv4_2;conv5_w_0;conv5_b_0"
+    outputs="conv5_1"
+    penwidth=3
+    style=filled
+    color="#8a9cc8"
+    fontcolor="#000000"
+    fillcolor="#9eafdc"
+  ];
+  "conv5_2" [
+    id=24
+    name="conv5_2"
+    type=Relu
+    label="{ {relu_5  | RELU} | [16,256,12,12] }"
+    inputs="conv5_1"
+    outputs="conv5_2"
+    penwidth=3
+    style=filled
+    color="#b686b1"
+    fontcolor="#000000"
+    fillcolor="#c998c4"
+  ];
+  "pool5_1" [
+    id=25
+    name="pool5_1"
+    type=MaxPool
+    label="{ {maxpool_3  | MXPL} | [16,256,6,6] }"
+    inputs="conv5_2"
+    outputs="pool5_1"
+    penwidth=3
+    style=filled
+    color="#adbf81"
+    fontcolor="#000000"
+    fillcolor="#c4d697"
+  ];
+  "OC2_DUMMY_1" [
+    id=26
+    name="OC2_DUMMY_1"
+    type=constant_input
+    label="OC2_DUMMY_1"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "OC2_DUMMY_0" [
+    id=27
+    name="OC2_DUMMY_0"
+    type=Reshape
+    label="{ {reshape_1  | RSHP} | [1,9216] }"
+    inputs="pool5_1;OC2_DUMMY_1"
+    outputs="OC2_DUMMY_0"
+    penwidth=3
+    style=filled
+    color="#83b7c6"
+    fontcolor="#000000"
+    fillcolor="#98cddc"
+  ];
+  "fc6_w_0" [
+    id=28
+    name="fc6_w_0"
+    type=constant_input
+    label="fc6_w_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "fc6_b_0" [
+    id=29
+    name="fc6_b_0"
+    type=constant_input
+    label="fc6_b_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "fc6_1" [
+    id=30
+    name="fc6_1"
+    type=Gemm
+    label="{ {gemm_1  | GEMM} | [1,4096] }"
+    inputs="OC2_DUMMY_0;fc6_w_0;fc6_b_0"
+    outputs="fc6_1"
+    penwidth=3
+    style=filled
+    color="#ce89ce"
+    fontcolor="#000000"
+    fillcolor="#e39ce2"
+  ];
+  "fc6_2" [
+    id=31
+    name="fc6_2"
+    type=Relu
+    label="{ {relu_6  | RELU} | [1,4096] }"
+    inputs="fc6_1"
+    outputs="fc6_2"
+    penwidth=3
+    style=filled
+    color="#b686b1"
+    fontcolor="#000000"
+    fillcolor="#c998c4"
+  ];
+  "fc6_3" [
+    id=32
+    name="fc6_3"
+    type=Dropout
+    label="{ {dropout_1  | DRP} | [1,4096] }"
+    inputs="fc6_2"
+    outputs="fc6_3;_fc6_mask_1"
+    penwidth=3
+    style=filled
+    color="#c68d8b"
+    fontcolor="#000000"
+    fillcolor="#daa09e"
+  ];
+  "_fc6_mask_1" [
+    id=33
+    name="_fc6_mask_1"
+    type=Dropout
+    label="{ {dropout_1  | DRP} | [1,4096] }"
+    inputs="fc6_2"
+    outputs="fc6_3;_fc6_mask_1"
+    penwidth=3
+    style=filled
+    color="#c68d8b"
+    fontcolor="#000000"
+    fillcolor="#daa09e"
+  ];
+  "fc7_w_0" [
+    id=34
+    name="fc7_w_0"
+    type=constant_input
+    label="fc7_w_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "fc7_b_0" [
+    id=35
+    name="fc7_b_0"
+    type=constant_input
+    label="fc7_b_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "fc7_1" [
+    id=36
+    name="fc7_1"
+    type=Gemm
+    label="{ {gemm_2  | GEMM} | [1,4096] }"
+    inputs="fc6_3;fc7_w_0;fc7_b_0"
+    outputs="fc7_1"
+    penwidth=3
+    style=filled
+    color="#ce89ce"
+    fontcolor="#000000"
+    fillcolor="#e39ce2"
+  ];
+  "fc7_2" [
+    id=37
+    name="fc7_2"
+    type=Relu
+    label="{ {relu_7  | RELU} | [1,4096] }"
+    inputs="fc7_1"
+    outputs="fc7_2"
+    penwidth=3
+    style=filled
+    color="#b686b1"
+    fontcolor="#000000"
+    fillcolor="#c998c4"
+  ];
+  "fc7_3" [
+    id=38
+    name="fc7_3"
+    type=Dropout
+    label="{ {dropout_2  | DRP} | [1,4096] }"
+    inputs="fc7_2"
+    outputs="fc7_3;_fc7_mask_1"
+    penwidth=3
+    style=filled
+    color="#c68d8b"
+    fontcolor="#000000"
+    fillcolor="#daa09e"
+  ];
+  "_fc7_mask_1" [
+    id=39
+    name="_fc7_mask_1"
+    type=Dropout
+    label="{ {dropout_2  | DRP} | [1,4096] }"
+    inputs="fc7_2"
+    outputs="fc7_3;_fc7_mask_1"
+    penwidth=3
+    style=filled
+    color="#c68d8b"
+    fontcolor="#000000"
+    fillcolor="#daa09e"
+  ];
+  "fc8_w_0" [
+    id=40
+    name="fc8_w_0"
+    type=constant_input
+    label="fc8_w_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "fc8_b_0" [
+    id=41
+    name="fc8_b_0"
+    type=constant_input
+    label="fc8_b_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "fc8_1" [
+    id=42
+    name="fc8_1"
+    type=Gemm
+    label="{ {gemm_3  | GEMM} | [1,1000] }"
+    inputs="fc7_3;fc8_w_0;fc8_b_0"
+    outputs="fc8_1"
+    penwidth=3
+    style=filled
+    color="#ce89ce"
+    fontcolor="#000000"
+    fillcolor="#e39ce2"
+  ];
+  "prob_1" [
+    id=43
+    name="prob_1"
+    type=Softmax
+    label="{ {softmax_1  | SFT} | [1,1000] }"
+    inputs="fc8_1"
+    outputs="prob_1"
+    penwidth=3
+    style=filled
+    color="#82c1a1"
+    fontcolor="#000000"
+    fillcolor="#98d8b7"
+  ];
+
+  // Edge definitions.
+  "data_0" -> "conv1_1";
+  "conv1_w_0" -> "conv1_1";
+  "conv1_b_0" -> "conv1_1";
+  "conv1_1" -> "conv1_2";
+  "conv1_2" -> "norm1_1";
+  "norm1_1" -> "pool1_1";
+  "pool1_1" -> "conv2_1";
+  "conv2_w_0" -> "conv2_1";
+  "conv2_b_0" -> "conv2_1";
+  "conv2_1" -> "conv2_2";
+  "conv2_2" -> "norm2_1";
+  "norm2_1" -> "pool2_1";
+  "pool2_1" -> "conv3_1";
+  "conv3_w_0" -> "conv3_1";
+  "conv3_b_0" -> "conv3_1";
+  "conv3_1" -> "conv3_2";
+  "conv3_2" -> "conv4_1";
+  "conv4_w_0" -> "conv4_1";
+  "conv4_b_0" -> "conv4_1";
+  "conv4_1" -> "conv4_2";
+  "conv4_2" -> "conv5_1";
+  "conv5_w_0" -> "conv5_1";
+  "conv5_b_0" -> "conv5_1";
+  "conv5_1" -> "conv5_2";
+  "conv5_2" -> "pool5_1";
+  "pool5_1" -> "OC2_DUMMY_0";
+  "OC2_DUMMY_1" -> "OC2_DUMMY_0";
+  "OC2_DUMMY_0" -> "fc6_1";
+  "fc6_w_0" -> "fc6_1";
+  "fc6_b_0" -> "fc6_1";
+  "fc6_1" -> "fc6_2";
+  "fc6_2" -> "fc6_3";
+  "fc6_2" -> "_fc6_mask_1";
+  "fc6_3" -> "fc7_1";
+  "fc7_w_0" -> "fc7_1";
+  "fc7_b_0" -> "fc7_1";
+  "fc7_1" -> "fc7_2";
+  "fc7_2" -> "fc7_3";
+  "fc7_2" -> "_fc7_mask_1";
+  "fc7_3" -> "fc8_1";
+  "fc8_w_0" -> "fc8_1";
+  "fc8_b_0" -> "fc8_1";
+  "fc8_1" -> "prob_1";
+}

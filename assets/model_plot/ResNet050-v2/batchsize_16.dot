@@ -1,0 +1,5601 @@
+strict digraph {
+  graph [
+    rankdir="TB"
+    overlap=prism
+    overlap_shrink=true
+    splines=curved
+  ];
+  node [
+    shape=Mrecord
+  ];
+  edge [
+    penwidth=3
+  ];
+
+  // Node definitions.
+  "data" [
+    id=0
+    name="data"
+    type=constant_input
+    label="data"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_batchnorm0_gamma" [
+    id=1
+    name="resnetv24_batchnorm0_gamma"
+    type=constant_input
+    label="resnetv24_batchnorm0_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_batchnorm0_beta" [
+    id=2
+    name="resnetv24_batchnorm0_beta"
+    type=constant_input
+    label="resnetv24_batchnorm0_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_batchnorm0_running_mean" [
+    id=3
+    name="resnetv24_batchnorm0_running_mean"
+    type=constant_input
+    label="resnetv24_batchnorm0_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_batchnorm0_running_var" [
+    id=4
+    name="resnetv24_batchnorm0_running_var"
+    type=constant_input
+    label="resnetv24_batchnorm0_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_batchnorm0_fwd" [
+    id=5
+    name="resnetv24_batchnorm0_fwd"
+    type=BatchNormalization
+    label="{ {resnetv24_batchnorm0_fwd  | BN} | [[16,3,224,224],[3],[3],[3],[3]] }"
+    inputs="data;resnetv24_batchnorm0_gamma;resnetv24_batchnorm0_beta;resnetv24_batchnorm0_running_mean;resnetv24_batchnorm0_running_var"
+    outputs="resnetv24_batchnorm0_fwd"
+    penwidth=3
+    style=filled
+    color="#c4b983"
+    fontcolor="#000000"
+    fillcolor="#dccf99"
+  ];
+  "resnetv24_conv0_weight" [
+    id=6
+    name="resnetv24_conv0_weight"
+    type=constant_input
+    label="resnetv24_conv0_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_conv0_fwd" [
+    id=7
+    name="resnetv24_conv0_fwd"
+    type=Conv
+    label="{ {resnetv24_conv0_fwd  | CONV} | [16,64,112,112] }"
+    inputs="resnetv24_batchnorm0_fwd;resnetv24_conv0_weight"
+    outputs="resnetv24_conv0_fwd"
+    penwidth=3
+    style=filled
+    color="#96c583"
+    fontcolor="#000000"
+    fillcolor="#acdc99"
+  ];
+  "resnetv24_batchnorm1_gamma" [
+    id=8
+    name="resnetv24_batchnorm1_gamma"
+    type=constant_input
+    label="resnetv24_batchnorm1_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_batchnorm1_beta" [
+    id=9
+    name="resnetv24_batchnorm1_beta"
+    type=constant_input
+    label="resnetv24_batchnorm1_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_batchnorm1_running_mean" [
+    id=10
+    name="resnetv24_batchnorm1_running_mean"
+    type=constant_input
+    label="resnetv24_batchnorm1_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_batchnorm1_running_var" [
+    id=11
+    name="resnetv24_batchnorm1_running_var"
+    type=constant_input
+    label="resnetv24_batchnorm1_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_batchnorm1_fwd" [
+    id=12
+    name="resnetv24_batchnorm1_fwd"
+    type=BatchNormalization
+    label="{ {resnetv24_batchnorm1_fwd  | BN} | [[16,64,112,112],[64],[64],[64],[64]] }"
+    inputs="resnetv24_conv0_fwd;resnetv24_batchnorm1_gamma;resnetv24_batchnorm1_beta;resnetv24_batchnorm1_running_mean;resnetv24_batchnorm1_running_var"
+    outputs="resnetv24_batchnorm1_fwd"
+    penwidth=3
+    style=filled
+    color="#c4b983"
+    fontcolor="#000000"
+    fillcolor="#dccf99"
+  ];
+  "resnetv24_relu0_fwd" [
+    id=13
+    name="resnetv24_relu0_fwd"
+    type=Relu
+    label="{ {resnetv24_relu0_fwd  | RELU} | [16,64,112,112] }"
+    inputs="resnetv24_batchnorm1_fwd"
+    outputs="resnetv24_relu0_fwd"
+    penwidth=3
+    style=filled
+    color="#c5869b"
+    fontcolor="#000000"
+    fillcolor="#d898ad"
+  ];
+  "resnetv24_pool0_fwd" [
+    id=14
+    name="resnetv24_pool0_fwd"
+    type=MaxPool
+    label="{ {resnetv24_pool0_fwd  | MXPL} | [16,64,56,56] }"
+    inputs="resnetv24_relu0_fwd"
+    outputs="resnetv24_pool0_fwd"
+    penwidth=3
+    style=filled
+    color="#cc88cb"
+    fontcolor="#000000"
+    fillcolor="#e19be0"
+  ];
+  "resnetv24_stage1_batchnorm0_gamma" [
+    id=15
+    name="resnetv24_stage1_batchnorm0_gamma"
+    type=constant_input
+    label="resnetv24_stage1_batchnorm0_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage1_batchnorm0_beta" [
+    id=16
+    name="resnetv24_stage1_batchnorm0_beta"
+    type=constant_input
+    label="resnetv24_stage1_batchnorm0_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage1_batchnorm0_running_mean" [
+    id=17
+    name="resnetv24_stage1_batchnorm0_running_mean"
+    type=constant_input
+    label="resnetv24_stage1_batchnorm0_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage1_batchnorm0_running_var" [
+    id=18
+    name="resnetv24_stage1_batchnorm0_running_var"
+    type=constant_input
+    label="resnetv24_stage1_batchnorm0_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage1_batchnorm0_fwd" [
+    id=19
+    name="resnetv24_stage1_batchnorm0_fwd"
+    type=BatchNormalization
+    label="{ {resnetv24_stage1_batchnorm0_fwd  | BN} | [[16,64,56,56],[64],[64],[64],[64]] }"
+    inputs="resnetv24_pool0_fwd;resnetv24_stage1_batchnorm0_gamma;resnetv24_stage1_batchnorm0_beta;resnetv24_stage1_batchnorm0_running_mean;resnetv24_stage1_batchnorm0_running_var"
+    outputs="resnetv24_stage1_batchnorm0_fwd"
+    penwidth=3
+    style=filled
+    color="#c4b983"
+    fontcolor="#000000"
+    fillcolor="#dccf99"
+  ];
+  "resnetv24_stage1_activation0" [
+    id=20
+    name="resnetv24_stage1_activation0"
+    type=Relu
+    label="{ {resnetv24_stage1_activation0  | RELU} | [16,64,56,56] }"
+    inputs="resnetv24_stage1_batchnorm0_fwd"
+    outputs="resnetv24_stage1_activation0"
+    penwidth=3
+    style=filled
+    color="#c5869b"
+    fontcolor="#000000"
+    fillcolor="#d898ad"
+  ];
+  "resnetv24_stage1_conv0_weight" [
+    id=21
+    name="resnetv24_stage1_conv0_weight"
+    type=constant_input
+    label="resnetv24_stage1_conv0_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage1_conv0_fwd" [
+    id=22
+    name="resnetv24_stage1_conv0_fwd"
+    type=Conv
+    label="{ {resnetv24_stage1_conv0_fwd  | CONV} | [16,64,56,56] }"
+    inputs="resnetv24_stage1_activation0;resnetv24_stage1_conv0_weight"
+    outputs="resnetv24_stage1_conv0_fwd"
+    penwidth=3
+    style=filled
+    color="#96c583"
+    fontcolor="#000000"
+    fillcolor="#acdc99"
+  ];
+  "resnetv24_stage1_batchnorm1_gamma" [
+    id=23
+    name="resnetv24_stage1_batchnorm1_gamma"
+    type=constant_input
+    label="resnetv24_stage1_batchnorm1_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage1_batchnorm1_beta" [
+    id=24
+    name="resnetv24_stage1_batchnorm1_beta"
+    type=constant_input
+    label="resnetv24_stage1_batchnorm1_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage1_batchnorm1_running_mean" [
+    id=25
+    name="resnetv24_stage1_batchnorm1_running_mean"
+    type=constant_input
+    label="resnetv24_stage1_batchnorm1_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage1_batchnorm1_running_var" [
+    id=26
+    name="resnetv24_stage1_batchnorm1_running_var"
+    type=constant_input
+    label="resnetv24_stage1_batchnorm1_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage1_batchnorm1_fwd" [
+    id=27
+    name="resnetv24_stage1_batchnorm1_fwd"
+    type=BatchNormalization
+    label="{ {resnetv24_stage1_batchnorm1_fwd  | BN} | [[16,64,56,56],[64],[64],[64],[64]] }"
+    inputs="resnetv24_stage1_conv0_fwd;resnetv24_stage1_batchnorm1_gamma;resnetv24_stage1_batchnorm1_beta;resnetv24_stage1_batchnorm1_running_mean;resnetv24_stage1_batchnorm1_running_var"
+    outputs="resnetv24_stage1_batchnorm1_fwd"
+    penwidth=3
+    style=filled
+    color="#c4b983"
+    fontcolor="#000000"
+    fillcolor="#dccf99"
+  ];
+  "resnetv24_stage1_activation1" [
+    id=28
+    name="resnetv24_stage1_activation1"
+    type=Relu
+    label="{ {resnetv24_stage1_activation1  | RELU} | [16,64,56,56] }"
+    inputs="resnetv24_stage1_batchnorm1_fwd"
+    outputs="resnetv24_stage1_activation1"
+    penwidth=3
+    style=filled
+    color="#c5869b"
+    fontcolor="#000000"
+    fillcolor="#d898ad"
+  ];
+  "resnetv24_stage1_conv1_weight" [
+    id=29
+    name="resnetv24_stage1_conv1_weight"
+    type=constant_input
+    label="resnetv24_stage1_conv1_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage1_conv1_fwd" [
+    id=30
+    name="resnetv24_stage1_conv1_fwd"
+    type=Conv
+    label="{ {resnetv24_stage1_conv1_fwd  | CONV} | [16,64,56,56] }"
+    inputs="resnetv24_stage1_activation1;resnetv24_stage1_conv1_weight"
+    outputs="resnetv24_stage1_conv1_fwd"
+    penwidth=3
+    style=filled
+    color="#96c583"
+    fontcolor="#000000"
+    fillcolor="#acdc99"
+  ];
+  "resnetv24_stage1_batchnorm2_gamma" [
+    id=31
+    name="resnetv24_stage1_batchnorm2_gamma"
+    type=constant_input
+    label="resnetv24_stage1_batchnorm2_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage1_batchnorm2_beta" [
+    id=32
+    name="resnetv24_stage1_batchnorm2_beta"
+    type=constant_input
+    label="resnetv24_stage1_batchnorm2_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage1_batchnorm2_running_mean" [
+    id=33
+    name="resnetv24_stage1_batchnorm2_running_mean"
+    type=constant_input
+    label="resnetv24_stage1_batchnorm2_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage1_batchnorm2_running_var" [
+    id=34
+    name="resnetv24_stage1_batchnorm2_running_var"
+    type=constant_input
+    label="resnetv24_stage1_batchnorm2_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage1_batchnorm2_fwd" [
+    id=35
+    name="resnetv24_stage1_batchnorm2_fwd"
+    type=BatchNormalization
+    label="{ {resnetv24_stage1_batchnorm2_fwd  | BN} | [[16,64,56,56],[64],[64],[64],[64]] }"
+    inputs="resnetv24_stage1_conv1_fwd;resnetv24_stage1_batchnorm2_gamma;resnetv24_stage1_batchnorm2_beta;resnetv24_stage1_batchnorm2_running_mean;resnetv24_stage1_batchnorm2_running_var"
+    outputs="resnetv24_stage1_batchnorm2_fwd"
+    penwidth=3
+    style=filled
+    color="#c4b983"
+    fontcolor="#000000"
+    fillcolor="#dccf99"
+  ];
+  "resnetv24_stage1_activation2" [
+    id=36
+    name="resnetv24_stage1_activation2"
+    type=Relu
+    label="{ {resnetv24_stage1_activation2  | RELU} | [16,64,56,56] }"
+    inputs="resnetv24_stage1_batchnorm2_fwd"
+    outputs="resnetv24_stage1_activation2"
+    penwidth=3
+    style=filled
+    color="#c5869b"
+    fontcolor="#000000"
+    fillcolor="#d898ad"
+  ];
+  "resnetv24_stage1_conv2_weight" [
+    id=37
+    name="resnetv24_stage1_conv2_weight"
+    type=constant_input
+    label="resnetv24_stage1_conv2_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage1_conv2_fwd" [
+    id=38
+    name="resnetv24_stage1_conv2_fwd"
+    type=Conv
+    label="{ {resnetv24_stage1_conv2_fwd  | CONV} | [16,256,56,56] }"
+    inputs="resnetv24_stage1_activation2;resnetv24_stage1_conv2_weight"
+    outputs="resnetv24_stage1_conv2_fwd"
+    penwidth=3
+    style=filled
+    color="#96c583"
+    fontcolor="#000000"
+    fillcolor="#acdc99"
+  ];
+  "resnetv24_stage1_conv3_weight" [
+    id=39
+    name="resnetv24_stage1_conv3_weight"
+    type=constant_input
+    label="resnetv24_stage1_conv3_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage1_conv3_fwd" [
+    id=40
+    name="resnetv24_stage1_conv3_fwd"
+    type=Conv
+    label="{ {resnetv24_stage1_conv3_fwd  | CONV} | [16,256,56,56] }"
+    inputs="resnetv24_stage1_activation0;resnetv24_stage1_conv3_weight"
+    outputs="resnetv24_stage1_conv3_fwd"
+    penwidth=3
+    style=filled
+    color="#96c583"
+    fontcolor="#000000"
+    fillcolor="#acdc99"
+  ];
+  "resnetv24_stage1__plus0" [
+    id=41
+    name="resnetv24_stage1__plus0"
+    type=Add
+    label="{ {resnetv24_stage1__plus0  | ADD} | [16,256,56,56] }"
+    inputs="resnetv24_stage1_conv2_fwd;resnetv24_stage1_conv3_fwd"
+    outputs="resnetv24_stage1__plus0"
+    penwidth=3
+    style=filled
+    color="#c29382"
+    fontcolor="#000000"
+    fillcolor="#d6a695"
+  ];
+  "resnetv24_stage1_batchnorm3_gamma" [
+    id=42
+    name="resnetv24_stage1_batchnorm3_gamma"
+    type=constant_input
+    label="resnetv24_stage1_batchnorm3_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage1_batchnorm3_beta" [
+    id=43
+    name="resnetv24_stage1_batchnorm3_beta"
+    type=constant_input
+    label="resnetv24_stage1_batchnorm3_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage1_batchnorm3_running_mean" [
+    id=44
+    name="resnetv24_stage1_batchnorm3_running_mean"
+    type=constant_input
+    label="resnetv24_stage1_batchnorm3_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage1_batchnorm3_running_var" [
+    id=45
+    name="resnetv24_stage1_batchnorm3_running_var"
+    type=constant_input
+    label="resnetv24_stage1_batchnorm3_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage1_batchnorm3_fwd" [
+    id=46
+    name="resnetv24_stage1_batchnorm3_fwd"
+    type=BatchNormalization
+    label="{ {resnetv24_stage1_batchnorm3_fwd  | BN} | [[16,256,56,56],[256],[256],[256],[256]] }"
+    inputs="resnetv24_stage1__plus0;resnetv24_stage1_batchnorm3_gamma;resnetv24_stage1_batchnorm3_beta;resnetv24_stage1_batchnorm3_running_mean;resnetv24_stage1_batchnorm3_running_var"
+    outputs="resnetv24_stage1_batchnorm3_fwd"
+    penwidth=3
+    style=filled
+    color="#c4b983"
+    fontcolor="#000000"
+    fillcolor="#dccf99"
+  ];
+  "resnetv24_stage1_activation3" [
+    id=47
+    name="resnetv24_stage1_activation3"
+    type=Relu
+    label="{ {resnetv24_stage1_activation3  | RELU} | [16,256,56,56] }"
+    inputs="resnetv24_stage1_batchnorm3_fwd"
+    outputs="resnetv24_stage1_activation3"
+    penwidth=3
+    style=filled
+    color="#c5869b"
+    fontcolor="#000000"
+    fillcolor="#d898ad"
+  ];
+  "resnetv24_stage1_conv4_weight" [
+    id=48
+    name="resnetv24_stage1_conv4_weight"
+    type=constant_input
+    label="resnetv24_stage1_conv4_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage1_conv4_fwd" [
+    id=49
+    name="resnetv24_stage1_conv4_fwd"
+    type=Conv
+    label="{ {resnetv24_stage1_conv4_fwd  | CONV} | [16,64,56,56] }"
+    inputs="resnetv24_stage1_activation3;resnetv24_stage1_conv4_weight"
+    outputs="resnetv24_stage1_conv4_fwd"
+    penwidth=3
+    style=filled
+    color="#96c583"
+    fontcolor="#000000"
+    fillcolor="#acdc99"
+  ];
+  "resnetv24_stage1_batchnorm4_gamma" [
+    id=50
+    name="resnetv24_stage1_batchnorm4_gamma"
+    type=constant_input
+    label="resnetv24_stage1_batchnorm4_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage1_batchnorm4_beta" [
+    id=51
+    name="resnetv24_stage1_batchnorm4_beta"
+    type=constant_input
+    label="resnetv24_stage1_batchnorm4_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage1_batchnorm4_running_mean" [
+    id=52
+    name="resnetv24_stage1_batchnorm4_running_mean"
+    type=constant_input
+    label="resnetv24_stage1_batchnorm4_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage1_batchnorm4_running_var" [
+    id=53
+    name="resnetv24_stage1_batchnorm4_running_var"
+    type=constant_input
+    label="resnetv24_stage1_batchnorm4_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage1_batchnorm4_fwd" [
+    id=54
+    name="resnetv24_stage1_batchnorm4_fwd"
+    type=BatchNormalization
+    label="{ {resnetv24_stage1_batchnorm4_fwd  | BN} | [[16,64,56,56],[64],[64],[64],[64]] }"
+    inputs="resnetv24_stage1_conv4_fwd;resnetv24_stage1_batchnorm4_gamma;resnetv24_stage1_batchnorm4_beta;resnetv24_stage1_batchnorm4_running_mean;resnetv24_stage1_batchnorm4_running_var"
+    outputs="resnetv24_stage1_batchnorm4_fwd"
+    penwidth=3
+    style=filled
+    color="#c4b983"
+    fontcolor="#000000"
+    fillcolor="#dccf99"
+  ];
+  "resnetv24_stage1_activation4" [
+    id=55
+    name="resnetv24_stage1_activation4"
+    type=Relu
+    label="{ {resnetv24_stage1_activation4  | RELU} | [16,64,56,56] }"
+    inputs="resnetv24_stage1_batchnorm4_fwd"
+    outputs="resnetv24_stage1_activation4"
+    penwidth=3
+    style=filled
+    color="#c5869b"
+    fontcolor="#000000"
+    fillcolor="#d898ad"
+  ];
+  "resnetv24_stage1_conv5_weight" [
+    id=56
+    name="resnetv24_stage1_conv5_weight"
+    type=constant_input
+    label="resnetv24_stage1_conv5_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage1_conv5_fwd" [
+    id=57
+    name="resnetv24_stage1_conv5_fwd"
+    type=Conv
+    label="{ {resnetv24_stage1_conv5_fwd  | CONV} | [16,64,56,56] }"
+    inputs="resnetv24_stage1_activation4;resnetv24_stage1_conv5_weight"
+    outputs="resnetv24_stage1_conv5_fwd"
+    penwidth=3
+    style=filled
+    color="#96c583"
+    fontcolor="#000000"
+    fillcolor="#acdc99"
+  ];
+  "resnetv24_stage1_batchnorm5_gamma" [
+    id=58
+    name="resnetv24_stage1_batchnorm5_gamma"
+    type=constant_input
+    label="resnetv24_stage1_batchnorm5_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage1_batchnorm5_beta" [
+    id=59
+    name="resnetv24_stage1_batchnorm5_beta"
+    type=constant_input
+    label="resnetv24_stage1_batchnorm5_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage1_batchnorm5_running_mean" [
+    id=60
+    name="resnetv24_stage1_batchnorm5_running_mean"
+    type=constant_input
+    label="resnetv24_stage1_batchnorm5_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage1_batchnorm5_running_var" [
+    id=61
+    name="resnetv24_stage1_batchnorm5_running_var"
+    type=constant_input
+    label="resnetv24_stage1_batchnorm5_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage1_batchnorm5_fwd" [
+    id=62
+    name="resnetv24_stage1_batchnorm5_fwd"
+    type=BatchNormalization
+    label="{ {resnetv24_stage1_batchnorm5_fwd  | BN} | [[16,64,56,56],[64],[64],[64],[64]] }"
+    inputs="resnetv24_stage1_conv5_fwd;resnetv24_stage1_batchnorm5_gamma;resnetv24_stage1_batchnorm5_beta;resnetv24_stage1_batchnorm5_running_mean;resnetv24_stage1_batchnorm5_running_var"
+    outputs="resnetv24_stage1_batchnorm5_fwd"
+    penwidth=3
+    style=filled
+    color="#c4b983"
+    fontcolor="#000000"
+    fillcolor="#dccf99"
+  ];
+  "resnetv24_stage1_activation5" [
+    id=63
+    name="resnetv24_stage1_activation5"
+    type=Relu
+    label="{ {resnetv24_stage1_activation5  | RELU} | [16,64,56,56] }"
+    inputs="resnetv24_stage1_batchnorm5_fwd"
+    outputs="resnetv24_stage1_activation5"
+    penwidth=3
+    style=filled
+    color="#c5869b"
+    fontcolor="#000000"
+    fillcolor="#d898ad"
+  ];
+  "resnetv24_stage1_conv6_weight" [
+    id=64
+    name="resnetv24_stage1_conv6_weight"
+    type=constant_input
+    label="resnetv24_stage1_conv6_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage1_conv6_fwd" [
+    id=65
+    name="resnetv24_stage1_conv6_fwd"
+    type=Conv
+    label="{ {resnetv24_stage1_conv6_fwd  | CONV} | [16,256,56,56] }"
+    inputs="resnetv24_stage1_activation5;resnetv24_stage1_conv6_weight"
+    outputs="resnetv24_stage1_conv6_fwd"
+    penwidth=3
+    style=filled
+    color="#96c583"
+    fontcolor="#000000"
+    fillcolor="#acdc99"
+  ];
+  "resnetv24_stage1__plus1" [
+    id=66
+    name="resnetv24_stage1__plus1"
+    type=Add
+    label="{ {resnetv24_stage1__plus1  | ADD} | [16,256,56,56] }"
+    inputs="resnetv24_stage1_conv6_fwd;resnetv24_stage1__plus0"
+    outputs="resnetv24_stage1__plus1"
+    penwidth=3
+    style=filled
+    color="#c29382"
+    fontcolor="#000000"
+    fillcolor="#d6a695"
+  ];
+  "resnetv24_stage1_batchnorm6_gamma" [
+    id=67
+    name="resnetv24_stage1_batchnorm6_gamma"
+    type=constant_input
+    label="resnetv24_stage1_batchnorm6_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage1_batchnorm6_beta" [
+    id=68
+    name="resnetv24_stage1_batchnorm6_beta"
+    type=constant_input
+    label="resnetv24_stage1_batchnorm6_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage1_batchnorm6_running_mean" [
+    id=69
+    name="resnetv24_stage1_batchnorm6_running_mean"
+    type=constant_input
+    label="resnetv24_stage1_batchnorm6_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage1_batchnorm6_running_var" [
+    id=70
+    name="resnetv24_stage1_batchnorm6_running_var"
+    type=constant_input
+    label="resnetv24_stage1_batchnorm6_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage1_batchnorm6_fwd" [
+    id=71
+    name="resnetv24_stage1_batchnorm6_fwd"
+    type=BatchNormalization
+    label="{ {resnetv24_stage1_batchnorm6_fwd  | BN} | [[16,256,56,56],[256],[256],[256],[256]] }"
+    inputs="resnetv24_stage1__plus1;resnetv24_stage1_batchnorm6_gamma;resnetv24_stage1_batchnorm6_beta;resnetv24_stage1_batchnorm6_running_mean;resnetv24_stage1_batchnorm6_running_var"
+    outputs="resnetv24_stage1_batchnorm6_fwd"
+    penwidth=3
+    style=filled
+    color="#c4b983"
+    fontcolor="#000000"
+    fillcolor="#dccf99"
+  ];
+  "resnetv24_stage1_activation6" [
+    id=72
+    name="resnetv24_stage1_activation6"
+    type=Relu
+    label="{ {resnetv24_stage1_activation6  | RELU} | [16,256,56,56] }"
+    inputs="resnetv24_stage1_batchnorm6_fwd"
+    outputs="resnetv24_stage1_activation6"
+    penwidth=3
+    style=filled
+    color="#c5869b"
+    fontcolor="#000000"
+    fillcolor="#d898ad"
+  ];
+  "resnetv24_stage1_conv7_weight" [
+    id=73
+    name="resnetv24_stage1_conv7_weight"
+    type=constant_input
+    label="resnetv24_stage1_conv7_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage1_conv7_fwd" [
+    id=74
+    name="resnetv24_stage1_conv7_fwd"
+    type=Conv
+    label="{ {resnetv24_stage1_conv7_fwd  | CONV} | [16,64,56,56] }"
+    inputs="resnetv24_stage1_activation6;resnetv24_stage1_conv7_weight"
+    outputs="resnetv24_stage1_conv7_fwd"
+    penwidth=3
+    style=filled
+    color="#96c583"
+    fontcolor="#000000"
+    fillcolor="#acdc99"
+  ];
+  "resnetv24_stage1_batchnorm7_gamma" [
+    id=75
+    name="resnetv24_stage1_batchnorm7_gamma"
+    type=constant_input
+    label="resnetv24_stage1_batchnorm7_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage1_batchnorm7_beta" [
+    id=76
+    name="resnetv24_stage1_batchnorm7_beta"
+    type=constant_input
+    label="resnetv24_stage1_batchnorm7_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage1_batchnorm7_running_mean" [
+    id=77
+    name="resnetv24_stage1_batchnorm7_running_mean"
+    type=constant_input
+    label="resnetv24_stage1_batchnorm7_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage1_batchnorm7_running_var" [
+    id=78
+    name="resnetv24_stage1_batchnorm7_running_var"
+    type=constant_input
+    label="resnetv24_stage1_batchnorm7_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage1_batchnorm7_fwd" [
+    id=79
+    name="resnetv24_stage1_batchnorm7_fwd"
+    type=BatchNormalization
+    label="{ {resnetv24_stage1_batchnorm7_fwd  | BN} | [[16,64,56,56],[64],[64],[64],[64]] }"
+    inputs="resnetv24_stage1_conv7_fwd;resnetv24_stage1_batchnorm7_gamma;resnetv24_stage1_batchnorm7_beta;resnetv24_stage1_batchnorm7_running_mean;resnetv24_stage1_batchnorm7_running_var"
+    outputs="resnetv24_stage1_batchnorm7_fwd"
+    penwidth=3
+    style=filled
+    color="#c4b983"
+    fontcolor="#000000"
+    fillcolor="#dccf99"
+  ];
+  "resnetv24_stage1_activation7" [
+    id=80
+    name="resnetv24_stage1_activation7"
+    type=Relu
+    label="{ {resnetv24_stage1_activation7  | RELU} | [16,64,56,56] }"
+    inputs="resnetv24_stage1_batchnorm7_fwd"
+    outputs="resnetv24_stage1_activation7"
+    penwidth=3
+    style=filled
+    color="#c5869b"
+    fontcolor="#000000"
+    fillcolor="#d898ad"
+  ];
+  "resnetv24_stage1_conv8_weight" [
+    id=81
+    name="resnetv24_stage1_conv8_weight"
+    type=constant_input
+    label="resnetv24_stage1_conv8_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage1_conv8_fwd" [
+    id=82
+    name="resnetv24_stage1_conv8_fwd"
+    type=Conv
+    label="{ {resnetv24_stage1_conv8_fwd  | CONV} | [16,64,56,56] }"
+    inputs="resnetv24_stage1_activation7;resnetv24_stage1_conv8_weight"
+    outputs="resnetv24_stage1_conv8_fwd"
+    penwidth=3
+    style=filled
+    color="#96c583"
+    fontcolor="#000000"
+    fillcolor="#acdc99"
+  ];
+  "resnetv24_stage1_batchnorm8_gamma" [
+    id=83
+    name="resnetv24_stage1_batchnorm8_gamma"
+    type=constant_input
+    label="resnetv24_stage1_batchnorm8_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage1_batchnorm8_beta" [
+    id=84
+    name="resnetv24_stage1_batchnorm8_beta"
+    type=constant_input
+    label="resnetv24_stage1_batchnorm8_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage1_batchnorm8_running_mean" [
+    id=85
+    name="resnetv24_stage1_batchnorm8_running_mean"
+    type=constant_input
+    label="resnetv24_stage1_batchnorm8_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage1_batchnorm8_running_var" [
+    id=86
+    name="resnetv24_stage1_batchnorm8_running_var"
+    type=constant_input
+    label="resnetv24_stage1_batchnorm8_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage1_batchnorm8_fwd" [
+    id=87
+    name="resnetv24_stage1_batchnorm8_fwd"
+    type=BatchNormalization
+    label="{ {resnetv24_stage1_batchnorm8_fwd  | BN} | [[16,64,56,56],[64],[64],[64],[64]] }"
+    inputs="resnetv24_stage1_conv8_fwd;resnetv24_stage1_batchnorm8_gamma;resnetv24_stage1_batchnorm8_beta;resnetv24_stage1_batchnorm8_running_mean;resnetv24_stage1_batchnorm8_running_var"
+    outputs="resnetv24_stage1_batchnorm8_fwd"
+    penwidth=3
+    style=filled
+    color="#c4b983"
+    fontcolor="#000000"
+    fillcolor="#dccf99"
+  ];
+  "resnetv24_stage1_activation8" [
+    id=88
+    name="resnetv24_stage1_activation8"
+    type=Relu
+    label="{ {resnetv24_stage1_activation8  | RELU} | [16,64,56,56] }"
+    inputs="resnetv24_stage1_batchnorm8_fwd"
+    outputs="resnetv24_stage1_activation8"
+    penwidth=3
+    style=filled
+    color="#c5869b"
+    fontcolor="#000000"
+    fillcolor="#d898ad"
+  ];
+  "resnetv24_stage1_conv9_weight" [
+    id=89
+    name="resnetv24_stage1_conv9_weight"
+    type=constant_input
+    label="resnetv24_stage1_conv9_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage1_conv9_fwd" [
+    id=90
+    name="resnetv24_stage1_conv9_fwd"
+    type=Conv
+    label="{ {resnetv24_stage1_conv9_fwd  | CONV} | [16,256,56,56] }"
+    inputs="resnetv24_stage1_activation8;resnetv24_stage1_conv9_weight"
+    outputs="resnetv24_stage1_conv9_fwd"
+    penwidth=3
+    style=filled
+    color="#96c583"
+    fontcolor="#000000"
+    fillcolor="#acdc99"
+  ];
+  "resnetv24_stage1__plus2" [
+    id=91
+    name="resnetv24_stage1__plus2"
+    type=Add
+    label="{ {resnetv24_stage1__plus2  | ADD} | [16,256,56,56] }"
+    inputs="resnetv24_stage1_conv9_fwd;resnetv24_stage1__plus1"
+    outputs="resnetv24_stage1__plus2"
+    penwidth=3
+    style=filled
+    color="#c29382"
+    fontcolor="#000000"
+    fillcolor="#d6a695"
+  ];
+  "resnetv24_stage2_batchnorm0_gamma" [
+    id=92
+    name="resnetv24_stage2_batchnorm0_gamma"
+    type=constant_input
+    label="resnetv24_stage2_batchnorm0_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage2_batchnorm0_beta" [
+    id=93
+    name="resnetv24_stage2_batchnorm0_beta"
+    type=constant_input
+    label="resnetv24_stage2_batchnorm0_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage2_batchnorm0_running_mean" [
+    id=94
+    name="resnetv24_stage2_batchnorm0_running_mean"
+    type=constant_input
+    label="resnetv24_stage2_batchnorm0_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage2_batchnorm0_running_var" [
+    id=95
+    name="resnetv24_stage2_batchnorm0_running_var"
+    type=constant_input
+    label="resnetv24_stage2_batchnorm0_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage2_batchnorm0_fwd" [
+    id=96
+    name="resnetv24_stage2_batchnorm0_fwd"
+    type=BatchNormalization
+    label="{ {resnetv24_stage2_batchnorm0_fwd  | BN} | [[16,256,56,56],[256],[256],[256],[256]] }"
+    inputs="resnetv24_stage1__plus2;resnetv24_stage2_batchnorm0_gamma;resnetv24_stage2_batchnorm0_beta;resnetv24_stage2_batchnorm0_running_mean;resnetv24_stage2_batchnorm0_running_var"
+    outputs="resnetv24_stage2_batchnorm0_fwd"
+    penwidth=3
+    style=filled
+    color="#c4b983"
+    fontcolor="#000000"
+    fillcolor="#dccf99"
+  ];
+  "resnetv24_stage2_activation0" [
+    id=97
+    name="resnetv24_stage2_activation0"
+    type=Relu
+    label="{ {resnetv24_stage2_activation0  | RELU} | [16,256,56,56] }"
+    inputs="resnetv24_stage2_batchnorm0_fwd"
+    outputs="resnetv24_stage2_activation0"
+    penwidth=3
+    style=filled
+    color="#c5869b"
+    fontcolor="#000000"
+    fillcolor="#d898ad"
+  ];
+  "resnetv24_stage2_conv0_weight" [
+    id=98
+    name="resnetv24_stage2_conv0_weight"
+    type=constant_input
+    label="resnetv24_stage2_conv0_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage2_conv0_fwd" [
+    id=99
+    name="resnetv24_stage2_conv0_fwd"
+    type=Conv
+    label="{ {resnetv24_stage2_conv0_fwd  | CONV} | [16,128,56,56] }"
+    inputs="resnetv24_stage2_activation0;resnetv24_stage2_conv0_weight"
+    outputs="resnetv24_stage2_conv0_fwd"
+    penwidth=3
+    style=filled
+    color="#96c583"
+    fontcolor="#000000"
+    fillcolor="#acdc99"
+  ];
+  "resnetv24_stage2_batchnorm1_gamma" [
+    id=100
+    name="resnetv24_stage2_batchnorm1_gamma"
+    type=constant_input
+    label="resnetv24_stage2_batchnorm1_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage2_batchnorm1_beta" [
+    id=101
+    name="resnetv24_stage2_batchnorm1_beta"
+    type=constant_input
+    label="resnetv24_stage2_batchnorm1_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage2_batchnorm1_running_mean" [
+    id=102
+    name="resnetv24_stage2_batchnorm1_running_mean"
+    type=constant_input
+    label="resnetv24_stage2_batchnorm1_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage2_batchnorm1_running_var" [
+    id=103
+    name="resnetv24_stage2_batchnorm1_running_var"
+    type=constant_input
+    label="resnetv24_stage2_batchnorm1_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage2_batchnorm1_fwd" [
+    id=104
+    name="resnetv24_stage2_batchnorm1_fwd"
+    type=BatchNormalization
+    label="{ {resnetv24_stage2_batchnorm1_fwd  | BN} | [[16,128,56,56],[128],[128],[128],[128]] }"
+    inputs="resnetv24_stage2_conv0_fwd;resnetv24_stage2_batchnorm1_gamma;resnetv24_stage2_batchnorm1_beta;resnetv24_stage2_batchnorm1_running_mean;resnetv24_stage2_batchnorm1_running_var"
+    outputs="resnetv24_stage2_batchnorm1_fwd"
+    penwidth=3
+    style=filled
+    color="#c4b983"
+    fontcolor="#000000"
+    fillcolor="#dccf99"
+  ];
+  "resnetv24_stage2_activation1" [
+    id=105
+    name="resnetv24_stage2_activation1"
+    type=Relu
+    label="{ {resnetv24_stage2_activation1  | RELU} | [16,128,56,56] }"
+    inputs="resnetv24_stage2_batchnorm1_fwd"
+    outputs="resnetv24_stage2_activation1"
+    penwidth=3
+    style=filled
+    color="#c5869b"
+    fontcolor="#000000"
+    fillcolor="#d898ad"
+  ];
+  "resnetv24_stage2_conv1_weight" [
+    id=106
+    name="resnetv24_stage2_conv1_weight"
+    type=constant_input
+    label="resnetv24_stage2_conv1_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage2_conv1_fwd" [
+    id=107
+    name="resnetv24_stage2_conv1_fwd"
+    type=Conv
+    label="{ {resnetv24_stage2_conv1_fwd  | CONV} | [16,128,28,28] }"
+    inputs="resnetv24_stage2_activation1;resnetv24_stage2_conv1_weight"
+    outputs="resnetv24_stage2_conv1_fwd"
+    penwidth=3
+    style=filled
+    color="#96c583"
+    fontcolor="#000000"
+    fillcolor="#acdc99"
+  ];
+  "resnetv24_stage2_batchnorm2_gamma" [
+    id=108
+    name="resnetv24_stage2_batchnorm2_gamma"
+    type=constant_input
+    label="resnetv24_stage2_batchnorm2_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage2_batchnorm2_beta" [
+    id=109
+    name="resnetv24_stage2_batchnorm2_beta"
+    type=constant_input
+    label="resnetv24_stage2_batchnorm2_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage2_batchnorm2_running_mean" [
+    id=110
+    name="resnetv24_stage2_batchnorm2_running_mean"
+    type=constant_input
+    label="resnetv24_stage2_batchnorm2_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage2_batchnorm2_running_var" [
+    id=111
+    name="resnetv24_stage2_batchnorm2_running_var"
+    type=constant_input
+    label="resnetv24_stage2_batchnorm2_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage2_batchnorm2_fwd" [
+    id=112
+    name="resnetv24_stage2_batchnorm2_fwd"
+    type=BatchNormalization
+    label="{ {resnetv24_stage2_batchnorm2_fwd  | BN} | [[16,128,28,28],[128],[128],[128],[128]] }"
+    inputs="resnetv24_stage2_conv1_fwd;resnetv24_stage2_batchnorm2_gamma;resnetv24_stage2_batchnorm2_beta;resnetv24_stage2_batchnorm2_running_mean;resnetv24_stage2_batchnorm2_running_var"
+    outputs="resnetv24_stage2_batchnorm2_fwd"
+    penwidth=3
+    style=filled
+    color="#c4b983"
+    fontcolor="#000000"
+    fillcolor="#dccf99"
+  ];
+  "resnetv24_stage2_activation2" [
+    id=113
+    name="resnetv24_stage2_activation2"
+    type=Relu
+    label="{ {resnetv24_stage2_activation2  | RELU} | [16,128,28,28] }"
+    inputs="resnetv24_stage2_batchnorm2_fwd"
+    outputs="resnetv24_stage2_activation2"
+    penwidth=3
+    style=filled
+    color="#c5869b"
+    fontcolor="#000000"
+    fillcolor="#d898ad"
+  ];
+  "resnetv24_stage2_conv2_weight" [
+    id=114
+    name="resnetv24_stage2_conv2_weight"
+    type=constant_input
+    label="resnetv24_stage2_conv2_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage2_conv2_fwd" [
+    id=115
+    name="resnetv24_stage2_conv2_fwd"
+    type=Conv
+    label="{ {resnetv24_stage2_conv2_fwd  | CONV} | [16,512,28,28] }"
+    inputs="resnetv24_stage2_activation2;resnetv24_stage2_conv2_weight"
+    outputs="resnetv24_stage2_conv2_fwd"
+    penwidth=3
+    style=filled
+    color="#96c583"
+    fontcolor="#000000"
+    fillcolor="#acdc99"
+  ];
+  "resnetv24_stage2_conv3_weight" [
+    id=116
+    name="resnetv24_stage2_conv3_weight"
+    type=constant_input
+    label="resnetv24_stage2_conv3_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage2_conv3_fwd" [
+    id=117
+    name="resnetv24_stage2_conv3_fwd"
+    type=Conv
+    label="{ {resnetv24_stage2_conv3_fwd  | CONV} | [16,512,28,28] }"
+    inputs="resnetv24_stage2_activation0;resnetv24_stage2_conv3_weight"
+    outputs="resnetv24_stage2_conv3_fwd"
+    penwidth=3
+    style=filled
+    color="#96c583"
+    fontcolor="#000000"
+    fillcolor="#acdc99"
+  ];
+  "resnetv24_stage2__plus0" [
+    id=118
+    name="resnetv24_stage2__plus0"
+    type=Add
+    label="{ {resnetv24_stage2__plus0  | ADD} | [16,512,28,28] }"
+    inputs="resnetv24_stage2_conv2_fwd;resnetv24_stage2_conv3_fwd"
+    outputs="resnetv24_stage2__plus0"
+    penwidth=3
+    style=filled
+    color="#c29382"
+    fontcolor="#000000"
+    fillcolor="#d6a695"
+  ];
+  "resnetv24_stage2_batchnorm3_gamma" [
+    id=119
+    name="resnetv24_stage2_batchnorm3_gamma"
+    type=constant_input
+    label="resnetv24_stage2_batchnorm3_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage2_batchnorm3_beta" [
+    id=120
+    name="resnetv24_stage2_batchnorm3_beta"
+    type=constant_input
+    label="resnetv24_stage2_batchnorm3_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage2_batchnorm3_running_mean" [
+    id=121
+    name="resnetv24_stage2_batchnorm3_running_mean"
+    type=constant_input
+    label="resnetv24_stage2_batchnorm3_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage2_batchnorm3_running_var" [
+    id=122
+    name="resnetv24_stage2_batchnorm3_running_var"
+    type=constant_input
+    label="resnetv24_stage2_batchnorm3_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage2_batchnorm3_fwd" [
+    id=123
+    name="resnetv24_stage2_batchnorm3_fwd"
+    type=BatchNormalization
+    label="{ {resnetv24_stage2_batchnorm3_fwd  | BN} | [[16,512,28,28],[512],[512],[512],[512]] }"
+    inputs="resnetv24_stage2__plus0;resnetv24_stage2_batchnorm3_gamma;resnetv24_stage2_batchnorm3_beta;resnetv24_stage2_batchnorm3_running_mean;resnetv24_stage2_batchnorm3_running_var"
+    outputs="resnetv24_stage2_batchnorm3_fwd"
+    penwidth=3
+    style=filled
+    color="#c4b983"
+    fontcolor="#000000"
+    fillcolor="#dccf99"
+  ];
+  "resnetv24_stage2_activation3" [
+    id=124
+    name="resnetv24_stage2_activation3"
+    type=Relu
+    label="{ {resnetv24_stage2_activation3  | RELU} | [16,512,28,28] }"
+    inputs="resnetv24_stage2_batchnorm3_fwd"
+    outputs="resnetv24_stage2_activation3"
+    penwidth=3
+    style=filled
+    color="#c5869b"
+    fontcolor="#000000"
+    fillcolor="#d898ad"
+  ];
+  "resnetv24_stage2_conv4_weight" [
+    id=125
+    name="resnetv24_stage2_conv4_weight"
+    type=constant_input
+    label="resnetv24_stage2_conv4_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage2_conv4_fwd" [
+    id=126
+    name="resnetv24_stage2_conv4_fwd"
+    type=Conv
+    label="{ {resnetv24_stage2_conv4_fwd  | CONV} | [16,128,28,28] }"
+    inputs="resnetv24_stage2_activation3;resnetv24_stage2_conv4_weight"
+    outputs="resnetv24_stage2_conv4_fwd"
+    penwidth=3
+    style=filled
+    color="#96c583"
+    fontcolor="#000000"
+    fillcolor="#acdc99"
+  ];
+  "resnetv24_stage2_batchnorm4_gamma" [
+    id=127
+    name="resnetv24_stage2_batchnorm4_gamma"
+    type=constant_input
+    label="resnetv24_stage2_batchnorm4_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage2_batchnorm4_beta" [
+    id=128
+    name="resnetv24_stage2_batchnorm4_beta"
+    type=constant_input
+    label="resnetv24_stage2_batchnorm4_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage2_batchnorm4_running_mean" [
+    id=129
+    name="resnetv24_stage2_batchnorm4_running_mean"
+    type=constant_input
+    label="resnetv24_stage2_batchnorm4_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage2_batchnorm4_running_var" [
+    id=130
+    name="resnetv24_stage2_batchnorm4_running_var"
+    type=constant_input
+    label="resnetv24_stage2_batchnorm4_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage2_batchnorm4_fwd" [
+    id=131
+    name="resnetv24_stage2_batchnorm4_fwd"
+    type=BatchNormalization
+    label="{ {resnetv24_stage2_batchnorm4_fwd  | BN} | [[16,128,28,28],[128],[128],[128],[128]] }"
+    inputs="resnetv24_stage2_conv4_fwd;resnetv24_stage2_batchnorm4_gamma;resnetv24_stage2_batchnorm4_beta;resnetv24_stage2_batchnorm4_running_mean;resnetv24_stage2_batchnorm4_running_var"
+    outputs="resnetv24_stage2_batchnorm4_fwd"
+    penwidth=3
+    style=filled
+    color="#c4b983"
+    fontcolor="#000000"
+    fillcolor="#dccf99"
+  ];
+  "resnetv24_stage2_activation4" [
+    id=132
+    name="resnetv24_stage2_activation4"
+    type=Relu
+    label="{ {resnetv24_stage2_activation4  | RELU} | [16,128,28,28] }"
+    inputs="resnetv24_stage2_batchnorm4_fwd"
+    outputs="resnetv24_stage2_activation4"
+    penwidth=3
+    style=filled
+    color="#c5869b"
+    fontcolor="#000000"
+    fillcolor="#d898ad"
+  ];
+  "resnetv24_stage2_conv5_weight" [
+    id=133
+    name="resnetv24_stage2_conv5_weight"
+    type=constant_input
+    label="resnetv24_stage2_conv5_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage2_conv5_fwd" [
+    id=134
+    name="resnetv24_stage2_conv5_fwd"
+    type=Conv
+    label="{ {resnetv24_stage2_conv5_fwd  | CONV} | [16,128,28,28] }"
+    inputs="resnetv24_stage2_activation4;resnetv24_stage2_conv5_weight"
+    outputs="resnetv24_stage2_conv5_fwd"
+    penwidth=3
+    style=filled
+    color="#96c583"
+    fontcolor="#000000"
+    fillcolor="#acdc99"
+  ];
+  "resnetv24_stage2_batchnorm5_gamma" [
+    id=135
+    name="resnetv24_stage2_batchnorm5_gamma"
+    type=constant_input
+    label="resnetv24_stage2_batchnorm5_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage2_batchnorm5_beta" [
+    id=136
+    name="resnetv24_stage2_batchnorm5_beta"
+    type=constant_input
+    label="resnetv24_stage2_batchnorm5_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage2_batchnorm5_running_mean" [
+    id=137
+    name="resnetv24_stage2_batchnorm5_running_mean"
+    type=constant_input
+    label="resnetv24_stage2_batchnorm5_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage2_batchnorm5_running_var" [
+    id=138
+    name="resnetv24_stage2_batchnorm5_running_var"
+    type=constant_input
+    label="resnetv24_stage2_batchnorm5_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage2_batchnorm5_fwd" [
+    id=139
+    name="resnetv24_stage2_batchnorm5_fwd"
+    type=BatchNormalization
+    label="{ {resnetv24_stage2_batchnorm5_fwd  | BN} | [[16,128,28,28],[128],[128],[128],[128]] }"
+    inputs="resnetv24_stage2_conv5_fwd;resnetv24_stage2_batchnorm5_gamma;resnetv24_stage2_batchnorm5_beta;resnetv24_stage2_batchnorm5_running_mean;resnetv24_stage2_batchnorm5_running_var"
+    outputs="resnetv24_stage2_batchnorm5_fwd"
+    penwidth=3
+    style=filled
+    color="#c4b983"
+    fontcolor="#000000"
+    fillcolor="#dccf99"
+  ];
+  "resnetv24_stage2_activation5" [
+    id=140
+    name="resnetv24_stage2_activation5"
+    type=Relu
+    label="{ {resnetv24_stage2_activation5  | RELU} | [16,128,28,28] }"
+    inputs="resnetv24_stage2_batchnorm5_fwd"
+    outputs="resnetv24_stage2_activation5"
+    penwidth=3
+    style=filled
+    color="#c5869b"
+    fontcolor="#000000"
+    fillcolor="#d898ad"
+  ];
+  "resnetv24_stage2_conv6_weight" [
+    id=141
+    name="resnetv24_stage2_conv6_weight"
+    type=constant_input
+    label="resnetv24_stage2_conv6_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage2_conv6_fwd" [
+    id=142
+    name="resnetv24_stage2_conv6_fwd"
+    type=Conv
+    label="{ {resnetv24_stage2_conv6_fwd  | CONV} | [16,512,28,28] }"
+    inputs="resnetv24_stage2_activation5;resnetv24_stage2_conv6_weight"
+    outputs="resnetv24_stage2_conv6_fwd"
+    penwidth=3
+    style=filled
+    color="#96c583"
+    fontcolor="#000000"
+    fillcolor="#acdc99"
+  ];
+  "resnetv24_stage2__plus1" [
+    id=143
+    name="resnetv24_stage2__plus1"
+    type=Add
+    label="{ {resnetv24_stage2__plus1  | ADD} | [16,512,28,28] }"
+    inputs="resnetv24_stage2_conv6_fwd;resnetv24_stage2__plus0"
+    outputs="resnetv24_stage2__plus1"
+    penwidth=3
+    style=filled
+    color="#c29382"
+    fontcolor="#000000"
+    fillcolor="#d6a695"
+  ];
+  "resnetv24_stage2_batchnorm6_gamma" [
+    id=144
+    name="resnetv24_stage2_batchnorm6_gamma"
+    type=constant_input
+    label="resnetv24_stage2_batchnorm6_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage2_batchnorm6_beta" [
+    id=145
+    name="resnetv24_stage2_batchnorm6_beta"
+    type=constant_input
+    label="resnetv24_stage2_batchnorm6_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage2_batchnorm6_running_mean" [
+    id=146
+    name="resnetv24_stage2_batchnorm6_running_mean"
+    type=constant_input
+    label="resnetv24_stage2_batchnorm6_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage2_batchnorm6_running_var" [
+    id=147
+    name="resnetv24_stage2_batchnorm6_running_var"
+    type=constant_input
+    label="resnetv24_stage2_batchnorm6_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage2_batchnorm6_fwd" [
+    id=148
+    name="resnetv24_stage2_batchnorm6_fwd"
+    type=BatchNormalization
+    label="{ {resnetv24_stage2_batchnorm6_fwd  | BN} | [[16,512,28,28],[512],[512],[512],[512]] }"
+    inputs="resnetv24_stage2__plus1;resnetv24_stage2_batchnorm6_gamma;resnetv24_stage2_batchnorm6_beta;resnetv24_stage2_batchnorm6_running_mean;resnetv24_stage2_batchnorm6_running_var"
+    outputs="resnetv24_stage2_batchnorm6_fwd"
+    penwidth=3
+    style=filled
+    color="#c4b983"
+    fontcolor="#000000"
+    fillcolor="#dccf99"
+  ];
+  "resnetv24_stage2_activation6" [
+    id=149
+    name="resnetv24_stage2_activation6"
+    type=Relu
+    label="{ {resnetv24_stage2_activation6  | RELU} | [16,512,28,28] }"
+    inputs="resnetv24_stage2_batchnorm6_fwd"
+    outputs="resnetv24_stage2_activation6"
+    penwidth=3
+    style=filled
+    color="#c5869b"
+    fontcolor="#000000"
+    fillcolor="#d898ad"
+  ];
+  "resnetv24_stage2_conv7_weight" [
+    id=150
+    name="resnetv24_stage2_conv7_weight"
+    type=constant_input
+    label="resnetv24_stage2_conv7_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage2_conv7_fwd" [
+    id=151
+    name="resnetv24_stage2_conv7_fwd"
+    type=Conv
+    label="{ {resnetv24_stage2_conv7_fwd  | CONV} | [16,128,28,28] }"
+    inputs="resnetv24_stage2_activation6;resnetv24_stage2_conv7_weight"
+    outputs="resnetv24_stage2_conv7_fwd"
+    penwidth=3
+    style=filled
+    color="#96c583"
+    fontcolor="#000000"
+    fillcolor="#acdc99"
+  ];
+  "resnetv24_stage2_batchnorm7_gamma" [
+    id=152
+    name="resnetv24_stage2_batchnorm7_gamma"
+    type=constant_input
+    label="resnetv24_stage2_batchnorm7_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage2_batchnorm7_beta" [
+    id=153
+    name="resnetv24_stage2_batchnorm7_beta"
+    type=constant_input
+    label="resnetv24_stage2_batchnorm7_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage2_batchnorm7_running_mean" [
+    id=154
+    name="resnetv24_stage2_batchnorm7_running_mean"
+    type=constant_input
+    label="resnetv24_stage2_batchnorm7_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage2_batchnorm7_running_var" [
+    id=155
+    name="resnetv24_stage2_batchnorm7_running_var"
+    type=constant_input
+    label="resnetv24_stage2_batchnorm7_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage2_batchnorm7_fwd" [
+    id=156
+    name="resnetv24_stage2_batchnorm7_fwd"
+    type=BatchNormalization
+    label="{ {resnetv24_stage2_batchnorm7_fwd  | BN} | [[16,128,28,28],[128],[128],[128],[128]] }"
+    inputs="resnetv24_stage2_conv7_fwd;resnetv24_stage2_batchnorm7_gamma;resnetv24_stage2_batchnorm7_beta;resnetv24_stage2_batchnorm7_running_mean;resnetv24_stage2_batchnorm7_running_var"
+    outputs="resnetv24_stage2_batchnorm7_fwd"
+    penwidth=3
+    style=filled
+    color="#c4b983"
+    fontcolor="#000000"
+    fillcolor="#dccf99"
+  ];
+  "resnetv24_stage2_activation7" [
+    id=157
+    name="resnetv24_stage2_activation7"
+    type=Relu
+    label="{ {resnetv24_stage2_activation7  | RELU} | [16,128,28,28] }"
+    inputs="resnetv24_stage2_batchnorm7_fwd"
+    outputs="resnetv24_stage2_activation7"
+    penwidth=3
+    style=filled
+    color="#c5869b"
+    fontcolor="#000000"
+    fillcolor="#d898ad"
+  ];
+  "resnetv24_stage2_conv8_weight" [
+    id=158
+    name="resnetv24_stage2_conv8_weight"
+    type=constant_input
+    label="resnetv24_stage2_conv8_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage2_conv8_fwd" [
+    id=159
+    name="resnetv24_stage2_conv8_fwd"
+    type=Conv
+    label="{ {resnetv24_stage2_conv8_fwd  | CONV} | [16,128,28,28] }"
+    inputs="resnetv24_stage2_activation7;resnetv24_stage2_conv8_weight"
+    outputs="resnetv24_stage2_conv8_fwd"
+    penwidth=3
+    style=filled
+    color="#96c583"
+    fontcolor="#000000"
+    fillcolor="#acdc99"
+  ];
+  "resnetv24_stage2_batchnorm8_gamma" [
+    id=160
+    name="resnetv24_stage2_batchnorm8_gamma"
+    type=constant_input
+    label="resnetv24_stage2_batchnorm8_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage2_batchnorm8_beta" [
+    id=161
+    name="resnetv24_stage2_batchnorm8_beta"
+    type=constant_input
+    label="resnetv24_stage2_batchnorm8_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage2_batchnorm8_running_mean" [
+    id=162
+    name="resnetv24_stage2_batchnorm8_running_mean"
+    type=constant_input
+    label="resnetv24_stage2_batchnorm8_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage2_batchnorm8_running_var" [
+    id=163
+    name="resnetv24_stage2_batchnorm8_running_var"
+    type=constant_input
+    label="resnetv24_stage2_batchnorm8_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage2_batchnorm8_fwd" [
+    id=164
+    name="resnetv24_stage2_batchnorm8_fwd"
+    type=BatchNormalization
+    label="{ {resnetv24_stage2_batchnorm8_fwd  | BN} | [[16,128,28,28],[128],[128],[128],[128]] }"
+    inputs="resnetv24_stage2_conv8_fwd;resnetv24_stage2_batchnorm8_gamma;resnetv24_stage2_batchnorm8_beta;resnetv24_stage2_batchnorm8_running_mean;resnetv24_stage2_batchnorm8_running_var"
+    outputs="resnetv24_stage2_batchnorm8_fwd"
+    penwidth=3
+    style=filled
+    color="#c4b983"
+    fontcolor="#000000"
+    fillcolor="#dccf99"
+  ];
+  "resnetv24_stage2_activation8" [
+    id=165
+    name="resnetv24_stage2_activation8"
+    type=Relu
+    label="{ {resnetv24_stage2_activation8  | RELU} | [16,128,28,28] }"
+    inputs="resnetv24_stage2_batchnorm8_fwd"
+    outputs="resnetv24_stage2_activation8"
+    penwidth=3
+    style=filled
+    color="#c5869b"
+    fontcolor="#000000"
+    fillcolor="#d898ad"
+  ];
+  "resnetv24_stage2_conv9_weight" [
+    id=166
+    name="resnetv24_stage2_conv9_weight"
+    type=constant_input
+    label="resnetv24_stage2_conv9_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage2_conv9_fwd" [
+    id=167
+    name="resnetv24_stage2_conv9_fwd"
+    type=Conv
+    label="{ {resnetv24_stage2_conv9_fwd  | CONV} | [16,512,28,28] }"
+    inputs="resnetv24_stage2_activation8;resnetv24_stage2_conv9_weight"
+    outputs="resnetv24_stage2_conv9_fwd"
+    penwidth=3
+    style=filled
+    color="#96c583"
+    fontcolor="#000000"
+    fillcolor="#acdc99"
+  ];
+  "resnetv24_stage2__plus2" [
+    id=168
+    name="resnetv24_stage2__plus2"
+    type=Add
+    label="{ {resnetv24_stage2__plus2  | ADD} | [16,512,28,28] }"
+    inputs="resnetv24_stage2_conv9_fwd;resnetv24_stage2__plus1"
+    outputs="resnetv24_stage2__plus2"
+    penwidth=3
+    style=filled
+    color="#c29382"
+    fontcolor="#000000"
+    fillcolor="#d6a695"
+  ];
+  "resnetv24_stage2_batchnorm9_gamma" [
+    id=169
+    name="resnetv24_stage2_batchnorm9_gamma"
+    type=constant_input
+    label="resnetv24_stage2_batchnorm9_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage2_batchnorm9_beta" [
+    id=170
+    name="resnetv24_stage2_batchnorm9_beta"
+    type=constant_input
+    label="resnetv24_stage2_batchnorm9_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage2_batchnorm9_running_mean" [
+    id=171
+    name="resnetv24_stage2_batchnorm9_running_mean"
+    type=constant_input
+    label="resnetv24_stage2_batchnorm9_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage2_batchnorm9_running_var" [
+    id=172
+    name="resnetv24_stage2_batchnorm9_running_var"
+    type=constant_input
+    label="resnetv24_stage2_batchnorm9_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage2_batchnorm9_fwd" [
+    id=173
+    name="resnetv24_stage2_batchnorm9_fwd"
+    type=BatchNormalization
+    label="{ {resnetv24_stage2_batchnorm9_fwd  | BN} | [[16,512,28,28],[512],[512],[512],[512]] }"
+    inputs="resnetv24_stage2__plus2;resnetv24_stage2_batchnorm9_gamma;resnetv24_stage2_batchnorm9_beta;resnetv24_stage2_batchnorm9_running_mean;resnetv24_stage2_batchnorm9_running_var"
+    outputs="resnetv24_stage2_batchnorm9_fwd"
+    penwidth=3
+    style=filled
+    color="#c4b983"
+    fontcolor="#000000"
+    fillcolor="#dccf99"
+  ];
+  "resnetv24_stage2_activation9" [
+    id=174
+    name="resnetv24_stage2_activation9"
+    type=Relu
+    label="{ {resnetv24_stage2_activation9  | RELU} | [16,512,28,28] }"
+    inputs="resnetv24_stage2_batchnorm9_fwd"
+    outputs="resnetv24_stage2_activation9"
+    penwidth=3
+    style=filled
+    color="#c5869b"
+    fontcolor="#000000"
+    fillcolor="#d898ad"
+  ];
+  "resnetv24_stage2_conv10_weight" [
+    id=175
+    name="resnetv24_stage2_conv10_weight"
+    type=constant_input
+    label="resnetv24_stage2_conv10_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage2_conv10_fwd" [
+    id=176
+    name="resnetv24_stage2_conv10_fwd"
+    type=Conv
+    label="{ {resnetv24_stage2_conv10_fwd  | CONV} | [16,128,28,28] }"
+    inputs="resnetv24_stage2_activation9;resnetv24_stage2_conv10_weight"
+    outputs="resnetv24_stage2_conv10_fwd"
+    penwidth=3
+    style=filled
+    color="#96c583"
+    fontcolor="#000000"
+    fillcolor="#acdc99"
+  ];
+  "resnetv24_stage2_batchnorm10_gamma" [
+    id=177
+    name="resnetv24_stage2_batchnorm10_gamma"
+    type=constant_input
+    label="resnetv24_stage2_batchnorm10_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage2_batchnorm10_beta" [
+    id=178
+    name="resnetv24_stage2_batchnorm10_beta"
+    type=constant_input
+    label="resnetv24_stage2_batchnorm10_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage2_batchnorm10_running_mean" [
+    id=179
+    name="resnetv24_stage2_batchnorm10_running_mean"
+    type=constant_input
+    label="resnetv24_stage2_batchnorm10_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage2_batchnorm10_running_var" [
+    id=180
+    name="resnetv24_stage2_batchnorm10_running_var"
+    type=constant_input
+    label="resnetv24_stage2_batchnorm10_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage2_batchnorm10_fwd" [
+    id=181
+    name="resnetv24_stage2_batchnorm10_fwd"
+    type=BatchNormalization
+    label="{ {resnetv24_stage2_batchnorm10_fwd  | BN} | [[16,128,28,28],[128],[128],[128],[128]] }"
+    inputs="resnetv24_stage2_conv10_fwd;resnetv24_stage2_batchnorm10_gamma;resnetv24_stage2_batchnorm10_beta;resnetv24_stage2_batchnorm10_running_mean;resnetv24_stage2_batchnorm10_running_var"
+    outputs="resnetv24_stage2_batchnorm10_fwd"
+    penwidth=3
+    style=filled
+    color="#c4b983"
+    fontcolor="#000000"
+    fillcolor="#dccf99"
+  ];
+  "resnetv24_stage2_activation10" [
+    id=182
+    name="resnetv24_stage2_activation10"
+    type=Relu
+    label="{ {resnetv24_stage2_activation10  | RELU} | [16,128,28,28] }"
+    inputs="resnetv24_stage2_batchnorm10_fwd"
+    outputs="resnetv24_stage2_activation10"
+    penwidth=3
+    style=filled
+    color="#c5869b"
+    fontcolor="#000000"
+    fillcolor="#d898ad"
+  ];
+  "resnetv24_stage2_conv11_weight" [
+    id=183
+    name="resnetv24_stage2_conv11_weight"
+    type=constant_input
+    label="resnetv24_stage2_conv11_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage2_conv11_fwd" [
+    id=184
+    name="resnetv24_stage2_conv11_fwd"
+    type=Conv
+    label="{ {resnetv24_stage2_conv11_fwd  | CONV} | [16,128,28,28] }"
+    inputs="resnetv24_stage2_activation10;resnetv24_stage2_conv11_weight"
+    outputs="resnetv24_stage2_conv11_fwd"
+    penwidth=3
+    style=filled
+    color="#96c583"
+    fontcolor="#000000"
+    fillcolor="#acdc99"
+  ];
+  "resnetv24_stage2_batchnorm11_gamma" [
+    id=185
+    name="resnetv24_stage2_batchnorm11_gamma"
+    type=constant_input
+    label="resnetv24_stage2_batchnorm11_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage2_batchnorm11_beta" [
+    id=186
+    name="resnetv24_stage2_batchnorm11_beta"
+    type=constant_input
+    label="resnetv24_stage2_batchnorm11_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage2_batchnorm11_running_mean" [
+    id=187
+    name="resnetv24_stage2_batchnorm11_running_mean"
+    type=constant_input
+    label="resnetv24_stage2_batchnorm11_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage2_batchnorm11_running_var" [
+    id=188
+    name="resnetv24_stage2_batchnorm11_running_var"
+    type=constant_input
+    label="resnetv24_stage2_batchnorm11_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage2_batchnorm11_fwd" [
+    id=189
+    name="resnetv24_stage2_batchnorm11_fwd"
+    type=BatchNormalization
+    label="{ {resnetv24_stage2_batchnorm11_fwd  | BN} | [[16,128,28,28],[128],[128],[128],[128]] }"
+    inputs="resnetv24_stage2_conv11_fwd;resnetv24_stage2_batchnorm11_gamma;resnetv24_stage2_batchnorm11_beta;resnetv24_stage2_batchnorm11_running_mean;resnetv24_stage2_batchnorm11_running_var"
+    outputs="resnetv24_stage2_batchnorm11_fwd"
+    penwidth=3
+    style=filled
+    color="#c4b983"
+    fontcolor="#000000"
+    fillcolor="#dccf99"
+  ];
+  "resnetv24_stage2_activation11" [
+    id=190
+    name="resnetv24_stage2_activation11"
+    type=Relu
+    label="{ {resnetv24_stage2_activation11  | RELU} | [16,128,28,28] }"
+    inputs="resnetv24_stage2_batchnorm11_fwd"
+    outputs="resnetv24_stage2_activation11"
+    penwidth=3
+    style=filled
+    color="#c5869b"
+    fontcolor="#000000"
+    fillcolor="#d898ad"
+  ];
+  "resnetv24_stage2_conv12_weight" [
+    id=191
+    name="resnetv24_stage2_conv12_weight"
+    type=constant_input
+    label="resnetv24_stage2_conv12_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage2_conv12_fwd" [
+    id=192
+    name="resnetv24_stage2_conv12_fwd"
+    type=Conv
+    label="{ {resnetv24_stage2_conv12_fwd  | CONV} | [16,512,28,28] }"
+    inputs="resnetv24_stage2_activation11;resnetv24_stage2_conv12_weight"
+    outputs="resnetv24_stage2_conv12_fwd"
+    penwidth=3
+    style=filled
+    color="#96c583"
+    fontcolor="#000000"
+    fillcolor="#acdc99"
+  ];
+  "resnetv24_stage2__plus3" [
+    id=193
+    name="resnetv24_stage2__plus3"
+    type=Add
+    label="{ {resnetv24_stage2__plus3  | ADD} | [16,512,28,28] }"
+    inputs="resnetv24_stage2_conv12_fwd;resnetv24_stage2__plus2"
+    outputs="resnetv24_stage2__plus3"
+    penwidth=3
+    style=filled
+    color="#c29382"
+    fontcolor="#000000"
+    fillcolor="#d6a695"
+  ];
+  "resnetv24_stage3_batchnorm0_gamma" [
+    id=194
+    name="resnetv24_stage3_batchnorm0_gamma"
+    type=constant_input
+    label="resnetv24_stage3_batchnorm0_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_batchnorm0_beta" [
+    id=195
+    name="resnetv24_stage3_batchnorm0_beta"
+    type=constant_input
+    label="resnetv24_stage3_batchnorm0_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_batchnorm0_running_mean" [
+    id=196
+    name="resnetv24_stage3_batchnorm0_running_mean"
+    type=constant_input
+    label="resnetv24_stage3_batchnorm0_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_batchnorm0_running_var" [
+    id=197
+    name="resnetv24_stage3_batchnorm0_running_var"
+    type=constant_input
+    label="resnetv24_stage3_batchnorm0_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_batchnorm0_fwd" [
+    id=198
+    name="resnetv24_stage3_batchnorm0_fwd"
+    type=BatchNormalization
+    label="{ {resnetv24_stage3_batchnorm0_fwd  | BN} | [[16,512,28,28],[512],[512],[512],[512]] }"
+    inputs="resnetv24_stage2__plus3;resnetv24_stage3_batchnorm0_gamma;resnetv24_stage3_batchnorm0_beta;resnetv24_stage3_batchnorm0_running_mean;resnetv24_stage3_batchnorm0_running_var"
+    outputs="resnetv24_stage3_batchnorm0_fwd"
+    penwidth=3
+    style=filled
+    color="#c4b983"
+    fontcolor="#000000"
+    fillcolor="#dccf99"
+  ];
+  "resnetv24_stage3_activation0" [
+    id=199
+    name="resnetv24_stage3_activation0"
+    type=Relu
+    label="{ {resnetv24_stage3_activation0  | RELU} | [16,512,28,28] }"
+    inputs="resnetv24_stage3_batchnorm0_fwd"
+    outputs="resnetv24_stage3_activation0"
+    penwidth=3
+    style=filled
+    color="#c5869b"
+    fontcolor="#000000"
+    fillcolor="#d898ad"
+  ];
+  "resnetv24_stage3_conv0_weight" [
+    id=200
+    name="resnetv24_stage3_conv0_weight"
+    type=constant_input
+    label="resnetv24_stage3_conv0_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_conv0_fwd" [
+    id=201
+    name="resnetv24_stage3_conv0_fwd"
+    type=Conv
+    label="{ {resnetv24_stage3_conv0_fwd  | CONV} | [16,256,28,28] }"
+    inputs="resnetv24_stage3_activation0;resnetv24_stage3_conv0_weight"
+    outputs="resnetv24_stage3_conv0_fwd"
+    penwidth=3
+    style=filled
+    color="#96c583"
+    fontcolor="#000000"
+    fillcolor="#acdc99"
+  ];
+  "resnetv24_stage3_batchnorm1_gamma" [
+    id=202
+    name="resnetv24_stage3_batchnorm1_gamma"
+    type=constant_input
+    label="resnetv24_stage3_batchnorm1_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_batchnorm1_beta" [
+    id=203
+    name="resnetv24_stage3_batchnorm1_beta"
+    type=constant_input
+    label="resnetv24_stage3_batchnorm1_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_batchnorm1_running_mean" [
+    id=204
+    name="resnetv24_stage3_batchnorm1_running_mean"
+    type=constant_input
+    label="resnetv24_stage3_batchnorm1_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_batchnorm1_running_var" [
+    id=205
+    name="resnetv24_stage3_batchnorm1_running_var"
+    type=constant_input
+    label="resnetv24_stage3_batchnorm1_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_batchnorm1_fwd" [
+    id=206
+    name="resnetv24_stage3_batchnorm1_fwd"
+    type=BatchNormalization
+    label="{ {resnetv24_stage3_batchnorm1_fwd  | BN} | [[16,256,28,28],[256],[256],[256],[256]] }"
+    inputs="resnetv24_stage3_conv0_fwd;resnetv24_stage3_batchnorm1_gamma;resnetv24_stage3_batchnorm1_beta;resnetv24_stage3_batchnorm1_running_mean;resnetv24_stage3_batchnorm1_running_var"
+    outputs="resnetv24_stage3_batchnorm1_fwd"
+    penwidth=3
+    style=filled
+    color="#c4b983"
+    fontcolor="#000000"
+    fillcolor="#dccf99"
+  ];
+  "resnetv24_stage3_activation1" [
+    id=207
+    name="resnetv24_stage3_activation1"
+    type=Relu
+    label="{ {resnetv24_stage3_activation1  | RELU} | [16,256,28,28] }"
+    inputs="resnetv24_stage3_batchnorm1_fwd"
+    outputs="resnetv24_stage3_activation1"
+    penwidth=3
+    style=filled
+    color="#c5869b"
+    fontcolor="#000000"
+    fillcolor="#d898ad"
+  ];
+  "resnetv24_stage3_conv1_weight" [
+    id=208
+    name="resnetv24_stage3_conv1_weight"
+    type=constant_input
+    label="resnetv24_stage3_conv1_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_conv1_fwd" [
+    id=209
+    name="resnetv24_stage3_conv1_fwd"
+    type=Conv
+    label="{ {resnetv24_stage3_conv1_fwd  | CONV} | [16,256,14,14] }"
+    inputs="resnetv24_stage3_activation1;resnetv24_stage3_conv1_weight"
+    outputs="resnetv24_stage3_conv1_fwd"
+    penwidth=3
+    style=filled
+    color="#96c583"
+    fontcolor="#000000"
+    fillcolor="#acdc99"
+  ];
+  "resnetv24_stage3_batchnorm2_gamma" [
+    id=210
+    name="resnetv24_stage3_batchnorm2_gamma"
+    type=constant_input
+    label="resnetv24_stage3_batchnorm2_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_batchnorm2_beta" [
+    id=211
+    name="resnetv24_stage3_batchnorm2_beta"
+    type=constant_input
+    label="resnetv24_stage3_batchnorm2_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_batchnorm2_running_mean" [
+    id=212
+    name="resnetv24_stage3_batchnorm2_running_mean"
+    type=constant_input
+    label="resnetv24_stage3_batchnorm2_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_batchnorm2_running_var" [
+    id=213
+    name="resnetv24_stage3_batchnorm2_running_var"
+    type=constant_input
+    label="resnetv24_stage3_batchnorm2_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_batchnorm2_fwd" [
+    id=214
+    name="resnetv24_stage3_batchnorm2_fwd"
+    type=BatchNormalization
+    label="{ {resnetv24_stage3_batchnorm2_fwd  | BN} | [[16,256,14,14],[256],[256],[256],[256]] }"
+    inputs="resnetv24_stage3_conv1_fwd;resnetv24_stage3_batchnorm2_gamma;resnetv24_stage3_batchnorm2_beta;resnetv24_stage3_batchnorm2_running_mean;resnetv24_stage3_batchnorm2_running_var"
+    outputs="resnetv24_stage3_batchnorm2_fwd"
+    penwidth=3
+    style=filled
+    color="#c4b983"
+    fontcolor="#000000"
+    fillcolor="#dccf99"
+  ];
+  "resnetv24_stage3_activation2" [
+    id=215
+    name="resnetv24_stage3_activation2"
+    type=Relu
+    label="{ {resnetv24_stage3_activation2  | RELU} | [16,256,14,14] }"
+    inputs="resnetv24_stage3_batchnorm2_fwd"
+    outputs="resnetv24_stage3_activation2"
+    penwidth=3
+    style=filled
+    color="#c5869b"
+    fontcolor="#000000"
+    fillcolor="#d898ad"
+  ];
+  "resnetv24_stage3_conv2_weight" [
+    id=216
+    name="resnetv24_stage3_conv2_weight"
+    type=constant_input
+    label="resnetv24_stage3_conv2_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_conv2_fwd" [
+    id=217
+    name="resnetv24_stage3_conv2_fwd"
+    type=Conv
+    label="{ {resnetv24_stage3_conv2_fwd  | CONV} | [16,1024,14,14] }"
+    inputs="resnetv24_stage3_activation2;resnetv24_stage3_conv2_weight"
+    outputs="resnetv24_stage3_conv2_fwd"
+    penwidth=3
+    style=filled
+    color="#96c583"
+    fontcolor="#000000"
+    fillcolor="#acdc99"
+  ];
+  "resnetv24_stage3_conv3_weight" [
+    id=218
+    name="resnetv24_stage3_conv3_weight"
+    type=constant_input
+    label="resnetv24_stage3_conv3_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_conv3_fwd" [
+    id=219
+    name="resnetv24_stage3_conv3_fwd"
+    type=Conv
+    label="{ {resnetv24_stage3_conv3_fwd  | CONV} | [16,1024,14,14] }"
+    inputs="resnetv24_stage3_activation0;resnetv24_stage3_conv3_weight"
+    outputs="resnetv24_stage3_conv3_fwd"
+    penwidth=3
+    style=filled
+    color="#96c583"
+    fontcolor="#000000"
+    fillcolor="#acdc99"
+  ];
+  "resnetv24_stage3__plus0" [
+    id=220
+    name="resnetv24_stage3__plus0"
+    type=Add
+    label="{ {resnetv24_stage3__plus0  | ADD} | [16,1024,14,14] }"
+    inputs="resnetv24_stage3_conv2_fwd;resnetv24_stage3_conv3_fwd"
+    outputs="resnetv24_stage3__plus0"
+    penwidth=3
+    style=filled
+    color="#c29382"
+    fontcolor="#000000"
+    fillcolor="#d6a695"
+  ];
+  "resnetv24_stage3_batchnorm3_gamma" [
+    id=221
+    name="resnetv24_stage3_batchnorm3_gamma"
+    type=constant_input
+    label="resnetv24_stage3_batchnorm3_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_batchnorm3_beta" [
+    id=222
+    name="resnetv24_stage3_batchnorm3_beta"
+    type=constant_input
+    label="resnetv24_stage3_batchnorm3_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_batchnorm3_running_mean" [
+    id=223
+    name="resnetv24_stage3_batchnorm3_running_mean"
+    type=constant_input
+    label="resnetv24_stage3_batchnorm3_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_batchnorm3_running_var" [
+    id=224
+    name="resnetv24_stage3_batchnorm3_running_var"
+    type=constant_input
+    label="resnetv24_stage3_batchnorm3_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_batchnorm3_fwd" [
+    id=225
+    name="resnetv24_stage3_batchnorm3_fwd"
+    type=BatchNormalization
+    label="{ {resnetv24_stage3_batchnorm3_fwd  | BN} | [[16,1024,14,14],[1024],[1024],[1024],[1024]] }"
+    inputs="resnetv24_stage3__plus0;resnetv24_stage3_batchnorm3_gamma;resnetv24_stage3_batchnorm3_beta;resnetv24_stage3_batchnorm3_running_mean;resnetv24_stage3_batchnorm3_running_var"
+    outputs="resnetv24_stage3_batchnorm3_fwd"
+    penwidth=3
+    style=filled
+    color="#c4b983"
+    fontcolor="#000000"
+    fillcolor="#dccf99"
+  ];
+  "resnetv24_stage3_activation3" [
+    id=226
+    name="resnetv24_stage3_activation3"
+    type=Relu
+    label="{ {resnetv24_stage3_activation3  | RELU} | [16,1024,14,14] }"
+    inputs="resnetv24_stage3_batchnorm3_fwd"
+    outputs="resnetv24_stage3_activation3"
+    penwidth=3
+    style=filled
+    color="#c5869b"
+    fontcolor="#000000"
+    fillcolor="#d898ad"
+  ];
+  "resnetv24_stage3_conv4_weight" [
+    id=227
+    name="resnetv24_stage3_conv4_weight"
+    type=constant_input
+    label="resnetv24_stage3_conv4_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_conv4_fwd" [
+    id=228
+    name="resnetv24_stage3_conv4_fwd"
+    type=Conv
+    label="{ {resnetv24_stage3_conv4_fwd  | CONV} | [16,256,14,14] }"
+    inputs="resnetv24_stage3_activation3;resnetv24_stage3_conv4_weight"
+    outputs="resnetv24_stage3_conv4_fwd"
+    penwidth=3
+    style=filled
+    color="#96c583"
+    fontcolor="#000000"
+    fillcolor="#acdc99"
+  ];
+  "resnetv24_stage3_batchnorm4_gamma" [
+    id=229
+    name="resnetv24_stage3_batchnorm4_gamma"
+    type=constant_input
+    label="resnetv24_stage3_batchnorm4_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_batchnorm4_beta" [
+    id=230
+    name="resnetv24_stage3_batchnorm4_beta"
+    type=constant_input
+    label="resnetv24_stage3_batchnorm4_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_batchnorm4_running_mean" [
+    id=231
+    name="resnetv24_stage3_batchnorm4_running_mean"
+    type=constant_input
+    label="resnetv24_stage3_batchnorm4_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_batchnorm4_running_var" [
+    id=232
+    name="resnetv24_stage3_batchnorm4_running_var"
+    type=constant_input
+    label="resnetv24_stage3_batchnorm4_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_batchnorm4_fwd" [
+    id=233
+    name="resnetv24_stage3_batchnorm4_fwd"
+    type=BatchNormalization
+    label="{ {resnetv24_stage3_batchnorm4_fwd  | BN} | [[16,256,14,14],[256],[256],[256],[256]] }"
+    inputs="resnetv24_stage3_conv4_fwd;resnetv24_stage3_batchnorm4_gamma;resnetv24_stage3_batchnorm4_beta;resnetv24_stage3_batchnorm4_running_mean;resnetv24_stage3_batchnorm4_running_var"
+    outputs="resnetv24_stage3_batchnorm4_fwd"
+    penwidth=3
+    style=filled
+    color="#c4b983"
+    fontcolor="#000000"
+    fillcolor="#dccf99"
+  ];
+  "resnetv24_stage3_activation4" [
+    id=234
+    name="resnetv24_stage3_activation4"
+    type=Relu
+    label="{ {resnetv24_stage3_activation4  | RELU} | [16,256,14,14] }"
+    inputs="resnetv24_stage3_batchnorm4_fwd"
+    outputs="resnetv24_stage3_activation4"
+    penwidth=3
+    style=filled
+    color="#c5869b"
+    fontcolor="#000000"
+    fillcolor="#d898ad"
+  ];
+  "resnetv24_stage3_conv5_weight" [
+    id=235
+    name="resnetv24_stage3_conv5_weight"
+    type=constant_input
+    label="resnetv24_stage3_conv5_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_conv5_fwd" [
+    id=236
+    name="resnetv24_stage3_conv5_fwd"
+    type=Conv
+    label="{ {resnetv24_stage3_conv5_fwd  | CONV} | [16,256,14,14] }"
+    inputs="resnetv24_stage3_activation4;resnetv24_stage3_conv5_weight"
+    outputs="resnetv24_stage3_conv5_fwd"
+    penwidth=3
+    style=filled
+    color="#96c583"
+    fontcolor="#000000"
+    fillcolor="#acdc99"
+  ];
+  "resnetv24_stage3_batchnorm5_gamma" [
+    id=237
+    name="resnetv24_stage3_batchnorm5_gamma"
+    type=constant_input
+    label="resnetv24_stage3_batchnorm5_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_batchnorm5_beta" [
+    id=238
+    name="resnetv24_stage3_batchnorm5_beta"
+    type=constant_input
+    label="resnetv24_stage3_batchnorm5_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_batchnorm5_running_mean" [
+    id=239
+    name="resnetv24_stage3_batchnorm5_running_mean"
+    type=constant_input
+    label="resnetv24_stage3_batchnorm5_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_batchnorm5_running_var" [
+    id=240
+    name="resnetv24_stage3_batchnorm5_running_var"
+    type=constant_input
+    label="resnetv24_stage3_batchnorm5_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_batchnorm5_fwd" [
+    id=241
+    name="resnetv24_stage3_batchnorm5_fwd"
+    type=BatchNormalization
+    label="{ {resnetv24_stage3_batchnorm5_fwd  | BN} | [[16,256,14,14],[256],[256],[256],[256]] }"
+    inputs="resnetv24_stage3_conv5_fwd;resnetv24_stage3_batchnorm5_gamma;resnetv24_stage3_batchnorm5_beta;resnetv24_stage3_batchnorm5_running_mean;resnetv24_stage3_batchnorm5_running_var"
+    outputs="resnetv24_stage3_batchnorm5_fwd"
+    penwidth=3
+    style=filled
+    color="#c4b983"
+    fontcolor="#000000"
+    fillcolor="#dccf99"
+  ];
+  "resnetv24_stage3_activation5" [
+    id=242
+    name="resnetv24_stage3_activation5"
+    type=Relu
+    label="{ {resnetv24_stage3_activation5  | RELU} | [16,256,14,14] }"
+    inputs="resnetv24_stage3_batchnorm5_fwd"
+    outputs="resnetv24_stage3_activation5"
+    penwidth=3
+    style=filled
+    color="#c5869b"
+    fontcolor="#000000"
+    fillcolor="#d898ad"
+  ];
+  "resnetv24_stage3_conv6_weight" [
+    id=243
+    name="resnetv24_stage3_conv6_weight"
+    type=constant_input
+    label="resnetv24_stage3_conv6_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_conv6_fwd" [
+    id=244
+    name="resnetv24_stage3_conv6_fwd"
+    type=Conv
+    label="{ {resnetv24_stage3_conv6_fwd  | CONV} | [16,1024,14,14] }"
+    inputs="resnetv24_stage3_activation5;resnetv24_stage3_conv6_weight"
+    outputs="resnetv24_stage3_conv6_fwd"
+    penwidth=3
+    style=filled
+    color="#96c583"
+    fontcolor="#000000"
+    fillcolor="#acdc99"
+  ];
+  "resnetv24_stage3__plus1" [
+    id=245
+    name="resnetv24_stage3__plus1"
+    type=Add
+    label="{ {resnetv24_stage3__plus1  | ADD} | [16,1024,14,14] }"
+    inputs="resnetv24_stage3_conv6_fwd;resnetv24_stage3__plus0"
+    outputs="resnetv24_stage3__plus1"
+    penwidth=3
+    style=filled
+    color="#c29382"
+    fontcolor="#000000"
+    fillcolor="#d6a695"
+  ];
+  "resnetv24_stage3_batchnorm6_gamma" [
+    id=246
+    name="resnetv24_stage3_batchnorm6_gamma"
+    type=constant_input
+    label="resnetv24_stage3_batchnorm6_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_batchnorm6_beta" [
+    id=247
+    name="resnetv24_stage3_batchnorm6_beta"
+    type=constant_input
+    label="resnetv24_stage3_batchnorm6_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_batchnorm6_running_mean" [
+    id=248
+    name="resnetv24_stage3_batchnorm6_running_mean"
+    type=constant_input
+    label="resnetv24_stage3_batchnorm6_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_batchnorm6_running_var" [
+    id=249
+    name="resnetv24_stage3_batchnorm6_running_var"
+    type=constant_input
+    label="resnetv24_stage3_batchnorm6_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_batchnorm6_fwd" [
+    id=250
+    name="resnetv24_stage3_batchnorm6_fwd"
+    type=BatchNormalization
+    label="{ {resnetv24_stage3_batchnorm6_fwd  | BN} | [[16,1024,14,14],[1024],[1024],[1024],[1024]] }"
+    inputs="resnetv24_stage3__plus1;resnetv24_stage3_batchnorm6_gamma;resnetv24_stage3_batchnorm6_beta;resnetv24_stage3_batchnorm6_running_mean;resnetv24_stage3_batchnorm6_running_var"
+    outputs="resnetv24_stage3_batchnorm6_fwd"
+    penwidth=3
+    style=filled
+    color="#c4b983"
+    fontcolor="#000000"
+    fillcolor="#dccf99"
+  ];
+  "resnetv24_stage3_activation6" [
+    id=251
+    name="resnetv24_stage3_activation6"
+    type=Relu
+    label="{ {resnetv24_stage3_activation6  | RELU} | [16,1024,14,14] }"
+    inputs="resnetv24_stage3_batchnorm6_fwd"
+    outputs="resnetv24_stage3_activation6"
+    penwidth=3
+    style=filled
+    color="#c5869b"
+    fontcolor="#000000"
+    fillcolor="#d898ad"
+  ];
+  "resnetv24_stage3_conv7_weight" [
+    id=252
+    name="resnetv24_stage3_conv7_weight"
+    type=constant_input
+    label="resnetv24_stage3_conv7_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_conv7_fwd" [
+    id=253
+    name="resnetv24_stage3_conv7_fwd"
+    type=Conv
+    label="{ {resnetv24_stage3_conv7_fwd  | CONV} | [16,256,14,14] }"
+    inputs="resnetv24_stage3_activation6;resnetv24_stage3_conv7_weight"
+    outputs="resnetv24_stage3_conv7_fwd"
+    penwidth=3
+    style=filled
+    color="#96c583"
+    fontcolor="#000000"
+    fillcolor="#acdc99"
+  ];
+  "resnetv24_stage3_batchnorm7_gamma" [
+    id=254
+    name="resnetv24_stage3_batchnorm7_gamma"
+    type=constant_input
+    label="resnetv24_stage3_batchnorm7_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_batchnorm7_beta" [
+    id=255
+    name="resnetv24_stage3_batchnorm7_beta"
+    type=constant_input
+    label="resnetv24_stage3_batchnorm7_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_batchnorm7_running_mean" [
+    id=256
+    name="resnetv24_stage3_batchnorm7_running_mean"
+    type=constant_input
+    label="resnetv24_stage3_batchnorm7_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_batchnorm7_running_var" [
+    id=257
+    name="resnetv24_stage3_batchnorm7_running_var"
+    type=constant_input
+    label="resnetv24_stage3_batchnorm7_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_batchnorm7_fwd" [
+    id=258
+    name="resnetv24_stage3_batchnorm7_fwd"
+    type=BatchNormalization
+    label="{ {resnetv24_stage3_batchnorm7_fwd  | BN} | [[16,256,14,14],[256],[256],[256],[256]] }"
+    inputs="resnetv24_stage3_conv7_fwd;resnetv24_stage3_batchnorm7_gamma;resnetv24_stage3_batchnorm7_beta;resnetv24_stage3_batchnorm7_running_mean;resnetv24_stage3_batchnorm7_running_var"
+    outputs="resnetv24_stage3_batchnorm7_fwd"
+    penwidth=3
+    style=filled
+    color="#c4b983"
+    fontcolor="#000000"
+    fillcolor="#dccf99"
+  ];
+  "resnetv24_stage3_activation7" [
+    id=259
+    name="resnetv24_stage3_activation7"
+    type=Relu
+    label="{ {resnetv24_stage3_activation7  | RELU} | [16,256,14,14] }"
+    inputs="resnetv24_stage3_batchnorm7_fwd"
+    outputs="resnetv24_stage3_activation7"
+    penwidth=3
+    style=filled
+    color="#c5869b"
+    fontcolor="#000000"
+    fillcolor="#d898ad"
+  ];
+  "resnetv24_stage3_conv8_weight" [
+    id=260
+    name="resnetv24_stage3_conv8_weight"
+    type=constant_input
+    label="resnetv24_stage3_conv8_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_conv8_fwd" [
+    id=261
+    name="resnetv24_stage3_conv8_fwd"
+    type=Conv
+    label="{ {resnetv24_stage3_conv8_fwd  | CONV} | [16,256,14,14] }"
+    inputs="resnetv24_stage3_activation7;resnetv24_stage3_conv8_weight"
+    outputs="resnetv24_stage3_conv8_fwd"
+    penwidth=3
+    style=filled
+    color="#96c583"
+    fontcolor="#000000"
+    fillcolor="#acdc99"
+  ];
+  "resnetv24_stage3_batchnorm8_gamma" [
+    id=262
+    name="resnetv24_stage3_batchnorm8_gamma"
+    type=constant_input
+    label="resnetv24_stage3_batchnorm8_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_batchnorm8_beta" [
+    id=263
+    name="resnetv24_stage3_batchnorm8_beta"
+    type=constant_input
+    label="resnetv24_stage3_batchnorm8_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_batchnorm8_running_mean" [
+    id=264
+    name="resnetv24_stage3_batchnorm8_running_mean"
+    type=constant_input
+    label="resnetv24_stage3_batchnorm8_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_batchnorm8_running_var" [
+    id=265
+    name="resnetv24_stage3_batchnorm8_running_var"
+    type=constant_input
+    label="resnetv24_stage3_batchnorm8_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_batchnorm8_fwd" [
+    id=266
+    name="resnetv24_stage3_batchnorm8_fwd"
+    type=BatchNormalization
+    label="{ {resnetv24_stage3_batchnorm8_fwd  | BN} | [[16,256,14,14],[256],[256],[256],[256]] }"
+    inputs="resnetv24_stage3_conv8_fwd;resnetv24_stage3_batchnorm8_gamma;resnetv24_stage3_batchnorm8_beta;resnetv24_stage3_batchnorm8_running_mean;resnetv24_stage3_batchnorm8_running_var"
+    outputs="resnetv24_stage3_batchnorm8_fwd"
+    penwidth=3
+    style=filled
+    color="#c4b983"
+    fontcolor="#000000"
+    fillcolor="#dccf99"
+  ];
+  "resnetv24_stage3_activation8" [
+    id=267
+    name="resnetv24_stage3_activation8"
+    type=Relu
+    label="{ {resnetv24_stage3_activation8  | RELU} | [16,256,14,14] }"
+    inputs="resnetv24_stage3_batchnorm8_fwd"
+    outputs="resnetv24_stage3_activation8"
+    penwidth=3
+    style=filled
+    color="#c5869b"
+    fontcolor="#000000"
+    fillcolor="#d898ad"
+  ];
+  "resnetv24_stage3_conv9_weight" [
+    id=268
+    name="resnetv24_stage3_conv9_weight"
+    type=constant_input
+    label="resnetv24_stage3_conv9_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_conv9_fwd" [
+    id=269
+    name="resnetv24_stage3_conv9_fwd"
+    type=Conv
+    label="{ {resnetv24_stage3_conv9_fwd  | CONV} | [16,1024,14,14] }"
+    inputs="resnetv24_stage3_activation8;resnetv24_stage3_conv9_weight"
+    outputs="resnetv24_stage3_conv9_fwd"
+    penwidth=3
+    style=filled
+    color="#96c583"
+    fontcolor="#000000"
+    fillcolor="#acdc99"
+  ];
+  "resnetv24_stage3__plus2" [
+    id=270
+    name="resnetv24_stage3__plus2"
+    type=Add
+    label="{ {resnetv24_stage3__plus2  | ADD} | [16,1024,14,14] }"
+    inputs="resnetv24_stage3_conv9_fwd;resnetv24_stage3__plus1"
+    outputs="resnetv24_stage3__plus2"
+    penwidth=3
+    style=filled
+    color="#c29382"
+    fontcolor="#000000"
+    fillcolor="#d6a695"
+  ];
+  "resnetv24_stage3_batchnorm9_gamma" [
+    id=271
+    name="resnetv24_stage3_batchnorm9_gamma"
+    type=constant_input
+    label="resnetv24_stage3_batchnorm9_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_batchnorm9_beta" [
+    id=272
+    name="resnetv24_stage3_batchnorm9_beta"
+    type=constant_input
+    label="resnetv24_stage3_batchnorm9_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_batchnorm9_running_mean" [
+    id=273
+    name="resnetv24_stage3_batchnorm9_running_mean"
+    type=constant_input
+    label="resnetv24_stage3_batchnorm9_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_batchnorm9_running_var" [
+    id=274
+    name="resnetv24_stage3_batchnorm9_running_var"
+    type=constant_input
+    label="resnetv24_stage3_batchnorm9_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_batchnorm9_fwd" [
+    id=275
+    name="resnetv24_stage3_batchnorm9_fwd"
+    type=BatchNormalization
+    label="{ {resnetv24_stage3_batchnorm9_fwd  | BN} | [[16,1024,14,14],[1024],[1024],[1024],[1024]] }"
+    inputs="resnetv24_stage3__plus2;resnetv24_stage3_batchnorm9_gamma;resnetv24_stage3_batchnorm9_beta;resnetv24_stage3_batchnorm9_running_mean;resnetv24_stage3_batchnorm9_running_var"
+    outputs="resnetv24_stage3_batchnorm9_fwd"
+    penwidth=3
+    style=filled
+    color="#c4b983"
+    fontcolor="#000000"
+    fillcolor="#dccf99"
+  ];
+  "resnetv24_stage3_activation9" [
+    id=276
+    name="resnetv24_stage3_activation9"
+    type=Relu
+    label="{ {resnetv24_stage3_activation9  | RELU} | [16,1024,14,14] }"
+    inputs="resnetv24_stage3_batchnorm9_fwd"
+    outputs="resnetv24_stage3_activation9"
+    penwidth=3
+    style=filled
+    color="#c5869b"
+    fontcolor="#000000"
+    fillcolor="#d898ad"
+  ];
+  "resnetv24_stage3_conv10_weight" [
+    id=277
+    name="resnetv24_stage3_conv10_weight"
+    type=constant_input
+    label="resnetv24_stage3_conv10_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_conv10_fwd" [
+    id=278
+    name="resnetv24_stage3_conv10_fwd"
+    type=Conv
+    label="{ {resnetv24_stage3_conv10_fwd  | CONV} | [16,256,14,14] }"
+    inputs="resnetv24_stage3_activation9;resnetv24_stage3_conv10_weight"
+    outputs="resnetv24_stage3_conv10_fwd"
+    penwidth=3
+    style=filled
+    color="#96c583"
+    fontcolor="#000000"
+    fillcolor="#acdc99"
+  ];
+  "resnetv24_stage3_batchnorm10_gamma" [
+    id=279
+    name="resnetv24_stage3_batchnorm10_gamma"
+    type=constant_input
+    label="resnetv24_stage3_batchnorm10_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_batchnorm10_beta" [
+    id=280
+    name="resnetv24_stage3_batchnorm10_beta"
+    type=constant_input
+    label="resnetv24_stage3_batchnorm10_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_batchnorm10_running_mean" [
+    id=281
+    name="resnetv24_stage3_batchnorm10_running_mean"
+    type=constant_input
+    label="resnetv24_stage3_batchnorm10_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_batchnorm10_running_var" [
+    id=282
+    name="resnetv24_stage3_batchnorm10_running_var"
+    type=constant_input
+    label="resnetv24_stage3_batchnorm10_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_batchnorm10_fwd" [
+    id=283
+    name="resnetv24_stage3_batchnorm10_fwd"
+    type=BatchNormalization
+    label="{ {resnetv24_stage3_batchnorm10_fwd  | BN} | [[16,256,14,14],[256],[256],[256],[256]] }"
+    inputs="resnetv24_stage3_conv10_fwd;resnetv24_stage3_batchnorm10_gamma;resnetv24_stage3_batchnorm10_beta;resnetv24_stage3_batchnorm10_running_mean;resnetv24_stage3_batchnorm10_running_var"
+    outputs="resnetv24_stage3_batchnorm10_fwd"
+    penwidth=3
+    style=filled
+    color="#c4b983"
+    fontcolor="#000000"
+    fillcolor="#dccf99"
+  ];
+  "resnetv24_stage3_activation10" [
+    id=284
+    name="resnetv24_stage3_activation10"
+    type=Relu
+    label="{ {resnetv24_stage3_activation10  | RELU} | [16,256,14,14] }"
+    inputs="resnetv24_stage3_batchnorm10_fwd"
+    outputs="resnetv24_stage3_activation10"
+    penwidth=3
+    style=filled
+    color="#c5869b"
+    fontcolor="#000000"
+    fillcolor="#d898ad"
+  ];
+  "resnetv24_stage3_conv11_weight" [
+    id=285
+    name="resnetv24_stage3_conv11_weight"
+    type=constant_input
+    label="resnetv24_stage3_conv11_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_conv11_fwd" [
+    id=286
+    name="resnetv24_stage3_conv11_fwd"
+    type=Conv
+    label="{ {resnetv24_stage3_conv11_fwd  | CONV} | [16,256,14,14] }"
+    inputs="resnetv24_stage3_activation10;resnetv24_stage3_conv11_weight"
+    outputs="resnetv24_stage3_conv11_fwd"
+    penwidth=3
+    style=filled
+    color="#96c583"
+    fontcolor="#000000"
+    fillcolor="#acdc99"
+  ];
+  "resnetv24_stage3_batchnorm11_gamma" [
+    id=287
+    name="resnetv24_stage3_batchnorm11_gamma"
+    type=constant_input
+    label="resnetv24_stage3_batchnorm11_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_batchnorm11_beta" [
+    id=288
+    name="resnetv24_stage3_batchnorm11_beta"
+    type=constant_input
+    label="resnetv24_stage3_batchnorm11_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_batchnorm11_running_mean" [
+    id=289
+    name="resnetv24_stage3_batchnorm11_running_mean"
+    type=constant_input
+    label="resnetv24_stage3_batchnorm11_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_batchnorm11_running_var" [
+    id=290
+    name="resnetv24_stage3_batchnorm11_running_var"
+    type=constant_input
+    label="resnetv24_stage3_batchnorm11_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_batchnorm11_fwd" [
+    id=291
+    name="resnetv24_stage3_batchnorm11_fwd"
+    type=BatchNormalization
+    label="{ {resnetv24_stage3_batchnorm11_fwd  | BN} | [[16,256,14,14],[256],[256],[256],[256]] }"
+    inputs="resnetv24_stage3_conv11_fwd;resnetv24_stage3_batchnorm11_gamma;resnetv24_stage3_batchnorm11_beta;resnetv24_stage3_batchnorm11_running_mean;resnetv24_stage3_batchnorm11_running_var"
+    outputs="resnetv24_stage3_batchnorm11_fwd"
+    penwidth=3
+    style=filled
+    color="#c4b983"
+    fontcolor="#000000"
+    fillcolor="#dccf99"
+  ];
+  "resnetv24_stage3_activation11" [
+    id=292
+    name="resnetv24_stage3_activation11"
+    type=Relu
+    label="{ {resnetv24_stage3_activation11  | RELU} | [16,256,14,14] }"
+    inputs="resnetv24_stage3_batchnorm11_fwd"
+    outputs="resnetv24_stage3_activation11"
+    penwidth=3
+    style=filled
+    color="#c5869b"
+    fontcolor="#000000"
+    fillcolor="#d898ad"
+  ];
+  "resnetv24_stage3_conv12_weight" [
+    id=293
+    name="resnetv24_stage3_conv12_weight"
+    type=constant_input
+    label="resnetv24_stage3_conv12_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_conv12_fwd" [
+    id=294
+    name="resnetv24_stage3_conv12_fwd"
+    type=Conv
+    label="{ {resnetv24_stage3_conv12_fwd  | CONV} | [16,1024,14,14] }"
+    inputs="resnetv24_stage3_activation11;resnetv24_stage3_conv12_weight"
+    outputs="resnetv24_stage3_conv12_fwd"
+    penwidth=3
+    style=filled
+    color="#96c583"
+    fontcolor="#000000"
+    fillcolor="#acdc99"
+  ];
+  "resnetv24_stage3__plus3" [
+    id=295
+    name="resnetv24_stage3__plus3"
+    type=Add
+    label="{ {resnetv24_stage3__plus3  | ADD} | [16,1024,14,14] }"
+    inputs="resnetv24_stage3_conv12_fwd;resnetv24_stage3__plus2"
+    outputs="resnetv24_stage3__plus3"
+    penwidth=3
+    style=filled
+    color="#c29382"
+    fontcolor="#000000"
+    fillcolor="#d6a695"
+  ];
+  "resnetv24_stage3_batchnorm12_gamma" [
+    id=296
+    name="resnetv24_stage3_batchnorm12_gamma"
+    type=constant_input
+    label="resnetv24_stage3_batchnorm12_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_batchnorm12_beta" [
+    id=297
+    name="resnetv24_stage3_batchnorm12_beta"
+    type=constant_input
+    label="resnetv24_stage3_batchnorm12_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_batchnorm12_running_mean" [
+    id=298
+    name="resnetv24_stage3_batchnorm12_running_mean"
+    type=constant_input
+    label="resnetv24_stage3_batchnorm12_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_batchnorm12_running_var" [
+    id=299
+    name="resnetv24_stage3_batchnorm12_running_var"
+    type=constant_input
+    label="resnetv24_stage3_batchnorm12_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_batchnorm12_fwd" [
+    id=300
+    name="resnetv24_stage3_batchnorm12_fwd"
+    type=BatchNormalization
+    label="{ {resnetv24_stage3_batchnorm12_fwd  | BN} | [[16,1024,14,14],[1024],[1024],[1024],[1024]] }"
+    inputs="resnetv24_stage3__plus3;resnetv24_stage3_batchnorm12_gamma;resnetv24_stage3_batchnorm12_beta;resnetv24_stage3_batchnorm12_running_mean;resnetv24_stage3_batchnorm12_running_var"
+    outputs="resnetv24_stage3_batchnorm12_fwd"
+    penwidth=3
+    style=filled
+    color="#c4b983"
+    fontcolor="#000000"
+    fillcolor="#dccf99"
+  ];
+  "resnetv24_stage3_activation12" [
+    id=301
+    name="resnetv24_stage3_activation12"
+    type=Relu
+    label="{ {resnetv24_stage3_activation12  | RELU} | [16,1024,14,14] }"
+    inputs="resnetv24_stage3_batchnorm12_fwd"
+    outputs="resnetv24_stage3_activation12"
+    penwidth=3
+    style=filled
+    color="#c5869b"
+    fontcolor="#000000"
+    fillcolor="#d898ad"
+  ];
+  "resnetv24_stage3_conv13_weight" [
+    id=302
+    name="resnetv24_stage3_conv13_weight"
+    type=constant_input
+    label="resnetv24_stage3_conv13_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_conv13_fwd" [
+    id=303
+    name="resnetv24_stage3_conv13_fwd"
+    type=Conv
+    label="{ {resnetv24_stage3_conv13_fwd  | CONV} | [16,256,14,14] }"
+    inputs="resnetv24_stage3_activation12;resnetv24_stage3_conv13_weight"
+    outputs="resnetv24_stage3_conv13_fwd"
+    penwidth=3
+    style=filled
+    color="#96c583"
+    fontcolor="#000000"
+    fillcolor="#acdc99"
+  ];
+  "resnetv24_stage3_batchnorm13_gamma" [
+    id=304
+    name="resnetv24_stage3_batchnorm13_gamma"
+    type=constant_input
+    label="resnetv24_stage3_batchnorm13_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_batchnorm13_beta" [
+    id=305
+    name="resnetv24_stage3_batchnorm13_beta"
+    type=constant_input
+    label="resnetv24_stage3_batchnorm13_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_batchnorm13_running_mean" [
+    id=306
+    name="resnetv24_stage3_batchnorm13_running_mean"
+    type=constant_input
+    label="resnetv24_stage3_batchnorm13_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_batchnorm13_running_var" [
+    id=307
+    name="resnetv24_stage3_batchnorm13_running_var"
+    type=constant_input
+    label="resnetv24_stage3_batchnorm13_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_batchnorm13_fwd" [
+    id=308
+    name="resnetv24_stage3_batchnorm13_fwd"
+    type=BatchNormalization
+    label="{ {resnetv24_stage3_batchnorm13_fwd  | BN} | [[16,256,14,14],[256],[256],[256],[256]] }"
+    inputs="resnetv24_stage3_conv13_fwd;resnetv24_stage3_batchnorm13_gamma;resnetv24_stage3_batchnorm13_beta;resnetv24_stage3_batchnorm13_running_mean;resnetv24_stage3_batchnorm13_running_var"
+    outputs="resnetv24_stage3_batchnorm13_fwd"
+    penwidth=3
+    style=filled
+    color="#c4b983"
+    fontcolor="#000000"
+    fillcolor="#dccf99"
+  ];
+  "resnetv24_stage3_activation13" [
+    id=309
+    name="resnetv24_stage3_activation13"
+    type=Relu
+    label="{ {resnetv24_stage3_activation13  | RELU} | [16,256,14,14] }"
+    inputs="resnetv24_stage3_batchnorm13_fwd"
+    outputs="resnetv24_stage3_activation13"
+    penwidth=3
+    style=filled
+    color="#c5869b"
+    fontcolor="#000000"
+    fillcolor="#d898ad"
+  ];
+  "resnetv24_stage3_conv14_weight" [
+    id=310
+    name="resnetv24_stage3_conv14_weight"
+    type=constant_input
+    label="resnetv24_stage3_conv14_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_conv14_fwd" [
+    id=311
+    name="resnetv24_stage3_conv14_fwd"
+    type=Conv
+    label="{ {resnetv24_stage3_conv14_fwd  | CONV} | [16,256,14,14] }"
+    inputs="resnetv24_stage3_activation13;resnetv24_stage3_conv14_weight"
+    outputs="resnetv24_stage3_conv14_fwd"
+    penwidth=3
+    style=filled
+    color="#96c583"
+    fontcolor="#000000"
+    fillcolor="#acdc99"
+  ];
+  "resnetv24_stage3_batchnorm14_gamma" [
+    id=312
+    name="resnetv24_stage3_batchnorm14_gamma"
+    type=constant_input
+    label="resnetv24_stage3_batchnorm14_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_batchnorm14_beta" [
+    id=313
+    name="resnetv24_stage3_batchnorm14_beta"
+    type=constant_input
+    label="resnetv24_stage3_batchnorm14_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_batchnorm14_running_mean" [
+    id=314
+    name="resnetv24_stage3_batchnorm14_running_mean"
+    type=constant_input
+    label="resnetv24_stage3_batchnorm14_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_batchnorm14_running_var" [
+    id=315
+    name="resnetv24_stage3_batchnorm14_running_var"
+    type=constant_input
+    label="resnetv24_stage3_batchnorm14_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_batchnorm14_fwd" [
+    id=316
+    name="resnetv24_stage3_batchnorm14_fwd"
+    type=BatchNormalization
+    label="{ {resnetv24_stage3_batchnorm14_fwd  | BN} | [[16,256,14,14],[256],[256],[256],[256]] }"
+    inputs="resnetv24_stage3_conv14_fwd;resnetv24_stage3_batchnorm14_gamma;resnetv24_stage3_batchnorm14_beta;resnetv24_stage3_batchnorm14_running_mean;resnetv24_stage3_batchnorm14_running_var"
+    outputs="resnetv24_stage3_batchnorm14_fwd"
+    penwidth=3
+    style=filled
+    color="#c4b983"
+    fontcolor="#000000"
+    fillcolor="#dccf99"
+  ];
+  "resnetv24_stage3_activation14" [
+    id=317
+    name="resnetv24_stage3_activation14"
+    type=Relu
+    label="{ {resnetv24_stage3_activation14  | RELU} | [16,256,14,14] }"
+    inputs="resnetv24_stage3_batchnorm14_fwd"
+    outputs="resnetv24_stage3_activation14"
+    penwidth=3
+    style=filled
+    color="#c5869b"
+    fontcolor="#000000"
+    fillcolor="#d898ad"
+  ];
+  "resnetv24_stage3_conv15_weight" [
+    id=318
+    name="resnetv24_stage3_conv15_weight"
+    type=constant_input
+    label="resnetv24_stage3_conv15_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_conv15_fwd" [
+    id=319
+    name="resnetv24_stage3_conv15_fwd"
+    type=Conv
+    label="{ {resnetv24_stage3_conv15_fwd  | CONV} | [16,1024,14,14] }"
+    inputs="resnetv24_stage3_activation14;resnetv24_stage3_conv15_weight"
+    outputs="resnetv24_stage3_conv15_fwd"
+    penwidth=3
+    style=filled
+    color="#96c583"
+    fontcolor="#000000"
+    fillcolor="#acdc99"
+  ];
+  "resnetv24_stage3__plus4" [
+    id=320
+    name="resnetv24_stage3__plus4"
+    type=Add
+    label="{ {resnetv24_stage3__plus4  | ADD} | [16,1024,14,14] }"
+    inputs="resnetv24_stage3_conv15_fwd;resnetv24_stage3__plus3"
+    outputs="resnetv24_stage3__plus4"
+    penwidth=3
+    style=filled
+    color="#c29382"
+    fontcolor="#000000"
+    fillcolor="#d6a695"
+  ];
+  "resnetv24_stage3_batchnorm15_gamma" [
+    id=321
+    name="resnetv24_stage3_batchnorm15_gamma"
+    type=constant_input
+    label="resnetv24_stage3_batchnorm15_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_batchnorm15_beta" [
+    id=322
+    name="resnetv24_stage3_batchnorm15_beta"
+    type=constant_input
+    label="resnetv24_stage3_batchnorm15_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_batchnorm15_running_mean" [
+    id=323
+    name="resnetv24_stage3_batchnorm15_running_mean"
+    type=constant_input
+    label="resnetv24_stage3_batchnorm15_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_batchnorm15_running_var" [
+    id=324
+    name="resnetv24_stage3_batchnorm15_running_var"
+    type=constant_input
+    label="resnetv24_stage3_batchnorm15_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_batchnorm15_fwd" [
+    id=325
+    name="resnetv24_stage3_batchnorm15_fwd"
+    type=BatchNormalization
+    label="{ {resnetv24_stage3_batchnorm15_fwd  | BN} | [[16,1024,14,14],[1024],[1024],[1024],[1024]] }"
+    inputs="resnetv24_stage3__plus4;resnetv24_stage3_batchnorm15_gamma;resnetv24_stage3_batchnorm15_beta;resnetv24_stage3_batchnorm15_running_mean;resnetv24_stage3_batchnorm15_running_var"
+    outputs="resnetv24_stage3_batchnorm15_fwd"
+    penwidth=3
+    style=filled
+    color="#c4b983"
+    fontcolor="#000000"
+    fillcolor="#dccf99"
+  ];
+  "resnetv24_stage3_activation15" [
+    id=326
+    name="resnetv24_stage3_activation15"
+    type=Relu
+    label="{ {resnetv24_stage3_activation15  | RELU} | [16,1024,14,14] }"
+    inputs="resnetv24_stage3_batchnorm15_fwd"
+    outputs="resnetv24_stage3_activation15"
+    penwidth=3
+    style=filled
+    color="#c5869b"
+    fontcolor="#000000"
+    fillcolor="#d898ad"
+  ];
+  "resnetv24_stage3_conv16_weight" [
+    id=327
+    name="resnetv24_stage3_conv16_weight"
+    type=constant_input
+    label="resnetv24_stage3_conv16_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_conv16_fwd" [
+    id=328
+    name="resnetv24_stage3_conv16_fwd"
+    type=Conv
+    label="{ {resnetv24_stage3_conv16_fwd  | CONV} | [16,256,14,14] }"
+    inputs="resnetv24_stage3_activation15;resnetv24_stage3_conv16_weight"
+    outputs="resnetv24_stage3_conv16_fwd"
+    penwidth=3
+    style=filled
+    color="#96c583"
+    fontcolor="#000000"
+    fillcolor="#acdc99"
+  ];
+  "resnetv24_stage3_batchnorm16_gamma" [
+    id=329
+    name="resnetv24_stage3_batchnorm16_gamma"
+    type=constant_input
+    label="resnetv24_stage3_batchnorm16_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_batchnorm16_beta" [
+    id=330
+    name="resnetv24_stage3_batchnorm16_beta"
+    type=constant_input
+    label="resnetv24_stage3_batchnorm16_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_batchnorm16_running_mean" [
+    id=331
+    name="resnetv24_stage3_batchnorm16_running_mean"
+    type=constant_input
+    label="resnetv24_stage3_batchnorm16_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_batchnorm16_running_var" [
+    id=332
+    name="resnetv24_stage3_batchnorm16_running_var"
+    type=constant_input
+    label="resnetv24_stage3_batchnorm16_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_batchnorm16_fwd" [
+    id=333
+    name="resnetv24_stage3_batchnorm16_fwd"
+    type=BatchNormalization
+    label="{ {resnetv24_stage3_batchnorm16_fwd  | BN} | [[16,256,14,14],[256],[256],[256],[256]] }"
+    inputs="resnetv24_stage3_conv16_fwd;resnetv24_stage3_batchnorm16_gamma;resnetv24_stage3_batchnorm16_beta;resnetv24_stage3_batchnorm16_running_mean;resnetv24_stage3_batchnorm16_running_var"
+    outputs="resnetv24_stage3_batchnorm16_fwd"
+    penwidth=3
+    style=filled
+    color="#c4b983"
+    fontcolor="#000000"
+    fillcolor="#dccf99"
+  ];
+  "resnetv24_stage3_activation16" [
+    id=334
+    name="resnetv24_stage3_activation16"
+    type=Relu
+    label="{ {resnetv24_stage3_activation16  | RELU} | [16,256,14,14] }"
+    inputs="resnetv24_stage3_batchnorm16_fwd"
+    outputs="resnetv24_stage3_activation16"
+    penwidth=3
+    style=filled
+    color="#c5869b"
+    fontcolor="#000000"
+    fillcolor="#d898ad"
+  ];
+  "resnetv24_stage3_conv17_weight" [
+    id=335
+    name="resnetv24_stage3_conv17_weight"
+    type=constant_input
+    label="resnetv24_stage3_conv17_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_conv17_fwd" [
+    id=336
+    name="resnetv24_stage3_conv17_fwd"
+    type=Conv
+    label="{ {resnetv24_stage3_conv17_fwd  | CONV} | [16,256,14,14] }"
+    inputs="resnetv24_stage3_activation16;resnetv24_stage3_conv17_weight"
+    outputs="resnetv24_stage3_conv17_fwd"
+    penwidth=3
+    style=filled
+    color="#96c583"
+    fontcolor="#000000"
+    fillcolor="#acdc99"
+  ];
+  "resnetv24_stage3_batchnorm17_gamma" [
+    id=337
+    name="resnetv24_stage3_batchnorm17_gamma"
+    type=constant_input
+    label="resnetv24_stage3_batchnorm17_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_batchnorm17_beta" [
+    id=338
+    name="resnetv24_stage3_batchnorm17_beta"
+    type=constant_input
+    label="resnetv24_stage3_batchnorm17_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_batchnorm17_running_mean" [
+    id=339
+    name="resnetv24_stage3_batchnorm17_running_mean"
+    type=constant_input
+    label="resnetv24_stage3_batchnorm17_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_batchnorm17_running_var" [
+    id=340
+    name="resnetv24_stage3_batchnorm17_running_var"
+    type=constant_input
+    label="resnetv24_stage3_batchnorm17_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_batchnorm17_fwd" [
+    id=341
+    name="resnetv24_stage3_batchnorm17_fwd"
+    type=BatchNormalization
+    label="{ {resnetv24_stage3_batchnorm17_fwd  | BN} | [[16,256,14,14],[256],[256],[256],[256]] }"
+    inputs="resnetv24_stage3_conv17_fwd;resnetv24_stage3_batchnorm17_gamma;resnetv24_stage3_batchnorm17_beta;resnetv24_stage3_batchnorm17_running_mean;resnetv24_stage3_batchnorm17_running_var"
+    outputs="resnetv24_stage3_batchnorm17_fwd"
+    penwidth=3
+    style=filled
+    color="#c4b983"
+    fontcolor="#000000"
+    fillcolor="#dccf99"
+  ];
+  "resnetv24_stage3_activation17" [
+    id=342
+    name="resnetv24_stage3_activation17"
+    type=Relu
+    label="{ {resnetv24_stage3_activation17  | RELU} | [16,256,14,14] }"
+    inputs="resnetv24_stage3_batchnorm17_fwd"
+    outputs="resnetv24_stage3_activation17"
+    penwidth=3
+    style=filled
+    color="#c5869b"
+    fontcolor="#000000"
+    fillcolor="#d898ad"
+  ];
+  "resnetv24_stage3_conv18_weight" [
+    id=343
+    name="resnetv24_stage3_conv18_weight"
+    type=constant_input
+    label="resnetv24_stage3_conv18_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage3_conv18_fwd" [
+    id=344
+    name="resnetv24_stage3_conv18_fwd"
+    type=Conv
+    label="{ {resnetv24_stage3_conv18_fwd  | CONV} | [16,1024,14,14] }"
+    inputs="resnetv24_stage3_activation17;resnetv24_stage3_conv18_weight"
+    outputs="resnetv24_stage3_conv18_fwd"
+    penwidth=3
+    style=filled
+    color="#96c583"
+    fontcolor="#000000"
+    fillcolor="#acdc99"
+  ];
+  "resnetv24_stage3__plus5" [
+    id=345
+    name="resnetv24_stage3__plus5"
+    type=Add
+    label="{ {resnetv24_stage3__plus5  | ADD} | [16,1024,14,14] }"
+    inputs="resnetv24_stage3_conv18_fwd;resnetv24_stage3__plus4"
+    outputs="resnetv24_stage3__plus5"
+    penwidth=3
+    style=filled
+    color="#c29382"
+    fontcolor="#000000"
+    fillcolor="#d6a695"
+  ];
+  "resnetv24_stage4_batchnorm0_gamma" [
+    id=346
+    name="resnetv24_stage4_batchnorm0_gamma"
+    type=constant_input
+    label="resnetv24_stage4_batchnorm0_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage4_batchnorm0_beta" [
+    id=347
+    name="resnetv24_stage4_batchnorm0_beta"
+    type=constant_input
+    label="resnetv24_stage4_batchnorm0_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage4_batchnorm0_running_mean" [
+    id=348
+    name="resnetv24_stage4_batchnorm0_running_mean"
+    type=constant_input
+    label="resnetv24_stage4_batchnorm0_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage4_batchnorm0_running_var" [
+    id=349
+    name="resnetv24_stage4_batchnorm0_running_var"
+    type=constant_input
+    label="resnetv24_stage4_batchnorm0_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage4_batchnorm0_fwd" [
+    id=350
+    name="resnetv24_stage4_batchnorm0_fwd"
+    type=BatchNormalization
+    label="{ {resnetv24_stage4_batchnorm0_fwd  | BN} | [[16,1024,14,14],[1024],[1024],[1024],[1024]] }"
+    inputs="resnetv24_stage3__plus5;resnetv24_stage4_batchnorm0_gamma;resnetv24_stage4_batchnorm0_beta;resnetv24_stage4_batchnorm0_running_mean;resnetv24_stage4_batchnorm0_running_var"
+    outputs="resnetv24_stage4_batchnorm0_fwd"
+    penwidth=3
+    style=filled
+    color="#c4b983"
+    fontcolor="#000000"
+    fillcolor="#dccf99"
+  ];
+  "resnetv24_stage4_activation0" [
+    id=351
+    name="resnetv24_stage4_activation0"
+    type=Relu
+    label="{ {resnetv24_stage4_activation0  | RELU} | [16,1024,14,14] }"
+    inputs="resnetv24_stage4_batchnorm0_fwd"
+    outputs="resnetv24_stage4_activation0"
+    penwidth=3
+    style=filled
+    color="#c5869b"
+    fontcolor="#000000"
+    fillcolor="#d898ad"
+  ];
+  "resnetv24_stage4_conv0_weight" [
+    id=352
+    name="resnetv24_stage4_conv0_weight"
+    type=constant_input
+    label="resnetv24_stage4_conv0_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage4_conv0_fwd" [
+    id=353
+    name="resnetv24_stage4_conv0_fwd"
+    type=Conv
+    label="{ {resnetv24_stage4_conv0_fwd  | CONV} | [16,512,14,14] }"
+    inputs="resnetv24_stage4_activation0;resnetv24_stage4_conv0_weight"
+    outputs="resnetv24_stage4_conv0_fwd"
+    penwidth=3
+    style=filled
+    color="#96c583"
+    fontcolor="#000000"
+    fillcolor="#acdc99"
+  ];
+  "resnetv24_stage4_batchnorm1_gamma" [
+    id=354
+    name="resnetv24_stage4_batchnorm1_gamma"
+    type=constant_input
+    label="resnetv24_stage4_batchnorm1_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage4_batchnorm1_beta" [
+    id=355
+    name="resnetv24_stage4_batchnorm1_beta"
+    type=constant_input
+    label="resnetv24_stage4_batchnorm1_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage4_batchnorm1_running_mean" [
+    id=356
+    name="resnetv24_stage4_batchnorm1_running_mean"
+    type=constant_input
+    label="resnetv24_stage4_batchnorm1_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage4_batchnorm1_running_var" [
+    id=357
+    name="resnetv24_stage4_batchnorm1_running_var"
+    type=constant_input
+    label="resnetv24_stage4_batchnorm1_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage4_batchnorm1_fwd" [
+    id=358
+    name="resnetv24_stage4_batchnorm1_fwd"
+    type=BatchNormalization
+    label="{ {resnetv24_stage4_batchnorm1_fwd  | BN} | [[16,512,14,14],[512],[512],[512],[512]] }"
+    inputs="resnetv24_stage4_conv0_fwd;resnetv24_stage4_batchnorm1_gamma;resnetv24_stage4_batchnorm1_beta;resnetv24_stage4_batchnorm1_running_mean;resnetv24_stage4_batchnorm1_running_var"
+    outputs="resnetv24_stage4_batchnorm1_fwd"
+    penwidth=3
+    style=filled
+    color="#c4b983"
+    fontcolor="#000000"
+    fillcolor="#dccf99"
+  ];
+  "resnetv24_stage4_activation1" [
+    id=359
+    name="resnetv24_stage4_activation1"
+    type=Relu
+    label="{ {resnetv24_stage4_activation1  | RELU} | [16,512,14,14] }"
+    inputs="resnetv24_stage4_batchnorm1_fwd"
+    outputs="resnetv24_stage4_activation1"
+    penwidth=3
+    style=filled
+    color="#c5869b"
+    fontcolor="#000000"
+    fillcolor="#d898ad"
+  ];
+  "resnetv24_stage4_conv1_weight" [
+    id=360
+    name="resnetv24_stage4_conv1_weight"
+    type=constant_input
+    label="resnetv24_stage4_conv1_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage4_conv1_fwd" [
+    id=361
+    name="resnetv24_stage4_conv1_fwd"
+    type=Conv
+    label="{ {resnetv24_stage4_conv1_fwd  | CONV} | [16,512,7,7] }"
+    inputs="resnetv24_stage4_activation1;resnetv24_stage4_conv1_weight"
+    outputs="resnetv24_stage4_conv1_fwd"
+    penwidth=3
+    style=filled
+    color="#96c583"
+    fontcolor="#000000"
+    fillcolor="#acdc99"
+  ];
+  "resnetv24_stage4_batchnorm2_gamma" [
+    id=362
+    name="resnetv24_stage4_batchnorm2_gamma"
+    type=constant_input
+    label="resnetv24_stage4_batchnorm2_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage4_batchnorm2_beta" [
+    id=363
+    name="resnetv24_stage4_batchnorm2_beta"
+    type=constant_input
+    label="resnetv24_stage4_batchnorm2_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage4_batchnorm2_running_mean" [
+    id=364
+    name="resnetv24_stage4_batchnorm2_running_mean"
+    type=constant_input
+    label="resnetv24_stage4_batchnorm2_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage4_batchnorm2_running_var" [
+    id=365
+    name="resnetv24_stage4_batchnorm2_running_var"
+    type=constant_input
+    label="resnetv24_stage4_batchnorm2_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage4_batchnorm2_fwd" [
+    id=366
+    name="resnetv24_stage4_batchnorm2_fwd"
+    type=BatchNormalization
+    label="{ {resnetv24_stage4_batchnorm2_fwd  | BN} | [[16,512,7,7],[512],[512],[512],[512]] }"
+    inputs="resnetv24_stage4_conv1_fwd;resnetv24_stage4_batchnorm2_gamma;resnetv24_stage4_batchnorm2_beta;resnetv24_stage4_batchnorm2_running_mean;resnetv24_stage4_batchnorm2_running_var"
+    outputs="resnetv24_stage4_batchnorm2_fwd"
+    penwidth=3
+    style=filled
+    color="#c4b983"
+    fontcolor="#000000"
+    fillcolor="#dccf99"
+  ];
+  "resnetv24_stage4_activation2" [
+    id=367
+    name="resnetv24_stage4_activation2"
+    type=Relu
+    label="{ {resnetv24_stage4_activation2  | RELU} | [16,512,7,7] }"
+    inputs="resnetv24_stage4_batchnorm2_fwd"
+    outputs="resnetv24_stage4_activation2"
+    penwidth=3
+    style=filled
+    color="#c5869b"
+    fontcolor="#000000"
+    fillcolor="#d898ad"
+  ];
+  "resnetv24_stage4_conv2_weight" [
+    id=368
+    name="resnetv24_stage4_conv2_weight"
+    type=constant_input
+    label="resnetv24_stage4_conv2_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage4_conv2_fwd" [
+    id=369
+    name="resnetv24_stage4_conv2_fwd"
+    type=Conv
+    label="{ {resnetv24_stage4_conv2_fwd  | CONV} | [16,2048,7,7] }"
+    inputs="resnetv24_stage4_activation2;resnetv24_stage4_conv2_weight"
+    outputs="resnetv24_stage4_conv2_fwd"
+    penwidth=3
+    style=filled
+    color="#96c583"
+    fontcolor="#000000"
+    fillcolor="#acdc99"
+  ];
+  "resnetv24_stage4_conv3_weight" [
+    id=370
+    name="resnetv24_stage4_conv3_weight"
+    type=constant_input
+    label="resnetv24_stage4_conv3_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage4_conv3_fwd" [
+    id=371
+    name="resnetv24_stage4_conv3_fwd"
+    type=Conv
+    label="{ {resnetv24_stage4_conv3_fwd  | CONV} | [16,2048,7,7] }"
+    inputs="resnetv24_stage4_activation0;resnetv24_stage4_conv3_weight"
+    outputs="resnetv24_stage4_conv3_fwd"
+    penwidth=3
+    style=filled
+    color="#96c583"
+    fontcolor="#000000"
+    fillcolor="#acdc99"
+  ];
+  "resnetv24_stage4__plus0" [
+    id=372
+    name="resnetv24_stage4__plus0"
+    type=Add
+    label="{ {resnetv24_stage4__plus0  | ADD} | [16,2048,7,7] }"
+    inputs="resnetv24_stage4_conv2_fwd;resnetv24_stage4_conv3_fwd"
+    outputs="resnetv24_stage4__plus0"
+    penwidth=3
+    style=filled
+    color="#c29382"
+    fontcolor="#000000"
+    fillcolor="#d6a695"
+  ];
+  "resnetv24_stage4_batchnorm3_gamma" [
+    id=373
+    name="resnetv24_stage4_batchnorm3_gamma"
+    type=constant_input
+    label="resnetv24_stage4_batchnorm3_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage4_batchnorm3_beta" [
+    id=374
+    name="resnetv24_stage4_batchnorm3_beta"
+    type=constant_input
+    label="resnetv24_stage4_batchnorm3_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage4_batchnorm3_running_mean" [
+    id=375
+    name="resnetv24_stage4_batchnorm3_running_mean"
+    type=constant_input
+    label="resnetv24_stage4_batchnorm3_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage4_batchnorm3_running_var" [
+    id=376
+    name="resnetv24_stage4_batchnorm3_running_var"
+    type=constant_input
+    label="resnetv24_stage4_batchnorm3_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage4_batchnorm3_fwd" [
+    id=377
+    name="resnetv24_stage4_batchnorm3_fwd"
+    type=BatchNormalization
+    label="{ {resnetv24_stage4_batchnorm3_fwd  | BN} | [[16,2048,7,7],[2048],[2048],[2048],[2048]] }"
+    inputs="resnetv24_stage4__plus0;resnetv24_stage4_batchnorm3_gamma;resnetv24_stage4_batchnorm3_beta;resnetv24_stage4_batchnorm3_running_mean;resnetv24_stage4_batchnorm3_running_var"
+    outputs="resnetv24_stage4_batchnorm3_fwd"
+    penwidth=3
+    style=filled
+    color="#c4b983"
+    fontcolor="#000000"
+    fillcolor="#dccf99"
+  ];
+  "resnetv24_stage4_activation3" [
+    id=378
+    name="resnetv24_stage4_activation3"
+    type=Relu
+    label="{ {resnetv24_stage4_activation3  | RELU} | [16,2048,7,7] }"
+    inputs="resnetv24_stage4_batchnorm3_fwd"
+    outputs="resnetv24_stage4_activation3"
+    penwidth=3
+    style=filled
+    color="#c5869b"
+    fontcolor="#000000"
+    fillcolor="#d898ad"
+  ];
+  "resnetv24_stage4_conv4_weight" [
+    id=379
+    name="resnetv24_stage4_conv4_weight"
+    type=constant_input
+    label="resnetv24_stage4_conv4_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage4_conv4_fwd" [
+    id=380
+    name="resnetv24_stage4_conv4_fwd"
+    type=Conv
+    label="{ {resnetv24_stage4_conv4_fwd  | CONV} | [16,512,7,7] }"
+    inputs="resnetv24_stage4_activation3;resnetv24_stage4_conv4_weight"
+    outputs="resnetv24_stage4_conv4_fwd"
+    penwidth=3
+    style=filled
+    color="#96c583"
+    fontcolor="#000000"
+    fillcolor="#acdc99"
+  ];
+  "resnetv24_stage4_batchnorm4_gamma" [
+    id=381
+    name="resnetv24_stage4_batchnorm4_gamma"
+    type=constant_input
+    label="resnetv24_stage4_batchnorm4_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage4_batchnorm4_beta" [
+    id=382
+    name="resnetv24_stage4_batchnorm4_beta"
+    type=constant_input
+    label="resnetv24_stage4_batchnorm4_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage4_batchnorm4_running_mean" [
+    id=383
+    name="resnetv24_stage4_batchnorm4_running_mean"
+    type=constant_input
+    label="resnetv24_stage4_batchnorm4_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage4_batchnorm4_running_var" [
+    id=384
+    name="resnetv24_stage4_batchnorm4_running_var"
+    type=constant_input
+    label="resnetv24_stage4_batchnorm4_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage4_batchnorm4_fwd" [
+    id=385
+    name="resnetv24_stage4_batchnorm4_fwd"
+    type=BatchNormalization
+    label="{ {resnetv24_stage4_batchnorm4_fwd  | BN} | [[16,512,7,7],[512],[512],[512],[512]] }"
+    inputs="resnetv24_stage4_conv4_fwd;resnetv24_stage4_batchnorm4_gamma;resnetv24_stage4_batchnorm4_beta;resnetv24_stage4_batchnorm4_running_mean;resnetv24_stage4_batchnorm4_running_var"
+    outputs="resnetv24_stage4_batchnorm4_fwd"
+    penwidth=3
+    style=filled
+    color="#c4b983"
+    fontcolor="#000000"
+    fillcolor="#dccf99"
+  ];
+  "resnetv24_stage4_activation4" [
+    id=386
+    name="resnetv24_stage4_activation4"
+    type=Relu
+    label="{ {resnetv24_stage4_activation4  | RELU} | [16,512,7,7] }"
+    inputs="resnetv24_stage4_batchnorm4_fwd"
+    outputs="resnetv24_stage4_activation4"
+    penwidth=3
+    style=filled
+    color="#c5869b"
+    fontcolor="#000000"
+    fillcolor="#d898ad"
+  ];
+  "resnetv24_stage4_conv5_weight" [
+    id=387
+    name="resnetv24_stage4_conv5_weight"
+    type=constant_input
+    label="resnetv24_stage4_conv5_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage4_conv5_fwd" [
+    id=388
+    name="resnetv24_stage4_conv5_fwd"
+    type=Conv
+    label="{ {resnetv24_stage4_conv5_fwd  | CONV} | [16,512,7,7] }"
+    inputs="resnetv24_stage4_activation4;resnetv24_stage4_conv5_weight"
+    outputs="resnetv24_stage4_conv5_fwd"
+    penwidth=3
+    style=filled
+    color="#96c583"
+    fontcolor="#000000"
+    fillcolor="#acdc99"
+  ];
+  "resnetv24_stage4_batchnorm5_gamma" [
+    id=389
+    name="resnetv24_stage4_batchnorm5_gamma"
+    type=constant_input
+    label="resnetv24_stage4_batchnorm5_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage4_batchnorm5_beta" [
+    id=390
+    name="resnetv24_stage4_batchnorm5_beta"
+    type=constant_input
+    label="resnetv24_stage4_batchnorm5_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage4_batchnorm5_running_mean" [
+    id=391
+    name="resnetv24_stage4_batchnorm5_running_mean"
+    type=constant_input
+    label="resnetv24_stage4_batchnorm5_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage4_batchnorm5_running_var" [
+    id=392
+    name="resnetv24_stage4_batchnorm5_running_var"
+    type=constant_input
+    label="resnetv24_stage4_batchnorm5_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage4_batchnorm5_fwd" [
+    id=393
+    name="resnetv24_stage4_batchnorm5_fwd"
+    type=BatchNormalization
+    label="{ {resnetv24_stage4_batchnorm5_fwd  | BN} | [[16,512,7,7],[512],[512],[512],[512]] }"
+    inputs="resnetv24_stage4_conv5_fwd;resnetv24_stage4_batchnorm5_gamma;resnetv24_stage4_batchnorm5_beta;resnetv24_stage4_batchnorm5_running_mean;resnetv24_stage4_batchnorm5_running_var"
+    outputs="resnetv24_stage4_batchnorm5_fwd"
+    penwidth=3
+    style=filled
+    color="#c4b983"
+    fontcolor="#000000"
+    fillcolor="#dccf99"
+  ];
+  "resnetv24_stage4_activation5" [
+    id=394
+    name="resnetv24_stage4_activation5"
+    type=Relu
+    label="{ {resnetv24_stage4_activation5  | RELU} | [16,512,7,7] }"
+    inputs="resnetv24_stage4_batchnorm5_fwd"
+    outputs="resnetv24_stage4_activation5"
+    penwidth=3
+    style=filled
+    color="#c5869b"
+    fontcolor="#000000"
+    fillcolor="#d898ad"
+  ];
+  "resnetv24_stage4_conv6_weight" [
+    id=395
+    name="resnetv24_stage4_conv6_weight"
+    type=constant_input
+    label="resnetv24_stage4_conv6_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage4_conv6_fwd" [
+    id=396
+    name="resnetv24_stage4_conv6_fwd"
+    type=Conv
+    label="{ {resnetv24_stage4_conv6_fwd  | CONV} | [16,2048,7,7] }"
+    inputs="resnetv24_stage4_activation5;resnetv24_stage4_conv6_weight"
+    outputs="resnetv24_stage4_conv6_fwd"
+    penwidth=3
+    style=filled
+    color="#96c583"
+    fontcolor="#000000"
+    fillcolor="#acdc99"
+  ];
+  "resnetv24_stage4__plus1" [
+    id=397
+    name="resnetv24_stage4__plus1"
+    type=Add
+    label="{ {resnetv24_stage4__plus1  | ADD} | [16,2048,7,7] }"
+    inputs="resnetv24_stage4_conv6_fwd;resnetv24_stage4__plus0"
+    outputs="resnetv24_stage4__plus1"
+    penwidth=3
+    style=filled
+    color="#c29382"
+    fontcolor="#000000"
+    fillcolor="#d6a695"
+  ];
+  "resnetv24_stage4_batchnorm6_gamma" [
+    id=398
+    name="resnetv24_stage4_batchnorm6_gamma"
+    type=constant_input
+    label="resnetv24_stage4_batchnorm6_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage4_batchnorm6_beta" [
+    id=399
+    name="resnetv24_stage4_batchnorm6_beta"
+    type=constant_input
+    label="resnetv24_stage4_batchnorm6_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage4_batchnorm6_running_mean" [
+    id=400
+    name="resnetv24_stage4_batchnorm6_running_mean"
+    type=constant_input
+    label="resnetv24_stage4_batchnorm6_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage4_batchnorm6_running_var" [
+    id=401
+    name="resnetv24_stage4_batchnorm6_running_var"
+    type=constant_input
+    label="resnetv24_stage4_batchnorm6_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage4_batchnorm6_fwd" [
+    id=402
+    name="resnetv24_stage4_batchnorm6_fwd"
+    type=BatchNormalization
+    label="{ {resnetv24_stage4_batchnorm6_fwd  | BN} | [[16,2048,7,7],[2048],[2048],[2048],[2048]] }"
+    inputs="resnetv24_stage4__plus1;resnetv24_stage4_batchnorm6_gamma;resnetv24_stage4_batchnorm6_beta;resnetv24_stage4_batchnorm6_running_mean;resnetv24_stage4_batchnorm6_running_var"
+    outputs="resnetv24_stage4_batchnorm6_fwd"
+    penwidth=3
+    style=filled
+    color="#c4b983"
+    fontcolor="#000000"
+    fillcolor="#dccf99"
+  ];
+  "resnetv24_stage4_activation6" [
+    id=403
+    name="resnetv24_stage4_activation6"
+    type=Relu
+    label="{ {resnetv24_stage4_activation6  | RELU} | [16,2048,7,7] }"
+    inputs="resnetv24_stage4_batchnorm6_fwd"
+    outputs="resnetv24_stage4_activation6"
+    penwidth=3
+    style=filled
+    color="#c5869b"
+    fontcolor="#000000"
+    fillcolor="#d898ad"
+  ];
+  "resnetv24_stage4_conv7_weight" [
+    id=404
+    name="resnetv24_stage4_conv7_weight"
+    type=constant_input
+    label="resnetv24_stage4_conv7_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage4_conv7_fwd" [
+    id=405
+    name="resnetv24_stage4_conv7_fwd"
+    type=Conv
+    label="{ {resnetv24_stage4_conv7_fwd  | CONV} | [16,512,7,7] }"
+    inputs="resnetv24_stage4_activation6;resnetv24_stage4_conv7_weight"
+    outputs="resnetv24_stage4_conv7_fwd"
+    penwidth=3
+    style=filled
+    color="#96c583"
+    fontcolor="#000000"
+    fillcolor="#acdc99"
+  ];
+  "resnetv24_stage4_batchnorm7_gamma" [
+    id=406
+    name="resnetv24_stage4_batchnorm7_gamma"
+    type=constant_input
+    label="resnetv24_stage4_batchnorm7_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage4_batchnorm7_beta" [
+    id=407
+    name="resnetv24_stage4_batchnorm7_beta"
+    type=constant_input
+    label="resnetv24_stage4_batchnorm7_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage4_batchnorm7_running_mean" [
+    id=408
+    name="resnetv24_stage4_batchnorm7_running_mean"
+    type=constant_input
+    label="resnetv24_stage4_batchnorm7_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage4_batchnorm7_running_var" [
+    id=409
+    name="resnetv24_stage4_batchnorm7_running_var"
+    type=constant_input
+    label="resnetv24_stage4_batchnorm7_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage4_batchnorm7_fwd" [
+    id=410
+    name="resnetv24_stage4_batchnorm7_fwd"
+    type=BatchNormalization
+    label="{ {resnetv24_stage4_batchnorm7_fwd  | BN} | [[16,512,7,7],[512],[512],[512],[512]] }"
+    inputs="resnetv24_stage4_conv7_fwd;resnetv24_stage4_batchnorm7_gamma;resnetv24_stage4_batchnorm7_beta;resnetv24_stage4_batchnorm7_running_mean;resnetv24_stage4_batchnorm7_running_var"
+    outputs="resnetv24_stage4_batchnorm7_fwd"
+    penwidth=3
+    style=filled
+    color="#c4b983"
+    fontcolor="#000000"
+    fillcolor="#dccf99"
+  ];
+  "resnetv24_stage4_activation7" [
+    id=411
+    name="resnetv24_stage4_activation7"
+    type=Relu
+    label="{ {resnetv24_stage4_activation7  | RELU} | [16,512,7,7] }"
+    inputs="resnetv24_stage4_batchnorm7_fwd"
+    outputs="resnetv24_stage4_activation7"
+    penwidth=3
+    style=filled
+    color="#c5869b"
+    fontcolor="#000000"
+    fillcolor="#d898ad"
+  ];
+  "resnetv24_stage4_conv8_weight" [
+    id=412
+    name="resnetv24_stage4_conv8_weight"
+    type=constant_input
+    label="resnetv24_stage4_conv8_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage4_conv8_fwd" [
+    id=413
+    name="resnetv24_stage4_conv8_fwd"
+    type=Conv
+    label="{ {resnetv24_stage4_conv8_fwd  | CONV} | [16,512,7,7] }"
+    inputs="resnetv24_stage4_activation7;resnetv24_stage4_conv8_weight"
+    outputs="resnetv24_stage4_conv8_fwd"
+    penwidth=3
+    style=filled
+    color="#96c583"
+    fontcolor="#000000"
+    fillcolor="#acdc99"
+  ];
+  "resnetv24_stage4_batchnorm8_gamma" [
+    id=414
+    name="resnetv24_stage4_batchnorm8_gamma"
+    type=constant_input
+    label="resnetv24_stage4_batchnorm8_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage4_batchnorm8_beta" [
+    id=415
+    name="resnetv24_stage4_batchnorm8_beta"
+    type=constant_input
+    label="resnetv24_stage4_batchnorm8_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage4_batchnorm8_running_mean" [
+    id=416
+    name="resnetv24_stage4_batchnorm8_running_mean"
+    type=constant_input
+    label="resnetv24_stage4_batchnorm8_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage4_batchnorm8_running_var" [
+    id=417
+    name="resnetv24_stage4_batchnorm8_running_var"
+    type=constant_input
+    label="resnetv24_stage4_batchnorm8_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage4_batchnorm8_fwd" [
+    id=418
+    name="resnetv24_stage4_batchnorm8_fwd"
+    type=BatchNormalization
+    label="{ {resnetv24_stage4_batchnorm8_fwd  | BN} | [[16,512,7,7],[512],[512],[512],[512]] }"
+    inputs="resnetv24_stage4_conv8_fwd;resnetv24_stage4_batchnorm8_gamma;resnetv24_stage4_batchnorm8_beta;resnetv24_stage4_batchnorm8_running_mean;resnetv24_stage4_batchnorm8_running_var"
+    outputs="resnetv24_stage4_batchnorm8_fwd"
+    penwidth=3
+    style=filled
+    color="#c4b983"
+    fontcolor="#000000"
+    fillcolor="#dccf99"
+  ];
+  "resnetv24_stage4_activation8" [
+    id=419
+    name="resnetv24_stage4_activation8"
+    type=Relu
+    label="{ {resnetv24_stage4_activation8  | RELU} | [16,512,7,7] }"
+    inputs="resnetv24_stage4_batchnorm8_fwd"
+    outputs="resnetv24_stage4_activation8"
+    penwidth=3
+    style=filled
+    color="#c5869b"
+    fontcolor="#000000"
+    fillcolor="#d898ad"
+  ];
+  "resnetv24_stage4_conv9_weight" [
+    id=420
+    name="resnetv24_stage4_conv9_weight"
+    type=constant_input
+    label="resnetv24_stage4_conv9_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_stage4_conv9_fwd" [
+    id=421
+    name="resnetv24_stage4_conv9_fwd"
+    type=Conv
+    label="{ {resnetv24_stage4_conv9_fwd  | CONV} | [16,2048,7,7] }"
+    inputs="resnetv24_stage4_activation8;resnetv24_stage4_conv9_weight"
+    outputs="resnetv24_stage4_conv9_fwd"
+    penwidth=3
+    style=filled
+    color="#96c583"
+    fontcolor="#000000"
+    fillcolor="#acdc99"
+  ];
+  "resnetv24_stage4__plus2" [
+    id=422
+    name="resnetv24_stage4__plus2"
+    type=Add
+    label="{ {resnetv24_stage4__plus2  | ADD} | [16,2048,7,7] }"
+    inputs="resnetv24_stage4_conv9_fwd;resnetv24_stage4__plus1"
+    outputs="resnetv24_stage4__plus2"
+    penwidth=3
+    style=filled
+    color="#c29382"
+    fontcolor="#000000"
+    fillcolor="#d6a695"
+  ];
+  "resnetv24_batchnorm2_gamma" [
+    id=423
+    name="resnetv24_batchnorm2_gamma"
+    type=constant_input
+    label="resnetv24_batchnorm2_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_batchnorm2_beta" [
+    id=424
+    name="resnetv24_batchnorm2_beta"
+    type=constant_input
+    label="resnetv24_batchnorm2_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_batchnorm2_running_mean" [
+    id=425
+    name="resnetv24_batchnorm2_running_mean"
+    type=constant_input
+    label="resnetv24_batchnorm2_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_batchnorm2_running_var" [
+    id=426
+    name="resnetv24_batchnorm2_running_var"
+    type=constant_input
+    label="resnetv24_batchnorm2_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_batchnorm2_fwd" [
+    id=427
+    name="resnetv24_batchnorm2_fwd"
+    type=BatchNormalization
+    label="{ {resnetv24_batchnorm2_fwd  | BN} | [[16,2048,7,7],[2048],[2048],[2048],[2048]] }"
+    inputs="resnetv24_stage4__plus2;resnetv24_batchnorm2_gamma;resnetv24_batchnorm2_beta;resnetv24_batchnorm2_running_mean;resnetv24_batchnorm2_running_var"
+    outputs="resnetv24_batchnorm2_fwd"
+    penwidth=3
+    style=filled
+    color="#c4b983"
+    fontcolor="#000000"
+    fillcolor="#dccf99"
+  ];
+  "resnetv24_relu1_fwd" [
+    id=428
+    name="resnetv24_relu1_fwd"
+    type=Relu
+    label="{ {resnetv24_relu1_fwd  | RELU} | [16,2048,7,7] }"
+    inputs="resnetv24_batchnorm2_fwd"
+    outputs="resnetv24_relu1_fwd"
+    penwidth=3
+    style=filled
+    color="#c5869b"
+    fontcolor="#000000"
+    fillcolor="#d898ad"
+  ];
+  "resnetv24_pool1_fwd" [
+    id=429
+    name="resnetv24_pool1_fwd"
+    type=GlobalAveragePool
+    label="{ {resnetv24_pool1_fwd  | GLBPL} | [16,2048,1,1] }"
+    inputs="resnetv24_relu1_fwd"
+    outputs="resnetv24_pool1_fwd"
+    penwidth=3
+    style=filled
+    color="#82bfb1"
+    fontcolor="#000000"
+    fillcolor="#98d6c7"
+  ];
+  "reshape_attr_tensor430" [
+    id=430
+    name="reshape_attr_tensor430"
+    type=constant_input
+    label="reshape_attr_tensor430"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_flatten0_reshape0" [
+    id=431
+    name="resnetv24_flatten0_reshape0"
+    type=Reshape
+    label="{ {resnetv24_flatten0_reshape0  | RSHP} | [16,2048] }"
+    inputs="resnetv24_pool1_fwd;reshape_attr_tensor430"
+    outputs="resnetv24_flatten0_reshape0"
+    penwidth=3
+    style=filled
+    color="#9684c1"
+    fontcolor="#000000"
+    fillcolor="#a895d3"
+  ];
+  "resnetv24_dense0_weight" [
+    id=432
+    name="resnetv24_dense0_weight"
+    type=constant_input
+    label="resnetv24_dense0_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_dense0_bias" [
+    id=433
+    name="resnetv24_dense0_bias"
+    type=constant_input
+    label="resnetv24_dense0_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv24_dense0_fwd" [
+    id=434
+    name="resnetv24_dense0_fwd"
+    type=Gemm
+    label="{ {resnetv24_dense0_fwd  | GEMM} | [16,1000] }"
+    inputs="resnetv24_flatten0_reshape0;resnetv24_dense0_weight;resnetv24_dense0_bias"
+    outputs="resnetv24_dense0_fwd"
+    penwidth=3
+    style=filled
+    color="#88a9c9"
+    fontcolor="#000000"
+    fillcolor="#9cbedf"
+  ];
+
+  // Edge definitions.
+  "data" -> "resnetv24_batchnorm0_fwd";
+  "resnetv24_batchnorm0_gamma" -> "resnetv24_batchnorm0_fwd";
+  "resnetv24_batchnorm0_beta" -> "resnetv24_batchnorm0_fwd";
+  "resnetv24_batchnorm0_running_mean" -> "resnetv24_batchnorm0_fwd";
+  "resnetv24_batchnorm0_running_var" -> "resnetv24_batchnorm0_fwd";
+  "resnetv24_batchnorm0_fwd" -> "resnetv24_conv0_fwd";
+  "resnetv24_conv0_weight" -> "resnetv24_conv0_fwd";
+  "resnetv24_conv0_fwd" -> "resnetv24_batchnorm1_fwd";
+  "resnetv24_batchnorm1_gamma" -> "resnetv24_batchnorm1_fwd";
+  "resnetv24_batchnorm1_beta" -> "resnetv24_batchnorm1_fwd";
+  "resnetv24_batchnorm1_running_mean" -> "resnetv24_batchnorm1_fwd";
+  "resnetv24_batchnorm1_running_var" -> "resnetv24_batchnorm1_fwd";
+  "resnetv24_batchnorm1_fwd" -> "resnetv24_relu0_fwd";
+  "resnetv24_relu0_fwd" -> "resnetv24_pool0_fwd";
+  "resnetv24_pool0_fwd" -> "resnetv24_stage1_batchnorm0_fwd";
+  "resnetv24_stage1_batchnorm0_gamma" -> "resnetv24_stage1_batchnorm0_fwd";
+  "resnetv24_stage1_batchnorm0_beta" -> "resnetv24_stage1_batchnorm0_fwd";
+  "resnetv24_stage1_batchnorm0_running_mean" -> "resnetv24_stage1_batchnorm0_fwd";
+  "resnetv24_stage1_batchnorm0_running_var" -> "resnetv24_stage1_batchnorm0_fwd";
+  "resnetv24_stage1_batchnorm0_fwd" -> "resnetv24_stage1_activation0";
+  "resnetv24_stage1_activation0" -> "resnetv24_stage1_conv0_fwd";
+  "resnetv24_stage1_activation0" -> "resnetv24_stage1_conv3_fwd";
+  "resnetv24_stage1_conv0_weight" -> "resnetv24_stage1_conv0_fwd";
+  "resnetv24_stage1_conv0_fwd" -> "resnetv24_stage1_batchnorm1_fwd";
+  "resnetv24_stage1_batchnorm1_gamma" -> "resnetv24_stage1_batchnorm1_fwd";
+  "resnetv24_stage1_batchnorm1_beta" -> "resnetv24_stage1_batchnorm1_fwd";
+  "resnetv24_stage1_batchnorm1_running_mean" -> "resnetv24_stage1_batchnorm1_fwd";
+  "resnetv24_stage1_batchnorm1_running_var" -> "resnetv24_stage1_batchnorm1_fwd";
+  "resnetv24_stage1_batchnorm1_fwd" -> "resnetv24_stage1_activation1";
+  "resnetv24_stage1_activation1" -> "resnetv24_stage1_conv1_fwd";
+  "resnetv24_stage1_conv1_weight" -> "resnetv24_stage1_conv1_fwd";
+  "resnetv24_stage1_conv1_fwd" -> "resnetv24_stage1_batchnorm2_fwd";
+  "resnetv24_stage1_batchnorm2_gamma" -> "resnetv24_stage1_batchnorm2_fwd";
+  "resnetv24_stage1_batchnorm2_beta" -> "resnetv24_stage1_batchnorm2_fwd";
+  "resnetv24_stage1_batchnorm2_running_mean" -> "resnetv24_stage1_batchnorm2_fwd";
+  "resnetv24_stage1_batchnorm2_running_var" -> "resnetv24_stage1_batchnorm2_fwd";
+  "resnetv24_stage1_batchnorm2_fwd" -> "resnetv24_stage1_activation2";
+  "resnetv24_stage1_activation2" -> "resnetv24_stage1_conv2_fwd";
+  "resnetv24_stage1_conv2_weight" -> "resnetv24_stage1_conv2_fwd";
+  "resnetv24_stage1_conv2_fwd" -> "resnetv24_stage1__plus0";
+  "resnetv24_stage1_conv3_weight" -> "resnetv24_stage1_conv3_fwd";
+  "resnetv24_stage1_conv3_fwd" -> "resnetv24_stage1__plus0";
+  "resnetv24_stage1__plus0" -> "resnetv24_stage1_batchnorm3_fwd";
+  "resnetv24_stage1__plus0" -> "resnetv24_stage1__plus1";
+  "resnetv24_stage1_batchnorm3_gamma" -> "resnetv24_stage1_batchnorm3_fwd";
+  "resnetv24_stage1_batchnorm3_beta" -> "resnetv24_stage1_batchnorm3_fwd";
+  "resnetv24_stage1_batchnorm3_running_mean" -> "resnetv24_stage1_batchnorm3_fwd";
+  "resnetv24_stage1_batchnorm3_running_var" -> "resnetv24_stage1_batchnorm3_fwd";
+  "resnetv24_stage1_batchnorm3_fwd" -> "resnetv24_stage1_activation3";
+  "resnetv24_stage1_activation3" -> "resnetv24_stage1_conv4_fwd";
+  "resnetv24_stage1_conv4_weight" -> "resnetv24_stage1_conv4_fwd";
+  "resnetv24_stage1_conv4_fwd" -> "resnetv24_stage1_batchnorm4_fwd";
+  "resnetv24_stage1_batchnorm4_gamma" -> "resnetv24_stage1_batchnorm4_fwd";
+  "resnetv24_stage1_batchnorm4_beta" -> "resnetv24_stage1_batchnorm4_fwd";
+  "resnetv24_stage1_batchnorm4_running_mean" -> "resnetv24_stage1_batchnorm4_fwd";
+  "resnetv24_stage1_batchnorm4_running_var" -> "resnetv24_stage1_batchnorm4_fwd";
+  "resnetv24_stage1_batchnorm4_fwd" -> "resnetv24_stage1_activation4";
+  "resnetv24_stage1_activation4" -> "resnetv24_stage1_conv5_fwd";
+  "resnetv24_stage1_conv5_weight" -> "resnetv24_stage1_conv5_fwd";
+  "resnetv24_stage1_conv5_fwd" -> "resnetv24_stage1_batchnorm5_fwd";
+  "resnetv24_stage1_batchnorm5_gamma" -> "resnetv24_stage1_batchnorm5_fwd";
+  "resnetv24_stage1_batchnorm5_beta" -> "resnetv24_stage1_batchnorm5_fwd";
+  "resnetv24_stage1_batchnorm5_running_mean" -> "resnetv24_stage1_batchnorm5_fwd";
+  "resnetv24_stage1_batchnorm5_running_var" -> "resnetv24_stage1_batchnorm5_fwd";
+  "resnetv24_stage1_batchnorm5_fwd" -> "resnetv24_stage1_activation5";
+  "resnetv24_stage1_activation5" -> "resnetv24_stage1_conv6_fwd";
+  "resnetv24_stage1_conv6_weight" -> "resnetv24_stage1_conv6_fwd";
+  "resnetv24_stage1_conv6_fwd" -> "resnetv24_stage1__plus1";
+  "resnetv24_stage1__plus1" -> "resnetv24_stage1_batchnorm6_fwd";
+  "resnetv24_stage1__plus1" -> "resnetv24_stage1__plus2";
+  "resnetv24_stage1_batchnorm6_gamma" -> "resnetv24_stage1_batchnorm6_fwd";
+  "resnetv24_stage1_batchnorm6_beta" -> "resnetv24_stage1_batchnorm6_fwd";
+  "resnetv24_stage1_batchnorm6_running_mean" -> "resnetv24_stage1_batchnorm6_fwd";
+  "resnetv24_stage1_batchnorm6_running_var" -> "resnetv24_stage1_batchnorm6_fwd";
+  "resnetv24_stage1_batchnorm6_fwd" -> "resnetv24_stage1_activation6";
+  "resnetv24_stage1_activation6" -> "resnetv24_stage1_conv7_fwd";
+  "resnetv24_stage1_conv7_weight" -> "resnetv24_stage1_conv7_fwd";
+  "resnetv24_stage1_conv7_fwd" -> "resnetv24_stage1_batchnorm7_fwd";
+  "resnetv24_stage1_batchnorm7_gamma" -> "resnetv24_stage1_batchnorm7_fwd";
+  "resnetv24_stage1_batchnorm7_beta" -> "resnetv24_stage1_batchnorm7_fwd";
+  "resnetv24_stage1_batchnorm7_running_mean" -> "resnetv24_stage1_batchnorm7_fwd";
+  "resnetv24_stage1_batchnorm7_running_var" -> "resnetv24_stage1_batchnorm7_fwd";
+  "resnetv24_stage1_batchnorm7_fwd" -> "resnetv24_stage1_activation7";
+  "resnetv24_stage1_activation7" -> "resnetv24_stage1_conv8_fwd";
+  "resnetv24_stage1_conv8_weight" -> "resnetv24_stage1_conv8_fwd";
+  "resnetv24_stage1_conv8_fwd" -> "resnetv24_stage1_batchnorm8_fwd";
+  "resnetv24_stage1_batchnorm8_gamma" -> "resnetv24_stage1_batchnorm8_fwd";
+  "resnetv24_stage1_batchnorm8_beta" -> "resnetv24_stage1_batchnorm8_fwd";
+  "resnetv24_stage1_batchnorm8_running_mean" -> "resnetv24_stage1_batchnorm8_fwd";
+  "resnetv24_stage1_batchnorm8_running_var" -> "resnetv24_stage1_batchnorm8_fwd";
+  "resnetv24_stage1_batchnorm8_fwd" -> "resnetv24_stage1_activation8";
+  "resnetv24_stage1_activation8" -> "resnetv24_stage1_conv9_fwd";
+  "resnetv24_stage1_conv9_weight" -> "resnetv24_stage1_conv9_fwd";
+  "resnetv24_stage1_conv9_fwd" -> "resnetv24_stage1__plus2";
+  "resnetv24_stage1__plus2" -> "resnetv24_stage2_batchnorm0_fwd";
+  "resnetv24_stage2_batchnorm0_gamma" -> "resnetv24_stage2_batchnorm0_fwd";
+  "resnetv24_stage2_batchnorm0_beta" -> "resnetv24_stage2_batchnorm0_fwd";
+  "resnetv24_stage2_batchnorm0_running_mean" -> "resnetv24_stage2_batchnorm0_fwd";
+  "resnetv24_stage2_batchnorm0_running_var" -> "resnetv24_stage2_batchnorm0_fwd";
+  "resnetv24_stage2_batchnorm0_fwd" -> "resnetv24_stage2_activation0";
+  "resnetv24_stage2_activation0" -> "resnetv24_stage2_conv0_fwd";
+  "resnetv24_stage2_activation0" -> "resnetv24_stage2_conv3_fwd";
+  "resnetv24_stage2_conv0_weight" -> "resnetv24_stage2_conv0_fwd";
+  "resnetv24_stage2_conv0_fwd" -> "resnetv24_stage2_batchnorm1_fwd";
+  "resnetv24_stage2_batchnorm1_gamma" -> "resnetv24_stage2_batchnorm1_fwd";
+  "resnetv24_stage2_batchnorm1_beta" -> "resnetv24_stage2_batchnorm1_fwd";
+  "resnetv24_stage2_batchnorm1_running_mean" -> "resnetv24_stage2_batchnorm1_fwd";
+  "resnetv24_stage2_batchnorm1_running_var" -> "resnetv24_stage2_batchnorm1_fwd";
+  "resnetv24_stage2_batchnorm1_fwd" -> "resnetv24_stage2_activation1";
+  "resnetv24_stage2_activation1" -> "resnetv24_stage2_conv1_fwd";
+  "resnetv24_stage2_conv1_weight" -> "resnetv24_stage2_conv1_fwd";
+  "resnetv24_stage2_conv1_fwd" -> "resnetv24_stage2_batchnorm2_fwd";
+  "resnetv24_stage2_batchnorm2_gamma" -> "resnetv24_stage2_batchnorm2_fwd";
+  "resnetv24_stage2_batchnorm2_beta" -> "resnetv24_stage2_batchnorm2_fwd";
+  "resnetv24_stage2_batchnorm2_running_mean" -> "resnetv24_stage2_batchnorm2_fwd";
+  "resnetv24_stage2_batchnorm2_running_var" -> "resnetv24_stage2_batchnorm2_fwd";
+  "resnetv24_stage2_batchnorm2_fwd" -> "resnetv24_stage2_activation2";
+  "resnetv24_stage2_activation2" -> "resnetv24_stage2_conv2_fwd";
+  "resnetv24_stage2_conv2_weight" -> "resnetv24_stage2_conv2_fwd";
+  "resnetv24_stage2_conv2_fwd" -> "resnetv24_stage2__plus0";
+  "resnetv24_stage2_conv3_weight" -> "resnetv24_stage2_conv3_fwd";
+  "resnetv24_stage2_conv3_fwd" -> "resnetv24_stage2__plus0";
+  "resnetv24_stage2__plus0" -> "resnetv24_stage2_batchnorm3_fwd";
+  "resnetv24_stage2__plus0" -> "resnetv24_stage2__plus1";
+  "resnetv24_stage2_batchnorm3_gamma" -> "resnetv24_stage2_batchnorm3_fwd";
+  "resnetv24_stage2_batchnorm3_beta" -> "resnetv24_stage2_batchnorm3_fwd";
+  "resnetv24_stage2_batchnorm3_running_mean" -> "resnetv24_stage2_batchnorm3_fwd";
+  "resnetv24_stage2_batchnorm3_running_var" -> "resnetv24_stage2_batchnorm3_fwd";
+  "resnetv24_stage2_batchnorm3_fwd" -> "resnetv24_stage2_activation3";
+  "resnetv24_stage2_activation3" -> "resnetv24_stage2_conv4_fwd";
+  "resnetv24_stage2_conv4_weight" -> "resnetv24_stage2_conv4_fwd";
+  "resnetv24_stage2_conv4_fwd" -> "resnetv24_stage2_batchnorm4_fwd";
+  "resnetv24_stage2_batchnorm4_gamma" -> "resnetv24_stage2_batchnorm4_fwd";
+  "resnetv24_stage2_batchnorm4_beta" -> "resnetv24_stage2_batchnorm4_fwd";
+  "resnetv24_stage2_batchnorm4_running_mean" -> "resnetv24_stage2_batchnorm4_fwd";
+  "resnetv24_stage2_batchnorm4_running_var" -> "resnetv24_stage2_batchnorm4_fwd";
+  "resnetv24_stage2_batchnorm4_fwd" -> "resnetv24_stage2_activation4";
+  "resnetv24_stage2_activation4" -> "resnetv24_stage2_conv5_fwd";
+  "resnetv24_stage2_conv5_weight" -> "resnetv24_stage2_conv5_fwd";
+  "resnetv24_stage2_conv5_fwd" -> "resnetv24_stage2_batchnorm5_fwd";
+  "resnetv24_stage2_batchnorm5_gamma" -> "resnetv24_stage2_batchnorm5_fwd";
+  "resnetv24_stage2_batchnorm5_beta" -> "resnetv24_stage2_batchnorm5_fwd";
+  "resnetv24_stage2_batchnorm5_running_mean" -> "resnetv24_stage2_batchnorm5_fwd";
+  "resnetv24_stage2_batchnorm5_running_var" -> "resnetv24_stage2_batchnorm5_fwd";
+  "resnetv24_stage2_batchnorm5_fwd" -> "resnetv24_stage2_activation5";
+  "resnetv24_stage2_activation5" -> "resnetv24_stage2_conv6_fwd";
+  "resnetv24_stage2_conv6_weight" -> "resnetv24_stage2_conv6_fwd";
+  "resnetv24_stage2_conv6_fwd" -> "resnetv24_stage2__plus1";
+  "resnetv24_stage2__plus1" -> "resnetv24_stage2_batchnorm6_fwd";
+  "resnetv24_stage2__plus1" -> "resnetv24_stage2__plus2";
+  "resnetv24_stage2_batchnorm6_gamma" -> "resnetv24_stage2_batchnorm6_fwd";
+  "resnetv24_stage2_batchnorm6_beta" -> "resnetv24_stage2_batchnorm6_fwd";
+  "resnetv24_stage2_batchnorm6_running_mean" -> "resnetv24_stage2_batchnorm6_fwd";
+  "resnetv24_stage2_batchnorm6_running_var" -> "resnetv24_stage2_batchnorm6_fwd";
+  "resnetv24_stage2_batchnorm6_fwd" -> "resnetv24_stage2_activation6";
+  "resnetv24_stage2_activation6" -> "resnetv24_stage2_conv7_fwd";
+  "resnetv24_stage2_conv7_weight" -> "resnetv24_stage2_conv7_fwd";
+  "resnetv24_stage2_conv7_fwd" -> "resnetv24_stage2_batchnorm7_fwd";
+  "resnetv24_stage2_batchnorm7_gamma" -> "resnetv24_stage2_batchnorm7_fwd";
+  "resnetv24_stage2_batchnorm7_beta" -> "resnetv24_stage2_batchnorm7_fwd";
+  "resnetv24_stage2_batchnorm7_running_mean" -> "resnetv24_stage2_batchnorm7_fwd";
+  "resnetv24_stage2_batchnorm7_running_var" -> "resnetv24_stage2_batchnorm7_fwd";
+  "resnetv24_stage2_batchnorm7_fwd" -> "resnetv24_stage2_activation7";
+  "resnetv24_stage2_activation7" -> "resnetv24_stage2_conv8_fwd";
+  "resnetv24_stage2_conv8_weight" -> "resnetv24_stage2_conv8_fwd";
+  "resnetv24_stage2_conv8_fwd" -> "resnetv24_stage2_batchnorm8_fwd";
+  "resnetv24_stage2_batchnorm8_gamma" -> "resnetv24_stage2_batchnorm8_fwd";
+  "resnetv24_stage2_batchnorm8_beta" -> "resnetv24_stage2_batchnorm8_fwd";
+  "resnetv24_stage2_batchnorm8_running_mean" -> "resnetv24_stage2_batchnorm8_fwd";
+  "resnetv24_stage2_batchnorm8_running_var" -> "resnetv24_stage2_batchnorm8_fwd";
+  "resnetv24_stage2_batchnorm8_fwd" -> "resnetv24_stage2_activation8";
+  "resnetv24_stage2_activation8" -> "resnetv24_stage2_conv9_fwd";
+  "resnetv24_stage2_conv9_weight" -> "resnetv24_stage2_conv9_fwd";
+  "resnetv24_stage2_conv9_fwd" -> "resnetv24_stage2__plus2";
+  "resnetv24_stage2__plus2" -> "resnetv24_stage2_batchnorm9_fwd";
+  "resnetv24_stage2__plus2" -> "resnetv24_stage2__plus3";
+  "resnetv24_stage2_batchnorm9_gamma" -> "resnetv24_stage2_batchnorm9_fwd";
+  "resnetv24_stage2_batchnorm9_beta" -> "resnetv24_stage2_batchnorm9_fwd";
+  "resnetv24_stage2_batchnorm9_running_mean" -> "resnetv24_stage2_batchnorm9_fwd";
+  "resnetv24_stage2_batchnorm9_running_var" -> "resnetv24_stage2_batchnorm9_fwd";
+  "resnetv24_stage2_batchnorm9_fwd" -> "resnetv24_stage2_activation9";
+  "resnetv24_stage2_activation9" -> "resnetv24_stage2_conv10_fwd";
+  "resnetv24_stage2_conv10_weight" -> "resnetv24_stage2_conv10_fwd";
+  "resnetv24_stage2_conv10_fwd" -> "resnetv24_stage2_batchnorm10_fwd";
+  "resnetv24_stage2_batchnorm10_gamma" -> "resnetv24_stage2_batchnorm10_fwd";
+  "resnetv24_stage2_batchnorm10_beta" -> "resnetv24_stage2_batchnorm10_fwd";
+  "resnetv24_stage2_batchnorm10_running_mean" -> "resnetv24_stage2_batchnorm10_fwd";
+  "resnetv24_stage2_batchnorm10_running_var" -> "resnetv24_stage2_batchnorm10_fwd";
+  "resnetv24_stage2_batchnorm10_fwd" -> "resnetv24_stage2_activation10";
+  "resnetv24_stage2_activation10" -> "resnetv24_stage2_conv11_fwd";
+  "resnetv24_stage2_conv11_weight" -> "resnetv24_stage2_conv11_fwd";
+  "resnetv24_stage2_conv11_fwd" -> "resnetv24_stage2_batchnorm11_fwd";
+  "resnetv24_stage2_batchnorm11_gamma" -> "resnetv24_stage2_batchnorm11_fwd";
+  "resnetv24_stage2_batchnorm11_beta" -> "resnetv24_stage2_batchnorm11_fwd";
+  "resnetv24_stage2_batchnorm11_running_mean" -> "resnetv24_stage2_batchnorm11_fwd";
+  "resnetv24_stage2_batchnorm11_running_var" -> "resnetv24_stage2_batchnorm11_fwd";
+  "resnetv24_stage2_batchnorm11_fwd" -> "resnetv24_stage2_activation11";
+  "resnetv24_stage2_activation11" -> "resnetv24_stage2_conv12_fwd";
+  "resnetv24_stage2_conv12_weight" -> "resnetv24_stage2_conv12_fwd";
+  "resnetv24_stage2_conv12_fwd" -> "resnetv24_stage2__plus3";
+  "resnetv24_stage2__plus3" -> "resnetv24_stage3_batchnorm0_fwd";
+  "resnetv24_stage3_batchnorm0_gamma" -> "resnetv24_stage3_batchnorm0_fwd";
+  "resnetv24_stage3_batchnorm0_beta" -> "resnetv24_stage3_batchnorm0_fwd";
+  "resnetv24_stage3_batchnorm0_running_mean" -> "resnetv24_stage3_batchnorm0_fwd";
+  "resnetv24_stage3_batchnorm0_running_var" -> "resnetv24_stage3_batchnorm0_fwd";
+  "resnetv24_stage3_batchnorm0_fwd" -> "resnetv24_stage3_activation0";
+  "resnetv24_stage3_activation0" -> "resnetv24_stage3_conv0_fwd";
+  "resnetv24_stage3_activation0" -> "resnetv24_stage3_conv3_fwd";
+  "resnetv24_stage3_conv0_weight" -> "resnetv24_stage3_conv0_fwd";
+  "resnetv24_stage3_conv0_fwd" -> "resnetv24_stage3_batchnorm1_fwd";
+  "resnetv24_stage3_batchnorm1_gamma" -> "resnetv24_stage3_batchnorm1_fwd";
+  "resnetv24_stage3_batchnorm1_beta" -> "resnetv24_stage3_batchnorm1_fwd";
+  "resnetv24_stage3_batchnorm1_running_mean" -> "resnetv24_stage3_batchnorm1_fwd";
+  "resnetv24_stage3_batchnorm1_running_var" -> "resnetv24_stage3_batchnorm1_fwd";
+  "resnetv24_stage3_batchnorm1_fwd" -> "resnetv24_stage3_activation1";
+  "resnetv24_stage3_activation1" -> "resnetv24_stage3_conv1_fwd";
+  "resnetv24_stage3_conv1_weight" -> "resnetv24_stage3_conv1_fwd";
+  "resnetv24_stage3_conv1_fwd" -> "resnetv24_stage3_batchnorm2_fwd";
+  "resnetv24_stage3_batchnorm2_gamma" -> "resnetv24_stage3_batchnorm2_fwd";
+  "resnetv24_stage3_batchnorm2_beta" -> "resnetv24_stage3_batchnorm2_fwd";
+  "resnetv24_stage3_batchnorm2_running_mean" -> "resnetv24_stage3_batchnorm2_fwd";
+  "resnetv24_stage3_batchnorm2_running_var" -> "resnetv24_stage3_batchnorm2_fwd";
+  "resnetv24_stage3_batchnorm2_fwd" -> "resnetv24_stage3_activation2";
+  "resnetv24_stage3_activation2" -> "resnetv24_stage3_conv2_fwd";
+  "resnetv24_stage3_conv2_weight" -> "resnetv24_stage3_conv2_fwd";
+  "resnetv24_stage3_conv2_fwd" -> "resnetv24_stage3__plus0";
+  "resnetv24_stage3_conv3_weight" -> "resnetv24_stage3_conv3_fwd";
+  "resnetv24_stage3_conv3_fwd" -> "resnetv24_stage3__plus0";
+  "resnetv24_stage3__plus0" -> "resnetv24_stage3_batchnorm3_fwd";
+  "resnetv24_stage3__plus0" -> "resnetv24_stage3__plus1";
+  "resnetv24_stage3_batchnorm3_gamma" -> "resnetv24_stage3_batchnorm3_fwd";
+  "resnetv24_stage3_batchnorm3_beta" -> "resnetv24_stage3_batchnorm3_fwd";
+  "resnetv24_stage3_batchnorm3_running_mean" -> "resnetv24_stage3_batchnorm3_fwd";
+  "resnetv24_stage3_batchnorm3_running_var" -> "resnetv24_stage3_batchnorm3_fwd";
+  "resnetv24_stage3_batchnorm3_fwd" -> "resnetv24_stage3_activation3";
+  "resnetv24_stage3_activation3" -> "resnetv24_stage3_conv4_fwd";
+  "resnetv24_stage3_conv4_weight" -> "resnetv24_stage3_conv4_fwd";
+  "resnetv24_stage3_conv4_fwd" -> "resnetv24_stage3_batchnorm4_fwd";
+  "resnetv24_stage3_batchnorm4_gamma" -> "resnetv24_stage3_batchnorm4_fwd";
+  "resnetv24_stage3_batchnorm4_beta" -> "resnetv24_stage3_batchnorm4_fwd";
+  "resnetv24_stage3_batchnorm4_running_mean" -> "resnetv24_stage3_batchnorm4_fwd";
+  "resnetv24_stage3_batchnorm4_running_var" -> "resnetv24_stage3_batchnorm4_fwd";
+  "resnetv24_stage3_batchnorm4_fwd" -> "resnetv24_stage3_activation4";
+  "resnetv24_stage3_activation4" -> "resnetv24_stage3_conv5_fwd";
+  "resnetv24_stage3_conv5_weight" -> "resnetv24_stage3_conv5_fwd";
+  "resnetv24_stage3_conv5_fwd" -> "resnetv24_stage3_batchnorm5_fwd";
+  "resnetv24_stage3_batchnorm5_gamma" -> "resnetv24_stage3_batchnorm5_fwd";
+  "resnetv24_stage3_batchnorm5_beta" -> "resnetv24_stage3_batchnorm5_fwd";
+  "resnetv24_stage3_batchnorm5_running_mean" -> "resnetv24_stage3_batchnorm5_fwd";
+  "resnetv24_stage3_batchnorm5_running_var" -> "resnetv24_stage3_batchnorm5_fwd";
+  "resnetv24_stage3_batchnorm5_fwd" -> "resnetv24_stage3_activation5";
+  "resnetv24_stage3_activation5" -> "resnetv24_stage3_conv6_fwd";
+  "resnetv24_stage3_conv6_weight" -> "resnetv24_stage3_conv6_fwd";
+  "resnetv24_stage3_conv6_fwd" -> "resnetv24_stage3__plus1";
+  "resnetv24_stage3__plus1" -> "resnetv24_stage3_batchnorm6_fwd";
+  "resnetv24_stage3__plus1" -> "resnetv24_stage3__plus2";
+  "resnetv24_stage3_batchnorm6_gamma" -> "resnetv24_stage3_batchnorm6_fwd";
+  "resnetv24_stage3_batchnorm6_beta" -> "resnetv24_stage3_batchnorm6_fwd";
+  "resnetv24_stage3_batchnorm6_running_mean" -> "resnetv24_stage3_batchnorm6_fwd";
+  "resnetv24_stage3_batchnorm6_running_var" -> "resnetv24_stage3_batchnorm6_fwd";
+  "resnetv24_stage3_batchnorm6_fwd" -> "resnetv24_stage3_activation6";
+  "resnetv24_stage3_activation6" -> "resnetv24_stage3_conv7_fwd";
+  "resnetv24_stage3_conv7_weight" -> "resnetv24_stage3_conv7_fwd";
+  "resnetv24_stage3_conv7_fwd" -> "resnetv24_stage3_batchnorm7_fwd";
+  "resnetv24_stage3_batchnorm7_gamma" -> "resnetv24_stage3_batchnorm7_fwd";
+  "resnetv24_stage3_batchnorm7_beta" -> "resnetv24_stage3_batchnorm7_fwd";
+  "resnetv24_stage3_batchnorm7_running_mean" -> "resnetv24_stage3_batchnorm7_fwd";
+  "resnetv24_stage3_batchnorm7_running_var" -> "resnetv24_stage3_batchnorm7_fwd";
+  "resnetv24_stage3_batchnorm7_fwd" -> "resnetv24_stage3_activation7";
+  "resnetv24_stage3_activation7" -> "resnetv24_stage3_conv8_fwd";
+  "resnetv24_stage3_conv8_weight" -> "resnetv24_stage3_conv8_fwd";
+  "resnetv24_stage3_conv8_fwd" -> "resnetv24_stage3_batchnorm8_fwd";
+  "resnetv24_stage3_batchnorm8_gamma" -> "resnetv24_stage3_batchnorm8_fwd";
+  "resnetv24_stage3_batchnorm8_beta" -> "resnetv24_stage3_batchnorm8_fwd";
+  "resnetv24_stage3_batchnorm8_running_mean" -> "resnetv24_stage3_batchnorm8_fwd";
+  "resnetv24_stage3_batchnorm8_running_var" -> "resnetv24_stage3_batchnorm8_fwd";
+  "resnetv24_stage3_batchnorm8_fwd" -> "resnetv24_stage3_activation8";
+  "resnetv24_stage3_activation8" -> "resnetv24_stage3_conv9_fwd";
+  "resnetv24_stage3_conv9_weight" -> "resnetv24_stage3_conv9_fwd";
+  "resnetv24_stage3_conv9_fwd" -> "resnetv24_stage3__plus2";
+  "resnetv24_stage3__plus2" -> "resnetv24_stage3_batchnorm9_fwd";
+  "resnetv24_stage3__plus2" -> "resnetv24_stage3__plus3";
+  "resnetv24_stage3_batchnorm9_gamma" -> "resnetv24_stage3_batchnorm9_fwd";
+  "resnetv24_stage3_batchnorm9_beta" -> "resnetv24_stage3_batchnorm9_fwd";
+  "resnetv24_stage3_batchnorm9_running_mean" -> "resnetv24_stage3_batchnorm9_fwd";
+  "resnetv24_stage3_batchnorm9_running_var" -> "resnetv24_stage3_batchnorm9_fwd";
+  "resnetv24_stage3_batchnorm9_fwd" -> "resnetv24_stage3_activation9";
+  "resnetv24_stage3_activation9" -> "resnetv24_stage3_conv10_fwd";
+  "resnetv24_stage3_conv10_weight" -> "resnetv24_stage3_conv10_fwd";
+  "resnetv24_stage3_conv10_fwd" -> "resnetv24_stage3_batchnorm10_fwd";
+  "resnetv24_stage3_batchnorm10_gamma" -> "resnetv24_stage3_batchnorm10_fwd";
+  "resnetv24_stage3_batchnorm10_beta" -> "resnetv24_stage3_batchnorm10_fwd";
+  "resnetv24_stage3_batchnorm10_running_mean" -> "resnetv24_stage3_batchnorm10_fwd";
+  "resnetv24_stage3_batchnorm10_running_var" -> "resnetv24_stage3_batchnorm10_fwd";
+  "resnetv24_stage3_batchnorm10_fwd" -> "resnetv24_stage3_activation10";
+  "resnetv24_stage3_activation10" -> "resnetv24_stage3_conv11_fwd";
+  "resnetv24_stage3_conv11_weight" -> "resnetv24_stage3_conv11_fwd";
+  "resnetv24_stage3_conv11_fwd" -> "resnetv24_stage3_batchnorm11_fwd";
+  "resnetv24_stage3_batchnorm11_gamma" -> "resnetv24_stage3_batchnorm11_fwd";
+  "resnetv24_stage3_batchnorm11_beta" -> "resnetv24_stage3_batchnorm11_fwd";
+  "resnetv24_stage3_batchnorm11_running_mean" -> "resnetv24_stage3_batchnorm11_fwd";
+  "resnetv24_stage3_batchnorm11_running_var" -> "resnetv24_stage3_batchnorm11_fwd";
+  "resnetv24_stage3_batchnorm11_fwd" -> "resnetv24_stage3_activation11";
+  "resnetv24_stage3_activation11" -> "resnetv24_stage3_conv12_fwd";
+  "resnetv24_stage3_conv12_weight" -> "resnetv24_stage3_conv12_fwd";
+  "resnetv24_stage3_conv12_fwd" -> "resnetv24_stage3__plus3";
+  "resnetv24_stage3__plus3" -> "resnetv24_stage3_batchnorm12_fwd";
+  "resnetv24_stage3__plus3" -> "resnetv24_stage3__plus4";
+  "resnetv24_stage3_batchnorm12_gamma" -> "resnetv24_stage3_batchnorm12_fwd";
+  "resnetv24_stage3_batchnorm12_beta" -> "resnetv24_stage3_batchnorm12_fwd";
+  "resnetv24_stage3_batchnorm12_running_mean" -> "resnetv24_stage3_batchnorm12_fwd";
+  "resnetv24_stage3_batchnorm12_running_var" -> "resnetv24_stage3_batchnorm12_fwd";
+  "resnetv24_stage3_batchnorm12_fwd" -> "resnetv24_stage3_activation12";
+  "resnetv24_stage3_activation12" -> "resnetv24_stage3_conv13_fwd";
+  "resnetv24_stage3_conv13_weight" -> "resnetv24_stage3_conv13_fwd";
+  "resnetv24_stage3_conv13_fwd" -> "resnetv24_stage3_batchnorm13_fwd";
+  "resnetv24_stage3_batchnorm13_gamma" -> "resnetv24_stage3_batchnorm13_fwd";
+  "resnetv24_stage3_batchnorm13_beta" -> "resnetv24_stage3_batchnorm13_fwd";
+  "resnetv24_stage3_batchnorm13_running_mean" -> "resnetv24_stage3_batchnorm13_fwd";
+  "resnetv24_stage3_batchnorm13_running_var" -> "resnetv24_stage3_batchnorm13_fwd";
+  "resnetv24_stage3_batchnorm13_fwd" -> "resnetv24_stage3_activation13";
+  "resnetv24_stage3_activation13" -> "resnetv24_stage3_conv14_fwd";
+  "resnetv24_stage3_conv14_weight" -> "resnetv24_stage3_conv14_fwd";
+  "resnetv24_stage3_conv14_fwd" -> "resnetv24_stage3_batchnorm14_fwd";
+  "resnetv24_stage3_batchnorm14_gamma" -> "resnetv24_stage3_batchnorm14_fwd";
+  "resnetv24_stage3_batchnorm14_beta" -> "resnetv24_stage3_batchnorm14_fwd";
+  "resnetv24_stage3_batchnorm14_running_mean" -> "resnetv24_stage3_batchnorm14_fwd";
+  "resnetv24_stage3_batchnorm14_running_var" -> "resnetv24_stage3_batchnorm14_fwd";
+  "resnetv24_stage3_batchnorm14_fwd" -> "resnetv24_stage3_activation14";
+  "resnetv24_stage3_activation14" -> "resnetv24_stage3_conv15_fwd";
+  "resnetv24_stage3_conv15_weight" -> "resnetv24_stage3_conv15_fwd";
+  "resnetv24_stage3_conv15_fwd" -> "resnetv24_stage3__plus4";
+  "resnetv24_stage3__plus4" -> "resnetv24_stage3_batchnorm15_fwd";
+  "resnetv24_stage3__plus4" -> "resnetv24_stage3__plus5";
+  "resnetv24_stage3_batchnorm15_gamma" -> "resnetv24_stage3_batchnorm15_fwd";
+  "resnetv24_stage3_batchnorm15_beta" -> "resnetv24_stage3_batchnorm15_fwd";
+  "resnetv24_stage3_batchnorm15_running_mean" -> "resnetv24_stage3_batchnorm15_fwd";
+  "resnetv24_stage3_batchnorm15_running_var" -> "resnetv24_stage3_batchnorm15_fwd";
+  "resnetv24_stage3_batchnorm15_fwd" -> "resnetv24_stage3_activation15";
+  "resnetv24_stage3_activation15" -> "resnetv24_stage3_conv16_fwd";
+  "resnetv24_stage3_conv16_weight" -> "resnetv24_stage3_conv16_fwd";
+  "resnetv24_stage3_conv16_fwd" -> "resnetv24_stage3_batchnorm16_fwd";
+  "resnetv24_stage3_batchnorm16_gamma" -> "resnetv24_stage3_batchnorm16_fwd";
+  "resnetv24_stage3_batchnorm16_beta" -> "resnetv24_stage3_batchnorm16_fwd";
+  "resnetv24_stage3_batchnorm16_running_mean" -> "resnetv24_stage3_batchnorm16_fwd";
+  "resnetv24_stage3_batchnorm16_running_var" -> "resnetv24_stage3_batchnorm16_fwd";
+  "resnetv24_stage3_batchnorm16_fwd" -> "resnetv24_stage3_activation16";
+  "resnetv24_stage3_activation16" -> "resnetv24_stage3_conv17_fwd";
+  "resnetv24_stage3_conv17_weight" -> "resnetv24_stage3_conv17_fwd";
+  "resnetv24_stage3_conv17_fwd" -> "resnetv24_stage3_batchnorm17_fwd";
+  "resnetv24_stage3_batchnorm17_gamma" -> "resnetv24_stage3_batchnorm17_fwd";
+  "resnetv24_stage3_batchnorm17_beta" -> "resnetv24_stage3_batchnorm17_fwd";
+  "resnetv24_stage3_batchnorm17_running_mean" -> "resnetv24_stage3_batchnorm17_fwd";
+  "resnetv24_stage3_batchnorm17_running_var" -> "resnetv24_stage3_batchnorm17_fwd";
+  "resnetv24_stage3_batchnorm17_fwd" -> "resnetv24_stage3_activation17";
+  "resnetv24_stage3_activation17" -> "resnetv24_stage3_conv18_fwd";
+  "resnetv24_stage3_conv18_weight" -> "resnetv24_stage3_conv18_fwd";
+  "resnetv24_stage3_conv18_fwd" -> "resnetv24_stage3__plus5";
+  "resnetv24_stage3__plus5" -> "resnetv24_stage4_batchnorm0_fwd";
+  "resnetv24_stage4_batchnorm0_gamma" -> "resnetv24_stage4_batchnorm0_fwd";
+  "resnetv24_stage4_batchnorm0_beta" -> "resnetv24_stage4_batchnorm0_fwd";
+  "resnetv24_stage4_batchnorm0_running_mean" -> "resnetv24_stage4_batchnorm0_fwd";
+  "resnetv24_stage4_batchnorm0_running_var" -> "resnetv24_stage4_batchnorm0_fwd";
+  "resnetv24_stage4_batchnorm0_fwd" -> "resnetv24_stage4_activation0";
+  "resnetv24_stage4_activation0" -> "resnetv24_stage4_conv0_fwd";
+  "resnetv24_stage4_activation0" -> "resnetv24_stage4_conv3_fwd";
+  "resnetv24_stage4_conv0_weight" -> "resnetv24_stage4_conv0_fwd";
+  "resnetv24_stage4_conv0_fwd" -> "resnetv24_stage4_batchnorm1_fwd";
+  "resnetv24_stage4_batchnorm1_gamma" -> "resnetv24_stage4_batchnorm1_fwd";
+  "resnetv24_stage4_batchnorm1_beta" -> "resnetv24_stage4_batchnorm1_fwd";
+  "resnetv24_stage4_batchnorm1_running_mean" -> "resnetv24_stage4_batchnorm1_fwd";
+  "resnetv24_stage4_batchnorm1_running_var" -> "resnetv24_stage4_batchnorm1_fwd";
+  "resnetv24_stage4_batchnorm1_fwd" -> "resnetv24_stage4_activation1";
+  "resnetv24_stage4_activation1" -> "resnetv24_stage4_conv1_fwd";
+  "resnetv24_stage4_conv1_weight" -> "resnetv24_stage4_conv1_fwd";
+  "resnetv24_stage4_conv1_fwd" -> "resnetv24_stage4_batchnorm2_fwd";
+  "resnetv24_stage4_batchnorm2_gamma" -> "resnetv24_stage4_batchnorm2_fwd";
+  "resnetv24_stage4_batchnorm2_beta" -> "resnetv24_stage4_batchnorm2_fwd";
+  "resnetv24_stage4_batchnorm2_running_mean" -> "resnetv24_stage4_batchnorm2_fwd";
+  "resnetv24_stage4_batchnorm2_running_var" -> "resnetv24_stage4_batchnorm2_fwd";
+  "resnetv24_stage4_batchnorm2_fwd" -> "resnetv24_stage4_activation2";
+  "resnetv24_stage4_activation2" -> "resnetv24_stage4_conv2_fwd";
+  "resnetv24_stage4_conv2_weight" -> "resnetv24_stage4_conv2_fwd";
+  "resnetv24_stage4_conv2_fwd" -> "resnetv24_stage4__plus0";
+  "resnetv24_stage4_conv3_weight" -> "resnetv24_stage4_conv3_fwd";
+  "resnetv24_stage4_conv3_fwd" -> "resnetv24_stage4__plus0";
+  "resnetv24_stage4__plus0" -> "resnetv24_stage4_batchnorm3_fwd";
+  "resnetv24_stage4__plus0" -> "resnetv24_stage4__plus1";
+  "resnetv24_stage4_batchnorm3_gamma" -> "resnetv24_stage4_batchnorm3_fwd";
+  "resnetv24_stage4_batchnorm3_beta" -> "resnetv24_stage4_batchnorm3_fwd";
+  "resnetv24_stage4_batchnorm3_running_mean" -> "resnetv24_stage4_batchnorm3_fwd";
+  "resnetv24_stage4_batchnorm3_running_var" -> "resnetv24_stage4_batchnorm3_fwd";
+  "resnetv24_stage4_batchnorm3_fwd" -> "resnetv24_stage4_activation3";
+  "resnetv24_stage4_activation3" -> "resnetv24_stage4_conv4_fwd";
+  "resnetv24_stage4_conv4_weight" -> "resnetv24_stage4_conv4_fwd";
+  "resnetv24_stage4_conv4_fwd" -> "resnetv24_stage4_batchnorm4_fwd";
+  "resnetv24_stage4_batchnorm4_gamma" -> "resnetv24_stage4_batchnorm4_fwd";
+  "resnetv24_stage4_batchnorm4_beta" -> "resnetv24_stage4_batchnorm4_fwd";
+  "resnetv24_stage4_batchnorm4_running_mean" -> "resnetv24_stage4_batchnorm4_fwd";
+  "resnetv24_stage4_batchnorm4_running_var" -> "resnetv24_stage4_batchnorm4_fwd";
+  "resnetv24_stage4_batchnorm4_fwd" -> "resnetv24_stage4_activation4";
+  "resnetv24_stage4_activation4" -> "resnetv24_stage4_conv5_fwd";
+  "resnetv24_stage4_conv5_weight" -> "resnetv24_stage4_conv5_fwd";
+  "resnetv24_stage4_conv5_fwd" -> "resnetv24_stage4_batchnorm5_fwd";
+  "resnetv24_stage4_batchnorm5_gamma" -> "resnetv24_stage4_batchnorm5_fwd";
+  "resnetv24_stage4_batchnorm5_beta" -> "resnetv24_stage4_batchnorm5_fwd";
+  "resnetv24_stage4_batchnorm5_running_mean" -> "resnetv24_stage4_batchnorm5_fwd";
+  "resnetv24_stage4_batchnorm5_running_var" -> "resnetv24_stage4_batchnorm5_fwd";
+  "resnetv24_stage4_batchnorm5_fwd" -> "resnetv24_stage4_activation5";
+  "resnetv24_stage4_activation5" -> "resnetv24_stage4_conv6_fwd";
+  "resnetv24_stage4_conv6_weight" -> "resnetv24_stage4_conv6_fwd";
+  "resnetv24_stage4_conv6_fwd" -> "resnetv24_stage4__plus1";
+  "resnetv24_stage4__plus1" -> "resnetv24_stage4_batchnorm6_fwd";
+  "resnetv24_stage4__plus1" -> "resnetv24_stage4__plus2";
+  "resnetv24_stage4_batchnorm6_gamma" -> "resnetv24_stage4_batchnorm6_fwd";
+  "resnetv24_stage4_batchnorm6_beta" -> "resnetv24_stage4_batchnorm6_fwd";
+  "resnetv24_stage4_batchnorm6_running_mean" -> "resnetv24_stage4_batchnorm6_fwd";
+  "resnetv24_stage4_batchnorm6_running_var" -> "resnetv24_stage4_batchnorm6_fwd";
+  "resnetv24_stage4_batchnorm6_fwd" -> "resnetv24_stage4_activation6";
+  "resnetv24_stage4_activation6" -> "resnetv24_stage4_conv7_fwd";
+  "resnetv24_stage4_conv7_weight" -> "resnetv24_stage4_conv7_fwd";
+  "resnetv24_stage4_conv7_fwd" -> "resnetv24_stage4_batchnorm7_fwd";
+  "resnetv24_stage4_batchnorm7_gamma" -> "resnetv24_stage4_batchnorm7_fwd";
+  "resnetv24_stage4_batchnorm7_beta" -> "resnetv24_stage4_batchnorm7_fwd";
+  "resnetv24_stage4_batchnorm7_running_mean" -> "resnetv24_stage4_batchnorm7_fwd";
+  "resnetv24_stage4_batchnorm7_running_var" -> "resnetv24_stage4_batchnorm7_fwd";
+  "resnetv24_stage4_batchnorm7_fwd" -> "resnetv24_stage4_activation7";
+  "resnetv24_stage4_activation7" -> "resnetv24_stage4_conv8_fwd";
+  "resnetv24_stage4_conv8_weight" -> "resnetv24_stage4_conv8_fwd";
+  "resnetv24_stage4_conv8_fwd" -> "resnetv24_stage4_batchnorm8_fwd";
+  "resnetv24_stage4_batchnorm8_gamma" -> "resnetv24_stage4_batchnorm8_fwd";
+  "resnetv24_stage4_batchnorm8_beta" -> "resnetv24_stage4_batchnorm8_fwd";
+  "resnetv24_stage4_batchnorm8_running_mean" -> "resnetv24_stage4_batchnorm8_fwd";
+  "resnetv24_stage4_batchnorm8_running_var" -> "resnetv24_stage4_batchnorm8_fwd";
+  "resnetv24_stage4_batchnorm8_fwd" -> "resnetv24_stage4_activation8";
+  "resnetv24_stage4_activation8" -> "resnetv24_stage4_conv9_fwd";
+  "resnetv24_stage4_conv9_weight" -> "resnetv24_stage4_conv9_fwd";
+  "resnetv24_stage4_conv9_fwd" -> "resnetv24_stage4__plus2";
+  "resnetv24_stage4__plus2" -> "resnetv24_batchnorm2_fwd";
+  "resnetv24_batchnorm2_gamma" -> "resnetv24_batchnorm2_fwd";
+  "resnetv24_batchnorm2_beta" -> "resnetv24_batchnorm2_fwd";
+  "resnetv24_batchnorm2_running_mean" -> "resnetv24_batchnorm2_fwd";
+  "resnetv24_batchnorm2_running_var" -> "resnetv24_batchnorm2_fwd";
+  "resnetv24_batchnorm2_fwd" -> "resnetv24_relu1_fwd";
+  "resnetv24_relu1_fwd" -> "resnetv24_pool1_fwd";
+  "resnetv24_pool1_fwd" -> "resnetv24_flatten0_reshape0";
+  "reshape_attr_tensor430" -> "resnetv24_flatten0_reshape0";
+  "resnetv24_flatten0_reshape0" -> "resnetv24_dense0_fwd";
+  "resnetv24_dense0_weight" -> "resnetv24_dense0_fwd";
+  "resnetv24_dense0_bias" -> "resnetv24_dense0_fwd";
+}

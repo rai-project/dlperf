@@ -1,0 +1,6083 @@
+strict digraph {
+  graph [
+    rankdir="TB"
+    overlap=prism
+    overlap_shrink=true
+    splines=curved
+  ];
+  node [
+    shape=Mrecord
+  ];
+  edge [
+    penwidth=3
+  ];
+
+  // Node definitions.
+  "data" [
+    id=0
+    name="data"
+    type=constant_input
+    label="data"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_conv0_weight" [
+    id=1
+    name="resnetv17_conv0_weight"
+    type=constant_input
+    label="resnetv17_conv0_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_conv0_fwd" [
+    id=2
+    name="resnetv17_conv0_fwd"
+    type=Conv
+    label="{ {resnetv17_conv0_fwd  | CONV} | [8,64,112,112] }"
+    inputs="data;resnetv17_conv0_weight"
+    outputs="resnetv17_conv0_fwd"
+    penwidth=3
+    style=filled
+    color="#c29182"
+    fontcolor="#000000"
+    fillcolor="#d6a494"
+  ];
+  "resnetv17_batchnorm0_gamma" [
+    id=3
+    name="resnetv17_batchnorm0_gamma"
+    type=constant_input
+    label="resnetv17_batchnorm0_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_batchnorm0_beta" [
+    id=4
+    name="resnetv17_batchnorm0_beta"
+    type=constant_input
+    label="resnetv17_batchnorm0_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_batchnorm0_running_mean" [
+    id=5
+    name="resnetv17_batchnorm0_running_mean"
+    type=constant_input
+    label="resnetv17_batchnorm0_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_batchnorm0_running_var" [
+    id=6
+    name="resnetv17_batchnorm0_running_var"
+    type=constant_input
+    label="resnetv17_batchnorm0_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_batchnorm0_fwd" [
+    id=7
+    name="resnetv17_batchnorm0_fwd"
+    type=BatchNormalization
+    label="{ {resnetv17_batchnorm0_fwd  | BN} | [[8,64,112,112],[64],[64],[64],[64]] }"
+    inputs="resnetv17_conv0_fwd;resnetv17_batchnorm0_gamma;resnetv17_batchnorm0_beta;resnetv17_batchnorm0_running_mean;resnetv17_batchnorm0_running_var"
+    outputs="resnetv17_batchnorm0_fwd"
+    penwidth=3
+    style=filled
+    color="#c78695"
+    fontcolor="#000000"
+    fillcolor="#db98a7"
+  ];
+  "resnetv17_relu0_fwd" [
+    id=8
+    name="resnetv17_relu0_fwd"
+    type=Relu
+    label="{ {resnetv17_relu0_fwd  | RELU} | [8,64,112,112] }"
+    inputs="resnetv17_batchnorm0_fwd"
+    outputs="resnetv17_relu0_fwd"
+    penwidth=3
+    style=filled
+    color="#a385cc"
+    fontcolor="#000000"
+    fillcolor="#b697df"
+  ];
+  "resnetv17_pool0_fwd" [
+    id=9
+    name="resnetv17_pool0_fwd"
+    type=MaxPool
+    label="{ {resnetv17_pool0_fwd  | MXPL} | [8,64,56,56] }"
+    inputs="resnetv17_relu0_fwd"
+    outputs="resnetv17_pool0_fwd"
+    penwidth=3
+    style=filled
+    color="#be88b7"
+    fontcolor="#000000"
+    fillcolor="#d19bcb"
+  ];
+  "resnetv17_stage1_conv0_weight" [
+    id=10
+    name="resnetv17_stage1_conv0_weight"
+    type=constant_input
+    label="resnetv17_stage1_conv0_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage1_conv0_bias" [
+    id=11
+    name="resnetv17_stage1_conv0_bias"
+    type=constant_input
+    label="resnetv17_stage1_conv0_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage1_conv0_fwd" [
+    id=12
+    name="resnetv17_stage1_conv0_fwd"
+    type=Conv
+    label="{ {resnetv17_stage1_conv0_fwd  | CONV} | [8,64,56,56] }"
+    inputs="resnetv17_pool0_fwd;resnetv17_stage1_conv0_weight;resnetv17_stage1_conv0_bias"
+    outputs="resnetv17_stage1_conv0_fwd"
+    penwidth=3
+    style=filled
+    color="#c29182"
+    fontcolor="#000000"
+    fillcolor="#d6a494"
+  ];
+  "resnetv17_stage1_batchnorm0_gamma" [
+    id=13
+    name="resnetv17_stage1_batchnorm0_gamma"
+    type=constant_input
+    label="resnetv17_stage1_batchnorm0_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage1_batchnorm0_beta" [
+    id=14
+    name="resnetv17_stage1_batchnorm0_beta"
+    type=constant_input
+    label="resnetv17_stage1_batchnorm0_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage1_batchnorm0_running_mean" [
+    id=15
+    name="resnetv17_stage1_batchnorm0_running_mean"
+    type=constant_input
+    label="resnetv17_stage1_batchnorm0_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage1_batchnorm0_running_var" [
+    id=16
+    name="resnetv17_stage1_batchnorm0_running_var"
+    type=constant_input
+    label="resnetv17_stage1_batchnorm0_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage1_batchnorm0_fwd" [
+    id=17
+    name="resnetv17_stage1_batchnorm0_fwd"
+    type=BatchNormalization
+    label="{ {resnetv17_stage1_batchnorm0_fwd  | BN} | [[8,64,56,56],[64],[64],[64],[64]] }"
+    inputs="resnetv17_stage1_conv0_fwd;resnetv17_stage1_batchnorm0_gamma;resnetv17_stage1_batchnorm0_beta;resnetv17_stage1_batchnorm0_running_mean;resnetv17_stage1_batchnorm0_running_var"
+    outputs="resnetv17_stage1_batchnorm0_fwd"
+    penwidth=3
+    style=filled
+    color="#c78695"
+    fontcolor="#000000"
+    fillcolor="#db98a7"
+  ];
+  "resnetv17_stage1_relu0_fwd" [
+    id=18
+    name="resnetv17_stage1_relu0_fwd"
+    type=Relu
+    label="{ {resnetv17_stage1_relu0_fwd  | RELU} | [8,64,56,56] }"
+    inputs="resnetv17_stage1_batchnorm0_fwd"
+    outputs="resnetv17_stage1_relu0_fwd"
+    penwidth=3
+    style=filled
+    color="#a385cc"
+    fontcolor="#000000"
+    fillcolor="#b697df"
+  ];
+  "resnetv17_stage1_conv1_weight" [
+    id=19
+    name="resnetv17_stage1_conv1_weight"
+    type=constant_input
+    label="resnetv17_stage1_conv1_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage1_conv1_fwd" [
+    id=20
+    name="resnetv17_stage1_conv1_fwd"
+    type=Conv
+    label="{ {resnetv17_stage1_conv1_fwd  | CONV} | [8,64,56,56] }"
+    inputs="resnetv17_stage1_relu0_fwd;resnetv17_stage1_conv1_weight"
+    outputs="resnetv17_stage1_conv1_fwd"
+    penwidth=3
+    style=filled
+    color="#c29182"
+    fontcolor="#000000"
+    fillcolor="#d6a494"
+  ];
+  "resnetv17_stage1_batchnorm1_gamma" [
+    id=21
+    name="resnetv17_stage1_batchnorm1_gamma"
+    type=constant_input
+    label="resnetv17_stage1_batchnorm1_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage1_batchnorm1_beta" [
+    id=22
+    name="resnetv17_stage1_batchnorm1_beta"
+    type=constant_input
+    label="resnetv17_stage1_batchnorm1_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage1_batchnorm1_running_mean" [
+    id=23
+    name="resnetv17_stage1_batchnorm1_running_mean"
+    type=constant_input
+    label="resnetv17_stage1_batchnorm1_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage1_batchnorm1_running_var" [
+    id=24
+    name="resnetv17_stage1_batchnorm1_running_var"
+    type=constant_input
+    label="resnetv17_stage1_batchnorm1_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage1_batchnorm1_fwd" [
+    id=25
+    name="resnetv17_stage1_batchnorm1_fwd"
+    type=BatchNormalization
+    label="{ {resnetv17_stage1_batchnorm1_fwd  | BN} | [[8,64,56,56],[64],[64],[64],[64]] }"
+    inputs="resnetv17_stage1_conv1_fwd;resnetv17_stage1_batchnorm1_gamma;resnetv17_stage1_batchnorm1_beta;resnetv17_stage1_batchnorm1_running_mean;resnetv17_stage1_batchnorm1_running_var"
+    outputs="resnetv17_stage1_batchnorm1_fwd"
+    penwidth=3
+    style=filled
+    color="#c78695"
+    fontcolor="#000000"
+    fillcolor="#db98a7"
+  ];
+  "resnetv17_stage1_relu1_fwd" [
+    id=26
+    name="resnetv17_stage1_relu1_fwd"
+    type=Relu
+    label="{ {resnetv17_stage1_relu1_fwd  | RELU} | [8,64,56,56] }"
+    inputs="resnetv17_stage1_batchnorm1_fwd"
+    outputs="resnetv17_stage1_relu1_fwd"
+    penwidth=3
+    style=filled
+    color="#a385cc"
+    fontcolor="#000000"
+    fillcolor="#b697df"
+  ];
+  "resnetv17_stage1_conv2_weight" [
+    id=27
+    name="resnetv17_stage1_conv2_weight"
+    type=constant_input
+    label="resnetv17_stage1_conv2_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage1_conv2_bias" [
+    id=28
+    name="resnetv17_stage1_conv2_bias"
+    type=constant_input
+    label="resnetv17_stage1_conv2_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage1_conv2_fwd" [
+    id=29
+    name="resnetv17_stage1_conv2_fwd"
+    type=Conv
+    label="{ {resnetv17_stage1_conv2_fwd  | CONV} | [8,256,56,56] }"
+    inputs="resnetv17_stage1_relu1_fwd;resnetv17_stage1_conv2_weight;resnetv17_stage1_conv2_bias"
+    outputs="resnetv17_stage1_conv2_fwd"
+    penwidth=3
+    style=filled
+    color="#c29182"
+    fontcolor="#000000"
+    fillcolor="#d6a494"
+  ];
+  "resnetv17_stage1_batchnorm2_gamma" [
+    id=30
+    name="resnetv17_stage1_batchnorm2_gamma"
+    type=constant_input
+    label="resnetv17_stage1_batchnorm2_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage1_batchnorm2_beta" [
+    id=31
+    name="resnetv17_stage1_batchnorm2_beta"
+    type=constant_input
+    label="resnetv17_stage1_batchnorm2_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage1_batchnorm2_running_mean" [
+    id=32
+    name="resnetv17_stage1_batchnorm2_running_mean"
+    type=constant_input
+    label="resnetv17_stage1_batchnorm2_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage1_batchnorm2_running_var" [
+    id=33
+    name="resnetv17_stage1_batchnorm2_running_var"
+    type=constant_input
+    label="resnetv17_stage1_batchnorm2_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage1_batchnorm2_fwd" [
+    id=34
+    name="resnetv17_stage1_batchnorm2_fwd"
+    type=BatchNormalization
+    label="{ {resnetv17_stage1_batchnorm2_fwd  | BN} | [[8,256,56,56],[256],[256],[256],[256]] }"
+    inputs="resnetv17_stage1_conv2_fwd;resnetv17_stage1_batchnorm2_gamma;resnetv17_stage1_batchnorm2_beta;resnetv17_stage1_batchnorm2_running_mean;resnetv17_stage1_batchnorm2_running_var"
+    outputs="resnetv17_stage1_batchnorm2_fwd"
+    penwidth=3
+    style=filled
+    color="#c78695"
+    fontcolor="#000000"
+    fillcolor="#db98a7"
+  ];
+  "resnetv17_stage1_conv3_weight" [
+    id=35
+    name="resnetv17_stage1_conv3_weight"
+    type=constant_input
+    label="resnetv17_stage1_conv3_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage1_conv3_fwd" [
+    id=36
+    name="resnetv17_stage1_conv3_fwd"
+    type=Conv
+    label="{ {resnetv17_stage1_conv3_fwd  | CONV} | [8,256,56,56] }"
+    inputs="resnetv17_pool0_fwd;resnetv17_stage1_conv3_weight"
+    outputs="resnetv17_stage1_conv3_fwd"
+    penwidth=3
+    style=filled
+    color="#c29182"
+    fontcolor="#000000"
+    fillcolor="#d6a494"
+  ];
+  "resnetv17_stage1_batchnorm3_gamma" [
+    id=37
+    name="resnetv17_stage1_batchnorm3_gamma"
+    type=constant_input
+    label="resnetv17_stage1_batchnorm3_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage1_batchnorm3_beta" [
+    id=38
+    name="resnetv17_stage1_batchnorm3_beta"
+    type=constant_input
+    label="resnetv17_stage1_batchnorm3_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage1_batchnorm3_running_mean" [
+    id=39
+    name="resnetv17_stage1_batchnorm3_running_mean"
+    type=constant_input
+    label="resnetv17_stage1_batchnorm3_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage1_batchnorm3_running_var" [
+    id=40
+    name="resnetv17_stage1_batchnorm3_running_var"
+    type=constant_input
+    label="resnetv17_stage1_batchnorm3_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage1_batchnorm3_fwd" [
+    id=41
+    name="resnetv17_stage1_batchnorm3_fwd"
+    type=BatchNormalization
+    label="{ {resnetv17_stage1_batchnorm3_fwd  | BN} | [[8,256,56,56],[256],[256],[256],[256]] }"
+    inputs="resnetv17_stage1_conv3_fwd;resnetv17_stage1_batchnorm3_gamma;resnetv17_stage1_batchnorm3_beta;resnetv17_stage1_batchnorm3_running_mean;resnetv17_stage1_batchnorm3_running_var"
+    outputs="resnetv17_stage1_batchnorm3_fwd"
+    penwidth=3
+    style=filled
+    color="#c78695"
+    fontcolor="#000000"
+    fillcolor="#db98a7"
+  ];
+  "resnetv17_stage1__plus0" [
+    id=42
+    name="resnetv17_stage1__plus0"
+    type=Add
+    label="{ {resnetv17_stage1__plus0  | ADD} | [8,256,56,56] }"
+    inputs="resnetv17_stage1_batchnorm2_fwd;resnetv17_stage1_batchnorm3_fwd"
+    outputs="resnetv17_stage1__plus0"
+    penwidth=3
+    style=filled
+    color="#85afc7"
+    fontcolor="#000000"
+    fillcolor="#99c4dd"
+  ];
+  "resnetv17_stage1_activation0" [
+    id=43
+    name="resnetv17_stage1_activation0"
+    type=Relu
+    label="{ {resnetv17_stage1_activation0  | RELU} | [8,256,56,56] }"
+    inputs="resnetv17_stage1__plus0"
+    outputs="resnetv17_stage1_activation0"
+    penwidth=3
+    style=filled
+    color="#a385cc"
+    fontcolor="#000000"
+    fillcolor="#b697df"
+  ];
+  "resnetv17_stage1_conv4_weight" [
+    id=44
+    name="resnetv17_stage1_conv4_weight"
+    type=constant_input
+    label="resnetv17_stage1_conv4_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage1_conv4_bias" [
+    id=45
+    name="resnetv17_stage1_conv4_bias"
+    type=constant_input
+    label="resnetv17_stage1_conv4_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage1_conv4_fwd" [
+    id=46
+    name="resnetv17_stage1_conv4_fwd"
+    type=Conv
+    label="{ {resnetv17_stage1_conv4_fwd  | CONV} | [8,64,56,56] }"
+    inputs="resnetv17_stage1_activation0;resnetv17_stage1_conv4_weight;resnetv17_stage1_conv4_bias"
+    outputs="resnetv17_stage1_conv4_fwd"
+    penwidth=3
+    style=filled
+    color="#c29182"
+    fontcolor="#000000"
+    fillcolor="#d6a494"
+  ];
+  "resnetv17_stage1_batchnorm4_gamma" [
+    id=47
+    name="resnetv17_stage1_batchnorm4_gamma"
+    type=constant_input
+    label="resnetv17_stage1_batchnorm4_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage1_batchnorm4_beta" [
+    id=48
+    name="resnetv17_stage1_batchnorm4_beta"
+    type=constant_input
+    label="resnetv17_stage1_batchnorm4_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage1_batchnorm4_running_mean" [
+    id=49
+    name="resnetv17_stage1_batchnorm4_running_mean"
+    type=constant_input
+    label="resnetv17_stage1_batchnorm4_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage1_batchnorm4_running_var" [
+    id=50
+    name="resnetv17_stage1_batchnorm4_running_var"
+    type=constant_input
+    label="resnetv17_stage1_batchnorm4_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage1_batchnorm4_fwd" [
+    id=51
+    name="resnetv17_stage1_batchnorm4_fwd"
+    type=BatchNormalization
+    label="{ {resnetv17_stage1_batchnorm4_fwd  | BN} | [[8,64,56,56],[64],[64],[64],[64]] }"
+    inputs="resnetv17_stage1_conv4_fwd;resnetv17_stage1_batchnorm4_gamma;resnetv17_stage1_batchnorm4_beta;resnetv17_stage1_batchnorm4_running_mean;resnetv17_stage1_batchnorm4_running_var"
+    outputs="resnetv17_stage1_batchnorm4_fwd"
+    penwidth=3
+    style=filled
+    color="#c78695"
+    fontcolor="#000000"
+    fillcolor="#db98a7"
+  ];
+  "resnetv17_stage1_relu2_fwd" [
+    id=52
+    name="resnetv17_stage1_relu2_fwd"
+    type=Relu
+    label="{ {resnetv17_stage1_relu2_fwd  | RELU} | [8,64,56,56] }"
+    inputs="resnetv17_stage1_batchnorm4_fwd"
+    outputs="resnetv17_stage1_relu2_fwd"
+    penwidth=3
+    style=filled
+    color="#a385cc"
+    fontcolor="#000000"
+    fillcolor="#b697df"
+  ];
+  "resnetv17_stage1_conv5_weight" [
+    id=53
+    name="resnetv17_stage1_conv5_weight"
+    type=constant_input
+    label="resnetv17_stage1_conv5_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage1_conv5_fwd" [
+    id=54
+    name="resnetv17_stage1_conv5_fwd"
+    type=Conv
+    label="{ {resnetv17_stage1_conv5_fwd  | CONV} | [8,64,56,56] }"
+    inputs="resnetv17_stage1_relu2_fwd;resnetv17_stage1_conv5_weight"
+    outputs="resnetv17_stage1_conv5_fwd"
+    penwidth=3
+    style=filled
+    color="#c29182"
+    fontcolor="#000000"
+    fillcolor="#d6a494"
+  ];
+  "resnetv17_stage1_batchnorm5_gamma" [
+    id=55
+    name="resnetv17_stage1_batchnorm5_gamma"
+    type=constant_input
+    label="resnetv17_stage1_batchnorm5_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage1_batchnorm5_beta" [
+    id=56
+    name="resnetv17_stage1_batchnorm5_beta"
+    type=constant_input
+    label="resnetv17_stage1_batchnorm5_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage1_batchnorm5_running_mean" [
+    id=57
+    name="resnetv17_stage1_batchnorm5_running_mean"
+    type=constant_input
+    label="resnetv17_stage1_batchnorm5_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage1_batchnorm5_running_var" [
+    id=58
+    name="resnetv17_stage1_batchnorm5_running_var"
+    type=constant_input
+    label="resnetv17_stage1_batchnorm5_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage1_batchnorm5_fwd" [
+    id=59
+    name="resnetv17_stage1_batchnorm5_fwd"
+    type=BatchNormalization
+    label="{ {resnetv17_stage1_batchnorm5_fwd  | BN} | [[8,64,56,56],[64],[64],[64],[64]] }"
+    inputs="resnetv17_stage1_conv5_fwd;resnetv17_stage1_batchnorm5_gamma;resnetv17_stage1_batchnorm5_beta;resnetv17_stage1_batchnorm5_running_mean;resnetv17_stage1_batchnorm5_running_var"
+    outputs="resnetv17_stage1_batchnorm5_fwd"
+    penwidth=3
+    style=filled
+    color="#c78695"
+    fontcolor="#000000"
+    fillcolor="#db98a7"
+  ];
+  "resnetv17_stage1_relu3_fwd" [
+    id=60
+    name="resnetv17_stage1_relu3_fwd"
+    type=Relu
+    label="{ {resnetv17_stage1_relu3_fwd  | RELU} | [8,64,56,56] }"
+    inputs="resnetv17_stage1_batchnorm5_fwd"
+    outputs="resnetv17_stage1_relu3_fwd"
+    penwidth=3
+    style=filled
+    color="#a385cc"
+    fontcolor="#000000"
+    fillcolor="#b697df"
+  ];
+  "resnetv17_stage1_conv6_weight" [
+    id=61
+    name="resnetv17_stage1_conv6_weight"
+    type=constant_input
+    label="resnetv17_stage1_conv6_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage1_conv6_bias" [
+    id=62
+    name="resnetv17_stage1_conv6_bias"
+    type=constant_input
+    label="resnetv17_stage1_conv6_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage1_conv6_fwd" [
+    id=63
+    name="resnetv17_stage1_conv6_fwd"
+    type=Conv
+    label="{ {resnetv17_stage1_conv6_fwd  | CONV} | [8,256,56,56] }"
+    inputs="resnetv17_stage1_relu3_fwd;resnetv17_stage1_conv6_weight;resnetv17_stage1_conv6_bias"
+    outputs="resnetv17_stage1_conv6_fwd"
+    penwidth=3
+    style=filled
+    color="#c29182"
+    fontcolor="#000000"
+    fillcolor="#d6a494"
+  ];
+  "resnetv17_stage1_batchnorm6_gamma" [
+    id=64
+    name="resnetv17_stage1_batchnorm6_gamma"
+    type=constant_input
+    label="resnetv17_stage1_batchnorm6_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage1_batchnorm6_beta" [
+    id=65
+    name="resnetv17_stage1_batchnorm6_beta"
+    type=constant_input
+    label="resnetv17_stage1_batchnorm6_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage1_batchnorm6_running_mean" [
+    id=66
+    name="resnetv17_stage1_batchnorm6_running_mean"
+    type=constant_input
+    label="resnetv17_stage1_batchnorm6_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage1_batchnorm6_running_var" [
+    id=67
+    name="resnetv17_stage1_batchnorm6_running_var"
+    type=constant_input
+    label="resnetv17_stage1_batchnorm6_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage1_batchnorm6_fwd" [
+    id=68
+    name="resnetv17_stage1_batchnorm6_fwd"
+    type=BatchNormalization
+    label="{ {resnetv17_stage1_batchnorm6_fwd  | BN} | [[8,256,56,56],[256],[256],[256],[256]] }"
+    inputs="resnetv17_stage1_conv6_fwd;resnetv17_stage1_batchnorm6_gamma;resnetv17_stage1_batchnorm6_beta;resnetv17_stage1_batchnorm6_running_mean;resnetv17_stage1_batchnorm6_running_var"
+    outputs="resnetv17_stage1_batchnorm6_fwd"
+    penwidth=3
+    style=filled
+    color="#c78695"
+    fontcolor="#000000"
+    fillcolor="#db98a7"
+  ];
+  "resnetv17_stage1__plus1" [
+    id=69
+    name="resnetv17_stage1__plus1"
+    type=Add
+    label="{ {resnetv17_stage1__plus1  | ADD} | [8,256,56,56] }"
+    inputs="resnetv17_stage1_batchnorm6_fwd;resnetv17_stage1_activation0"
+    outputs="resnetv17_stage1__plus1"
+    penwidth=3
+    style=filled
+    color="#85afc7"
+    fontcolor="#000000"
+    fillcolor="#99c4dd"
+  ];
+  "resnetv17_stage1_activation1" [
+    id=70
+    name="resnetv17_stage1_activation1"
+    type=Relu
+    label="{ {resnetv17_stage1_activation1  | RELU} | [8,256,56,56] }"
+    inputs="resnetv17_stage1__plus1"
+    outputs="resnetv17_stage1_activation1"
+    penwidth=3
+    style=filled
+    color="#a385cc"
+    fontcolor="#000000"
+    fillcolor="#b697df"
+  ];
+  "resnetv17_stage1_conv7_weight" [
+    id=71
+    name="resnetv17_stage1_conv7_weight"
+    type=constant_input
+    label="resnetv17_stage1_conv7_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage1_conv7_bias" [
+    id=72
+    name="resnetv17_stage1_conv7_bias"
+    type=constant_input
+    label="resnetv17_stage1_conv7_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage1_conv7_fwd" [
+    id=73
+    name="resnetv17_stage1_conv7_fwd"
+    type=Conv
+    label="{ {resnetv17_stage1_conv7_fwd  | CONV} | [8,64,56,56] }"
+    inputs="resnetv17_stage1_activation1;resnetv17_stage1_conv7_weight;resnetv17_stage1_conv7_bias"
+    outputs="resnetv17_stage1_conv7_fwd"
+    penwidth=3
+    style=filled
+    color="#c29182"
+    fontcolor="#000000"
+    fillcolor="#d6a494"
+  ];
+  "resnetv17_stage1_batchnorm7_gamma" [
+    id=74
+    name="resnetv17_stage1_batchnorm7_gamma"
+    type=constant_input
+    label="resnetv17_stage1_batchnorm7_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage1_batchnorm7_beta" [
+    id=75
+    name="resnetv17_stage1_batchnorm7_beta"
+    type=constant_input
+    label="resnetv17_stage1_batchnorm7_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage1_batchnorm7_running_mean" [
+    id=76
+    name="resnetv17_stage1_batchnorm7_running_mean"
+    type=constant_input
+    label="resnetv17_stage1_batchnorm7_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage1_batchnorm7_running_var" [
+    id=77
+    name="resnetv17_stage1_batchnorm7_running_var"
+    type=constant_input
+    label="resnetv17_stage1_batchnorm7_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage1_batchnorm7_fwd" [
+    id=78
+    name="resnetv17_stage1_batchnorm7_fwd"
+    type=BatchNormalization
+    label="{ {resnetv17_stage1_batchnorm7_fwd  | BN} | [[8,64,56,56],[64],[64],[64],[64]] }"
+    inputs="resnetv17_stage1_conv7_fwd;resnetv17_stage1_batchnorm7_gamma;resnetv17_stage1_batchnorm7_beta;resnetv17_stage1_batchnorm7_running_mean;resnetv17_stage1_batchnorm7_running_var"
+    outputs="resnetv17_stage1_batchnorm7_fwd"
+    penwidth=3
+    style=filled
+    color="#c78695"
+    fontcolor="#000000"
+    fillcolor="#db98a7"
+  ];
+  "resnetv17_stage1_relu4_fwd" [
+    id=79
+    name="resnetv17_stage1_relu4_fwd"
+    type=Relu
+    label="{ {resnetv17_stage1_relu4_fwd  | RELU} | [8,64,56,56] }"
+    inputs="resnetv17_stage1_batchnorm7_fwd"
+    outputs="resnetv17_stage1_relu4_fwd"
+    penwidth=3
+    style=filled
+    color="#a385cc"
+    fontcolor="#000000"
+    fillcolor="#b697df"
+  ];
+  "resnetv17_stage1_conv8_weight" [
+    id=80
+    name="resnetv17_stage1_conv8_weight"
+    type=constant_input
+    label="resnetv17_stage1_conv8_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage1_conv8_fwd" [
+    id=81
+    name="resnetv17_stage1_conv8_fwd"
+    type=Conv
+    label="{ {resnetv17_stage1_conv8_fwd  | CONV} | [8,64,56,56] }"
+    inputs="resnetv17_stage1_relu4_fwd;resnetv17_stage1_conv8_weight"
+    outputs="resnetv17_stage1_conv8_fwd"
+    penwidth=3
+    style=filled
+    color="#c29182"
+    fontcolor="#000000"
+    fillcolor="#d6a494"
+  ];
+  "resnetv17_stage1_batchnorm8_gamma" [
+    id=82
+    name="resnetv17_stage1_batchnorm8_gamma"
+    type=constant_input
+    label="resnetv17_stage1_batchnorm8_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage1_batchnorm8_beta" [
+    id=83
+    name="resnetv17_stage1_batchnorm8_beta"
+    type=constant_input
+    label="resnetv17_stage1_batchnorm8_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage1_batchnorm8_running_mean" [
+    id=84
+    name="resnetv17_stage1_batchnorm8_running_mean"
+    type=constant_input
+    label="resnetv17_stage1_batchnorm8_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage1_batchnorm8_running_var" [
+    id=85
+    name="resnetv17_stage1_batchnorm8_running_var"
+    type=constant_input
+    label="resnetv17_stage1_batchnorm8_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage1_batchnorm8_fwd" [
+    id=86
+    name="resnetv17_stage1_batchnorm8_fwd"
+    type=BatchNormalization
+    label="{ {resnetv17_stage1_batchnorm8_fwd  | BN} | [[8,64,56,56],[64],[64],[64],[64]] }"
+    inputs="resnetv17_stage1_conv8_fwd;resnetv17_stage1_batchnorm8_gamma;resnetv17_stage1_batchnorm8_beta;resnetv17_stage1_batchnorm8_running_mean;resnetv17_stage1_batchnorm8_running_var"
+    outputs="resnetv17_stage1_batchnorm8_fwd"
+    penwidth=3
+    style=filled
+    color="#c78695"
+    fontcolor="#000000"
+    fillcolor="#db98a7"
+  ];
+  "resnetv17_stage1_relu5_fwd" [
+    id=87
+    name="resnetv17_stage1_relu5_fwd"
+    type=Relu
+    label="{ {resnetv17_stage1_relu5_fwd  | RELU} | [8,64,56,56] }"
+    inputs="resnetv17_stage1_batchnorm8_fwd"
+    outputs="resnetv17_stage1_relu5_fwd"
+    penwidth=3
+    style=filled
+    color="#a385cc"
+    fontcolor="#000000"
+    fillcolor="#b697df"
+  ];
+  "resnetv17_stage1_conv9_weight" [
+    id=88
+    name="resnetv17_stage1_conv9_weight"
+    type=constant_input
+    label="resnetv17_stage1_conv9_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage1_conv9_bias" [
+    id=89
+    name="resnetv17_stage1_conv9_bias"
+    type=constant_input
+    label="resnetv17_stage1_conv9_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage1_conv9_fwd" [
+    id=90
+    name="resnetv17_stage1_conv9_fwd"
+    type=Conv
+    label="{ {resnetv17_stage1_conv9_fwd  | CONV} | [8,256,56,56] }"
+    inputs="resnetv17_stage1_relu5_fwd;resnetv17_stage1_conv9_weight;resnetv17_stage1_conv9_bias"
+    outputs="resnetv17_stage1_conv9_fwd"
+    penwidth=3
+    style=filled
+    color="#c29182"
+    fontcolor="#000000"
+    fillcolor="#d6a494"
+  ];
+  "resnetv17_stage1_batchnorm9_gamma" [
+    id=91
+    name="resnetv17_stage1_batchnorm9_gamma"
+    type=constant_input
+    label="resnetv17_stage1_batchnorm9_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage1_batchnorm9_beta" [
+    id=92
+    name="resnetv17_stage1_batchnorm9_beta"
+    type=constant_input
+    label="resnetv17_stage1_batchnorm9_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage1_batchnorm9_running_mean" [
+    id=93
+    name="resnetv17_stage1_batchnorm9_running_mean"
+    type=constant_input
+    label="resnetv17_stage1_batchnorm9_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage1_batchnorm9_running_var" [
+    id=94
+    name="resnetv17_stage1_batchnorm9_running_var"
+    type=constant_input
+    label="resnetv17_stage1_batchnorm9_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage1_batchnorm9_fwd" [
+    id=95
+    name="resnetv17_stage1_batchnorm9_fwd"
+    type=BatchNormalization
+    label="{ {resnetv17_stage1_batchnorm9_fwd  | BN} | [[8,256,56,56],[256],[256],[256],[256]] }"
+    inputs="resnetv17_stage1_conv9_fwd;resnetv17_stage1_batchnorm9_gamma;resnetv17_stage1_batchnorm9_beta;resnetv17_stage1_batchnorm9_running_mean;resnetv17_stage1_batchnorm9_running_var"
+    outputs="resnetv17_stage1_batchnorm9_fwd"
+    penwidth=3
+    style=filled
+    color="#c78695"
+    fontcolor="#000000"
+    fillcolor="#db98a7"
+  ];
+  "resnetv17_stage1__plus2" [
+    id=96
+    name="resnetv17_stage1__plus2"
+    type=Add
+    label="{ {resnetv17_stage1__plus2  | ADD} | [8,256,56,56] }"
+    inputs="resnetv17_stage1_batchnorm9_fwd;resnetv17_stage1_activation1"
+    outputs="resnetv17_stage1__plus2"
+    penwidth=3
+    style=filled
+    color="#85afc7"
+    fontcolor="#000000"
+    fillcolor="#99c4dd"
+  ];
+  "resnetv17_stage1_activation2" [
+    id=97
+    name="resnetv17_stage1_activation2"
+    type=Relu
+    label="{ {resnetv17_stage1_activation2  | RELU} | [8,256,56,56] }"
+    inputs="resnetv17_stage1__plus2"
+    outputs="resnetv17_stage1_activation2"
+    penwidth=3
+    style=filled
+    color="#a385cc"
+    fontcolor="#000000"
+    fillcolor="#b697df"
+  ];
+  "resnetv17_stage2_conv0_weight" [
+    id=98
+    name="resnetv17_stage2_conv0_weight"
+    type=constant_input
+    label="resnetv17_stage2_conv0_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage2_conv0_bias" [
+    id=99
+    name="resnetv17_stage2_conv0_bias"
+    type=constant_input
+    label="resnetv17_stage2_conv0_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage2_conv0_fwd" [
+    id=100
+    name="resnetv17_stage2_conv0_fwd"
+    type=Conv
+    label="{ {resnetv17_stage2_conv0_fwd  | CONV} | [8,128,28,28] }"
+    inputs="resnetv17_stage1_activation2;resnetv17_stage2_conv0_weight;resnetv17_stage2_conv0_bias"
+    outputs="resnetv17_stage2_conv0_fwd"
+    penwidth=3
+    style=filled
+    color="#c29182"
+    fontcolor="#000000"
+    fillcolor="#d6a494"
+  ];
+  "resnetv17_stage2_batchnorm0_gamma" [
+    id=101
+    name="resnetv17_stage2_batchnorm0_gamma"
+    type=constant_input
+    label="resnetv17_stage2_batchnorm0_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage2_batchnorm0_beta" [
+    id=102
+    name="resnetv17_stage2_batchnorm0_beta"
+    type=constant_input
+    label="resnetv17_stage2_batchnorm0_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage2_batchnorm0_running_mean" [
+    id=103
+    name="resnetv17_stage2_batchnorm0_running_mean"
+    type=constant_input
+    label="resnetv17_stage2_batchnorm0_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage2_batchnorm0_running_var" [
+    id=104
+    name="resnetv17_stage2_batchnorm0_running_var"
+    type=constant_input
+    label="resnetv17_stage2_batchnorm0_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage2_batchnorm0_fwd" [
+    id=105
+    name="resnetv17_stage2_batchnorm0_fwd"
+    type=BatchNormalization
+    label="{ {resnetv17_stage2_batchnorm0_fwd  | BN} | [[8,128,28,28],[128],[128],[128],[128]] }"
+    inputs="resnetv17_stage2_conv0_fwd;resnetv17_stage2_batchnorm0_gamma;resnetv17_stage2_batchnorm0_beta;resnetv17_stage2_batchnorm0_running_mean;resnetv17_stage2_batchnorm0_running_var"
+    outputs="resnetv17_stage2_batchnorm0_fwd"
+    penwidth=3
+    style=filled
+    color="#c78695"
+    fontcolor="#000000"
+    fillcolor="#db98a7"
+  ];
+  "resnetv17_stage2_relu0_fwd" [
+    id=106
+    name="resnetv17_stage2_relu0_fwd"
+    type=Relu
+    label="{ {resnetv17_stage2_relu0_fwd  | RELU} | [8,128,28,28] }"
+    inputs="resnetv17_stage2_batchnorm0_fwd"
+    outputs="resnetv17_stage2_relu0_fwd"
+    penwidth=3
+    style=filled
+    color="#a385cc"
+    fontcolor="#000000"
+    fillcolor="#b697df"
+  ];
+  "resnetv17_stage2_conv1_weight" [
+    id=107
+    name="resnetv17_stage2_conv1_weight"
+    type=constant_input
+    label="resnetv17_stage2_conv1_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage2_conv1_fwd" [
+    id=108
+    name="resnetv17_stage2_conv1_fwd"
+    type=Conv
+    label="{ {resnetv17_stage2_conv1_fwd  | CONV} | [8,128,28,28] }"
+    inputs="resnetv17_stage2_relu0_fwd;resnetv17_stage2_conv1_weight"
+    outputs="resnetv17_stage2_conv1_fwd"
+    penwidth=3
+    style=filled
+    color="#c29182"
+    fontcolor="#000000"
+    fillcolor="#d6a494"
+  ];
+  "resnetv17_stage2_batchnorm1_gamma" [
+    id=109
+    name="resnetv17_stage2_batchnorm1_gamma"
+    type=constant_input
+    label="resnetv17_stage2_batchnorm1_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage2_batchnorm1_beta" [
+    id=110
+    name="resnetv17_stage2_batchnorm1_beta"
+    type=constant_input
+    label="resnetv17_stage2_batchnorm1_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage2_batchnorm1_running_mean" [
+    id=111
+    name="resnetv17_stage2_batchnorm1_running_mean"
+    type=constant_input
+    label="resnetv17_stage2_batchnorm1_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage2_batchnorm1_running_var" [
+    id=112
+    name="resnetv17_stage2_batchnorm1_running_var"
+    type=constant_input
+    label="resnetv17_stage2_batchnorm1_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage2_batchnorm1_fwd" [
+    id=113
+    name="resnetv17_stage2_batchnorm1_fwd"
+    type=BatchNormalization
+    label="{ {resnetv17_stage2_batchnorm1_fwd  | BN} | [[8,128,28,28],[128],[128],[128],[128]] }"
+    inputs="resnetv17_stage2_conv1_fwd;resnetv17_stage2_batchnorm1_gamma;resnetv17_stage2_batchnorm1_beta;resnetv17_stage2_batchnorm1_running_mean;resnetv17_stage2_batchnorm1_running_var"
+    outputs="resnetv17_stage2_batchnorm1_fwd"
+    penwidth=3
+    style=filled
+    color="#c78695"
+    fontcolor="#000000"
+    fillcolor="#db98a7"
+  ];
+  "resnetv17_stage2_relu1_fwd" [
+    id=114
+    name="resnetv17_stage2_relu1_fwd"
+    type=Relu
+    label="{ {resnetv17_stage2_relu1_fwd  | RELU} | [8,128,28,28] }"
+    inputs="resnetv17_stage2_batchnorm1_fwd"
+    outputs="resnetv17_stage2_relu1_fwd"
+    penwidth=3
+    style=filled
+    color="#a385cc"
+    fontcolor="#000000"
+    fillcolor="#b697df"
+  ];
+  "resnetv17_stage2_conv2_weight" [
+    id=115
+    name="resnetv17_stage2_conv2_weight"
+    type=constant_input
+    label="resnetv17_stage2_conv2_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage2_conv2_bias" [
+    id=116
+    name="resnetv17_stage2_conv2_bias"
+    type=constant_input
+    label="resnetv17_stage2_conv2_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage2_conv2_fwd" [
+    id=117
+    name="resnetv17_stage2_conv2_fwd"
+    type=Conv
+    label="{ {resnetv17_stage2_conv2_fwd  | CONV} | [8,512,28,28] }"
+    inputs="resnetv17_stage2_relu1_fwd;resnetv17_stage2_conv2_weight;resnetv17_stage2_conv2_bias"
+    outputs="resnetv17_stage2_conv2_fwd"
+    penwidth=3
+    style=filled
+    color="#c29182"
+    fontcolor="#000000"
+    fillcolor="#d6a494"
+  ];
+  "resnetv17_stage2_batchnorm2_gamma" [
+    id=118
+    name="resnetv17_stage2_batchnorm2_gamma"
+    type=constant_input
+    label="resnetv17_stage2_batchnorm2_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage2_batchnorm2_beta" [
+    id=119
+    name="resnetv17_stage2_batchnorm2_beta"
+    type=constant_input
+    label="resnetv17_stage2_batchnorm2_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage2_batchnorm2_running_mean" [
+    id=120
+    name="resnetv17_stage2_batchnorm2_running_mean"
+    type=constant_input
+    label="resnetv17_stage2_batchnorm2_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage2_batchnorm2_running_var" [
+    id=121
+    name="resnetv17_stage2_batchnorm2_running_var"
+    type=constant_input
+    label="resnetv17_stage2_batchnorm2_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage2_batchnorm2_fwd" [
+    id=122
+    name="resnetv17_stage2_batchnorm2_fwd"
+    type=BatchNormalization
+    label="{ {resnetv17_stage2_batchnorm2_fwd  | BN} | [[8,512,28,28],[512],[512],[512],[512]] }"
+    inputs="resnetv17_stage2_conv2_fwd;resnetv17_stage2_batchnorm2_gamma;resnetv17_stage2_batchnorm2_beta;resnetv17_stage2_batchnorm2_running_mean;resnetv17_stage2_batchnorm2_running_var"
+    outputs="resnetv17_stage2_batchnorm2_fwd"
+    penwidth=3
+    style=filled
+    color="#c78695"
+    fontcolor="#000000"
+    fillcolor="#db98a7"
+  ];
+  "resnetv17_stage2_conv3_weight" [
+    id=123
+    name="resnetv17_stage2_conv3_weight"
+    type=constant_input
+    label="resnetv17_stage2_conv3_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage2_conv3_fwd" [
+    id=124
+    name="resnetv17_stage2_conv3_fwd"
+    type=Conv
+    label="{ {resnetv17_stage2_conv3_fwd  | CONV} | [8,512,28,28] }"
+    inputs="resnetv17_stage1_activation2;resnetv17_stage2_conv3_weight"
+    outputs="resnetv17_stage2_conv3_fwd"
+    penwidth=3
+    style=filled
+    color="#c29182"
+    fontcolor="#000000"
+    fillcolor="#d6a494"
+  ];
+  "resnetv17_stage2_batchnorm3_gamma" [
+    id=125
+    name="resnetv17_stage2_batchnorm3_gamma"
+    type=constant_input
+    label="resnetv17_stage2_batchnorm3_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage2_batchnorm3_beta" [
+    id=126
+    name="resnetv17_stage2_batchnorm3_beta"
+    type=constant_input
+    label="resnetv17_stage2_batchnorm3_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage2_batchnorm3_running_mean" [
+    id=127
+    name="resnetv17_stage2_batchnorm3_running_mean"
+    type=constant_input
+    label="resnetv17_stage2_batchnorm3_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage2_batchnorm3_running_var" [
+    id=128
+    name="resnetv17_stage2_batchnorm3_running_var"
+    type=constant_input
+    label="resnetv17_stage2_batchnorm3_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage2_batchnorm3_fwd" [
+    id=129
+    name="resnetv17_stage2_batchnorm3_fwd"
+    type=BatchNormalization
+    label="{ {resnetv17_stage2_batchnorm3_fwd  | BN} | [[8,512,28,28],[512],[512],[512],[512]] }"
+    inputs="resnetv17_stage2_conv3_fwd;resnetv17_stage2_batchnorm3_gamma;resnetv17_stage2_batchnorm3_beta;resnetv17_stage2_batchnorm3_running_mean;resnetv17_stage2_batchnorm3_running_var"
+    outputs="resnetv17_stage2_batchnorm3_fwd"
+    penwidth=3
+    style=filled
+    color="#c78695"
+    fontcolor="#000000"
+    fillcolor="#db98a7"
+  ];
+  "resnetv17_stage2__plus0" [
+    id=130
+    name="resnetv17_stage2__plus0"
+    type=Add
+    label="{ {resnetv17_stage2__plus0  | ADD} | [8,512,28,28] }"
+    inputs="resnetv17_stage2_batchnorm2_fwd;resnetv17_stage2_batchnorm3_fwd"
+    outputs="resnetv17_stage2__plus0"
+    penwidth=3
+    style=filled
+    color="#85afc7"
+    fontcolor="#000000"
+    fillcolor="#99c4dd"
+  ];
+  "resnetv17_stage2_activation0" [
+    id=131
+    name="resnetv17_stage2_activation0"
+    type=Relu
+    label="{ {resnetv17_stage2_activation0  | RELU} | [8,512,28,28] }"
+    inputs="resnetv17_stage2__plus0"
+    outputs="resnetv17_stage2_activation0"
+    penwidth=3
+    style=filled
+    color="#a385cc"
+    fontcolor="#000000"
+    fillcolor="#b697df"
+  ];
+  "resnetv17_stage2_conv4_weight" [
+    id=132
+    name="resnetv17_stage2_conv4_weight"
+    type=constant_input
+    label="resnetv17_stage2_conv4_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage2_conv4_bias" [
+    id=133
+    name="resnetv17_stage2_conv4_bias"
+    type=constant_input
+    label="resnetv17_stage2_conv4_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage2_conv4_fwd" [
+    id=134
+    name="resnetv17_stage2_conv4_fwd"
+    type=Conv
+    label="{ {resnetv17_stage2_conv4_fwd  | CONV} | [8,128,28,28] }"
+    inputs="resnetv17_stage2_activation0;resnetv17_stage2_conv4_weight;resnetv17_stage2_conv4_bias"
+    outputs="resnetv17_stage2_conv4_fwd"
+    penwidth=3
+    style=filled
+    color="#c29182"
+    fontcolor="#000000"
+    fillcolor="#d6a494"
+  ];
+  "resnetv17_stage2_batchnorm4_gamma" [
+    id=135
+    name="resnetv17_stage2_batchnorm4_gamma"
+    type=constant_input
+    label="resnetv17_stage2_batchnorm4_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage2_batchnorm4_beta" [
+    id=136
+    name="resnetv17_stage2_batchnorm4_beta"
+    type=constant_input
+    label="resnetv17_stage2_batchnorm4_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage2_batchnorm4_running_mean" [
+    id=137
+    name="resnetv17_stage2_batchnorm4_running_mean"
+    type=constant_input
+    label="resnetv17_stage2_batchnorm4_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage2_batchnorm4_running_var" [
+    id=138
+    name="resnetv17_stage2_batchnorm4_running_var"
+    type=constant_input
+    label="resnetv17_stage2_batchnorm4_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage2_batchnorm4_fwd" [
+    id=139
+    name="resnetv17_stage2_batchnorm4_fwd"
+    type=BatchNormalization
+    label="{ {resnetv17_stage2_batchnorm4_fwd  | BN} | [[8,128,28,28],[128],[128],[128],[128]] }"
+    inputs="resnetv17_stage2_conv4_fwd;resnetv17_stage2_batchnorm4_gamma;resnetv17_stage2_batchnorm4_beta;resnetv17_stage2_batchnorm4_running_mean;resnetv17_stage2_batchnorm4_running_var"
+    outputs="resnetv17_stage2_batchnorm4_fwd"
+    penwidth=3
+    style=filled
+    color="#c78695"
+    fontcolor="#000000"
+    fillcolor="#db98a7"
+  ];
+  "resnetv17_stage2_relu2_fwd" [
+    id=140
+    name="resnetv17_stage2_relu2_fwd"
+    type=Relu
+    label="{ {resnetv17_stage2_relu2_fwd  | RELU} | [8,128,28,28] }"
+    inputs="resnetv17_stage2_batchnorm4_fwd"
+    outputs="resnetv17_stage2_relu2_fwd"
+    penwidth=3
+    style=filled
+    color="#a385cc"
+    fontcolor="#000000"
+    fillcolor="#b697df"
+  ];
+  "resnetv17_stage2_conv5_weight" [
+    id=141
+    name="resnetv17_stage2_conv5_weight"
+    type=constant_input
+    label="resnetv17_stage2_conv5_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage2_conv5_fwd" [
+    id=142
+    name="resnetv17_stage2_conv5_fwd"
+    type=Conv
+    label="{ {resnetv17_stage2_conv5_fwd  | CONV} | [8,128,28,28] }"
+    inputs="resnetv17_stage2_relu2_fwd;resnetv17_stage2_conv5_weight"
+    outputs="resnetv17_stage2_conv5_fwd"
+    penwidth=3
+    style=filled
+    color="#c29182"
+    fontcolor="#000000"
+    fillcolor="#d6a494"
+  ];
+  "resnetv17_stage2_batchnorm5_gamma" [
+    id=143
+    name="resnetv17_stage2_batchnorm5_gamma"
+    type=constant_input
+    label="resnetv17_stage2_batchnorm5_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage2_batchnorm5_beta" [
+    id=144
+    name="resnetv17_stage2_batchnorm5_beta"
+    type=constant_input
+    label="resnetv17_stage2_batchnorm5_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage2_batchnorm5_running_mean" [
+    id=145
+    name="resnetv17_stage2_batchnorm5_running_mean"
+    type=constant_input
+    label="resnetv17_stage2_batchnorm5_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage2_batchnorm5_running_var" [
+    id=146
+    name="resnetv17_stage2_batchnorm5_running_var"
+    type=constant_input
+    label="resnetv17_stage2_batchnorm5_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage2_batchnorm5_fwd" [
+    id=147
+    name="resnetv17_stage2_batchnorm5_fwd"
+    type=BatchNormalization
+    label="{ {resnetv17_stage2_batchnorm5_fwd  | BN} | [[8,128,28,28],[128],[128],[128],[128]] }"
+    inputs="resnetv17_stage2_conv5_fwd;resnetv17_stage2_batchnorm5_gamma;resnetv17_stage2_batchnorm5_beta;resnetv17_stage2_batchnorm5_running_mean;resnetv17_stage2_batchnorm5_running_var"
+    outputs="resnetv17_stage2_batchnorm5_fwd"
+    penwidth=3
+    style=filled
+    color="#c78695"
+    fontcolor="#000000"
+    fillcolor="#db98a7"
+  ];
+  "resnetv17_stage2_relu3_fwd" [
+    id=148
+    name="resnetv17_stage2_relu3_fwd"
+    type=Relu
+    label="{ {resnetv17_stage2_relu3_fwd  | RELU} | [8,128,28,28] }"
+    inputs="resnetv17_stage2_batchnorm5_fwd"
+    outputs="resnetv17_stage2_relu3_fwd"
+    penwidth=3
+    style=filled
+    color="#a385cc"
+    fontcolor="#000000"
+    fillcolor="#b697df"
+  ];
+  "resnetv17_stage2_conv6_weight" [
+    id=149
+    name="resnetv17_stage2_conv6_weight"
+    type=constant_input
+    label="resnetv17_stage2_conv6_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage2_conv6_bias" [
+    id=150
+    name="resnetv17_stage2_conv6_bias"
+    type=constant_input
+    label="resnetv17_stage2_conv6_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage2_conv6_fwd" [
+    id=151
+    name="resnetv17_stage2_conv6_fwd"
+    type=Conv
+    label="{ {resnetv17_stage2_conv6_fwd  | CONV} | [8,512,28,28] }"
+    inputs="resnetv17_stage2_relu3_fwd;resnetv17_stage2_conv6_weight;resnetv17_stage2_conv6_bias"
+    outputs="resnetv17_stage2_conv6_fwd"
+    penwidth=3
+    style=filled
+    color="#c29182"
+    fontcolor="#000000"
+    fillcolor="#d6a494"
+  ];
+  "resnetv17_stage2_batchnorm6_gamma" [
+    id=152
+    name="resnetv17_stage2_batchnorm6_gamma"
+    type=constant_input
+    label="resnetv17_stage2_batchnorm6_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage2_batchnorm6_beta" [
+    id=153
+    name="resnetv17_stage2_batchnorm6_beta"
+    type=constant_input
+    label="resnetv17_stage2_batchnorm6_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage2_batchnorm6_running_mean" [
+    id=154
+    name="resnetv17_stage2_batchnorm6_running_mean"
+    type=constant_input
+    label="resnetv17_stage2_batchnorm6_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage2_batchnorm6_running_var" [
+    id=155
+    name="resnetv17_stage2_batchnorm6_running_var"
+    type=constant_input
+    label="resnetv17_stage2_batchnorm6_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage2_batchnorm6_fwd" [
+    id=156
+    name="resnetv17_stage2_batchnorm6_fwd"
+    type=BatchNormalization
+    label="{ {resnetv17_stage2_batchnorm6_fwd  | BN} | [[8,512,28,28],[512],[512],[512],[512]] }"
+    inputs="resnetv17_stage2_conv6_fwd;resnetv17_stage2_batchnorm6_gamma;resnetv17_stage2_batchnorm6_beta;resnetv17_stage2_batchnorm6_running_mean;resnetv17_stage2_batchnorm6_running_var"
+    outputs="resnetv17_stage2_batchnorm6_fwd"
+    penwidth=3
+    style=filled
+    color="#c78695"
+    fontcolor="#000000"
+    fillcolor="#db98a7"
+  ];
+  "resnetv17_stage2__plus1" [
+    id=157
+    name="resnetv17_stage2__plus1"
+    type=Add
+    label="{ {resnetv17_stage2__plus1  | ADD} | [8,512,28,28] }"
+    inputs="resnetv17_stage2_batchnorm6_fwd;resnetv17_stage2_activation0"
+    outputs="resnetv17_stage2__plus1"
+    penwidth=3
+    style=filled
+    color="#85afc7"
+    fontcolor="#000000"
+    fillcolor="#99c4dd"
+  ];
+  "resnetv17_stage2_activation1" [
+    id=158
+    name="resnetv17_stage2_activation1"
+    type=Relu
+    label="{ {resnetv17_stage2_activation1  | RELU} | [8,512,28,28] }"
+    inputs="resnetv17_stage2__plus1"
+    outputs="resnetv17_stage2_activation1"
+    penwidth=3
+    style=filled
+    color="#a385cc"
+    fontcolor="#000000"
+    fillcolor="#b697df"
+  ];
+  "resnetv17_stage2_conv7_weight" [
+    id=159
+    name="resnetv17_stage2_conv7_weight"
+    type=constant_input
+    label="resnetv17_stage2_conv7_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage2_conv7_bias" [
+    id=160
+    name="resnetv17_stage2_conv7_bias"
+    type=constant_input
+    label="resnetv17_stage2_conv7_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage2_conv7_fwd" [
+    id=161
+    name="resnetv17_stage2_conv7_fwd"
+    type=Conv
+    label="{ {resnetv17_stage2_conv7_fwd  | CONV} | [8,128,28,28] }"
+    inputs="resnetv17_stage2_activation1;resnetv17_stage2_conv7_weight;resnetv17_stage2_conv7_bias"
+    outputs="resnetv17_stage2_conv7_fwd"
+    penwidth=3
+    style=filled
+    color="#c29182"
+    fontcolor="#000000"
+    fillcolor="#d6a494"
+  ];
+  "resnetv17_stage2_batchnorm7_gamma" [
+    id=162
+    name="resnetv17_stage2_batchnorm7_gamma"
+    type=constant_input
+    label="resnetv17_stage2_batchnorm7_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage2_batchnorm7_beta" [
+    id=163
+    name="resnetv17_stage2_batchnorm7_beta"
+    type=constant_input
+    label="resnetv17_stage2_batchnorm7_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage2_batchnorm7_running_mean" [
+    id=164
+    name="resnetv17_stage2_batchnorm7_running_mean"
+    type=constant_input
+    label="resnetv17_stage2_batchnorm7_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage2_batchnorm7_running_var" [
+    id=165
+    name="resnetv17_stage2_batchnorm7_running_var"
+    type=constant_input
+    label="resnetv17_stage2_batchnorm7_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage2_batchnorm7_fwd" [
+    id=166
+    name="resnetv17_stage2_batchnorm7_fwd"
+    type=BatchNormalization
+    label="{ {resnetv17_stage2_batchnorm7_fwd  | BN} | [[8,128,28,28],[128],[128],[128],[128]] }"
+    inputs="resnetv17_stage2_conv7_fwd;resnetv17_stage2_batchnorm7_gamma;resnetv17_stage2_batchnorm7_beta;resnetv17_stage2_batchnorm7_running_mean;resnetv17_stage2_batchnorm7_running_var"
+    outputs="resnetv17_stage2_batchnorm7_fwd"
+    penwidth=3
+    style=filled
+    color="#c78695"
+    fontcolor="#000000"
+    fillcolor="#db98a7"
+  ];
+  "resnetv17_stage2_relu4_fwd" [
+    id=167
+    name="resnetv17_stage2_relu4_fwd"
+    type=Relu
+    label="{ {resnetv17_stage2_relu4_fwd  | RELU} | [8,128,28,28] }"
+    inputs="resnetv17_stage2_batchnorm7_fwd"
+    outputs="resnetv17_stage2_relu4_fwd"
+    penwidth=3
+    style=filled
+    color="#a385cc"
+    fontcolor="#000000"
+    fillcolor="#b697df"
+  ];
+  "resnetv17_stage2_conv8_weight" [
+    id=168
+    name="resnetv17_stage2_conv8_weight"
+    type=constant_input
+    label="resnetv17_stage2_conv8_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage2_conv8_fwd" [
+    id=169
+    name="resnetv17_stage2_conv8_fwd"
+    type=Conv
+    label="{ {resnetv17_stage2_conv8_fwd  | CONV} | [8,128,28,28] }"
+    inputs="resnetv17_stage2_relu4_fwd;resnetv17_stage2_conv8_weight"
+    outputs="resnetv17_stage2_conv8_fwd"
+    penwidth=3
+    style=filled
+    color="#c29182"
+    fontcolor="#000000"
+    fillcolor="#d6a494"
+  ];
+  "resnetv17_stage2_batchnorm8_gamma" [
+    id=170
+    name="resnetv17_stage2_batchnorm8_gamma"
+    type=constant_input
+    label="resnetv17_stage2_batchnorm8_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage2_batchnorm8_beta" [
+    id=171
+    name="resnetv17_stage2_batchnorm8_beta"
+    type=constant_input
+    label="resnetv17_stage2_batchnorm8_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage2_batchnorm8_running_mean" [
+    id=172
+    name="resnetv17_stage2_batchnorm8_running_mean"
+    type=constant_input
+    label="resnetv17_stage2_batchnorm8_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage2_batchnorm8_running_var" [
+    id=173
+    name="resnetv17_stage2_batchnorm8_running_var"
+    type=constant_input
+    label="resnetv17_stage2_batchnorm8_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage2_batchnorm8_fwd" [
+    id=174
+    name="resnetv17_stage2_batchnorm8_fwd"
+    type=BatchNormalization
+    label="{ {resnetv17_stage2_batchnorm8_fwd  | BN} | [[8,128,28,28],[128],[128],[128],[128]] }"
+    inputs="resnetv17_stage2_conv8_fwd;resnetv17_stage2_batchnorm8_gamma;resnetv17_stage2_batchnorm8_beta;resnetv17_stage2_batchnorm8_running_mean;resnetv17_stage2_batchnorm8_running_var"
+    outputs="resnetv17_stage2_batchnorm8_fwd"
+    penwidth=3
+    style=filled
+    color="#c78695"
+    fontcolor="#000000"
+    fillcolor="#db98a7"
+  ];
+  "resnetv17_stage2_relu5_fwd" [
+    id=175
+    name="resnetv17_stage2_relu5_fwd"
+    type=Relu
+    label="{ {resnetv17_stage2_relu5_fwd  | RELU} | [8,128,28,28] }"
+    inputs="resnetv17_stage2_batchnorm8_fwd"
+    outputs="resnetv17_stage2_relu5_fwd"
+    penwidth=3
+    style=filled
+    color="#a385cc"
+    fontcolor="#000000"
+    fillcolor="#b697df"
+  ];
+  "resnetv17_stage2_conv9_weight" [
+    id=176
+    name="resnetv17_stage2_conv9_weight"
+    type=constant_input
+    label="resnetv17_stage2_conv9_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage2_conv9_bias" [
+    id=177
+    name="resnetv17_stage2_conv9_bias"
+    type=constant_input
+    label="resnetv17_stage2_conv9_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage2_conv9_fwd" [
+    id=178
+    name="resnetv17_stage2_conv9_fwd"
+    type=Conv
+    label="{ {resnetv17_stage2_conv9_fwd  | CONV} | [8,512,28,28] }"
+    inputs="resnetv17_stage2_relu5_fwd;resnetv17_stage2_conv9_weight;resnetv17_stage2_conv9_bias"
+    outputs="resnetv17_stage2_conv9_fwd"
+    penwidth=3
+    style=filled
+    color="#c29182"
+    fontcolor="#000000"
+    fillcolor="#d6a494"
+  ];
+  "resnetv17_stage2_batchnorm9_gamma" [
+    id=179
+    name="resnetv17_stage2_batchnorm9_gamma"
+    type=constant_input
+    label="resnetv17_stage2_batchnorm9_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage2_batchnorm9_beta" [
+    id=180
+    name="resnetv17_stage2_batchnorm9_beta"
+    type=constant_input
+    label="resnetv17_stage2_batchnorm9_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage2_batchnorm9_running_mean" [
+    id=181
+    name="resnetv17_stage2_batchnorm9_running_mean"
+    type=constant_input
+    label="resnetv17_stage2_batchnorm9_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage2_batchnorm9_running_var" [
+    id=182
+    name="resnetv17_stage2_batchnorm9_running_var"
+    type=constant_input
+    label="resnetv17_stage2_batchnorm9_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage2_batchnorm9_fwd" [
+    id=183
+    name="resnetv17_stage2_batchnorm9_fwd"
+    type=BatchNormalization
+    label="{ {resnetv17_stage2_batchnorm9_fwd  | BN} | [[8,512,28,28],[512],[512],[512],[512]] }"
+    inputs="resnetv17_stage2_conv9_fwd;resnetv17_stage2_batchnorm9_gamma;resnetv17_stage2_batchnorm9_beta;resnetv17_stage2_batchnorm9_running_mean;resnetv17_stage2_batchnorm9_running_var"
+    outputs="resnetv17_stage2_batchnorm9_fwd"
+    penwidth=3
+    style=filled
+    color="#c78695"
+    fontcolor="#000000"
+    fillcolor="#db98a7"
+  ];
+  "resnetv17_stage2__plus2" [
+    id=184
+    name="resnetv17_stage2__plus2"
+    type=Add
+    label="{ {resnetv17_stage2__plus2  | ADD} | [8,512,28,28] }"
+    inputs="resnetv17_stage2_batchnorm9_fwd;resnetv17_stage2_activation1"
+    outputs="resnetv17_stage2__plus2"
+    penwidth=3
+    style=filled
+    color="#85afc7"
+    fontcolor="#000000"
+    fillcolor="#99c4dd"
+  ];
+  "resnetv17_stage2_activation2" [
+    id=185
+    name="resnetv17_stage2_activation2"
+    type=Relu
+    label="{ {resnetv17_stage2_activation2  | RELU} | [8,512,28,28] }"
+    inputs="resnetv17_stage2__plus2"
+    outputs="resnetv17_stage2_activation2"
+    penwidth=3
+    style=filled
+    color="#a385cc"
+    fontcolor="#000000"
+    fillcolor="#b697df"
+  ];
+  "resnetv17_stage2_conv10_weight" [
+    id=186
+    name="resnetv17_stage2_conv10_weight"
+    type=constant_input
+    label="resnetv17_stage2_conv10_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage2_conv10_bias" [
+    id=187
+    name="resnetv17_stage2_conv10_bias"
+    type=constant_input
+    label="resnetv17_stage2_conv10_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage2_conv10_fwd" [
+    id=188
+    name="resnetv17_stage2_conv10_fwd"
+    type=Conv
+    label="{ {resnetv17_stage2_conv10_fwd  | CONV} | [8,128,28,28] }"
+    inputs="resnetv17_stage2_activation2;resnetv17_stage2_conv10_weight;resnetv17_stage2_conv10_bias"
+    outputs="resnetv17_stage2_conv10_fwd"
+    penwidth=3
+    style=filled
+    color="#c29182"
+    fontcolor="#000000"
+    fillcolor="#d6a494"
+  ];
+  "resnetv17_stage2_batchnorm10_gamma" [
+    id=189
+    name="resnetv17_stage2_batchnorm10_gamma"
+    type=constant_input
+    label="resnetv17_stage2_batchnorm10_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage2_batchnorm10_beta" [
+    id=190
+    name="resnetv17_stage2_batchnorm10_beta"
+    type=constant_input
+    label="resnetv17_stage2_batchnorm10_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage2_batchnorm10_running_mean" [
+    id=191
+    name="resnetv17_stage2_batchnorm10_running_mean"
+    type=constant_input
+    label="resnetv17_stage2_batchnorm10_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage2_batchnorm10_running_var" [
+    id=192
+    name="resnetv17_stage2_batchnorm10_running_var"
+    type=constant_input
+    label="resnetv17_stage2_batchnorm10_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage2_batchnorm10_fwd" [
+    id=193
+    name="resnetv17_stage2_batchnorm10_fwd"
+    type=BatchNormalization
+    label="{ {resnetv17_stage2_batchnorm10_fwd  | BN} | [[8,128,28,28],[128],[128],[128],[128]] }"
+    inputs="resnetv17_stage2_conv10_fwd;resnetv17_stage2_batchnorm10_gamma;resnetv17_stage2_batchnorm10_beta;resnetv17_stage2_batchnorm10_running_mean;resnetv17_stage2_batchnorm10_running_var"
+    outputs="resnetv17_stage2_batchnorm10_fwd"
+    penwidth=3
+    style=filled
+    color="#c78695"
+    fontcolor="#000000"
+    fillcolor="#db98a7"
+  ];
+  "resnetv17_stage2_relu6_fwd" [
+    id=194
+    name="resnetv17_stage2_relu6_fwd"
+    type=Relu
+    label="{ {resnetv17_stage2_relu6_fwd  | RELU} | [8,128,28,28] }"
+    inputs="resnetv17_stage2_batchnorm10_fwd"
+    outputs="resnetv17_stage2_relu6_fwd"
+    penwidth=3
+    style=filled
+    color="#a385cc"
+    fontcolor="#000000"
+    fillcolor="#b697df"
+  ];
+  "resnetv17_stage2_conv11_weight" [
+    id=195
+    name="resnetv17_stage2_conv11_weight"
+    type=constant_input
+    label="resnetv17_stage2_conv11_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage2_conv11_fwd" [
+    id=196
+    name="resnetv17_stage2_conv11_fwd"
+    type=Conv
+    label="{ {resnetv17_stage2_conv11_fwd  | CONV} | [8,128,28,28] }"
+    inputs="resnetv17_stage2_relu6_fwd;resnetv17_stage2_conv11_weight"
+    outputs="resnetv17_stage2_conv11_fwd"
+    penwidth=3
+    style=filled
+    color="#c29182"
+    fontcolor="#000000"
+    fillcolor="#d6a494"
+  ];
+  "resnetv17_stage2_batchnorm11_gamma" [
+    id=197
+    name="resnetv17_stage2_batchnorm11_gamma"
+    type=constant_input
+    label="resnetv17_stage2_batchnorm11_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage2_batchnorm11_beta" [
+    id=198
+    name="resnetv17_stage2_batchnorm11_beta"
+    type=constant_input
+    label="resnetv17_stage2_batchnorm11_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage2_batchnorm11_running_mean" [
+    id=199
+    name="resnetv17_stage2_batchnorm11_running_mean"
+    type=constant_input
+    label="resnetv17_stage2_batchnorm11_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage2_batchnorm11_running_var" [
+    id=200
+    name="resnetv17_stage2_batchnorm11_running_var"
+    type=constant_input
+    label="resnetv17_stage2_batchnorm11_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage2_batchnorm11_fwd" [
+    id=201
+    name="resnetv17_stage2_batchnorm11_fwd"
+    type=BatchNormalization
+    label="{ {resnetv17_stage2_batchnorm11_fwd  | BN} | [[8,128,28,28],[128],[128],[128],[128]] }"
+    inputs="resnetv17_stage2_conv11_fwd;resnetv17_stage2_batchnorm11_gamma;resnetv17_stage2_batchnorm11_beta;resnetv17_stage2_batchnorm11_running_mean;resnetv17_stage2_batchnorm11_running_var"
+    outputs="resnetv17_stage2_batchnorm11_fwd"
+    penwidth=3
+    style=filled
+    color="#c78695"
+    fontcolor="#000000"
+    fillcolor="#db98a7"
+  ];
+  "resnetv17_stage2_relu7_fwd" [
+    id=202
+    name="resnetv17_stage2_relu7_fwd"
+    type=Relu
+    label="{ {resnetv17_stage2_relu7_fwd  | RELU} | [8,128,28,28] }"
+    inputs="resnetv17_stage2_batchnorm11_fwd"
+    outputs="resnetv17_stage2_relu7_fwd"
+    penwidth=3
+    style=filled
+    color="#a385cc"
+    fontcolor="#000000"
+    fillcolor="#b697df"
+  ];
+  "resnetv17_stage2_conv12_weight" [
+    id=203
+    name="resnetv17_stage2_conv12_weight"
+    type=constant_input
+    label="resnetv17_stage2_conv12_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage2_conv12_bias" [
+    id=204
+    name="resnetv17_stage2_conv12_bias"
+    type=constant_input
+    label="resnetv17_stage2_conv12_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage2_conv12_fwd" [
+    id=205
+    name="resnetv17_stage2_conv12_fwd"
+    type=Conv
+    label="{ {resnetv17_stage2_conv12_fwd  | CONV} | [8,512,28,28] }"
+    inputs="resnetv17_stage2_relu7_fwd;resnetv17_stage2_conv12_weight;resnetv17_stage2_conv12_bias"
+    outputs="resnetv17_stage2_conv12_fwd"
+    penwidth=3
+    style=filled
+    color="#c29182"
+    fontcolor="#000000"
+    fillcolor="#d6a494"
+  ];
+  "resnetv17_stage2_batchnorm12_gamma" [
+    id=206
+    name="resnetv17_stage2_batchnorm12_gamma"
+    type=constant_input
+    label="resnetv17_stage2_batchnorm12_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage2_batchnorm12_beta" [
+    id=207
+    name="resnetv17_stage2_batchnorm12_beta"
+    type=constant_input
+    label="resnetv17_stage2_batchnorm12_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage2_batchnorm12_running_mean" [
+    id=208
+    name="resnetv17_stage2_batchnorm12_running_mean"
+    type=constant_input
+    label="resnetv17_stage2_batchnorm12_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage2_batchnorm12_running_var" [
+    id=209
+    name="resnetv17_stage2_batchnorm12_running_var"
+    type=constant_input
+    label="resnetv17_stage2_batchnorm12_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage2_batchnorm12_fwd" [
+    id=210
+    name="resnetv17_stage2_batchnorm12_fwd"
+    type=BatchNormalization
+    label="{ {resnetv17_stage2_batchnorm12_fwd  | BN} | [[8,512,28,28],[512],[512],[512],[512]] }"
+    inputs="resnetv17_stage2_conv12_fwd;resnetv17_stage2_batchnorm12_gamma;resnetv17_stage2_batchnorm12_beta;resnetv17_stage2_batchnorm12_running_mean;resnetv17_stage2_batchnorm12_running_var"
+    outputs="resnetv17_stage2_batchnorm12_fwd"
+    penwidth=3
+    style=filled
+    color="#c78695"
+    fontcolor="#000000"
+    fillcolor="#db98a7"
+  ];
+  "resnetv17_stage2__plus3" [
+    id=211
+    name="resnetv17_stage2__plus3"
+    type=Add
+    label="{ {resnetv17_stage2__plus3  | ADD} | [8,512,28,28] }"
+    inputs="resnetv17_stage2_batchnorm12_fwd;resnetv17_stage2_activation2"
+    outputs="resnetv17_stage2__plus3"
+    penwidth=3
+    style=filled
+    color="#85afc7"
+    fontcolor="#000000"
+    fillcolor="#99c4dd"
+  ];
+  "resnetv17_stage2_activation3" [
+    id=212
+    name="resnetv17_stage2_activation3"
+    type=Relu
+    label="{ {resnetv17_stage2_activation3  | RELU} | [8,512,28,28] }"
+    inputs="resnetv17_stage2__plus3"
+    outputs="resnetv17_stage2_activation3"
+    penwidth=3
+    style=filled
+    color="#a385cc"
+    fontcolor="#000000"
+    fillcolor="#b697df"
+  ];
+  "resnetv17_stage3_conv0_weight" [
+    id=213
+    name="resnetv17_stage3_conv0_weight"
+    type=constant_input
+    label="resnetv17_stage3_conv0_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_conv0_bias" [
+    id=214
+    name="resnetv17_stage3_conv0_bias"
+    type=constant_input
+    label="resnetv17_stage3_conv0_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_conv0_fwd" [
+    id=215
+    name="resnetv17_stage3_conv0_fwd"
+    type=Conv
+    label="{ {resnetv17_stage3_conv0_fwd  | CONV} | [8,256,14,14] }"
+    inputs="resnetv17_stage2_activation3;resnetv17_stage3_conv0_weight;resnetv17_stage3_conv0_bias"
+    outputs="resnetv17_stage3_conv0_fwd"
+    penwidth=3
+    style=filled
+    color="#c29182"
+    fontcolor="#000000"
+    fillcolor="#d6a494"
+  ];
+  "resnetv17_stage3_batchnorm0_gamma" [
+    id=216
+    name="resnetv17_stage3_batchnorm0_gamma"
+    type=constant_input
+    label="resnetv17_stage3_batchnorm0_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_batchnorm0_beta" [
+    id=217
+    name="resnetv17_stage3_batchnorm0_beta"
+    type=constant_input
+    label="resnetv17_stage3_batchnorm0_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_batchnorm0_running_mean" [
+    id=218
+    name="resnetv17_stage3_batchnorm0_running_mean"
+    type=constant_input
+    label="resnetv17_stage3_batchnorm0_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_batchnorm0_running_var" [
+    id=219
+    name="resnetv17_stage3_batchnorm0_running_var"
+    type=constant_input
+    label="resnetv17_stage3_batchnorm0_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_batchnorm0_fwd" [
+    id=220
+    name="resnetv17_stage3_batchnorm0_fwd"
+    type=BatchNormalization
+    label="{ {resnetv17_stage3_batchnorm0_fwd  | BN} | [[8,256,14,14],[256],[256],[256],[256]] }"
+    inputs="resnetv17_stage3_conv0_fwd;resnetv17_stage3_batchnorm0_gamma;resnetv17_stage3_batchnorm0_beta;resnetv17_stage3_batchnorm0_running_mean;resnetv17_stage3_batchnorm0_running_var"
+    outputs="resnetv17_stage3_batchnorm0_fwd"
+    penwidth=3
+    style=filled
+    color="#c78695"
+    fontcolor="#000000"
+    fillcolor="#db98a7"
+  ];
+  "resnetv17_stage3_relu0_fwd" [
+    id=221
+    name="resnetv17_stage3_relu0_fwd"
+    type=Relu
+    label="{ {resnetv17_stage3_relu0_fwd  | RELU} | [8,256,14,14] }"
+    inputs="resnetv17_stage3_batchnorm0_fwd"
+    outputs="resnetv17_stage3_relu0_fwd"
+    penwidth=3
+    style=filled
+    color="#a385cc"
+    fontcolor="#000000"
+    fillcolor="#b697df"
+  ];
+  "resnetv17_stage3_conv1_weight" [
+    id=222
+    name="resnetv17_stage3_conv1_weight"
+    type=constant_input
+    label="resnetv17_stage3_conv1_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_conv1_fwd" [
+    id=223
+    name="resnetv17_stage3_conv1_fwd"
+    type=Conv
+    label="{ {resnetv17_stage3_conv1_fwd  | CONV} | [8,256,14,14] }"
+    inputs="resnetv17_stage3_relu0_fwd;resnetv17_stage3_conv1_weight"
+    outputs="resnetv17_stage3_conv1_fwd"
+    penwidth=3
+    style=filled
+    color="#c29182"
+    fontcolor="#000000"
+    fillcolor="#d6a494"
+  ];
+  "resnetv17_stage3_batchnorm1_gamma" [
+    id=224
+    name="resnetv17_stage3_batchnorm1_gamma"
+    type=constant_input
+    label="resnetv17_stage3_batchnorm1_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_batchnorm1_beta" [
+    id=225
+    name="resnetv17_stage3_batchnorm1_beta"
+    type=constant_input
+    label="resnetv17_stage3_batchnorm1_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_batchnorm1_running_mean" [
+    id=226
+    name="resnetv17_stage3_batchnorm1_running_mean"
+    type=constant_input
+    label="resnetv17_stage3_batchnorm1_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_batchnorm1_running_var" [
+    id=227
+    name="resnetv17_stage3_batchnorm1_running_var"
+    type=constant_input
+    label="resnetv17_stage3_batchnorm1_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_batchnorm1_fwd" [
+    id=228
+    name="resnetv17_stage3_batchnorm1_fwd"
+    type=BatchNormalization
+    label="{ {resnetv17_stage3_batchnorm1_fwd  | BN} | [[8,256,14,14],[256],[256],[256],[256]] }"
+    inputs="resnetv17_stage3_conv1_fwd;resnetv17_stage3_batchnorm1_gamma;resnetv17_stage3_batchnorm1_beta;resnetv17_stage3_batchnorm1_running_mean;resnetv17_stage3_batchnorm1_running_var"
+    outputs="resnetv17_stage3_batchnorm1_fwd"
+    penwidth=3
+    style=filled
+    color="#c78695"
+    fontcolor="#000000"
+    fillcolor="#db98a7"
+  ];
+  "resnetv17_stage3_relu1_fwd" [
+    id=229
+    name="resnetv17_stage3_relu1_fwd"
+    type=Relu
+    label="{ {resnetv17_stage3_relu1_fwd  | RELU} | [8,256,14,14] }"
+    inputs="resnetv17_stage3_batchnorm1_fwd"
+    outputs="resnetv17_stage3_relu1_fwd"
+    penwidth=3
+    style=filled
+    color="#a385cc"
+    fontcolor="#000000"
+    fillcolor="#b697df"
+  ];
+  "resnetv17_stage3_conv2_weight" [
+    id=230
+    name="resnetv17_stage3_conv2_weight"
+    type=constant_input
+    label="resnetv17_stage3_conv2_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_conv2_bias" [
+    id=231
+    name="resnetv17_stage3_conv2_bias"
+    type=constant_input
+    label="resnetv17_stage3_conv2_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_conv2_fwd" [
+    id=232
+    name="resnetv17_stage3_conv2_fwd"
+    type=Conv
+    label="{ {resnetv17_stage3_conv2_fwd  | CONV} | [8,1024,14,14] }"
+    inputs="resnetv17_stage3_relu1_fwd;resnetv17_stage3_conv2_weight;resnetv17_stage3_conv2_bias"
+    outputs="resnetv17_stage3_conv2_fwd"
+    penwidth=3
+    style=filled
+    color="#c29182"
+    fontcolor="#000000"
+    fillcolor="#d6a494"
+  ];
+  "resnetv17_stage3_batchnorm2_gamma" [
+    id=233
+    name="resnetv17_stage3_batchnorm2_gamma"
+    type=constant_input
+    label="resnetv17_stage3_batchnorm2_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_batchnorm2_beta" [
+    id=234
+    name="resnetv17_stage3_batchnorm2_beta"
+    type=constant_input
+    label="resnetv17_stage3_batchnorm2_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_batchnorm2_running_mean" [
+    id=235
+    name="resnetv17_stage3_batchnorm2_running_mean"
+    type=constant_input
+    label="resnetv17_stage3_batchnorm2_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_batchnorm2_running_var" [
+    id=236
+    name="resnetv17_stage3_batchnorm2_running_var"
+    type=constant_input
+    label="resnetv17_stage3_batchnorm2_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_batchnorm2_fwd" [
+    id=237
+    name="resnetv17_stage3_batchnorm2_fwd"
+    type=BatchNormalization
+    label="{ {resnetv17_stage3_batchnorm2_fwd  | BN} | [[8,1024,14,14],[1024],[1024],[1024],[1024]] }"
+    inputs="resnetv17_stage3_conv2_fwd;resnetv17_stage3_batchnorm2_gamma;resnetv17_stage3_batchnorm2_beta;resnetv17_stage3_batchnorm2_running_mean;resnetv17_stage3_batchnorm2_running_var"
+    outputs="resnetv17_stage3_batchnorm2_fwd"
+    penwidth=3
+    style=filled
+    color="#c78695"
+    fontcolor="#000000"
+    fillcolor="#db98a7"
+  ];
+  "resnetv17_stage3_conv3_weight" [
+    id=238
+    name="resnetv17_stage3_conv3_weight"
+    type=constant_input
+    label="resnetv17_stage3_conv3_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_conv3_fwd" [
+    id=239
+    name="resnetv17_stage3_conv3_fwd"
+    type=Conv
+    label="{ {resnetv17_stage3_conv3_fwd  | CONV} | [8,1024,14,14] }"
+    inputs="resnetv17_stage2_activation3;resnetv17_stage3_conv3_weight"
+    outputs="resnetv17_stage3_conv3_fwd"
+    penwidth=3
+    style=filled
+    color="#c29182"
+    fontcolor="#000000"
+    fillcolor="#d6a494"
+  ];
+  "resnetv17_stage3_batchnorm3_gamma" [
+    id=240
+    name="resnetv17_stage3_batchnorm3_gamma"
+    type=constant_input
+    label="resnetv17_stage3_batchnorm3_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_batchnorm3_beta" [
+    id=241
+    name="resnetv17_stage3_batchnorm3_beta"
+    type=constant_input
+    label="resnetv17_stage3_batchnorm3_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_batchnorm3_running_mean" [
+    id=242
+    name="resnetv17_stage3_batchnorm3_running_mean"
+    type=constant_input
+    label="resnetv17_stage3_batchnorm3_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_batchnorm3_running_var" [
+    id=243
+    name="resnetv17_stage3_batchnorm3_running_var"
+    type=constant_input
+    label="resnetv17_stage3_batchnorm3_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_batchnorm3_fwd" [
+    id=244
+    name="resnetv17_stage3_batchnorm3_fwd"
+    type=BatchNormalization
+    label="{ {resnetv17_stage3_batchnorm3_fwd  | BN} | [[8,1024,14,14],[1024],[1024],[1024],[1024]] }"
+    inputs="resnetv17_stage3_conv3_fwd;resnetv17_stage3_batchnorm3_gamma;resnetv17_stage3_batchnorm3_beta;resnetv17_stage3_batchnorm3_running_mean;resnetv17_stage3_batchnorm3_running_var"
+    outputs="resnetv17_stage3_batchnorm3_fwd"
+    penwidth=3
+    style=filled
+    color="#c78695"
+    fontcolor="#000000"
+    fillcolor="#db98a7"
+  ];
+  "resnetv17_stage3__plus0" [
+    id=245
+    name="resnetv17_stage3__plus0"
+    type=Add
+    label="{ {resnetv17_stage3__plus0  | ADD} | [8,1024,14,14] }"
+    inputs="resnetv17_stage3_batchnorm2_fwd;resnetv17_stage3_batchnorm3_fwd"
+    outputs="resnetv17_stage3__plus0"
+    penwidth=3
+    style=filled
+    color="#85afc7"
+    fontcolor="#000000"
+    fillcolor="#99c4dd"
+  ];
+  "resnetv17_stage3_activation0" [
+    id=246
+    name="resnetv17_stage3_activation0"
+    type=Relu
+    label="{ {resnetv17_stage3_activation0  | RELU} | [8,1024,14,14] }"
+    inputs="resnetv17_stage3__plus0"
+    outputs="resnetv17_stage3_activation0"
+    penwidth=3
+    style=filled
+    color="#a385cc"
+    fontcolor="#000000"
+    fillcolor="#b697df"
+  ];
+  "resnetv17_stage3_conv4_weight" [
+    id=247
+    name="resnetv17_stage3_conv4_weight"
+    type=constant_input
+    label="resnetv17_stage3_conv4_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_conv4_bias" [
+    id=248
+    name="resnetv17_stage3_conv4_bias"
+    type=constant_input
+    label="resnetv17_stage3_conv4_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_conv4_fwd" [
+    id=249
+    name="resnetv17_stage3_conv4_fwd"
+    type=Conv
+    label="{ {resnetv17_stage3_conv4_fwd  | CONV} | [8,256,14,14] }"
+    inputs="resnetv17_stage3_activation0;resnetv17_stage3_conv4_weight;resnetv17_stage3_conv4_bias"
+    outputs="resnetv17_stage3_conv4_fwd"
+    penwidth=3
+    style=filled
+    color="#c29182"
+    fontcolor="#000000"
+    fillcolor="#d6a494"
+  ];
+  "resnetv17_stage3_batchnorm4_gamma" [
+    id=250
+    name="resnetv17_stage3_batchnorm4_gamma"
+    type=constant_input
+    label="resnetv17_stage3_batchnorm4_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_batchnorm4_beta" [
+    id=251
+    name="resnetv17_stage3_batchnorm4_beta"
+    type=constant_input
+    label="resnetv17_stage3_batchnorm4_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_batchnorm4_running_mean" [
+    id=252
+    name="resnetv17_stage3_batchnorm4_running_mean"
+    type=constant_input
+    label="resnetv17_stage3_batchnorm4_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_batchnorm4_running_var" [
+    id=253
+    name="resnetv17_stage3_batchnorm4_running_var"
+    type=constant_input
+    label="resnetv17_stage3_batchnorm4_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_batchnorm4_fwd" [
+    id=254
+    name="resnetv17_stage3_batchnorm4_fwd"
+    type=BatchNormalization
+    label="{ {resnetv17_stage3_batchnorm4_fwd  | BN} | [[8,256,14,14],[256],[256],[256],[256]] }"
+    inputs="resnetv17_stage3_conv4_fwd;resnetv17_stage3_batchnorm4_gamma;resnetv17_stage3_batchnorm4_beta;resnetv17_stage3_batchnorm4_running_mean;resnetv17_stage3_batchnorm4_running_var"
+    outputs="resnetv17_stage3_batchnorm4_fwd"
+    penwidth=3
+    style=filled
+    color="#c78695"
+    fontcolor="#000000"
+    fillcolor="#db98a7"
+  ];
+  "resnetv17_stage3_relu2_fwd" [
+    id=255
+    name="resnetv17_stage3_relu2_fwd"
+    type=Relu
+    label="{ {resnetv17_stage3_relu2_fwd  | RELU} | [8,256,14,14] }"
+    inputs="resnetv17_stage3_batchnorm4_fwd"
+    outputs="resnetv17_stage3_relu2_fwd"
+    penwidth=3
+    style=filled
+    color="#a385cc"
+    fontcolor="#000000"
+    fillcolor="#b697df"
+  ];
+  "resnetv17_stage3_conv5_weight" [
+    id=256
+    name="resnetv17_stage3_conv5_weight"
+    type=constant_input
+    label="resnetv17_stage3_conv5_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_conv5_fwd" [
+    id=257
+    name="resnetv17_stage3_conv5_fwd"
+    type=Conv
+    label="{ {resnetv17_stage3_conv5_fwd  | CONV} | [8,256,14,14] }"
+    inputs="resnetv17_stage3_relu2_fwd;resnetv17_stage3_conv5_weight"
+    outputs="resnetv17_stage3_conv5_fwd"
+    penwidth=3
+    style=filled
+    color="#c29182"
+    fontcolor="#000000"
+    fillcolor="#d6a494"
+  ];
+  "resnetv17_stage3_batchnorm5_gamma" [
+    id=258
+    name="resnetv17_stage3_batchnorm5_gamma"
+    type=constant_input
+    label="resnetv17_stage3_batchnorm5_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_batchnorm5_beta" [
+    id=259
+    name="resnetv17_stage3_batchnorm5_beta"
+    type=constant_input
+    label="resnetv17_stage3_batchnorm5_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_batchnorm5_running_mean" [
+    id=260
+    name="resnetv17_stage3_batchnorm5_running_mean"
+    type=constant_input
+    label="resnetv17_stage3_batchnorm5_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_batchnorm5_running_var" [
+    id=261
+    name="resnetv17_stage3_batchnorm5_running_var"
+    type=constant_input
+    label="resnetv17_stage3_batchnorm5_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_batchnorm5_fwd" [
+    id=262
+    name="resnetv17_stage3_batchnorm5_fwd"
+    type=BatchNormalization
+    label="{ {resnetv17_stage3_batchnorm5_fwd  | BN} | [[8,256,14,14],[256],[256],[256],[256]] }"
+    inputs="resnetv17_stage3_conv5_fwd;resnetv17_stage3_batchnorm5_gamma;resnetv17_stage3_batchnorm5_beta;resnetv17_stage3_batchnorm5_running_mean;resnetv17_stage3_batchnorm5_running_var"
+    outputs="resnetv17_stage3_batchnorm5_fwd"
+    penwidth=3
+    style=filled
+    color="#c78695"
+    fontcolor="#000000"
+    fillcolor="#db98a7"
+  ];
+  "resnetv17_stage3_relu3_fwd" [
+    id=263
+    name="resnetv17_stage3_relu3_fwd"
+    type=Relu
+    label="{ {resnetv17_stage3_relu3_fwd  | RELU} | [8,256,14,14] }"
+    inputs="resnetv17_stage3_batchnorm5_fwd"
+    outputs="resnetv17_stage3_relu3_fwd"
+    penwidth=3
+    style=filled
+    color="#a385cc"
+    fontcolor="#000000"
+    fillcolor="#b697df"
+  ];
+  "resnetv17_stage3_conv6_weight" [
+    id=264
+    name="resnetv17_stage3_conv6_weight"
+    type=constant_input
+    label="resnetv17_stage3_conv6_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_conv6_bias" [
+    id=265
+    name="resnetv17_stage3_conv6_bias"
+    type=constant_input
+    label="resnetv17_stage3_conv6_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_conv6_fwd" [
+    id=266
+    name="resnetv17_stage3_conv6_fwd"
+    type=Conv
+    label="{ {resnetv17_stage3_conv6_fwd  | CONV} | [8,1024,14,14] }"
+    inputs="resnetv17_stage3_relu3_fwd;resnetv17_stage3_conv6_weight;resnetv17_stage3_conv6_bias"
+    outputs="resnetv17_stage3_conv6_fwd"
+    penwidth=3
+    style=filled
+    color="#c29182"
+    fontcolor="#000000"
+    fillcolor="#d6a494"
+  ];
+  "resnetv17_stage3_batchnorm6_gamma" [
+    id=267
+    name="resnetv17_stage3_batchnorm6_gamma"
+    type=constant_input
+    label="resnetv17_stage3_batchnorm6_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_batchnorm6_beta" [
+    id=268
+    name="resnetv17_stage3_batchnorm6_beta"
+    type=constant_input
+    label="resnetv17_stage3_batchnorm6_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_batchnorm6_running_mean" [
+    id=269
+    name="resnetv17_stage3_batchnorm6_running_mean"
+    type=constant_input
+    label="resnetv17_stage3_batchnorm6_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_batchnorm6_running_var" [
+    id=270
+    name="resnetv17_stage3_batchnorm6_running_var"
+    type=constant_input
+    label="resnetv17_stage3_batchnorm6_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_batchnorm6_fwd" [
+    id=271
+    name="resnetv17_stage3_batchnorm6_fwd"
+    type=BatchNormalization
+    label="{ {resnetv17_stage3_batchnorm6_fwd  | BN} | [[8,1024,14,14],[1024],[1024],[1024],[1024]] }"
+    inputs="resnetv17_stage3_conv6_fwd;resnetv17_stage3_batchnorm6_gamma;resnetv17_stage3_batchnorm6_beta;resnetv17_stage3_batchnorm6_running_mean;resnetv17_stage3_batchnorm6_running_var"
+    outputs="resnetv17_stage3_batchnorm6_fwd"
+    penwidth=3
+    style=filled
+    color="#c78695"
+    fontcolor="#000000"
+    fillcolor="#db98a7"
+  ];
+  "resnetv17_stage3__plus1" [
+    id=272
+    name="resnetv17_stage3__plus1"
+    type=Add
+    label="{ {resnetv17_stage3__plus1  | ADD} | [8,1024,14,14] }"
+    inputs="resnetv17_stage3_batchnorm6_fwd;resnetv17_stage3_activation0"
+    outputs="resnetv17_stage3__plus1"
+    penwidth=3
+    style=filled
+    color="#85afc7"
+    fontcolor="#000000"
+    fillcolor="#99c4dd"
+  ];
+  "resnetv17_stage3_activation1" [
+    id=273
+    name="resnetv17_stage3_activation1"
+    type=Relu
+    label="{ {resnetv17_stage3_activation1  | RELU} | [8,1024,14,14] }"
+    inputs="resnetv17_stage3__plus1"
+    outputs="resnetv17_stage3_activation1"
+    penwidth=3
+    style=filled
+    color="#a385cc"
+    fontcolor="#000000"
+    fillcolor="#b697df"
+  ];
+  "resnetv17_stage3_conv7_weight" [
+    id=274
+    name="resnetv17_stage3_conv7_weight"
+    type=constant_input
+    label="resnetv17_stage3_conv7_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_conv7_bias" [
+    id=275
+    name="resnetv17_stage3_conv7_bias"
+    type=constant_input
+    label="resnetv17_stage3_conv7_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_conv7_fwd" [
+    id=276
+    name="resnetv17_stage3_conv7_fwd"
+    type=Conv
+    label="{ {resnetv17_stage3_conv7_fwd  | CONV} | [8,256,14,14] }"
+    inputs="resnetv17_stage3_activation1;resnetv17_stage3_conv7_weight;resnetv17_stage3_conv7_bias"
+    outputs="resnetv17_stage3_conv7_fwd"
+    penwidth=3
+    style=filled
+    color="#c29182"
+    fontcolor="#000000"
+    fillcolor="#d6a494"
+  ];
+  "resnetv17_stage3_batchnorm7_gamma" [
+    id=277
+    name="resnetv17_stage3_batchnorm7_gamma"
+    type=constant_input
+    label="resnetv17_stage3_batchnorm7_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_batchnorm7_beta" [
+    id=278
+    name="resnetv17_stage3_batchnorm7_beta"
+    type=constant_input
+    label="resnetv17_stage3_batchnorm7_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_batchnorm7_running_mean" [
+    id=279
+    name="resnetv17_stage3_batchnorm7_running_mean"
+    type=constant_input
+    label="resnetv17_stage3_batchnorm7_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_batchnorm7_running_var" [
+    id=280
+    name="resnetv17_stage3_batchnorm7_running_var"
+    type=constant_input
+    label="resnetv17_stage3_batchnorm7_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_batchnorm7_fwd" [
+    id=281
+    name="resnetv17_stage3_batchnorm7_fwd"
+    type=BatchNormalization
+    label="{ {resnetv17_stage3_batchnorm7_fwd  | BN} | [[8,256,14,14],[256],[256],[256],[256]] }"
+    inputs="resnetv17_stage3_conv7_fwd;resnetv17_stage3_batchnorm7_gamma;resnetv17_stage3_batchnorm7_beta;resnetv17_stage3_batchnorm7_running_mean;resnetv17_stage3_batchnorm7_running_var"
+    outputs="resnetv17_stage3_batchnorm7_fwd"
+    penwidth=3
+    style=filled
+    color="#c78695"
+    fontcolor="#000000"
+    fillcolor="#db98a7"
+  ];
+  "resnetv17_stage3_relu4_fwd" [
+    id=282
+    name="resnetv17_stage3_relu4_fwd"
+    type=Relu
+    label="{ {resnetv17_stage3_relu4_fwd  | RELU} | [8,256,14,14] }"
+    inputs="resnetv17_stage3_batchnorm7_fwd"
+    outputs="resnetv17_stage3_relu4_fwd"
+    penwidth=3
+    style=filled
+    color="#a385cc"
+    fontcolor="#000000"
+    fillcolor="#b697df"
+  ];
+  "resnetv17_stage3_conv8_weight" [
+    id=283
+    name="resnetv17_stage3_conv8_weight"
+    type=constant_input
+    label="resnetv17_stage3_conv8_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_conv8_fwd" [
+    id=284
+    name="resnetv17_stage3_conv8_fwd"
+    type=Conv
+    label="{ {resnetv17_stage3_conv8_fwd  | CONV} | [8,256,14,14] }"
+    inputs="resnetv17_stage3_relu4_fwd;resnetv17_stage3_conv8_weight"
+    outputs="resnetv17_stage3_conv8_fwd"
+    penwidth=3
+    style=filled
+    color="#c29182"
+    fontcolor="#000000"
+    fillcolor="#d6a494"
+  ];
+  "resnetv17_stage3_batchnorm8_gamma" [
+    id=285
+    name="resnetv17_stage3_batchnorm8_gamma"
+    type=constant_input
+    label="resnetv17_stage3_batchnorm8_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_batchnorm8_beta" [
+    id=286
+    name="resnetv17_stage3_batchnorm8_beta"
+    type=constant_input
+    label="resnetv17_stage3_batchnorm8_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_batchnorm8_running_mean" [
+    id=287
+    name="resnetv17_stage3_batchnorm8_running_mean"
+    type=constant_input
+    label="resnetv17_stage3_batchnorm8_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_batchnorm8_running_var" [
+    id=288
+    name="resnetv17_stage3_batchnorm8_running_var"
+    type=constant_input
+    label="resnetv17_stage3_batchnorm8_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_batchnorm8_fwd" [
+    id=289
+    name="resnetv17_stage3_batchnorm8_fwd"
+    type=BatchNormalization
+    label="{ {resnetv17_stage3_batchnorm8_fwd  | BN} | [[8,256,14,14],[256],[256],[256],[256]] }"
+    inputs="resnetv17_stage3_conv8_fwd;resnetv17_stage3_batchnorm8_gamma;resnetv17_stage3_batchnorm8_beta;resnetv17_stage3_batchnorm8_running_mean;resnetv17_stage3_batchnorm8_running_var"
+    outputs="resnetv17_stage3_batchnorm8_fwd"
+    penwidth=3
+    style=filled
+    color="#c78695"
+    fontcolor="#000000"
+    fillcolor="#db98a7"
+  ];
+  "resnetv17_stage3_relu5_fwd" [
+    id=290
+    name="resnetv17_stage3_relu5_fwd"
+    type=Relu
+    label="{ {resnetv17_stage3_relu5_fwd  | RELU} | [8,256,14,14] }"
+    inputs="resnetv17_stage3_batchnorm8_fwd"
+    outputs="resnetv17_stage3_relu5_fwd"
+    penwidth=3
+    style=filled
+    color="#a385cc"
+    fontcolor="#000000"
+    fillcolor="#b697df"
+  ];
+  "resnetv17_stage3_conv9_weight" [
+    id=291
+    name="resnetv17_stage3_conv9_weight"
+    type=constant_input
+    label="resnetv17_stage3_conv9_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_conv9_bias" [
+    id=292
+    name="resnetv17_stage3_conv9_bias"
+    type=constant_input
+    label="resnetv17_stage3_conv9_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_conv9_fwd" [
+    id=293
+    name="resnetv17_stage3_conv9_fwd"
+    type=Conv
+    label="{ {resnetv17_stage3_conv9_fwd  | CONV} | [8,1024,14,14] }"
+    inputs="resnetv17_stage3_relu5_fwd;resnetv17_stage3_conv9_weight;resnetv17_stage3_conv9_bias"
+    outputs="resnetv17_stage3_conv9_fwd"
+    penwidth=3
+    style=filled
+    color="#c29182"
+    fontcolor="#000000"
+    fillcolor="#d6a494"
+  ];
+  "resnetv17_stage3_batchnorm9_gamma" [
+    id=294
+    name="resnetv17_stage3_batchnorm9_gamma"
+    type=constant_input
+    label="resnetv17_stage3_batchnorm9_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_batchnorm9_beta" [
+    id=295
+    name="resnetv17_stage3_batchnorm9_beta"
+    type=constant_input
+    label="resnetv17_stage3_batchnorm9_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_batchnorm9_running_mean" [
+    id=296
+    name="resnetv17_stage3_batchnorm9_running_mean"
+    type=constant_input
+    label="resnetv17_stage3_batchnorm9_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_batchnorm9_running_var" [
+    id=297
+    name="resnetv17_stage3_batchnorm9_running_var"
+    type=constant_input
+    label="resnetv17_stage3_batchnorm9_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_batchnorm9_fwd" [
+    id=298
+    name="resnetv17_stage3_batchnorm9_fwd"
+    type=BatchNormalization
+    label="{ {resnetv17_stage3_batchnorm9_fwd  | BN} | [[8,1024,14,14],[1024],[1024],[1024],[1024]] }"
+    inputs="resnetv17_stage3_conv9_fwd;resnetv17_stage3_batchnorm9_gamma;resnetv17_stage3_batchnorm9_beta;resnetv17_stage3_batchnorm9_running_mean;resnetv17_stage3_batchnorm9_running_var"
+    outputs="resnetv17_stage3_batchnorm9_fwd"
+    penwidth=3
+    style=filled
+    color="#c78695"
+    fontcolor="#000000"
+    fillcolor="#db98a7"
+  ];
+  "resnetv17_stage3__plus2" [
+    id=299
+    name="resnetv17_stage3__plus2"
+    type=Add
+    label="{ {resnetv17_stage3__plus2  | ADD} | [8,1024,14,14] }"
+    inputs="resnetv17_stage3_batchnorm9_fwd;resnetv17_stage3_activation1"
+    outputs="resnetv17_stage3__plus2"
+    penwidth=3
+    style=filled
+    color="#85afc7"
+    fontcolor="#000000"
+    fillcolor="#99c4dd"
+  ];
+  "resnetv17_stage3_activation2" [
+    id=300
+    name="resnetv17_stage3_activation2"
+    type=Relu
+    label="{ {resnetv17_stage3_activation2  | RELU} | [8,1024,14,14] }"
+    inputs="resnetv17_stage3__plus2"
+    outputs="resnetv17_stage3_activation2"
+    penwidth=3
+    style=filled
+    color="#a385cc"
+    fontcolor="#000000"
+    fillcolor="#b697df"
+  ];
+  "resnetv17_stage3_conv10_weight" [
+    id=301
+    name="resnetv17_stage3_conv10_weight"
+    type=constant_input
+    label="resnetv17_stage3_conv10_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_conv10_bias" [
+    id=302
+    name="resnetv17_stage3_conv10_bias"
+    type=constant_input
+    label="resnetv17_stage3_conv10_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_conv10_fwd" [
+    id=303
+    name="resnetv17_stage3_conv10_fwd"
+    type=Conv
+    label="{ {resnetv17_stage3_conv10_fwd  | CONV} | [8,256,14,14] }"
+    inputs="resnetv17_stage3_activation2;resnetv17_stage3_conv10_weight;resnetv17_stage3_conv10_bias"
+    outputs="resnetv17_stage3_conv10_fwd"
+    penwidth=3
+    style=filled
+    color="#c29182"
+    fontcolor="#000000"
+    fillcolor="#d6a494"
+  ];
+  "resnetv17_stage3_batchnorm10_gamma" [
+    id=304
+    name="resnetv17_stage3_batchnorm10_gamma"
+    type=constant_input
+    label="resnetv17_stage3_batchnorm10_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_batchnorm10_beta" [
+    id=305
+    name="resnetv17_stage3_batchnorm10_beta"
+    type=constant_input
+    label="resnetv17_stage3_batchnorm10_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_batchnorm10_running_mean" [
+    id=306
+    name="resnetv17_stage3_batchnorm10_running_mean"
+    type=constant_input
+    label="resnetv17_stage3_batchnorm10_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_batchnorm10_running_var" [
+    id=307
+    name="resnetv17_stage3_batchnorm10_running_var"
+    type=constant_input
+    label="resnetv17_stage3_batchnorm10_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_batchnorm10_fwd" [
+    id=308
+    name="resnetv17_stage3_batchnorm10_fwd"
+    type=BatchNormalization
+    label="{ {resnetv17_stage3_batchnorm10_fwd  | BN} | [[8,256,14,14],[256],[256],[256],[256]] }"
+    inputs="resnetv17_stage3_conv10_fwd;resnetv17_stage3_batchnorm10_gamma;resnetv17_stage3_batchnorm10_beta;resnetv17_stage3_batchnorm10_running_mean;resnetv17_stage3_batchnorm10_running_var"
+    outputs="resnetv17_stage3_batchnorm10_fwd"
+    penwidth=3
+    style=filled
+    color="#c78695"
+    fontcolor="#000000"
+    fillcolor="#db98a7"
+  ];
+  "resnetv17_stage3_relu6_fwd" [
+    id=309
+    name="resnetv17_stage3_relu6_fwd"
+    type=Relu
+    label="{ {resnetv17_stage3_relu6_fwd  | RELU} | [8,256,14,14] }"
+    inputs="resnetv17_stage3_batchnorm10_fwd"
+    outputs="resnetv17_stage3_relu6_fwd"
+    penwidth=3
+    style=filled
+    color="#a385cc"
+    fontcolor="#000000"
+    fillcolor="#b697df"
+  ];
+  "resnetv17_stage3_conv11_weight" [
+    id=310
+    name="resnetv17_stage3_conv11_weight"
+    type=constant_input
+    label="resnetv17_stage3_conv11_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_conv11_fwd" [
+    id=311
+    name="resnetv17_stage3_conv11_fwd"
+    type=Conv
+    label="{ {resnetv17_stage3_conv11_fwd  | CONV} | [8,256,14,14] }"
+    inputs="resnetv17_stage3_relu6_fwd;resnetv17_stage3_conv11_weight"
+    outputs="resnetv17_stage3_conv11_fwd"
+    penwidth=3
+    style=filled
+    color="#c29182"
+    fontcolor="#000000"
+    fillcolor="#d6a494"
+  ];
+  "resnetv17_stage3_batchnorm11_gamma" [
+    id=312
+    name="resnetv17_stage3_batchnorm11_gamma"
+    type=constant_input
+    label="resnetv17_stage3_batchnorm11_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_batchnorm11_beta" [
+    id=313
+    name="resnetv17_stage3_batchnorm11_beta"
+    type=constant_input
+    label="resnetv17_stage3_batchnorm11_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_batchnorm11_running_mean" [
+    id=314
+    name="resnetv17_stage3_batchnorm11_running_mean"
+    type=constant_input
+    label="resnetv17_stage3_batchnorm11_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_batchnorm11_running_var" [
+    id=315
+    name="resnetv17_stage3_batchnorm11_running_var"
+    type=constant_input
+    label="resnetv17_stage3_batchnorm11_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_batchnorm11_fwd" [
+    id=316
+    name="resnetv17_stage3_batchnorm11_fwd"
+    type=BatchNormalization
+    label="{ {resnetv17_stage3_batchnorm11_fwd  | BN} | [[8,256,14,14],[256],[256],[256],[256]] }"
+    inputs="resnetv17_stage3_conv11_fwd;resnetv17_stage3_batchnorm11_gamma;resnetv17_stage3_batchnorm11_beta;resnetv17_stage3_batchnorm11_running_mean;resnetv17_stage3_batchnorm11_running_var"
+    outputs="resnetv17_stage3_batchnorm11_fwd"
+    penwidth=3
+    style=filled
+    color="#c78695"
+    fontcolor="#000000"
+    fillcolor="#db98a7"
+  ];
+  "resnetv17_stage3_relu7_fwd" [
+    id=317
+    name="resnetv17_stage3_relu7_fwd"
+    type=Relu
+    label="{ {resnetv17_stage3_relu7_fwd  | RELU} | [8,256,14,14] }"
+    inputs="resnetv17_stage3_batchnorm11_fwd"
+    outputs="resnetv17_stage3_relu7_fwd"
+    penwidth=3
+    style=filled
+    color="#a385cc"
+    fontcolor="#000000"
+    fillcolor="#b697df"
+  ];
+  "resnetv17_stage3_conv12_weight" [
+    id=318
+    name="resnetv17_stage3_conv12_weight"
+    type=constant_input
+    label="resnetv17_stage3_conv12_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_conv12_bias" [
+    id=319
+    name="resnetv17_stage3_conv12_bias"
+    type=constant_input
+    label="resnetv17_stage3_conv12_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_conv12_fwd" [
+    id=320
+    name="resnetv17_stage3_conv12_fwd"
+    type=Conv
+    label="{ {resnetv17_stage3_conv12_fwd  | CONV} | [8,1024,14,14] }"
+    inputs="resnetv17_stage3_relu7_fwd;resnetv17_stage3_conv12_weight;resnetv17_stage3_conv12_bias"
+    outputs="resnetv17_stage3_conv12_fwd"
+    penwidth=3
+    style=filled
+    color="#c29182"
+    fontcolor="#000000"
+    fillcolor="#d6a494"
+  ];
+  "resnetv17_stage3_batchnorm12_gamma" [
+    id=321
+    name="resnetv17_stage3_batchnorm12_gamma"
+    type=constant_input
+    label="resnetv17_stage3_batchnorm12_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_batchnorm12_beta" [
+    id=322
+    name="resnetv17_stage3_batchnorm12_beta"
+    type=constant_input
+    label="resnetv17_stage3_batchnorm12_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_batchnorm12_running_mean" [
+    id=323
+    name="resnetv17_stage3_batchnorm12_running_mean"
+    type=constant_input
+    label="resnetv17_stage3_batchnorm12_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_batchnorm12_running_var" [
+    id=324
+    name="resnetv17_stage3_batchnorm12_running_var"
+    type=constant_input
+    label="resnetv17_stage3_batchnorm12_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_batchnorm12_fwd" [
+    id=325
+    name="resnetv17_stage3_batchnorm12_fwd"
+    type=BatchNormalization
+    label="{ {resnetv17_stage3_batchnorm12_fwd  | BN} | [[8,1024,14,14],[1024],[1024],[1024],[1024]] }"
+    inputs="resnetv17_stage3_conv12_fwd;resnetv17_stage3_batchnorm12_gamma;resnetv17_stage3_batchnorm12_beta;resnetv17_stage3_batchnorm12_running_mean;resnetv17_stage3_batchnorm12_running_var"
+    outputs="resnetv17_stage3_batchnorm12_fwd"
+    penwidth=3
+    style=filled
+    color="#c78695"
+    fontcolor="#000000"
+    fillcolor="#db98a7"
+  ];
+  "resnetv17_stage3__plus3" [
+    id=326
+    name="resnetv17_stage3__plus3"
+    type=Add
+    label="{ {resnetv17_stage3__plus3  | ADD} | [8,1024,14,14] }"
+    inputs="resnetv17_stage3_batchnorm12_fwd;resnetv17_stage3_activation2"
+    outputs="resnetv17_stage3__plus3"
+    penwidth=3
+    style=filled
+    color="#85afc7"
+    fontcolor="#000000"
+    fillcolor="#99c4dd"
+  ];
+  "resnetv17_stage3_activation3" [
+    id=327
+    name="resnetv17_stage3_activation3"
+    type=Relu
+    label="{ {resnetv17_stage3_activation3  | RELU} | [8,1024,14,14] }"
+    inputs="resnetv17_stage3__plus3"
+    outputs="resnetv17_stage3_activation3"
+    penwidth=3
+    style=filled
+    color="#a385cc"
+    fontcolor="#000000"
+    fillcolor="#b697df"
+  ];
+  "resnetv17_stage3_conv13_weight" [
+    id=328
+    name="resnetv17_stage3_conv13_weight"
+    type=constant_input
+    label="resnetv17_stage3_conv13_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_conv13_bias" [
+    id=329
+    name="resnetv17_stage3_conv13_bias"
+    type=constant_input
+    label="resnetv17_stage3_conv13_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_conv13_fwd" [
+    id=330
+    name="resnetv17_stage3_conv13_fwd"
+    type=Conv
+    label="{ {resnetv17_stage3_conv13_fwd  | CONV} | [8,256,14,14] }"
+    inputs="resnetv17_stage3_activation3;resnetv17_stage3_conv13_weight;resnetv17_stage3_conv13_bias"
+    outputs="resnetv17_stage3_conv13_fwd"
+    penwidth=3
+    style=filled
+    color="#c29182"
+    fontcolor="#000000"
+    fillcolor="#d6a494"
+  ];
+  "resnetv17_stage3_batchnorm13_gamma" [
+    id=331
+    name="resnetv17_stage3_batchnorm13_gamma"
+    type=constant_input
+    label="resnetv17_stage3_batchnorm13_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_batchnorm13_beta" [
+    id=332
+    name="resnetv17_stage3_batchnorm13_beta"
+    type=constant_input
+    label="resnetv17_stage3_batchnorm13_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_batchnorm13_running_mean" [
+    id=333
+    name="resnetv17_stage3_batchnorm13_running_mean"
+    type=constant_input
+    label="resnetv17_stage3_batchnorm13_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_batchnorm13_running_var" [
+    id=334
+    name="resnetv17_stage3_batchnorm13_running_var"
+    type=constant_input
+    label="resnetv17_stage3_batchnorm13_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_batchnorm13_fwd" [
+    id=335
+    name="resnetv17_stage3_batchnorm13_fwd"
+    type=BatchNormalization
+    label="{ {resnetv17_stage3_batchnorm13_fwd  | BN} | [[8,256,14,14],[256],[256],[256],[256]] }"
+    inputs="resnetv17_stage3_conv13_fwd;resnetv17_stage3_batchnorm13_gamma;resnetv17_stage3_batchnorm13_beta;resnetv17_stage3_batchnorm13_running_mean;resnetv17_stage3_batchnorm13_running_var"
+    outputs="resnetv17_stage3_batchnorm13_fwd"
+    penwidth=3
+    style=filled
+    color="#c78695"
+    fontcolor="#000000"
+    fillcolor="#db98a7"
+  ];
+  "resnetv17_stage3_relu8_fwd" [
+    id=336
+    name="resnetv17_stage3_relu8_fwd"
+    type=Relu
+    label="{ {resnetv17_stage3_relu8_fwd  | RELU} | [8,256,14,14] }"
+    inputs="resnetv17_stage3_batchnorm13_fwd"
+    outputs="resnetv17_stage3_relu8_fwd"
+    penwidth=3
+    style=filled
+    color="#a385cc"
+    fontcolor="#000000"
+    fillcolor="#b697df"
+  ];
+  "resnetv17_stage3_conv14_weight" [
+    id=337
+    name="resnetv17_stage3_conv14_weight"
+    type=constant_input
+    label="resnetv17_stage3_conv14_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_conv14_fwd" [
+    id=338
+    name="resnetv17_stage3_conv14_fwd"
+    type=Conv
+    label="{ {resnetv17_stage3_conv14_fwd  | CONV} | [8,256,14,14] }"
+    inputs="resnetv17_stage3_relu8_fwd;resnetv17_stage3_conv14_weight"
+    outputs="resnetv17_stage3_conv14_fwd"
+    penwidth=3
+    style=filled
+    color="#c29182"
+    fontcolor="#000000"
+    fillcolor="#d6a494"
+  ];
+  "resnetv17_stage3_batchnorm14_gamma" [
+    id=339
+    name="resnetv17_stage3_batchnorm14_gamma"
+    type=constant_input
+    label="resnetv17_stage3_batchnorm14_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_batchnorm14_beta" [
+    id=340
+    name="resnetv17_stage3_batchnorm14_beta"
+    type=constant_input
+    label="resnetv17_stage3_batchnorm14_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_batchnorm14_running_mean" [
+    id=341
+    name="resnetv17_stage3_batchnorm14_running_mean"
+    type=constant_input
+    label="resnetv17_stage3_batchnorm14_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_batchnorm14_running_var" [
+    id=342
+    name="resnetv17_stage3_batchnorm14_running_var"
+    type=constant_input
+    label="resnetv17_stage3_batchnorm14_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_batchnorm14_fwd" [
+    id=343
+    name="resnetv17_stage3_batchnorm14_fwd"
+    type=BatchNormalization
+    label="{ {resnetv17_stage3_batchnorm14_fwd  | BN} | [[8,256,14,14],[256],[256],[256],[256]] }"
+    inputs="resnetv17_stage3_conv14_fwd;resnetv17_stage3_batchnorm14_gamma;resnetv17_stage3_batchnorm14_beta;resnetv17_stage3_batchnorm14_running_mean;resnetv17_stage3_batchnorm14_running_var"
+    outputs="resnetv17_stage3_batchnorm14_fwd"
+    penwidth=3
+    style=filled
+    color="#c78695"
+    fontcolor="#000000"
+    fillcolor="#db98a7"
+  ];
+  "resnetv17_stage3_relu9_fwd" [
+    id=344
+    name="resnetv17_stage3_relu9_fwd"
+    type=Relu
+    label="{ {resnetv17_stage3_relu9_fwd  | RELU} | [8,256,14,14] }"
+    inputs="resnetv17_stage3_batchnorm14_fwd"
+    outputs="resnetv17_stage3_relu9_fwd"
+    penwidth=3
+    style=filled
+    color="#a385cc"
+    fontcolor="#000000"
+    fillcolor="#b697df"
+  ];
+  "resnetv17_stage3_conv15_weight" [
+    id=345
+    name="resnetv17_stage3_conv15_weight"
+    type=constant_input
+    label="resnetv17_stage3_conv15_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_conv15_bias" [
+    id=346
+    name="resnetv17_stage3_conv15_bias"
+    type=constant_input
+    label="resnetv17_stage3_conv15_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_conv15_fwd" [
+    id=347
+    name="resnetv17_stage3_conv15_fwd"
+    type=Conv
+    label="{ {resnetv17_stage3_conv15_fwd  | CONV} | [8,1024,14,14] }"
+    inputs="resnetv17_stage3_relu9_fwd;resnetv17_stage3_conv15_weight;resnetv17_stage3_conv15_bias"
+    outputs="resnetv17_stage3_conv15_fwd"
+    penwidth=3
+    style=filled
+    color="#c29182"
+    fontcolor="#000000"
+    fillcolor="#d6a494"
+  ];
+  "resnetv17_stage3_batchnorm15_gamma" [
+    id=348
+    name="resnetv17_stage3_batchnorm15_gamma"
+    type=constant_input
+    label="resnetv17_stage3_batchnorm15_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_batchnorm15_beta" [
+    id=349
+    name="resnetv17_stage3_batchnorm15_beta"
+    type=constant_input
+    label="resnetv17_stage3_batchnorm15_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_batchnorm15_running_mean" [
+    id=350
+    name="resnetv17_stage3_batchnorm15_running_mean"
+    type=constant_input
+    label="resnetv17_stage3_batchnorm15_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_batchnorm15_running_var" [
+    id=351
+    name="resnetv17_stage3_batchnorm15_running_var"
+    type=constant_input
+    label="resnetv17_stage3_batchnorm15_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_batchnorm15_fwd" [
+    id=352
+    name="resnetv17_stage3_batchnorm15_fwd"
+    type=BatchNormalization
+    label="{ {resnetv17_stage3_batchnorm15_fwd  | BN} | [[8,1024,14,14],[1024],[1024],[1024],[1024]] }"
+    inputs="resnetv17_stage3_conv15_fwd;resnetv17_stage3_batchnorm15_gamma;resnetv17_stage3_batchnorm15_beta;resnetv17_stage3_batchnorm15_running_mean;resnetv17_stage3_batchnorm15_running_var"
+    outputs="resnetv17_stage3_batchnorm15_fwd"
+    penwidth=3
+    style=filled
+    color="#c78695"
+    fontcolor="#000000"
+    fillcolor="#db98a7"
+  ];
+  "resnetv17_stage3__plus4" [
+    id=353
+    name="resnetv17_stage3__plus4"
+    type=Add
+    label="{ {resnetv17_stage3__plus4  | ADD} | [8,1024,14,14] }"
+    inputs="resnetv17_stage3_batchnorm15_fwd;resnetv17_stage3_activation3"
+    outputs="resnetv17_stage3__plus4"
+    penwidth=3
+    style=filled
+    color="#85afc7"
+    fontcolor="#000000"
+    fillcolor="#99c4dd"
+  ];
+  "resnetv17_stage3_activation4" [
+    id=354
+    name="resnetv17_stage3_activation4"
+    type=Relu
+    label="{ {resnetv17_stage3_activation4  | RELU} | [8,1024,14,14] }"
+    inputs="resnetv17_stage3__plus4"
+    outputs="resnetv17_stage3_activation4"
+    penwidth=3
+    style=filled
+    color="#a385cc"
+    fontcolor="#000000"
+    fillcolor="#b697df"
+  ];
+  "resnetv17_stage3_conv16_weight" [
+    id=355
+    name="resnetv17_stage3_conv16_weight"
+    type=constant_input
+    label="resnetv17_stage3_conv16_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_conv16_bias" [
+    id=356
+    name="resnetv17_stage3_conv16_bias"
+    type=constant_input
+    label="resnetv17_stage3_conv16_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_conv16_fwd" [
+    id=357
+    name="resnetv17_stage3_conv16_fwd"
+    type=Conv
+    label="{ {resnetv17_stage3_conv16_fwd  | CONV} | [8,256,14,14] }"
+    inputs="resnetv17_stage3_activation4;resnetv17_stage3_conv16_weight;resnetv17_stage3_conv16_bias"
+    outputs="resnetv17_stage3_conv16_fwd"
+    penwidth=3
+    style=filled
+    color="#c29182"
+    fontcolor="#000000"
+    fillcolor="#d6a494"
+  ];
+  "resnetv17_stage3_batchnorm16_gamma" [
+    id=358
+    name="resnetv17_stage3_batchnorm16_gamma"
+    type=constant_input
+    label="resnetv17_stage3_batchnorm16_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_batchnorm16_beta" [
+    id=359
+    name="resnetv17_stage3_batchnorm16_beta"
+    type=constant_input
+    label="resnetv17_stage3_batchnorm16_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_batchnorm16_running_mean" [
+    id=360
+    name="resnetv17_stage3_batchnorm16_running_mean"
+    type=constant_input
+    label="resnetv17_stage3_batchnorm16_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_batchnorm16_running_var" [
+    id=361
+    name="resnetv17_stage3_batchnorm16_running_var"
+    type=constant_input
+    label="resnetv17_stage3_batchnorm16_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_batchnorm16_fwd" [
+    id=362
+    name="resnetv17_stage3_batchnorm16_fwd"
+    type=BatchNormalization
+    label="{ {resnetv17_stage3_batchnorm16_fwd  | BN} | [[8,256,14,14],[256],[256],[256],[256]] }"
+    inputs="resnetv17_stage3_conv16_fwd;resnetv17_stage3_batchnorm16_gamma;resnetv17_stage3_batchnorm16_beta;resnetv17_stage3_batchnorm16_running_mean;resnetv17_stage3_batchnorm16_running_var"
+    outputs="resnetv17_stage3_batchnorm16_fwd"
+    penwidth=3
+    style=filled
+    color="#c78695"
+    fontcolor="#000000"
+    fillcolor="#db98a7"
+  ];
+  "resnetv17_stage3_relu10_fwd" [
+    id=363
+    name="resnetv17_stage3_relu10_fwd"
+    type=Relu
+    label="{ {resnetv17_stage3_relu10_fwd  | RELU} | [8,256,14,14] }"
+    inputs="resnetv17_stage3_batchnorm16_fwd"
+    outputs="resnetv17_stage3_relu10_fwd"
+    penwidth=3
+    style=filled
+    color="#a385cc"
+    fontcolor="#000000"
+    fillcolor="#b697df"
+  ];
+  "resnetv17_stage3_conv17_weight" [
+    id=364
+    name="resnetv17_stage3_conv17_weight"
+    type=constant_input
+    label="resnetv17_stage3_conv17_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_conv17_fwd" [
+    id=365
+    name="resnetv17_stage3_conv17_fwd"
+    type=Conv
+    label="{ {resnetv17_stage3_conv17_fwd  | CONV} | [8,256,14,14] }"
+    inputs="resnetv17_stage3_relu10_fwd;resnetv17_stage3_conv17_weight"
+    outputs="resnetv17_stage3_conv17_fwd"
+    penwidth=3
+    style=filled
+    color="#c29182"
+    fontcolor="#000000"
+    fillcolor="#d6a494"
+  ];
+  "resnetv17_stage3_batchnorm17_gamma" [
+    id=366
+    name="resnetv17_stage3_batchnorm17_gamma"
+    type=constant_input
+    label="resnetv17_stage3_batchnorm17_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_batchnorm17_beta" [
+    id=367
+    name="resnetv17_stage3_batchnorm17_beta"
+    type=constant_input
+    label="resnetv17_stage3_batchnorm17_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_batchnorm17_running_mean" [
+    id=368
+    name="resnetv17_stage3_batchnorm17_running_mean"
+    type=constant_input
+    label="resnetv17_stage3_batchnorm17_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_batchnorm17_running_var" [
+    id=369
+    name="resnetv17_stage3_batchnorm17_running_var"
+    type=constant_input
+    label="resnetv17_stage3_batchnorm17_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_batchnorm17_fwd" [
+    id=370
+    name="resnetv17_stage3_batchnorm17_fwd"
+    type=BatchNormalization
+    label="{ {resnetv17_stage3_batchnorm17_fwd  | BN} | [[8,256,14,14],[256],[256],[256],[256]] }"
+    inputs="resnetv17_stage3_conv17_fwd;resnetv17_stage3_batchnorm17_gamma;resnetv17_stage3_batchnorm17_beta;resnetv17_stage3_batchnorm17_running_mean;resnetv17_stage3_batchnorm17_running_var"
+    outputs="resnetv17_stage3_batchnorm17_fwd"
+    penwidth=3
+    style=filled
+    color="#c78695"
+    fontcolor="#000000"
+    fillcolor="#db98a7"
+  ];
+  "resnetv17_stage3_relu11_fwd" [
+    id=371
+    name="resnetv17_stage3_relu11_fwd"
+    type=Relu
+    label="{ {resnetv17_stage3_relu11_fwd  | RELU} | [8,256,14,14] }"
+    inputs="resnetv17_stage3_batchnorm17_fwd"
+    outputs="resnetv17_stage3_relu11_fwd"
+    penwidth=3
+    style=filled
+    color="#a385cc"
+    fontcolor="#000000"
+    fillcolor="#b697df"
+  ];
+  "resnetv17_stage3_conv18_weight" [
+    id=372
+    name="resnetv17_stage3_conv18_weight"
+    type=constant_input
+    label="resnetv17_stage3_conv18_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_conv18_bias" [
+    id=373
+    name="resnetv17_stage3_conv18_bias"
+    type=constant_input
+    label="resnetv17_stage3_conv18_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_conv18_fwd" [
+    id=374
+    name="resnetv17_stage3_conv18_fwd"
+    type=Conv
+    label="{ {resnetv17_stage3_conv18_fwd  | CONV} | [8,1024,14,14] }"
+    inputs="resnetv17_stage3_relu11_fwd;resnetv17_stage3_conv18_weight;resnetv17_stage3_conv18_bias"
+    outputs="resnetv17_stage3_conv18_fwd"
+    penwidth=3
+    style=filled
+    color="#c29182"
+    fontcolor="#000000"
+    fillcolor="#d6a494"
+  ];
+  "resnetv17_stage3_batchnorm18_gamma" [
+    id=375
+    name="resnetv17_stage3_batchnorm18_gamma"
+    type=constant_input
+    label="resnetv17_stage3_batchnorm18_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_batchnorm18_beta" [
+    id=376
+    name="resnetv17_stage3_batchnorm18_beta"
+    type=constant_input
+    label="resnetv17_stage3_batchnorm18_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_batchnorm18_running_mean" [
+    id=377
+    name="resnetv17_stage3_batchnorm18_running_mean"
+    type=constant_input
+    label="resnetv17_stage3_batchnorm18_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_batchnorm18_running_var" [
+    id=378
+    name="resnetv17_stage3_batchnorm18_running_var"
+    type=constant_input
+    label="resnetv17_stage3_batchnorm18_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage3_batchnorm18_fwd" [
+    id=379
+    name="resnetv17_stage3_batchnorm18_fwd"
+    type=BatchNormalization
+    label="{ {resnetv17_stage3_batchnorm18_fwd  | BN} | [[8,1024,14,14],[1024],[1024],[1024],[1024]] }"
+    inputs="resnetv17_stage3_conv18_fwd;resnetv17_stage3_batchnorm18_gamma;resnetv17_stage3_batchnorm18_beta;resnetv17_stage3_batchnorm18_running_mean;resnetv17_stage3_batchnorm18_running_var"
+    outputs="resnetv17_stage3_batchnorm18_fwd"
+    penwidth=3
+    style=filled
+    color="#c78695"
+    fontcolor="#000000"
+    fillcolor="#db98a7"
+  ];
+  "resnetv17_stage3__plus5" [
+    id=380
+    name="resnetv17_stage3__plus5"
+    type=Add
+    label="{ {resnetv17_stage3__plus5  | ADD} | [8,1024,14,14] }"
+    inputs="resnetv17_stage3_batchnorm18_fwd;resnetv17_stage3_activation4"
+    outputs="resnetv17_stage3__plus5"
+    penwidth=3
+    style=filled
+    color="#85afc7"
+    fontcolor="#000000"
+    fillcolor="#99c4dd"
+  ];
+  "resnetv17_stage3_activation5" [
+    id=381
+    name="resnetv17_stage3_activation5"
+    type=Relu
+    label="{ {resnetv17_stage3_activation5  | RELU} | [8,1024,14,14] }"
+    inputs="resnetv17_stage3__plus5"
+    outputs="resnetv17_stage3_activation5"
+    penwidth=3
+    style=filled
+    color="#a385cc"
+    fontcolor="#000000"
+    fillcolor="#b697df"
+  ];
+  "resnetv17_stage4_conv0_weight" [
+    id=382
+    name="resnetv17_stage4_conv0_weight"
+    type=constant_input
+    label="resnetv17_stage4_conv0_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage4_conv0_bias" [
+    id=383
+    name="resnetv17_stage4_conv0_bias"
+    type=constant_input
+    label="resnetv17_stage4_conv0_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage4_conv0_fwd" [
+    id=384
+    name="resnetv17_stage4_conv0_fwd"
+    type=Conv
+    label="{ {resnetv17_stage4_conv0_fwd  | CONV} | [8,512,7,7] }"
+    inputs="resnetv17_stage3_activation5;resnetv17_stage4_conv0_weight;resnetv17_stage4_conv0_bias"
+    outputs="resnetv17_stage4_conv0_fwd"
+    penwidth=3
+    style=filled
+    color="#c29182"
+    fontcolor="#000000"
+    fillcolor="#d6a494"
+  ];
+  "resnetv17_stage4_batchnorm0_gamma" [
+    id=385
+    name="resnetv17_stage4_batchnorm0_gamma"
+    type=constant_input
+    label="resnetv17_stage4_batchnorm0_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage4_batchnorm0_beta" [
+    id=386
+    name="resnetv17_stage4_batchnorm0_beta"
+    type=constant_input
+    label="resnetv17_stage4_batchnorm0_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage4_batchnorm0_running_mean" [
+    id=387
+    name="resnetv17_stage4_batchnorm0_running_mean"
+    type=constant_input
+    label="resnetv17_stage4_batchnorm0_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage4_batchnorm0_running_var" [
+    id=388
+    name="resnetv17_stage4_batchnorm0_running_var"
+    type=constant_input
+    label="resnetv17_stage4_batchnorm0_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage4_batchnorm0_fwd" [
+    id=389
+    name="resnetv17_stage4_batchnorm0_fwd"
+    type=BatchNormalization
+    label="{ {resnetv17_stage4_batchnorm0_fwd  | BN} | [[8,512,7,7],[512],[512],[512],[512]] }"
+    inputs="resnetv17_stage4_conv0_fwd;resnetv17_stage4_batchnorm0_gamma;resnetv17_stage4_batchnorm0_beta;resnetv17_stage4_batchnorm0_running_mean;resnetv17_stage4_batchnorm0_running_var"
+    outputs="resnetv17_stage4_batchnorm0_fwd"
+    penwidth=3
+    style=filled
+    color="#c78695"
+    fontcolor="#000000"
+    fillcolor="#db98a7"
+  ];
+  "resnetv17_stage4_relu0_fwd" [
+    id=390
+    name="resnetv17_stage4_relu0_fwd"
+    type=Relu
+    label="{ {resnetv17_stage4_relu0_fwd  | RELU} | [8,512,7,7] }"
+    inputs="resnetv17_stage4_batchnorm0_fwd"
+    outputs="resnetv17_stage4_relu0_fwd"
+    penwidth=3
+    style=filled
+    color="#a385cc"
+    fontcolor="#000000"
+    fillcolor="#b697df"
+  ];
+  "resnetv17_stage4_conv1_weight" [
+    id=391
+    name="resnetv17_stage4_conv1_weight"
+    type=constant_input
+    label="resnetv17_stage4_conv1_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage4_conv1_fwd" [
+    id=392
+    name="resnetv17_stage4_conv1_fwd"
+    type=Conv
+    label="{ {resnetv17_stage4_conv1_fwd  | CONV} | [8,512,7,7] }"
+    inputs="resnetv17_stage4_relu0_fwd;resnetv17_stage4_conv1_weight"
+    outputs="resnetv17_stage4_conv1_fwd"
+    penwidth=3
+    style=filled
+    color="#c29182"
+    fontcolor="#000000"
+    fillcolor="#d6a494"
+  ];
+  "resnetv17_stage4_batchnorm1_gamma" [
+    id=393
+    name="resnetv17_stage4_batchnorm1_gamma"
+    type=constant_input
+    label="resnetv17_stage4_batchnorm1_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage4_batchnorm1_beta" [
+    id=394
+    name="resnetv17_stage4_batchnorm1_beta"
+    type=constant_input
+    label="resnetv17_stage4_batchnorm1_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage4_batchnorm1_running_mean" [
+    id=395
+    name="resnetv17_stage4_batchnorm1_running_mean"
+    type=constant_input
+    label="resnetv17_stage4_batchnorm1_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage4_batchnorm1_running_var" [
+    id=396
+    name="resnetv17_stage4_batchnorm1_running_var"
+    type=constant_input
+    label="resnetv17_stage4_batchnorm1_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage4_batchnorm1_fwd" [
+    id=397
+    name="resnetv17_stage4_batchnorm1_fwd"
+    type=BatchNormalization
+    label="{ {resnetv17_stage4_batchnorm1_fwd  | BN} | [[8,512,7,7],[512],[512],[512],[512]] }"
+    inputs="resnetv17_stage4_conv1_fwd;resnetv17_stage4_batchnorm1_gamma;resnetv17_stage4_batchnorm1_beta;resnetv17_stage4_batchnorm1_running_mean;resnetv17_stage4_batchnorm1_running_var"
+    outputs="resnetv17_stage4_batchnorm1_fwd"
+    penwidth=3
+    style=filled
+    color="#c78695"
+    fontcolor="#000000"
+    fillcolor="#db98a7"
+  ];
+  "resnetv17_stage4_relu1_fwd" [
+    id=398
+    name="resnetv17_stage4_relu1_fwd"
+    type=Relu
+    label="{ {resnetv17_stage4_relu1_fwd  | RELU} | [8,512,7,7] }"
+    inputs="resnetv17_stage4_batchnorm1_fwd"
+    outputs="resnetv17_stage4_relu1_fwd"
+    penwidth=3
+    style=filled
+    color="#a385cc"
+    fontcolor="#000000"
+    fillcolor="#b697df"
+  ];
+  "resnetv17_stage4_conv2_weight" [
+    id=399
+    name="resnetv17_stage4_conv2_weight"
+    type=constant_input
+    label="resnetv17_stage4_conv2_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage4_conv2_bias" [
+    id=400
+    name="resnetv17_stage4_conv2_bias"
+    type=constant_input
+    label="resnetv17_stage4_conv2_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage4_conv2_fwd" [
+    id=401
+    name="resnetv17_stage4_conv2_fwd"
+    type=Conv
+    label="{ {resnetv17_stage4_conv2_fwd  | CONV} | [8,2048,7,7] }"
+    inputs="resnetv17_stage4_relu1_fwd;resnetv17_stage4_conv2_weight;resnetv17_stage4_conv2_bias"
+    outputs="resnetv17_stage4_conv2_fwd"
+    penwidth=3
+    style=filled
+    color="#c29182"
+    fontcolor="#000000"
+    fillcolor="#d6a494"
+  ];
+  "resnetv17_stage4_batchnorm2_gamma" [
+    id=402
+    name="resnetv17_stage4_batchnorm2_gamma"
+    type=constant_input
+    label="resnetv17_stage4_batchnorm2_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage4_batchnorm2_beta" [
+    id=403
+    name="resnetv17_stage4_batchnorm2_beta"
+    type=constant_input
+    label="resnetv17_stage4_batchnorm2_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage4_batchnorm2_running_mean" [
+    id=404
+    name="resnetv17_stage4_batchnorm2_running_mean"
+    type=constant_input
+    label="resnetv17_stage4_batchnorm2_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage4_batchnorm2_running_var" [
+    id=405
+    name="resnetv17_stage4_batchnorm2_running_var"
+    type=constant_input
+    label="resnetv17_stage4_batchnorm2_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage4_batchnorm2_fwd" [
+    id=406
+    name="resnetv17_stage4_batchnorm2_fwd"
+    type=BatchNormalization
+    label="{ {resnetv17_stage4_batchnorm2_fwd  | BN} | [[8,2048,7,7],[2048],[2048],[2048],[2048]] }"
+    inputs="resnetv17_stage4_conv2_fwd;resnetv17_stage4_batchnorm2_gamma;resnetv17_stage4_batchnorm2_beta;resnetv17_stage4_batchnorm2_running_mean;resnetv17_stage4_batchnorm2_running_var"
+    outputs="resnetv17_stage4_batchnorm2_fwd"
+    penwidth=3
+    style=filled
+    color="#c78695"
+    fontcolor="#000000"
+    fillcolor="#db98a7"
+  ];
+  "resnetv17_stage4_conv3_weight" [
+    id=407
+    name="resnetv17_stage4_conv3_weight"
+    type=constant_input
+    label="resnetv17_stage4_conv3_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage4_conv3_fwd" [
+    id=408
+    name="resnetv17_stage4_conv3_fwd"
+    type=Conv
+    label="{ {resnetv17_stage4_conv3_fwd  | CONV} | [8,2048,7,7] }"
+    inputs="resnetv17_stage3_activation5;resnetv17_stage4_conv3_weight"
+    outputs="resnetv17_stage4_conv3_fwd"
+    penwidth=3
+    style=filled
+    color="#c29182"
+    fontcolor="#000000"
+    fillcolor="#d6a494"
+  ];
+  "resnetv17_stage4_batchnorm3_gamma" [
+    id=409
+    name="resnetv17_stage4_batchnorm3_gamma"
+    type=constant_input
+    label="resnetv17_stage4_batchnorm3_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage4_batchnorm3_beta" [
+    id=410
+    name="resnetv17_stage4_batchnorm3_beta"
+    type=constant_input
+    label="resnetv17_stage4_batchnorm3_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage4_batchnorm3_running_mean" [
+    id=411
+    name="resnetv17_stage4_batchnorm3_running_mean"
+    type=constant_input
+    label="resnetv17_stage4_batchnorm3_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage4_batchnorm3_running_var" [
+    id=412
+    name="resnetv17_stage4_batchnorm3_running_var"
+    type=constant_input
+    label="resnetv17_stage4_batchnorm3_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage4_batchnorm3_fwd" [
+    id=413
+    name="resnetv17_stage4_batchnorm3_fwd"
+    type=BatchNormalization
+    label="{ {resnetv17_stage4_batchnorm3_fwd  | BN} | [[8,2048,7,7],[2048],[2048],[2048],[2048]] }"
+    inputs="resnetv17_stage4_conv3_fwd;resnetv17_stage4_batchnorm3_gamma;resnetv17_stage4_batchnorm3_beta;resnetv17_stage4_batchnorm3_running_mean;resnetv17_stage4_batchnorm3_running_var"
+    outputs="resnetv17_stage4_batchnorm3_fwd"
+    penwidth=3
+    style=filled
+    color="#c78695"
+    fontcolor="#000000"
+    fillcolor="#db98a7"
+  ];
+  "resnetv17_stage4__plus0" [
+    id=414
+    name="resnetv17_stage4__plus0"
+    type=Add
+    label="{ {resnetv17_stage4__plus0  | ADD} | [8,2048,7,7] }"
+    inputs="resnetv17_stage4_batchnorm2_fwd;resnetv17_stage4_batchnorm3_fwd"
+    outputs="resnetv17_stage4__plus0"
+    penwidth=3
+    style=filled
+    color="#85afc7"
+    fontcolor="#000000"
+    fillcolor="#99c4dd"
+  ];
+  "resnetv17_stage4_activation0" [
+    id=415
+    name="resnetv17_stage4_activation0"
+    type=Relu
+    label="{ {resnetv17_stage4_activation0  | RELU} | [8,2048,7,7] }"
+    inputs="resnetv17_stage4__plus0"
+    outputs="resnetv17_stage4_activation0"
+    penwidth=3
+    style=filled
+    color="#a385cc"
+    fontcolor="#000000"
+    fillcolor="#b697df"
+  ];
+  "resnetv17_stage4_conv4_weight" [
+    id=416
+    name="resnetv17_stage4_conv4_weight"
+    type=constant_input
+    label="resnetv17_stage4_conv4_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage4_conv4_bias" [
+    id=417
+    name="resnetv17_stage4_conv4_bias"
+    type=constant_input
+    label="resnetv17_stage4_conv4_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage4_conv4_fwd" [
+    id=418
+    name="resnetv17_stage4_conv4_fwd"
+    type=Conv
+    label="{ {resnetv17_stage4_conv4_fwd  | CONV} | [8,512,7,7] }"
+    inputs="resnetv17_stage4_activation0;resnetv17_stage4_conv4_weight;resnetv17_stage4_conv4_bias"
+    outputs="resnetv17_stage4_conv4_fwd"
+    penwidth=3
+    style=filled
+    color="#c29182"
+    fontcolor="#000000"
+    fillcolor="#d6a494"
+  ];
+  "resnetv17_stage4_batchnorm4_gamma" [
+    id=419
+    name="resnetv17_stage4_batchnorm4_gamma"
+    type=constant_input
+    label="resnetv17_stage4_batchnorm4_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage4_batchnorm4_beta" [
+    id=420
+    name="resnetv17_stage4_batchnorm4_beta"
+    type=constant_input
+    label="resnetv17_stage4_batchnorm4_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage4_batchnorm4_running_mean" [
+    id=421
+    name="resnetv17_stage4_batchnorm4_running_mean"
+    type=constant_input
+    label="resnetv17_stage4_batchnorm4_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage4_batchnorm4_running_var" [
+    id=422
+    name="resnetv17_stage4_batchnorm4_running_var"
+    type=constant_input
+    label="resnetv17_stage4_batchnorm4_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage4_batchnorm4_fwd" [
+    id=423
+    name="resnetv17_stage4_batchnorm4_fwd"
+    type=BatchNormalization
+    label="{ {resnetv17_stage4_batchnorm4_fwd  | BN} | [[8,512,7,7],[512],[512],[512],[512]] }"
+    inputs="resnetv17_stage4_conv4_fwd;resnetv17_stage4_batchnorm4_gamma;resnetv17_stage4_batchnorm4_beta;resnetv17_stage4_batchnorm4_running_mean;resnetv17_stage4_batchnorm4_running_var"
+    outputs="resnetv17_stage4_batchnorm4_fwd"
+    penwidth=3
+    style=filled
+    color="#c78695"
+    fontcolor="#000000"
+    fillcolor="#db98a7"
+  ];
+  "resnetv17_stage4_relu2_fwd" [
+    id=424
+    name="resnetv17_stage4_relu2_fwd"
+    type=Relu
+    label="{ {resnetv17_stage4_relu2_fwd  | RELU} | [8,512,7,7] }"
+    inputs="resnetv17_stage4_batchnorm4_fwd"
+    outputs="resnetv17_stage4_relu2_fwd"
+    penwidth=3
+    style=filled
+    color="#a385cc"
+    fontcolor="#000000"
+    fillcolor="#b697df"
+  ];
+  "resnetv17_stage4_conv5_weight" [
+    id=425
+    name="resnetv17_stage4_conv5_weight"
+    type=constant_input
+    label="resnetv17_stage4_conv5_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage4_conv5_fwd" [
+    id=426
+    name="resnetv17_stage4_conv5_fwd"
+    type=Conv
+    label="{ {resnetv17_stage4_conv5_fwd  | CONV} | [8,512,7,7] }"
+    inputs="resnetv17_stage4_relu2_fwd;resnetv17_stage4_conv5_weight"
+    outputs="resnetv17_stage4_conv5_fwd"
+    penwidth=3
+    style=filled
+    color="#c29182"
+    fontcolor="#000000"
+    fillcolor="#d6a494"
+  ];
+  "resnetv17_stage4_batchnorm5_gamma" [
+    id=427
+    name="resnetv17_stage4_batchnorm5_gamma"
+    type=constant_input
+    label="resnetv17_stage4_batchnorm5_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage4_batchnorm5_beta" [
+    id=428
+    name="resnetv17_stage4_batchnorm5_beta"
+    type=constant_input
+    label="resnetv17_stage4_batchnorm5_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage4_batchnorm5_running_mean" [
+    id=429
+    name="resnetv17_stage4_batchnorm5_running_mean"
+    type=constant_input
+    label="resnetv17_stage4_batchnorm5_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage4_batchnorm5_running_var" [
+    id=430
+    name="resnetv17_stage4_batchnorm5_running_var"
+    type=constant_input
+    label="resnetv17_stage4_batchnorm5_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage4_batchnorm5_fwd" [
+    id=431
+    name="resnetv17_stage4_batchnorm5_fwd"
+    type=BatchNormalization
+    label="{ {resnetv17_stage4_batchnorm5_fwd  | BN} | [[8,512,7,7],[512],[512],[512],[512]] }"
+    inputs="resnetv17_stage4_conv5_fwd;resnetv17_stage4_batchnorm5_gamma;resnetv17_stage4_batchnorm5_beta;resnetv17_stage4_batchnorm5_running_mean;resnetv17_stage4_batchnorm5_running_var"
+    outputs="resnetv17_stage4_batchnorm5_fwd"
+    penwidth=3
+    style=filled
+    color="#c78695"
+    fontcolor="#000000"
+    fillcolor="#db98a7"
+  ];
+  "resnetv17_stage4_relu3_fwd" [
+    id=432
+    name="resnetv17_stage4_relu3_fwd"
+    type=Relu
+    label="{ {resnetv17_stage4_relu3_fwd  | RELU} | [8,512,7,7] }"
+    inputs="resnetv17_stage4_batchnorm5_fwd"
+    outputs="resnetv17_stage4_relu3_fwd"
+    penwidth=3
+    style=filled
+    color="#a385cc"
+    fontcolor="#000000"
+    fillcolor="#b697df"
+  ];
+  "resnetv17_stage4_conv6_weight" [
+    id=433
+    name="resnetv17_stage4_conv6_weight"
+    type=constant_input
+    label="resnetv17_stage4_conv6_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage4_conv6_bias" [
+    id=434
+    name="resnetv17_stage4_conv6_bias"
+    type=constant_input
+    label="resnetv17_stage4_conv6_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage4_conv6_fwd" [
+    id=435
+    name="resnetv17_stage4_conv6_fwd"
+    type=Conv
+    label="{ {resnetv17_stage4_conv6_fwd  | CONV} | [8,2048,7,7] }"
+    inputs="resnetv17_stage4_relu3_fwd;resnetv17_stage4_conv6_weight;resnetv17_stage4_conv6_bias"
+    outputs="resnetv17_stage4_conv6_fwd"
+    penwidth=3
+    style=filled
+    color="#c29182"
+    fontcolor="#000000"
+    fillcolor="#d6a494"
+  ];
+  "resnetv17_stage4_batchnorm6_gamma" [
+    id=436
+    name="resnetv17_stage4_batchnorm6_gamma"
+    type=constant_input
+    label="resnetv17_stage4_batchnorm6_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage4_batchnorm6_beta" [
+    id=437
+    name="resnetv17_stage4_batchnorm6_beta"
+    type=constant_input
+    label="resnetv17_stage4_batchnorm6_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage4_batchnorm6_running_mean" [
+    id=438
+    name="resnetv17_stage4_batchnorm6_running_mean"
+    type=constant_input
+    label="resnetv17_stage4_batchnorm6_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage4_batchnorm6_running_var" [
+    id=439
+    name="resnetv17_stage4_batchnorm6_running_var"
+    type=constant_input
+    label="resnetv17_stage4_batchnorm6_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage4_batchnorm6_fwd" [
+    id=440
+    name="resnetv17_stage4_batchnorm6_fwd"
+    type=BatchNormalization
+    label="{ {resnetv17_stage4_batchnorm6_fwd  | BN} | [[8,2048,7,7],[2048],[2048],[2048],[2048]] }"
+    inputs="resnetv17_stage4_conv6_fwd;resnetv17_stage4_batchnorm6_gamma;resnetv17_stage4_batchnorm6_beta;resnetv17_stage4_batchnorm6_running_mean;resnetv17_stage4_batchnorm6_running_var"
+    outputs="resnetv17_stage4_batchnorm6_fwd"
+    penwidth=3
+    style=filled
+    color="#c78695"
+    fontcolor="#000000"
+    fillcolor="#db98a7"
+  ];
+  "resnetv17_stage4__plus1" [
+    id=441
+    name="resnetv17_stage4__plus1"
+    type=Add
+    label="{ {resnetv17_stage4__plus1  | ADD} | [8,2048,7,7] }"
+    inputs="resnetv17_stage4_batchnorm6_fwd;resnetv17_stage4_activation0"
+    outputs="resnetv17_stage4__plus1"
+    penwidth=3
+    style=filled
+    color="#85afc7"
+    fontcolor="#000000"
+    fillcolor="#99c4dd"
+  ];
+  "resnetv17_stage4_activation1" [
+    id=442
+    name="resnetv17_stage4_activation1"
+    type=Relu
+    label="{ {resnetv17_stage4_activation1  | RELU} | [8,2048,7,7] }"
+    inputs="resnetv17_stage4__plus1"
+    outputs="resnetv17_stage4_activation1"
+    penwidth=3
+    style=filled
+    color="#a385cc"
+    fontcolor="#000000"
+    fillcolor="#b697df"
+  ];
+  "resnetv17_stage4_conv7_weight" [
+    id=443
+    name="resnetv17_stage4_conv7_weight"
+    type=constant_input
+    label="resnetv17_stage4_conv7_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage4_conv7_bias" [
+    id=444
+    name="resnetv17_stage4_conv7_bias"
+    type=constant_input
+    label="resnetv17_stage4_conv7_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage4_conv7_fwd" [
+    id=445
+    name="resnetv17_stage4_conv7_fwd"
+    type=Conv
+    label="{ {resnetv17_stage4_conv7_fwd  | CONV} | [8,512,7,7] }"
+    inputs="resnetv17_stage4_activation1;resnetv17_stage4_conv7_weight;resnetv17_stage4_conv7_bias"
+    outputs="resnetv17_stage4_conv7_fwd"
+    penwidth=3
+    style=filled
+    color="#c29182"
+    fontcolor="#000000"
+    fillcolor="#d6a494"
+  ];
+  "resnetv17_stage4_batchnorm7_gamma" [
+    id=446
+    name="resnetv17_stage4_batchnorm7_gamma"
+    type=constant_input
+    label="resnetv17_stage4_batchnorm7_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage4_batchnorm7_beta" [
+    id=447
+    name="resnetv17_stage4_batchnorm7_beta"
+    type=constant_input
+    label="resnetv17_stage4_batchnorm7_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage4_batchnorm7_running_mean" [
+    id=448
+    name="resnetv17_stage4_batchnorm7_running_mean"
+    type=constant_input
+    label="resnetv17_stage4_batchnorm7_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage4_batchnorm7_running_var" [
+    id=449
+    name="resnetv17_stage4_batchnorm7_running_var"
+    type=constant_input
+    label="resnetv17_stage4_batchnorm7_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage4_batchnorm7_fwd" [
+    id=450
+    name="resnetv17_stage4_batchnorm7_fwd"
+    type=BatchNormalization
+    label="{ {resnetv17_stage4_batchnorm7_fwd  | BN} | [[8,512,7,7],[512],[512],[512],[512]] }"
+    inputs="resnetv17_stage4_conv7_fwd;resnetv17_stage4_batchnorm7_gamma;resnetv17_stage4_batchnorm7_beta;resnetv17_stage4_batchnorm7_running_mean;resnetv17_stage4_batchnorm7_running_var"
+    outputs="resnetv17_stage4_batchnorm7_fwd"
+    penwidth=3
+    style=filled
+    color="#c78695"
+    fontcolor="#000000"
+    fillcolor="#db98a7"
+  ];
+  "resnetv17_stage4_relu4_fwd" [
+    id=451
+    name="resnetv17_stage4_relu4_fwd"
+    type=Relu
+    label="{ {resnetv17_stage4_relu4_fwd  | RELU} | [8,512,7,7] }"
+    inputs="resnetv17_stage4_batchnorm7_fwd"
+    outputs="resnetv17_stage4_relu4_fwd"
+    penwidth=3
+    style=filled
+    color="#a385cc"
+    fontcolor="#000000"
+    fillcolor="#b697df"
+  ];
+  "resnetv17_stage4_conv8_weight" [
+    id=452
+    name="resnetv17_stage4_conv8_weight"
+    type=constant_input
+    label="resnetv17_stage4_conv8_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage4_conv8_fwd" [
+    id=453
+    name="resnetv17_stage4_conv8_fwd"
+    type=Conv
+    label="{ {resnetv17_stage4_conv8_fwd  | CONV} | [8,512,7,7] }"
+    inputs="resnetv17_stage4_relu4_fwd;resnetv17_stage4_conv8_weight"
+    outputs="resnetv17_stage4_conv8_fwd"
+    penwidth=3
+    style=filled
+    color="#c29182"
+    fontcolor="#000000"
+    fillcolor="#d6a494"
+  ];
+  "resnetv17_stage4_batchnorm8_gamma" [
+    id=454
+    name="resnetv17_stage4_batchnorm8_gamma"
+    type=constant_input
+    label="resnetv17_stage4_batchnorm8_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage4_batchnorm8_beta" [
+    id=455
+    name="resnetv17_stage4_batchnorm8_beta"
+    type=constant_input
+    label="resnetv17_stage4_batchnorm8_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage4_batchnorm8_running_mean" [
+    id=456
+    name="resnetv17_stage4_batchnorm8_running_mean"
+    type=constant_input
+    label="resnetv17_stage4_batchnorm8_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage4_batchnorm8_running_var" [
+    id=457
+    name="resnetv17_stage4_batchnorm8_running_var"
+    type=constant_input
+    label="resnetv17_stage4_batchnorm8_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage4_batchnorm8_fwd" [
+    id=458
+    name="resnetv17_stage4_batchnorm8_fwd"
+    type=BatchNormalization
+    label="{ {resnetv17_stage4_batchnorm8_fwd  | BN} | [[8,512,7,7],[512],[512],[512],[512]] }"
+    inputs="resnetv17_stage4_conv8_fwd;resnetv17_stage4_batchnorm8_gamma;resnetv17_stage4_batchnorm8_beta;resnetv17_stage4_batchnorm8_running_mean;resnetv17_stage4_batchnorm8_running_var"
+    outputs="resnetv17_stage4_batchnorm8_fwd"
+    penwidth=3
+    style=filled
+    color="#c78695"
+    fontcolor="#000000"
+    fillcolor="#db98a7"
+  ];
+  "resnetv17_stage4_relu5_fwd" [
+    id=459
+    name="resnetv17_stage4_relu5_fwd"
+    type=Relu
+    label="{ {resnetv17_stage4_relu5_fwd  | RELU} | [8,512,7,7] }"
+    inputs="resnetv17_stage4_batchnorm8_fwd"
+    outputs="resnetv17_stage4_relu5_fwd"
+    penwidth=3
+    style=filled
+    color="#a385cc"
+    fontcolor="#000000"
+    fillcolor="#b697df"
+  ];
+  "resnetv17_stage4_conv9_weight" [
+    id=460
+    name="resnetv17_stage4_conv9_weight"
+    type=constant_input
+    label="resnetv17_stage4_conv9_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage4_conv9_bias" [
+    id=461
+    name="resnetv17_stage4_conv9_bias"
+    type=constant_input
+    label="resnetv17_stage4_conv9_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage4_conv9_fwd" [
+    id=462
+    name="resnetv17_stage4_conv9_fwd"
+    type=Conv
+    label="{ {resnetv17_stage4_conv9_fwd  | CONV} | [8,2048,7,7] }"
+    inputs="resnetv17_stage4_relu5_fwd;resnetv17_stage4_conv9_weight;resnetv17_stage4_conv9_bias"
+    outputs="resnetv17_stage4_conv9_fwd"
+    penwidth=3
+    style=filled
+    color="#c29182"
+    fontcolor="#000000"
+    fillcolor="#d6a494"
+  ];
+  "resnetv17_stage4_batchnorm9_gamma" [
+    id=463
+    name="resnetv17_stage4_batchnorm9_gamma"
+    type=constant_input
+    label="resnetv17_stage4_batchnorm9_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage4_batchnorm9_beta" [
+    id=464
+    name="resnetv17_stage4_batchnorm9_beta"
+    type=constant_input
+    label="resnetv17_stage4_batchnorm9_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage4_batchnorm9_running_mean" [
+    id=465
+    name="resnetv17_stage4_batchnorm9_running_mean"
+    type=constant_input
+    label="resnetv17_stage4_batchnorm9_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage4_batchnorm9_running_var" [
+    id=466
+    name="resnetv17_stage4_batchnorm9_running_var"
+    type=constant_input
+    label="resnetv17_stage4_batchnorm9_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_stage4_batchnorm9_fwd" [
+    id=467
+    name="resnetv17_stage4_batchnorm9_fwd"
+    type=BatchNormalization
+    label="{ {resnetv17_stage4_batchnorm9_fwd  | BN} | [[8,2048,7,7],[2048],[2048],[2048],[2048]] }"
+    inputs="resnetv17_stage4_conv9_fwd;resnetv17_stage4_batchnorm9_gamma;resnetv17_stage4_batchnorm9_beta;resnetv17_stage4_batchnorm9_running_mean;resnetv17_stage4_batchnorm9_running_var"
+    outputs="resnetv17_stage4_batchnorm9_fwd"
+    penwidth=3
+    style=filled
+    color="#c78695"
+    fontcolor="#000000"
+    fillcolor="#db98a7"
+  ];
+  "resnetv17_stage4__plus2" [
+    id=468
+    name="resnetv17_stage4__plus2"
+    type=Add
+    label="{ {resnetv17_stage4__plus2  | ADD} | [8,2048,7,7] }"
+    inputs="resnetv17_stage4_batchnorm9_fwd;resnetv17_stage4_activation1"
+    outputs="resnetv17_stage4__plus2"
+    penwidth=3
+    style=filled
+    color="#85afc7"
+    fontcolor="#000000"
+    fillcolor="#99c4dd"
+  ];
+  "resnetv17_stage4_activation2" [
+    id=469
+    name="resnetv17_stage4_activation2"
+    type=Relu
+    label="{ {resnetv17_stage4_activation2  | RELU} | [8,2048,7,7] }"
+    inputs="resnetv17_stage4__plus2"
+    outputs="resnetv17_stage4_activation2"
+    penwidth=3
+    style=filled
+    color="#a385cc"
+    fontcolor="#000000"
+    fillcolor="#b697df"
+  ];
+  "resnetv17_pool1_fwd" [
+    id=470
+    name="resnetv17_pool1_fwd"
+    type=GlobalAveragePool
+    label="{ {resnetv17_pool1_fwd  | GLBPL} | [8,2048,1,1] }"
+    inputs="resnetv17_stage4_activation2"
+    outputs="resnetv17_pool1_fwd"
+    penwidth=3
+    style=filled
+    color="#86bc9d"
+    fontcolor="#000000"
+    fillcolor="#9cd3b3"
+  ];
+  "flatten_473" [
+    id=471
+    name="flatten_473"
+    type=Flatten
+    label="{ {flatten_473  | FLT} | [8,2048,1,1] }"
+    inputs="resnetv17_pool1_fwd"
+    outputs="flatten_473"
+    penwidth=3
+    style=filled
+    color="#c4b784"
+    fontcolor="#000000"
+    fillcolor="#dcce99"
+  ];
+  "resnetv17_dense0_weight" [
+    id=472
+    name="resnetv17_dense0_weight"
+    type=constant_input
+    label="resnetv17_dense0_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_dense0_bias" [
+    id=473
+    name="resnetv17_dense0_bias"
+    type=constant_input
+    label="resnetv17_dense0_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "resnetv17_dense0_fwd" [
+    id=474
+    name="resnetv17_dense0_fwd"
+    type=Gemm
+    label="{ {resnetv17_dense0_fwd  | GEMM} | [8,1000] }"
+    inputs="flatten_473;resnetv17_dense0_weight;resnetv17_dense0_bias"
+    outputs="resnetv17_dense0_fwd"
+    penwidth=3
+    style=filled
+    color="#99ca82"
+    fontcolor="#000000"
+    fillcolor="#b0e298"
+  ];
+
+  // Edge definitions.
+  "data" -> "resnetv17_conv0_fwd";
+  "resnetv17_conv0_weight" -> "resnetv17_conv0_fwd";
+  "resnetv17_conv0_fwd" -> "resnetv17_batchnorm0_fwd";
+  "resnetv17_batchnorm0_gamma" -> "resnetv17_batchnorm0_fwd";
+  "resnetv17_batchnorm0_beta" -> "resnetv17_batchnorm0_fwd";
+  "resnetv17_batchnorm0_running_mean" -> "resnetv17_batchnorm0_fwd";
+  "resnetv17_batchnorm0_running_var" -> "resnetv17_batchnorm0_fwd";
+  "resnetv17_batchnorm0_fwd" -> "resnetv17_relu0_fwd";
+  "resnetv17_relu0_fwd" -> "resnetv17_pool0_fwd";
+  "resnetv17_pool0_fwd" -> "resnetv17_stage1_conv0_fwd";
+  "resnetv17_pool0_fwd" -> "resnetv17_stage1_conv3_fwd";
+  "resnetv17_stage1_conv0_weight" -> "resnetv17_stage1_conv0_fwd";
+  "resnetv17_stage1_conv0_bias" -> "resnetv17_stage1_conv0_fwd";
+  "resnetv17_stage1_conv0_fwd" -> "resnetv17_stage1_batchnorm0_fwd";
+  "resnetv17_stage1_batchnorm0_gamma" -> "resnetv17_stage1_batchnorm0_fwd";
+  "resnetv17_stage1_batchnorm0_beta" -> "resnetv17_stage1_batchnorm0_fwd";
+  "resnetv17_stage1_batchnorm0_running_mean" -> "resnetv17_stage1_batchnorm0_fwd";
+  "resnetv17_stage1_batchnorm0_running_var" -> "resnetv17_stage1_batchnorm0_fwd";
+  "resnetv17_stage1_batchnorm0_fwd" -> "resnetv17_stage1_relu0_fwd";
+  "resnetv17_stage1_relu0_fwd" -> "resnetv17_stage1_conv1_fwd";
+  "resnetv17_stage1_conv1_weight" -> "resnetv17_stage1_conv1_fwd";
+  "resnetv17_stage1_conv1_fwd" -> "resnetv17_stage1_batchnorm1_fwd";
+  "resnetv17_stage1_batchnorm1_gamma" -> "resnetv17_stage1_batchnorm1_fwd";
+  "resnetv17_stage1_batchnorm1_beta" -> "resnetv17_stage1_batchnorm1_fwd";
+  "resnetv17_stage1_batchnorm1_running_mean" -> "resnetv17_stage1_batchnorm1_fwd";
+  "resnetv17_stage1_batchnorm1_running_var" -> "resnetv17_stage1_batchnorm1_fwd";
+  "resnetv17_stage1_batchnorm1_fwd" -> "resnetv17_stage1_relu1_fwd";
+  "resnetv17_stage1_relu1_fwd" -> "resnetv17_stage1_conv2_fwd";
+  "resnetv17_stage1_conv2_weight" -> "resnetv17_stage1_conv2_fwd";
+  "resnetv17_stage1_conv2_bias" -> "resnetv17_stage1_conv2_fwd";
+  "resnetv17_stage1_conv2_fwd" -> "resnetv17_stage1_batchnorm2_fwd";
+  "resnetv17_stage1_batchnorm2_gamma" -> "resnetv17_stage1_batchnorm2_fwd";
+  "resnetv17_stage1_batchnorm2_beta" -> "resnetv17_stage1_batchnorm2_fwd";
+  "resnetv17_stage1_batchnorm2_running_mean" -> "resnetv17_stage1_batchnorm2_fwd";
+  "resnetv17_stage1_batchnorm2_running_var" -> "resnetv17_stage1_batchnorm2_fwd";
+  "resnetv17_stage1_batchnorm2_fwd" -> "resnetv17_stage1__plus0";
+  "resnetv17_stage1_conv3_weight" -> "resnetv17_stage1_conv3_fwd";
+  "resnetv17_stage1_conv3_fwd" -> "resnetv17_stage1_batchnorm3_fwd";
+  "resnetv17_stage1_batchnorm3_gamma" -> "resnetv17_stage1_batchnorm3_fwd";
+  "resnetv17_stage1_batchnorm3_beta" -> "resnetv17_stage1_batchnorm3_fwd";
+  "resnetv17_stage1_batchnorm3_running_mean" -> "resnetv17_stage1_batchnorm3_fwd";
+  "resnetv17_stage1_batchnorm3_running_var" -> "resnetv17_stage1_batchnorm3_fwd";
+  "resnetv17_stage1_batchnorm3_fwd" -> "resnetv17_stage1__plus0";
+  "resnetv17_stage1__plus0" -> "resnetv17_stage1_activation0";
+  "resnetv17_stage1_activation0" -> "resnetv17_stage1_conv4_fwd";
+  "resnetv17_stage1_activation0" -> "resnetv17_stage1__plus1";
+  "resnetv17_stage1_conv4_weight" -> "resnetv17_stage1_conv4_fwd";
+  "resnetv17_stage1_conv4_bias" -> "resnetv17_stage1_conv4_fwd";
+  "resnetv17_stage1_conv4_fwd" -> "resnetv17_stage1_batchnorm4_fwd";
+  "resnetv17_stage1_batchnorm4_gamma" -> "resnetv17_stage1_batchnorm4_fwd";
+  "resnetv17_stage1_batchnorm4_beta" -> "resnetv17_stage1_batchnorm4_fwd";
+  "resnetv17_stage1_batchnorm4_running_mean" -> "resnetv17_stage1_batchnorm4_fwd";
+  "resnetv17_stage1_batchnorm4_running_var" -> "resnetv17_stage1_batchnorm4_fwd";
+  "resnetv17_stage1_batchnorm4_fwd" -> "resnetv17_stage1_relu2_fwd";
+  "resnetv17_stage1_relu2_fwd" -> "resnetv17_stage1_conv5_fwd";
+  "resnetv17_stage1_conv5_weight" -> "resnetv17_stage1_conv5_fwd";
+  "resnetv17_stage1_conv5_fwd" -> "resnetv17_stage1_batchnorm5_fwd";
+  "resnetv17_stage1_batchnorm5_gamma" -> "resnetv17_stage1_batchnorm5_fwd";
+  "resnetv17_stage1_batchnorm5_beta" -> "resnetv17_stage1_batchnorm5_fwd";
+  "resnetv17_stage1_batchnorm5_running_mean" -> "resnetv17_stage1_batchnorm5_fwd";
+  "resnetv17_stage1_batchnorm5_running_var" -> "resnetv17_stage1_batchnorm5_fwd";
+  "resnetv17_stage1_batchnorm5_fwd" -> "resnetv17_stage1_relu3_fwd";
+  "resnetv17_stage1_relu3_fwd" -> "resnetv17_stage1_conv6_fwd";
+  "resnetv17_stage1_conv6_weight" -> "resnetv17_stage1_conv6_fwd";
+  "resnetv17_stage1_conv6_bias" -> "resnetv17_stage1_conv6_fwd";
+  "resnetv17_stage1_conv6_fwd" -> "resnetv17_stage1_batchnorm6_fwd";
+  "resnetv17_stage1_batchnorm6_gamma" -> "resnetv17_stage1_batchnorm6_fwd";
+  "resnetv17_stage1_batchnorm6_beta" -> "resnetv17_stage1_batchnorm6_fwd";
+  "resnetv17_stage1_batchnorm6_running_mean" -> "resnetv17_stage1_batchnorm6_fwd";
+  "resnetv17_stage1_batchnorm6_running_var" -> "resnetv17_stage1_batchnorm6_fwd";
+  "resnetv17_stage1_batchnorm6_fwd" -> "resnetv17_stage1__plus1";
+  "resnetv17_stage1__plus1" -> "resnetv17_stage1_activation1";
+  "resnetv17_stage1_activation1" -> "resnetv17_stage1_conv7_fwd";
+  "resnetv17_stage1_activation1" -> "resnetv17_stage1__plus2";
+  "resnetv17_stage1_conv7_weight" -> "resnetv17_stage1_conv7_fwd";
+  "resnetv17_stage1_conv7_bias" -> "resnetv17_stage1_conv7_fwd";
+  "resnetv17_stage1_conv7_fwd" -> "resnetv17_stage1_batchnorm7_fwd";
+  "resnetv17_stage1_batchnorm7_gamma" -> "resnetv17_stage1_batchnorm7_fwd";
+  "resnetv17_stage1_batchnorm7_beta" -> "resnetv17_stage1_batchnorm7_fwd";
+  "resnetv17_stage1_batchnorm7_running_mean" -> "resnetv17_stage1_batchnorm7_fwd";
+  "resnetv17_stage1_batchnorm7_running_var" -> "resnetv17_stage1_batchnorm7_fwd";
+  "resnetv17_stage1_batchnorm7_fwd" -> "resnetv17_stage1_relu4_fwd";
+  "resnetv17_stage1_relu4_fwd" -> "resnetv17_stage1_conv8_fwd";
+  "resnetv17_stage1_conv8_weight" -> "resnetv17_stage1_conv8_fwd";
+  "resnetv17_stage1_conv8_fwd" -> "resnetv17_stage1_batchnorm8_fwd";
+  "resnetv17_stage1_batchnorm8_gamma" -> "resnetv17_stage1_batchnorm8_fwd";
+  "resnetv17_stage1_batchnorm8_beta" -> "resnetv17_stage1_batchnorm8_fwd";
+  "resnetv17_stage1_batchnorm8_running_mean" -> "resnetv17_stage1_batchnorm8_fwd";
+  "resnetv17_stage1_batchnorm8_running_var" -> "resnetv17_stage1_batchnorm8_fwd";
+  "resnetv17_stage1_batchnorm8_fwd" -> "resnetv17_stage1_relu5_fwd";
+  "resnetv17_stage1_relu5_fwd" -> "resnetv17_stage1_conv9_fwd";
+  "resnetv17_stage1_conv9_weight" -> "resnetv17_stage1_conv9_fwd";
+  "resnetv17_stage1_conv9_bias" -> "resnetv17_stage1_conv9_fwd";
+  "resnetv17_stage1_conv9_fwd" -> "resnetv17_stage1_batchnorm9_fwd";
+  "resnetv17_stage1_batchnorm9_gamma" -> "resnetv17_stage1_batchnorm9_fwd";
+  "resnetv17_stage1_batchnorm9_beta" -> "resnetv17_stage1_batchnorm9_fwd";
+  "resnetv17_stage1_batchnorm9_running_mean" -> "resnetv17_stage1_batchnorm9_fwd";
+  "resnetv17_stage1_batchnorm9_running_var" -> "resnetv17_stage1_batchnorm9_fwd";
+  "resnetv17_stage1_batchnorm9_fwd" -> "resnetv17_stage1__plus2";
+  "resnetv17_stage1__plus2" -> "resnetv17_stage1_activation2";
+  "resnetv17_stage1_activation2" -> "resnetv17_stage2_conv0_fwd";
+  "resnetv17_stage1_activation2" -> "resnetv17_stage2_conv3_fwd";
+  "resnetv17_stage2_conv0_weight" -> "resnetv17_stage2_conv0_fwd";
+  "resnetv17_stage2_conv0_bias" -> "resnetv17_stage2_conv0_fwd";
+  "resnetv17_stage2_conv0_fwd" -> "resnetv17_stage2_batchnorm0_fwd";
+  "resnetv17_stage2_batchnorm0_gamma" -> "resnetv17_stage2_batchnorm0_fwd";
+  "resnetv17_stage2_batchnorm0_beta" -> "resnetv17_stage2_batchnorm0_fwd";
+  "resnetv17_stage2_batchnorm0_running_mean" -> "resnetv17_stage2_batchnorm0_fwd";
+  "resnetv17_stage2_batchnorm0_running_var" -> "resnetv17_stage2_batchnorm0_fwd";
+  "resnetv17_stage2_batchnorm0_fwd" -> "resnetv17_stage2_relu0_fwd";
+  "resnetv17_stage2_relu0_fwd" -> "resnetv17_stage2_conv1_fwd";
+  "resnetv17_stage2_conv1_weight" -> "resnetv17_stage2_conv1_fwd";
+  "resnetv17_stage2_conv1_fwd" -> "resnetv17_stage2_batchnorm1_fwd";
+  "resnetv17_stage2_batchnorm1_gamma" -> "resnetv17_stage2_batchnorm1_fwd";
+  "resnetv17_stage2_batchnorm1_beta" -> "resnetv17_stage2_batchnorm1_fwd";
+  "resnetv17_stage2_batchnorm1_running_mean" -> "resnetv17_stage2_batchnorm1_fwd";
+  "resnetv17_stage2_batchnorm1_running_var" -> "resnetv17_stage2_batchnorm1_fwd";
+  "resnetv17_stage2_batchnorm1_fwd" -> "resnetv17_stage2_relu1_fwd";
+  "resnetv17_stage2_relu1_fwd" -> "resnetv17_stage2_conv2_fwd";
+  "resnetv17_stage2_conv2_weight" -> "resnetv17_stage2_conv2_fwd";
+  "resnetv17_stage2_conv2_bias" -> "resnetv17_stage2_conv2_fwd";
+  "resnetv17_stage2_conv2_fwd" -> "resnetv17_stage2_batchnorm2_fwd";
+  "resnetv17_stage2_batchnorm2_gamma" -> "resnetv17_stage2_batchnorm2_fwd";
+  "resnetv17_stage2_batchnorm2_beta" -> "resnetv17_stage2_batchnorm2_fwd";
+  "resnetv17_stage2_batchnorm2_running_mean" -> "resnetv17_stage2_batchnorm2_fwd";
+  "resnetv17_stage2_batchnorm2_running_var" -> "resnetv17_stage2_batchnorm2_fwd";
+  "resnetv17_stage2_batchnorm2_fwd" -> "resnetv17_stage2__plus0";
+  "resnetv17_stage2_conv3_weight" -> "resnetv17_stage2_conv3_fwd";
+  "resnetv17_stage2_conv3_fwd" -> "resnetv17_stage2_batchnorm3_fwd";
+  "resnetv17_stage2_batchnorm3_gamma" -> "resnetv17_stage2_batchnorm3_fwd";
+  "resnetv17_stage2_batchnorm3_beta" -> "resnetv17_stage2_batchnorm3_fwd";
+  "resnetv17_stage2_batchnorm3_running_mean" -> "resnetv17_stage2_batchnorm3_fwd";
+  "resnetv17_stage2_batchnorm3_running_var" -> "resnetv17_stage2_batchnorm3_fwd";
+  "resnetv17_stage2_batchnorm3_fwd" -> "resnetv17_stage2__plus0";
+  "resnetv17_stage2__plus0" -> "resnetv17_stage2_activation0";
+  "resnetv17_stage2_activation0" -> "resnetv17_stage2_conv4_fwd";
+  "resnetv17_stage2_activation0" -> "resnetv17_stage2__plus1";
+  "resnetv17_stage2_conv4_weight" -> "resnetv17_stage2_conv4_fwd";
+  "resnetv17_stage2_conv4_bias" -> "resnetv17_stage2_conv4_fwd";
+  "resnetv17_stage2_conv4_fwd" -> "resnetv17_stage2_batchnorm4_fwd";
+  "resnetv17_stage2_batchnorm4_gamma" -> "resnetv17_stage2_batchnorm4_fwd";
+  "resnetv17_stage2_batchnorm4_beta" -> "resnetv17_stage2_batchnorm4_fwd";
+  "resnetv17_stage2_batchnorm4_running_mean" -> "resnetv17_stage2_batchnorm4_fwd";
+  "resnetv17_stage2_batchnorm4_running_var" -> "resnetv17_stage2_batchnorm4_fwd";
+  "resnetv17_stage2_batchnorm4_fwd" -> "resnetv17_stage2_relu2_fwd";
+  "resnetv17_stage2_relu2_fwd" -> "resnetv17_stage2_conv5_fwd";
+  "resnetv17_stage2_conv5_weight" -> "resnetv17_stage2_conv5_fwd";
+  "resnetv17_stage2_conv5_fwd" -> "resnetv17_stage2_batchnorm5_fwd";
+  "resnetv17_stage2_batchnorm5_gamma" -> "resnetv17_stage2_batchnorm5_fwd";
+  "resnetv17_stage2_batchnorm5_beta" -> "resnetv17_stage2_batchnorm5_fwd";
+  "resnetv17_stage2_batchnorm5_running_mean" -> "resnetv17_stage2_batchnorm5_fwd";
+  "resnetv17_stage2_batchnorm5_running_var" -> "resnetv17_stage2_batchnorm5_fwd";
+  "resnetv17_stage2_batchnorm5_fwd" -> "resnetv17_stage2_relu3_fwd";
+  "resnetv17_stage2_relu3_fwd" -> "resnetv17_stage2_conv6_fwd";
+  "resnetv17_stage2_conv6_weight" -> "resnetv17_stage2_conv6_fwd";
+  "resnetv17_stage2_conv6_bias" -> "resnetv17_stage2_conv6_fwd";
+  "resnetv17_stage2_conv6_fwd" -> "resnetv17_stage2_batchnorm6_fwd";
+  "resnetv17_stage2_batchnorm6_gamma" -> "resnetv17_stage2_batchnorm6_fwd";
+  "resnetv17_stage2_batchnorm6_beta" -> "resnetv17_stage2_batchnorm6_fwd";
+  "resnetv17_stage2_batchnorm6_running_mean" -> "resnetv17_stage2_batchnorm6_fwd";
+  "resnetv17_stage2_batchnorm6_running_var" -> "resnetv17_stage2_batchnorm6_fwd";
+  "resnetv17_stage2_batchnorm6_fwd" -> "resnetv17_stage2__plus1";
+  "resnetv17_stage2__plus1" -> "resnetv17_stage2_activation1";
+  "resnetv17_stage2_activation1" -> "resnetv17_stage2_conv7_fwd";
+  "resnetv17_stage2_activation1" -> "resnetv17_stage2__plus2";
+  "resnetv17_stage2_conv7_weight" -> "resnetv17_stage2_conv7_fwd";
+  "resnetv17_stage2_conv7_bias" -> "resnetv17_stage2_conv7_fwd";
+  "resnetv17_stage2_conv7_fwd" -> "resnetv17_stage2_batchnorm7_fwd";
+  "resnetv17_stage2_batchnorm7_gamma" -> "resnetv17_stage2_batchnorm7_fwd";
+  "resnetv17_stage2_batchnorm7_beta" -> "resnetv17_stage2_batchnorm7_fwd";
+  "resnetv17_stage2_batchnorm7_running_mean" -> "resnetv17_stage2_batchnorm7_fwd";
+  "resnetv17_stage2_batchnorm7_running_var" -> "resnetv17_stage2_batchnorm7_fwd";
+  "resnetv17_stage2_batchnorm7_fwd" -> "resnetv17_stage2_relu4_fwd";
+  "resnetv17_stage2_relu4_fwd" -> "resnetv17_stage2_conv8_fwd";
+  "resnetv17_stage2_conv8_weight" -> "resnetv17_stage2_conv8_fwd";
+  "resnetv17_stage2_conv8_fwd" -> "resnetv17_stage2_batchnorm8_fwd";
+  "resnetv17_stage2_batchnorm8_gamma" -> "resnetv17_stage2_batchnorm8_fwd";
+  "resnetv17_stage2_batchnorm8_beta" -> "resnetv17_stage2_batchnorm8_fwd";
+  "resnetv17_stage2_batchnorm8_running_mean" -> "resnetv17_stage2_batchnorm8_fwd";
+  "resnetv17_stage2_batchnorm8_running_var" -> "resnetv17_stage2_batchnorm8_fwd";
+  "resnetv17_stage2_batchnorm8_fwd" -> "resnetv17_stage2_relu5_fwd";
+  "resnetv17_stage2_relu5_fwd" -> "resnetv17_stage2_conv9_fwd";
+  "resnetv17_stage2_conv9_weight" -> "resnetv17_stage2_conv9_fwd";
+  "resnetv17_stage2_conv9_bias" -> "resnetv17_stage2_conv9_fwd";
+  "resnetv17_stage2_conv9_fwd" -> "resnetv17_stage2_batchnorm9_fwd";
+  "resnetv17_stage2_batchnorm9_gamma" -> "resnetv17_stage2_batchnorm9_fwd";
+  "resnetv17_stage2_batchnorm9_beta" -> "resnetv17_stage2_batchnorm9_fwd";
+  "resnetv17_stage2_batchnorm9_running_mean" -> "resnetv17_stage2_batchnorm9_fwd";
+  "resnetv17_stage2_batchnorm9_running_var" -> "resnetv17_stage2_batchnorm9_fwd";
+  "resnetv17_stage2_batchnorm9_fwd" -> "resnetv17_stage2__plus2";
+  "resnetv17_stage2__plus2" -> "resnetv17_stage2_activation2";
+  "resnetv17_stage2_activation2" -> "resnetv17_stage2_conv10_fwd";
+  "resnetv17_stage2_activation2" -> "resnetv17_stage2__plus3";
+  "resnetv17_stage2_conv10_weight" -> "resnetv17_stage2_conv10_fwd";
+  "resnetv17_stage2_conv10_bias" -> "resnetv17_stage2_conv10_fwd";
+  "resnetv17_stage2_conv10_fwd" -> "resnetv17_stage2_batchnorm10_fwd";
+  "resnetv17_stage2_batchnorm10_gamma" -> "resnetv17_stage2_batchnorm10_fwd";
+  "resnetv17_stage2_batchnorm10_beta" -> "resnetv17_stage2_batchnorm10_fwd";
+  "resnetv17_stage2_batchnorm10_running_mean" -> "resnetv17_stage2_batchnorm10_fwd";
+  "resnetv17_stage2_batchnorm10_running_var" -> "resnetv17_stage2_batchnorm10_fwd";
+  "resnetv17_stage2_batchnorm10_fwd" -> "resnetv17_stage2_relu6_fwd";
+  "resnetv17_stage2_relu6_fwd" -> "resnetv17_stage2_conv11_fwd";
+  "resnetv17_stage2_conv11_weight" -> "resnetv17_stage2_conv11_fwd";
+  "resnetv17_stage2_conv11_fwd" -> "resnetv17_stage2_batchnorm11_fwd";
+  "resnetv17_stage2_batchnorm11_gamma" -> "resnetv17_stage2_batchnorm11_fwd";
+  "resnetv17_stage2_batchnorm11_beta" -> "resnetv17_stage2_batchnorm11_fwd";
+  "resnetv17_stage2_batchnorm11_running_mean" -> "resnetv17_stage2_batchnorm11_fwd";
+  "resnetv17_stage2_batchnorm11_running_var" -> "resnetv17_stage2_batchnorm11_fwd";
+  "resnetv17_stage2_batchnorm11_fwd" -> "resnetv17_stage2_relu7_fwd";
+  "resnetv17_stage2_relu7_fwd" -> "resnetv17_stage2_conv12_fwd";
+  "resnetv17_stage2_conv12_weight" -> "resnetv17_stage2_conv12_fwd";
+  "resnetv17_stage2_conv12_bias" -> "resnetv17_stage2_conv12_fwd";
+  "resnetv17_stage2_conv12_fwd" -> "resnetv17_stage2_batchnorm12_fwd";
+  "resnetv17_stage2_batchnorm12_gamma" -> "resnetv17_stage2_batchnorm12_fwd";
+  "resnetv17_stage2_batchnorm12_beta" -> "resnetv17_stage2_batchnorm12_fwd";
+  "resnetv17_stage2_batchnorm12_running_mean" -> "resnetv17_stage2_batchnorm12_fwd";
+  "resnetv17_stage2_batchnorm12_running_var" -> "resnetv17_stage2_batchnorm12_fwd";
+  "resnetv17_stage2_batchnorm12_fwd" -> "resnetv17_stage2__plus3";
+  "resnetv17_stage2__plus3" -> "resnetv17_stage2_activation3";
+  "resnetv17_stage2_activation3" -> "resnetv17_stage3_conv0_fwd";
+  "resnetv17_stage2_activation3" -> "resnetv17_stage3_conv3_fwd";
+  "resnetv17_stage3_conv0_weight" -> "resnetv17_stage3_conv0_fwd";
+  "resnetv17_stage3_conv0_bias" -> "resnetv17_stage3_conv0_fwd";
+  "resnetv17_stage3_conv0_fwd" -> "resnetv17_stage3_batchnorm0_fwd";
+  "resnetv17_stage3_batchnorm0_gamma" -> "resnetv17_stage3_batchnorm0_fwd";
+  "resnetv17_stage3_batchnorm0_beta" -> "resnetv17_stage3_batchnorm0_fwd";
+  "resnetv17_stage3_batchnorm0_running_mean" -> "resnetv17_stage3_batchnorm0_fwd";
+  "resnetv17_stage3_batchnorm0_running_var" -> "resnetv17_stage3_batchnorm0_fwd";
+  "resnetv17_stage3_batchnorm0_fwd" -> "resnetv17_stage3_relu0_fwd";
+  "resnetv17_stage3_relu0_fwd" -> "resnetv17_stage3_conv1_fwd";
+  "resnetv17_stage3_conv1_weight" -> "resnetv17_stage3_conv1_fwd";
+  "resnetv17_stage3_conv1_fwd" -> "resnetv17_stage3_batchnorm1_fwd";
+  "resnetv17_stage3_batchnorm1_gamma" -> "resnetv17_stage3_batchnorm1_fwd";
+  "resnetv17_stage3_batchnorm1_beta" -> "resnetv17_stage3_batchnorm1_fwd";
+  "resnetv17_stage3_batchnorm1_running_mean" -> "resnetv17_stage3_batchnorm1_fwd";
+  "resnetv17_stage3_batchnorm1_running_var" -> "resnetv17_stage3_batchnorm1_fwd";
+  "resnetv17_stage3_batchnorm1_fwd" -> "resnetv17_stage3_relu1_fwd";
+  "resnetv17_stage3_relu1_fwd" -> "resnetv17_stage3_conv2_fwd";
+  "resnetv17_stage3_conv2_weight" -> "resnetv17_stage3_conv2_fwd";
+  "resnetv17_stage3_conv2_bias" -> "resnetv17_stage3_conv2_fwd";
+  "resnetv17_stage3_conv2_fwd" -> "resnetv17_stage3_batchnorm2_fwd";
+  "resnetv17_stage3_batchnorm2_gamma" -> "resnetv17_stage3_batchnorm2_fwd";
+  "resnetv17_stage3_batchnorm2_beta" -> "resnetv17_stage3_batchnorm2_fwd";
+  "resnetv17_stage3_batchnorm2_running_mean" -> "resnetv17_stage3_batchnorm2_fwd";
+  "resnetv17_stage3_batchnorm2_running_var" -> "resnetv17_stage3_batchnorm2_fwd";
+  "resnetv17_stage3_batchnorm2_fwd" -> "resnetv17_stage3__plus0";
+  "resnetv17_stage3_conv3_weight" -> "resnetv17_stage3_conv3_fwd";
+  "resnetv17_stage3_conv3_fwd" -> "resnetv17_stage3_batchnorm3_fwd";
+  "resnetv17_stage3_batchnorm3_gamma" -> "resnetv17_stage3_batchnorm3_fwd";
+  "resnetv17_stage3_batchnorm3_beta" -> "resnetv17_stage3_batchnorm3_fwd";
+  "resnetv17_stage3_batchnorm3_running_mean" -> "resnetv17_stage3_batchnorm3_fwd";
+  "resnetv17_stage3_batchnorm3_running_var" -> "resnetv17_stage3_batchnorm3_fwd";
+  "resnetv17_stage3_batchnorm3_fwd" -> "resnetv17_stage3__plus0";
+  "resnetv17_stage3__plus0" -> "resnetv17_stage3_activation0";
+  "resnetv17_stage3_activation0" -> "resnetv17_stage3_conv4_fwd";
+  "resnetv17_stage3_activation0" -> "resnetv17_stage3__plus1";
+  "resnetv17_stage3_conv4_weight" -> "resnetv17_stage3_conv4_fwd";
+  "resnetv17_stage3_conv4_bias" -> "resnetv17_stage3_conv4_fwd";
+  "resnetv17_stage3_conv4_fwd" -> "resnetv17_stage3_batchnorm4_fwd";
+  "resnetv17_stage3_batchnorm4_gamma" -> "resnetv17_stage3_batchnorm4_fwd";
+  "resnetv17_stage3_batchnorm4_beta" -> "resnetv17_stage3_batchnorm4_fwd";
+  "resnetv17_stage3_batchnorm4_running_mean" -> "resnetv17_stage3_batchnorm4_fwd";
+  "resnetv17_stage3_batchnorm4_running_var" -> "resnetv17_stage3_batchnorm4_fwd";
+  "resnetv17_stage3_batchnorm4_fwd" -> "resnetv17_stage3_relu2_fwd";
+  "resnetv17_stage3_relu2_fwd" -> "resnetv17_stage3_conv5_fwd";
+  "resnetv17_stage3_conv5_weight" -> "resnetv17_stage3_conv5_fwd";
+  "resnetv17_stage3_conv5_fwd" -> "resnetv17_stage3_batchnorm5_fwd";
+  "resnetv17_stage3_batchnorm5_gamma" -> "resnetv17_stage3_batchnorm5_fwd";
+  "resnetv17_stage3_batchnorm5_beta" -> "resnetv17_stage3_batchnorm5_fwd";
+  "resnetv17_stage3_batchnorm5_running_mean" -> "resnetv17_stage3_batchnorm5_fwd";
+  "resnetv17_stage3_batchnorm5_running_var" -> "resnetv17_stage3_batchnorm5_fwd";
+  "resnetv17_stage3_batchnorm5_fwd" -> "resnetv17_stage3_relu3_fwd";
+  "resnetv17_stage3_relu3_fwd" -> "resnetv17_stage3_conv6_fwd";
+  "resnetv17_stage3_conv6_weight" -> "resnetv17_stage3_conv6_fwd";
+  "resnetv17_stage3_conv6_bias" -> "resnetv17_stage3_conv6_fwd";
+  "resnetv17_stage3_conv6_fwd" -> "resnetv17_stage3_batchnorm6_fwd";
+  "resnetv17_stage3_batchnorm6_gamma" -> "resnetv17_stage3_batchnorm6_fwd";
+  "resnetv17_stage3_batchnorm6_beta" -> "resnetv17_stage3_batchnorm6_fwd";
+  "resnetv17_stage3_batchnorm6_running_mean" -> "resnetv17_stage3_batchnorm6_fwd";
+  "resnetv17_stage3_batchnorm6_running_var" -> "resnetv17_stage3_batchnorm6_fwd";
+  "resnetv17_stage3_batchnorm6_fwd" -> "resnetv17_stage3__plus1";
+  "resnetv17_stage3__plus1" -> "resnetv17_stage3_activation1";
+  "resnetv17_stage3_activation1" -> "resnetv17_stage3_conv7_fwd";
+  "resnetv17_stage3_activation1" -> "resnetv17_stage3__plus2";
+  "resnetv17_stage3_conv7_weight" -> "resnetv17_stage3_conv7_fwd";
+  "resnetv17_stage3_conv7_bias" -> "resnetv17_stage3_conv7_fwd";
+  "resnetv17_stage3_conv7_fwd" -> "resnetv17_stage3_batchnorm7_fwd";
+  "resnetv17_stage3_batchnorm7_gamma" -> "resnetv17_stage3_batchnorm7_fwd";
+  "resnetv17_stage3_batchnorm7_beta" -> "resnetv17_stage3_batchnorm7_fwd";
+  "resnetv17_stage3_batchnorm7_running_mean" -> "resnetv17_stage3_batchnorm7_fwd";
+  "resnetv17_stage3_batchnorm7_running_var" -> "resnetv17_stage3_batchnorm7_fwd";
+  "resnetv17_stage3_batchnorm7_fwd" -> "resnetv17_stage3_relu4_fwd";
+  "resnetv17_stage3_relu4_fwd" -> "resnetv17_stage3_conv8_fwd";
+  "resnetv17_stage3_conv8_weight" -> "resnetv17_stage3_conv8_fwd";
+  "resnetv17_stage3_conv8_fwd" -> "resnetv17_stage3_batchnorm8_fwd";
+  "resnetv17_stage3_batchnorm8_gamma" -> "resnetv17_stage3_batchnorm8_fwd";
+  "resnetv17_stage3_batchnorm8_beta" -> "resnetv17_stage3_batchnorm8_fwd";
+  "resnetv17_stage3_batchnorm8_running_mean" -> "resnetv17_stage3_batchnorm8_fwd";
+  "resnetv17_stage3_batchnorm8_running_var" -> "resnetv17_stage3_batchnorm8_fwd";
+  "resnetv17_stage3_batchnorm8_fwd" -> "resnetv17_stage3_relu5_fwd";
+  "resnetv17_stage3_relu5_fwd" -> "resnetv17_stage3_conv9_fwd";
+  "resnetv17_stage3_conv9_weight" -> "resnetv17_stage3_conv9_fwd";
+  "resnetv17_stage3_conv9_bias" -> "resnetv17_stage3_conv9_fwd";
+  "resnetv17_stage3_conv9_fwd" -> "resnetv17_stage3_batchnorm9_fwd";
+  "resnetv17_stage3_batchnorm9_gamma" -> "resnetv17_stage3_batchnorm9_fwd";
+  "resnetv17_stage3_batchnorm9_beta" -> "resnetv17_stage3_batchnorm9_fwd";
+  "resnetv17_stage3_batchnorm9_running_mean" -> "resnetv17_stage3_batchnorm9_fwd";
+  "resnetv17_stage3_batchnorm9_running_var" -> "resnetv17_stage3_batchnorm9_fwd";
+  "resnetv17_stage3_batchnorm9_fwd" -> "resnetv17_stage3__plus2";
+  "resnetv17_stage3__plus2" -> "resnetv17_stage3_activation2";
+  "resnetv17_stage3_activation2" -> "resnetv17_stage3_conv10_fwd";
+  "resnetv17_stage3_activation2" -> "resnetv17_stage3__plus3";
+  "resnetv17_stage3_conv10_weight" -> "resnetv17_stage3_conv10_fwd";
+  "resnetv17_stage3_conv10_bias" -> "resnetv17_stage3_conv10_fwd";
+  "resnetv17_stage3_conv10_fwd" -> "resnetv17_stage3_batchnorm10_fwd";
+  "resnetv17_stage3_batchnorm10_gamma" -> "resnetv17_stage3_batchnorm10_fwd";
+  "resnetv17_stage3_batchnorm10_beta" -> "resnetv17_stage3_batchnorm10_fwd";
+  "resnetv17_stage3_batchnorm10_running_mean" -> "resnetv17_stage3_batchnorm10_fwd";
+  "resnetv17_stage3_batchnorm10_running_var" -> "resnetv17_stage3_batchnorm10_fwd";
+  "resnetv17_stage3_batchnorm10_fwd" -> "resnetv17_stage3_relu6_fwd";
+  "resnetv17_stage3_relu6_fwd" -> "resnetv17_stage3_conv11_fwd";
+  "resnetv17_stage3_conv11_weight" -> "resnetv17_stage3_conv11_fwd";
+  "resnetv17_stage3_conv11_fwd" -> "resnetv17_stage3_batchnorm11_fwd";
+  "resnetv17_stage3_batchnorm11_gamma" -> "resnetv17_stage3_batchnorm11_fwd";
+  "resnetv17_stage3_batchnorm11_beta" -> "resnetv17_stage3_batchnorm11_fwd";
+  "resnetv17_stage3_batchnorm11_running_mean" -> "resnetv17_stage3_batchnorm11_fwd";
+  "resnetv17_stage3_batchnorm11_running_var" -> "resnetv17_stage3_batchnorm11_fwd";
+  "resnetv17_stage3_batchnorm11_fwd" -> "resnetv17_stage3_relu7_fwd";
+  "resnetv17_stage3_relu7_fwd" -> "resnetv17_stage3_conv12_fwd";
+  "resnetv17_stage3_conv12_weight" -> "resnetv17_stage3_conv12_fwd";
+  "resnetv17_stage3_conv12_bias" -> "resnetv17_stage3_conv12_fwd";
+  "resnetv17_stage3_conv12_fwd" -> "resnetv17_stage3_batchnorm12_fwd";
+  "resnetv17_stage3_batchnorm12_gamma" -> "resnetv17_stage3_batchnorm12_fwd";
+  "resnetv17_stage3_batchnorm12_beta" -> "resnetv17_stage3_batchnorm12_fwd";
+  "resnetv17_stage3_batchnorm12_running_mean" -> "resnetv17_stage3_batchnorm12_fwd";
+  "resnetv17_stage3_batchnorm12_running_var" -> "resnetv17_stage3_batchnorm12_fwd";
+  "resnetv17_stage3_batchnorm12_fwd" -> "resnetv17_stage3__plus3";
+  "resnetv17_stage3__plus3" -> "resnetv17_stage3_activation3";
+  "resnetv17_stage3_activation3" -> "resnetv17_stage3_conv13_fwd";
+  "resnetv17_stage3_activation3" -> "resnetv17_stage3__plus4";
+  "resnetv17_stage3_conv13_weight" -> "resnetv17_stage3_conv13_fwd";
+  "resnetv17_stage3_conv13_bias" -> "resnetv17_stage3_conv13_fwd";
+  "resnetv17_stage3_conv13_fwd" -> "resnetv17_stage3_batchnorm13_fwd";
+  "resnetv17_stage3_batchnorm13_gamma" -> "resnetv17_stage3_batchnorm13_fwd";
+  "resnetv17_stage3_batchnorm13_beta" -> "resnetv17_stage3_batchnorm13_fwd";
+  "resnetv17_stage3_batchnorm13_running_mean" -> "resnetv17_stage3_batchnorm13_fwd";
+  "resnetv17_stage3_batchnorm13_running_var" -> "resnetv17_stage3_batchnorm13_fwd";
+  "resnetv17_stage3_batchnorm13_fwd" -> "resnetv17_stage3_relu8_fwd";
+  "resnetv17_stage3_relu8_fwd" -> "resnetv17_stage3_conv14_fwd";
+  "resnetv17_stage3_conv14_weight" -> "resnetv17_stage3_conv14_fwd";
+  "resnetv17_stage3_conv14_fwd" -> "resnetv17_stage3_batchnorm14_fwd";
+  "resnetv17_stage3_batchnorm14_gamma" -> "resnetv17_stage3_batchnorm14_fwd";
+  "resnetv17_stage3_batchnorm14_beta" -> "resnetv17_stage3_batchnorm14_fwd";
+  "resnetv17_stage3_batchnorm14_running_mean" -> "resnetv17_stage3_batchnorm14_fwd";
+  "resnetv17_stage3_batchnorm14_running_var" -> "resnetv17_stage3_batchnorm14_fwd";
+  "resnetv17_stage3_batchnorm14_fwd" -> "resnetv17_stage3_relu9_fwd";
+  "resnetv17_stage3_relu9_fwd" -> "resnetv17_stage3_conv15_fwd";
+  "resnetv17_stage3_conv15_weight" -> "resnetv17_stage3_conv15_fwd";
+  "resnetv17_stage3_conv15_bias" -> "resnetv17_stage3_conv15_fwd";
+  "resnetv17_stage3_conv15_fwd" -> "resnetv17_stage3_batchnorm15_fwd";
+  "resnetv17_stage3_batchnorm15_gamma" -> "resnetv17_stage3_batchnorm15_fwd";
+  "resnetv17_stage3_batchnorm15_beta" -> "resnetv17_stage3_batchnorm15_fwd";
+  "resnetv17_stage3_batchnorm15_running_mean" -> "resnetv17_stage3_batchnorm15_fwd";
+  "resnetv17_stage3_batchnorm15_running_var" -> "resnetv17_stage3_batchnorm15_fwd";
+  "resnetv17_stage3_batchnorm15_fwd" -> "resnetv17_stage3__plus4";
+  "resnetv17_stage3__plus4" -> "resnetv17_stage3_activation4";
+  "resnetv17_stage3_activation4" -> "resnetv17_stage3_conv16_fwd";
+  "resnetv17_stage3_activation4" -> "resnetv17_stage3__plus5";
+  "resnetv17_stage3_conv16_weight" -> "resnetv17_stage3_conv16_fwd";
+  "resnetv17_stage3_conv16_bias" -> "resnetv17_stage3_conv16_fwd";
+  "resnetv17_stage3_conv16_fwd" -> "resnetv17_stage3_batchnorm16_fwd";
+  "resnetv17_stage3_batchnorm16_gamma" -> "resnetv17_stage3_batchnorm16_fwd";
+  "resnetv17_stage3_batchnorm16_beta" -> "resnetv17_stage3_batchnorm16_fwd";
+  "resnetv17_stage3_batchnorm16_running_mean" -> "resnetv17_stage3_batchnorm16_fwd";
+  "resnetv17_stage3_batchnorm16_running_var" -> "resnetv17_stage3_batchnorm16_fwd";
+  "resnetv17_stage3_batchnorm16_fwd" -> "resnetv17_stage3_relu10_fwd";
+  "resnetv17_stage3_relu10_fwd" -> "resnetv17_stage3_conv17_fwd";
+  "resnetv17_stage3_conv17_weight" -> "resnetv17_stage3_conv17_fwd";
+  "resnetv17_stage3_conv17_fwd" -> "resnetv17_stage3_batchnorm17_fwd";
+  "resnetv17_stage3_batchnorm17_gamma" -> "resnetv17_stage3_batchnorm17_fwd";
+  "resnetv17_stage3_batchnorm17_beta" -> "resnetv17_stage3_batchnorm17_fwd";
+  "resnetv17_stage3_batchnorm17_running_mean" -> "resnetv17_stage3_batchnorm17_fwd";
+  "resnetv17_stage3_batchnorm17_running_var" -> "resnetv17_stage3_batchnorm17_fwd";
+  "resnetv17_stage3_batchnorm17_fwd" -> "resnetv17_stage3_relu11_fwd";
+  "resnetv17_stage3_relu11_fwd" -> "resnetv17_stage3_conv18_fwd";
+  "resnetv17_stage3_conv18_weight" -> "resnetv17_stage3_conv18_fwd";
+  "resnetv17_stage3_conv18_bias" -> "resnetv17_stage3_conv18_fwd";
+  "resnetv17_stage3_conv18_fwd" -> "resnetv17_stage3_batchnorm18_fwd";
+  "resnetv17_stage3_batchnorm18_gamma" -> "resnetv17_stage3_batchnorm18_fwd";
+  "resnetv17_stage3_batchnorm18_beta" -> "resnetv17_stage3_batchnorm18_fwd";
+  "resnetv17_stage3_batchnorm18_running_mean" -> "resnetv17_stage3_batchnorm18_fwd";
+  "resnetv17_stage3_batchnorm18_running_var" -> "resnetv17_stage3_batchnorm18_fwd";
+  "resnetv17_stage3_batchnorm18_fwd" -> "resnetv17_stage3__plus5";
+  "resnetv17_stage3__plus5" -> "resnetv17_stage3_activation5";
+  "resnetv17_stage3_activation5" -> "resnetv17_stage4_conv0_fwd";
+  "resnetv17_stage3_activation5" -> "resnetv17_stage4_conv3_fwd";
+  "resnetv17_stage4_conv0_weight" -> "resnetv17_stage4_conv0_fwd";
+  "resnetv17_stage4_conv0_bias" -> "resnetv17_stage4_conv0_fwd";
+  "resnetv17_stage4_conv0_fwd" -> "resnetv17_stage4_batchnorm0_fwd";
+  "resnetv17_stage4_batchnorm0_gamma" -> "resnetv17_stage4_batchnorm0_fwd";
+  "resnetv17_stage4_batchnorm0_beta" -> "resnetv17_stage4_batchnorm0_fwd";
+  "resnetv17_stage4_batchnorm0_running_mean" -> "resnetv17_stage4_batchnorm0_fwd";
+  "resnetv17_stage4_batchnorm0_running_var" -> "resnetv17_stage4_batchnorm0_fwd";
+  "resnetv17_stage4_batchnorm0_fwd" -> "resnetv17_stage4_relu0_fwd";
+  "resnetv17_stage4_relu0_fwd" -> "resnetv17_stage4_conv1_fwd";
+  "resnetv17_stage4_conv1_weight" -> "resnetv17_stage4_conv1_fwd";
+  "resnetv17_stage4_conv1_fwd" -> "resnetv17_stage4_batchnorm1_fwd";
+  "resnetv17_stage4_batchnorm1_gamma" -> "resnetv17_stage4_batchnorm1_fwd";
+  "resnetv17_stage4_batchnorm1_beta" -> "resnetv17_stage4_batchnorm1_fwd";
+  "resnetv17_stage4_batchnorm1_running_mean" -> "resnetv17_stage4_batchnorm1_fwd";
+  "resnetv17_stage4_batchnorm1_running_var" -> "resnetv17_stage4_batchnorm1_fwd";
+  "resnetv17_stage4_batchnorm1_fwd" -> "resnetv17_stage4_relu1_fwd";
+  "resnetv17_stage4_relu1_fwd" -> "resnetv17_stage4_conv2_fwd";
+  "resnetv17_stage4_conv2_weight" -> "resnetv17_stage4_conv2_fwd";
+  "resnetv17_stage4_conv2_bias" -> "resnetv17_stage4_conv2_fwd";
+  "resnetv17_stage4_conv2_fwd" -> "resnetv17_stage4_batchnorm2_fwd";
+  "resnetv17_stage4_batchnorm2_gamma" -> "resnetv17_stage4_batchnorm2_fwd";
+  "resnetv17_stage4_batchnorm2_beta" -> "resnetv17_stage4_batchnorm2_fwd";
+  "resnetv17_stage4_batchnorm2_running_mean" -> "resnetv17_stage4_batchnorm2_fwd";
+  "resnetv17_stage4_batchnorm2_running_var" -> "resnetv17_stage4_batchnorm2_fwd";
+  "resnetv17_stage4_batchnorm2_fwd" -> "resnetv17_stage4__plus0";
+  "resnetv17_stage4_conv3_weight" -> "resnetv17_stage4_conv3_fwd";
+  "resnetv17_stage4_conv3_fwd" -> "resnetv17_stage4_batchnorm3_fwd";
+  "resnetv17_stage4_batchnorm3_gamma" -> "resnetv17_stage4_batchnorm3_fwd";
+  "resnetv17_stage4_batchnorm3_beta" -> "resnetv17_stage4_batchnorm3_fwd";
+  "resnetv17_stage4_batchnorm3_running_mean" -> "resnetv17_stage4_batchnorm3_fwd";
+  "resnetv17_stage4_batchnorm3_running_var" -> "resnetv17_stage4_batchnorm3_fwd";
+  "resnetv17_stage4_batchnorm3_fwd" -> "resnetv17_stage4__plus0";
+  "resnetv17_stage4__plus0" -> "resnetv17_stage4_activation0";
+  "resnetv17_stage4_activation0" -> "resnetv17_stage4_conv4_fwd";
+  "resnetv17_stage4_activation0" -> "resnetv17_stage4__plus1";
+  "resnetv17_stage4_conv4_weight" -> "resnetv17_stage4_conv4_fwd";
+  "resnetv17_stage4_conv4_bias" -> "resnetv17_stage4_conv4_fwd";
+  "resnetv17_stage4_conv4_fwd" -> "resnetv17_stage4_batchnorm4_fwd";
+  "resnetv17_stage4_batchnorm4_gamma" -> "resnetv17_stage4_batchnorm4_fwd";
+  "resnetv17_stage4_batchnorm4_beta" -> "resnetv17_stage4_batchnorm4_fwd";
+  "resnetv17_stage4_batchnorm4_running_mean" -> "resnetv17_stage4_batchnorm4_fwd";
+  "resnetv17_stage4_batchnorm4_running_var" -> "resnetv17_stage4_batchnorm4_fwd";
+  "resnetv17_stage4_batchnorm4_fwd" -> "resnetv17_stage4_relu2_fwd";
+  "resnetv17_stage4_relu2_fwd" -> "resnetv17_stage4_conv5_fwd";
+  "resnetv17_stage4_conv5_weight" -> "resnetv17_stage4_conv5_fwd";
+  "resnetv17_stage4_conv5_fwd" -> "resnetv17_stage4_batchnorm5_fwd";
+  "resnetv17_stage4_batchnorm5_gamma" -> "resnetv17_stage4_batchnorm5_fwd";
+  "resnetv17_stage4_batchnorm5_beta" -> "resnetv17_stage4_batchnorm5_fwd";
+  "resnetv17_stage4_batchnorm5_running_mean" -> "resnetv17_stage4_batchnorm5_fwd";
+  "resnetv17_stage4_batchnorm5_running_var" -> "resnetv17_stage4_batchnorm5_fwd";
+  "resnetv17_stage4_batchnorm5_fwd" -> "resnetv17_stage4_relu3_fwd";
+  "resnetv17_stage4_relu3_fwd" -> "resnetv17_stage4_conv6_fwd";
+  "resnetv17_stage4_conv6_weight" -> "resnetv17_stage4_conv6_fwd";
+  "resnetv17_stage4_conv6_bias" -> "resnetv17_stage4_conv6_fwd";
+  "resnetv17_stage4_conv6_fwd" -> "resnetv17_stage4_batchnorm6_fwd";
+  "resnetv17_stage4_batchnorm6_gamma" -> "resnetv17_stage4_batchnorm6_fwd";
+  "resnetv17_stage4_batchnorm6_beta" -> "resnetv17_stage4_batchnorm6_fwd";
+  "resnetv17_stage4_batchnorm6_running_mean" -> "resnetv17_stage4_batchnorm6_fwd";
+  "resnetv17_stage4_batchnorm6_running_var" -> "resnetv17_stage4_batchnorm6_fwd";
+  "resnetv17_stage4_batchnorm6_fwd" -> "resnetv17_stage4__plus1";
+  "resnetv17_stage4__plus1" -> "resnetv17_stage4_activation1";
+  "resnetv17_stage4_activation1" -> "resnetv17_stage4_conv7_fwd";
+  "resnetv17_stage4_activation1" -> "resnetv17_stage4__plus2";
+  "resnetv17_stage4_conv7_weight" -> "resnetv17_stage4_conv7_fwd";
+  "resnetv17_stage4_conv7_bias" -> "resnetv17_stage4_conv7_fwd";
+  "resnetv17_stage4_conv7_fwd" -> "resnetv17_stage4_batchnorm7_fwd";
+  "resnetv17_stage4_batchnorm7_gamma" -> "resnetv17_stage4_batchnorm7_fwd";
+  "resnetv17_stage4_batchnorm7_beta" -> "resnetv17_stage4_batchnorm7_fwd";
+  "resnetv17_stage4_batchnorm7_running_mean" -> "resnetv17_stage4_batchnorm7_fwd";
+  "resnetv17_stage4_batchnorm7_running_var" -> "resnetv17_stage4_batchnorm7_fwd";
+  "resnetv17_stage4_batchnorm7_fwd" -> "resnetv17_stage4_relu4_fwd";
+  "resnetv17_stage4_relu4_fwd" -> "resnetv17_stage4_conv8_fwd";
+  "resnetv17_stage4_conv8_weight" -> "resnetv17_stage4_conv8_fwd";
+  "resnetv17_stage4_conv8_fwd" -> "resnetv17_stage4_batchnorm8_fwd";
+  "resnetv17_stage4_batchnorm8_gamma" -> "resnetv17_stage4_batchnorm8_fwd";
+  "resnetv17_stage4_batchnorm8_beta" -> "resnetv17_stage4_batchnorm8_fwd";
+  "resnetv17_stage4_batchnorm8_running_mean" -> "resnetv17_stage4_batchnorm8_fwd";
+  "resnetv17_stage4_batchnorm8_running_var" -> "resnetv17_stage4_batchnorm8_fwd";
+  "resnetv17_stage4_batchnorm8_fwd" -> "resnetv17_stage4_relu5_fwd";
+  "resnetv17_stage4_relu5_fwd" -> "resnetv17_stage4_conv9_fwd";
+  "resnetv17_stage4_conv9_weight" -> "resnetv17_stage4_conv9_fwd";
+  "resnetv17_stage4_conv9_bias" -> "resnetv17_stage4_conv9_fwd";
+  "resnetv17_stage4_conv9_fwd" -> "resnetv17_stage4_batchnorm9_fwd";
+  "resnetv17_stage4_batchnorm9_gamma" -> "resnetv17_stage4_batchnorm9_fwd";
+  "resnetv17_stage4_batchnorm9_beta" -> "resnetv17_stage4_batchnorm9_fwd";
+  "resnetv17_stage4_batchnorm9_running_mean" -> "resnetv17_stage4_batchnorm9_fwd";
+  "resnetv17_stage4_batchnorm9_running_var" -> "resnetv17_stage4_batchnorm9_fwd";
+  "resnetv17_stage4_batchnorm9_fwd" -> "resnetv17_stage4__plus2";
+  "resnetv17_stage4__plus2" -> "resnetv17_stage4_activation2";
+  "resnetv17_stage4_activation2" -> "resnetv17_pool1_fwd";
+  "resnetv17_pool1_fwd" -> "flatten_473";
+  "flatten_473" -> "resnetv17_dense0_fwd";
+  "resnetv17_dense0_weight" -> "resnetv17_dense0_fwd";
+  "resnetv17_dense0_bias" -> "resnetv17_dense0_fwd";
+}

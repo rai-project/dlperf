@@ -1,0 +1,987 @@
+strict digraph {
+  graph [
+    rankdir="TB"
+    overlap=prism
+    overlap_shrink=true
+    splines=curved
+  ];
+  node [
+    shape=Mrecord
+  ];
+  edge [
+    penwidth=3
+  ];
+
+  // Node definitions.
+  "data" [
+    id=0
+    name="data"
+    type=constant_input
+    label="data"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_conv0_weight" [
+    id=1
+    name="vgg0_conv0_weight"
+    type=constant_input
+    label="vgg0_conv0_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_conv0_bias" [
+    id=2
+    name="vgg0_conv0_bias"
+    type=constant_input
+    label="vgg0_conv0_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_conv0_fwd" [
+    id=3
+    name="vgg0_conv0_fwd"
+    type=Conv
+    label="{ {vgg0_conv0_fwd  | CONV} | [256,64,224,224] }"
+    inputs="data;vgg0_conv0_weight;vgg0_conv0_bias"
+    outputs="vgg0_conv0_fwd"
+    penwidth=3
+    style=filled
+    color="#c6a283"
+    fontcolor="#000000"
+    fillcolor="#dcb797"
+  ];
+  "vgg0_relu0_fwd" [
+    id=4
+    name="vgg0_relu0_fwd"
+    type=Relu
+    label="{ {vgg0_relu0_fwd  | RELU} | [256,64,224,224] }"
+    inputs="vgg0_conv0_fwd"
+    outputs="vgg0_relu0_fwd"
+    penwidth=3
+    style=filled
+    color="#86bbbd"
+    fontcolor="#000000"
+    fillcolor="#9cd1d3"
+  ];
+  "vgg0_conv1_weight" [
+    id=5
+    name="vgg0_conv1_weight"
+    type=constant_input
+    label="vgg0_conv1_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_conv1_bias" [
+    id=6
+    name="vgg0_conv1_bias"
+    type=constant_input
+    label="vgg0_conv1_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_conv1_fwd" [
+    id=7
+    name="vgg0_conv1_fwd"
+    type=Conv
+    label="{ {vgg0_conv1_fwd  | CONV} | [256,64,224,224] }"
+    inputs="vgg0_relu0_fwd;vgg0_conv1_weight;vgg0_conv1_bias"
+    outputs="vgg0_conv1_fwd"
+    penwidth=3
+    style=filled
+    color="#c6a283"
+    fontcolor="#000000"
+    fillcolor="#dcb797"
+  ];
+  "vgg0_relu1_fwd" [
+    id=8
+    name="vgg0_relu1_fwd"
+    type=Relu
+    label="{ {vgg0_relu1_fwd  | RELU} | [256,64,224,224] }"
+    inputs="vgg0_conv1_fwd"
+    outputs="vgg0_relu1_fwd"
+    penwidth=3
+    style=filled
+    color="#86bbbd"
+    fontcolor="#000000"
+    fillcolor="#9cd1d3"
+  ];
+  "vgg0_pool0_fwd" [
+    id=9
+    name="vgg0_pool0_fwd"
+    type=MaxPool
+    label="{ {vgg0_pool0_fwd  | MXPL} | [256,64,112,112] }"
+    inputs="vgg0_relu1_fwd"
+    outputs="vgg0_pool0_fwd"
+    penwidth=3
+    style=filled
+    color="#c084ca"
+    fontcolor="#000000"
+    fillcolor="#d497de"
+  ];
+  "vgg0_conv2_weight" [
+    id=10
+    name="vgg0_conv2_weight"
+    type=constant_input
+    label="vgg0_conv2_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_conv2_bias" [
+    id=11
+    name="vgg0_conv2_bias"
+    type=constant_input
+    label="vgg0_conv2_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_conv2_fwd" [
+    id=12
+    name="vgg0_conv2_fwd"
+    type=Conv
+    label="{ {vgg0_conv2_fwd  | CONV} | [256,128,112,112] }"
+    inputs="vgg0_pool0_fwd;vgg0_conv2_weight;vgg0_conv2_bias"
+    outputs="vgg0_conv2_fwd"
+    penwidth=3
+    style=filled
+    color="#c6a283"
+    fontcolor="#000000"
+    fillcolor="#dcb797"
+  ];
+  "vgg0_relu2_fwd" [
+    id=13
+    name="vgg0_relu2_fwd"
+    type=Relu
+    label="{ {vgg0_relu2_fwd  | RELU} | [256,128,112,112] }"
+    inputs="vgg0_conv2_fwd"
+    outputs="vgg0_relu2_fwd"
+    penwidth=3
+    style=filled
+    color="#86bbbd"
+    fontcolor="#000000"
+    fillcolor="#9cd1d3"
+  ];
+  "vgg0_conv3_weight" [
+    id=14
+    name="vgg0_conv3_weight"
+    type=constant_input
+    label="vgg0_conv3_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_conv3_bias" [
+    id=15
+    name="vgg0_conv3_bias"
+    type=constant_input
+    label="vgg0_conv3_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_conv3_fwd" [
+    id=16
+    name="vgg0_conv3_fwd"
+    type=Conv
+    label="{ {vgg0_conv3_fwd  | CONV} | [256,128,112,112] }"
+    inputs="vgg0_relu2_fwd;vgg0_conv3_weight;vgg0_conv3_bias"
+    outputs="vgg0_conv3_fwd"
+    penwidth=3
+    style=filled
+    color="#c6a283"
+    fontcolor="#000000"
+    fillcolor="#dcb797"
+  ];
+  "vgg0_relu3_fwd" [
+    id=17
+    name="vgg0_relu3_fwd"
+    type=Relu
+    label="{ {vgg0_relu3_fwd  | RELU} | [256,128,112,112] }"
+    inputs="vgg0_conv3_fwd"
+    outputs="vgg0_relu3_fwd"
+    penwidth=3
+    style=filled
+    color="#86bbbd"
+    fontcolor="#000000"
+    fillcolor="#9cd1d3"
+  ];
+  "vgg0_pool1_fwd" [
+    id=18
+    name="vgg0_pool1_fwd"
+    type=MaxPool
+    label="{ {vgg0_pool1_fwd  | MXPL} | [256,128,56,56] }"
+    inputs="vgg0_relu3_fwd"
+    outputs="vgg0_pool1_fwd"
+    penwidth=3
+    style=filled
+    color="#c084ca"
+    fontcolor="#000000"
+    fillcolor="#d497de"
+  ];
+  "vgg0_conv4_weight" [
+    id=19
+    name="vgg0_conv4_weight"
+    type=constant_input
+    label="vgg0_conv4_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_conv4_bias" [
+    id=20
+    name="vgg0_conv4_bias"
+    type=constant_input
+    label="vgg0_conv4_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_conv4_fwd" [
+    id=21
+    name="vgg0_conv4_fwd"
+    type=Conv
+    label="{ {vgg0_conv4_fwd  | CONV} | [256,256,56,56] }"
+    inputs="vgg0_pool1_fwd;vgg0_conv4_weight;vgg0_conv4_bias"
+    outputs="vgg0_conv4_fwd"
+    penwidth=3
+    style=filled
+    color="#c6a283"
+    fontcolor="#000000"
+    fillcolor="#dcb797"
+  ];
+  "vgg0_relu4_fwd" [
+    id=22
+    name="vgg0_relu4_fwd"
+    type=Relu
+    label="{ {vgg0_relu4_fwd  | RELU} | [256,256,56,56] }"
+    inputs="vgg0_conv4_fwd"
+    outputs="vgg0_relu4_fwd"
+    penwidth=3
+    style=filled
+    color="#86bbbd"
+    fontcolor="#000000"
+    fillcolor="#9cd1d3"
+  ];
+  "vgg0_conv5_weight" [
+    id=23
+    name="vgg0_conv5_weight"
+    type=constant_input
+    label="vgg0_conv5_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_conv5_bias" [
+    id=24
+    name="vgg0_conv5_bias"
+    type=constant_input
+    label="vgg0_conv5_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_conv5_fwd" [
+    id=25
+    name="vgg0_conv5_fwd"
+    type=Conv
+    label="{ {vgg0_conv5_fwd  | CONV} | [256,256,56,56] }"
+    inputs="vgg0_relu4_fwd;vgg0_conv5_weight;vgg0_conv5_bias"
+    outputs="vgg0_conv5_fwd"
+    penwidth=3
+    style=filled
+    color="#c6a283"
+    fontcolor="#000000"
+    fillcolor="#dcb797"
+  ];
+  "vgg0_relu5_fwd" [
+    id=26
+    name="vgg0_relu5_fwd"
+    type=Relu
+    label="{ {vgg0_relu5_fwd  | RELU} | [256,256,56,56] }"
+    inputs="vgg0_conv5_fwd"
+    outputs="vgg0_relu5_fwd"
+    penwidth=3
+    style=filled
+    color="#86bbbd"
+    fontcolor="#000000"
+    fillcolor="#9cd1d3"
+  ];
+  "vgg0_conv6_weight" [
+    id=27
+    name="vgg0_conv6_weight"
+    type=constant_input
+    label="vgg0_conv6_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_conv6_bias" [
+    id=28
+    name="vgg0_conv6_bias"
+    type=constant_input
+    label="vgg0_conv6_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_conv6_fwd" [
+    id=29
+    name="vgg0_conv6_fwd"
+    type=Conv
+    label="{ {vgg0_conv6_fwd  | CONV} | [256,256,56,56] }"
+    inputs="vgg0_relu5_fwd;vgg0_conv6_weight;vgg0_conv6_bias"
+    outputs="vgg0_conv6_fwd"
+    penwidth=3
+    style=filled
+    color="#c6a283"
+    fontcolor="#000000"
+    fillcolor="#dcb797"
+  ];
+  "vgg0_relu6_fwd" [
+    id=30
+    name="vgg0_relu6_fwd"
+    type=Relu
+    label="{ {vgg0_relu6_fwd  | RELU} | [256,256,56,56] }"
+    inputs="vgg0_conv6_fwd"
+    outputs="vgg0_relu6_fwd"
+    penwidth=3
+    style=filled
+    color="#86bbbd"
+    fontcolor="#000000"
+    fillcolor="#9cd1d3"
+  ];
+  "vgg0_pool2_fwd" [
+    id=31
+    name="vgg0_pool2_fwd"
+    type=MaxPool
+    label="{ {vgg0_pool2_fwd  | MXPL} | [256,256,28,28] }"
+    inputs="vgg0_relu6_fwd"
+    outputs="vgg0_pool2_fwd"
+    penwidth=3
+    style=filled
+    color="#c084ca"
+    fontcolor="#000000"
+    fillcolor="#d497de"
+  ];
+  "vgg0_conv7_weight" [
+    id=32
+    name="vgg0_conv7_weight"
+    type=constant_input
+    label="vgg0_conv7_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_conv7_bias" [
+    id=33
+    name="vgg0_conv7_bias"
+    type=constant_input
+    label="vgg0_conv7_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_conv7_fwd" [
+    id=34
+    name="vgg0_conv7_fwd"
+    type=Conv
+    label="{ {vgg0_conv7_fwd  | CONV} | [256,512,28,28] }"
+    inputs="vgg0_pool2_fwd;vgg0_conv7_weight;vgg0_conv7_bias"
+    outputs="vgg0_conv7_fwd"
+    penwidth=3
+    style=filled
+    color="#c6a283"
+    fontcolor="#000000"
+    fillcolor="#dcb797"
+  ];
+  "vgg0_relu7_fwd" [
+    id=35
+    name="vgg0_relu7_fwd"
+    type=Relu
+    label="{ {vgg0_relu7_fwd  | RELU} | [256,512,28,28] }"
+    inputs="vgg0_conv7_fwd"
+    outputs="vgg0_relu7_fwd"
+    penwidth=3
+    style=filled
+    color="#86bbbd"
+    fontcolor="#000000"
+    fillcolor="#9cd1d3"
+  ];
+  "vgg0_conv8_weight" [
+    id=36
+    name="vgg0_conv8_weight"
+    type=constant_input
+    label="vgg0_conv8_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_conv8_bias" [
+    id=37
+    name="vgg0_conv8_bias"
+    type=constant_input
+    label="vgg0_conv8_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_conv8_fwd" [
+    id=38
+    name="vgg0_conv8_fwd"
+    type=Conv
+    label="{ {vgg0_conv8_fwd  | CONV} | [256,512,28,28] }"
+    inputs="vgg0_relu7_fwd;vgg0_conv8_weight;vgg0_conv8_bias"
+    outputs="vgg0_conv8_fwd"
+    penwidth=3
+    style=filled
+    color="#c6a283"
+    fontcolor="#000000"
+    fillcolor="#dcb797"
+  ];
+  "vgg0_relu8_fwd" [
+    id=39
+    name="vgg0_relu8_fwd"
+    type=Relu
+    label="{ {vgg0_relu8_fwd  | RELU} | [256,512,28,28] }"
+    inputs="vgg0_conv8_fwd"
+    outputs="vgg0_relu8_fwd"
+    penwidth=3
+    style=filled
+    color="#86bbbd"
+    fontcolor="#000000"
+    fillcolor="#9cd1d3"
+  ];
+  "vgg0_conv9_weight" [
+    id=40
+    name="vgg0_conv9_weight"
+    type=constant_input
+    label="vgg0_conv9_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_conv9_bias" [
+    id=41
+    name="vgg0_conv9_bias"
+    type=constant_input
+    label="vgg0_conv9_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_conv9_fwd" [
+    id=42
+    name="vgg0_conv9_fwd"
+    type=Conv
+    label="{ {vgg0_conv9_fwd  | CONV} | [256,512,28,28] }"
+    inputs="vgg0_relu8_fwd;vgg0_conv9_weight;vgg0_conv9_bias"
+    outputs="vgg0_conv9_fwd"
+    penwidth=3
+    style=filled
+    color="#c6a283"
+    fontcolor="#000000"
+    fillcolor="#dcb797"
+  ];
+  "vgg0_relu9_fwd" [
+    id=43
+    name="vgg0_relu9_fwd"
+    type=Relu
+    label="{ {vgg0_relu9_fwd  | RELU} | [256,512,28,28] }"
+    inputs="vgg0_conv9_fwd"
+    outputs="vgg0_relu9_fwd"
+    penwidth=3
+    style=filled
+    color="#86bbbd"
+    fontcolor="#000000"
+    fillcolor="#9cd1d3"
+  ];
+  "vgg0_pool3_fwd" [
+    id=44
+    name="vgg0_pool3_fwd"
+    type=MaxPool
+    label="{ {vgg0_pool3_fwd  | MXPL} | [256,512,14,14] }"
+    inputs="vgg0_relu9_fwd"
+    outputs="vgg0_pool3_fwd"
+    penwidth=3
+    style=filled
+    color="#c084ca"
+    fontcolor="#000000"
+    fillcolor="#d497de"
+  ];
+  "vgg0_conv10_weight" [
+    id=45
+    name="vgg0_conv10_weight"
+    type=constant_input
+    label="vgg0_conv10_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_conv10_bias" [
+    id=46
+    name="vgg0_conv10_bias"
+    type=constant_input
+    label="vgg0_conv10_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_conv10_fwd" [
+    id=47
+    name="vgg0_conv10_fwd"
+    type=Conv
+    label="{ {vgg0_conv10_fwd  | CONV} | [256,512,14,14] }"
+    inputs="vgg0_pool3_fwd;vgg0_conv10_weight;vgg0_conv10_bias"
+    outputs="vgg0_conv10_fwd"
+    penwidth=3
+    style=filled
+    color="#c6a283"
+    fontcolor="#000000"
+    fillcolor="#dcb797"
+  ];
+  "vgg0_relu10_fwd" [
+    id=48
+    name="vgg0_relu10_fwd"
+    type=Relu
+    label="{ {vgg0_relu10_fwd  | RELU} | [256,512,14,14] }"
+    inputs="vgg0_conv10_fwd"
+    outputs="vgg0_relu10_fwd"
+    penwidth=3
+    style=filled
+    color="#86bbbd"
+    fontcolor="#000000"
+    fillcolor="#9cd1d3"
+  ];
+  "vgg0_conv11_weight" [
+    id=49
+    name="vgg0_conv11_weight"
+    type=constant_input
+    label="vgg0_conv11_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_conv11_bias" [
+    id=50
+    name="vgg0_conv11_bias"
+    type=constant_input
+    label="vgg0_conv11_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_conv11_fwd" [
+    id=51
+    name="vgg0_conv11_fwd"
+    type=Conv
+    label="{ {vgg0_conv11_fwd  | CONV} | [256,512,14,14] }"
+    inputs="vgg0_relu10_fwd;vgg0_conv11_weight;vgg0_conv11_bias"
+    outputs="vgg0_conv11_fwd"
+    penwidth=3
+    style=filled
+    color="#c6a283"
+    fontcolor="#000000"
+    fillcolor="#dcb797"
+  ];
+  "vgg0_relu11_fwd" [
+    id=52
+    name="vgg0_relu11_fwd"
+    type=Relu
+    label="{ {vgg0_relu11_fwd  | RELU} | [256,512,14,14] }"
+    inputs="vgg0_conv11_fwd"
+    outputs="vgg0_relu11_fwd"
+    penwidth=3
+    style=filled
+    color="#86bbbd"
+    fontcolor="#000000"
+    fillcolor="#9cd1d3"
+  ];
+  "vgg0_conv12_weight" [
+    id=53
+    name="vgg0_conv12_weight"
+    type=constant_input
+    label="vgg0_conv12_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_conv12_bias" [
+    id=54
+    name="vgg0_conv12_bias"
+    type=constant_input
+    label="vgg0_conv12_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_conv12_fwd" [
+    id=55
+    name="vgg0_conv12_fwd"
+    type=Conv
+    label="{ {vgg0_conv12_fwd  | CONV} | [256,512,14,14] }"
+    inputs="vgg0_relu11_fwd;vgg0_conv12_weight;vgg0_conv12_bias"
+    outputs="vgg0_conv12_fwd"
+    penwidth=3
+    style=filled
+    color="#c6a283"
+    fontcolor="#000000"
+    fillcolor="#dcb797"
+  ];
+  "vgg0_relu12_fwd" [
+    id=56
+    name="vgg0_relu12_fwd"
+    type=Relu
+    label="{ {vgg0_relu12_fwd  | RELU} | [256,512,14,14] }"
+    inputs="vgg0_conv12_fwd"
+    outputs="vgg0_relu12_fwd"
+    penwidth=3
+    style=filled
+    color="#86bbbd"
+    fontcolor="#000000"
+    fillcolor="#9cd1d3"
+  ];
+  "vgg0_pool4_fwd" [
+    id=57
+    name="vgg0_pool4_fwd"
+    type=MaxPool
+    label="{ {vgg0_pool4_fwd  | MXPL} | [256,512,7,7] }"
+    inputs="vgg0_relu12_fwd"
+    outputs="vgg0_pool4_fwd"
+    penwidth=3
+    style=filled
+    color="#c084ca"
+    fontcolor="#000000"
+    fillcolor="#d497de"
+  ];
+  "flatten_60" [
+    id=58
+    name="flatten_60"
+    type=Flatten
+    label="{ {flatten_60  | FLT} | [256,512,7,7] }"
+    inputs="vgg0_pool4_fwd"
+    outputs="flatten_60"
+    penwidth=3
+    style=filled
+    color="#908fc4"
+    fontcolor="#000000"
+    fillcolor="#a2a1d7"
+  ];
+  "vgg0_dense0_weight" [
+    id=59
+    name="vgg0_dense0_weight"
+    type=constant_input
+    label="vgg0_dense0_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_dense0_bias" [
+    id=60
+    name="vgg0_dense0_bias"
+    type=constant_input
+    label="vgg0_dense0_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_dense0_fwd" [
+    id=61
+    name="vgg0_dense0_fwd"
+    type=Gemm
+    label="{ {vgg0_dense0_fwd  | GEMM} | [256,4096] }"
+    inputs="flatten_60;vgg0_dense0_weight;vgg0_dense0_bias"
+    outputs="vgg0_dense0_fwd"
+    penwidth=3
+    style=filled
+    color="#c58699"
+    fontcolor="#000000"
+    fillcolor="#d998ab"
+  ];
+  "vgg0_dense0_relu_fwd" [
+    id=62
+    name="vgg0_dense0_relu_fwd"
+    type=Relu
+    label="{ {vgg0_dense0_relu_fwd  | RELU} | [256,4096] }"
+    inputs="vgg0_dense0_fwd"
+    outputs="vgg0_dense0_relu_fwd"
+    penwidth=3
+    style=filled
+    color="#86bbbd"
+    fontcolor="#000000"
+    fillcolor="#9cd1d3"
+  ];
+  "vgg0_dropout0_fwd" [
+    id=63
+    name="vgg0_dropout0_fwd"
+    type=Dropout
+    label="{ {vgg0_dropout0_fwd  | DRP} | [256,4096] }"
+    inputs="vgg0_dense0_relu_fwd"
+    outputs="vgg0_dropout0_fwd"
+    penwidth=3
+    style=filled
+    color="#9cc486"
+    fontcolor="#000000"
+    fillcolor="#b3db9c"
+  ];
+  "flatten_65" [
+    id=64
+    name="flatten_65"
+    type=Flatten
+    label="{ {flatten_65  | FLT} | [256,4096] }"
+    inputs="vgg0_dropout0_fwd"
+    outputs="flatten_65"
+    penwidth=3
+    style=filled
+    color="#908fc4"
+    fontcolor="#000000"
+    fillcolor="#a2a1d7"
+  ];
+  "vgg0_dense1_weight" [
+    id=65
+    name="vgg0_dense1_weight"
+    type=constant_input
+    label="vgg0_dense1_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_dense1_bias" [
+    id=66
+    name="vgg0_dense1_bias"
+    type=constant_input
+    label="vgg0_dense1_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_dense1_fwd" [
+    id=67
+    name="vgg0_dense1_fwd"
+    type=Gemm
+    label="{ {vgg0_dense1_fwd  | GEMM} | [256,4096] }"
+    inputs="flatten_65;vgg0_dense1_weight;vgg0_dense1_bias"
+    outputs="vgg0_dense1_fwd"
+    penwidth=3
+    style=filled
+    color="#c58699"
+    fontcolor="#000000"
+    fillcolor="#d998ab"
+  ];
+  "vgg0_dense1_relu_fwd" [
+    id=68
+    name="vgg0_dense1_relu_fwd"
+    type=Relu
+    label="{ {vgg0_dense1_relu_fwd  | RELU} | [256,4096] }"
+    inputs="vgg0_dense1_fwd"
+    outputs="vgg0_dense1_relu_fwd"
+    penwidth=3
+    style=filled
+    color="#86bbbd"
+    fontcolor="#000000"
+    fillcolor="#9cd1d3"
+  ];
+  "vgg0_dropout1_fwd" [
+    id=69
+    name="vgg0_dropout1_fwd"
+    type=Dropout
+    label="{ {vgg0_dropout1_fwd  | DRP} | [256,4096] }"
+    inputs="vgg0_dense1_relu_fwd"
+    outputs="vgg0_dropout1_fwd"
+    penwidth=3
+    style=filled
+    color="#9cc486"
+    fontcolor="#000000"
+    fillcolor="#b3db9c"
+  ];
+  "flatten_70" [
+    id=70
+    name="flatten_70"
+    type=Flatten
+    label="{ {flatten_70  | FLT} | [256,4096] }"
+    inputs="vgg0_dropout1_fwd"
+    outputs="flatten_70"
+    penwidth=3
+    style=filled
+    color="#908fc4"
+    fontcolor="#000000"
+    fillcolor="#a2a1d7"
+  ];
+  "vgg0_dense2_weight" [
+    id=71
+    name="vgg0_dense2_weight"
+    type=constant_input
+    label="vgg0_dense2_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_dense2_bias" [
+    id=72
+    name="vgg0_dense2_bias"
+    type=constant_input
+    label="vgg0_dense2_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_dense2_fwd" [
+    id=73
+    name="vgg0_dense2_fwd"
+    type=Gemm
+    label="{ {vgg0_dense2_fwd  | GEMM} | [256,1000] }"
+    inputs="flatten_70;vgg0_dense2_weight;vgg0_dense2_bias"
+    outputs="vgg0_dense2_fwd"
+    penwidth=3
+    style=filled
+    color="#c58699"
+    fontcolor="#000000"
+    fillcolor="#d998ab"
+  ];
+
+  // Edge definitions.
+  "data" -> "vgg0_conv0_fwd";
+  "vgg0_conv0_weight" -> "vgg0_conv0_fwd";
+  "vgg0_conv0_bias" -> "vgg0_conv0_fwd";
+  "vgg0_conv0_fwd" -> "vgg0_relu0_fwd";
+  "vgg0_relu0_fwd" -> "vgg0_conv1_fwd";
+  "vgg0_conv1_weight" -> "vgg0_conv1_fwd";
+  "vgg0_conv1_bias" -> "vgg0_conv1_fwd";
+  "vgg0_conv1_fwd" -> "vgg0_relu1_fwd";
+  "vgg0_relu1_fwd" -> "vgg0_pool0_fwd";
+  "vgg0_pool0_fwd" -> "vgg0_conv2_fwd";
+  "vgg0_conv2_weight" -> "vgg0_conv2_fwd";
+  "vgg0_conv2_bias" -> "vgg0_conv2_fwd";
+  "vgg0_conv2_fwd" -> "vgg0_relu2_fwd";
+  "vgg0_relu2_fwd" -> "vgg0_conv3_fwd";
+  "vgg0_conv3_weight" -> "vgg0_conv3_fwd";
+  "vgg0_conv3_bias" -> "vgg0_conv3_fwd";
+  "vgg0_conv3_fwd" -> "vgg0_relu3_fwd";
+  "vgg0_relu3_fwd" -> "vgg0_pool1_fwd";
+  "vgg0_pool1_fwd" -> "vgg0_conv4_fwd";
+  "vgg0_conv4_weight" -> "vgg0_conv4_fwd";
+  "vgg0_conv4_bias" -> "vgg0_conv4_fwd";
+  "vgg0_conv4_fwd" -> "vgg0_relu4_fwd";
+  "vgg0_relu4_fwd" -> "vgg0_conv5_fwd";
+  "vgg0_conv5_weight" -> "vgg0_conv5_fwd";
+  "vgg0_conv5_bias" -> "vgg0_conv5_fwd";
+  "vgg0_conv5_fwd" -> "vgg0_relu5_fwd";
+  "vgg0_relu5_fwd" -> "vgg0_conv6_fwd";
+  "vgg0_conv6_weight" -> "vgg0_conv6_fwd";
+  "vgg0_conv6_bias" -> "vgg0_conv6_fwd";
+  "vgg0_conv6_fwd" -> "vgg0_relu6_fwd";
+  "vgg0_relu6_fwd" -> "vgg0_pool2_fwd";
+  "vgg0_pool2_fwd" -> "vgg0_conv7_fwd";
+  "vgg0_conv7_weight" -> "vgg0_conv7_fwd";
+  "vgg0_conv7_bias" -> "vgg0_conv7_fwd";
+  "vgg0_conv7_fwd" -> "vgg0_relu7_fwd";
+  "vgg0_relu7_fwd" -> "vgg0_conv8_fwd";
+  "vgg0_conv8_weight" -> "vgg0_conv8_fwd";
+  "vgg0_conv8_bias" -> "vgg0_conv8_fwd";
+  "vgg0_conv8_fwd" -> "vgg0_relu8_fwd";
+  "vgg0_relu8_fwd" -> "vgg0_conv9_fwd";
+  "vgg0_conv9_weight" -> "vgg0_conv9_fwd";
+  "vgg0_conv9_bias" -> "vgg0_conv9_fwd";
+  "vgg0_conv9_fwd" -> "vgg0_relu9_fwd";
+  "vgg0_relu9_fwd" -> "vgg0_pool3_fwd";
+  "vgg0_pool3_fwd" -> "vgg0_conv10_fwd";
+  "vgg0_conv10_weight" -> "vgg0_conv10_fwd";
+  "vgg0_conv10_bias" -> "vgg0_conv10_fwd";
+  "vgg0_conv10_fwd" -> "vgg0_relu10_fwd";
+  "vgg0_relu10_fwd" -> "vgg0_conv11_fwd";
+  "vgg0_conv11_weight" -> "vgg0_conv11_fwd";
+  "vgg0_conv11_bias" -> "vgg0_conv11_fwd";
+  "vgg0_conv11_fwd" -> "vgg0_relu11_fwd";
+  "vgg0_relu11_fwd" -> "vgg0_conv12_fwd";
+  "vgg0_conv12_weight" -> "vgg0_conv12_fwd";
+  "vgg0_conv12_bias" -> "vgg0_conv12_fwd";
+  "vgg0_conv12_fwd" -> "vgg0_relu12_fwd";
+  "vgg0_relu12_fwd" -> "vgg0_pool4_fwd";
+  "vgg0_pool4_fwd" -> "flatten_60";
+  "flatten_60" -> "vgg0_dense0_fwd";
+  "vgg0_dense0_weight" -> "vgg0_dense0_fwd";
+  "vgg0_dense0_bias" -> "vgg0_dense0_fwd";
+  "vgg0_dense0_fwd" -> "vgg0_dense0_relu_fwd";
+  "vgg0_dense0_relu_fwd" -> "vgg0_dropout0_fwd";
+  "vgg0_dropout0_fwd" -> "flatten_65";
+  "flatten_65" -> "vgg0_dense1_fwd";
+  "vgg0_dense1_weight" -> "vgg0_dense1_fwd";
+  "vgg0_dense1_bias" -> "vgg0_dense1_fwd";
+  "vgg0_dense1_fwd" -> "vgg0_dense1_relu_fwd";
+  "vgg0_dense1_relu_fwd" -> "vgg0_dropout1_fwd";
+  "vgg0_dropout1_fwd" -> "flatten_70";
+  "flatten_70" -> "vgg0_dense2_fwd";
+  "vgg0_dense2_weight" -> "vgg0_dense2_fwd";
+  "vgg0_dense2_bias" -> "vgg0_dense2_fwd";
+}

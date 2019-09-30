@@ -1,0 +1,1597 @@
+strict digraph {
+  graph [
+    rankdir="TB"
+    overlap=prism
+    overlap_shrink=true
+    splines=curved
+  ];
+  node [
+    shape=Mrecord
+  ];
+  edge [
+    penwidth=3
+  ];
+
+  // Node definitions.
+  "data" [
+    id=0
+    name="data"
+    type=constant_input
+    label="data"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "squeezenet0_conv0_weight" [
+    id=1
+    name="squeezenet0_conv0_weight"
+    type=constant_input
+    label="squeezenet0_conv0_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "squeezenet0_conv0_bias" [
+    id=2
+    name="squeezenet0_conv0_bias"
+    type=constant_input
+    label="squeezenet0_conv0_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "squeezenet0_conv0_fwd" [
+    id=3
+    name="squeezenet0_conv0_fwd"
+    type=Conv
+    label="{ {squeezenet0_conv0_fwd  | CONV} | [1,64,111,111] }"
+    inputs="data;squeezenet0_conv0_weight;squeezenet0_conv0_bias"
+    outputs="squeezenet0_conv0_fwd"
+    penwidth=3
+    style=filled
+    color="#88c883"
+    fontcolor="#000000"
+    fillcolor="#9fdf99"
+  ];
+  "squeezenet0_relu0_fwd" [
+    id=4
+    name="squeezenet0_relu0_fwd"
+    type=Relu
+    label="{ {squeezenet0_relu0_fwd  | RELU} | [1,64,111,111] }"
+    inputs="squeezenet0_conv0_fwd"
+    outputs="squeezenet0_relu0_fwd"
+    penwidth=3
+    style=filled
+    color="#88a9c9"
+    fontcolor="#000000"
+    fillcolor="#9cbedf"
+  ];
+  "squeezenet0_pool0_fwd" [
+    id=5
+    name="squeezenet0_pool0_fwd"
+    type=MaxPool
+    label="{ {squeezenet0_pool0_fwd  | MXPL} | [1,64,55,55] }"
+    inputs="squeezenet0_relu0_fwd"
+    outputs="squeezenet0_pool0_fwd"
+    penwidth=3
+    style=filled
+    color="#82bfb1"
+    fontcolor="#000000"
+    fillcolor="#98d6c7"
+  ];
+  "squeezenet0_conv1_weight" [
+    id=6
+    name="squeezenet0_conv1_weight"
+    type=constant_input
+    label="squeezenet0_conv1_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "squeezenet0_conv1_bias" [
+    id=7
+    name="squeezenet0_conv1_bias"
+    type=constant_input
+    label="squeezenet0_conv1_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "squeezenet0_conv1_fwd" [
+    id=8
+    name="squeezenet0_conv1_fwd"
+    type=Conv
+    label="{ {squeezenet0_conv1_fwd  | CONV} | [1,16,55,55] }"
+    inputs="squeezenet0_pool0_fwd;squeezenet0_conv1_weight;squeezenet0_conv1_bias"
+    outputs="squeezenet0_conv1_fwd"
+    penwidth=3
+    style=filled
+    color="#88c883"
+    fontcolor="#000000"
+    fillcolor="#9fdf99"
+  ];
+  "squeezenet0_relu1_fwd" [
+    id=9
+    name="squeezenet0_relu1_fwd"
+    type=Relu
+    label="{ {squeezenet0_relu1_fwd  | RELU} | [1,16,55,55] }"
+    inputs="squeezenet0_conv1_fwd"
+    outputs="squeezenet0_relu1_fwd"
+    penwidth=3
+    style=filled
+    color="#88a9c9"
+    fontcolor="#000000"
+    fillcolor="#9cbedf"
+  ];
+  "squeezenet0_conv2_weight" [
+    id=10
+    name="squeezenet0_conv2_weight"
+    type=constant_input
+    label="squeezenet0_conv2_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "squeezenet0_conv2_bias" [
+    id=11
+    name="squeezenet0_conv2_bias"
+    type=constant_input
+    label="squeezenet0_conv2_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "squeezenet0_conv2_fwd" [
+    id=12
+    name="squeezenet0_conv2_fwd"
+    type=Conv
+    label="{ {squeezenet0_conv2_fwd  | CONV} | [1,64,55,55] }"
+    inputs="squeezenet0_relu1_fwd;squeezenet0_conv2_weight;squeezenet0_conv2_bias"
+    outputs="squeezenet0_conv2_fwd"
+    penwidth=3
+    style=filled
+    color="#88c883"
+    fontcolor="#000000"
+    fillcolor="#9fdf99"
+  ];
+  "squeezenet0_relu2_fwd" [
+    id=13
+    name="squeezenet0_relu2_fwd"
+    type=Relu
+    label="{ {squeezenet0_relu2_fwd  | RELU} | [1,64,55,55] }"
+    inputs="squeezenet0_conv2_fwd"
+    outputs="squeezenet0_relu2_fwd"
+    penwidth=3
+    style=filled
+    color="#88a9c9"
+    fontcolor="#000000"
+    fillcolor="#9cbedf"
+  ];
+  "squeezenet0_conv3_weight" [
+    id=14
+    name="squeezenet0_conv3_weight"
+    type=constant_input
+    label="squeezenet0_conv3_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "squeezenet0_conv3_bias" [
+    id=15
+    name="squeezenet0_conv3_bias"
+    type=constant_input
+    label="squeezenet0_conv3_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "squeezenet0_conv3_fwd" [
+    id=16
+    name="squeezenet0_conv3_fwd"
+    type=Conv
+    label="{ {squeezenet0_conv3_fwd  | CONV} | [1,64,55,55] }"
+    inputs="squeezenet0_relu1_fwd;squeezenet0_conv3_weight;squeezenet0_conv3_bias"
+    outputs="squeezenet0_conv3_fwd"
+    penwidth=3
+    style=filled
+    color="#88c883"
+    fontcolor="#000000"
+    fillcolor="#9fdf99"
+  ];
+  "squeezenet0_relu3_fwd" [
+    id=17
+    name="squeezenet0_relu3_fwd"
+    type=Relu
+    label="{ {squeezenet0_relu3_fwd  | RELU} | [1,64,55,55] }"
+    inputs="squeezenet0_conv3_fwd"
+    outputs="squeezenet0_relu3_fwd"
+    penwidth=3
+    style=filled
+    color="#88a9c9"
+    fontcolor="#000000"
+    fillcolor="#9cbedf"
+  ];
+  "squeezenet0_concat0" [
+    id=18
+    name="squeezenet0_concat0"
+    type=Concat
+    label="{ {squeezenet0_concat0  | CONC} | [1,128,55,55] }"
+    inputs="squeezenet0_relu2_fwd;squeezenet0_relu3_fwd"
+    outputs="squeezenet0_concat0"
+    penwidth=3
+    style=filled
+    color="#b8bb83"
+    fontcolor="#000000"
+    fillcolor="#d0d298"
+  ];
+  "squeezenet0_conv4_weight" [
+    id=19
+    name="squeezenet0_conv4_weight"
+    type=constant_input
+    label="squeezenet0_conv4_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "squeezenet0_conv4_bias" [
+    id=20
+    name="squeezenet0_conv4_bias"
+    type=constant_input
+    label="squeezenet0_conv4_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "squeezenet0_conv4_fwd" [
+    id=21
+    name="squeezenet0_conv4_fwd"
+    type=Conv
+    label="{ {squeezenet0_conv4_fwd  | CONV} | [1,16,55,55] }"
+    inputs="squeezenet0_concat0;squeezenet0_conv4_weight;squeezenet0_conv4_bias"
+    outputs="squeezenet0_conv4_fwd"
+    penwidth=3
+    style=filled
+    color="#88c883"
+    fontcolor="#000000"
+    fillcolor="#9fdf99"
+  ];
+  "squeezenet0_relu4_fwd" [
+    id=22
+    name="squeezenet0_relu4_fwd"
+    type=Relu
+    label="{ {squeezenet0_relu4_fwd  | RELU} | [1,16,55,55] }"
+    inputs="squeezenet0_conv4_fwd"
+    outputs="squeezenet0_relu4_fwd"
+    penwidth=3
+    style=filled
+    color="#88a9c9"
+    fontcolor="#000000"
+    fillcolor="#9cbedf"
+  ];
+  "squeezenet0_conv5_weight" [
+    id=23
+    name="squeezenet0_conv5_weight"
+    type=constant_input
+    label="squeezenet0_conv5_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "squeezenet0_conv5_bias" [
+    id=24
+    name="squeezenet0_conv5_bias"
+    type=constant_input
+    label="squeezenet0_conv5_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "squeezenet0_conv5_fwd" [
+    id=25
+    name="squeezenet0_conv5_fwd"
+    type=Conv
+    label="{ {squeezenet0_conv5_fwd  | CONV} | [1,64,55,55] }"
+    inputs="squeezenet0_relu4_fwd;squeezenet0_conv5_weight;squeezenet0_conv5_bias"
+    outputs="squeezenet0_conv5_fwd"
+    penwidth=3
+    style=filled
+    color="#88c883"
+    fontcolor="#000000"
+    fillcolor="#9fdf99"
+  ];
+  "squeezenet0_relu5_fwd" [
+    id=26
+    name="squeezenet0_relu5_fwd"
+    type=Relu
+    label="{ {squeezenet0_relu5_fwd  | RELU} | [1,64,55,55] }"
+    inputs="squeezenet0_conv5_fwd"
+    outputs="squeezenet0_relu5_fwd"
+    penwidth=3
+    style=filled
+    color="#88a9c9"
+    fontcolor="#000000"
+    fillcolor="#9cbedf"
+  ];
+  "squeezenet0_conv6_weight" [
+    id=27
+    name="squeezenet0_conv6_weight"
+    type=constant_input
+    label="squeezenet0_conv6_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "squeezenet0_conv6_bias" [
+    id=28
+    name="squeezenet0_conv6_bias"
+    type=constant_input
+    label="squeezenet0_conv6_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "squeezenet0_conv6_fwd" [
+    id=29
+    name="squeezenet0_conv6_fwd"
+    type=Conv
+    label="{ {squeezenet0_conv6_fwd  | CONV} | [1,64,55,55] }"
+    inputs="squeezenet0_relu4_fwd;squeezenet0_conv6_weight;squeezenet0_conv6_bias"
+    outputs="squeezenet0_conv6_fwd"
+    penwidth=3
+    style=filled
+    color="#88c883"
+    fontcolor="#000000"
+    fillcolor="#9fdf99"
+  ];
+  "squeezenet0_relu6_fwd" [
+    id=30
+    name="squeezenet0_relu6_fwd"
+    type=Relu
+    label="{ {squeezenet0_relu6_fwd  | RELU} | [1,64,55,55] }"
+    inputs="squeezenet0_conv6_fwd"
+    outputs="squeezenet0_relu6_fwd"
+    penwidth=3
+    style=filled
+    color="#88a9c9"
+    fontcolor="#000000"
+    fillcolor="#9cbedf"
+  ];
+  "squeezenet0_concat1" [
+    id=31
+    name="squeezenet0_concat1"
+    type=Concat
+    label="{ {squeezenet0_concat1  | CONC} | [1,128,55,55] }"
+    inputs="squeezenet0_relu5_fwd;squeezenet0_relu6_fwd"
+    outputs="squeezenet0_concat1"
+    penwidth=3
+    style=filled
+    color="#b8bb83"
+    fontcolor="#000000"
+    fillcolor="#d0d298"
+  ];
+  "squeezenet0_pool1_fwd" [
+    id=32
+    name="squeezenet0_pool1_fwd"
+    type=MaxPool
+    label="{ {squeezenet0_pool1_fwd  | MXPL} | [1,128,27,27] }"
+    inputs="squeezenet0_concat1"
+    outputs="squeezenet0_pool1_fwd"
+    penwidth=3
+    style=filled
+    color="#82bfb1"
+    fontcolor="#000000"
+    fillcolor="#98d6c7"
+  ];
+  "squeezenet0_conv7_weight" [
+    id=33
+    name="squeezenet0_conv7_weight"
+    type=constant_input
+    label="squeezenet0_conv7_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "squeezenet0_conv7_bias" [
+    id=34
+    name="squeezenet0_conv7_bias"
+    type=constant_input
+    label="squeezenet0_conv7_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "squeezenet0_conv7_fwd" [
+    id=35
+    name="squeezenet0_conv7_fwd"
+    type=Conv
+    label="{ {squeezenet0_conv7_fwd  | CONV} | [1,32,27,27] }"
+    inputs="squeezenet0_pool1_fwd;squeezenet0_conv7_weight;squeezenet0_conv7_bias"
+    outputs="squeezenet0_conv7_fwd"
+    penwidth=3
+    style=filled
+    color="#88c883"
+    fontcolor="#000000"
+    fillcolor="#9fdf99"
+  ];
+  "squeezenet0_relu7_fwd" [
+    id=36
+    name="squeezenet0_relu7_fwd"
+    type=Relu
+    label="{ {squeezenet0_relu7_fwd  | RELU} | [1,32,27,27] }"
+    inputs="squeezenet0_conv7_fwd"
+    outputs="squeezenet0_relu7_fwd"
+    penwidth=3
+    style=filled
+    color="#88a9c9"
+    fontcolor="#000000"
+    fillcolor="#9cbedf"
+  ];
+  "squeezenet0_conv8_weight" [
+    id=37
+    name="squeezenet0_conv8_weight"
+    type=constant_input
+    label="squeezenet0_conv8_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "squeezenet0_conv8_bias" [
+    id=38
+    name="squeezenet0_conv8_bias"
+    type=constant_input
+    label="squeezenet0_conv8_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "squeezenet0_conv8_fwd" [
+    id=39
+    name="squeezenet0_conv8_fwd"
+    type=Conv
+    label="{ {squeezenet0_conv8_fwd  | CONV} | [1,128,27,27] }"
+    inputs="squeezenet0_relu7_fwd;squeezenet0_conv8_weight;squeezenet0_conv8_bias"
+    outputs="squeezenet0_conv8_fwd"
+    penwidth=3
+    style=filled
+    color="#88c883"
+    fontcolor="#000000"
+    fillcolor="#9fdf99"
+  ];
+  "squeezenet0_relu8_fwd" [
+    id=40
+    name="squeezenet0_relu8_fwd"
+    type=Relu
+    label="{ {squeezenet0_relu8_fwd  | RELU} | [1,128,27,27] }"
+    inputs="squeezenet0_conv8_fwd"
+    outputs="squeezenet0_relu8_fwd"
+    penwidth=3
+    style=filled
+    color="#88a9c9"
+    fontcolor="#000000"
+    fillcolor="#9cbedf"
+  ];
+  "squeezenet0_conv9_weight" [
+    id=41
+    name="squeezenet0_conv9_weight"
+    type=constant_input
+    label="squeezenet0_conv9_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "squeezenet0_conv9_bias" [
+    id=42
+    name="squeezenet0_conv9_bias"
+    type=constant_input
+    label="squeezenet0_conv9_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "squeezenet0_conv9_fwd" [
+    id=43
+    name="squeezenet0_conv9_fwd"
+    type=Conv
+    label="{ {squeezenet0_conv9_fwd  | CONV} | [1,128,27,27] }"
+    inputs="squeezenet0_relu7_fwd;squeezenet0_conv9_weight;squeezenet0_conv9_bias"
+    outputs="squeezenet0_conv9_fwd"
+    penwidth=3
+    style=filled
+    color="#88c883"
+    fontcolor="#000000"
+    fillcolor="#9fdf99"
+  ];
+  "squeezenet0_relu9_fwd" [
+    id=44
+    name="squeezenet0_relu9_fwd"
+    type=Relu
+    label="{ {squeezenet0_relu9_fwd  | RELU} | [1,128,27,27] }"
+    inputs="squeezenet0_conv9_fwd"
+    outputs="squeezenet0_relu9_fwd"
+    penwidth=3
+    style=filled
+    color="#88a9c9"
+    fontcolor="#000000"
+    fillcolor="#9cbedf"
+  ];
+  "squeezenet0_concat2" [
+    id=45
+    name="squeezenet0_concat2"
+    type=Concat
+    label="{ {squeezenet0_concat2  | CONC} | [1,256,27,27] }"
+    inputs="squeezenet0_relu8_fwd;squeezenet0_relu9_fwd"
+    outputs="squeezenet0_concat2"
+    penwidth=3
+    style=filled
+    color="#b8bb83"
+    fontcolor="#000000"
+    fillcolor="#d0d298"
+  ];
+  "squeezenet0_conv10_weight" [
+    id=46
+    name="squeezenet0_conv10_weight"
+    type=constant_input
+    label="squeezenet0_conv10_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "squeezenet0_conv10_bias" [
+    id=47
+    name="squeezenet0_conv10_bias"
+    type=constant_input
+    label="squeezenet0_conv10_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "squeezenet0_conv10_fwd" [
+    id=48
+    name="squeezenet0_conv10_fwd"
+    type=Conv
+    label="{ {squeezenet0_conv10_fwd  | CONV} | [1,32,27,27] }"
+    inputs="squeezenet0_concat2;squeezenet0_conv10_weight;squeezenet0_conv10_bias"
+    outputs="squeezenet0_conv10_fwd"
+    penwidth=3
+    style=filled
+    color="#88c883"
+    fontcolor="#000000"
+    fillcolor="#9fdf99"
+  ];
+  "squeezenet0_relu10_fwd" [
+    id=49
+    name="squeezenet0_relu10_fwd"
+    type=Relu
+    label="{ {squeezenet0_relu10_fwd  | RELU} | [1,32,27,27] }"
+    inputs="squeezenet0_conv10_fwd"
+    outputs="squeezenet0_relu10_fwd"
+    penwidth=3
+    style=filled
+    color="#88a9c9"
+    fontcolor="#000000"
+    fillcolor="#9cbedf"
+  ];
+  "squeezenet0_conv11_weight" [
+    id=50
+    name="squeezenet0_conv11_weight"
+    type=constant_input
+    label="squeezenet0_conv11_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "squeezenet0_conv11_bias" [
+    id=51
+    name="squeezenet0_conv11_bias"
+    type=constant_input
+    label="squeezenet0_conv11_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "squeezenet0_conv11_fwd" [
+    id=52
+    name="squeezenet0_conv11_fwd"
+    type=Conv
+    label="{ {squeezenet0_conv11_fwd  | CONV} | [1,128,27,27] }"
+    inputs="squeezenet0_relu10_fwd;squeezenet0_conv11_weight;squeezenet0_conv11_bias"
+    outputs="squeezenet0_conv11_fwd"
+    penwidth=3
+    style=filled
+    color="#88c883"
+    fontcolor="#000000"
+    fillcolor="#9fdf99"
+  ];
+  "squeezenet0_relu11_fwd" [
+    id=53
+    name="squeezenet0_relu11_fwd"
+    type=Relu
+    label="{ {squeezenet0_relu11_fwd  | RELU} | [1,128,27,27] }"
+    inputs="squeezenet0_conv11_fwd"
+    outputs="squeezenet0_relu11_fwd"
+    penwidth=3
+    style=filled
+    color="#88a9c9"
+    fontcolor="#000000"
+    fillcolor="#9cbedf"
+  ];
+  "squeezenet0_conv12_weight" [
+    id=54
+    name="squeezenet0_conv12_weight"
+    type=constant_input
+    label="squeezenet0_conv12_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "squeezenet0_conv12_bias" [
+    id=55
+    name="squeezenet0_conv12_bias"
+    type=constant_input
+    label="squeezenet0_conv12_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "squeezenet0_conv12_fwd" [
+    id=56
+    name="squeezenet0_conv12_fwd"
+    type=Conv
+    label="{ {squeezenet0_conv12_fwd  | CONV} | [1,128,27,27] }"
+    inputs="squeezenet0_relu10_fwd;squeezenet0_conv12_weight;squeezenet0_conv12_bias"
+    outputs="squeezenet0_conv12_fwd"
+    penwidth=3
+    style=filled
+    color="#88c883"
+    fontcolor="#000000"
+    fillcolor="#9fdf99"
+  ];
+  "squeezenet0_relu12_fwd" [
+    id=57
+    name="squeezenet0_relu12_fwd"
+    type=Relu
+    label="{ {squeezenet0_relu12_fwd  | RELU} | [1,128,27,27] }"
+    inputs="squeezenet0_conv12_fwd"
+    outputs="squeezenet0_relu12_fwd"
+    penwidth=3
+    style=filled
+    color="#88a9c9"
+    fontcolor="#000000"
+    fillcolor="#9cbedf"
+  ];
+  "squeezenet0_concat3" [
+    id=58
+    name="squeezenet0_concat3"
+    type=Concat
+    label="{ {squeezenet0_concat3  | CONC} | [1,256,27,27] }"
+    inputs="squeezenet0_relu11_fwd;squeezenet0_relu12_fwd"
+    outputs="squeezenet0_concat3"
+    penwidth=3
+    style=filled
+    color="#b8bb83"
+    fontcolor="#000000"
+    fillcolor="#d0d298"
+  ];
+  "squeezenet0_pool2_fwd" [
+    id=59
+    name="squeezenet0_pool2_fwd"
+    type=MaxPool
+    label="{ {squeezenet0_pool2_fwd  | MXPL} | [1,256,13,13] }"
+    inputs="squeezenet0_concat3"
+    outputs="squeezenet0_pool2_fwd"
+    penwidth=3
+    style=filled
+    color="#82bfb1"
+    fontcolor="#000000"
+    fillcolor="#98d6c7"
+  ];
+  "squeezenet0_conv13_weight" [
+    id=60
+    name="squeezenet0_conv13_weight"
+    type=constant_input
+    label="squeezenet0_conv13_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "squeezenet0_conv13_bias" [
+    id=61
+    name="squeezenet0_conv13_bias"
+    type=constant_input
+    label="squeezenet0_conv13_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "squeezenet0_conv13_fwd" [
+    id=62
+    name="squeezenet0_conv13_fwd"
+    type=Conv
+    label="{ {squeezenet0_conv13_fwd  | CONV} | [1,48,13,13] }"
+    inputs="squeezenet0_pool2_fwd;squeezenet0_conv13_weight;squeezenet0_conv13_bias"
+    outputs="squeezenet0_conv13_fwd"
+    penwidth=3
+    style=filled
+    color="#88c883"
+    fontcolor="#000000"
+    fillcolor="#9fdf99"
+  ];
+  "squeezenet0_relu13_fwd" [
+    id=63
+    name="squeezenet0_relu13_fwd"
+    type=Relu
+    label="{ {squeezenet0_relu13_fwd  | RELU} | [1,48,13,13] }"
+    inputs="squeezenet0_conv13_fwd"
+    outputs="squeezenet0_relu13_fwd"
+    penwidth=3
+    style=filled
+    color="#88a9c9"
+    fontcolor="#000000"
+    fillcolor="#9cbedf"
+  ];
+  "squeezenet0_conv14_weight" [
+    id=64
+    name="squeezenet0_conv14_weight"
+    type=constant_input
+    label="squeezenet0_conv14_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "squeezenet0_conv14_bias" [
+    id=65
+    name="squeezenet0_conv14_bias"
+    type=constant_input
+    label="squeezenet0_conv14_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "squeezenet0_conv14_fwd" [
+    id=66
+    name="squeezenet0_conv14_fwd"
+    type=Conv
+    label="{ {squeezenet0_conv14_fwd  | CONV} | [1,192,13,13] }"
+    inputs="squeezenet0_relu13_fwd;squeezenet0_conv14_weight;squeezenet0_conv14_bias"
+    outputs="squeezenet0_conv14_fwd"
+    penwidth=3
+    style=filled
+    color="#88c883"
+    fontcolor="#000000"
+    fillcolor="#9fdf99"
+  ];
+  "squeezenet0_relu14_fwd" [
+    id=67
+    name="squeezenet0_relu14_fwd"
+    type=Relu
+    label="{ {squeezenet0_relu14_fwd  | RELU} | [1,192,13,13] }"
+    inputs="squeezenet0_conv14_fwd"
+    outputs="squeezenet0_relu14_fwd"
+    penwidth=3
+    style=filled
+    color="#88a9c9"
+    fontcolor="#000000"
+    fillcolor="#9cbedf"
+  ];
+  "squeezenet0_conv15_weight" [
+    id=68
+    name="squeezenet0_conv15_weight"
+    type=constant_input
+    label="squeezenet0_conv15_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "squeezenet0_conv15_bias" [
+    id=69
+    name="squeezenet0_conv15_bias"
+    type=constant_input
+    label="squeezenet0_conv15_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "squeezenet0_conv15_fwd" [
+    id=70
+    name="squeezenet0_conv15_fwd"
+    type=Conv
+    label="{ {squeezenet0_conv15_fwd  | CONV} | [1,192,13,13] }"
+    inputs="squeezenet0_relu13_fwd;squeezenet0_conv15_weight;squeezenet0_conv15_bias"
+    outputs="squeezenet0_conv15_fwd"
+    penwidth=3
+    style=filled
+    color="#88c883"
+    fontcolor="#000000"
+    fillcolor="#9fdf99"
+  ];
+  "squeezenet0_relu15_fwd" [
+    id=71
+    name="squeezenet0_relu15_fwd"
+    type=Relu
+    label="{ {squeezenet0_relu15_fwd  | RELU} | [1,192,13,13] }"
+    inputs="squeezenet0_conv15_fwd"
+    outputs="squeezenet0_relu15_fwd"
+    penwidth=3
+    style=filled
+    color="#88a9c9"
+    fontcolor="#000000"
+    fillcolor="#9cbedf"
+  ];
+  "squeezenet0_concat4" [
+    id=72
+    name="squeezenet0_concat4"
+    type=Concat
+    label="{ {squeezenet0_concat4  | CONC} | [1,384,13,13] }"
+    inputs="squeezenet0_relu14_fwd;squeezenet0_relu15_fwd"
+    outputs="squeezenet0_concat4"
+    penwidth=3
+    style=filled
+    color="#b8bb83"
+    fontcolor="#000000"
+    fillcolor="#d0d298"
+  ];
+  "squeezenet0_conv16_weight" [
+    id=73
+    name="squeezenet0_conv16_weight"
+    type=constant_input
+    label="squeezenet0_conv16_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "squeezenet0_conv16_bias" [
+    id=74
+    name="squeezenet0_conv16_bias"
+    type=constant_input
+    label="squeezenet0_conv16_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "squeezenet0_conv16_fwd" [
+    id=75
+    name="squeezenet0_conv16_fwd"
+    type=Conv
+    label="{ {squeezenet0_conv16_fwd  | CONV} | [1,48,13,13] }"
+    inputs="squeezenet0_concat4;squeezenet0_conv16_weight;squeezenet0_conv16_bias"
+    outputs="squeezenet0_conv16_fwd"
+    penwidth=3
+    style=filled
+    color="#88c883"
+    fontcolor="#000000"
+    fillcolor="#9fdf99"
+  ];
+  "squeezenet0_relu16_fwd" [
+    id=76
+    name="squeezenet0_relu16_fwd"
+    type=Relu
+    label="{ {squeezenet0_relu16_fwd  | RELU} | [1,48,13,13] }"
+    inputs="squeezenet0_conv16_fwd"
+    outputs="squeezenet0_relu16_fwd"
+    penwidth=3
+    style=filled
+    color="#88a9c9"
+    fontcolor="#000000"
+    fillcolor="#9cbedf"
+  ];
+  "squeezenet0_conv17_weight" [
+    id=77
+    name="squeezenet0_conv17_weight"
+    type=constant_input
+    label="squeezenet0_conv17_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "squeezenet0_conv17_bias" [
+    id=78
+    name="squeezenet0_conv17_bias"
+    type=constant_input
+    label="squeezenet0_conv17_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "squeezenet0_conv17_fwd" [
+    id=79
+    name="squeezenet0_conv17_fwd"
+    type=Conv
+    label="{ {squeezenet0_conv17_fwd  | CONV} | [1,192,13,13] }"
+    inputs="squeezenet0_relu16_fwd;squeezenet0_conv17_weight;squeezenet0_conv17_bias"
+    outputs="squeezenet0_conv17_fwd"
+    penwidth=3
+    style=filled
+    color="#88c883"
+    fontcolor="#000000"
+    fillcolor="#9fdf99"
+  ];
+  "squeezenet0_relu17_fwd" [
+    id=80
+    name="squeezenet0_relu17_fwd"
+    type=Relu
+    label="{ {squeezenet0_relu17_fwd  | RELU} | [1,192,13,13] }"
+    inputs="squeezenet0_conv17_fwd"
+    outputs="squeezenet0_relu17_fwd"
+    penwidth=3
+    style=filled
+    color="#88a9c9"
+    fontcolor="#000000"
+    fillcolor="#9cbedf"
+  ];
+  "squeezenet0_conv18_weight" [
+    id=81
+    name="squeezenet0_conv18_weight"
+    type=constant_input
+    label="squeezenet0_conv18_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "squeezenet0_conv18_bias" [
+    id=82
+    name="squeezenet0_conv18_bias"
+    type=constant_input
+    label="squeezenet0_conv18_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "squeezenet0_conv18_fwd" [
+    id=83
+    name="squeezenet0_conv18_fwd"
+    type=Conv
+    label="{ {squeezenet0_conv18_fwd  | CONV} | [1,192,13,13] }"
+    inputs="squeezenet0_relu16_fwd;squeezenet0_conv18_weight;squeezenet0_conv18_bias"
+    outputs="squeezenet0_conv18_fwd"
+    penwidth=3
+    style=filled
+    color="#88c883"
+    fontcolor="#000000"
+    fillcolor="#9fdf99"
+  ];
+  "squeezenet0_relu18_fwd" [
+    id=84
+    name="squeezenet0_relu18_fwd"
+    type=Relu
+    label="{ {squeezenet0_relu18_fwd  | RELU} | [1,192,13,13] }"
+    inputs="squeezenet0_conv18_fwd"
+    outputs="squeezenet0_relu18_fwd"
+    penwidth=3
+    style=filled
+    color="#88a9c9"
+    fontcolor="#000000"
+    fillcolor="#9cbedf"
+  ];
+  "squeezenet0_concat5" [
+    id=85
+    name="squeezenet0_concat5"
+    type=Concat
+    label="{ {squeezenet0_concat5  | CONC} | [1,384,13,13] }"
+    inputs="squeezenet0_relu17_fwd;squeezenet0_relu18_fwd"
+    outputs="squeezenet0_concat5"
+    penwidth=3
+    style=filled
+    color="#b8bb83"
+    fontcolor="#000000"
+    fillcolor="#d0d298"
+  ];
+  "squeezenet0_conv19_weight" [
+    id=86
+    name="squeezenet0_conv19_weight"
+    type=constant_input
+    label="squeezenet0_conv19_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "squeezenet0_conv19_bias" [
+    id=87
+    name="squeezenet0_conv19_bias"
+    type=constant_input
+    label="squeezenet0_conv19_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "squeezenet0_conv19_fwd" [
+    id=88
+    name="squeezenet0_conv19_fwd"
+    type=Conv
+    label="{ {squeezenet0_conv19_fwd  | CONV} | [1,64,13,13] }"
+    inputs="squeezenet0_concat5;squeezenet0_conv19_weight;squeezenet0_conv19_bias"
+    outputs="squeezenet0_conv19_fwd"
+    penwidth=3
+    style=filled
+    color="#88c883"
+    fontcolor="#000000"
+    fillcolor="#9fdf99"
+  ];
+  "squeezenet0_relu19_fwd" [
+    id=89
+    name="squeezenet0_relu19_fwd"
+    type=Relu
+    label="{ {squeezenet0_relu19_fwd  | RELU} | [1,64,13,13] }"
+    inputs="squeezenet0_conv19_fwd"
+    outputs="squeezenet0_relu19_fwd"
+    penwidth=3
+    style=filled
+    color="#88a9c9"
+    fontcolor="#000000"
+    fillcolor="#9cbedf"
+  ];
+  "squeezenet0_conv20_weight" [
+    id=90
+    name="squeezenet0_conv20_weight"
+    type=constant_input
+    label="squeezenet0_conv20_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "squeezenet0_conv20_bias" [
+    id=91
+    name="squeezenet0_conv20_bias"
+    type=constant_input
+    label="squeezenet0_conv20_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "squeezenet0_conv20_fwd" [
+    id=92
+    name="squeezenet0_conv20_fwd"
+    type=Conv
+    label="{ {squeezenet0_conv20_fwd  | CONV} | [1,256,13,13] }"
+    inputs="squeezenet0_relu19_fwd;squeezenet0_conv20_weight;squeezenet0_conv20_bias"
+    outputs="squeezenet0_conv20_fwd"
+    penwidth=3
+    style=filled
+    color="#88c883"
+    fontcolor="#000000"
+    fillcolor="#9fdf99"
+  ];
+  "squeezenet0_relu20_fwd" [
+    id=93
+    name="squeezenet0_relu20_fwd"
+    type=Relu
+    label="{ {squeezenet0_relu20_fwd  | RELU} | [1,256,13,13] }"
+    inputs="squeezenet0_conv20_fwd"
+    outputs="squeezenet0_relu20_fwd"
+    penwidth=3
+    style=filled
+    color="#88a9c9"
+    fontcolor="#000000"
+    fillcolor="#9cbedf"
+  ];
+  "squeezenet0_conv21_weight" [
+    id=94
+    name="squeezenet0_conv21_weight"
+    type=constant_input
+    label="squeezenet0_conv21_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "squeezenet0_conv21_bias" [
+    id=95
+    name="squeezenet0_conv21_bias"
+    type=constant_input
+    label="squeezenet0_conv21_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "squeezenet0_conv21_fwd" [
+    id=96
+    name="squeezenet0_conv21_fwd"
+    type=Conv
+    label="{ {squeezenet0_conv21_fwd  | CONV} | [1,256,13,13] }"
+    inputs="squeezenet0_relu19_fwd;squeezenet0_conv21_weight;squeezenet0_conv21_bias"
+    outputs="squeezenet0_conv21_fwd"
+    penwidth=3
+    style=filled
+    color="#88c883"
+    fontcolor="#000000"
+    fillcolor="#9fdf99"
+  ];
+  "squeezenet0_relu21_fwd" [
+    id=97
+    name="squeezenet0_relu21_fwd"
+    type=Relu
+    label="{ {squeezenet0_relu21_fwd  | RELU} | [1,256,13,13] }"
+    inputs="squeezenet0_conv21_fwd"
+    outputs="squeezenet0_relu21_fwd"
+    penwidth=3
+    style=filled
+    color="#88a9c9"
+    fontcolor="#000000"
+    fillcolor="#9cbedf"
+  ];
+  "squeezenet0_concat6" [
+    id=98
+    name="squeezenet0_concat6"
+    type=Concat
+    label="{ {squeezenet0_concat6  | CONC} | [1,512,13,13] }"
+    inputs="squeezenet0_relu20_fwd;squeezenet0_relu21_fwd"
+    outputs="squeezenet0_concat6"
+    penwidth=3
+    style=filled
+    color="#b8bb83"
+    fontcolor="#000000"
+    fillcolor="#d0d298"
+  ];
+  "squeezenet0_conv22_weight" [
+    id=99
+    name="squeezenet0_conv22_weight"
+    type=constant_input
+    label="squeezenet0_conv22_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "squeezenet0_conv22_bias" [
+    id=100
+    name="squeezenet0_conv22_bias"
+    type=constant_input
+    label="squeezenet0_conv22_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "squeezenet0_conv22_fwd" [
+    id=101
+    name="squeezenet0_conv22_fwd"
+    type=Conv
+    label="{ {squeezenet0_conv22_fwd  | CONV} | [1,64,13,13] }"
+    inputs="squeezenet0_concat6;squeezenet0_conv22_weight;squeezenet0_conv22_bias"
+    outputs="squeezenet0_conv22_fwd"
+    penwidth=3
+    style=filled
+    color="#88c883"
+    fontcolor="#000000"
+    fillcolor="#9fdf99"
+  ];
+  "squeezenet0_relu22_fwd" [
+    id=102
+    name="squeezenet0_relu22_fwd"
+    type=Relu
+    label="{ {squeezenet0_relu22_fwd  | RELU} | [1,64,13,13] }"
+    inputs="squeezenet0_conv22_fwd"
+    outputs="squeezenet0_relu22_fwd"
+    penwidth=3
+    style=filled
+    color="#88a9c9"
+    fontcolor="#000000"
+    fillcolor="#9cbedf"
+  ];
+  "squeezenet0_conv23_weight" [
+    id=103
+    name="squeezenet0_conv23_weight"
+    type=constant_input
+    label="squeezenet0_conv23_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "squeezenet0_conv23_bias" [
+    id=104
+    name="squeezenet0_conv23_bias"
+    type=constant_input
+    label="squeezenet0_conv23_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "squeezenet0_conv23_fwd" [
+    id=105
+    name="squeezenet0_conv23_fwd"
+    type=Conv
+    label="{ {squeezenet0_conv23_fwd  | CONV} | [1,256,13,13] }"
+    inputs="squeezenet0_relu22_fwd;squeezenet0_conv23_weight;squeezenet0_conv23_bias"
+    outputs="squeezenet0_conv23_fwd"
+    penwidth=3
+    style=filled
+    color="#88c883"
+    fontcolor="#000000"
+    fillcolor="#9fdf99"
+  ];
+  "squeezenet0_relu23_fwd" [
+    id=106
+    name="squeezenet0_relu23_fwd"
+    type=Relu
+    label="{ {squeezenet0_relu23_fwd  | RELU} | [1,256,13,13] }"
+    inputs="squeezenet0_conv23_fwd"
+    outputs="squeezenet0_relu23_fwd"
+    penwidth=3
+    style=filled
+    color="#88a9c9"
+    fontcolor="#000000"
+    fillcolor="#9cbedf"
+  ];
+  "squeezenet0_conv24_weight" [
+    id=107
+    name="squeezenet0_conv24_weight"
+    type=constant_input
+    label="squeezenet0_conv24_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "squeezenet0_conv24_bias" [
+    id=108
+    name="squeezenet0_conv24_bias"
+    type=constant_input
+    label="squeezenet0_conv24_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "squeezenet0_conv24_fwd" [
+    id=109
+    name="squeezenet0_conv24_fwd"
+    type=Conv
+    label="{ {squeezenet0_conv24_fwd  | CONV} | [1,256,13,13] }"
+    inputs="squeezenet0_relu22_fwd;squeezenet0_conv24_weight;squeezenet0_conv24_bias"
+    outputs="squeezenet0_conv24_fwd"
+    penwidth=3
+    style=filled
+    color="#88c883"
+    fontcolor="#000000"
+    fillcolor="#9fdf99"
+  ];
+  "squeezenet0_relu24_fwd" [
+    id=110
+    name="squeezenet0_relu24_fwd"
+    type=Relu
+    label="{ {squeezenet0_relu24_fwd  | RELU} | [1,256,13,13] }"
+    inputs="squeezenet0_conv24_fwd"
+    outputs="squeezenet0_relu24_fwd"
+    penwidth=3
+    style=filled
+    color="#88a9c9"
+    fontcolor="#000000"
+    fillcolor="#9cbedf"
+  ];
+  "squeezenet0_concat7" [
+    id=111
+    name="squeezenet0_concat7"
+    type=Concat
+    label="{ {squeezenet0_concat7  | CONC} | [1,512,13,13] }"
+    inputs="squeezenet0_relu23_fwd;squeezenet0_relu24_fwd"
+    outputs="squeezenet0_concat7"
+    penwidth=3
+    style=filled
+    color="#b8bb83"
+    fontcolor="#000000"
+    fillcolor="#d0d298"
+  ];
+  "squeezenet0_dropout0_fwd" [
+    id=112
+    name="squeezenet0_dropout0_fwd"
+    type=Dropout
+    label="{ {squeezenet0_dropout0_fwd  | DRP} | [1,512,13,13] }"
+    inputs="squeezenet0_concat7"
+    outputs="squeezenet0_dropout0_fwd"
+    penwidth=3
+    style=filled
+    color="#9785c0"
+    fontcolor="#000000"
+    fillcolor="#a996d2"
+  ];
+  "squeezenet0_conv25_weight" [
+    id=113
+    name="squeezenet0_conv25_weight"
+    type=constant_input
+    label="squeezenet0_conv25_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "squeezenet0_conv25_bias" [
+    id=114
+    name="squeezenet0_conv25_bias"
+    type=constant_input
+    label="squeezenet0_conv25_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "squeezenet0_conv25_fwd" [
+    id=115
+    name="squeezenet0_conv25_fwd"
+    type=Conv
+    label="{ {squeezenet0_conv25_fwd  | CONV} | [1,1000,13,13] }"
+    inputs="squeezenet0_dropout0_fwd;squeezenet0_conv25_weight;squeezenet0_conv25_bias"
+    outputs="squeezenet0_conv25_fwd"
+    penwidth=3
+    style=filled
+    color="#88c883"
+    fontcolor="#000000"
+    fillcolor="#9fdf99"
+  ];
+  "squeezenet0_relu25_fwd" [
+    id=116
+    name="squeezenet0_relu25_fwd"
+    type=Relu
+    label="{ {squeezenet0_relu25_fwd  | RELU} | [1,1000,13,13] }"
+    inputs="squeezenet0_conv25_fwd"
+    outputs="squeezenet0_relu25_fwd"
+    penwidth=3
+    style=filled
+    color="#88a9c9"
+    fontcolor="#000000"
+    fillcolor="#9cbedf"
+  ];
+  "squeezenet0_pool3_fwd" [
+    id=117
+    name="squeezenet0_pool3_fwd"
+    type=AveragePool
+    label="{ {squeezenet0_pool3_fwd  | AVGPL} | [1,1000,1,1] }"
+    inputs="squeezenet0_relu25_fwd"
+    outputs="squeezenet0_pool3_fwd"
+    penwidth=3
+    style=filled
+    color="#c58c8b"
+    fontcolor="#000000"
+    fillcolor="#d99f9e"
+  ];
+  "reshape_attr_tensor118" [
+    id=118
+    name="reshape_attr_tensor118"
+    type=constant_input
+    label="reshape_attr_tensor118"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "squeezenet0_flatten0_reshape0" [
+    id=119
+    name="squeezenet0_flatten0_reshape0"
+    type=Reshape
+    label="{ {squeezenet0_flatten0_reshape0  | RSHP} | [1,1000] }"
+    inputs="squeezenet0_pool3_fwd;reshape_attr_tensor118"
+    outputs="squeezenet0_flatten0_reshape0"
+    penwidth=3
+    style=filled
+    color="#c987c4"
+    fontcolor="#000000"
+    fillcolor="#de9ad8"
+  ];
+
+  // Edge definitions.
+  "data" -> "squeezenet0_conv0_fwd";
+  "squeezenet0_conv0_weight" -> "squeezenet0_conv0_fwd";
+  "squeezenet0_conv0_bias" -> "squeezenet0_conv0_fwd";
+  "squeezenet0_conv0_fwd" -> "squeezenet0_relu0_fwd";
+  "squeezenet0_relu0_fwd" -> "squeezenet0_pool0_fwd";
+  "squeezenet0_pool0_fwd" -> "squeezenet0_conv1_fwd";
+  "squeezenet0_conv1_weight" -> "squeezenet0_conv1_fwd";
+  "squeezenet0_conv1_bias" -> "squeezenet0_conv1_fwd";
+  "squeezenet0_conv1_fwd" -> "squeezenet0_relu1_fwd";
+  "squeezenet0_relu1_fwd" -> "squeezenet0_conv2_fwd";
+  "squeezenet0_relu1_fwd" -> "squeezenet0_conv3_fwd";
+  "squeezenet0_conv2_weight" -> "squeezenet0_conv2_fwd";
+  "squeezenet0_conv2_bias" -> "squeezenet0_conv2_fwd";
+  "squeezenet0_conv2_fwd" -> "squeezenet0_relu2_fwd";
+  "squeezenet0_relu2_fwd" -> "squeezenet0_concat0";
+  "squeezenet0_conv3_weight" -> "squeezenet0_conv3_fwd";
+  "squeezenet0_conv3_bias" -> "squeezenet0_conv3_fwd";
+  "squeezenet0_conv3_fwd" -> "squeezenet0_relu3_fwd";
+  "squeezenet0_relu3_fwd" -> "squeezenet0_concat0";
+  "squeezenet0_concat0" -> "squeezenet0_conv4_fwd";
+  "squeezenet0_conv4_weight" -> "squeezenet0_conv4_fwd";
+  "squeezenet0_conv4_bias" -> "squeezenet0_conv4_fwd";
+  "squeezenet0_conv4_fwd" -> "squeezenet0_relu4_fwd";
+  "squeezenet0_relu4_fwd" -> "squeezenet0_conv5_fwd";
+  "squeezenet0_relu4_fwd" -> "squeezenet0_conv6_fwd";
+  "squeezenet0_conv5_weight" -> "squeezenet0_conv5_fwd";
+  "squeezenet0_conv5_bias" -> "squeezenet0_conv5_fwd";
+  "squeezenet0_conv5_fwd" -> "squeezenet0_relu5_fwd";
+  "squeezenet0_relu5_fwd" -> "squeezenet0_concat1";
+  "squeezenet0_conv6_weight" -> "squeezenet0_conv6_fwd";
+  "squeezenet0_conv6_bias" -> "squeezenet0_conv6_fwd";
+  "squeezenet0_conv6_fwd" -> "squeezenet0_relu6_fwd";
+  "squeezenet0_relu6_fwd" -> "squeezenet0_concat1";
+  "squeezenet0_concat1" -> "squeezenet0_pool1_fwd";
+  "squeezenet0_pool1_fwd" -> "squeezenet0_conv7_fwd";
+  "squeezenet0_conv7_weight" -> "squeezenet0_conv7_fwd";
+  "squeezenet0_conv7_bias" -> "squeezenet0_conv7_fwd";
+  "squeezenet0_conv7_fwd" -> "squeezenet0_relu7_fwd";
+  "squeezenet0_relu7_fwd" -> "squeezenet0_conv8_fwd";
+  "squeezenet0_relu7_fwd" -> "squeezenet0_conv9_fwd";
+  "squeezenet0_conv8_weight" -> "squeezenet0_conv8_fwd";
+  "squeezenet0_conv8_bias" -> "squeezenet0_conv8_fwd";
+  "squeezenet0_conv8_fwd" -> "squeezenet0_relu8_fwd";
+  "squeezenet0_relu8_fwd" -> "squeezenet0_concat2";
+  "squeezenet0_conv9_weight" -> "squeezenet0_conv9_fwd";
+  "squeezenet0_conv9_bias" -> "squeezenet0_conv9_fwd";
+  "squeezenet0_conv9_fwd" -> "squeezenet0_relu9_fwd";
+  "squeezenet0_relu9_fwd" -> "squeezenet0_concat2";
+  "squeezenet0_concat2" -> "squeezenet0_conv10_fwd";
+  "squeezenet0_conv10_weight" -> "squeezenet0_conv10_fwd";
+  "squeezenet0_conv10_bias" -> "squeezenet0_conv10_fwd";
+  "squeezenet0_conv10_fwd" -> "squeezenet0_relu10_fwd";
+  "squeezenet0_relu10_fwd" -> "squeezenet0_conv11_fwd";
+  "squeezenet0_relu10_fwd" -> "squeezenet0_conv12_fwd";
+  "squeezenet0_conv11_weight" -> "squeezenet0_conv11_fwd";
+  "squeezenet0_conv11_bias" -> "squeezenet0_conv11_fwd";
+  "squeezenet0_conv11_fwd" -> "squeezenet0_relu11_fwd";
+  "squeezenet0_relu11_fwd" -> "squeezenet0_concat3";
+  "squeezenet0_conv12_weight" -> "squeezenet0_conv12_fwd";
+  "squeezenet0_conv12_bias" -> "squeezenet0_conv12_fwd";
+  "squeezenet0_conv12_fwd" -> "squeezenet0_relu12_fwd";
+  "squeezenet0_relu12_fwd" -> "squeezenet0_concat3";
+  "squeezenet0_concat3" -> "squeezenet0_pool2_fwd";
+  "squeezenet0_pool2_fwd" -> "squeezenet0_conv13_fwd";
+  "squeezenet0_conv13_weight" -> "squeezenet0_conv13_fwd";
+  "squeezenet0_conv13_bias" -> "squeezenet0_conv13_fwd";
+  "squeezenet0_conv13_fwd" -> "squeezenet0_relu13_fwd";
+  "squeezenet0_relu13_fwd" -> "squeezenet0_conv14_fwd";
+  "squeezenet0_relu13_fwd" -> "squeezenet0_conv15_fwd";
+  "squeezenet0_conv14_weight" -> "squeezenet0_conv14_fwd";
+  "squeezenet0_conv14_bias" -> "squeezenet0_conv14_fwd";
+  "squeezenet0_conv14_fwd" -> "squeezenet0_relu14_fwd";
+  "squeezenet0_relu14_fwd" -> "squeezenet0_concat4";
+  "squeezenet0_conv15_weight" -> "squeezenet0_conv15_fwd";
+  "squeezenet0_conv15_bias" -> "squeezenet0_conv15_fwd";
+  "squeezenet0_conv15_fwd" -> "squeezenet0_relu15_fwd";
+  "squeezenet0_relu15_fwd" -> "squeezenet0_concat4";
+  "squeezenet0_concat4" -> "squeezenet0_conv16_fwd";
+  "squeezenet0_conv16_weight" -> "squeezenet0_conv16_fwd";
+  "squeezenet0_conv16_bias" -> "squeezenet0_conv16_fwd";
+  "squeezenet0_conv16_fwd" -> "squeezenet0_relu16_fwd";
+  "squeezenet0_relu16_fwd" -> "squeezenet0_conv17_fwd";
+  "squeezenet0_relu16_fwd" -> "squeezenet0_conv18_fwd";
+  "squeezenet0_conv17_weight" -> "squeezenet0_conv17_fwd";
+  "squeezenet0_conv17_bias" -> "squeezenet0_conv17_fwd";
+  "squeezenet0_conv17_fwd" -> "squeezenet0_relu17_fwd";
+  "squeezenet0_relu17_fwd" -> "squeezenet0_concat5";
+  "squeezenet0_conv18_weight" -> "squeezenet0_conv18_fwd";
+  "squeezenet0_conv18_bias" -> "squeezenet0_conv18_fwd";
+  "squeezenet0_conv18_fwd" -> "squeezenet0_relu18_fwd";
+  "squeezenet0_relu18_fwd" -> "squeezenet0_concat5";
+  "squeezenet0_concat5" -> "squeezenet0_conv19_fwd";
+  "squeezenet0_conv19_weight" -> "squeezenet0_conv19_fwd";
+  "squeezenet0_conv19_bias" -> "squeezenet0_conv19_fwd";
+  "squeezenet0_conv19_fwd" -> "squeezenet0_relu19_fwd";
+  "squeezenet0_relu19_fwd" -> "squeezenet0_conv20_fwd";
+  "squeezenet0_relu19_fwd" -> "squeezenet0_conv21_fwd";
+  "squeezenet0_conv20_weight" -> "squeezenet0_conv20_fwd";
+  "squeezenet0_conv20_bias" -> "squeezenet0_conv20_fwd";
+  "squeezenet0_conv20_fwd" -> "squeezenet0_relu20_fwd";
+  "squeezenet0_relu20_fwd" -> "squeezenet0_concat6";
+  "squeezenet0_conv21_weight" -> "squeezenet0_conv21_fwd";
+  "squeezenet0_conv21_bias" -> "squeezenet0_conv21_fwd";
+  "squeezenet0_conv21_fwd" -> "squeezenet0_relu21_fwd";
+  "squeezenet0_relu21_fwd" -> "squeezenet0_concat6";
+  "squeezenet0_concat6" -> "squeezenet0_conv22_fwd";
+  "squeezenet0_conv22_weight" -> "squeezenet0_conv22_fwd";
+  "squeezenet0_conv22_bias" -> "squeezenet0_conv22_fwd";
+  "squeezenet0_conv22_fwd" -> "squeezenet0_relu22_fwd";
+  "squeezenet0_relu22_fwd" -> "squeezenet0_conv23_fwd";
+  "squeezenet0_relu22_fwd" -> "squeezenet0_conv24_fwd";
+  "squeezenet0_conv23_weight" -> "squeezenet0_conv23_fwd";
+  "squeezenet0_conv23_bias" -> "squeezenet0_conv23_fwd";
+  "squeezenet0_conv23_fwd" -> "squeezenet0_relu23_fwd";
+  "squeezenet0_relu23_fwd" -> "squeezenet0_concat7";
+  "squeezenet0_conv24_weight" -> "squeezenet0_conv24_fwd";
+  "squeezenet0_conv24_bias" -> "squeezenet0_conv24_fwd";
+  "squeezenet0_conv24_fwd" -> "squeezenet0_relu24_fwd";
+  "squeezenet0_relu24_fwd" -> "squeezenet0_concat7";
+  "squeezenet0_concat7" -> "squeezenet0_dropout0_fwd";
+  "squeezenet0_dropout0_fwd" -> "squeezenet0_conv25_fwd";
+  "squeezenet0_conv25_weight" -> "squeezenet0_conv25_fwd";
+  "squeezenet0_conv25_bias" -> "squeezenet0_conv25_fwd";
+  "squeezenet0_conv25_fwd" -> "squeezenet0_relu25_fwd";
+  "squeezenet0_relu25_fwd" -> "squeezenet0_pool3_fwd";
+  "squeezenet0_pool3_fwd" -> "squeezenet0_flatten0_reshape0";
+  "reshape_attr_tensor118" -> "squeezenet0_flatten0_reshape0";
+}

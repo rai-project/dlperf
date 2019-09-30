@@ -1,0 +1,981 @@
+strict digraph {
+  graph [
+    rankdir="TB"
+    overlap=prism
+    overlap_shrink=true
+    splines=curved
+  ];
+  node [
+    shape=Mrecord
+  ];
+  edge [
+    penwidth=3
+  ];
+
+  // Node definitions.
+  "image" [
+    id=0
+    name="image"
+    type=constant_input
+    label="image"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "image2" [
+    id=1
+    name="image2"
+    type=ImageScaler
+    label="{ {scalerPreprocessor  | imagescal} | [512,3,416,416] }"
+    inputs="image"
+    outputs="image2"
+    penwidth=3
+    style=filled
+    color="#ac87c7"
+    fontcolor="#000000"
+    fillcolor="#be99da"
+  ];
+  "convolution_W" [
+    id=2
+    name="convolution_W"
+    type=constant_input
+    label="convolution_W"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "convolution2d_1_output" [
+    id=3
+    name="convolution2d_1_output"
+    type=Conv
+    label="{ {convolution  | CONV} | [512,16,416,416] }"
+    inputs="image2;convolution_W"
+    outputs="convolution2d_1_output"
+    penwidth=3
+    style=filled
+    color="#86b5c4"
+    fontcolor="#000000"
+    fillcolor="#9bcada"
+  ];
+  "BatchNormalization_scale" [
+    id=4
+    name="BatchNormalization_scale"
+    type=constant_input
+    label="BatchNormalization_scale"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "BatchNormalization_B" [
+    id=5
+    name="BatchNormalization_B"
+    type=constant_input
+    label="BatchNormalization_B"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "BatchNormalization_mean" [
+    id=6
+    name="BatchNormalization_mean"
+    type=constant_input
+    label="BatchNormalization_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "BatchNormalization_variance" [
+    id=7
+    name="BatchNormalization_variance"
+    type=constant_input
+    label="BatchNormalization_variance"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "batchnormalization_1_output" [
+    id=8
+    name="batchnormalization_1_output"
+    type=BatchNormalization
+    label="{ {batchnorm  | BN} | [[512,16,416,416],[16],[16],[16],[16]] }"
+    inputs="convolution2d_1_output;BatchNormalization_scale;BatchNormalization_B;BatchNormalization_mean;BatchNormalization_variance"
+    outputs="batchnormalization_1_output"
+    penwidth=3
+    style=filled
+    color="#c6a283"
+    fontcolor="#000000"
+    fillcolor="#dcb797"
+  ];
+  "leakyrelu_1_output" [
+    id=9
+    name="leakyrelu_1_output"
+    type=LeakyRelu
+    label="{ {activation  | leakyrelu} | [512,16,416,416] }"
+    inputs="batchnormalization_1_output"
+    outputs="leakyrelu_1_output"
+    penwidth=3
+    style=filled
+    color="#c58699"
+    fontcolor="#000000"
+    fillcolor="#d998ab"
+  ];
+  "maxpooling2d_1_output" [
+    id=10
+    name="maxpooling2d_1_output"
+    type=MaxPool
+    label="{ {pooling  | MXPL} | [512,16,208,208] }"
+    inputs="leakyrelu_1_output"
+    outputs="maxpooling2d_1_output"
+    penwidth=3
+    style=filled
+    color="#9bc287"
+    fontcolor="#000000"
+    fillcolor="#b2d99c"
+  ];
+  "convolution1_W" [
+    id=11
+    name="convolution1_W"
+    type=constant_input
+    label="convolution1_W"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "convolution2d_2_output" [
+    id=12
+    name="convolution2d_2_output"
+    type=Conv
+    label="{ {convolution1  | CONV} | [512,32,208,208] }"
+    inputs="maxpooling2d_1_output;convolution1_W"
+    outputs="convolution2d_2_output"
+    penwidth=3
+    style=filled
+    color="#86b5c4"
+    fontcolor="#000000"
+    fillcolor="#9bcada"
+  ];
+  "BatchNormalization_scale1" [
+    id=13
+    name="BatchNormalization_scale1"
+    type=constant_input
+    label="BatchNormalization_scale1"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "BatchNormalization_B1" [
+    id=14
+    name="BatchNormalization_B1"
+    type=constant_input
+    label="BatchNormalization_B1"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "BatchNormalization_mean1" [
+    id=15
+    name="BatchNormalization_mean1"
+    type=constant_input
+    label="BatchNormalization_mean1"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "BatchNormalization_variance1" [
+    id=16
+    name="BatchNormalization_variance1"
+    type=constant_input
+    label="BatchNormalization_variance1"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "batchnormalization_2_output" [
+    id=17
+    name="batchnormalization_2_output"
+    type=BatchNormalization
+    label="{ {batchnorm1  | BN} | [[512,32,208,208],[32],[32],[32],[32]] }"
+    inputs="convolution2d_2_output;BatchNormalization_scale1;BatchNormalization_B1;BatchNormalization_mean1;BatchNormalization_variance1"
+    outputs="batchnormalization_2_output"
+    penwidth=3
+    style=filled
+    color="#c6a283"
+    fontcolor="#000000"
+    fillcolor="#dcb797"
+  ];
+  "leakyrelu_2_output" [
+    id=18
+    name="leakyrelu_2_output"
+    type=LeakyRelu
+    label="{ {activation1  | leakyrelu} | [512,32,208,208] }"
+    inputs="batchnormalization_2_output"
+    outputs="leakyrelu_2_output"
+    penwidth=3
+    style=filled
+    color="#c58699"
+    fontcolor="#000000"
+    fillcolor="#d998ab"
+  ];
+  "maxpooling2d_2_output" [
+    id=19
+    name="maxpooling2d_2_output"
+    type=MaxPool
+    label="{ {pooling1  | MXPL} | [512,32,104,104] }"
+    inputs="leakyrelu_2_output"
+    outputs="maxpooling2d_2_output"
+    penwidth=3
+    style=filled
+    color="#9bc287"
+    fontcolor="#000000"
+    fillcolor="#b2d99c"
+  ];
+  "convolution2_W" [
+    id=20
+    name="convolution2_W"
+    type=constant_input
+    label="convolution2_W"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "convolution2d_3_output" [
+    id=21
+    name="convolution2d_3_output"
+    type=Conv
+    label="{ {convolution2  | CONV} | [512,64,104,104] }"
+    inputs="maxpooling2d_2_output;convolution2_W"
+    outputs="convolution2d_3_output"
+    penwidth=3
+    style=filled
+    color="#86b5c4"
+    fontcolor="#000000"
+    fillcolor="#9bcada"
+  ];
+  "BatchNormalization_scale2" [
+    id=22
+    name="BatchNormalization_scale2"
+    type=constant_input
+    label="BatchNormalization_scale2"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "BatchNormalization_B2" [
+    id=23
+    name="BatchNormalization_B2"
+    type=constant_input
+    label="BatchNormalization_B2"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "BatchNormalization_mean2" [
+    id=24
+    name="BatchNormalization_mean2"
+    type=constant_input
+    label="BatchNormalization_mean2"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "BatchNormalization_variance2" [
+    id=25
+    name="BatchNormalization_variance2"
+    type=constant_input
+    label="BatchNormalization_variance2"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "batchnormalization_3_output" [
+    id=26
+    name="batchnormalization_3_output"
+    type=BatchNormalization
+    label="{ {batchnorm2  | BN} | [[512,64,104,104],[64],[64],[64],[64]] }"
+    inputs="convolution2d_3_output;BatchNormalization_scale2;BatchNormalization_B2;BatchNormalization_mean2;BatchNormalization_variance2"
+    outputs="batchnormalization_3_output"
+    penwidth=3
+    style=filled
+    color="#c6a283"
+    fontcolor="#000000"
+    fillcolor="#dcb797"
+  ];
+  "leakyrelu_3_output" [
+    id=27
+    name="leakyrelu_3_output"
+    type=LeakyRelu
+    label="{ {activation2  | leakyrelu} | [512,64,104,104] }"
+    inputs="batchnormalization_3_output"
+    outputs="leakyrelu_3_output"
+    penwidth=3
+    style=filled
+    color="#c58699"
+    fontcolor="#000000"
+    fillcolor="#d998ab"
+  ];
+  "maxpooling2d_3_output" [
+    id=28
+    name="maxpooling2d_3_output"
+    type=MaxPool
+    label="{ {pooling2  | MXPL} | [512,64,52,52] }"
+    inputs="leakyrelu_3_output"
+    outputs="maxpooling2d_3_output"
+    penwidth=3
+    style=filled
+    color="#9bc287"
+    fontcolor="#000000"
+    fillcolor="#b2d99c"
+  ];
+  "convolution3_W" [
+    id=29
+    name="convolution3_W"
+    type=constant_input
+    label="convolution3_W"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "convolution2d_4_output" [
+    id=30
+    name="convolution2d_4_output"
+    type=Conv
+    label="{ {convolution3  | CONV} | [512,128,52,52] }"
+    inputs="maxpooling2d_3_output;convolution3_W"
+    outputs="convolution2d_4_output"
+    penwidth=3
+    style=filled
+    color="#86b5c4"
+    fontcolor="#000000"
+    fillcolor="#9bcada"
+  ];
+  "BatchNormalization_scale3" [
+    id=31
+    name="BatchNormalization_scale3"
+    type=constant_input
+    label="BatchNormalization_scale3"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "BatchNormalization_B3" [
+    id=32
+    name="BatchNormalization_B3"
+    type=constant_input
+    label="BatchNormalization_B3"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "BatchNormalization_mean3" [
+    id=33
+    name="BatchNormalization_mean3"
+    type=constant_input
+    label="BatchNormalization_mean3"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "BatchNormalization_variance3" [
+    id=34
+    name="BatchNormalization_variance3"
+    type=constant_input
+    label="BatchNormalization_variance3"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "batchnormalization_4_output" [
+    id=35
+    name="batchnormalization_4_output"
+    type=BatchNormalization
+    label="{ {batchnorm3  | BN} | [[512,128,52,52],[128],[128],[128],[128]] }"
+    inputs="convolution2d_4_output;BatchNormalization_scale3;BatchNormalization_B3;BatchNormalization_mean3;BatchNormalization_variance3"
+    outputs="batchnormalization_4_output"
+    penwidth=3
+    style=filled
+    color="#c6a283"
+    fontcolor="#000000"
+    fillcolor="#dcb797"
+  ];
+  "leakyrelu_4_output" [
+    id=36
+    name="leakyrelu_4_output"
+    type=LeakyRelu
+    label="{ {activation3  | leakyrelu} | [512,128,52,52] }"
+    inputs="batchnormalization_4_output"
+    outputs="leakyrelu_4_output"
+    penwidth=3
+    style=filled
+    color="#c58699"
+    fontcolor="#000000"
+    fillcolor="#d998ab"
+  ];
+  "maxpooling2d_4_output" [
+    id=37
+    name="maxpooling2d_4_output"
+    type=MaxPool
+    label="{ {pooling3  | MXPL} | [512,128,26,26] }"
+    inputs="leakyrelu_4_output"
+    outputs="maxpooling2d_4_output"
+    penwidth=3
+    style=filled
+    color="#9bc287"
+    fontcolor="#000000"
+    fillcolor="#b2d99c"
+  ];
+  "convolution4_W" [
+    id=38
+    name="convolution4_W"
+    type=constant_input
+    label="convolution4_W"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "convolution2d_5_output" [
+    id=39
+    name="convolution2d_5_output"
+    type=Conv
+    label="{ {convolution4  | CONV} | [512,256,26,26] }"
+    inputs="maxpooling2d_4_output;convolution4_W"
+    outputs="convolution2d_5_output"
+    penwidth=3
+    style=filled
+    color="#86b5c4"
+    fontcolor="#000000"
+    fillcolor="#9bcada"
+  ];
+  "BatchNormalization_scale4" [
+    id=40
+    name="BatchNormalization_scale4"
+    type=constant_input
+    label="BatchNormalization_scale4"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "BatchNormalization_B4" [
+    id=41
+    name="BatchNormalization_B4"
+    type=constant_input
+    label="BatchNormalization_B4"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "BatchNormalization_mean4" [
+    id=42
+    name="BatchNormalization_mean4"
+    type=constant_input
+    label="BatchNormalization_mean4"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "BatchNormalization_variance4" [
+    id=43
+    name="BatchNormalization_variance4"
+    type=constant_input
+    label="BatchNormalization_variance4"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "batchnormalization_5_output" [
+    id=44
+    name="batchnormalization_5_output"
+    type=BatchNormalization
+    label="{ {batchnorm4  | BN} | [[512,256,26,26],[256],[256],[256],[256]] }"
+    inputs="convolution2d_5_output;BatchNormalization_scale4;BatchNormalization_B4;BatchNormalization_mean4;BatchNormalization_variance4"
+    outputs="batchnormalization_5_output"
+    penwidth=3
+    style=filled
+    color="#c6a283"
+    fontcolor="#000000"
+    fillcolor="#dcb797"
+  ];
+  "leakyrelu_5_output" [
+    id=45
+    name="leakyrelu_5_output"
+    type=LeakyRelu
+    label="{ {activation4  | leakyrelu} | [512,256,26,26] }"
+    inputs="batchnormalization_5_output"
+    outputs="leakyrelu_5_output"
+    penwidth=3
+    style=filled
+    color="#c58699"
+    fontcolor="#000000"
+    fillcolor="#d998ab"
+  ];
+  "maxpooling2d_5_output" [
+    id=46
+    name="maxpooling2d_5_output"
+    type=MaxPool
+    label="{ {pooling4  | MXPL} | [512,256,13,13] }"
+    inputs="leakyrelu_5_output"
+    outputs="maxpooling2d_5_output"
+    penwidth=3
+    style=filled
+    color="#9bc287"
+    fontcolor="#000000"
+    fillcolor="#b2d99c"
+  ];
+  "convolution5_W" [
+    id=47
+    name="convolution5_W"
+    type=constant_input
+    label="convolution5_W"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "convolution2d_6_output" [
+    id=48
+    name="convolution2d_6_output"
+    type=Conv
+    label="{ {convolution5  | CONV} | [512,512,13,13] }"
+    inputs="maxpooling2d_5_output;convolution5_W"
+    outputs="convolution2d_6_output"
+    penwidth=3
+    style=filled
+    color="#86b5c4"
+    fontcolor="#000000"
+    fillcolor="#9bcada"
+  ];
+  "BatchNormalization_scale5" [
+    id=49
+    name="BatchNormalization_scale5"
+    type=constant_input
+    label="BatchNormalization_scale5"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "BatchNormalization_B5" [
+    id=50
+    name="BatchNormalization_B5"
+    type=constant_input
+    label="BatchNormalization_B5"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "BatchNormalization_mean5" [
+    id=51
+    name="BatchNormalization_mean5"
+    type=constant_input
+    label="BatchNormalization_mean5"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "BatchNormalization_variance5" [
+    id=52
+    name="BatchNormalization_variance5"
+    type=constant_input
+    label="BatchNormalization_variance5"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "batchnormalization_6_output" [
+    id=53
+    name="batchnormalization_6_output"
+    type=BatchNormalization
+    label="{ {batchnorm5  | BN} | [[512,512,13,13],[512],[512],[512],[512]] }"
+    inputs="convolution2d_6_output;BatchNormalization_scale5;BatchNormalization_B5;BatchNormalization_mean5;BatchNormalization_variance5"
+    outputs="batchnormalization_6_output"
+    penwidth=3
+    style=filled
+    color="#c6a283"
+    fontcolor="#000000"
+    fillcolor="#dcb797"
+  ];
+  "leakyrelu_6_output" [
+    id=54
+    name="leakyrelu_6_output"
+    type=LeakyRelu
+    label="{ {activation5  | leakyrelu} | [512,512,13,13] }"
+    inputs="batchnormalization_6_output"
+    outputs="leakyrelu_6_output"
+    penwidth=3
+    style=filled
+    color="#c58699"
+    fontcolor="#000000"
+    fillcolor="#d998ab"
+  ];
+  "maxpooling2d_6_output" [
+    id=55
+    name="maxpooling2d_6_output"
+    type=MaxPool
+    label="{ {pooling5  | MXPL} | [512,512,12,12] }"
+    inputs="leakyrelu_6_output"
+    outputs="maxpooling2d_6_output"
+    penwidth=3
+    style=filled
+    color="#9bc287"
+    fontcolor="#000000"
+    fillcolor="#b2d99c"
+  ];
+  "convolution6_W" [
+    id=56
+    name="convolution6_W"
+    type=constant_input
+    label="convolution6_W"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "convolution2d_7_output" [
+    id=57
+    name="convolution2d_7_output"
+    type=Conv
+    label="{ {convolution6  | CONV} | [512,1024,12,12] }"
+    inputs="maxpooling2d_6_output;convolution6_W"
+    outputs="convolution2d_7_output"
+    penwidth=3
+    style=filled
+    color="#86b5c4"
+    fontcolor="#000000"
+    fillcolor="#9bcada"
+  ];
+  "BatchNormalization_scale6" [
+    id=58
+    name="BatchNormalization_scale6"
+    type=constant_input
+    label="BatchNormalization_scale6"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "BatchNormalization_B6" [
+    id=59
+    name="BatchNormalization_B6"
+    type=constant_input
+    label="BatchNormalization_B6"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "BatchNormalization_mean6" [
+    id=60
+    name="BatchNormalization_mean6"
+    type=constant_input
+    label="BatchNormalization_mean6"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "BatchNormalization_variance6" [
+    id=61
+    name="BatchNormalization_variance6"
+    type=constant_input
+    label="BatchNormalization_variance6"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "batchnormalization_7_output" [
+    id=62
+    name="batchnormalization_7_output"
+    type=BatchNormalization
+    label="{ {batchnorm6  | BN} | [[512,1024,12,12],[1024],[1024],[1024],[1024]] }"
+    inputs="convolution2d_7_output;BatchNormalization_scale6;BatchNormalization_B6;BatchNormalization_mean6;BatchNormalization_variance6"
+    outputs="batchnormalization_7_output"
+    penwidth=3
+    style=filled
+    color="#c6a283"
+    fontcolor="#000000"
+    fillcolor="#dcb797"
+  ];
+  "leakyrelu_7_output" [
+    id=63
+    name="leakyrelu_7_output"
+    type=LeakyRelu
+    label="{ {activation6  | leakyrelu} | [512,1024,12,12] }"
+    inputs="batchnormalization_7_output"
+    outputs="leakyrelu_7_output"
+    penwidth=3
+    style=filled
+    color="#c58699"
+    fontcolor="#000000"
+    fillcolor="#d998ab"
+  ];
+  "convolution7_W" [
+    id=64
+    name="convolution7_W"
+    type=constant_input
+    label="convolution7_W"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "convolution2d_8_output" [
+    id=65
+    name="convolution2d_8_output"
+    type=Conv
+    label="{ {convolution7  | CONV} | [512,1024,12,12] }"
+    inputs="leakyrelu_7_output;convolution7_W"
+    outputs="convolution2d_8_output"
+    penwidth=3
+    style=filled
+    color="#86b5c4"
+    fontcolor="#000000"
+    fillcolor="#9bcada"
+  ];
+  "BatchNormalization_scale7" [
+    id=66
+    name="BatchNormalization_scale7"
+    type=constant_input
+    label="BatchNormalization_scale7"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "BatchNormalization_B7" [
+    id=67
+    name="BatchNormalization_B7"
+    type=constant_input
+    label="BatchNormalization_B7"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "BatchNormalization_mean7" [
+    id=68
+    name="BatchNormalization_mean7"
+    type=constant_input
+    label="BatchNormalization_mean7"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "BatchNormalization_variance7" [
+    id=69
+    name="BatchNormalization_variance7"
+    type=constant_input
+    label="BatchNormalization_variance7"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "batchnormalization_8_output" [
+    id=70
+    name="batchnormalization_8_output"
+    type=BatchNormalization
+    label="{ {batchnorm7  | BN} | [[512,1024,12,12],[1024],[1024],[1024],[1024]] }"
+    inputs="convolution2d_8_output;BatchNormalization_scale7;BatchNormalization_B7;BatchNormalization_mean7;BatchNormalization_variance7"
+    outputs="batchnormalization_8_output"
+    penwidth=3
+    style=filled
+    color="#c6a283"
+    fontcolor="#000000"
+    fillcolor="#dcb797"
+  ];
+  "leakyrelu_8_output" [
+    id=71
+    name="leakyrelu_8_output"
+    type=LeakyRelu
+    label="{ {activation7  | leakyrelu} | [512,1024,12,12] }"
+    inputs="batchnormalization_8_output"
+    outputs="leakyrelu_8_output"
+    penwidth=3
+    style=filled
+    color="#c58699"
+    fontcolor="#000000"
+    fillcolor="#d998ab"
+  ];
+  "convolution8_W" [
+    id=72
+    name="convolution8_W"
+    type=constant_input
+    label="convolution8_W"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "convolution8_B" [
+    id=73
+    name="convolution8_B"
+    type=constant_input
+    label="convolution8_B"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "grid" [
+    id=74
+    name="grid"
+    type=Conv
+    label="{ {convolution8  | CONV} | [512,125,12,12] }"
+    inputs="leakyrelu_8_output;convolution8_W;convolution8_B"
+    outputs="grid"
+    penwidth=3
+    style=filled
+    color="#86b5c4"
+    fontcolor="#000000"
+    fillcolor="#9bcada"
+  ];
+
+  // Edge definitions.
+  "image" -> "image2";
+  "image2" -> "convolution2d_1_output";
+  "convolution_W" -> "convolution2d_1_output";
+  "convolution2d_1_output" -> "batchnormalization_1_output";
+  "BatchNormalization_scale" -> "batchnormalization_1_output";
+  "BatchNormalization_B" -> "batchnormalization_1_output";
+  "BatchNormalization_mean" -> "batchnormalization_1_output";
+  "BatchNormalization_variance" -> "batchnormalization_1_output";
+  "batchnormalization_1_output" -> "leakyrelu_1_output";
+  "leakyrelu_1_output" -> "maxpooling2d_1_output";
+  "maxpooling2d_1_output" -> "convolution2d_2_output";
+  "convolution1_W" -> "convolution2d_2_output";
+  "convolution2d_2_output" -> "batchnormalization_2_output";
+  "BatchNormalization_scale1" -> "batchnormalization_2_output";
+  "BatchNormalization_B1" -> "batchnormalization_2_output";
+  "BatchNormalization_mean1" -> "batchnormalization_2_output";
+  "BatchNormalization_variance1" -> "batchnormalization_2_output";
+  "batchnormalization_2_output" -> "leakyrelu_2_output";
+  "leakyrelu_2_output" -> "maxpooling2d_2_output";
+  "maxpooling2d_2_output" -> "convolution2d_3_output";
+  "convolution2_W" -> "convolution2d_3_output";
+  "convolution2d_3_output" -> "batchnormalization_3_output";
+  "BatchNormalization_scale2" -> "batchnormalization_3_output";
+  "BatchNormalization_B2" -> "batchnormalization_3_output";
+  "BatchNormalization_mean2" -> "batchnormalization_3_output";
+  "BatchNormalization_variance2" -> "batchnormalization_3_output";
+  "batchnormalization_3_output" -> "leakyrelu_3_output";
+  "leakyrelu_3_output" -> "maxpooling2d_3_output";
+  "maxpooling2d_3_output" -> "convolution2d_4_output";
+  "convolution3_W" -> "convolution2d_4_output";
+  "convolution2d_4_output" -> "batchnormalization_4_output";
+  "BatchNormalization_scale3" -> "batchnormalization_4_output";
+  "BatchNormalization_B3" -> "batchnormalization_4_output";
+  "BatchNormalization_mean3" -> "batchnormalization_4_output";
+  "BatchNormalization_variance3" -> "batchnormalization_4_output";
+  "batchnormalization_4_output" -> "leakyrelu_4_output";
+  "leakyrelu_4_output" -> "maxpooling2d_4_output";
+  "maxpooling2d_4_output" -> "convolution2d_5_output";
+  "convolution4_W" -> "convolution2d_5_output";
+  "convolution2d_5_output" -> "batchnormalization_5_output";
+  "BatchNormalization_scale4" -> "batchnormalization_5_output";
+  "BatchNormalization_B4" -> "batchnormalization_5_output";
+  "BatchNormalization_mean4" -> "batchnormalization_5_output";
+  "BatchNormalization_variance4" -> "batchnormalization_5_output";
+  "batchnormalization_5_output" -> "leakyrelu_5_output";
+  "leakyrelu_5_output" -> "maxpooling2d_5_output";
+  "maxpooling2d_5_output" -> "convolution2d_6_output";
+  "convolution5_W" -> "convolution2d_6_output";
+  "convolution2d_6_output" -> "batchnormalization_6_output";
+  "BatchNormalization_scale5" -> "batchnormalization_6_output";
+  "BatchNormalization_B5" -> "batchnormalization_6_output";
+  "BatchNormalization_mean5" -> "batchnormalization_6_output";
+  "BatchNormalization_variance5" -> "batchnormalization_6_output";
+  "batchnormalization_6_output" -> "leakyrelu_6_output";
+  "leakyrelu_6_output" -> "maxpooling2d_6_output";
+  "maxpooling2d_6_output" -> "convolution2d_7_output";
+  "convolution6_W" -> "convolution2d_7_output";
+  "convolution2d_7_output" -> "batchnormalization_7_output";
+  "BatchNormalization_scale6" -> "batchnormalization_7_output";
+  "BatchNormalization_B6" -> "batchnormalization_7_output";
+  "BatchNormalization_mean6" -> "batchnormalization_7_output";
+  "BatchNormalization_variance6" -> "batchnormalization_7_output";
+  "batchnormalization_7_output" -> "leakyrelu_7_output";
+  "leakyrelu_7_output" -> "convolution2d_8_output";
+  "convolution7_W" -> "convolution2d_8_output";
+  "convolution2d_8_output" -> "batchnormalization_8_output";
+  "BatchNormalization_scale7" -> "batchnormalization_8_output";
+  "BatchNormalization_B7" -> "batchnormalization_8_output";
+  "BatchNormalization_mean7" -> "batchnormalization_8_output";
+  "BatchNormalization_variance7" -> "batchnormalization_8_output";
+  "batchnormalization_8_output" -> "leakyrelu_8_output";
+  "leakyrelu_8_output" -> "grid";
+  "convolution8_W" -> "grid";
+  "convolution8_B" -> "grid";
+}

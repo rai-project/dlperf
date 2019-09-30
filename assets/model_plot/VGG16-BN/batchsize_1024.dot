@@ -1,0 +1,1793 @@
+strict digraph {
+  graph [
+    rankdir="TB"
+    overlap=prism
+    overlap_shrink=true
+    splines=curved
+  ];
+  node [
+    shape=Mrecord
+  ];
+  edge [
+    penwidth=3
+  ];
+
+  // Node definitions.
+  "data" [
+    id=0
+    name="data"
+    type=constant_input
+    label="data"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_conv0_weight" [
+    id=1
+    name="vgg0_conv0_weight"
+    type=constant_input
+    label="vgg0_conv0_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_conv0_bias" [
+    id=2
+    name="vgg0_conv0_bias"
+    type=constant_input
+    label="vgg0_conv0_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_conv0_fwd" [
+    id=3
+    name="vgg0_conv0_fwd"
+    type=Conv
+    label="{ {vgg0_conv0_fwd  | CONV} | [1024,64,224,224] }"
+    inputs="data;vgg0_conv0_weight;vgg0_conv0_bias"
+    outputs="vgg0_conv0_fwd"
+    penwidth=3
+    style=filled
+    color="#c58699"
+    fontcolor="#000000"
+    fillcolor="#d998ab"
+  ];
+  "vgg0_batchnorm0_gamma" [
+    id=4
+    name="vgg0_batchnorm0_gamma"
+    type=constant_input
+    label="vgg0_batchnorm0_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_batchnorm0_beta" [
+    id=5
+    name="vgg0_batchnorm0_beta"
+    type=constant_input
+    label="vgg0_batchnorm0_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_batchnorm0_running_mean" [
+    id=6
+    name="vgg0_batchnorm0_running_mean"
+    type=constant_input
+    label="vgg0_batchnorm0_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_batchnorm0_running_var" [
+    id=7
+    name="vgg0_batchnorm0_running_var"
+    type=constant_input
+    label="vgg0_batchnorm0_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_batchnorm0_fwd" [
+    id=8
+    name="vgg0_batchnorm0_fwd"
+    type=BatchNormalization
+    label="{ {vgg0_batchnorm0_fwd  | BN} | [[1024,64,224,224],[64],[64],[64],[64]] }"
+    inputs="vgg0_conv0_fwd;vgg0_batchnorm0_gamma;vgg0_batchnorm0_beta;vgg0_batchnorm0_running_mean;vgg0_batchnorm0_running_var"
+    outputs="vgg0_batchnorm0_fwd"
+    penwidth=3
+    style=filled
+    color="#c6a283"
+    fontcolor="#000000"
+    fillcolor="#dcb797"
+  ];
+  "vgg0_relu0_fwd" [
+    id=9
+    name="vgg0_relu0_fwd"
+    type=Relu
+    label="{ {vgg0_relu0_fwd  | RELU} | [1024,64,224,224] }"
+    inputs="vgg0_batchnorm0_fwd"
+    outputs="vgg0_relu0_fwd"
+    penwidth=3
+    style=filled
+    color="#9bc287"
+    fontcolor="#000000"
+    fillcolor="#b2d99c"
+  ];
+  "vgg0_conv1_weight" [
+    id=10
+    name="vgg0_conv1_weight"
+    type=constant_input
+    label="vgg0_conv1_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_conv1_bias" [
+    id=11
+    name="vgg0_conv1_bias"
+    type=constant_input
+    label="vgg0_conv1_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_conv1_fwd" [
+    id=12
+    name="vgg0_conv1_fwd"
+    type=Conv
+    label="{ {vgg0_conv1_fwd  | CONV} | [1024,64,224,224] }"
+    inputs="vgg0_relu0_fwd;vgg0_conv1_weight;vgg0_conv1_bias"
+    outputs="vgg0_conv1_fwd"
+    penwidth=3
+    style=filled
+    color="#c58699"
+    fontcolor="#000000"
+    fillcolor="#d998ab"
+  ];
+  "vgg0_batchnorm1_gamma" [
+    id=13
+    name="vgg0_batchnorm1_gamma"
+    type=constant_input
+    label="vgg0_batchnorm1_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_batchnorm1_beta" [
+    id=14
+    name="vgg0_batchnorm1_beta"
+    type=constant_input
+    label="vgg0_batchnorm1_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_batchnorm1_running_mean" [
+    id=15
+    name="vgg0_batchnorm1_running_mean"
+    type=constant_input
+    label="vgg0_batchnorm1_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_batchnorm1_running_var" [
+    id=16
+    name="vgg0_batchnorm1_running_var"
+    type=constant_input
+    label="vgg0_batchnorm1_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_batchnorm1_fwd" [
+    id=17
+    name="vgg0_batchnorm1_fwd"
+    type=BatchNormalization
+    label="{ {vgg0_batchnorm1_fwd  | BN} | [[1024,64,224,224],[64],[64],[64],[64]] }"
+    inputs="vgg0_conv1_fwd;vgg0_batchnorm1_gamma;vgg0_batchnorm1_beta;vgg0_batchnorm1_running_mean;vgg0_batchnorm1_running_var"
+    outputs="vgg0_batchnorm1_fwd"
+    penwidth=3
+    style=filled
+    color="#c6a283"
+    fontcolor="#000000"
+    fillcolor="#dcb797"
+  ];
+  "vgg0_relu1_fwd" [
+    id=18
+    name="vgg0_relu1_fwd"
+    type=Relu
+    label="{ {vgg0_relu1_fwd  | RELU} | [1024,64,224,224] }"
+    inputs="vgg0_batchnorm1_fwd"
+    outputs="vgg0_relu1_fwd"
+    penwidth=3
+    style=filled
+    color="#9bc287"
+    fontcolor="#000000"
+    fillcolor="#b2d99c"
+  ];
+  "vgg0_pool0_fwd" [
+    id=19
+    name="vgg0_pool0_fwd"
+    type=MaxPool
+    label="{ {vgg0_pool0_fwd  | MXPL} | [1024,64,112,112] }"
+    inputs="vgg0_relu1_fwd"
+    outputs="vgg0_pool0_fwd"
+    penwidth=3
+    style=filled
+    color="#858bc1"
+    fontcolor="#000000"
+    fillcolor="#979cd3"
+  ];
+  "vgg0_conv2_weight" [
+    id=20
+    name="vgg0_conv2_weight"
+    type=constant_input
+    label="vgg0_conv2_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_conv2_bias" [
+    id=21
+    name="vgg0_conv2_bias"
+    type=constant_input
+    label="vgg0_conv2_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_conv2_fwd" [
+    id=22
+    name="vgg0_conv2_fwd"
+    type=Conv
+    label="{ {vgg0_conv2_fwd  | CONV} | [1024,128,112,112] }"
+    inputs="vgg0_pool0_fwd;vgg0_conv2_weight;vgg0_conv2_bias"
+    outputs="vgg0_conv2_fwd"
+    penwidth=3
+    style=filled
+    color="#c58699"
+    fontcolor="#000000"
+    fillcolor="#d998ab"
+  ];
+  "vgg0_batchnorm2_gamma" [
+    id=23
+    name="vgg0_batchnorm2_gamma"
+    type=constant_input
+    label="vgg0_batchnorm2_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_batchnorm2_beta" [
+    id=24
+    name="vgg0_batchnorm2_beta"
+    type=constant_input
+    label="vgg0_batchnorm2_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_batchnorm2_running_mean" [
+    id=25
+    name="vgg0_batchnorm2_running_mean"
+    type=constant_input
+    label="vgg0_batchnorm2_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_batchnorm2_running_var" [
+    id=26
+    name="vgg0_batchnorm2_running_var"
+    type=constant_input
+    label="vgg0_batchnorm2_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_batchnorm2_fwd" [
+    id=27
+    name="vgg0_batchnorm2_fwd"
+    type=BatchNormalization
+    label="{ {vgg0_batchnorm2_fwd  | BN} | [[1024,128,112,112],[128],[128],[128],[128]] }"
+    inputs="vgg0_conv2_fwd;vgg0_batchnorm2_gamma;vgg0_batchnorm2_beta;vgg0_batchnorm2_running_mean;vgg0_batchnorm2_running_var"
+    outputs="vgg0_batchnorm2_fwd"
+    penwidth=3
+    style=filled
+    color="#c6a283"
+    fontcolor="#000000"
+    fillcolor="#dcb797"
+  ];
+  "vgg0_relu2_fwd" [
+    id=28
+    name="vgg0_relu2_fwd"
+    type=Relu
+    label="{ {vgg0_relu2_fwd  | RELU} | [1024,128,112,112] }"
+    inputs="vgg0_batchnorm2_fwd"
+    outputs="vgg0_relu2_fwd"
+    penwidth=3
+    style=filled
+    color="#9bc287"
+    fontcolor="#000000"
+    fillcolor="#b2d99c"
+  ];
+  "vgg0_conv3_weight" [
+    id=29
+    name="vgg0_conv3_weight"
+    type=constant_input
+    label="vgg0_conv3_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_conv3_bias" [
+    id=30
+    name="vgg0_conv3_bias"
+    type=constant_input
+    label="vgg0_conv3_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_conv3_fwd" [
+    id=31
+    name="vgg0_conv3_fwd"
+    type=Conv
+    label="{ {vgg0_conv3_fwd  | CONV} | [1024,128,112,112] }"
+    inputs="vgg0_relu2_fwd;vgg0_conv3_weight;vgg0_conv3_bias"
+    outputs="vgg0_conv3_fwd"
+    penwidth=3
+    style=filled
+    color="#c58699"
+    fontcolor="#000000"
+    fillcolor="#d998ab"
+  ];
+  "vgg0_batchnorm3_gamma" [
+    id=32
+    name="vgg0_batchnorm3_gamma"
+    type=constant_input
+    label="vgg0_batchnorm3_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_batchnorm3_beta" [
+    id=33
+    name="vgg0_batchnorm3_beta"
+    type=constant_input
+    label="vgg0_batchnorm3_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_batchnorm3_running_mean" [
+    id=34
+    name="vgg0_batchnorm3_running_mean"
+    type=constant_input
+    label="vgg0_batchnorm3_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_batchnorm3_running_var" [
+    id=35
+    name="vgg0_batchnorm3_running_var"
+    type=constant_input
+    label="vgg0_batchnorm3_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_batchnorm3_fwd" [
+    id=36
+    name="vgg0_batchnorm3_fwd"
+    type=BatchNormalization
+    label="{ {vgg0_batchnorm3_fwd  | BN} | [[1024,128,112,112],[128],[128],[128],[128]] }"
+    inputs="vgg0_conv3_fwd;vgg0_batchnorm3_gamma;vgg0_batchnorm3_beta;vgg0_batchnorm3_running_mean;vgg0_batchnorm3_running_var"
+    outputs="vgg0_batchnorm3_fwd"
+    penwidth=3
+    style=filled
+    color="#c6a283"
+    fontcolor="#000000"
+    fillcolor="#dcb797"
+  ];
+  "vgg0_relu3_fwd" [
+    id=37
+    name="vgg0_relu3_fwd"
+    type=Relu
+    label="{ {vgg0_relu3_fwd  | RELU} | [1024,128,112,112] }"
+    inputs="vgg0_batchnorm3_fwd"
+    outputs="vgg0_relu3_fwd"
+    penwidth=3
+    style=filled
+    color="#9bc287"
+    fontcolor="#000000"
+    fillcolor="#b2d99c"
+  ];
+  "vgg0_pool1_fwd" [
+    id=38
+    name="vgg0_pool1_fwd"
+    type=MaxPool
+    label="{ {vgg0_pool1_fwd  | MXPL} | [1024,128,56,56] }"
+    inputs="vgg0_relu3_fwd"
+    outputs="vgg0_pool1_fwd"
+    penwidth=3
+    style=filled
+    color="#858bc1"
+    fontcolor="#000000"
+    fillcolor="#979cd3"
+  ];
+  "vgg0_conv4_weight" [
+    id=39
+    name="vgg0_conv4_weight"
+    type=constant_input
+    label="vgg0_conv4_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_conv4_bias" [
+    id=40
+    name="vgg0_conv4_bias"
+    type=constant_input
+    label="vgg0_conv4_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_conv4_fwd" [
+    id=41
+    name="vgg0_conv4_fwd"
+    type=Conv
+    label="{ {vgg0_conv4_fwd  | CONV} | [1024,256,56,56] }"
+    inputs="vgg0_pool1_fwd;vgg0_conv4_weight;vgg0_conv4_bias"
+    outputs="vgg0_conv4_fwd"
+    penwidth=3
+    style=filled
+    color="#c58699"
+    fontcolor="#000000"
+    fillcolor="#d998ab"
+  ];
+  "vgg0_batchnorm4_gamma" [
+    id=42
+    name="vgg0_batchnorm4_gamma"
+    type=constant_input
+    label="vgg0_batchnorm4_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_batchnorm4_beta" [
+    id=43
+    name="vgg0_batchnorm4_beta"
+    type=constant_input
+    label="vgg0_batchnorm4_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_batchnorm4_running_mean" [
+    id=44
+    name="vgg0_batchnorm4_running_mean"
+    type=constant_input
+    label="vgg0_batchnorm4_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_batchnorm4_running_var" [
+    id=45
+    name="vgg0_batchnorm4_running_var"
+    type=constant_input
+    label="vgg0_batchnorm4_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_batchnorm4_fwd" [
+    id=46
+    name="vgg0_batchnorm4_fwd"
+    type=BatchNormalization
+    label="{ {vgg0_batchnorm4_fwd  | BN} | [[1024,256,56,56],[256],[256],[256],[256]] }"
+    inputs="vgg0_conv4_fwd;vgg0_batchnorm4_gamma;vgg0_batchnorm4_beta;vgg0_batchnorm4_running_mean;vgg0_batchnorm4_running_var"
+    outputs="vgg0_batchnorm4_fwd"
+    penwidth=3
+    style=filled
+    color="#c6a283"
+    fontcolor="#000000"
+    fillcolor="#dcb797"
+  ];
+  "vgg0_relu4_fwd" [
+    id=47
+    name="vgg0_relu4_fwd"
+    type=Relu
+    label="{ {vgg0_relu4_fwd  | RELU} | [1024,256,56,56] }"
+    inputs="vgg0_batchnorm4_fwd"
+    outputs="vgg0_relu4_fwd"
+    penwidth=3
+    style=filled
+    color="#9bc287"
+    fontcolor="#000000"
+    fillcolor="#b2d99c"
+  ];
+  "vgg0_conv5_weight" [
+    id=48
+    name="vgg0_conv5_weight"
+    type=constant_input
+    label="vgg0_conv5_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_conv5_bias" [
+    id=49
+    name="vgg0_conv5_bias"
+    type=constant_input
+    label="vgg0_conv5_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_conv5_fwd" [
+    id=50
+    name="vgg0_conv5_fwd"
+    type=Conv
+    label="{ {vgg0_conv5_fwd  | CONV} | [1024,256,56,56] }"
+    inputs="vgg0_relu4_fwd;vgg0_conv5_weight;vgg0_conv5_bias"
+    outputs="vgg0_conv5_fwd"
+    penwidth=3
+    style=filled
+    color="#c58699"
+    fontcolor="#000000"
+    fillcolor="#d998ab"
+  ];
+  "vgg0_batchnorm5_gamma" [
+    id=51
+    name="vgg0_batchnorm5_gamma"
+    type=constant_input
+    label="vgg0_batchnorm5_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_batchnorm5_beta" [
+    id=52
+    name="vgg0_batchnorm5_beta"
+    type=constant_input
+    label="vgg0_batchnorm5_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_batchnorm5_running_mean" [
+    id=53
+    name="vgg0_batchnorm5_running_mean"
+    type=constant_input
+    label="vgg0_batchnorm5_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_batchnorm5_running_var" [
+    id=54
+    name="vgg0_batchnorm5_running_var"
+    type=constant_input
+    label="vgg0_batchnorm5_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_batchnorm5_fwd" [
+    id=55
+    name="vgg0_batchnorm5_fwd"
+    type=BatchNormalization
+    label="{ {vgg0_batchnorm5_fwd  | BN} | [[1024,256,56,56],[256],[256],[256],[256]] }"
+    inputs="vgg0_conv5_fwd;vgg0_batchnorm5_gamma;vgg0_batchnorm5_beta;vgg0_batchnorm5_running_mean;vgg0_batchnorm5_running_var"
+    outputs="vgg0_batchnorm5_fwd"
+    penwidth=3
+    style=filled
+    color="#c6a283"
+    fontcolor="#000000"
+    fillcolor="#dcb797"
+  ];
+  "vgg0_relu5_fwd" [
+    id=56
+    name="vgg0_relu5_fwd"
+    type=Relu
+    label="{ {vgg0_relu5_fwd  | RELU} | [1024,256,56,56] }"
+    inputs="vgg0_batchnorm5_fwd"
+    outputs="vgg0_relu5_fwd"
+    penwidth=3
+    style=filled
+    color="#9bc287"
+    fontcolor="#000000"
+    fillcolor="#b2d99c"
+  ];
+  "vgg0_conv6_weight" [
+    id=57
+    name="vgg0_conv6_weight"
+    type=constant_input
+    label="vgg0_conv6_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_conv6_bias" [
+    id=58
+    name="vgg0_conv6_bias"
+    type=constant_input
+    label="vgg0_conv6_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_conv6_fwd" [
+    id=59
+    name="vgg0_conv6_fwd"
+    type=Conv
+    label="{ {vgg0_conv6_fwd  | CONV} | [1024,256,56,56] }"
+    inputs="vgg0_relu5_fwd;vgg0_conv6_weight;vgg0_conv6_bias"
+    outputs="vgg0_conv6_fwd"
+    penwidth=3
+    style=filled
+    color="#c58699"
+    fontcolor="#000000"
+    fillcolor="#d998ab"
+  ];
+  "vgg0_batchnorm6_gamma" [
+    id=60
+    name="vgg0_batchnorm6_gamma"
+    type=constant_input
+    label="vgg0_batchnorm6_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_batchnorm6_beta" [
+    id=61
+    name="vgg0_batchnorm6_beta"
+    type=constant_input
+    label="vgg0_batchnorm6_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_batchnorm6_running_mean" [
+    id=62
+    name="vgg0_batchnorm6_running_mean"
+    type=constant_input
+    label="vgg0_batchnorm6_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_batchnorm6_running_var" [
+    id=63
+    name="vgg0_batchnorm6_running_var"
+    type=constant_input
+    label="vgg0_batchnorm6_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_batchnorm6_fwd" [
+    id=64
+    name="vgg0_batchnorm6_fwd"
+    type=BatchNormalization
+    label="{ {vgg0_batchnorm6_fwd  | BN} | [[1024,256,56,56],[256],[256],[256],[256]] }"
+    inputs="vgg0_conv6_fwd;vgg0_batchnorm6_gamma;vgg0_batchnorm6_beta;vgg0_batchnorm6_running_mean;vgg0_batchnorm6_running_var"
+    outputs="vgg0_batchnorm6_fwd"
+    penwidth=3
+    style=filled
+    color="#c6a283"
+    fontcolor="#000000"
+    fillcolor="#dcb797"
+  ];
+  "vgg0_relu6_fwd" [
+    id=65
+    name="vgg0_relu6_fwd"
+    type=Relu
+    label="{ {vgg0_relu6_fwd  | RELU} | [1024,256,56,56] }"
+    inputs="vgg0_batchnorm6_fwd"
+    outputs="vgg0_relu6_fwd"
+    penwidth=3
+    style=filled
+    color="#9bc287"
+    fontcolor="#000000"
+    fillcolor="#b2d99c"
+  ];
+  "vgg0_pool2_fwd" [
+    id=66
+    name="vgg0_pool2_fwd"
+    type=MaxPool
+    label="{ {vgg0_pool2_fwd  | MXPL} | [1024,256,28,28] }"
+    inputs="vgg0_relu6_fwd"
+    outputs="vgg0_pool2_fwd"
+    penwidth=3
+    style=filled
+    color="#858bc1"
+    fontcolor="#000000"
+    fillcolor="#979cd3"
+  ];
+  "vgg0_conv7_weight" [
+    id=67
+    name="vgg0_conv7_weight"
+    type=constant_input
+    label="vgg0_conv7_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_conv7_bias" [
+    id=68
+    name="vgg0_conv7_bias"
+    type=constant_input
+    label="vgg0_conv7_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_conv7_fwd" [
+    id=69
+    name="vgg0_conv7_fwd"
+    type=Conv
+    label="{ {vgg0_conv7_fwd  | CONV} | [1024,512,28,28] }"
+    inputs="vgg0_pool2_fwd;vgg0_conv7_weight;vgg0_conv7_bias"
+    outputs="vgg0_conv7_fwd"
+    penwidth=3
+    style=filled
+    color="#c58699"
+    fontcolor="#000000"
+    fillcolor="#d998ab"
+  ];
+  "vgg0_batchnorm7_gamma" [
+    id=70
+    name="vgg0_batchnorm7_gamma"
+    type=constant_input
+    label="vgg0_batchnorm7_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_batchnorm7_beta" [
+    id=71
+    name="vgg0_batchnorm7_beta"
+    type=constant_input
+    label="vgg0_batchnorm7_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_batchnorm7_running_mean" [
+    id=72
+    name="vgg0_batchnorm7_running_mean"
+    type=constant_input
+    label="vgg0_batchnorm7_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_batchnorm7_running_var" [
+    id=73
+    name="vgg0_batchnorm7_running_var"
+    type=constant_input
+    label="vgg0_batchnorm7_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_batchnorm7_fwd" [
+    id=74
+    name="vgg0_batchnorm7_fwd"
+    type=BatchNormalization
+    label="{ {vgg0_batchnorm7_fwd  | BN} | [[1024,512,28,28],[512],[512],[512],[512]] }"
+    inputs="vgg0_conv7_fwd;vgg0_batchnorm7_gamma;vgg0_batchnorm7_beta;vgg0_batchnorm7_running_mean;vgg0_batchnorm7_running_var"
+    outputs="vgg0_batchnorm7_fwd"
+    penwidth=3
+    style=filled
+    color="#c6a283"
+    fontcolor="#000000"
+    fillcolor="#dcb797"
+  ];
+  "vgg0_relu7_fwd" [
+    id=75
+    name="vgg0_relu7_fwd"
+    type=Relu
+    label="{ {vgg0_relu7_fwd  | RELU} | [1024,512,28,28] }"
+    inputs="vgg0_batchnorm7_fwd"
+    outputs="vgg0_relu7_fwd"
+    penwidth=3
+    style=filled
+    color="#9bc287"
+    fontcolor="#000000"
+    fillcolor="#b2d99c"
+  ];
+  "vgg0_conv8_weight" [
+    id=76
+    name="vgg0_conv8_weight"
+    type=constant_input
+    label="vgg0_conv8_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_conv8_bias" [
+    id=77
+    name="vgg0_conv8_bias"
+    type=constant_input
+    label="vgg0_conv8_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_conv8_fwd" [
+    id=78
+    name="vgg0_conv8_fwd"
+    type=Conv
+    label="{ {vgg0_conv8_fwd  | CONV} | [1024,512,28,28] }"
+    inputs="vgg0_relu7_fwd;vgg0_conv8_weight;vgg0_conv8_bias"
+    outputs="vgg0_conv8_fwd"
+    penwidth=3
+    style=filled
+    color="#c58699"
+    fontcolor="#000000"
+    fillcolor="#d998ab"
+  ];
+  "vgg0_batchnorm8_gamma" [
+    id=79
+    name="vgg0_batchnorm8_gamma"
+    type=constant_input
+    label="vgg0_batchnorm8_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_batchnorm8_beta" [
+    id=80
+    name="vgg0_batchnorm8_beta"
+    type=constant_input
+    label="vgg0_batchnorm8_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_batchnorm8_running_mean" [
+    id=81
+    name="vgg0_batchnorm8_running_mean"
+    type=constant_input
+    label="vgg0_batchnorm8_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_batchnorm8_running_var" [
+    id=82
+    name="vgg0_batchnorm8_running_var"
+    type=constant_input
+    label="vgg0_batchnorm8_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_batchnorm8_fwd" [
+    id=83
+    name="vgg0_batchnorm8_fwd"
+    type=BatchNormalization
+    label="{ {vgg0_batchnorm8_fwd  | BN} | [[1024,512,28,28],[512],[512],[512],[512]] }"
+    inputs="vgg0_conv8_fwd;vgg0_batchnorm8_gamma;vgg0_batchnorm8_beta;vgg0_batchnorm8_running_mean;vgg0_batchnorm8_running_var"
+    outputs="vgg0_batchnorm8_fwd"
+    penwidth=3
+    style=filled
+    color="#c6a283"
+    fontcolor="#000000"
+    fillcolor="#dcb797"
+  ];
+  "vgg0_relu8_fwd" [
+    id=84
+    name="vgg0_relu8_fwd"
+    type=Relu
+    label="{ {vgg0_relu8_fwd  | RELU} | [1024,512,28,28] }"
+    inputs="vgg0_batchnorm8_fwd"
+    outputs="vgg0_relu8_fwd"
+    penwidth=3
+    style=filled
+    color="#9bc287"
+    fontcolor="#000000"
+    fillcolor="#b2d99c"
+  ];
+  "vgg0_conv9_weight" [
+    id=85
+    name="vgg0_conv9_weight"
+    type=constant_input
+    label="vgg0_conv9_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_conv9_bias" [
+    id=86
+    name="vgg0_conv9_bias"
+    type=constant_input
+    label="vgg0_conv9_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_conv9_fwd" [
+    id=87
+    name="vgg0_conv9_fwd"
+    type=Conv
+    label="{ {vgg0_conv9_fwd  | CONV} | [1024,512,28,28] }"
+    inputs="vgg0_relu8_fwd;vgg0_conv9_weight;vgg0_conv9_bias"
+    outputs="vgg0_conv9_fwd"
+    penwidth=3
+    style=filled
+    color="#c58699"
+    fontcolor="#000000"
+    fillcolor="#d998ab"
+  ];
+  "vgg0_batchnorm9_gamma" [
+    id=88
+    name="vgg0_batchnorm9_gamma"
+    type=constant_input
+    label="vgg0_batchnorm9_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_batchnorm9_beta" [
+    id=89
+    name="vgg0_batchnorm9_beta"
+    type=constant_input
+    label="vgg0_batchnorm9_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_batchnorm9_running_mean" [
+    id=90
+    name="vgg0_batchnorm9_running_mean"
+    type=constant_input
+    label="vgg0_batchnorm9_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_batchnorm9_running_var" [
+    id=91
+    name="vgg0_batchnorm9_running_var"
+    type=constant_input
+    label="vgg0_batchnorm9_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_batchnorm9_fwd" [
+    id=92
+    name="vgg0_batchnorm9_fwd"
+    type=BatchNormalization
+    label="{ {vgg0_batchnorm9_fwd  | BN} | [[1024,512,28,28],[512],[512],[512],[512]] }"
+    inputs="vgg0_conv9_fwd;vgg0_batchnorm9_gamma;vgg0_batchnorm9_beta;vgg0_batchnorm9_running_mean;vgg0_batchnorm9_running_var"
+    outputs="vgg0_batchnorm9_fwd"
+    penwidth=3
+    style=filled
+    color="#c6a283"
+    fontcolor="#000000"
+    fillcolor="#dcb797"
+  ];
+  "vgg0_relu9_fwd" [
+    id=93
+    name="vgg0_relu9_fwd"
+    type=Relu
+    label="{ {vgg0_relu9_fwd  | RELU} | [1024,512,28,28] }"
+    inputs="vgg0_batchnorm9_fwd"
+    outputs="vgg0_relu9_fwd"
+    penwidth=3
+    style=filled
+    color="#9bc287"
+    fontcolor="#000000"
+    fillcolor="#b2d99c"
+  ];
+  "vgg0_pool3_fwd" [
+    id=94
+    name="vgg0_pool3_fwd"
+    type=MaxPool
+    label="{ {vgg0_pool3_fwd  | MXPL} | [1024,512,14,14] }"
+    inputs="vgg0_relu9_fwd"
+    outputs="vgg0_pool3_fwd"
+    penwidth=3
+    style=filled
+    color="#858bc1"
+    fontcolor="#000000"
+    fillcolor="#979cd3"
+  ];
+  "vgg0_conv10_weight" [
+    id=95
+    name="vgg0_conv10_weight"
+    type=constant_input
+    label="vgg0_conv10_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_conv10_bias" [
+    id=96
+    name="vgg0_conv10_bias"
+    type=constant_input
+    label="vgg0_conv10_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_conv10_fwd" [
+    id=97
+    name="vgg0_conv10_fwd"
+    type=Conv
+    label="{ {vgg0_conv10_fwd  | CONV} | [1024,512,14,14] }"
+    inputs="vgg0_pool3_fwd;vgg0_conv10_weight;vgg0_conv10_bias"
+    outputs="vgg0_conv10_fwd"
+    penwidth=3
+    style=filled
+    color="#c58699"
+    fontcolor="#000000"
+    fillcolor="#d998ab"
+  ];
+  "vgg0_batchnorm10_gamma" [
+    id=98
+    name="vgg0_batchnorm10_gamma"
+    type=constant_input
+    label="vgg0_batchnorm10_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_batchnorm10_beta" [
+    id=99
+    name="vgg0_batchnorm10_beta"
+    type=constant_input
+    label="vgg0_batchnorm10_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_batchnorm10_running_mean" [
+    id=100
+    name="vgg0_batchnorm10_running_mean"
+    type=constant_input
+    label="vgg0_batchnorm10_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_batchnorm10_running_var" [
+    id=101
+    name="vgg0_batchnorm10_running_var"
+    type=constant_input
+    label="vgg0_batchnorm10_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_batchnorm10_fwd" [
+    id=102
+    name="vgg0_batchnorm10_fwd"
+    type=BatchNormalization
+    label="{ {vgg0_batchnorm10_fwd  | BN} | [[1024,512,14,14],[512],[512],[512],[512]] }"
+    inputs="vgg0_conv10_fwd;vgg0_batchnorm10_gamma;vgg0_batchnorm10_beta;vgg0_batchnorm10_running_mean;vgg0_batchnorm10_running_var"
+    outputs="vgg0_batchnorm10_fwd"
+    penwidth=3
+    style=filled
+    color="#c6a283"
+    fontcolor="#000000"
+    fillcolor="#dcb797"
+  ];
+  "vgg0_relu10_fwd" [
+    id=103
+    name="vgg0_relu10_fwd"
+    type=Relu
+    label="{ {vgg0_relu10_fwd  | RELU} | [1024,512,14,14] }"
+    inputs="vgg0_batchnorm10_fwd"
+    outputs="vgg0_relu10_fwd"
+    penwidth=3
+    style=filled
+    color="#9bc287"
+    fontcolor="#000000"
+    fillcolor="#b2d99c"
+  ];
+  "vgg0_conv11_weight" [
+    id=104
+    name="vgg0_conv11_weight"
+    type=constant_input
+    label="vgg0_conv11_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_conv11_bias" [
+    id=105
+    name="vgg0_conv11_bias"
+    type=constant_input
+    label="vgg0_conv11_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_conv11_fwd" [
+    id=106
+    name="vgg0_conv11_fwd"
+    type=Conv
+    label="{ {vgg0_conv11_fwd  | CONV} | [1024,512,14,14] }"
+    inputs="vgg0_relu10_fwd;vgg0_conv11_weight;vgg0_conv11_bias"
+    outputs="vgg0_conv11_fwd"
+    penwidth=3
+    style=filled
+    color="#c58699"
+    fontcolor="#000000"
+    fillcolor="#d998ab"
+  ];
+  "vgg0_batchnorm11_gamma" [
+    id=107
+    name="vgg0_batchnorm11_gamma"
+    type=constant_input
+    label="vgg0_batchnorm11_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_batchnorm11_beta" [
+    id=108
+    name="vgg0_batchnorm11_beta"
+    type=constant_input
+    label="vgg0_batchnorm11_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_batchnorm11_running_mean" [
+    id=109
+    name="vgg0_batchnorm11_running_mean"
+    type=constant_input
+    label="vgg0_batchnorm11_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_batchnorm11_running_var" [
+    id=110
+    name="vgg0_batchnorm11_running_var"
+    type=constant_input
+    label="vgg0_batchnorm11_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_batchnorm11_fwd" [
+    id=111
+    name="vgg0_batchnorm11_fwd"
+    type=BatchNormalization
+    label="{ {vgg0_batchnorm11_fwd  | BN} | [[1024,512,14,14],[512],[512],[512],[512]] }"
+    inputs="vgg0_conv11_fwd;vgg0_batchnorm11_gamma;vgg0_batchnorm11_beta;vgg0_batchnorm11_running_mean;vgg0_batchnorm11_running_var"
+    outputs="vgg0_batchnorm11_fwd"
+    penwidth=3
+    style=filled
+    color="#c6a283"
+    fontcolor="#000000"
+    fillcolor="#dcb797"
+  ];
+  "vgg0_relu11_fwd" [
+    id=112
+    name="vgg0_relu11_fwd"
+    type=Relu
+    label="{ {vgg0_relu11_fwd  | RELU} | [1024,512,14,14] }"
+    inputs="vgg0_batchnorm11_fwd"
+    outputs="vgg0_relu11_fwd"
+    penwidth=3
+    style=filled
+    color="#9bc287"
+    fontcolor="#000000"
+    fillcolor="#b2d99c"
+  ];
+  "vgg0_conv12_weight" [
+    id=113
+    name="vgg0_conv12_weight"
+    type=constant_input
+    label="vgg0_conv12_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_conv12_bias" [
+    id=114
+    name="vgg0_conv12_bias"
+    type=constant_input
+    label="vgg0_conv12_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_conv12_fwd" [
+    id=115
+    name="vgg0_conv12_fwd"
+    type=Conv
+    label="{ {vgg0_conv12_fwd  | CONV} | [1024,512,14,14] }"
+    inputs="vgg0_relu11_fwd;vgg0_conv12_weight;vgg0_conv12_bias"
+    outputs="vgg0_conv12_fwd"
+    penwidth=3
+    style=filled
+    color="#c58699"
+    fontcolor="#000000"
+    fillcolor="#d998ab"
+  ];
+  "vgg0_batchnorm12_gamma" [
+    id=116
+    name="vgg0_batchnorm12_gamma"
+    type=constant_input
+    label="vgg0_batchnorm12_gamma"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_batchnorm12_beta" [
+    id=117
+    name="vgg0_batchnorm12_beta"
+    type=constant_input
+    label="vgg0_batchnorm12_beta"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_batchnorm12_running_mean" [
+    id=118
+    name="vgg0_batchnorm12_running_mean"
+    type=constant_input
+    label="vgg0_batchnorm12_running_mean"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_batchnorm12_running_var" [
+    id=119
+    name="vgg0_batchnorm12_running_var"
+    type=constant_input
+    label="vgg0_batchnorm12_running_var"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_batchnorm12_fwd" [
+    id=120
+    name="vgg0_batchnorm12_fwd"
+    type=BatchNormalization
+    label="{ {vgg0_batchnorm12_fwd  | BN} | [[1024,512,14,14],[512],[512],[512],[512]] }"
+    inputs="vgg0_conv12_fwd;vgg0_batchnorm12_gamma;vgg0_batchnorm12_beta;vgg0_batchnorm12_running_mean;vgg0_batchnorm12_running_var"
+    outputs="vgg0_batchnorm12_fwd"
+    penwidth=3
+    style=filled
+    color="#c6a283"
+    fontcolor="#000000"
+    fillcolor="#dcb797"
+  ];
+  "vgg0_relu12_fwd" [
+    id=121
+    name="vgg0_relu12_fwd"
+    type=Relu
+    label="{ {vgg0_relu12_fwd  | RELU} | [1024,512,14,14] }"
+    inputs="vgg0_batchnorm12_fwd"
+    outputs="vgg0_relu12_fwd"
+    penwidth=3
+    style=filled
+    color="#9bc287"
+    fontcolor="#000000"
+    fillcolor="#b2d99c"
+  ];
+  "vgg0_pool4_fwd" [
+    id=122
+    name="vgg0_pool4_fwd"
+    type=MaxPool
+    label="{ {vgg0_pool4_fwd  | MXPL} | [1024,512,7,7] }"
+    inputs="vgg0_relu12_fwd"
+    outputs="vgg0_pool4_fwd"
+    penwidth=3
+    style=filled
+    color="#858bc1"
+    fontcolor="#000000"
+    fillcolor="#979cd3"
+  ];
+  "flatten_125" [
+    id=123
+    name="flatten_125"
+    type=Flatten
+    label="{ {flatten_125  | FLT} | [1024,512,7,7] }"
+    inputs="vgg0_pool4_fwd"
+    outputs="flatten_125"
+    penwidth=3
+    style=filled
+    color="#bc7ec8"
+    fontcolor="#000000"
+    fillcolor="#d090db"
+  ];
+  "vgg0_dense0_weight" [
+    id=124
+    name="vgg0_dense0_weight"
+    type=constant_input
+    label="vgg0_dense0_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_dense0_bias" [
+    id=125
+    name="vgg0_dense0_bias"
+    type=constant_input
+    label="vgg0_dense0_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_dense0_fwd" [
+    id=126
+    name="vgg0_dense0_fwd"
+    type=Gemm
+    label="{ {vgg0_dense0_fwd  | GEMM} | [1024,4096] }"
+    inputs="flatten_125;vgg0_dense0_weight;vgg0_dense0_bias"
+    outputs="vgg0_dense0_fwd"
+    penwidth=3
+    style=filled
+    color="#bd95ce"
+    fontcolor="#000000"
+    fillcolor="#d2a9e3"
+  ];
+  "vgg0_dense0_relu_fwd" [
+    id=127
+    name="vgg0_dense0_relu_fwd"
+    type=Relu
+    label="{ {vgg0_dense0_relu_fwd  | RELU} | [1024,4096] }"
+    inputs="vgg0_dense0_fwd"
+    outputs="vgg0_dense0_relu_fwd"
+    penwidth=3
+    style=filled
+    color="#9bc287"
+    fontcolor="#000000"
+    fillcolor="#b2d99c"
+  ];
+  "vgg0_dropout0_fwd" [
+    id=128
+    name="vgg0_dropout0_fwd"
+    type=Dropout
+    label="{ {vgg0_dropout0_fwd  | DRP} | [1024,4096] }"
+    inputs="vgg0_dense0_relu_fwd"
+    outputs="vgg0_dropout0_fwd"
+    penwidth=3
+    style=filled
+    color="#87bcc3"
+    fontcolor="#000000"
+    fillcolor="#9dd2da"
+  ];
+  "flatten_130" [
+    id=129
+    name="flatten_130"
+    type=Flatten
+    label="{ {flatten_130  | FLT} | [1024,4096] }"
+    inputs="vgg0_dropout0_fwd"
+    outputs="flatten_130"
+    penwidth=3
+    style=filled
+    color="#bc7ec8"
+    fontcolor="#000000"
+    fillcolor="#d090db"
+  ];
+  "vgg0_dense1_weight" [
+    id=130
+    name="vgg0_dense1_weight"
+    type=constant_input
+    label="vgg0_dense1_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_dense1_bias" [
+    id=131
+    name="vgg0_dense1_bias"
+    type=constant_input
+    label="vgg0_dense1_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_dense1_fwd" [
+    id=132
+    name="vgg0_dense1_fwd"
+    type=Gemm
+    label="{ {vgg0_dense1_fwd  | GEMM} | [1024,4096] }"
+    inputs="flatten_130;vgg0_dense1_weight;vgg0_dense1_bias"
+    outputs="vgg0_dense1_fwd"
+    penwidth=3
+    style=filled
+    color="#bd95ce"
+    fontcolor="#000000"
+    fillcolor="#d2a9e3"
+  ];
+  "vgg0_dense1_relu_fwd" [
+    id=133
+    name="vgg0_dense1_relu_fwd"
+    type=Relu
+    label="{ {vgg0_dense1_relu_fwd  | RELU} | [1024,4096] }"
+    inputs="vgg0_dense1_fwd"
+    outputs="vgg0_dense1_relu_fwd"
+    penwidth=3
+    style=filled
+    color="#9bc287"
+    fontcolor="#000000"
+    fillcolor="#b2d99c"
+  ];
+  "vgg0_dropout1_fwd" [
+    id=134
+    name="vgg0_dropout1_fwd"
+    type=Dropout
+    label="{ {vgg0_dropout1_fwd  | DRP} | [1024,4096] }"
+    inputs="vgg0_dense1_relu_fwd"
+    outputs="vgg0_dropout1_fwd"
+    penwidth=3
+    style=filled
+    color="#87bcc3"
+    fontcolor="#000000"
+    fillcolor="#9dd2da"
+  ];
+  "flatten_135" [
+    id=135
+    name="flatten_135"
+    type=Flatten
+    label="{ {flatten_135  | FLT} | [1024,4096] }"
+    inputs="vgg0_dropout1_fwd"
+    outputs="flatten_135"
+    penwidth=3
+    style=filled
+    color="#bc7ec8"
+    fontcolor="#000000"
+    fillcolor="#d090db"
+  ];
+  "vgg0_dense2_weight" [
+    id=136
+    name="vgg0_dense2_weight"
+    type=constant_input
+    label="vgg0_dense2_weight"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_dense2_bias" [
+    id=137
+    name="vgg0_dense2_bias"
+    type=constant_input
+    label="vgg0_dense2_bias"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "vgg0_dense2_fwd" [
+    id=138
+    name="vgg0_dense2_fwd"
+    type=Gemm
+    label="{ {vgg0_dense2_fwd  | GEMM} | [1024,1000] }"
+    inputs="flatten_135;vgg0_dense2_weight;vgg0_dense2_bias"
+    outputs="vgg0_dense2_fwd"
+    penwidth=3
+    style=filled
+    color="#bd95ce"
+    fontcolor="#000000"
+    fillcolor="#d2a9e3"
+  ];
+
+  // Edge definitions.
+  "data" -> "vgg0_conv0_fwd";
+  "vgg0_conv0_weight" -> "vgg0_conv0_fwd";
+  "vgg0_conv0_bias" -> "vgg0_conv0_fwd";
+  "vgg0_conv0_fwd" -> "vgg0_batchnorm0_fwd";
+  "vgg0_batchnorm0_gamma" -> "vgg0_batchnorm0_fwd";
+  "vgg0_batchnorm0_beta" -> "vgg0_batchnorm0_fwd";
+  "vgg0_batchnorm0_running_mean" -> "vgg0_batchnorm0_fwd";
+  "vgg0_batchnorm0_running_var" -> "vgg0_batchnorm0_fwd";
+  "vgg0_batchnorm0_fwd" -> "vgg0_relu0_fwd";
+  "vgg0_relu0_fwd" -> "vgg0_conv1_fwd";
+  "vgg0_conv1_weight" -> "vgg0_conv1_fwd";
+  "vgg0_conv1_bias" -> "vgg0_conv1_fwd";
+  "vgg0_conv1_fwd" -> "vgg0_batchnorm1_fwd";
+  "vgg0_batchnorm1_gamma" -> "vgg0_batchnorm1_fwd";
+  "vgg0_batchnorm1_beta" -> "vgg0_batchnorm1_fwd";
+  "vgg0_batchnorm1_running_mean" -> "vgg0_batchnorm1_fwd";
+  "vgg0_batchnorm1_running_var" -> "vgg0_batchnorm1_fwd";
+  "vgg0_batchnorm1_fwd" -> "vgg0_relu1_fwd";
+  "vgg0_relu1_fwd" -> "vgg0_pool0_fwd";
+  "vgg0_pool0_fwd" -> "vgg0_conv2_fwd";
+  "vgg0_conv2_weight" -> "vgg0_conv2_fwd";
+  "vgg0_conv2_bias" -> "vgg0_conv2_fwd";
+  "vgg0_conv2_fwd" -> "vgg0_batchnorm2_fwd";
+  "vgg0_batchnorm2_gamma" -> "vgg0_batchnorm2_fwd";
+  "vgg0_batchnorm2_beta" -> "vgg0_batchnorm2_fwd";
+  "vgg0_batchnorm2_running_mean" -> "vgg0_batchnorm2_fwd";
+  "vgg0_batchnorm2_running_var" -> "vgg0_batchnorm2_fwd";
+  "vgg0_batchnorm2_fwd" -> "vgg0_relu2_fwd";
+  "vgg0_relu2_fwd" -> "vgg0_conv3_fwd";
+  "vgg0_conv3_weight" -> "vgg0_conv3_fwd";
+  "vgg0_conv3_bias" -> "vgg0_conv3_fwd";
+  "vgg0_conv3_fwd" -> "vgg0_batchnorm3_fwd";
+  "vgg0_batchnorm3_gamma" -> "vgg0_batchnorm3_fwd";
+  "vgg0_batchnorm3_beta" -> "vgg0_batchnorm3_fwd";
+  "vgg0_batchnorm3_running_mean" -> "vgg0_batchnorm3_fwd";
+  "vgg0_batchnorm3_running_var" -> "vgg0_batchnorm3_fwd";
+  "vgg0_batchnorm3_fwd" -> "vgg0_relu3_fwd";
+  "vgg0_relu3_fwd" -> "vgg0_pool1_fwd";
+  "vgg0_pool1_fwd" -> "vgg0_conv4_fwd";
+  "vgg0_conv4_weight" -> "vgg0_conv4_fwd";
+  "vgg0_conv4_bias" -> "vgg0_conv4_fwd";
+  "vgg0_conv4_fwd" -> "vgg0_batchnorm4_fwd";
+  "vgg0_batchnorm4_gamma" -> "vgg0_batchnorm4_fwd";
+  "vgg0_batchnorm4_beta" -> "vgg0_batchnorm4_fwd";
+  "vgg0_batchnorm4_running_mean" -> "vgg0_batchnorm4_fwd";
+  "vgg0_batchnorm4_running_var" -> "vgg0_batchnorm4_fwd";
+  "vgg0_batchnorm4_fwd" -> "vgg0_relu4_fwd";
+  "vgg0_relu4_fwd" -> "vgg0_conv5_fwd";
+  "vgg0_conv5_weight" -> "vgg0_conv5_fwd";
+  "vgg0_conv5_bias" -> "vgg0_conv5_fwd";
+  "vgg0_conv5_fwd" -> "vgg0_batchnorm5_fwd";
+  "vgg0_batchnorm5_gamma" -> "vgg0_batchnorm5_fwd";
+  "vgg0_batchnorm5_beta" -> "vgg0_batchnorm5_fwd";
+  "vgg0_batchnorm5_running_mean" -> "vgg0_batchnorm5_fwd";
+  "vgg0_batchnorm5_running_var" -> "vgg0_batchnorm5_fwd";
+  "vgg0_batchnorm5_fwd" -> "vgg0_relu5_fwd";
+  "vgg0_relu5_fwd" -> "vgg0_conv6_fwd";
+  "vgg0_conv6_weight" -> "vgg0_conv6_fwd";
+  "vgg0_conv6_bias" -> "vgg0_conv6_fwd";
+  "vgg0_conv6_fwd" -> "vgg0_batchnorm6_fwd";
+  "vgg0_batchnorm6_gamma" -> "vgg0_batchnorm6_fwd";
+  "vgg0_batchnorm6_beta" -> "vgg0_batchnorm6_fwd";
+  "vgg0_batchnorm6_running_mean" -> "vgg0_batchnorm6_fwd";
+  "vgg0_batchnorm6_running_var" -> "vgg0_batchnorm6_fwd";
+  "vgg0_batchnorm6_fwd" -> "vgg0_relu6_fwd";
+  "vgg0_relu6_fwd" -> "vgg0_pool2_fwd";
+  "vgg0_pool2_fwd" -> "vgg0_conv7_fwd";
+  "vgg0_conv7_weight" -> "vgg0_conv7_fwd";
+  "vgg0_conv7_bias" -> "vgg0_conv7_fwd";
+  "vgg0_conv7_fwd" -> "vgg0_batchnorm7_fwd";
+  "vgg0_batchnorm7_gamma" -> "vgg0_batchnorm7_fwd";
+  "vgg0_batchnorm7_beta" -> "vgg0_batchnorm7_fwd";
+  "vgg0_batchnorm7_running_mean" -> "vgg0_batchnorm7_fwd";
+  "vgg0_batchnorm7_running_var" -> "vgg0_batchnorm7_fwd";
+  "vgg0_batchnorm7_fwd" -> "vgg0_relu7_fwd";
+  "vgg0_relu7_fwd" -> "vgg0_conv8_fwd";
+  "vgg0_conv8_weight" -> "vgg0_conv8_fwd";
+  "vgg0_conv8_bias" -> "vgg0_conv8_fwd";
+  "vgg0_conv8_fwd" -> "vgg0_batchnorm8_fwd";
+  "vgg0_batchnorm8_gamma" -> "vgg0_batchnorm8_fwd";
+  "vgg0_batchnorm8_beta" -> "vgg0_batchnorm8_fwd";
+  "vgg0_batchnorm8_running_mean" -> "vgg0_batchnorm8_fwd";
+  "vgg0_batchnorm8_running_var" -> "vgg0_batchnorm8_fwd";
+  "vgg0_batchnorm8_fwd" -> "vgg0_relu8_fwd";
+  "vgg0_relu8_fwd" -> "vgg0_conv9_fwd";
+  "vgg0_conv9_weight" -> "vgg0_conv9_fwd";
+  "vgg0_conv9_bias" -> "vgg0_conv9_fwd";
+  "vgg0_conv9_fwd" -> "vgg0_batchnorm9_fwd";
+  "vgg0_batchnorm9_gamma" -> "vgg0_batchnorm9_fwd";
+  "vgg0_batchnorm9_beta" -> "vgg0_batchnorm9_fwd";
+  "vgg0_batchnorm9_running_mean" -> "vgg0_batchnorm9_fwd";
+  "vgg0_batchnorm9_running_var" -> "vgg0_batchnorm9_fwd";
+  "vgg0_batchnorm9_fwd" -> "vgg0_relu9_fwd";
+  "vgg0_relu9_fwd" -> "vgg0_pool3_fwd";
+  "vgg0_pool3_fwd" -> "vgg0_conv10_fwd";
+  "vgg0_conv10_weight" -> "vgg0_conv10_fwd";
+  "vgg0_conv10_bias" -> "vgg0_conv10_fwd";
+  "vgg0_conv10_fwd" -> "vgg0_batchnorm10_fwd";
+  "vgg0_batchnorm10_gamma" -> "vgg0_batchnorm10_fwd";
+  "vgg0_batchnorm10_beta" -> "vgg0_batchnorm10_fwd";
+  "vgg0_batchnorm10_running_mean" -> "vgg0_batchnorm10_fwd";
+  "vgg0_batchnorm10_running_var" -> "vgg0_batchnorm10_fwd";
+  "vgg0_batchnorm10_fwd" -> "vgg0_relu10_fwd";
+  "vgg0_relu10_fwd" -> "vgg0_conv11_fwd";
+  "vgg0_conv11_weight" -> "vgg0_conv11_fwd";
+  "vgg0_conv11_bias" -> "vgg0_conv11_fwd";
+  "vgg0_conv11_fwd" -> "vgg0_batchnorm11_fwd";
+  "vgg0_batchnorm11_gamma" -> "vgg0_batchnorm11_fwd";
+  "vgg0_batchnorm11_beta" -> "vgg0_batchnorm11_fwd";
+  "vgg0_batchnorm11_running_mean" -> "vgg0_batchnorm11_fwd";
+  "vgg0_batchnorm11_running_var" -> "vgg0_batchnorm11_fwd";
+  "vgg0_batchnorm11_fwd" -> "vgg0_relu11_fwd";
+  "vgg0_relu11_fwd" -> "vgg0_conv12_fwd";
+  "vgg0_conv12_weight" -> "vgg0_conv12_fwd";
+  "vgg0_conv12_bias" -> "vgg0_conv12_fwd";
+  "vgg0_conv12_fwd" -> "vgg0_batchnorm12_fwd";
+  "vgg0_batchnorm12_gamma" -> "vgg0_batchnorm12_fwd";
+  "vgg0_batchnorm12_beta" -> "vgg0_batchnorm12_fwd";
+  "vgg0_batchnorm12_running_mean" -> "vgg0_batchnorm12_fwd";
+  "vgg0_batchnorm12_running_var" -> "vgg0_batchnorm12_fwd";
+  "vgg0_batchnorm12_fwd" -> "vgg0_relu12_fwd";
+  "vgg0_relu12_fwd" -> "vgg0_pool4_fwd";
+  "vgg0_pool4_fwd" -> "flatten_125";
+  "flatten_125" -> "vgg0_dense0_fwd";
+  "vgg0_dense0_weight" -> "vgg0_dense0_fwd";
+  "vgg0_dense0_bias" -> "vgg0_dense0_fwd";
+  "vgg0_dense0_fwd" -> "vgg0_dense0_relu_fwd";
+  "vgg0_dense0_relu_fwd" -> "vgg0_dropout0_fwd";
+  "vgg0_dropout0_fwd" -> "flatten_130";
+  "flatten_130" -> "vgg0_dense1_fwd";
+  "vgg0_dense1_weight" -> "vgg0_dense1_fwd";
+  "vgg0_dense1_bias" -> "vgg0_dense1_fwd";
+  "vgg0_dense1_fwd" -> "vgg0_dense1_relu_fwd";
+  "vgg0_dense1_relu_fwd" -> "vgg0_dropout1_fwd";
+  "vgg0_dropout1_fwd" -> "flatten_135";
+  "flatten_135" -> "vgg0_dense2_fwd";
+  "vgg0_dense2_weight" -> "vgg0_dense2_fwd";
+  "vgg0_dense2_bias" -> "vgg0_dense2_fwd";
+}

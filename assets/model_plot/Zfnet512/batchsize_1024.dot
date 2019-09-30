@@ -1,0 +1,541 @@
+strict digraph {
+  graph [
+    rankdir="TB"
+    overlap=prism
+    overlap_shrink=true
+    splines=curved
+  ];
+  node [
+    shape=Mrecord
+  ];
+  edge [
+    penwidth=3
+  ];
+
+  // Node definitions.
+  "gpu_0/data_0" [
+    id=0
+    name="gpu_0/data_0"
+    type=constant_input
+    label="gpu_0/data_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "gpu_0/conv1_w_0" [
+    id=1
+    name="gpu_0/conv1_w_0"
+    type=constant_input
+    label="gpu_0/conv1_w_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "gpu_0/conv1_b_0" [
+    id=2
+    name="gpu_0/conv1_b_0"
+    type=constant_input
+    label="gpu_0/conv1_b_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "gpu_0/conv1_1" [
+    id=3
+    name="gpu_0/conv1_1"
+    type=Conv
+    label="{ {conv_1  | CONV} | [1024,96,109,109] }"
+    inputs="gpu_0/data_0;gpu_0/conv1_w_0;gpu_0/conv1_b_0"
+    outputs="gpu_0/conv1_1"
+    penwidth=3
+    style=filled
+    color="#85bc95"
+    fontcolor="#000000"
+    fillcolor="#9ad2ab"
+  ];
+  "gpu_0/conv1_2" [
+    id=4
+    name="gpu_0/conv1_2"
+    type=Relu
+    label="{ {relu_1  | RELU} | [1024,96,109,109] }"
+    inputs="gpu_0/conv1_1"
+    outputs="gpu_0/conv1_2"
+    penwidth=3
+    style=filled
+    color="#8e8ac3"
+    fontcolor="#000000"
+    fillcolor="#a09bd6"
+  ];
+  "gpu_0/norm1_1" [
+    id=5
+    name="gpu_0/norm1_1"
+    type=LRN
+    label="{ {lrn_1  | LRN} | [1024,96,109,109] }"
+    inputs="gpu_0/conv1_2"
+    outputs="gpu_0/norm1_1"
+    penwidth=3
+    style=filled
+    color="#bdbb81"
+    fontcolor="#000000"
+    fillcolor="#d5d297"
+  ];
+  "gpu_0/pool1_1" [
+    id=6
+    name="gpu_0/pool1_1"
+    type=MaxPool
+    label="{ {maxpool_1  | MXPL} | [1024,96,54,54] }"
+    inputs="gpu_0/norm1_1"
+    outputs="gpu_0/pool1_1"
+    penwidth=3
+    style=filled
+    color="#c687c1"
+    fontcolor="#000000"
+    fillcolor="#da9ad5"
+  ];
+  "gpu_0/conv2_w_0" [
+    id=7
+    name="gpu_0/conv2_w_0"
+    type=constant_input
+    label="gpu_0/conv2_w_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "gpu_0/conv2_b_0" [
+    id=8
+    name="gpu_0/conv2_b_0"
+    type=constant_input
+    label="gpu_0/conv2_b_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "gpu_0/conv2_1" [
+    id=9
+    name="gpu_0/conv2_1"
+    type=Conv
+    label="{ {conv_2  | CONV} | [1024,256,25,25] }"
+    inputs="gpu_0/pool1_1;gpu_0/conv2_w_0;gpu_0/conv2_b_0"
+    outputs="gpu_0/conv2_1"
+    penwidth=3
+    style=filled
+    color="#85bc95"
+    fontcolor="#000000"
+    fillcolor="#9ad2ab"
+  ];
+  "gpu_0/conv2_2" [
+    id=10
+    name="gpu_0/conv2_2"
+    type=Relu
+    label="{ {relu_2  | RELU} | [1024,256,25,25] }"
+    inputs="gpu_0/conv2_1"
+    outputs="gpu_0/conv2_2"
+    penwidth=3
+    style=filled
+    color="#8e8ac3"
+    fontcolor="#000000"
+    fillcolor="#a09bd6"
+  ];
+  "gpu_0/norm2_1" [
+    id=11
+    name="gpu_0/norm2_1"
+    type=LRN
+    label="{ {lrn_2  | LRN} | [1024,256,25,25] }"
+    inputs="gpu_0/conv2_2"
+    outputs="gpu_0/norm2_1"
+    penwidth=3
+    style=filled
+    color="#bdbb81"
+    fontcolor="#000000"
+    fillcolor="#d5d297"
+  ];
+  "gpu_0/pool2_1" [
+    id=12
+    name="gpu_0/pool2_1"
+    type=MaxPool
+    label="{ {maxpool_2  | MXPL} | [1024,256,12,12] }"
+    inputs="gpu_0/norm2_1"
+    outputs="gpu_0/pool2_1"
+    penwidth=3
+    style=filled
+    color="#c687c1"
+    fontcolor="#000000"
+    fillcolor="#da9ad5"
+  ];
+  "gpu_0/conv3_w_0" [
+    id=13
+    name="gpu_0/conv3_w_0"
+    type=constant_input
+    label="gpu_0/conv3_w_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "gpu_0/conv3_b_0" [
+    id=14
+    name="gpu_0/conv3_b_0"
+    type=constant_input
+    label="gpu_0/conv3_b_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "gpu_0/conv3_1" [
+    id=15
+    name="gpu_0/conv3_1"
+    type=Conv
+    label="{ {conv_3  | CONV} | [1024,512,12,12] }"
+    inputs="gpu_0/pool2_1;gpu_0/conv3_w_0;gpu_0/conv3_b_0"
+    outputs="gpu_0/conv3_1"
+    penwidth=3
+    style=filled
+    color="#85bc95"
+    fontcolor="#000000"
+    fillcolor="#9ad2ab"
+  ];
+  "gpu_0/conv3_2" [
+    id=16
+    name="gpu_0/conv3_2"
+    type=Relu
+    label="{ {relu_3  | RELU} | [1024,512,12,12] }"
+    inputs="gpu_0/conv3_1"
+    outputs="gpu_0/conv3_2"
+    penwidth=3
+    style=filled
+    color="#8e8ac3"
+    fontcolor="#000000"
+    fillcolor="#a09bd6"
+  ];
+  "gpu_0/conv4_w_0" [
+    id=17
+    name="gpu_0/conv4_w_0"
+    type=constant_input
+    label="gpu_0/conv4_w_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "gpu_0/conv4_b_0" [
+    id=18
+    name="gpu_0/conv4_b_0"
+    type=constant_input
+    label="gpu_0/conv4_b_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "gpu_0/conv4_1" [
+    id=19
+    name="gpu_0/conv4_1"
+    type=Conv
+    label="{ {conv_4  | CONV} | [1024,512,12,12] }"
+    inputs="gpu_0/conv3_2;gpu_0/conv4_w_0;gpu_0/conv4_b_0"
+    outputs="gpu_0/conv4_1"
+    penwidth=3
+    style=filled
+    color="#85bc95"
+    fontcolor="#000000"
+    fillcolor="#9ad2ab"
+  ];
+  "gpu_0/conv4_2" [
+    id=20
+    name="gpu_0/conv4_2"
+    type=Relu
+    label="{ {relu_4  | RELU} | [1024,512,12,12] }"
+    inputs="gpu_0/conv4_1"
+    outputs="gpu_0/conv4_2"
+    penwidth=3
+    style=filled
+    color="#8e8ac3"
+    fontcolor="#000000"
+    fillcolor="#a09bd6"
+  ];
+  "gpu_0/conv5_w_0" [
+    id=21
+    name="gpu_0/conv5_w_0"
+    type=constant_input
+    label="gpu_0/conv5_w_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "gpu_0/conv5_b_0" [
+    id=22
+    name="gpu_0/conv5_b_0"
+    type=constant_input
+    label="gpu_0/conv5_b_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "gpu_0/conv5_1" [
+    id=23
+    name="gpu_0/conv5_1"
+    type=Conv
+    label="{ {conv_5  | CONV} | [1024,512,12,12] }"
+    inputs="gpu_0/conv4_2;gpu_0/conv5_w_0;gpu_0/conv5_b_0"
+    outputs="gpu_0/conv5_1"
+    penwidth=3
+    style=filled
+    color="#85bc95"
+    fontcolor="#000000"
+    fillcolor="#9ad2ab"
+  ];
+  "gpu_0/conv5_2" [
+    id=24
+    name="gpu_0/conv5_2"
+    type=Relu
+    label="{ {relu_5  | RELU} | [1024,512,12,12] }"
+    inputs="gpu_0/conv5_1"
+    outputs="gpu_0/conv5_2"
+    penwidth=3
+    style=filled
+    color="#8e8ac3"
+    fontcolor="#000000"
+    fillcolor="#a09bd6"
+  ];
+  "gpu_0/pool5_1" [
+    id=25
+    name="gpu_0/pool5_1"
+    type=MaxPool
+    label="{ {maxpool_3  | MXPL} | [1024,512,6,6] }"
+    inputs="gpu_0/conv5_2"
+    outputs="gpu_0/pool5_1"
+    penwidth=3
+    style=filled
+    color="#c687c1"
+    fontcolor="#000000"
+    fillcolor="#da9ad5"
+  ];
+  "OC2_DUMMY_1" [
+    id=26
+    name="OC2_DUMMY_1"
+    type=constant_input
+    label="OC2_DUMMY_1"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "OC2_DUMMY_0" [
+    id=27
+    name="OC2_DUMMY_0"
+    type=Reshape
+    label="{ {reshape_1  | RSHP} | [1,18432] }"
+    inputs="gpu_0/pool5_1;OC2_DUMMY_1"
+    outputs="OC2_DUMMY_0"
+    penwidth=3
+    style=filled
+    color="#88b9c3"
+    fontcolor="#000000"
+    fillcolor="#9ecfda"
+  ];
+  "gpu_0/fc6_w_0" [
+    id=28
+    name="gpu_0/fc6_w_0"
+    type=constant_input
+    label="gpu_0/fc6_w_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "gpu_0/fc6_b_0" [
+    id=29
+    name="gpu_0/fc6_b_0"
+    type=constant_input
+    label="gpu_0/fc6_b_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "gpu_0/fc6_1" [
+    id=30
+    name="gpu_0/fc6_1"
+    type=Gemm
+    label="{ {gemm_1  | GEMM} | [1,4096] }"
+    inputs="OC2_DUMMY_0;gpu_0/fc6_w_0;gpu_0/fc6_b_0"
+    outputs="gpu_0/fc6_1"
+    penwidth=3
+    style=filled
+    color="#8bcc83"
+    fontcolor="#000000"
+    fillcolor="#a2e499"
+  ];
+  "gpu_0/fc6_2" [
+    id=31
+    name="gpu_0/fc6_2"
+    type=Relu
+    label="{ {relu_6  | RELU} | [1,4096] }"
+    inputs="gpu_0/fc6_1"
+    outputs="gpu_0/fc6_2"
+    penwidth=3
+    style=filled
+    color="#8e8ac3"
+    fontcolor="#000000"
+    fillcolor="#a09bd6"
+  ];
+  "gpu_0/fc7_w_0" [
+    id=32
+    name="gpu_0/fc7_w_0"
+    type=constant_input
+    label="gpu_0/fc7_w_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "gpu_0/fc7_b_0" [
+    id=33
+    name="gpu_0/fc7_b_0"
+    type=constant_input
+    label="gpu_0/fc7_b_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "gpu_0/fc7_1" [
+    id=34
+    name="gpu_0/fc7_1"
+    type=Gemm
+    label="{ {gemm_2  | GEMM} | [1,1024] }"
+    inputs="gpu_0/fc6_2;gpu_0/fc7_w_0;gpu_0/fc7_b_0"
+    outputs="gpu_0/fc7_1"
+    penwidth=3
+    style=filled
+    color="#8bcc83"
+    fontcolor="#000000"
+    fillcolor="#a2e499"
+  ];
+  "gpu_0/fc7_2" [
+    id=35
+    name="gpu_0/fc7_2"
+    type=Relu
+    label="{ {relu_7  | RELU} | [1,1024] }"
+    inputs="gpu_0/fc7_1"
+    outputs="gpu_0/fc7_2"
+    penwidth=3
+    style=filled
+    color="#8e8ac3"
+    fontcolor="#000000"
+    fillcolor="#a09bd6"
+  ];
+  "gpu_0/fc8_w_0" [
+    id=36
+    name="gpu_0/fc8_w_0"
+    type=constant_input
+    label="gpu_0/fc8_w_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "gpu_0/fc8_b_0" [
+    id=37
+    name="gpu_0/fc8_b_0"
+    type=constant_input
+    label="gpu_0/fc8_b_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "gpu_0/pred_1" [
+    id=38
+    name="gpu_0/pred_1"
+    type=Gemm
+    label="{ {gemm_3  | GEMM} | [1,1000] }"
+    inputs="gpu_0/fc7_2;gpu_0/fc8_w_0;gpu_0/fc8_b_0"
+    outputs="gpu_0/pred_1"
+    penwidth=3
+    style=filled
+    color="#8bcc83"
+    fontcolor="#000000"
+    fillcolor="#a2e499"
+  ];
+  "gpu_0/softmax_1" [
+    id=39
+    name="gpu_0/softmax_1"
+    type=Softmax
+    label="{ {softmax_1  | SFT} | [1,1000] }"
+    inputs="gpu_0/pred_1"
+    outputs="gpu_0/softmax_1"
+    penwidth=3
+    style=filled
+    color="#c48d8b"
+    fontcolor="#000000"
+    fillcolor="#d89f9d"
+  ];
+
+  // Edge definitions.
+  "gpu_0/data_0" -> "gpu_0/conv1_1";
+  "gpu_0/conv1_w_0" -> "gpu_0/conv1_1";
+  "gpu_0/conv1_b_0" -> "gpu_0/conv1_1";
+  "gpu_0/conv1_1" -> "gpu_0/conv1_2";
+  "gpu_0/conv1_2" -> "gpu_0/norm1_1";
+  "gpu_0/norm1_1" -> "gpu_0/pool1_1";
+  "gpu_0/pool1_1" -> "gpu_0/conv2_1";
+  "gpu_0/conv2_w_0" -> "gpu_0/conv2_1";
+  "gpu_0/conv2_b_0" -> "gpu_0/conv2_1";
+  "gpu_0/conv2_1" -> "gpu_0/conv2_2";
+  "gpu_0/conv2_2" -> "gpu_0/norm2_1";
+  "gpu_0/norm2_1" -> "gpu_0/pool2_1";
+  "gpu_0/pool2_1" -> "gpu_0/conv3_1";
+  "gpu_0/conv3_w_0" -> "gpu_0/conv3_1";
+  "gpu_0/conv3_b_0" -> "gpu_0/conv3_1";
+  "gpu_0/conv3_1" -> "gpu_0/conv3_2";
+  "gpu_0/conv3_2" -> "gpu_0/conv4_1";
+  "gpu_0/conv4_w_0" -> "gpu_0/conv4_1";
+  "gpu_0/conv4_b_0" -> "gpu_0/conv4_1";
+  "gpu_0/conv4_1" -> "gpu_0/conv4_2";
+  "gpu_0/conv4_2" -> "gpu_0/conv5_1";
+  "gpu_0/conv5_w_0" -> "gpu_0/conv5_1";
+  "gpu_0/conv5_b_0" -> "gpu_0/conv5_1";
+  "gpu_0/conv5_1" -> "gpu_0/conv5_2";
+  "gpu_0/conv5_2" -> "gpu_0/pool5_1";
+  "gpu_0/pool5_1" -> "OC2_DUMMY_0";
+  "OC2_DUMMY_1" -> "OC2_DUMMY_0";
+  "OC2_DUMMY_0" -> "gpu_0/fc6_1";
+  "gpu_0/fc6_w_0" -> "gpu_0/fc6_1";
+  "gpu_0/fc6_b_0" -> "gpu_0/fc6_1";
+  "gpu_0/fc6_1" -> "gpu_0/fc6_2";
+  "gpu_0/fc6_2" -> "gpu_0/fc7_1";
+  "gpu_0/fc7_w_0" -> "gpu_0/fc7_1";
+  "gpu_0/fc7_b_0" -> "gpu_0/fc7_1";
+  "gpu_0/fc7_1" -> "gpu_0/fc7_2";
+  "gpu_0/fc7_2" -> "gpu_0/pred_1";
+  "gpu_0/fc8_w_0" -> "gpu_0/pred_1";
+  "gpu_0/fc8_b_0" -> "gpu_0/pred_1";
+  "gpu_0/pred_1" -> "gpu_0/softmax_1";
+}

@@ -1,0 +1,1117 @@
+strict digraph {
+  graph [
+    rankdir="TB"
+    overlap=prism
+    overlap_shrink=true
+    splines=curved
+  ];
+  node [
+    shape=Mrecord
+  ];
+  edge [
+    penwidth=3
+  ];
+
+  // Node definitions.
+  "Parameter1367" [
+    id=0
+    name="Parameter1367"
+    type=constant_input
+    label="Parameter1367"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "Parameter1367_reshape1_shape" [
+    id=1
+    name="Parameter1367_reshape1_shape"
+    type=constant_input
+    label="Parameter1367_reshape1_shape"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "Parameter1367_reshape1" [
+    id=2
+    name="Parameter1367_reshape1"
+    type=Reshape
+    label="{ {Times622_reshape1  | RSHP} | [4096,1024] }"
+    inputs="Parameter1367;Parameter1367_reshape1_shape"
+    outputs="Parameter1367_reshape1"
+    penwidth=3
+    style=filled
+    color="#82bfa9"
+    fontcolor="#000000"
+    fillcolor="#98d6bf"
+  ];
+  "Input3" [
+    id=3
+    name="Input3"
+    type=constant_input
+    label="Input3"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "Constant339" [
+    id=4
+    name="Constant339"
+    type=constant_input
+    label="Constant339"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "Minus340_Output_0" [
+    id=5
+    name="Minus340_Output_0"
+    type=Sub
+    label="{ {Minus340  | SUB} | [16,1,64,64] }"
+    inputs="Input3;Constant339"
+    outputs="Minus340_Output_0"
+    penwidth=3
+    style=filled
+    color="#c2d186"
+    fontcolor="#000000"
+    fillcolor="#dceb9e"
+  ];
+  "Constant343" [
+    id=6
+    name="Constant343"
+    type=constant_input
+    label="Constant343"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "Block352_Output_0" [
+    id=7
+    name="Block352_Output_0"
+    type=Div
+    label="{ {Block352  | div} | [16,1,64,64] }"
+    inputs="Minus340_Output_0;Constant343"
+    outputs="Block352_Output_0"
+    penwidth=3
+    style=filled
+    color="#a382bb"
+    fontcolor="#000000"
+    fillcolor="#b593cd"
+  ];
+  "Parameter3" [
+    id=8
+    name="Parameter3"
+    type=constant_input
+    label="Parameter3"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "Convolution362_Output_0" [
+    id=9
+    name="Convolution362_Output_0"
+    type=Conv
+    label="{ {Convolution362  | CONV} | [16,64,64,64] }"
+    inputs="Block352_Output_0;Parameter3"
+    outputs="Convolution362_Output_0"
+    penwidth=3
+    style=filled
+    color="#8ac082"
+    fontcolor="#000000"
+    fillcolor="#a0d798"
+  ];
+  "Parameter4" [
+    id=10
+    name="Parameter4"
+    type=constant_input
+    label="Parameter4"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "Plus364_Output_0" [
+    id=11
+    name="Plus364_Output_0"
+    type=Add
+    label="{ {Plus364  | ADD} | [16,64,64,64] }"
+    inputs="Convolution362_Output_0;Parameter4"
+    outputs="Plus364_Output_0"
+    penwidth=3
+    style=filled
+    color="#c58a8d"
+    fontcolor="#000000"
+    fillcolor="#da9ca0"
+  ];
+  "ReLU366_Output_0" [
+    id=12
+    name="ReLU366_Output_0"
+    type=Relu
+    label="{ {ReLU366  | RELU} | [16,64,64,64] }"
+    inputs="Plus364_Output_0"
+    outputs="ReLU366_Output_0"
+    penwidth=3
+    style=filled
+    color="#87b7c8"
+    fontcolor="#000000"
+    fillcolor="#9ccddf"
+  ];
+  "Parameter23" [
+    id=13
+    name="Parameter23"
+    type=constant_input
+    label="Parameter23"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "Convolution380_Output_0" [
+    id=14
+    name="Convolution380_Output_0"
+    type=Conv
+    label="{ {Convolution380  | CONV} | [16,64,64,64] }"
+    inputs="ReLU366_Output_0;Parameter23"
+    outputs="Convolution380_Output_0"
+    penwidth=3
+    style=filled
+    color="#8ac082"
+    fontcolor="#000000"
+    fillcolor="#a0d798"
+  ];
+  "Parameter24" [
+    id=15
+    name="Parameter24"
+    type=constant_input
+    label="Parameter24"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "Plus382_Output_0" [
+    id=16
+    name="Plus382_Output_0"
+    type=Add
+    label="{ {Plus382  | ADD} | [16,64,64,64] }"
+    inputs="Convolution380_Output_0;Parameter24"
+    outputs="Plus382_Output_0"
+    penwidth=3
+    style=filled
+    color="#c58a8d"
+    fontcolor="#000000"
+    fillcolor="#da9ca0"
+  ];
+  "ReLU384_Output_0" [
+    id=17
+    name="ReLU384_Output_0"
+    type=Relu
+    label="{ {ReLU384  | RELU} | [16,64,64,64] }"
+    inputs="Plus382_Output_0"
+    outputs="ReLU384_Output_0"
+    penwidth=3
+    style=filled
+    color="#87b7c8"
+    fontcolor="#000000"
+    fillcolor="#9ccddf"
+  ];
+  "Pooling398_Output_0" [
+    id=18
+    name="Pooling398_Output_0"
+    type=MaxPool
+    label="{ {Pooling398  | MXPL} | [16,64,32,32] }"
+    inputs="ReLU384_Output_0"
+    outputs="Pooling398_Output_0"
+    penwidth=3
+    style=filled
+    color="#8394c2"
+    fontcolor="#000000"
+    fillcolor="#96a6d5"
+  ];
+  "Dropout408_Output_0" [
+    id=19
+    name="Dropout408_Output_0"
+    type=Dropout
+    label="{ {Dropout408  | DRP} | [16,64,32,32] }"
+    inputs="Pooling398_Output_0"
+    outputs="Dropout408_Output_0"
+    penwidth=3
+    style=filled
+    color="#c0ab81"
+    fontcolor="#000000"
+    fillcolor="#d6c096"
+  ];
+  "Parameter63" [
+    id=20
+    name="Parameter63"
+    type=constant_input
+    label="Parameter63"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "Convolution418_Output_0" [
+    id=21
+    name="Convolution418_Output_0"
+    type=Conv
+    label="{ {Convolution418  | CONV} | [16,128,32,32] }"
+    inputs="Dropout408_Output_0;Parameter63"
+    outputs="Convolution418_Output_0"
+    penwidth=3
+    style=filled
+    color="#8ac082"
+    fontcolor="#000000"
+    fillcolor="#a0d798"
+  ];
+  "Parameter64" [
+    id=22
+    name="Parameter64"
+    type=constant_input
+    label="Parameter64"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "Plus420_Output_0" [
+    id=23
+    name="Plus420_Output_0"
+    type=Add
+    label="{ {Plus420  | ADD} | [16,128,32,32] }"
+    inputs="Convolution418_Output_0;Parameter64"
+    outputs="Plus420_Output_0"
+    penwidth=3
+    style=filled
+    color="#c58a8d"
+    fontcolor="#000000"
+    fillcolor="#da9ca0"
+  ];
+  "ReLU422_Output_0" [
+    id=24
+    name="ReLU422_Output_0"
+    type=Relu
+    label="{ {ReLU422  | RELU} | [16,128,32,32] }"
+    inputs="Plus420_Output_0"
+    outputs="ReLU422_Output_0"
+    penwidth=3
+    style=filled
+    color="#87b7c8"
+    fontcolor="#000000"
+    fillcolor="#9ccddf"
+  ];
+  "Parameter83" [
+    id=25
+    name="Parameter83"
+    type=constant_input
+    label="Parameter83"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "Convolution436_Output_0" [
+    id=26
+    name="Convolution436_Output_0"
+    type=Conv
+    label="{ {Convolution436  | CONV} | [16,128,32,32] }"
+    inputs="ReLU422_Output_0;Parameter83"
+    outputs="Convolution436_Output_0"
+    penwidth=3
+    style=filled
+    color="#8ac082"
+    fontcolor="#000000"
+    fillcolor="#a0d798"
+  ];
+  "Parameter84" [
+    id=27
+    name="Parameter84"
+    type=constant_input
+    label="Parameter84"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "Plus438_Output_0" [
+    id=28
+    name="Plus438_Output_0"
+    type=Add
+    label="{ {Plus438  | ADD} | [16,128,32,32] }"
+    inputs="Convolution436_Output_0;Parameter84"
+    outputs="Plus438_Output_0"
+    penwidth=3
+    style=filled
+    color="#c58a8d"
+    fontcolor="#000000"
+    fillcolor="#da9ca0"
+  ];
+  "ReLU440_Output_0" [
+    id=29
+    name="ReLU440_Output_0"
+    type=Relu
+    label="{ {ReLU440  | RELU} | [16,128,32,32] }"
+    inputs="Plus438_Output_0"
+    outputs="ReLU440_Output_0"
+    penwidth=3
+    style=filled
+    color="#87b7c8"
+    fontcolor="#000000"
+    fillcolor="#9ccddf"
+  ];
+  "Pooling454_Output_0" [
+    id=30
+    name="Pooling454_Output_0"
+    type=MaxPool
+    label="{ {Pooling454  | MXPL} | [16,128,16,16] }"
+    inputs="ReLU440_Output_0"
+    outputs="Pooling454_Output_0"
+    penwidth=3
+    style=filled
+    color="#8394c2"
+    fontcolor="#000000"
+    fillcolor="#96a6d5"
+  ];
+  "Dropout464_Output_0" [
+    id=31
+    name="Dropout464_Output_0"
+    type=Dropout
+    label="{ {Dropout464  | DRP} | [16,128,16,16] }"
+    inputs="Pooling454_Output_0"
+    outputs="Dropout464_Output_0"
+    penwidth=3
+    style=filled
+    color="#c0ab81"
+    fontcolor="#000000"
+    fillcolor="#d6c096"
+  ];
+  "Parameter575" [
+    id=32
+    name="Parameter575"
+    type=constant_input
+    label="Parameter575"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "Convolution474_Output_0" [
+    id=33
+    name="Convolution474_Output_0"
+    type=Conv
+    label="{ {Convolution474  | CONV} | [16,256,16,16] }"
+    inputs="Dropout464_Output_0;Parameter575"
+    outputs="Convolution474_Output_0"
+    penwidth=3
+    style=filled
+    color="#8ac082"
+    fontcolor="#000000"
+    fillcolor="#a0d798"
+  ];
+  "Parameter576" [
+    id=34
+    name="Parameter576"
+    type=constant_input
+    label="Parameter576"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "Plus476_Output_0" [
+    id=35
+    name="Plus476_Output_0"
+    type=Add
+    label="{ {Plus476  | ADD} | [16,256,16,16] }"
+    inputs="Convolution474_Output_0;Parameter576"
+    outputs="Plus476_Output_0"
+    penwidth=3
+    style=filled
+    color="#c58a8d"
+    fontcolor="#000000"
+    fillcolor="#da9ca0"
+  ];
+  "ReLU478_Output_0" [
+    id=36
+    name="ReLU478_Output_0"
+    type=Relu
+    label="{ {ReLU478  | RELU} | [16,256,16,16] }"
+    inputs="Plus476_Output_0"
+    outputs="ReLU478_Output_0"
+    penwidth=3
+    style=filled
+    color="#87b7c8"
+    fontcolor="#000000"
+    fillcolor="#9ccddf"
+  ];
+  "Parameter595" [
+    id=37
+    name="Parameter595"
+    type=constant_input
+    label="Parameter595"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "Convolution492_Output_0" [
+    id=38
+    name="Convolution492_Output_0"
+    type=Conv
+    label="{ {Convolution492  | CONV} | [16,256,16,16] }"
+    inputs="ReLU478_Output_0;Parameter595"
+    outputs="Convolution492_Output_0"
+    penwidth=3
+    style=filled
+    color="#8ac082"
+    fontcolor="#000000"
+    fillcolor="#a0d798"
+  ];
+  "Parameter596" [
+    id=39
+    name="Parameter596"
+    type=constant_input
+    label="Parameter596"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "Plus494_Output_0" [
+    id=40
+    name="Plus494_Output_0"
+    type=Add
+    label="{ {Plus494  | ADD} | [16,256,16,16] }"
+    inputs="Convolution492_Output_0;Parameter596"
+    outputs="Plus494_Output_0"
+    penwidth=3
+    style=filled
+    color="#c58a8d"
+    fontcolor="#000000"
+    fillcolor="#da9ca0"
+  ];
+  "ReLU496_Output_0" [
+    id=41
+    name="ReLU496_Output_0"
+    type=Relu
+    label="{ {ReLU496  | RELU} | [16,256,16,16] }"
+    inputs="Plus494_Output_0"
+    outputs="ReLU496_Output_0"
+    penwidth=3
+    style=filled
+    color="#87b7c8"
+    fontcolor="#000000"
+    fillcolor="#9ccddf"
+  ];
+  "Parameter615" [
+    id=42
+    name="Parameter615"
+    type=constant_input
+    label="Parameter615"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "Convolution510_Output_0" [
+    id=43
+    name="Convolution510_Output_0"
+    type=Conv
+    label="{ {Convolution510  | CONV} | [16,256,16,16] }"
+    inputs="ReLU496_Output_0;Parameter615"
+    outputs="Convolution510_Output_0"
+    penwidth=3
+    style=filled
+    color="#8ac082"
+    fontcolor="#000000"
+    fillcolor="#a0d798"
+  ];
+  "Parameter616" [
+    id=44
+    name="Parameter616"
+    type=constant_input
+    label="Parameter616"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "Plus512_Output_0" [
+    id=45
+    name="Plus512_Output_0"
+    type=Add
+    label="{ {Plus512  | ADD} | [16,256,16,16] }"
+    inputs="Convolution510_Output_0;Parameter616"
+    outputs="Plus512_Output_0"
+    penwidth=3
+    style=filled
+    color="#c58a8d"
+    fontcolor="#000000"
+    fillcolor="#da9ca0"
+  ];
+  "ReLU514_Output_0" [
+    id=46
+    name="ReLU514_Output_0"
+    type=Relu
+    label="{ {ReLU514  | RELU} | [16,256,16,16] }"
+    inputs="Plus512_Output_0"
+    outputs="ReLU514_Output_0"
+    penwidth=3
+    style=filled
+    color="#87b7c8"
+    fontcolor="#000000"
+    fillcolor="#9ccddf"
+  ];
+  "Pooling528_Output_0" [
+    id=47
+    name="Pooling528_Output_0"
+    type=MaxPool
+    label="{ {Pooling528  | MXPL} | [16,256,8,8] }"
+    inputs="ReLU514_Output_0"
+    outputs="Pooling528_Output_0"
+    penwidth=3
+    style=filled
+    color="#8394c2"
+    fontcolor="#000000"
+    fillcolor="#96a6d5"
+  ];
+  "Dropout538_Output_0" [
+    id=48
+    name="Dropout538_Output_0"
+    type=Dropout
+    label="{ {Dropout538  | DRP} | [16,256,8,8] }"
+    inputs="Pooling528_Output_0"
+    outputs="Dropout538_Output_0"
+    penwidth=3
+    style=filled
+    color="#c0ab81"
+    fontcolor="#000000"
+    fillcolor="#d6c096"
+  ];
+  "Parameter655" [
+    id=49
+    name="Parameter655"
+    type=constant_input
+    label="Parameter655"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "Convolution548_Output_0" [
+    id=50
+    name="Convolution548_Output_0"
+    type=Conv
+    label="{ {Convolution548  | CONV} | [16,256,8,8] }"
+    inputs="Dropout538_Output_0;Parameter655"
+    outputs="Convolution548_Output_0"
+    penwidth=3
+    style=filled
+    color="#8ac082"
+    fontcolor="#000000"
+    fillcolor="#a0d798"
+  ];
+  "Parameter656" [
+    id=51
+    name="Parameter656"
+    type=constant_input
+    label="Parameter656"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "Plus550_Output_0" [
+    id=52
+    name="Plus550_Output_0"
+    type=Add
+    label="{ {Plus550  | ADD} | [16,256,8,8] }"
+    inputs="Convolution548_Output_0;Parameter656"
+    outputs="Plus550_Output_0"
+    penwidth=3
+    style=filled
+    color="#c58a8d"
+    fontcolor="#000000"
+    fillcolor="#da9ca0"
+  ];
+  "ReLU552_Output_0" [
+    id=53
+    name="ReLU552_Output_0"
+    type=Relu
+    label="{ {ReLU552  | RELU} | [16,256,8,8] }"
+    inputs="Plus550_Output_0"
+    outputs="ReLU552_Output_0"
+    penwidth=3
+    style=filled
+    color="#87b7c8"
+    fontcolor="#000000"
+    fillcolor="#9ccddf"
+  ];
+  "Parameter675" [
+    id=54
+    name="Parameter675"
+    type=constant_input
+    label="Parameter675"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "Convolution566_Output_0" [
+    id=55
+    name="Convolution566_Output_0"
+    type=Conv
+    label="{ {Convolution566  | CONV} | [16,256,8,8] }"
+    inputs="ReLU552_Output_0;Parameter675"
+    outputs="Convolution566_Output_0"
+    penwidth=3
+    style=filled
+    color="#8ac082"
+    fontcolor="#000000"
+    fillcolor="#a0d798"
+  ];
+  "Parameter676" [
+    id=56
+    name="Parameter676"
+    type=constant_input
+    label="Parameter676"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "Plus568_Output_0" [
+    id=57
+    name="Plus568_Output_0"
+    type=Add
+    label="{ {Plus568  | ADD} | [16,256,8,8] }"
+    inputs="Convolution566_Output_0;Parameter676"
+    outputs="Plus568_Output_0"
+    penwidth=3
+    style=filled
+    color="#c58a8d"
+    fontcolor="#000000"
+    fillcolor="#da9ca0"
+  ];
+  "ReLU570_Output_0" [
+    id=58
+    name="ReLU570_Output_0"
+    type=Relu
+    label="{ {ReLU570  | RELU} | [16,256,8,8] }"
+    inputs="Plus568_Output_0"
+    outputs="ReLU570_Output_0"
+    penwidth=3
+    style=filled
+    color="#87b7c8"
+    fontcolor="#000000"
+    fillcolor="#9ccddf"
+  ];
+  "Parameter695" [
+    id=59
+    name="Parameter695"
+    type=constant_input
+    label="Parameter695"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "Convolution584_Output_0" [
+    id=60
+    name="Convolution584_Output_0"
+    type=Conv
+    label="{ {Convolution584  | CONV} | [16,256,8,8] }"
+    inputs="ReLU570_Output_0;Parameter695"
+    outputs="Convolution584_Output_0"
+    penwidth=3
+    style=filled
+    color="#8ac082"
+    fontcolor="#000000"
+    fillcolor="#a0d798"
+  ];
+  "Parameter696" [
+    id=61
+    name="Parameter696"
+    type=constant_input
+    label="Parameter696"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "Plus586_Output_0" [
+    id=62
+    name="Plus586_Output_0"
+    type=Add
+    label="{ {Plus586  | ADD} | [16,256,8,8] }"
+    inputs="Convolution584_Output_0;Parameter696"
+    outputs="Plus586_Output_0"
+    penwidth=3
+    style=filled
+    color="#c58a8d"
+    fontcolor="#000000"
+    fillcolor="#da9ca0"
+  ];
+  "ReLU588_Output_0" [
+    id=63
+    name="ReLU588_Output_0"
+    type=Relu
+    label="{ {ReLU588  | RELU} | [16,256,8,8] }"
+    inputs="Plus586_Output_0"
+    outputs="ReLU588_Output_0"
+    penwidth=3
+    style=filled
+    color="#87b7c8"
+    fontcolor="#000000"
+    fillcolor="#9ccddf"
+  ];
+  "Pooling602_Output_0" [
+    id=64
+    name="Pooling602_Output_0"
+    type=MaxPool
+    label="{ {Pooling602  | MXPL} | [16,256,4,4] }"
+    inputs="ReLU588_Output_0"
+    outputs="Pooling602_Output_0"
+    penwidth=3
+    style=filled
+    color="#8394c2"
+    fontcolor="#000000"
+    fillcolor="#96a6d5"
+  ];
+  "Dropout612_Output_0" [
+    id=65
+    name="Dropout612_Output_0"
+    type=Dropout
+    label="{ {Dropout612  | DRP} | [16,256,4,4] }"
+    inputs="Pooling602_Output_0"
+    outputs="Dropout612_Output_0"
+    penwidth=3
+    style=filled
+    color="#c0ab81"
+    fontcolor="#000000"
+    fillcolor="#d6c096"
+  ];
+  "Dropout612_Output_0_reshape0_shape" [
+    id=66
+    name="Dropout612_Output_0_reshape0_shape"
+    type=constant_input
+    label="Dropout612_Output_0_reshape0_shape"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "Dropout612_Output_0_reshape0" [
+    id=67
+    name="Dropout612_Output_0_reshape0"
+    type=Reshape
+    label="{ {Times622_reshape0  | RSHP} | [1,4096] }"
+    inputs="Dropout612_Output_0;Dropout612_Output_0_reshape0_shape"
+    outputs="Dropout612_Output_0_reshape0"
+    penwidth=3
+    style=filled
+    color="#82bfa9"
+    fontcolor="#000000"
+    fillcolor="#98d6bf"
+  ];
+  "Times622_Output_0" [
+    id=68
+    name="Times622_Output_0"
+    type=MatMul
+    label="{ {Times622  | MM} | [1,1024] }"
+    inputs="Dropout612_Output_0_reshape0;Parameter1367_reshape1"
+    outputs="Times622_Output_0"
+    penwidth=3
+    style=filled
+    color="#ce8acd"
+    fontcolor="#000000"
+    fillcolor="#e39ee2"
+  ];
+  "Parameter1368" [
+    id=69
+    name="Parameter1368"
+    type=constant_input
+    label="Parameter1368"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "Plus624_Output_0" [
+    id=70
+    name="Plus624_Output_0"
+    type=Add
+    label="{ {Plus624  | ADD} | [1,1024] }"
+    inputs="Times622_Output_0;Parameter1368"
+    outputs="Plus624_Output_0"
+    penwidth=3
+    style=filled
+    color="#c58a8d"
+    fontcolor="#000000"
+    fillcolor="#da9ca0"
+  ];
+  "ReLU636_Output_0" [
+    id=71
+    name="ReLU636_Output_0"
+    type=Relu
+    label="{ {ReLU636  | RELU} | [1,1024] }"
+    inputs="Plus624_Output_0"
+    outputs="ReLU636_Output_0"
+    penwidth=3
+    style=filled
+    color="#87b7c8"
+    fontcolor="#000000"
+    fillcolor="#9ccddf"
+  ];
+  "Dropout646_Output_0" [
+    id=72
+    name="Dropout646_Output_0"
+    type=Dropout
+    label="{ {Dropout646  | DRP} | [1,1024] }"
+    inputs="ReLU636_Output_0"
+    outputs="Dropout646_Output_0"
+    penwidth=3
+    style=filled
+    color="#c0ab81"
+    fontcolor="#000000"
+    fillcolor="#d6c096"
+  ];
+  "Parameter1403" [
+    id=73
+    name="Parameter1403"
+    type=constant_input
+    label="Parameter1403"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "Times656_Output_0" [
+    id=74
+    name="Times656_Output_0"
+    type=MatMul
+    label="{ {Times656  | MM} | [1,1024] }"
+    inputs="Dropout646_Output_0;Parameter1403"
+    outputs="Times656_Output_0"
+    penwidth=3
+    style=filled
+    color="#ce8acd"
+    fontcolor="#000000"
+    fillcolor="#e39ee2"
+  ];
+  "Parameter1404" [
+    id=75
+    name="Parameter1404"
+    type=constant_input
+    label="Parameter1404"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "Plus658_Output_0" [
+    id=76
+    name="Plus658_Output_0"
+    type=Add
+    label="{ {Plus658  | ADD} | [1,1024] }"
+    inputs="Times656_Output_0;Parameter1404"
+    outputs="Plus658_Output_0"
+    penwidth=3
+    style=filled
+    color="#c58a8d"
+    fontcolor="#000000"
+    fillcolor="#da9ca0"
+  ];
+  "ReLU670_Output_0" [
+    id=77
+    name="ReLU670_Output_0"
+    type=Relu
+    label="{ {ReLU670  | RELU} | [1,1024] }"
+    inputs="Plus658_Output_0"
+    outputs="ReLU670_Output_0"
+    penwidth=3
+    style=filled
+    color="#87b7c8"
+    fontcolor="#000000"
+    fillcolor="#9ccddf"
+  ];
+  "Dropout680_Output_0" [
+    id=78
+    name="Dropout680_Output_0"
+    type=Dropout
+    label="{ {Dropout680  | DRP} | [1,1024] }"
+    inputs="ReLU670_Output_0"
+    outputs="Dropout680_Output_0"
+    penwidth=3
+    style=filled
+    color="#c0ab81"
+    fontcolor="#000000"
+    fillcolor="#d6c096"
+  ];
+  "Parameter1693" [
+    id=79
+    name="Parameter1693"
+    type=constant_input
+    label="Parameter1693"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "Times690_Output_0" [
+    id=80
+    name="Times690_Output_0"
+    type=MatMul
+    label="{ {Times690  | MM} | [1,8] }"
+    inputs="Dropout680_Output_0;Parameter1693"
+    outputs="Times690_Output_0"
+    penwidth=3
+    style=filled
+    color="#ce8acd"
+    fontcolor="#000000"
+    fillcolor="#e39ee2"
+  ];
+  "Parameter1694" [
+    id=81
+    name="Parameter1694"
+    type=constant_input
+    label="Parameter1694"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "Plus692_Output_0" [
+    id=82
+    name="Plus692_Output_0"
+    type=Add
+    label="{ {Plus692  | ADD} | [1,8] }"
+    inputs="Times690_Output_0;Parameter1694"
+    outputs="Plus692_Output_0"
+    penwidth=3
+    style=filled
+    color="#c58a8d"
+    fontcolor="#000000"
+    fillcolor="#da9ca0"
+  ];
+
+  // Edge definitions.
+  "Parameter1367" -> "Parameter1367_reshape1";
+  "Parameter1367_reshape1_shape" -> "Parameter1367_reshape1";
+  "Parameter1367_reshape1" -> "Times622_Output_0";
+  "Input3" -> "Minus340_Output_0";
+  "Constant339" -> "Minus340_Output_0";
+  "Minus340_Output_0" -> "Block352_Output_0";
+  "Constant343" -> "Block352_Output_0";
+  "Block352_Output_0" -> "Convolution362_Output_0";
+  "Parameter3" -> "Convolution362_Output_0";
+  "Convolution362_Output_0" -> "Plus364_Output_0";
+  "Parameter4" -> "Plus364_Output_0";
+  "Plus364_Output_0" -> "ReLU366_Output_0";
+  "ReLU366_Output_0" -> "Convolution380_Output_0";
+  "Parameter23" -> "Convolution380_Output_0";
+  "Convolution380_Output_0" -> "Plus382_Output_0";
+  "Parameter24" -> "Plus382_Output_0";
+  "Plus382_Output_0" -> "ReLU384_Output_0";
+  "ReLU384_Output_0" -> "Pooling398_Output_0";
+  "Pooling398_Output_0" -> "Dropout408_Output_0";
+  "Dropout408_Output_0" -> "Convolution418_Output_0";
+  "Parameter63" -> "Convolution418_Output_0";
+  "Convolution418_Output_0" -> "Plus420_Output_0";
+  "Parameter64" -> "Plus420_Output_0";
+  "Plus420_Output_0" -> "ReLU422_Output_0";
+  "ReLU422_Output_0" -> "Convolution436_Output_0";
+  "Parameter83" -> "Convolution436_Output_0";
+  "Convolution436_Output_0" -> "Plus438_Output_0";
+  "Parameter84" -> "Plus438_Output_0";
+  "Plus438_Output_0" -> "ReLU440_Output_0";
+  "ReLU440_Output_0" -> "Pooling454_Output_0";
+  "Pooling454_Output_0" -> "Dropout464_Output_0";
+  "Dropout464_Output_0" -> "Convolution474_Output_0";
+  "Parameter575" -> "Convolution474_Output_0";
+  "Convolution474_Output_0" -> "Plus476_Output_0";
+  "Parameter576" -> "Plus476_Output_0";
+  "Plus476_Output_0" -> "ReLU478_Output_0";
+  "ReLU478_Output_0" -> "Convolution492_Output_0";
+  "Parameter595" -> "Convolution492_Output_0";
+  "Convolution492_Output_0" -> "Plus494_Output_0";
+  "Parameter596" -> "Plus494_Output_0";
+  "Plus494_Output_0" -> "ReLU496_Output_0";
+  "ReLU496_Output_0" -> "Convolution510_Output_0";
+  "Parameter615" -> "Convolution510_Output_0";
+  "Convolution510_Output_0" -> "Plus512_Output_0";
+  "Parameter616" -> "Plus512_Output_0";
+  "Plus512_Output_0" -> "ReLU514_Output_0";
+  "ReLU514_Output_0" -> "Pooling528_Output_0";
+  "Pooling528_Output_0" -> "Dropout538_Output_0";
+  "Dropout538_Output_0" -> "Convolution548_Output_0";
+  "Parameter655" -> "Convolution548_Output_0";
+  "Convolution548_Output_0" -> "Plus550_Output_0";
+  "Parameter656" -> "Plus550_Output_0";
+  "Plus550_Output_0" -> "ReLU552_Output_0";
+  "ReLU552_Output_0" -> "Convolution566_Output_0";
+  "Parameter675" -> "Convolution566_Output_0";
+  "Convolution566_Output_0" -> "Plus568_Output_0";
+  "Parameter676" -> "Plus568_Output_0";
+  "Plus568_Output_0" -> "ReLU570_Output_0";
+  "ReLU570_Output_0" -> "Convolution584_Output_0";
+  "Parameter695" -> "Convolution584_Output_0";
+  "Convolution584_Output_0" -> "Plus586_Output_0";
+  "Parameter696" -> "Plus586_Output_0";
+  "Plus586_Output_0" -> "ReLU588_Output_0";
+  "ReLU588_Output_0" -> "Pooling602_Output_0";
+  "Pooling602_Output_0" -> "Dropout612_Output_0";
+  "Dropout612_Output_0" -> "Dropout612_Output_0_reshape0";
+  "Dropout612_Output_0_reshape0_shape" -> "Dropout612_Output_0_reshape0";
+  "Dropout612_Output_0_reshape0" -> "Times622_Output_0";
+  "Times622_Output_0" -> "Plus624_Output_0";
+  "Parameter1368" -> "Plus624_Output_0";
+  "Plus624_Output_0" -> "ReLU636_Output_0";
+  "ReLU636_Output_0" -> "Dropout646_Output_0";
+  "Dropout646_Output_0" -> "Times656_Output_0";
+  "Parameter1403" -> "Times656_Output_0";
+  "Times656_Output_0" -> "Plus658_Output_0";
+  "Parameter1404" -> "Plus658_Output_0";
+  "Plus658_Output_0" -> "ReLU670_Output_0";
+  "ReLU670_Output_0" -> "Dropout680_Output_0";
+  "Dropout680_Output_0" -> "Times690_Output_0";
+  "Parameter1693" -> "Times690_Output_0";
+  "Times690_Output_0" -> "Plus692_Output_0";
+  "Parameter1694" -> "Plus692_Output_0";
+}

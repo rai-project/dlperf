@@ -1,0 +1,3502 @@
+strict digraph {
+  graph [
+    rankdir="TB"
+    overlap=prism
+    overlap_shrink=true
+    splines=curved
+  ];
+  node [
+    shape=Mrecord
+  ];
+  edge [
+    penwidth=3
+  ];
+
+  // Node definitions.
+  "data_0" [
+    id=0
+    name="data_0"
+    type=constant_input
+    label="data_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "conv1/7x7_s2_w_0" [
+    id=1
+    name="conv1/7x7_s2_w_0"
+    type=constant_input
+    label="conv1/7x7_s2_w_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "conv1/7x7_s2_b_0" [
+    id=2
+    name="conv1/7x7_s2_b_0"
+    type=constant_input
+    label="conv1/7x7_s2_b_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "conv1/7x7_s2_1" [
+    id=3
+    name="conv1/7x7_s2_1"
+    type=Conv
+    label="{ {conv_1  | CONV} | [1024,64,112,112] }"
+    inputs="data_0;conv1/7x7_s2_w_0;conv1/7x7_s2_b_0"
+    outputs="conv1/7x7_s2_1"
+    penwidth=3
+    style=filled
+    color="#d09295"
+    fontcolor="#000000"
+    fillcolor="#e5a6a8"
+  ];
+  "conv1/7x7_s2_2" [
+    id=4
+    name="conv1/7x7_s2_2"
+    type=Relu
+    label="{ {relu_1  | RELU} | [1024,64,112,112] }"
+    inputs="conv1/7x7_s2_1"
+    outputs="conv1/7x7_s2_2"
+    penwidth=3
+    style=filled
+    color="#c587cc"
+    fontcolor="#000000"
+    fillcolor="#da9ae1"
+  ];
+  "pool1/3x3_s2_1" [
+    id=5
+    name="pool1/3x3_s2_1"
+    type=MaxPool
+    label="{ {maxpool_1  | MXPL} | [1024,64,55,55] }"
+    inputs="conv1/7x7_s2_2"
+    outputs="pool1/3x3_s2_1"
+    penwidth=3
+    style=filled
+    color="#83a7c7"
+    fontcolor="#000000"
+    fillcolor="#97bbdc"
+  ];
+  "pool1/norm1_1" [
+    id=6
+    name="pool1/norm1_1"
+    type=LRN
+    label="{ {lrn_1  | LRN} | [1024,64,55,55] }"
+    inputs="pool1/3x3_s2_1"
+    outputs="pool1/norm1_1"
+    penwidth=3
+    style=filled
+    color="#89c287"
+    fontcolor="#000000"
+    fillcolor="#9fd99d"
+  ];
+  "conv2/3x3_reduce_w_0" [
+    id=7
+    name="conv2/3x3_reduce_w_0"
+    type=constant_input
+    label="conv2/3x3_reduce_w_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "conv2/3x3_reduce_b_0" [
+    id=8
+    name="conv2/3x3_reduce_b_0"
+    type=constant_input
+    label="conv2/3x3_reduce_b_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "conv2/3x3_reduce_1" [
+    id=9
+    name="conv2/3x3_reduce_1"
+    type=Conv
+    label="{ {conv_2  | CONV} | [1024,64,55,55] }"
+    inputs="pool1/norm1_1;conv2/3x3_reduce_w_0;conv2/3x3_reduce_b_0"
+    outputs="conv2/3x3_reduce_1"
+    penwidth=3
+    style=filled
+    color="#d09295"
+    fontcolor="#000000"
+    fillcolor="#e5a6a8"
+  ];
+  "conv2/3x3_reduce_2" [
+    id=10
+    name="conv2/3x3_reduce_2"
+    type=Relu
+    label="{ {relu_2  | RELU} | [1024,64,55,55] }"
+    inputs="conv2/3x3_reduce_1"
+    outputs="conv2/3x3_reduce_2"
+    penwidth=3
+    style=filled
+    color="#c587cc"
+    fontcolor="#000000"
+    fillcolor="#da9ae1"
+  ];
+  "conv2/3x3_w_0" [
+    id=11
+    name="conv2/3x3_w_0"
+    type=constant_input
+    label="conv2/3x3_w_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "conv2/3x3_b_0" [
+    id=12
+    name="conv2/3x3_b_0"
+    type=constant_input
+    label="conv2/3x3_b_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "conv2/3x3_1" [
+    id=13
+    name="conv2/3x3_1"
+    type=Conv
+    label="{ {conv_3  | CONV} | [1024,192,55,55] }"
+    inputs="conv2/3x3_reduce_2;conv2/3x3_w_0;conv2/3x3_b_0"
+    outputs="conv2/3x3_1"
+    penwidth=3
+    style=filled
+    color="#d09295"
+    fontcolor="#000000"
+    fillcolor="#e5a6a8"
+  ];
+  "conv2/3x3_2" [
+    id=14
+    name="conv2/3x3_2"
+    type=Relu
+    label="{ {relu_3  | RELU} | [1024,192,55,55] }"
+    inputs="conv2/3x3_1"
+    outputs="conv2/3x3_2"
+    penwidth=3
+    style=filled
+    color="#c587cc"
+    fontcolor="#000000"
+    fillcolor="#da9ae1"
+  ];
+  "conv2/norm2_1" [
+    id=15
+    name="conv2/norm2_1"
+    type=LRN
+    label="{ {lrn_2  | LRN} | [1024,192,55,55] }"
+    inputs="conv2/3x3_2"
+    outputs="conv2/norm2_1"
+    penwidth=3
+    style=filled
+    color="#89c287"
+    fontcolor="#000000"
+    fillcolor="#9fd99d"
+  ];
+  "pool2/3x3_s2_1" [
+    id=16
+    name="pool2/3x3_s2_1"
+    type=MaxPool
+    label="{ {maxpool_2  | MXPL} | [1024,192,27,27] }"
+    inputs="conv2/norm2_1"
+    outputs="pool2/3x3_s2_1"
+    penwidth=3
+    style=filled
+    color="#83a7c7"
+    fontcolor="#000000"
+    fillcolor="#97bbdc"
+  ];
+  "inception_3a/1x1_w_0" [
+    id=17
+    name="inception_3a/1x1_w_0"
+    type=constant_input
+    label="inception_3a/1x1_w_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_3a/1x1_b_0" [
+    id=18
+    name="inception_3a/1x1_b_0"
+    type=constant_input
+    label="inception_3a/1x1_b_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_3a/1x1_1" [
+    id=19
+    name="inception_3a/1x1_1"
+    type=Conv
+    label="{ {conv_4  | CONV} | [1024,64,27,27] }"
+    inputs="pool2/3x3_s2_1;inception_3a/1x1_w_0;inception_3a/1x1_b_0"
+    outputs="inception_3a/1x1_1"
+    penwidth=3
+    style=filled
+    color="#d09295"
+    fontcolor="#000000"
+    fillcolor="#e5a6a8"
+  ];
+  "inception_3a/1x1_2" [
+    id=20
+    name="inception_3a/1x1_2"
+    type=Relu
+    label="{ {relu_4  | RELU} | [1024,64,27,27] }"
+    inputs="inception_3a/1x1_1"
+    outputs="inception_3a/1x1_2"
+    penwidth=3
+    style=filled
+    color="#c587cc"
+    fontcolor="#000000"
+    fillcolor="#da9ae1"
+  ];
+  "inception_3a/3x3_reduce_w_0" [
+    id=21
+    name="inception_3a/3x3_reduce_w_0"
+    type=constant_input
+    label="inception_3a/3x3_reduce_w_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_3a/3x3_reduce_b_0" [
+    id=22
+    name="inception_3a/3x3_reduce_b_0"
+    type=constant_input
+    label="inception_3a/3x3_reduce_b_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_3a/3x3_reduce_1" [
+    id=23
+    name="inception_3a/3x3_reduce_1"
+    type=Conv
+    label="{ {conv_5  | CONV} | [1024,96,27,27] }"
+    inputs="pool2/3x3_s2_1;inception_3a/3x3_reduce_w_0;inception_3a/3x3_reduce_b_0"
+    outputs="inception_3a/3x3_reduce_1"
+    penwidth=3
+    style=filled
+    color="#d09295"
+    fontcolor="#000000"
+    fillcolor="#e5a6a8"
+  ];
+  "inception_3a/3x3_reduce_2" [
+    id=24
+    name="inception_3a/3x3_reduce_2"
+    type=Relu
+    label="{ {relu_5  | RELU} | [1024,96,27,27] }"
+    inputs="inception_3a/3x3_reduce_1"
+    outputs="inception_3a/3x3_reduce_2"
+    penwidth=3
+    style=filled
+    color="#c587cc"
+    fontcolor="#000000"
+    fillcolor="#da9ae1"
+  ];
+  "inception_3a/3x3_w_0" [
+    id=25
+    name="inception_3a/3x3_w_0"
+    type=constant_input
+    label="inception_3a/3x3_w_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_3a/3x3_b_0" [
+    id=26
+    name="inception_3a/3x3_b_0"
+    type=constant_input
+    label="inception_3a/3x3_b_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_3a/3x3_1" [
+    id=27
+    name="inception_3a/3x3_1"
+    type=Conv
+    label="{ {conv_6  | CONV} | [1024,128,27,27] }"
+    inputs="inception_3a/3x3_reduce_2;inception_3a/3x3_w_0;inception_3a/3x3_b_0"
+    outputs="inception_3a/3x3_1"
+    penwidth=3
+    style=filled
+    color="#d09295"
+    fontcolor="#000000"
+    fillcolor="#e5a6a8"
+  ];
+  "inception_3a/3x3_2" [
+    id=28
+    name="inception_3a/3x3_2"
+    type=Relu
+    label="{ {relu_6  | RELU} | [1024,128,27,27] }"
+    inputs="inception_3a/3x3_1"
+    outputs="inception_3a/3x3_2"
+    penwidth=3
+    style=filled
+    color="#c587cc"
+    fontcolor="#000000"
+    fillcolor="#da9ae1"
+  ];
+  "inception_3a/5x5_reduce_w_0" [
+    id=29
+    name="inception_3a/5x5_reduce_w_0"
+    type=constant_input
+    label="inception_3a/5x5_reduce_w_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_3a/5x5_reduce_b_0" [
+    id=30
+    name="inception_3a/5x5_reduce_b_0"
+    type=constant_input
+    label="inception_3a/5x5_reduce_b_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_3a/5x5_reduce_1" [
+    id=31
+    name="inception_3a/5x5_reduce_1"
+    type=Conv
+    label="{ {conv_7  | CONV} | [1024,16,27,27] }"
+    inputs="pool2/3x3_s2_1;inception_3a/5x5_reduce_w_0;inception_3a/5x5_reduce_b_0"
+    outputs="inception_3a/5x5_reduce_1"
+    penwidth=3
+    style=filled
+    color="#d09295"
+    fontcolor="#000000"
+    fillcolor="#e5a6a8"
+  ];
+  "inception_3a/5x5_reduce_2" [
+    id=32
+    name="inception_3a/5x5_reduce_2"
+    type=Relu
+    label="{ {relu_7  | RELU} | [1024,16,27,27] }"
+    inputs="inception_3a/5x5_reduce_1"
+    outputs="inception_3a/5x5_reduce_2"
+    penwidth=3
+    style=filled
+    color="#c587cc"
+    fontcolor="#000000"
+    fillcolor="#da9ae1"
+  ];
+  "inception_3a/5x5_w_0" [
+    id=33
+    name="inception_3a/5x5_w_0"
+    type=constant_input
+    label="inception_3a/5x5_w_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_3a/5x5_b_0" [
+    id=34
+    name="inception_3a/5x5_b_0"
+    type=constant_input
+    label="inception_3a/5x5_b_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_3a/5x5_1" [
+    id=35
+    name="inception_3a/5x5_1"
+    type=Conv
+    label="{ {conv_8  | CONV} | [1024,32,27,27] }"
+    inputs="inception_3a/5x5_reduce_2;inception_3a/5x5_w_0;inception_3a/5x5_b_0"
+    outputs="inception_3a/5x5_1"
+    penwidth=3
+    style=filled
+    color="#d09295"
+    fontcolor="#000000"
+    fillcolor="#e5a6a8"
+  ];
+  "inception_3a/5x5_2" [
+    id=36
+    name="inception_3a/5x5_2"
+    type=Relu
+    label="{ {relu_8  | RELU} | [1024,32,27,27] }"
+    inputs="inception_3a/5x5_1"
+    outputs="inception_3a/5x5_2"
+    penwidth=3
+    style=filled
+    color="#c587cc"
+    fontcolor="#000000"
+    fillcolor="#da9ae1"
+  ];
+  "inception_3a/pool_1" [
+    id=37
+    name="inception_3a/pool_1"
+    type=MaxPool
+    label="{ {maxpool_3  | MXPL} | [1024,192,27,27] }"
+    inputs="pool2/3x3_s2_1"
+    outputs="inception_3a/pool_1"
+    penwidth=3
+    style=filled
+    color="#83a7c7"
+    fontcolor="#000000"
+    fillcolor="#97bbdc"
+  ];
+  "inception_3a/pool_proj_w_0" [
+    id=38
+    name="inception_3a/pool_proj_w_0"
+    type=constant_input
+    label="inception_3a/pool_proj_w_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_3a/pool_proj_b_0" [
+    id=39
+    name="inception_3a/pool_proj_b_0"
+    type=constant_input
+    label="inception_3a/pool_proj_b_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_3a/pool_proj_1" [
+    id=40
+    name="inception_3a/pool_proj_1"
+    type=Conv
+    label="{ {conv_9  | CONV} | [1024,32,27,27] }"
+    inputs="inception_3a/pool_1;inception_3a/pool_proj_w_0;inception_3a/pool_proj_b_0"
+    outputs="inception_3a/pool_proj_1"
+    penwidth=3
+    style=filled
+    color="#d09295"
+    fontcolor="#000000"
+    fillcolor="#e5a6a8"
+  ];
+  "inception_3a/pool_proj_2" [
+    id=41
+    name="inception_3a/pool_proj_2"
+    type=Relu
+    label="{ {relu_9  | RELU} | [1024,32,27,27] }"
+    inputs="inception_3a/pool_proj_1"
+    outputs="inception_3a/pool_proj_2"
+    penwidth=3
+    style=filled
+    color="#c587cc"
+    fontcolor="#000000"
+    fillcolor="#da9ae1"
+  ];
+  "inception_3a/output_1" [
+    id=42
+    name="inception_3a/output_1"
+    type=Concat
+    label="{ {concat_1  | CONC} | [1024,256,27,27] }"
+    inputs="inception_3a/1x1_2;inception_3a/3x3_2;inception_3a/5x5_2;inception_3a/pool_proj_2"
+    outputs="inception_3a/output_1"
+    penwidth=3
+    style=filled
+    color="#9586c2"
+    fontcolor="#000000"
+    fillcolor="#a698d5"
+  ];
+  "inception_3b/1x1_w_0" [
+    id=43
+    name="inception_3b/1x1_w_0"
+    type=constant_input
+    label="inception_3b/1x1_w_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_3b/1x1_b_0" [
+    id=44
+    name="inception_3b/1x1_b_0"
+    type=constant_input
+    label="inception_3b/1x1_b_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_3b/1x1_1" [
+    id=45
+    name="inception_3b/1x1_1"
+    type=Conv
+    label="{ {conv_10  | CONV} | [1024,128,27,27] }"
+    inputs="inception_3a/output_1;inception_3b/1x1_w_0;inception_3b/1x1_b_0"
+    outputs="inception_3b/1x1_1"
+    penwidth=3
+    style=filled
+    color="#d09295"
+    fontcolor="#000000"
+    fillcolor="#e5a6a8"
+  ];
+  "inception_3b/1x1_2" [
+    id=46
+    name="inception_3b/1x1_2"
+    type=Relu
+    label="{ {relu_10  | RELU} | [1024,128,27,27] }"
+    inputs="inception_3b/1x1_1"
+    outputs="inception_3b/1x1_2"
+    penwidth=3
+    style=filled
+    color="#c587cc"
+    fontcolor="#000000"
+    fillcolor="#da9ae1"
+  ];
+  "inception_3b/3x3_reduce_w_0" [
+    id=47
+    name="inception_3b/3x3_reduce_w_0"
+    type=constant_input
+    label="inception_3b/3x3_reduce_w_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_3b/3x3_reduce_b_0" [
+    id=48
+    name="inception_3b/3x3_reduce_b_0"
+    type=constant_input
+    label="inception_3b/3x3_reduce_b_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_3b/3x3_reduce_1" [
+    id=49
+    name="inception_3b/3x3_reduce_1"
+    type=Conv
+    label="{ {conv_11  | CONV} | [1024,128,27,27] }"
+    inputs="inception_3a/output_1;inception_3b/3x3_reduce_w_0;inception_3b/3x3_reduce_b_0"
+    outputs="inception_3b/3x3_reduce_1"
+    penwidth=3
+    style=filled
+    color="#d09295"
+    fontcolor="#000000"
+    fillcolor="#e5a6a8"
+  ];
+  "inception_3b/3x3_reduce_2" [
+    id=50
+    name="inception_3b/3x3_reduce_2"
+    type=Relu
+    label="{ {relu_11  | RELU} | [1024,128,27,27] }"
+    inputs="inception_3b/3x3_reduce_1"
+    outputs="inception_3b/3x3_reduce_2"
+    penwidth=3
+    style=filled
+    color="#c587cc"
+    fontcolor="#000000"
+    fillcolor="#da9ae1"
+  ];
+  "inception_3b/3x3_w_0" [
+    id=51
+    name="inception_3b/3x3_w_0"
+    type=constant_input
+    label="inception_3b/3x3_w_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_3b/3x3_b_0" [
+    id=52
+    name="inception_3b/3x3_b_0"
+    type=constant_input
+    label="inception_3b/3x3_b_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_3b/3x3_1" [
+    id=53
+    name="inception_3b/3x3_1"
+    type=Conv
+    label="{ {conv_12  | CONV} | [1024,192,27,27] }"
+    inputs="inception_3b/3x3_reduce_2;inception_3b/3x3_w_0;inception_3b/3x3_b_0"
+    outputs="inception_3b/3x3_1"
+    penwidth=3
+    style=filled
+    color="#d09295"
+    fontcolor="#000000"
+    fillcolor="#e5a6a8"
+  ];
+  "inception_3b/3x3_2" [
+    id=54
+    name="inception_3b/3x3_2"
+    type=Relu
+    label="{ {relu_12  | RELU} | [1024,192,27,27] }"
+    inputs="inception_3b/3x3_1"
+    outputs="inception_3b/3x3_2"
+    penwidth=3
+    style=filled
+    color="#c587cc"
+    fontcolor="#000000"
+    fillcolor="#da9ae1"
+  ];
+  "inception_3b/5x5_reduce_w_0" [
+    id=55
+    name="inception_3b/5x5_reduce_w_0"
+    type=constant_input
+    label="inception_3b/5x5_reduce_w_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_3b/5x5_reduce_b_0" [
+    id=56
+    name="inception_3b/5x5_reduce_b_0"
+    type=constant_input
+    label="inception_3b/5x5_reduce_b_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_3b/5x5_reduce_1" [
+    id=57
+    name="inception_3b/5x5_reduce_1"
+    type=Conv
+    label="{ {conv_13  | CONV} | [1024,32,27,27] }"
+    inputs="inception_3a/output_1;inception_3b/5x5_reduce_w_0;inception_3b/5x5_reduce_b_0"
+    outputs="inception_3b/5x5_reduce_1"
+    penwidth=3
+    style=filled
+    color="#d09295"
+    fontcolor="#000000"
+    fillcolor="#e5a6a8"
+  ];
+  "inception_3b/5x5_reduce_2" [
+    id=58
+    name="inception_3b/5x5_reduce_2"
+    type=Relu
+    label="{ {relu_13  | RELU} | [1024,32,27,27] }"
+    inputs="inception_3b/5x5_reduce_1"
+    outputs="inception_3b/5x5_reduce_2"
+    penwidth=3
+    style=filled
+    color="#c587cc"
+    fontcolor="#000000"
+    fillcolor="#da9ae1"
+  ];
+  "inception_3b/5x5_w_0" [
+    id=59
+    name="inception_3b/5x5_w_0"
+    type=constant_input
+    label="inception_3b/5x5_w_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_3b/5x5_b_0" [
+    id=60
+    name="inception_3b/5x5_b_0"
+    type=constant_input
+    label="inception_3b/5x5_b_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_3b/5x5_1" [
+    id=61
+    name="inception_3b/5x5_1"
+    type=Conv
+    label="{ {conv_14  | CONV} | [1024,96,27,27] }"
+    inputs="inception_3b/5x5_reduce_2;inception_3b/5x5_w_0;inception_3b/5x5_b_0"
+    outputs="inception_3b/5x5_1"
+    penwidth=3
+    style=filled
+    color="#d09295"
+    fontcolor="#000000"
+    fillcolor="#e5a6a8"
+  ];
+  "inception_3b/5x5_2" [
+    id=62
+    name="inception_3b/5x5_2"
+    type=Relu
+    label="{ {relu_14  | RELU} | [1024,96,27,27] }"
+    inputs="inception_3b/5x5_1"
+    outputs="inception_3b/5x5_2"
+    penwidth=3
+    style=filled
+    color="#c587cc"
+    fontcolor="#000000"
+    fillcolor="#da9ae1"
+  ];
+  "inception_3b/pool_1" [
+    id=63
+    name="inception_3b/pool_1"
+    type=MaxPool
+    label="{ {maxpool_4  | MXPL} | [1024,256,27,27] }"
+    inputs="inception_3a/output_1"
+    outputs="inception_3b/pool_1"
+    penwidth=3
+    style=filled
+    color="#83a7c7"
+    fontcolor="#000000"
+    fillcolor="#97bbdc"
+  ];
+  "inception_3b/pool_proj_w_0" [
+    id=64
+    name="inception_3b/pool_proj_w_0"
+    type=constant_input
+    label="inception_3b/pool_proj_w_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_3b/pool_proj_b_0" [
+    id=65
+    name="inception_3b/pool_proj_b_0"
+    type=constant_input
+    label="inception_3b/pool_proj_b_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_3b/pool_proj_1" [
+    id=66
+    name="inception_3b/pool_proj_1"
+    type=Conv
+    label="{ {conv_15  | CONV} | [1024,64,27,27] }"
+    inputs="inception_3b/pool_1;inception_3b/pool_proj_w_0;inception_3b/pool_proj_b_0"
+    outputs="inception_3b/pool_proj_1"
+    penwidth=3
+    style=filled
+    color="#d09295"
+    fontcolor="#000000"
+    fillcolor="#e5a6a8"
+  ];
+  "inception_3b/pool_proj_2" [
+    id=67
+    name="inception_3b/pool_proj_2"
+    type=Relu
+    label="{ {relu_15  | RELU} | [1024,64,27,27] }"
+    inputs="inception_3b/pool_proj_1"
+    outputs="inception_3b/pool_proj_2"
+    penwidth=3
+    style=filled
+    color="#c587cc"
+    fontcolor="#000000"
+    fillcolor="#da9ae1"
+  ];
+  "inception_3b/output_1" [
+    id=68
+    name="inception_3b/output_1"
+    type=Concat
+    label="{ {concat_2  | CONC} | [1024,480,27,27] }"
+    inputs="inception_3b/1x1_2;inception_3b/3x3_2;inception_3b/5x5_2;inception_3b/pool_proj_2"
+    outputs="inception_3b/output_1"
+    penwidth=3
+    style=filled
+    color="#9586c2"
+    fontcolor="#000000"
+    fillcolor="#a698d5"
+  ];
+  "pool3/3x3_s2_1" [
+    id=69
+    name="pool3/3x3_s2_1"
+    type=MaxPool
+    label="{ {maxpool_5  | MXPL} | [1024,480,13,13] }"
+    inputs="inception_3b/output_1"
+    outputs="pool3/3x3_s2_1"
+    penwidth=3
+    style=filled
+    color="#83a7c7"
+    fontcolor="#000000"
+    fillcolor="#97bbdc"
+  ];
+  "inception_4a/1x1_w_0" [
+    id=70
+    name="inception_4a/1x1_w_0"
+    type=constant_input
+    label="inception_4a/1x1_w_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_4a/1x1_b_0" [
+    id=71
+    name="inception_4a/1x1_b_0"
+    type=constant_input
+    label="inception_4a/1x1_b_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_4a/1x1_1" [
+    id=72
+    name="inception_4a/1x1_1"
+    type=Conv
+    label="{ {conv_16  | CONV} | [1024,192,13,13] }"
+    inputs="pool3/3x3_s2_1;inception_4a/1x1_w_0;inception_4a/1x1_b_0"
+    outputs="inception_4a/1x1_1"
+    penwidth=3
+    style=filled
+    color="#d09295"
+    fontcolor="#000000"
+    fillcolor="#e5a6a8"
+  ];
+  "inception_4a/1x1_2" [
+    id=73
+    name="inception_4a/1x1_2"
+    type=Relu
+    label="{ {relu_16  | RELU} | [1024,192,13,13] }"
+    inputs="inception_4a/1x1_1"
+    outputs="inception_4a/1x1_2"
+    penwidth=3
+    style=filled
+    color="#c587cc"
+    fontcolor="#000000"
+    fillcolor="#da9ae1"
+  ];
+  "inception_4a/3x3_reduce_w_0" [
+    id=74
+    name="inception_4a/3x3_reduce_w_0"
+    type=constant_input
+    label="inception_4a/3x3_reduce_w_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_4a/3x3_reduce_b_0" [
+    id=75
+    name="inception_4a/3x3_reduce_b_0"
+    type=constant_input
+    label="inception_4a/3x3_reduce_b_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_4a/3x3_reduce_1" [
+    id=76
+    name="inception_4a/3x3_reduce_1"
+    type=Conv
+    label="{ {conv_17  | CONV} | [1024,96,13,13] }"
+    inputs="pool3/3x3_s2_1;inception_4a/3x3_reduce_w_0;inception_4a/3x3_reduce_b_0"
+    outputs="inception_4a/3x3_reduce_1"
+    penwidth=3
+    style=filled
+    color="#d09295"
+    fontcolor="#000000"
+    fillcolor="#e5a6a8"
+  ];
+  "inception_4a/3x3_reduce_2" [
+    id=77
+    name="inception_4a/3x3_reduce_2"
+    type=Relu
+    label="{ {relu_17  | RELU} | [1024,96,13,13] }"
+    inputs="inception_4a/3x3_reduce_1"
+    outputs="inception_4a/3x3_reduce_2"
+    penwidth=3
+    style=filled
+    color="#c587cc"
+    fontcolor="#000000"
+    fillcolor="#da9ae1"
+  ];
+  "inception_4a/3x3_w_0" [
+    id=78
+    name="inception_4a/3x3_w_0"
+    type=constant_input
+    label="inception_4a/3x3_w_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_4a/3x3_b_0" [
+    id=79
+    name="inception_4a/3x3_b_0"
+    type=constant_input
+    label="inception_4a/3x3_b_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_4a/3x3_1" [
+    id=80
+    name="inception_4a/3x3_1"
+    type=Conv
+    label="{ {conv_18  | CONV} | [1024,208,13,13] }"
+    inputs="inception_4a/3x3_reduce_2;inception_4a/3x3_w_0;inception_4a/3x3_b_0"
+    outputs="inception_4a/3x3_1"
+    penwidth=3
+    style=filled
+    color="#d09295"
+    fontcolor="#000000"
+    fillcolor="#e5a6a8"
+  ];
+  "inception_4a/3x3_2" [
+    id=81
+    name="inception_4a/3x3_2"
+    type=Relu
+    label="{ {relu_18  | RELU} | [1024,208,13,13] }"
+    inputs="inception_4a/3x3_1"
+    outputs="inception_4a/3x3_2"
+    penwidth=3
+    style=filled
+    color="#c587cc"
+    fontcolor="#000000"
+    fillcolor="#da9ae1"
+  ];
+  "inception_4a/5x5_reduce_w_0" [
+    id=82
+    name="inception_4a/5x5_reduce_w_0"
+    type=constant_input
+    label="inception_4a/5x5_reduce_w_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_4a/5x5_reduce_b_0" [
+    id=83
+    name="inception_4a/5x5_reduce_b_0"
+    type=constant_input
+    label="inception_4a/5x5_reduce_b_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_4a/5x5_reduce_1" [
+    id=84
+    name="inception_4a/5x5_reduce_1"
+    type=Conv
+    label="{ {conv_19  | CONV} | [1024,16,13,13] }"
+    inputs="pool3/3x3_s2_1;inception_4a/5x5_reduce_w_0;inception_4a/5x5_reduce_b_0"
+    outputs="inception_4a/5x5_reduce_1"
+    penwidth=3
+    style=filled
+    color="#d09295"
+    fontcolor="#000000"
+    fillcolor="#e5a6a8"
+  ];
+  "inception_4a/5x5_reduce_2" [
+    id=85
+    name="inception_4a/5x5_reduce_2"
+    type=Relu
+    label="{ {relu_19  | RELU} | [1024,16,13,13] }"
+    inputs="inception_4a/5x5_reduce_1"
+    outputs="inception_4a/5x5_reduce_2"
+    penwidth=3
+    style=filled
+    color="#c587cc"
+    fontcolor="#000000"
+    fillcolor="#da9ae1"
+  ];
+  "inception_4a/5x5_w_0" [
+    id=86
+    name="inception_4a/5x5_w_0"
+    type=constant_input
+    label="inception_4a/5x5_w_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_4a/5x5_b_0" [
+    id=87
+    name="inception_4a/5x5_b_0"
+    type=constant_input
+    label="inception_4a/5x5_b_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_4a/5x5_1" [
+    id=88
+    name="inception_4a/5x5_1"
+    type=Conv
+    label="{ {conv_20  | CONV} | [1024,48,13,13] }"
+    inputs="inception_4a/5x5_reduce_2;inception_4a/5x5_w_0;inception_4a/5x5_b_0"
+    outputs="inception_4a/5x5_1"
+    penwidth=3
+    style=filled
+    color="#d09295"
+    fontcolor="#000000"
+    fillcolor="#e5a6a8"
+  ];
+  "inception_4a/5x5_2" [
+    id=89
+    name="inception_4a/5x5_2"
+    type=Relu
+    label="{ {relu_20  | RELU} | [1024,48,13,13] }"
+    inputs="inception_4a/5x5_1"
+    outputs="inception_4a/5x5_2"
+    penwidth=3
+    style=filled
+    color="#c587cc"
+    fontcolor="#000000"
+    fillcolor="#da9ae1"
+  ];
+  "inception_4a/pool_1" [
+    id=90
+    name="inception_4a/pool_1"
+    type=MaxPool
+    label="{ {maxpool_6  | MXPL} | [1024,480,13,13] }"
+    inputs="pool3/3x3_s2_1"
+    outputs="inception_4a/pool_1"
+    penwidth=3
+    style=filled
+    color="#83a7c7"
+    fontcolor="#000000"
+    fillcolor="#97bbdc"
+  ];
+  "inception_4a/pool_proj_w_0" [
+    id=91
+    name="inception_4a/pool_proj_w_0"
+    type=constant_input
+    label="inception_4a/pool_proj_w_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_4a/pool_proj_b_0" [
+    id=92
+    name="inception_4a/pool_proj_b_0"
+    type=constant_input
+    label="inception_4a/pool_proj_b_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_4a/pool_proj_1" [
+    id=93
+    name="inception_4a/pool_proj_1"
+    type=Conv
+    label="{ {conv_21  | CONV} | [1024,64,13,13] }"
+    inputs="inception_4a/pool_1;inception_4a/pool_proj_w_0;inception_4a/pool_proj_b_0"
+    outputs="inception_4a/pool_proj_1"
+    penwidth=3
+    style=filled
+    color="#d09295"
+    fontcolor="#000000"
+    fillcolor="#e5a6a8"
+  ];
+  "inception_4a/pool_proj_2" [
+    id=94
+    name="inception_4a/pool_proj_2"
+    type=Relu
+    label="{ {relu_21  | RELU} | [1024,64,13,13] }"
+    inputs="inception_4a/pool_proj_1"
+    outputs="inception_4a/pool_proj_2"
+    penwidth=3
+    style=filled
+    color="#c587cc"
+    fontcolor="#000000"
+    fillcolor="#da9ae1"
+  ];
+  "inception_4a/output_1" [
+    id=95
+    name="inception_4a/output_1"
+    type=Concat
+    label="{ {concat_3  | CONC} | [1024,512,13,13] }"
+    inputs="inception_4a/1x1_2;inception_4a/3x3_2;inception_4a/5x5_2;inception_4a/pool_proj_2"
+    outputs="inception_4a/output_1"
+    penwidth=3
+    style=filled
+    color="#9586c2"
+    fontcolor="#000000"
+    fillcolor="#a698d5"
+  ];
+  "inception_4b/1x1_w_0" [
+    id=96
+    name="inception_4b/1x1_w_0"
+    type=constant_input
+    label="inception_4b/1x1_w_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_4b/1x1_b_0" [
+    id=97
+    name="inception_4b/1x1_b_0"
+    type=constant_input
+    label="inception_4b/1x1_b_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_4b/1x1_1" [
+    id=98
+    name="inception_4b/1x1_1"
+    type=Conv
+    label="{ {conv_22  | CONV} | [1024,160,13,13] }"
+    inputs="inception_4a/output_1;inception_4b/1x1_w_0;inception_4b/1x1_b_0"
+    outputs="inception_4b/1x1_1"
+    penwidth=3
+    style=filled
+    color="#d09295"
+    fontcolor="#000000"
+    fillcolor="#e5a6a8"
+  ];
+  "inception_4b/1x1_2" [
+    id=99
+    name="inception_4b/1x1_2"
+    type=Relu
+    label="{ {relu_22  | RELU} | [1024,160,13,13] }"
+    inputs="inception_4b/1x1_1"
+    outputs="inception_4b/1x1_2"
+    penwidth=3
+    style=filled
+    color="#c587cc"
+    fontcolor="#000000"
+    fillcolor="#da9ae1"
+  ];
+  "inception_4b/3x3_reduce_w_0" [
+    id=100
+    name="inception_4b/3x3_reduce_w_0"
+    type=constant_input
+    label="inception_4b/3x3_reduce_w_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_4b/3x3_reduce_b_0" [
+    id=101
+    name="inception_4b/3x3_reduce_b_0"
+    type=constant_input
+    label="inception_4b/3x3_reduce_b_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_4b/3x3_reduce_1" [
+    id=102
+    name="inception_4b/3x3_reduce_1"
+    type=Conv
+    label="{ {conv_23  | CONV} | [1024,112,13,13] }"
+    inputs="inception_4a/output_1;inception_4b/3x3_reduce_w_0;inception_4b/3x3_reduce_b_0"
+    outputs="inception_4b/3x3_reduce_1"
+    penwidth=3
+    style=filled
+    color="#d09295"
+    fontcolor="#000000"
+    fillcolor="#e5a6a8"
+  ];
+  "inception_4b/3x3_reduce_2" [
+    id=103
+    name="inception_4b/3x3_reduce_2"
+    type=Relu
+    label="{ {relu_23  | RELU} | [1024,112,13,13] }"
+    inputs="inception_4b/3x3_reduce_1"
+    outputs="inception_4b/3x3_reduce_2"
+    penwidth=3
+    style=filled
+    color="#c587cc"
+    fontcolor="#000000"
+    fillcolor="#da9ae1"
+  ];
+  "inception_4b/3x3_w_0" [
+    id=104
+    name="inception_4b/3x3_w_0"
+    type=constant_input
+    label="inception_4b/3x3_w_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_4b/3x3_b_0" [
+    id=105
+    name="inception_4b/3x3_b_0"
+    type=constant_input
+    label="inception_4b/3x3_b_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_4b/3x3_1" [
+    id=106
+    name="inception_4b/3x3_1"
+    type=Conv
+    label="{ {conv_24  | CONV} | [1024,224,13,13] }"
+    inputs="inception_4b/3x3_reduce_2;inception_4b/3x3_w_0;inception_4b/3x3_b_0"
+    outputs="inception_4b/3x3_1"
+    penwidth=3
+    style=filled
+    color="#d09295"
+    fontcolor="#000000"
+    fillcolor="#e5a6a8"
+  ];
+  "inception_4b/3x3_2" [
+    id=107
+    name="inception_4b/3x3_2"
+    type=Relu
+    label="{ {relu_24  | RELU} | [1024,224,13,13] }"
+    inputs="inception_4b/3x3_1"
+    outputs="inception_4b/3x3_2"
+    penwidth=3
+    style=filled
+    color="#c587cc"
+    fontcolor="#000000"
+    fillcolor="#da9ae1"
+  ];
+  "inception_4b/5x5_reduce_w_0" [
+    id=108
+    name="inception_4b/5x5_reduce_w_0"
+    type=constant_input
+    label="inception_4b/5x5_reduce_w_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_4b/5x5_reduce_b_0" [
+    id=109
+    name="inception_4b/5x5_reduce_b_0"
+    type=constant_input
+    label="inception_4b/5x5_reduce_b_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_4b/5x5_reduce_1" [
+    id=110
+    name="inception_4b/5x5_reduce_1"
+    type=Conv
+    label="{ {conv_25  | CONV} | [1024,24,13,13] }"
+    inputs="inception_4a/output_1;inception_4b/5x5_reduce_w_0;inception_4b/5x5_reduce_b_0"
+    outputs="inception_4b/5x5_reduce_1"
+    penwidth=3
+    style=filled
+    color="#d09295"
+    fontcolor="#000000"
+    fillcolor="#e5a6a8"
+  ];
+  "inception_4b/5x5_reduce_2" [
+    id=111
+    name="inception_4b/5x5_reduce_2"
+    type=Relu
+    label="{ {relu_25  | RELU} | [1024,24,13,13] }"
+    inputs="inception_4b/5x5_reduce_1"
+    outputs="inception_4b/5x5_reduce_2"
+    penwidth=3
+    style=filled
+    color="#c587cc"
+    fontcolor="#000000"
+    fillcolor="#da9ae1"
+  ];
+  "inception_4b/5x5_w_0" [
+    id=112
+    name="inception_4b/5x5_w_0"
+    type=constant_input
+    label="inception_4b/5x5_w_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_4b/5x5_b_0" [
+    id=113
+    name="inception_4b/5x5_b_0"
+    type=constant_input
+    label="inception_4b/5x5_b_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_4b/5x5_1" [
+    id=114
+    name="inception_4b/5x5_1"
+    type=Conv
+    label="{ {conv_26  | CONV} | [1024,64,13,13] }"
+    inputs="inception_4b/5x5_reduce_2;inception_4b/5x5_w_0;inception_4b/5x5_b_0"
+    outputs="inception_4b/5x5_1"
+    penwidth=3
+    style=filled
+    color="#d09295"
+    fontcolor="#000000"
+    fillcolor="#e5a6a8"
+  ];
+  "inception_4b/5x5_2" [
+    id=115
+    name="inception_4b/5x5_2"
+    type=Relu
+    label="{ {relu_26  | RELU} | [1024,64,13,13] }"
+    inputs="inception_4b/5x5_1"
+    outputs="inception_4b/5x5_2"
+    penwidth=3
+    style=filled
+    color="#c587cc"
+    fontcolor="#000000"
+    fillcolor="#da9ae1"
+  ];
+  "inception_4b/pool_1" [
+    id=116
+    name="inception_4b/pool_1"
+    type=MaxPool
+    label="{ {maxpool_7  | MXPL} | [1024,512,13,13] }"
+    inputs="inception_4a/output_1"
+    outputs="inception_4b/pool_1"
+    penwidth=3
+    style=filled
+    color="#83a7c7"
+    fontcolor="#000000"
+    fillcolor="#97bbdc"
+  ];
+  "inception_4b/pool_proj_w_0" [
+    id=117
+    name="inception_4b/pool_proj_w_0"
+    type=constant_input
+    label="inception_4b/pool_proj_w_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_4b/pool_proj_b_0" [
+    id=118
+    name="inception_4b/pool_proj_b_0"
+    type=constant_input
+    label="inception_4b/pool_proj_b_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_4b/pool_proj_1" [
+    id=119
+    name="inception_4b/pool_proj_1"
+    type=Conv
+    label="{ {conv_27  | CONV} | [1024,64,13,13] }"
+    inputs="inception_4b/pool_1;inception_4b/pool_proj_w_0;inception_4b/pool_proj_b_0"
+    outputs="inception_4b/pool_proj_1"
+    penwidth=3
+    style=filled
+    color="#d09295"
+    fontcolor="#000000"
+    fillcolor="#e5a6a8"
+  ];
+  "inception_4b/pool_proj_2" [
+    id=120
+    name="inception_4b/pool_proj_2"
+    type=Relu
+    label="{ {relu_27  | RELU} | [1024,64,13,13] }"
+    inputs="inception_4b/pool_proj_1"
+    outputs="inception_4b/pool_proj_2"
+    penwidth=3
+    style=filled
+    color="#c587cc"
+    fontcolor="#000000"
+    fillcolor="#da9ae1"
+  ];
+  "inception_4b/output_1" [
+    id=121
+    name="inception_4b/output_1"
+    type=Concat
+    label="{ {concat_4  | CONC} | [1024,512,13,13] }"
+    inputs="inception_4b/1x1_2;inception_4b/3x3_2;inception_4b/5x5_2;inception_4b/pool_proj_2"
+    outputs="inception_4b/output_1"
+    penwidth=3
+    style=filled
+    color="#9586c2"
+    fontcolor="#000000"
+    fillcolor="#a698d5"
+  ];
+  "inception_4c/1x1_w_0" [
+    id=122
+    name="inception_4c/1x1_w_0"
+    type=constant_input
+    label="inception_4c/1x1_w_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_4c/1x1_b_0" [
+    id=123
+    name="inception_4c/1x1_b_0"
+    type=constant_input
+    label="inception_4c/1x1_b_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_4c/1x1_1" [
+    id=124
+    name="inception_4c/1x1_1"
+    type=Conv
+    label="{ {conv_28  | CONV} | [1024,128,13,13] }"
+    inputs="inception_4b/output_1;inception_4c/1x1_w_0;inception_4c/1x1_b_0"
+    outputs="inception_4c/1x1_1"
+    penwidth=3
+    style=filled
+    color="#d09295"
+    fontcolor="#000000"
+    fillcolor="#e5a6a8"
+  ];
+  "inception_4c/1x1_2" [
+    id=125
+    name="inception_4c/1x1_2"
+    type=Relu
+    label="{ {relu_28  | RELU} | [1024,128,13,13] }"
+    inputs="inception_4c/1x1_1"
+    outputs="inception_4c/1x1_2"
+    penwidth=3
+    style=filled
+    color="#c587cc"
+    fontcolor="#000000"
+    fillcolor="#da9ae1"
+  ];
+  "inception_4c/3x3_reduce_w_0" [
+    id=126
+    name="inception_4c/3x3_reduce_w_0"
+    type=constant_input
+    label="inception_4c/3x3_reduce_w_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_4c/3x3_reduce_b_0" [
+    id=127
+    name="inception_4c/3x3_reduce_b_0"
+    type=constant_input
+    label="inception_4c/3x3_reduce_b_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_4c/3x3_reduce_1" [
+    id=128
+    name="inception_4c/3x3_reduce_1"
+    type=Conv
+    label="{ {conv_29  | CONV} | [1024,128,13,13] }"
+    inputs="inception_4b/output_1;inception_4c/3x3_reduce_w_0;inception_4c/3x3_reduce_b_0"
+    outputs="inception_4c/3x3_reduce_1"
+    penwidth=3
+    style=filled
+    color="#d09295"
+    fontcolor="#000000"
+    fillcolor="#e5a6a8"
+  ];
+  "inception_4c/3x3_reduce_2" [
+    id=129
+    name="inception_4c/3x3_reduce_2"
+    type=Relu
+    label="{ {relu_29  | RELU} | [1024,128,13,13] }"
+    inputs="inception_4c/3x3_reduce_1"
+    outputs="inception_4c/3x3_reduce_2"
+    penwidth=3
+    style=filled
+    color="#c587cc"
+    fontcolor="#000000"
+    fillcolor="#da9ae1"
+  ];
+  "inception_4c/3x3_w_0" [
+    id=130
+    name="inception_4c/3x3_w_0"
+    type=constant_input
+    label="inception_4c/3x3_w_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_4c/3x3_b_0" [
+    id=131
+    name="inception_4c/3x3_b_0"
+    type=constant_input
+    label="inception_4c/3x3_b_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_4c/3x3_1" [
+    id=132
+    name="inception_4c/3x3_1"
+    type=Conv
+    label="{ {conv_30  | CONV} | [1024,256,13,13] }"
+    inputs="inception_4c/3x3_reduce_2;inception_4c/3x3_w_0;inception_4c/3x3_b_0"
+    outputs="inception_4c/3x3_1"
+    penwidth=3
+    style=filled
+    color="#d09295"
+    fontcolor="#000000"
+    fillcolor="#e5a6a8"
+  ];
+  "inception_4c/3x3_2" [
+    id=133
+    name="inception_4c/3x3_2"
+    type=Relu
+    label="{ {relu_30  | RELU} | [1024,256,13,13] }"
+    inputs="inception_4c/3x3_1"
+    outputs="inception_4c/3x3_2"
+    penwidth=3
+    style=filled
+    color="#c587cc"
+    fontcolor="#000000"
+    fillcolor="#da9ae1"
+  ];
+  "inception_4c/5x5_reduce_w_0" [
+    id=134
+    name="inception_4c/5x5_reduce_w_0"
+    type=constant_input
+    label="inception_4c/5x5_reduce_w_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_4c/5x5_reduce_b_0" [
+    id=135
+    name="inception_4c/5x5_reduce_b_0"
+    type=constant_input
+    label="inception_4c/5x5_reduce_b_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_4c/5x5_reduce_1" [
+    id=136
+    name="inception_4c/5x5_reduce_1"
+    type=Conv
+    label="{ {conv_31  | CONV} | [1024,24,13,13] }"
+    inputs="inception_4b/output_1;inception_4c/5x5_reduce_w_0;inception_4c/5x5_reduce_b_0"
+    outputs="inception_4c/5x5_reduce_1"
+    penwidth=3
+    style=filled
+    color="#d09295"
+    fontcolor="#000000"
+    fillcolor="#e5a6a8"
+  ];
+  "inception_4c/5x5_reduce_2" [
+    id=137
+    name="inception_4c/5x5_reduce_2"
+    type=Relu
+    label="{ {relu_31  | RELU} | [1024,24,13,13] }"
+    inputs="inception_4c/5x5_reduce_1"
+    outputs="inception_4c/5x5_reduce_2"
+    penwidth=3
+    style=filled
+    color="#c587cc"
+    fontcolor="#000000"
+    fillcolor="#da9ae1"
+  ];
+  "inception_4c/5x5_w_0" [
+    id=138
+    name="inception_4c/5x5_w_0"
+    type=constant_input
+    label="inception_4c/5x5_w_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_4c/5x5_b_0" [
+    id=139
+    name="inception_4c/5x5_b_0"
+    type=constant_input
+    label="inception_4c/5x5_b_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_4c/5x5_1" [
+    id=140
+    name="inception_4c/5x5_1"
+    type=Conv
+    label="{ {conv_32  | CONV} | [1024,64,13,13] }"
+    inputs="inception_4c/5x5_reduce_2;inception_4c/5x5_w_0;inception_4c/5x5_b_0"
+    outputs="inception_4c/5x5_1"
+    penwidth=3
+    style=filled
+    color="#d09295"
+    fontcolor="#000000"
+    fillcolor="#e5a6a8"
+  ];
+  "inception_4c/5x5_2" [
+    id=141
+    name="inception_4c/5x5_2"
+    type=Relu
+    label="{ {relu_32  | RELU} | [1024,64,13,13] }"
+    inputs="inception_4c/5x5_1"
+    outputs="inception_4c/5x5_2"
+    penwidth=3
+    style=filled
+    color="#c587cc"
+    fontcolor="#000000"
+    fillcolor="#da9ae1"
+  ];
+  "inception_4c/pool_1" [
+    id=142
+    name="inception_4c/pool_1"
+    type=MaxPool
+    label="{ {maxpool_8  | MXPL} | [1024,512,13,13] }"
+    inputs="inception_4b/output_1"
+    outputs="inception_4c/pool_1"
+    penwidth=3
+    style=filled
+    color="#83a7c7"
+    fontcolor="#000000"
+    fillcolor="#97bbdc"
+  ];
+  "inception_4c/pool_proj_w_0" [
+    id=143
+    name="inception_4c/pool_proj_w_0"
+    type=constant_input
+    label="inception_4c/pool_proj_w_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_4c/pool_proj_b_0" [
+    id=144
+    name="inception_4c/pool_proj_b_0"
+    type=constant_input
+    label="inception_4c/pool_proj_b_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_4c/pool_proj_1" [
+    id=145
+    name="inception_4c/pool_proj_1"
+    type=Conv
+    label="{ {conv_33  | CONV} | [1024,64,13,13] }"
+    inputs="inception_4c/pool_1;inception_4c/pool_proj_w_0;inception_4c/pool_proj_b_0"
+    outputs="inception_4c/pool_proj_1"
+    penwidth=3
+    style=filled
+    color="#d09295"
+    fontcolor="#000000"
+    fillcolor="#e5a6a8"
+  ];
+  "inception_4c/pool_proj_2" [
+    id=146
+    name="inception_4c/pool_proj_2"
+    type=Relu
+    label="{ {relu_33  | RELU} | [1024,64,13,13] }"
+    inputs="inception_4c/pool_proj_1"
+    outputs="inception_4c/pool_proj_2"
+    penwidth=3
+    style=filled
+    color="#c587cc"
+    fontcolor="#000000"
+    fillcolor="#da9ae1"
+  ];
+  "inception_4c/output_1" [
+    id=147
+    name="inception_4c/output_1"
+    type=Concat
+    label="{ {concat_5  | CONC} | [1024,512,13,13] }"
+    inputs="inception_4c/1x1_2;inception_4c/3x3_2;inception_4c/5x5_2;inception_4c/pool_proj_2"
+    outputs="inception_4c/output_1"
+    penwidth=3
+    style=filled
+    color="#9586c2"
+    fontcolor="#000000"
+    fillcolor="#a698d5"
+  ];
+  "inception_4d/1x1_w_0" [
+    id=148
+    name="inception_4d/1x1_w_0"
+    type=constant_input
+    label="inception_4d/1x1_w_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_4d/1x1_b_0" [
+    id=149
+    name="inception_4d/1x1_b_0"
+    type=constant_input
+    label="inception_4d/1x1_b_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_4d/1x1_1" [
+    id=150
+    name="inception_4d/1x1_1"
+    type=Conv
+    label="{ {conv_34  | CONV} | [1024,112,13,13] }"
+    inputs="inception_4c/output_1;inception_4d/1x1_w_0;inception_4d/1x1_b_0"
+    outputs="inception_4d/1x1_1"
+    penwidth=3
+    style=filled
+    color="#d09295"
+    fontcolor="#000000"
+    fillcolor="#e5a6a8"
+  ];
+  "inception_4d/1x1_2" [
+    id=151
+    name="inception_4d/1x1_2"
+    type=Relu
+    label="{ {relu_34  | RELU} | [1024,112,13,13] }"
+    inputs="inception_4d/1x1_1"
+    outputs="inception_4d/1x1_2"
+    penwidth=3
+    style=filled
+    color="#c587cc"
+    fontcolor="#000000"
+    fillcolor="#da9ae1"
+  ];
+  "inception_4d/3x3_reduce_w_0" [
+    id=152
+    name="inception_4d/3x3_reduce_w_0"
+    type=constant_input
+    label="inception_4d/3x3_reduce_w_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_4d/3x3_reduce_b_0" [
+    id=153
+    name="inception_4d/3x3_reduce_b_0"
+    type=constant_input
+    label="inception_4d/3x3_reduce_b_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_4d/3x3_reduce_1" [
+    id=154
+    name="inception_4d/3x3_reduce_1"
+    type=Conv
+    label="{ {conv_35  | CONV} | [1024,144,13,13] }"
+    inputs="inception_4c/output_1;inception_4d/3x3_reduce_w_0;inception_4d/3x3_reduce_b_0"
+    outputs="inception_4d/3x3_reduce_1"
+    penwidth=3
+    style=filled
+    color="#d09295"
+    fontcolor="#000000"
+    fillcolor="#e5a6a8"
+  ];
+  "inception_4d/3x3_reduce_2" [
+    id=155
+    name="inception_4d/3x3_reduce_2"
+    type=Relu
+    label="{ {relu_35  | RELU} | [1024,144,13,13] }"
+    inputs="inception_4d/3x3_reduce_1"
+    outputs="inception_4d/3x3_reduce_2"
+    penwidth=3
+    style=filled
+    color="#c587cc"
+    fontcolor="#000000"
+    fillcolor="#da9ae1"
+  ];
+  "inception_4d/3x3_w_0" [
+    id=156
+    name="inception_4d/3x3_w_0"
+    type=constant_input
+    label="inception_4d/3x3_w_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_4d/3x3_b_0" [
+    id=157
+    name="inception_4d/3x3_b_0"
+    type=constant_input
+    label="inception_4d/3x3_b_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_4d/3x3_1" [
+    id=158
+    name="inception_4d/3x3_1"
+    type=Conv
+    label="{ {conv_36  | CONV} | [1024,288,13,13] }"
+    inputs="inception_4d/3x3_reduce_2;inception_4d/3x3_w_0;inception_4d/3x3_b_0"
+    outputs="inception_4d/3x3_1"
+    penwidth=3
+    style=filled
+    color="#d09295"
+    fontcolor="#000000"
+    fillcolor="#e5a6a8"
+  ];
+  "inception_4d/3x3_2" [
+    id=159
+    name="inception_4d/3x3_2"
+    type=Relu
+    label="{ {relu_36  | RELU} | [1024,288,13,13] }"
+    inputs="inception_4d/3x3_1"
+    outputs="inception_4d/3x3_2"
+    penwidth=3
+    style=filled
+    color="#c587cc"
+    fontcolor="#000000"
+    fillcolor="#da9ae1"
+  ];
+  "inception_4d/5x5_reduce_w_0" [
+    id=160
+    name="inception_4d/5x5_reduce_w_0"
+    type=constant_input
+    label="inception_4d/5x5_reduce_w_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_4d/5x5_reduce_b_0" [
+    id=161
+    name="inception_4d/5x5_reduce_b_0"
+    type=constant_input
+    label="inception_4d/5x5_reduce_b_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_4d/5x5_reduce_1" [
+    id=162
+    name="inception_4d/5x5_reduce_1"
+    type=Conv
+    label="{ {conv_37  | CONV} | [1024,32,13,13] }"
+    inputs="inception_4c/output_1;inception_4d/5x5_reduce_w_0;inception_4d/5x5_reduce_b_0"
+    outputs="inception_4d/5x5_reduce_1"
+    penwidth=3
+    style=filled
+    color="#d09295"
+    fontcolor="#000000"
+    fillcolor="#e5a6a8"
+  ];
+  "inception_4d/5x5_reduce_2" [
+    id=163
+    name="inception_4d/5x5_reduce_2"
+    type=Relu
+    label="{ {relu_37  | RELU} | [1024,32,13,13] }"
+    inputs="inception_4d/5x5_reduce_1"
+    outputs="inception_4d/5x5_reduce_2"
+    penwidth=3
+    style=filled
+    color="#c587cc"
+    fontcolor="#000000"
+    fillcolor="#da9ae1"
+  ];
+  "inception_4d/5x5_w_0" [
+    id=164
+    name="inception_4d/5x5_w_0"
+    type=constant_input
+    label="inception_4d/5x5_w_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_4d/5x5_b_0" [
+    id=165
+    name="inception_4d/5x5_b_0"
+    type=constant_input
+    label="inception_4d/5x5_b_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_4d/5x5_1" [
+    id=166
+    name="inception_4d/5x5_1"
+    type=Conv
+    label="{ {conv_38  | CONV} | [1024,64,13,13] }"
+    inputs="inception_4d/5x5_reduce_2;inception_4d/5x5_w_0;inception_4d/5x5_b_0"
+    outputs="inception_4d/5x5_1"
+    penwidth=3
+    style=filled
+    color="#d09295"
+    fontcolor="#000000"
+    fillcolor="#e5a6a8"
+  ];
+  "inception_4d/5x5_2" [
+    id=167
+    name="inception_4d/5x5_2"
+    type=Relu
+    label="{ {relu_38  | RELU} | [1024,64,13,13] }"
+    inputs="inception_4d/5x5_1"
+    outputs="inception_4d/5x5_2"
+    penwidth=3
+    style=filled
+    color="#c587cc"
+    fontcolor="#000000"
+    fillcolor="#da9ae1"
+  ];
+  "inception_4d/pool_1" [
+    id=168
+    name="inception_4d/pool_1"
+    type=MaxPool
+    label="{ {maxpool_9  | MXPL} | [1024,512,13,13] }"
+    inputs="inception_4c/output_1"
+    outputs="inception_4d/pool_1"
+    penwidth=3
+    style=filled
+    color="#83a7c7"
+    fontcolor="#000000"
+    fillcolor="#97bbdc"
+  ];
+  "inception_4d/pool_proj_w_0" [
+    id=169
+    name="inception_4d/pool_proj_w_0"
+    type=constant_input
+    label="inception_4d/pool_proj_w_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_4d/pool_proj_b_0" [
+    id=170
+    name="inception_4d/pool_proj_b_0"
+    type=constant_input
+    label="inception_4d/pool_proj_b_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_4d/pool_proj_1" [
+    id=171
+    name="inception_4d/pool_proj_1"
+    type=Conv
+    label="{ {conv_39  | CONV} | [1024,64,13,13] }"
+    inputs="inception_4d/pool_1;inception_4d/pool_proj_w_0;inception_4d/pool_proj_b_0"
+    outputs="inception_4d/pool_proj_1"
+    penwidth=3
+    style=filled
+    color="#d09295"
+    fontcolor="#000000"
+    fillcolor="#e5a6a8"
+  ];
+  "inception_4d/pool_proj_2" [
+    id=172
+    name="inception_4d/pool_proj_2"
+    type=Relu
+    label="{ {relu_39  | RELU} | [1024,64,13,13] }"
+    inputs="inception_4d/pool_proj_1"
+    outputs="inception_4d/pool_proj_2"
+    penwidth=3
+    style=filled
+    color="#c587cc"
+    fontcolor="#000000"
+    fillcolor="#da9ae1"
+  ];
+  "inception_4d/output_1" [
+    id=173
+    name="inception_4d/output_1"
+    type=Concat
+    label="{ {concat_6  | CONC} | [1024,528,13,13] }"
+    inputs="inception_4d/1x1_2;inception_4d/3x3_2;inception_4d/5x5_2;inception_4d/pool_proj_2"
+    outputs="inception_4d/output_1"
+    penwidth=3
+    style=filled
+    color="#9586c2"
+    fontcolor="#000000"
+    fillcolor="#a698d5"
+  ];
+  "inception_4e/1x1_w_0" [
+    id=174
+    name="inception_4e/1x1_w_0"
+    type=constant_input
+    label="inception_4e/1x1_w_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_4e/1x1_b_0" [
+    id=175
+    name="inception_4e/1x1_b_0"
+    type=constant_input
+    label="inception_4e/1x1_b_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_4e/1x1_1" [
+    id=176
+    name="inception_4e/1x1_1"
+    type=Conv
+    label="{ {conv_40  | CONV} | [1024,256,13,13] }"
+    inputs="inception_4d/output_1;inception_4e/1x1_w_0;inception_4e/1x1_b_0"
+    outputs="inception_4e/1x1_1"
+    penwidth=3
+    style=filled
+    color="#d09295"
+    fontcolor="#000000"
+    fillcolor="#e5a6a8"
+  ];
+  "inception_4e/1x1_2" [
+    id=177
+    name="inception_4e/1x1_2"
+    type=Relu
+    label="{ {relu_40  | RELU} | [1024,256,13,13] }"
+    inputs="inception_4e/1x1_1"
+    outputs="inception_4e/1x1_2"
+    penwidth=3
+    style=filled
+    color="#c587cc"
+    fontcolor="#000000"
+    fillcolor="#da9ae1"
+  ];
+  "inception_4e/3x3_reduce_w_0" [
+    id=178
+    name="inception_4e/3x3_reduce_w_0"
+    type=constant_input
+    label="inception_4e/3x3_reduce_w_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_4e/3x3_reduce_b_0" [
+    id=179
+    name="inception_4e/3x3_reduce_b_0"
+    type=constant_input
+    label="inception_4e/3x3_reduce_b_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_4e/3x3_reduce_1" [
+    id=180
+    name="inception_4e/3x3_reduce_1"
+    type=Conv
+    label="{ {conv_41  | CONV} | [1024,160,13,13] }"
+    inputs="inception_4d/output_1;inception_4e/3x3_reduce_w_0;inception_4e/3x3_reduce_b_0"
+    outputs="inception_4e/3x3_reduce_1"
+    penwidth=3
+    style=filled
+    color="#d09295"
+    fontcolor="#000000"
+    fillcolor="#e5a6a8"
+  ];
+  "inception_4e/3x3_reduce_2" [
+    id=181
+    name="inception_4e/3x3_reduce_2"
+    type=Relu
+    label="{ {relu_41  | RELU} | [1024,160,13,13] }"
+    inputs="inception_4e/3x3_reduce_1"
+    outputs="inception_4e/3x3_reduce_2"
+    penwidth=3
+    style=filled
+    color="#c587cc"
+    fontcolor="#000000"
+    fillcolor="#da9ae1"
+  ];
+  "inception_4e/3x3_w_0" [
+    id=182
+    name="inception_4e/3x3_w_0"
+    type=constant_input
+    label="inception_4e/3x3_w_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_4e/3x3_b_0" [
+    id=183
+    name="inception_4e/3x3_b_0"
+    type=constant_input
+    label="inception_4e/3x3_b_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_4e/3x3_1" [
+    id=184
+    name="inception_4e/3x3_1"
+    type=Conv
+    label="{ {conv_42  | CONV} | [1024,320,13,13] }"
+    inputs="inception_4e/3x3_reduce_2;inception_4e/3x3_w_0;inception_4e/3x3_b_0"
+    outputs="inception_4e/3x3_1"
+    penwidth=3
+    style=filled
+    color="#d09295"
+    fontcolor="#000000"
+    fillcolor="#e5a6a8"
+  ];
+  "inception_4e/3x3_2" [
+    id=185
+    name="inception_4e/3x3_2"
+    type=Relu
+    label="{ {relu_42  | RELU} | [1024,320,13,13] }"
+    inputs="inception_4e/3x3_1"
+    outputs="inception_4e/3x3_2"
+    penwidth=3
+    style=filled
+    color="#c587cc"
+    fontcolor="#000000"
+    fillcolor="#da9ae1"
+  ];
+  "inception_4e/5x5_reduce_w_0" [
+    id=186
+    name="inception_4e/5x5_reduce_w_0"
+    type=constant_input
+    label="inception_4e/5x5_reduce_w_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_4e/5x5_reduce_b_0" [
+    id=187
+    name="inception_4e/5x5_reduce_b_0"
+    type=constant_input
+    label="inception_4e/5x5_reduce_b_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_4e/5x5_reduce_1" [
+    id=188
+    name="inception_4e/5x5_reduce_1"
+    type=Conv
+    label="{ {conv_43  | CONV} | [1024,32,13,13] }"
+    inputs="inception_4d/output_1;inception_4e/5x5_reduce_w_0;inception_4e/5x5_reduce_b_0"
+    outputs="inception_4e/5x5_reduce_1"
+    penwidth=3
+    style=filled
+    color="#d09295"
+    fontcolor="#000000"
+    fillcolor="#e5a6a8"
+  ];
+  "inception_4e/5x5_reduce_2" [
+    id=189
+    name="inception_4e/5x5_reduce_2"
+    type=Relu
+    label="{ {relu_43  | RELU} | [1024,32,13,13] }"
+    inputs="inception_4e/5x5_reduce_1"
+    outputs="inception_4e/5x5_reduce_2"
+    penwidth=3
+    style=filled
+    color="#c587cc"
+    fontcolor="#000000"
+    fillcolor="#da9ae1"
+  ];
+  "inception_4e/5x5_w_0" [
+    id=190
+    name="inception_4e/5x5_w_0"
+    type=constant_input
+    label="inception_4e/5x5_w_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_4e/5x5_b_0" [
+    id=191
+    name="inception_4e/5x5_b_0"
+    type=constant_input
+    label="inception_4e/5x5_b_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_4e/5x5_1" [
+    id=192
+    name="inception_4e/5x5_1"
+    type=Conv
+    label="{ {conv_44  | CONV} | [1024,128,13,13] }"
+    inputs="inception_4e/5x5_reduce_2;inception_4e/5x5_w_0;inception_4e/5x5_b_0"
+    outputs="inception_4e/5x5_1"
+    penwidth=3
+    style=filled
+    color="#d09295"
+    fontcolor="#000000"
+    fillcolor="#e5a6a8"
+  ];
+  "inception_4e/5x5_2" [
+    id=193
+    name="inception_4e/5x5_2"
+    type=Relu
+    label="{ {relu_44  | RELU} | [1024,128,13,13] }"
+    inputs="inception_4e/5x5_1"
+    outputs="inception_4e/5x5_2"
+    penwidth=3
+    style=filled
+    color="#c587cc"
+    fontcolor="#000000"
+    fillcolor="#da9ae1"
+  ];
+  "inception_4e/pool_1" [
+    id=194
+    name="inception_4e/pool_1"
+    type=MaxPool
+    label="{ {maxpool_10  | MXPL} | [1024,528,13,13] }"
+    inputs="inception_4d/output_1"
+    outputs="inception_4e/pool_1"
+    penwidth=3
+    style=filled
+    color="#83a7c7"
+    fontcolor="#000000"
+    fillcolor="#97bbdc"
+  ];
+  "inception_4e/pool_proj_w_0" [
+    id=195
+    name="inception_4e/pool_proj_w_0"
+    type=constant_input
+    label="inception_4e/pool_proj_w_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_4e/pool_proj_b_0" [
+    id=196
+    name="inception_4e/pool_proj_b_0"
+    type=constant_input
+    label="inception_4e/pool_proj_b_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_4e/pool_proj_1" [
+    id=197
+    name="inception_4e/pool_proj_1"
+    type=Conv
+    label="{ {conv_45  | CONV} | [1024,128,13,13] }"
+    inputs="inception_4e/pool_1;inception_4e/pool_proj_w_0;inception_4e/pool_proj_b_0"
+    outputs="inception_4e/pool_proj_1"
+    penwidth=3
+    style=filled
+    color="#d09295"
+    fontcolor="#000000"
+    fillcolor="#e5a6a8"
+  ];
+  "inception_4e/pool_proj_2" [
+    id=198
+    name="inception_4e/pool_proj_2"
+    type=Relu
+    label="{ {relu_45  | RELU} | [1024,128,13,13] }"
+    inputs="inception_4e/pool_proj_1"
+    outputs="inception_4e/pool_proj_2"
+    penwidth=3
+    style=filled
+    color="#c587cc"
+    fontcolor="#000000"
+    fillcolor="#da9ae1"
+  ];
+  "inception_4e/output_1" [
+    id=199
+    name="inception_4e/output_1"
+    type=Concat
+    label="{ {concat_7  | CONC} | [1024,832,13,13] }"
+    inputs="inception_4e/1x1_2;inception_4e/3x3_2;inception_4e/5x5_2;inception_4e/pool_proj_2"
+    outputs="inception_4e/output_1"
+    penwidth=3
+    style=filled
+    color="#9586c2"
+    fontcolor="#000000"
+    fillcolor="#a698d5"
+  ];
+  "pool4/3x3_s2_1" [
+    id=200
+    name="pool4/3x3_s2_1"
+    type=MaxPool
+    label="{ {maxpool_11  | MXPL} | [1024,832,6,6] }"
+    inputs="inception_4e/output_1"
+    outputs="pool4/3x3_s2_1"
+    penwidth=3
+    style=filled
+    color="#83a7c7"
+    fontcolor="#000000"
+    fillcolor="#97bbdc"
+  ];
+  "inception_5a/1x1_w_0" [
+    id=201
+    name="inception_5a/1x1_w_0"
+    type=constant_input
+    label="inception_5a/1x1_w_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_5a/1x1_b_0" [
+    id=202
+    name="inception_5a/1x1_b_0"
+    type=constant_input
+    label="inception_5a/1x1_b_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_5a/1x1_1" [
+    id=203
+    name="inception_5a/1x1_1"
+    type=Conv
+    label="{ {conv_46  | CONV} | [1024,256,6,6] }"
+    inputs="pool4/3x3_s2_1;inception_5a/1x1_w_0;inception_5a/1x1_b_0"
+    outputs="inception_5a/1x1_1"
+    penwidth=3
+    style=filled
+    color="#d09295"
+    fontcolor="#000000"
+    fillcolor="#e5a6a8"
+  ];
+  "inception_5a/1x1_2" [
+    id=204
+    name="inception_5a/1x1_2"
+    type=Relu
+    label="{ {relu_46  | RELU} | [1024,256,6,6] }"
+    inputs="inception_5a/1x1_1"
+    outputs="inception_5a/1x1_2"
+    penwidth=3
+    style=filled
+    color="#c587cc"
+    fontcolor="#000000"
+    fillcolor="#da9ae1"
+  ];
+  "inception_5a/3x3_reduce_w_0" [
+    id=205
+    name="inception_5a/3x3_reduce_w_0"
+    type=constant_input
+    label="inception_5a/3x3_reduce_w_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_5a/3x3_reduce_b_0" [
+    id=206
+    name="inception_5a/3x3_reduce_b_0"
+    type=constant_input
+    label="inception_5a/3x3_reduce_b_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_5a/3x3_reduce_1" [
+    id=207
+    name="inception_5a/3x3_reduce_1"
+    type=Conv
+    label="{ {conv_47  | CONV} | [1024,160,6,6] }"
+    inputs="pool4/3x3_s2_1;inception_5a/3x3_reduce_w_0;inception_5a/3x3_reduce_b_0"
+    outputs="inception_5a/3x3_reduce_1"
+    penwidth=3
+    style=filled
+    color="#d09295"
+    fontcolor="#000000"
+    fillcolor="#e5a6a8"
+  ];
+  "inception_5a/3x3_reduce_2" [
+    id=208
+    name="inception_5a/3x3_reduce_2"
+    type=Relu
+    label="{ {relu_47  | RELU} | [1024,160,6,6] }"
+    inputs="inception_5a/3x3_reduce_1"
+    outputs="inception_5a/3x3_reduce_2"
+    penwidth=3
+    style=filled
+    color="#c587cc"
+    fontcolor="#000000"
+    fillcolor="#da9ae1"
+  ];
+  "inception_5a/3x3_w_0" [
+    id=209
+    name="inception_5a/3x3_w_0"
+    type=constant_input
+    label="inception_5a/3x3_w_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_5a/3x3_b_0" [
+    id=210
+    name="inception_5a/3x3_b_0"
+    type=constant_input
+    label="inception_5a/3x3_b_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_5a/3x3_1" [
+    id=211
+    name="inception_5a/3x3_1"
+    type=Conv
+    label="{ {conv_48  | CONV} | [1024,320,6,6] }"
+    inputs="inception_5a/3x3_reduce_2;inception_5a/3x3_w_0;inception_5a/3x3_b_0"
+    outputs="inception_5a/3x3_1"
+    penwidth=3
+    style=filled
+    color="#d09295"
+    fontcolor="#000000"
+    fillcolor="#e5a6a8"
+  ];
+  "inception_5a/3x3_2" [
+    id=212
+    name="inception_5a/3x3_2"
+    type=Relu
+    label="{ {relu_48  | RELU} | [1024,320,6,6] }"
+    inputs="inception_5a/3x3_1"
+    outputs="inception_5a/3x3_2"
+    penwidth=3
+    style=filled
+    color="#c587cc"
+    fontcolor="#000000"
+    fillcolor="#da9ae1"
+  ];
+  "inception_5a/5x5_reduce_w_0" [
+    id=213
+    name="inception_5a/5x5_reduce_w_0"
+    type=constant_input
+    label="inception_5a/5x5_reduce_w_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_5a/5x5_reduce_b_0" [
+    id=214
+    name="inception_5a/5x5_reduce_b_0"
+    type=constant_input
+    label="inception_5a/5x5_reduce_b_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_5a/5x5_reduce_1" [
+    id=215
+    name="inception_5a/5x5_reduce_1"
+    type=Conv
+    label="{ {conv_49  | CONV} | [1024,32,6,6] }"
+    inputs="pool4/3x3_s2_1;inception_5a/5x5_reduce_w_0;inception_5a/5x5_reduce_b_0"
+    outputs="inception_5a/5x5_reduce_1"
+    penwidth=3
+    style=filled
+    color="#d09295"
+    fontcolor="#000000"
+    fillcolor="#e5a6a8"
+  ];
+  "inception_5a/5x5_reduce_2" [
+    id=216
+    name="inception_5a/5x5_reduce_2"
+    type=Relu
+    label="{ {relu_49  | RELU} | [1024,32,6,6] }"
+    inputs="inception_5a/5x5_reduce_1"
+    outputs="inception_5a/5x5_reduce_2"
+    penwidth=3
+    style=filled
+    color="#c587cc"
+    fontcolor="#000000"
+    fillcolor="#da9ae1"
+  ];
+  "inception_5a/5x5_w_0" [
+    id=217
+    name="inception_5a/5x5_w_0"
+    type=constant_input
+    label="inception_5a/5x5_w_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_5a/5x5_b_0" [
+    id=218
+    name="inception_5a/5x5_b_0"
+    type=constant_input
+    label="inception_5a/5x5_b_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_5a/5x5_1" [
+    id=219
+    name="inception_5a/5x5_1"
+    type=Conv
+    label="{ {conv_50  | CONV} | [1024,128,6,6] }"
+    inputs="inception_5a/5x5_reduce_2;inception_5a/5x5_w_0;inception_5a/5x5_b_0"
+    outputs="inception_5a/5x5_1"
+    penwidth=3
+    style=filled
+    color="#d09295"
+    fontcolor="#000000"
+    fillcolor="#e5a6a8"
+  ];
+  "inception_5a/5x5_2" [
+    id=220
+    name="inception_5a/5x5_2"
+    type=Relu
+    label="{ {relu_50  | RELU} | [1024,128,6,6] }"
+    inputs="inception_5a/5x5_1"
+    outputs="inception_5a/5x5_2"
+    penwidth=3
+    style=filled
+    color="#c587cc"
+    fontcolor="#000000"
+    fillcolor="#da9ae1"
+  ];
+  "inception_5a/pool_1" [
+    id=221
+    name="inception_5a/pool_1"
+    type=MaxPool
+    label="{ {maxpool_12  | MXPL} | [1024,832,6,6] }"
+    inputs="pool4/3x3_s2_1"
+    outputs="inception_5a/pool_1"
+    penwidth=3
+    style=filled
+    color="#83a7c7"
+    fontcolor="#000000"
+    fillcolor="#97bbdc"
+  ];
+  "inception_5a/pool_proj_w_0" [
+    id=222
+    name="inception_5a/pool_proj_w_0"
+    type=constant_input
+    label="inception_5a/pool_proj_w_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_5a/pool_proj_b_0" [
+    id=223
+    name="inception_5a/pool_proj_b_0"
+    type=constant_input
+    label="inception_5a/pool_proj_b_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_5a/pool_proj_1" [
+    id=224
+    name="inception_5a/pool_proj_1"
+    type=Conv
+    label="{ {conv_51  | CONV} | [1024,128,6,6] }"
+    inputs="inception_5a/pool_1;inception_5a/pool_proj_w_0;inception_5a/pool_proj_b_0"
+    outputs="inception_5a/pool_proj_1"
+    penwidth=3
+    style=filled
+    color="#d09295"
+    fontcolor="#000000"
+    fillcolor="#e5a6a8"
+  ];
+  "inception_5a/pool_proj_2" [
+    id=225
+    name="inception_5a/pool_proj_2"
+    type=Relu
+    label="{ {relu_51  | RELU} | [1024,128,6,6] }"
+    inputs="inception_5a/pool_proj_1"
+    outputs="inception_5a/pool_proj_2"
+    penwidth=3
+    style=filled
+    color="#c587cc"
+    fontcolor="#000000"
+    fillcolor="#da9ae1"
+  ];
+  "inception_5a/output_1" [
+    id=226
+    name="inception_5a/output_1"
+    type=Concat
+    label="{ {concat_8  | CONC} | [1024,832,6,6] }"
+    inputs="inception_5a/1x1_2;inception_5a/3x3_2;inception_5a/5x5_2;inception_5a/pool_proj_2"
+    outputs="inception_5a/output_1"
+    penwidth=3
+    style=filled
+    color="#9586c2"
+    fontcolor="#000000"
+    fillcolor="#a698d5"
+  ];
+  "inception_5b/1x1_w_0" [
+    id=227
+    name="inception_5b/1x1_w_0"
+    type=constant_input
+    label="inception_5b/1x1_w_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_5b/1x1_b_0" [
+    id=228
+    name="inception_5b/1x1_b_0"
+    type=constant_input
+    label="inception_5b/1x1_b_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_5b/1x1_1" [
+    id=229
+    name="inception_5b/1x1_1"
+    type=Conv
+    label="{ {conv_52  | CONV} | [1024,384,6,6] }"
+    inputs="inception_5a/output_1;inception_5b/1x1_w_0;inception_5b/1x1_b_0"
+    outputs="inception_5b/1x1_1"
+    penwidth=3
+    style=filled
+    color="#d09295"
+    fontcolor="#000000"
+    fillcolor="#e5a6a8"
+  ];
+  "inception_5b/1x1_2" [
+    id=230
+    name="inception_5b/1x1_2"
+    type=Relu
+    label="{ {relu_52  | RELU} | [1024,384,6,6] }"
+    inputs="inception_5b/1x1_1"
+    outputs="inception_5b/1x1_2"
+    penwidth=3
+    style=filled
+    color="#c587cc"
+    fontcolor="#000000"
+    fillcolor="#da9ae1"
+  ];
+  "inception_5b/3x3_reduce_w_0" [
+    id=231
+    name="inception_5b/3x3_reduce_w_0"
+    type=constant_input
+    label="inception_5b/3x3_reduce_w_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_5b/3x3_reduce_b_0" [
+    id=232
+    name="inception_5b/3x3_reduce_b_0"
+    type=constant_input
+    label="inception_5b/3x3_reduce_b_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_5b/3x3_reduce_1" [
+    id=233
+    name="inception_5b/3x3_reduce_1"
+    type=Conv
+    label="{ {conv_53  | CONV} | [1024,192,6,6] }"
+    inputs="inception_5a/output_1;inception_5b/3x3_reduce_w_0;inception_5b/3x3_reduce_b_0"
+    outputs="inception_5b/3x3_reduce_1"
+    penwidth=3
+    style=filled
+    color="#d09295"
+    fontcolor="#000000"
+    fillcolor="#e5a6a8"
+  ];
+  "inception_5b/3x3_reduce_2" [
+    id=234
+    name="inception_5b/3x3_reduce_2"
+    type=Relu
+    label="{ {relu_53  | RELU} | [1024,192,6,6] }"
+    inputs="inception_5b/3x3_reduce_1"
+    outputs="inception_5b/3x3_reduce_2"
+    penwidth=3
+    style=filled
+    color="#c587cc"
+    fontcolor="#000000"
+    fillcolor="#da9ae1"
+  ];
+  "inception_5b/3x3_w_0" [
+    id=235
+    name="inception_5b/3x3_w_0"
+    type=constant_input
+    label="inception_5b/3x3_w_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_5b/3x3_b_0" [
+    id=236
+    name="inception_5b/3x3_b_0"
+    type=constant_input
+    label="inception_5b/3x3_b_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_5b/3x3_1" [
+    id=237
+    name="inception_5b/3x3_1"
+    type=Conv
+    label="{ {conv_54  | CONV} | [1024,384,6,6] }"
+    inputs="inception_5b/3x3_reduce_2;inception_5b/3x3_w_0;inception_5b/3x3_b_0"
+    outputs="inception_5b/3x3_1"
+    penwidth=3
+    style=filled
+    color="#d09295"
+    fontcolor="#000000"
+    fillcolor="#e5a6a8"
+  ];
+  "inception_5b/3x3_2" [
+    id=238
+    name="inception_5b/3x3_2"
+    type=Relu
+    label="{ {relu_54  | RELU} | [1024,384,6,6] }"
+    inputs="inception_5b/3x3_1"
+    outputs="inception_5b/3x3_2"
+    penwidth=3
+    style=filled
+    color="#c587cc"
+    fontcolor="#000000"
+    fillcolor="#da9ae1"
+  ];
+  "inception_5b/5x5_reduce_w_0" [
+    id=239
+    name="inception_5b/5x5_reduce_w_0"
+    type=constant_input
+    label="inception_5b/5x5_reduce_w_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_5b/5x5_reduce_b_0" [
+    id=240
+    name="inception_5b/5x5_reduce_b_0"
+    type=constant_input
+    label="inception_5b/5x5_reduce_b_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_5b/5x5_reduce_1" [
+    id=241
+    name="inception_5b/5x5_reduce_1"
+    type=Conv
+    label="{ {conv_55  | CONV} | [1024,48,6,6] }"
+    inputs="inception_5a/output_1;inception_5b/5x5_reduce_w_0;inception_5b/5x5_reduce_b_0"
+    outputs="inception_5b/5x5_reduce_1"
+    penwidth=3
+    style=filled
+    color="#d09295"
+    fontcolor="#000000"
+    fillcolor="#e5a6a8"
+  ];
+  "inception_5b/5x5_reduce_2" [
+    id=242
+    name="inception_5b/5x5_reduce_2"
+    type=Relu
+    label="{ {relu_55  | RELU} | [1024,48,6,6] }"
+    inputs="inception_5b/5x5_reduce_1"
+    outputs="inception_5b/5x5_reduce_2"
+    penwidth=3
+    style=filled
+    color="#c587cc"
+    fontcolor="#000000"
+    fillcolor="#da9ae1"
+  ];
+  "inception_5b/5x5_w_0" [
+    id=243
+    name="inception_5b/5x5_w_0"
+    type=constant_input
+    label="inception_5b/5x5_w_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_5b/5x5_b_0" [
+    id=244
+    name="inception_5b/5x5_b_0"
+    type=constant_input
+    label="inception_5b/5x5_b_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_5b/5x5_1" [
+    id=245
+    name="inception_5b/5x5_1"
+    type=Conv
+    label="{ {conv_56  | CONV} | [1024,128,6,6] }"
+    inputs="inception_5b/5x5_reduce_2;inception_5b/5x5_w_0;inception_5b/5x5_b_0"
+    outputs="inception_5b/5x5_1"
+    penwidth=3
+    style=filled
+    color="#d09295"
+    fontcolor="#000000"
+    fillcolor="#e5a6a8"
+  ];
+  "inception_5b/5x5_2" [
+    id=246
+    name="inception_5b/5x5_2"
+    type=Relu
+    label="{ {relu_56  | RELU} | [1024,128,6,6] }"
+    inputs="inception_5b/5x5_1"
+    outputs="inception_5b/5x5_2"
+    penwidth=3
+    style=filled
+    color="#c587cc"
+    fontcolor="#000000"
+    fillcolor="#da9ae1"
+  ];
+  "inception_5b/pool_1" [
+    id=247
+    name="inception_5b/pool_1"
+    type=MaxPool
+    label="{ {maxpool_13  | MXPL} | [1024,832,6,6] }"
+    inputs="inception_5a/output_1"
+    outputs="inception_5b/pool_1"
+    penwidth=3
+    style=filled
+    color="#83a7c7"
+    fontcolor="#000000"
+    fillcolor="#97bbdc"
+  ];
+  "inception_5b/pool_proj_w_0" [
+    id=248
+    name="inception_5b/pool_proj_w_0"
+    type=constant_input
+    label="inception_5b/pool_proj_w_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_5b/pool_proj_b_0" [
+    id=249
+    name="inception_5b/pool_proj_b_0"
+    type=constant_input
+    label="inception_5b/pool_proj_b_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "inception_5b/pool_proj_1" [
+    id=250
+    name="inception_5b/pool_proj_1"
+    type=Conv
+    label="{ {conv_57  | CONV} | [1024,128,6,6] }"
+    inputs="inception_5b/pool_1;inception_5b/pool_proj_w_0;inception_5b/pool_proj_b_0"
+    outputs="inception_5b/pool_proj_1"
+    penwidth=3
+    style=filled
+    color="#d09295"
+    fontcolor="#000000"
+    fillcolor="#e5a6a8"
+  ];
+  "inception_5b/pool_proj_2" [
+    id=251
+    name="inception_5b/pool_proj_2"
+    type=Relu
+    label="{ {relu_57  | RELU} | [1024,128,6,6] }"
+    inputs="inception_5b/pool_proj_1"
+    outputs="inception_5b/pool_proj_2"
+    penwidth=3
+    style=filled
+    color="#c587cc"
+    fontcolor="#000000"
+    fillcolor="#da9ae1"
+  ];
+  "inception_5b/output_1" [
+    id=252
+    name="inception_5b/output_1"
+    type=Concat
+    label="{ {concat_9  | CONC} | [1024,1024,6,6] }"
+    inputs="inception_5b/1x1_2;inception_5b/3x3_2;inception_5b/5x5_2;inception_5b/pool_proj_2"
+    outputs="inception_5b/output_1"
+    penwidth=3
+    style=filled
+    color="#9586c2"
+    fontcolor="#000000"
+    fillcolor="#a698d5"
+  ];
+  "pool5/7x7_s1_1" [
+    id=253
+    name="pool5/7x7_s1_1"
+    type=AveragePool
+    label="{ {averagepool_1  | AVGPL} | [1024,1024,1,1] }"
+    inputs="inception_5b/output_1"
+    outputs="pool5/7x7_s1_1"
+    penwidth=3
+    style=filled
+    color="#c19d7f"
+    fontcolor="#000000"
+    fillcolor="#d6b193"
+  ];
+  "pool5/7x7_s1_2" [
+    id=254
+    name="pool5/7x7_s1_2"
+    type=Dropout
+    label="{ {dropout_1  | DRP} | [1024,1024,1,1] }"
+    inputs="pool5/7x7_s1_1"
+    outputs="pool5/7x7_s1_2;_pool5/7x7_s1_mask_1"
+    penwidth=3
+    style=filled
+    color="#b0788b"
+    fontcolor="#000000"
+    fillcolor="#c2889c"
+  ];
+  "_pool5/7x7_s1_mask_1" [
+    id=255
+    name="_pool5/7x7_s1_mask_1"
+    type=Dropout
+    label="{ {dropout_1  | DRP} | [1024,1024,1,1] }"
+    inputs="pool5/7x7_s1_1"
+    outputs="pool5/7x7_s1_2;_pool5/7x7_s1_mask_1"
+    penwidth=3
+    style=filled
+    color="#b0788b"
+    fontcolor="#000000"
+    fillcolor="#c2889c"
+  ];
+  "OC2_DUMMY_1" [
+    id=256
+    name="OC2_DUMMY_1"
+    type=constant_input
+    label="OC2_DUMMY_1"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "OC2_DUMMY_0" [
+    id=257
+    name="OC2_DUMMY_0"
+    type=Reshape
+    label="{ {reshape_1  | RSHP} | [1,1024] }"
+    inputs="pool5/7x7_s1_2;OC2_DUMMY_1"
+    outputs="OC2_DUMMY_0"
+    penwidth=3
+    style=filled
+    color="#d88dae"
+    fontcolor="#000000"
+    fillcolor="#eea1c2"
+  ];
+  "loss3/classifier_w_0" [
+    id=258
+    name="loss3/classifier_w_0"
+    type=constant_input
+    label="loss3/classifier_w_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "OC2_DUMMY_3" [
+    id=259
+    name="OC2_DUMMY_3"
+    type=constant_input
+    label="OC2_DUMMY_3"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "OC2_DUMMY_2" [
+    id=260
+    name="OC2_DUMMY_2"
+    type=Reshape
+    label="{ {reshape_2  | RSHP} | [1000,1024] }"
+    inputs="loss3/classifier_w_0;OC2_DUMMY_3"
+    outputs="OC2_DUMMY_2"
+    penwidth=3
+    style=filled
+    color="#d88dae"
+    fontcolor="#000000"
+    fillcolor="#eea1c2"
+  ];
+  "loss3/classifier_b_0" [
+    id=261
+    name="loss3/classifier_b_0"
+    type=constant_input
+    label="loss3/classifier_b_0"
+    inputs=""
+    outputs=""
+    shape=box
+    style="filled,dashed"
+    fillcolor="white"
+  ];
+  "loss3/classifier_1" [
+    id=262
+    name="loss3/classifier_1"
+    type=Gemm
+    label="{ {gemm_1  | GEMM} | [1,1000] }"
+    inputs="OC2_DUMMY_0;OC2_DUMMY_2;loss3/classifier_b_0"
+    outputs="loss3/classifier_1"
+    penwidth=3
+    style=filled
+    color="#c1c585"
+    fontcolor="#000000"
+    fillcolor="#d9dd9c"
+  ];
+  "prob_1" [
+    id=263
+    name="prob_1"
+    type=Softmax
+    label="{ {softmax_1  | SFT} | [1,1000] }"
+    inputs="loss3/classifier_1"
+    outputs="prob_1"
+    penwidth=3
+    style=filled
+    color="#87bfb8"
+    fontcolor="#000000"
+    fillcolor="#9dd6cf"
+  ];
+
+  // Edge definitions.
+  "data_0" -> "conv1/7x7_s2_1";
+  "conv1/7x7_s2_w_0" -> "conv1/7x7_s2_1";
+  "conv1/7x7_s2_b_0" -> "conv1/7x7_s2_1";
+  "conv1/7x7_s2_1" -> "conv1/7x7_s2_2";
+  "conv1/7x7_s2_2" -> "pool1/3x3_s2_1";
+  "pool1/3x3_s2_1" -> "pool1/norm1_1";
+  "pool1/norm1_1" -> "conv2/3x3_reduce_1";
+  "conv2/3x3_reduce_w_0" -> "conv2/3x3_reduce_1";
+  "conv2/3x3_reduce_b_0" -> "conv2/3x3_reduce_1";
+  "conv2/3x3_reduce_1" -> "conv2/3x3_reduce_2";
+  "conv2/3x3_reduce_2" -> "conv2/3x3_1";
+  "conv2/3x3_w_0" -> "conv2/3x3_1";
+  "conv2/3x3_b_0" -> "conv2/3x3_1";
+  "conv2/3x3_1" -> "conv2/3x3_2";
+  "conv2/3x3_2" -> "conv2/norm2_1";
+  "conv2/norm2_1" -> "pool2/3x3_s2_1";
+  "pool2/3x3_s2_1" -> "inception_3a/1x1_1";
+  "pool2/3x3_s2_1" -> "inception_3a/3x3_reduce_1";
+  "pool2/3x3_s2_1" -> "inception_3a/5x5_reduce_1";
+  "pool2/3x3_s2_1" -> "inception_3a/pool_1";
+  "inception_3a/1x1_w_0" -> "inception_3a/1x1_1";
+  "inception_3a/1x1_b_0" -> "inception_3a/1x1_1";
+  "inception_3a/1x1_1" -> "inception_3a/1x1_2";
+  "inception_3a/1x1_2" -> "inception_3a/output_1";
+  "inception_3a/3x3_reduce_w_0" -> "inception_3a/3x3_reduce_1";
+  "inception_3a/3x3_reduce_b_0" -> "inception_3a/3x3_reduce_1";
+  "inception_3a/3x3_reduce_1" -> "inception_3a/3x3_reduce_2";
+  "inception_3a/3x3_reduce_2" -> "inception_3a/3x3_1";
+  "inception_3a/3x3_w_0" -> "inception_3a/3x3_1";
+  "inception_3a/3x3_b_0" -> "inception_3a/3x3_1";
+  "inception_3a/3x3_1" -> "inception_3a/3x3_2";
+  "inception_3a/3x3_2" -> "inception_3a/output_1";
+  "inception_3a/5x5_reduce_w_0" -> "inception_3a/5x5_reduce_1";
+  "inception_3a/5x5_reduce_b_0" -> "inception_3a/5x5_reduce_1";
+  "inception_3a/5x5_reduce_1" -> "inception_3a/5x5_reduce_2";
+  "inception_3a/5x5_reduce_2" -> "inception_3a/5x5_1";
+  "inception_3a/5x5_w_0" -> "inception_3a/5x5_1";
+  "inception_3a/5x5_b_0" -> "inception_3a/5x5_1";
+  "inception_3a/5x5_1" -> "inception_3a/5x5_2";
+  "inception_3a/5x5_2" -> "inception_3a/output_1";
+  "inception_3a/pool_1" -> "inception_3a/pool_proj_1";
+  "inception_3a/pool_proj_w_0" -> "inception_3a/pool_proj_1";
+  "inception_3a/pool_proj_b_0" -> "inception_3a/pool_proj_1";
+  "inception_3a/pool_proj_1" -> "inception_3a/pool_proj_2";
+  "inception_3a/pool_proj_2" -> "inception_3a/output_1";
+  "inception_3a/output_1" -> "inception_3b/1x1_1";
+  "inception_3a/output_1" -> "inception_3b/3x3_reduce_1";
+  "inception_3a/output_1" -> "inception_3b/5x5_reduce_1";
+  "inception_3a/output_1" -> "inception_3b/pool_1";
+  "inception_3b/1x1_w_0" -> "inception_3b/1x1_1";
+  "inception_3b/1x1_b_0" -> "inception_3b/1x1_1";
+  "inception_3b/1x1_1" -> "inception_3b/1x1_2";
+  "inception_3b/1x1_2" -> "inception_3b/output_1";
+  "inception_3b/3x3_reduce_w_0" -> "inception_3b/3x3_reduce_1";
+  "inception_3b/3x3_reduce_b_0" -> "inception_3b/3x3_reduce_1";
+  "inception_3b/3x3_reduce_1" -> "inception_3b/3x3_reduce_2";
+  "inception_3b/3x3_reduce_2" -> "inception_3b/3x3_1";
+  "inception_3b/3x3_w_0" -> "inception_3b/3x3_1";
+  "inception_3b/3x3_b_0" -> "inception_3b/3x3_1";
+  "inception_3b/3x3_1" -> "inception_3b/3x3_2";
+  "inception_3b/3x3_2" -> "inception_3b/output_1";
+  "inception_3b/5x5_reduce_w_0" -> "inception_3b/5x5_reduce_1";
+  "inception_3b/5x5_reduce_b_0" -> "inception_3b/5x5_reduce_1";
+  "inception_3b/5x5_reduce_1" -> "inception_3b/5x5_reduce_2";
+  "inception_3b/5x5_reduce_2" -> "inception_3b/5x5_1";
+  "inception_3b/5x5_w_0" -> "inception_3b/5x5_1";
+  "inception_3b/5x5_b_0" -> "inception_3b/5x5_1";
+  "inception_3b/5x5_1" -> "inception_3b/5x5_2";
+  "inception_3b/5x5_2" -> "inception_3b/output_1";
+  "inception_3b/pool_1" -> "inception_3b/pool_proj_1";
+  "inception_3b/pool_proj_w_0" -> "inception_3b/pool_proj_1";
+  "inception_3b/pool_proj_b_0" -> "inception_3b/pool_proj_1";
+  "inception_3b/pool_proj_1" -> "inception_3b/pool_proj_2";
+  "inception_3b/pool_proj_2" -> "inception_3b/output_1";
+  "inception_3b/output_1" -> "pool3/3x3_s2_1";
+  "pool3/3x3_s2_1" -> "inception_4a/1x1_1";
+  "pool3/3x3_s2_1" -> "inception_4a/3x3_reduce_1";
+  "pool3/3x3_s2_1" -> "inception_4a/5x5_reduce_1";
+  "pool3/3x3_s2_1" -> "inception_4a/pool_1";
+  "inception_4a/1x1_w_0" -> "inception_4a/1x1_1";
+  "inception_4a/1x1_b_0" -> "inception_4a/1x1_1";
+  "inception_4a/1x1_1" -> "inception_4a/1x1_2";
+  "inception_4a/1x1_2" -> "inception_4a/output_1";
+  "inception_4a/3x3_reduce_w_0" -> "inception_4a/3x3_reduce_1";
+  "inception_4a/3x3_reduce_b_0" -> "inception_4a/3x3_reduce_1";
+  "inception_4a/3x3_reduce_1" -> "inception_4a/3x3_reduce_2";
+  "inception_4a/3x3_reduce_2" -> "inception_4a/3x3_1";
+  "inception_4a/3x3_w_0" -> "inception_4a/3x3_1";
+  "inception_4a/3x3_b_0" -> "inception_4a/3x3_1";
+  "inception_4a/3x3_1" -> "inception_4a/3x3_2";
+  "inception_4a/3x3_2" -> "inception_4a/output_1";
+  "inception_4a/5x5_reduce_w_0" -> "inception_4a/5x5_reduce_1";
+  "inception_4a/5x5_reduce_b_0" -> "inception_4a/5x5_reduce_1";
+  "inception_4a/5x5_reduce_1" -> "inception_4a/5x5_reduce_2";
+  "inception_4a/5x5_reduce_2" -> "inception_4a/5x5_1";
+  "inception_4a/5x5_w_0" -> "inception_4a/5x5_1";
+  "inception_4a/5x5_b_0" -> "inception_4a/5x5_1";
+  "inception_4a/5x5_1" -> "inception_4a/5x5_2";
+  "inception_4a/5x5_2" -> "inception_4a/output_1";
+  "inception_4a/pool_1" -> "inception_4a/pool_proj_1";
+  "inception_4a/pool_proj_w_0" -> "inception_4a/pool_proj_1";
+  "inception_4a/pool_proj_b_0" -> "inception_4a/pool_proj_1";
+  "inception_4a/pool_proj_1" -> "inception_4a/pool_proj_2";
+  "inception_4a/pool_proj_2" -> "inception_4a/output_1";
+  "inception_4a/output_1" -> "inception_4b/1x1_1";
+  "inception_4a/output_1" -> "inception_4b/3x3_reduce_1";
+  "inception_4a/output_1" -> "inception_4b/5x5_reduce_1";
+  "inception_4a/output_1" -> "inception_4b/pool_1";
+  "inception_4b/1x1_w_0" -> "inception_4b/1x1_1";
+  "inception_4b/1x1_b_0" -> "inception_4b/1x1_1";
+  "inception_4b/1x1_1" -> "inception_4b/1x1_2";
+  "inception_4b/1x1_2" -> "inception_4b/output_1";
+  "inception_4b/3x3_reduce_w_0" -> "inception_4b/3x3_reduce_1";
+  "inception_4b/3x3_reduce_b_0" -> "inception_4b/3x3_reduce_1";
+  "inception_4b/3x3_reduce_1" -> "inception_4b/3x3_reduce_2";
+  "inception_4b/3x3_reduce_2" -> "inception_4b/3x3_1";
+  "inception_4b/3x3_w_0" -> "inception_4b/3x3_1";
+  "inception_4b/3x3_b_0" -> "inception_4b/3x3_1";
+  "inception_4b/3x3_1" -> "inception_4b/3x3_2";
+  "inception_4b/3x3_2" -> "inception_4b/output_1";
+  "inception_4b/5x5_reduce_w_0" -> "inception_4b/5x5_reduce_1";
+  "inception_4b/5x5_reduce_b_0" -> "inception_4b/5x5_reduce_1";
+  "inception_4b/5x5_reduce_1" -> "inception_4b/5x5_reduce_2";
+  "inception_4b/5x5_reduce_2" -> "inception_4b/5x5_1";
+  "inception_4b/5x5_w_0" -> "inception_4b/5x5_1";
+  "inception_4b/5x5_b_0" -> "inception_4b/5x5_1";
+  "inception_4b/5x5_1" -> "inception_4b/5x5_2";
+  "inception_4b/5x5_2" -> "inception_4b/output_1";
+  "inception_4b/pool_1" -> "inception_4b/pool_proj_1";
+  "inception_4b/pool_proj_w_0" -> "inception_4b/pool_proj_1";
+  "inception_4b/pool_proj_b_0" -> "inception_4b/pool_proj_1";
+  "inception_4b/pool_proj_1" -> "inception_4b/pool_proj_2";
+  "inception_4b/pool_proj_2" -> "inception_4b/output_1";
+  "inception_4b/output_1" -> "inception_4c/1x1_1";
+  "inception_4b/output_1" -> "inception_4c/3x3_reduce_1";
+  "inception_4b/output_1" -> "inception_4c/5x5_reduce_1";
+  "inception_4b/output_1" -> "inception_4c/pool_1";
+  "inception_4c/1x1_w_0" -> "inception_4c/1x1_1";
+  "inception_4c/1x1_b_0" -> "inception_4c/1x1_1";
+  "inception_4c/1x1_1" -> "inception_4c/1x1_2";
+  "inception_4c/1x1_2" -> "inception_4c/output_1";
+  "inception_4c/3x3_reduce_w_0" -> "inception_4c/3x3_reduce_1";
+  "inception_4c/3x3_reduce_b_0" -> "inception_4c/3x3_reduce_1";
+  "inception_4c/3x3_reduce_1" -> "inception_4c/3x3_reduce_2";
+  "inception_4c/3x3_reduce_2" -> "inception_4c/3x3_1";
+  "inception_4c/3x3_w_0" -> "inception_4c/3x3_1";
+  "inception_4c/3x3_b_0" -> "inception_4c/3x3_1";
+  "inception_4c/3x3_1" -> "inception_4c/3x3_2";
+  "inception_4c/3x3_2" -> "inception_4c/output_1";
+  "inception_4c/5x5_reduce_w_0" -> "inception_4c/5x5_reduce_1";
+  "inception_4c/5x5_reduce_b_0" -> "inception_4c/5x5_reduce_1";
+  "inception_4c/5x5_reduce_1" -> "inception_4c/5x5_reduce_2";
+  "inception_4c/5x5_reduce_2" -> "inception_4c/5x5_1";
+  "inception_4c/5x5_w_0" -> "inception_4c/5x5_1";
+  "inception_4c/5x5_b_0" -> "inception_4c/5x5_1";
+  "inception_4c/5x5_1" -> "inception_4c/5x5_2";
+  "inception_4c/5x5_2" -> "inception_4c/output_1";
+  "inception_4c/pool_1" -> "inception_4c/pool_proj_1";
+  "inception_4c/pool_proj_w_0" -> "inception_4c/pool_proj_1";
+  "inception_4c/pool_proj_b_0" -> "inception_4c/pool_proj_1";
+  "inception_4c/pool_proj_1" -> "inception_4c/pool_proj_2";
+  "inception_4c/pool_proj_2" -> "inception_4c/output_1";
+  "inception_4c/output_1" -> "inception_4d/1x1_1";
+  "inception_4c/output_1" -> "inception_4d/3x3_reduce_1";
+  "inception_4c/output_1" -> "inception_4d/5x5_reduce_1";
+  "inception_4c/output_1" -> "inception_4d/pool_1";
+  "inception_4d/1x1_w_0" -> "inception_4d/1x1_1";
+  "inception_4d/1x1_b_0" -> "inception_4d/1x1_1";
+  "inception_4d/1x1_1" -> "inception_4d/1x1_2";
+  "inception_4d/1x1_2" -> "inception_4d/output_1";
+  "inception_4d/3x3_reduce_w_0" -> "inception_4d/3x3_reduce_1";
+  "inception_4d/3x3_reduce_b_0" -> "inception_4d/3x3_reduce_1";
+  "inception_4d/3x3_reduce_1" -> "inception_4d/3x3_reduce_2";
+  "inception_4d/3x3_reduce_2" -> "inception_4d/3x3_1";
+  "inception_4d/3x3_w_0" -> "inception_4d/3x3_1";
+  "inception_4d/3x3_b_0" -> "inception_4d/3x3_1";
+  "inception_4d/3x3_1" -> "inception_4d/3x3_2";
+  "inception_4d/3x3_2" -> "inception_4d/output_1";
+  "inception_4d/5x5_reduce_w_0" -> "inception_4d/5x5_reduce_1";
+  "inception_4d/5x5_reduce_b_0" -> "inception_4d/5x5_reduce_1";
+  "inception_4d/5x5_reduce_1" -> "inception_4d/5x5_reduce_2";
+  "inception_4d/5x5_reduce_2" -> "inception_4d/5x5_1";
+  "inception_4d/5x5_w_0" -> "inception_4d/5x5_1";
+  "inception_4d/5x5_b_0" -> "inception_4d/5x5_1";
+  "inception_4d/5x5_1" -> "inception_4d/5x5_2";
+  "inception_4d/5x5_2" -> "inception_4d/output_1";
+  "inception_4d/pool_1" -> "inception_4d/pool_proj_1";
+  "inception_4d/pool_proj_w_0" -> "inception_4d/pool_proj_1";
+  "inception_4d/pool_proj_b_0" -> "inception_4d/pool_proj_1";
+  "inception_4d/pool_proj_1" -> "inception_4d/pool_proj_2";
+  "inception_4d/pool_proj_2" -> "inception_4d/output_1";
+  "inception_4d/output_1" -> "inception_4e/1x1_1";
+  "inception_4d/output_1" -> "inception_4e/3x3_reduce_1";
+  "inception_4d/output_1" -> "inception_4e/5x5_reduce_1";
+  "inception_4d/output_1" -> "inception_4e/pool_1";
+  "inception_4e/1x1_w_0" -> "inception_4e/1x1_1";
+  "inception_4e/1x1_b_0" -> "inception_4e/1x1_1";
+  "inception_4e/1x1_1" -> "inception_4e/1x1_2";
+  "inception_4e/1x1_2" -> "inception_4e/output_1";
+  "inception_4e/3x3_reduce_w_0" -> "inception_4e/3x3_reduce_1";
+  "inception_4e/3x3_reduce_b_0" -> "inception_4e/3x3_reduce_1";
+  "inception_4e/3x3_reduce_1" -> "inception_4e/3x3_reduce_2";
+  "inception_4e/3x3_reduce_2" -> "inception_4e/3x3_1";
+  "inception_4e/3x3_w_0" -> "inception_4e/3x3_1";
+  "inception_4e/3x3_b_0" -> "inception_4e/3x3_1";
+  "inception_4e/3x3_1" -> "inception_4e/3x3_2";
+  "inception_4e/3x3_2" -> "inception_4e/output_1";
+  "inception_4e/5x5_reduce_w_0" -> "inception_4e/5x5_reduce_1";
+  "inception_4e/5x5_reduce_b_0" -> "inception_4e/5x5_reduce_1";
+  "inception_4e/5x5_reduce_1" -> "inception_4e/5x5_reduce_2";
+  "inception_4e/5x5_reduce_2" -> "inception_4e/5x5_1";
+  "inception_4e/5x5_w_0" -> "inception_4e/5x5_1";
+  "inception_4e/5x5_b_0" -> "inception_4e/5x5_1";
+  "inception_4e/5x5_1" -> "inception_4e/5x5_2";
+  "inception_4e/5x5_2" -> "inception_4e/output_1";
+  "inception_4e/pool_1" -> "inception_4e/pool_proj_1";
+  "inception_4e/pool_proj_w_0" -> "inception_4e/pool_proj_1";
+  "inception_4e/pool_proj_b_0" -> "inception_4e/pool_proj_1";
+  "inception_4e/pool_proj_1" -> "inception_4e/pool_proj_2";
+  "inception_4e/pool_proj_2" -> "inception_4e/output_1";
+  "inception_4e/output_1" -> "pool4/3x3_s2_1";
+  "pool4/3x3_s2_1" -> "inception_5a/1x1_1";
+  "pool4/3x3_s2_1" -> "inception_5a/3x3_reduce_1";
+  "pool4/3x3_s2_1" -> "inception_5a/5x5_reduce_1";
+  "pool4/3x3_s2_1" -> "inception_5a/pool_1";
+  "inception_5a/1x1_w_0" -> "inception_5a/1x1_1";
+  "inception_5a/1x1_b_0" -> "inception_5a/1x1_1";
+  "inception_5a/1x1_1" -> "inception_5a/1x1_2";
+  "inception_5a/1x1_2" -> "inception_5a/output_1";
+  "inception_5a/3x3_reduce_w_0" -> "inception_5a/3x3_reduce_1";
+  "inception_5a/3x3_reduce_b_0" -> "inception_5a/3x3_reduce_1";
+  "inception_5a/3x3_reduce_1" -> "inception_5a/3x3_reduce_2";
+  "inception_5a/3x3_reduce_2" -> "inception_5a/3x3_1";
+  "inception_5a/3x3_w_0" -> "inception_5a/3x3_1";
+  "inception_5a/3x3_b_0" -> "inception_5a/3x3_1";
+  "inception_5a/3x3_1" -> "inception_5a/3x3_2";
+  "inception_5a/3x3_2" -> "inception_5a/output_1";
+  "inception_5a/5x5_reduce_w_0" -> "inception_5a/5x5_reduce_1";
+  "inception_5a/5x5_reduce_b_0" -> "inception_5a/5x5_reduce_1";
+  "inception_5a/5x5_reduce_1" -> "inception_5a/5x5_reduce_2";
+  "inception_5a/5x5_reduce_2" -> "inception_5a/5x5_1";
+  "inception_5a/5x5_w_0" -> "inception_5a/5x5_1";
+  "inception_5a/5x5_b_0" -> "inception_5a/5x5_1";
+  "inception_5a/5x5_1" -> "inception_5a/5x5_2";
+  "inception_5a/5x5_2" -> "inception_5a/output_1";
+  "inception_5a/pool_1" -> "inception_5a/pool_proj_1";
+  "inception_5a/pool_proj_w_0" -> "inception_5a/pool_proj_1";
+  "inception_5a/pool_proj_b_0" -> "inception_5a/pool_proj_1";
+  "inception_5a/pool_proj_1" -> "inception_5a/pool_proj_2";
+  "inception_5a/pool_proj_2" -> "inception_5a/output_1";
+  "inception_5a/output_1" -> "inception_5b/1x1_1";
+  "inception_5a/output_1" -> "inception_5b/3x3_reduce_1";
+  "inception_5a/output_1" -> "inception_5b/5x5_reduce_1";
+  "inception_5a/output_1" -> "inception_5b/pool_1";
+  "inception_5b/1x1_w_0" -> "inception_5b/1x1_1";
+  "inception_5b/1x1_b_0" -> "inception_5b/1x1_1";
+  "inception_5b/1x1_1" -> "inception_5b/1x1_2";
+  "inception_5b/1x1_2" -> "inception_5b/output_1";
+  "inception_5b/3x3_reduce_w_0" -> "inception_5b/3x3_reduce_1";
+  "inception_5b/3x3_reduce_b_0" -> "inception_5b/3x3_reduce_1";
+  "inception_5b/3x3_reduce_1" -> "inception_5b/3x3_reduce_2";
+  "inception_5b/3x3_reduce_2" -> "inception_5b/3x3_1";
+  "inception_5b/3x3_w_0" -> "inception_5b/3x3_1";
+  "inception_5b/3x3_b_0" -> "inception_5b/3x3_1";
+  "inception_5b/3x3_1" -> "inception_5b/3x3_2";
+  "inception_5b/3x3_2" -> "inception_5b/output_1";
+  "inception_5b/5x5_reduce_w_0" -> "inception_5b/5x5_reduce_1";
+  "inception_5b/5x5_reduce_b_0" -> "inception_5b/5x5_reduce_1";
+  "inception_5b/5x5_reduce_1" -> "inception_5b/5x5_reduce_2";
+  "inception_5b/5x5_reduce_2" -> "inception_5b/5x5_1";
+  "inception_5b/5x5_w_0" -> "inception_5b/5x5_1";
+  "inception_5b/5x5_b_0" -> "inception_5b/5x5_1";
+  "inception_5b/5x5_1" -> "inception_5b/5x5_2";
+  "inception_5b/5x5_2" -> "inception_5b/output_1";
+  "inception_5b/pool_1" -> "inception_5b/pool_proj_1";
+  "inception_5b/pool_proj_w_0" -> "inception_5b/pool_proj_1";
+  "inception_5b/pool_proj_b_0" -> "inception_5b/pool_proj_1";
+  "inception_5b/pool_proj_1" -> "inception_5b/pool_proj_2";
+  "inception_5b/pool_proj_2" -> "inception_5b/output_1";
+  "inception_5b/output_1" -> "pool5/7x7_s1_1";
+  "pool5/7x7_s1_1" -> "pool5/7x7_s1_2";
+  "pool5/7x7_s1_1" -> "_pool5/7x7_s1_mask_1";
+  "pool5/7x7_s1_2" -> "OC2_DUMMY_0";
+  "OC2_DUMMY_1" -> "OC2_DUMMY_0";
+  "OC2_DUMMY_0" -> "loss3/classifier_1";
+  "loss3/classifier_w_0" -> "OC2_DUMMY_2";
+  "OC2_DUMMY_3" -> "OC2_DUMMY_2";
+  "OC2_DUMMY_2" -> "loss3/classifier_1";
+  "loss3/classifier_b_0" -> "loss3/classifier_1";
+  "loss3/classifier_1" -> "prob_1";
+}
