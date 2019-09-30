@@ -3,7 +3,6 @@ package cmd
 import (
 	"fmt"
 	"image/color"
-	"math"
 	"time"
 
 	"github.com/spf13/cast"
@@ -105,7 +104,7 @@ func makeBenchmarkGraph(model *onnx.Onnx, net *onnx.Graph, nds []benchmarkGraphN
 				return timeTransformFunction(t)
 			}
 		}
-		return math.Inf(1)
+		return 0 //math.Inf(1)
 	}
 
 	colors := mkColors(nds)
