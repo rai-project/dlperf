@@ -1,169 +1,4398 @@
-[{"name":"data","type":"ConstantInput","input_dimensions":{"input_shapes":[[1,3,224,224]],"output_shapes":[[1,3,224,224]]}},
-{"name":"resnetv22_batchnorm0_gamma","type":"ConstantInput","input_dimensions":{"input_shapes":[[3]],"output_shapes":[[3]]}},
-{"name":"resnetv22_batchnorm0_beta","type":"ConstantInput","input_dimensions":{"input_shapes":[[3]],"output_shapes":[[3]]}},
-{"name":"resnetv22_batchnorm0_running_mean","type":"ConstantInput","input_dimensions":{"input_shapes":[[3]],"output_shapes":[[3]]}},
-{"name":"resnetv22_batchnorm0_running_var","type":"ConstantInput","input_dimensions":{"input_shapes":[[3]],"output_shapes":[[3]]}},
-{"name":"resnetv22_batchnorm0_fwd","type":"BatchNorm","inputs":["data","resnetv22_batchnorm0_gamma","resnetv22_batchnorm0_beta","resnetv22_batchnorm0_running_mean","resnetv22_batchnorm0_running_var"],"outputs":["resnetv22_batchnorm0_fwd"],"input_dimensions":{"input_shapes":[[1,3,224,224],[3],[3],[3],[3]],"output_shapes":[[1,3,224,224],[3],[3],[3],[3]]}},
-{"name":"resnetv22_conv0_weight","type":"ConstantInput","input_dimensions":{"input_shapes":[[64,3,7,7]],"output_shapes":[[64,3,7,7]]}},
-{"name":"resnetv22_conv0_fwd","type":"Conv","inputs":["resnetv22_batchnorm0_fwd","resnetv22_conv0_weight"],"outputs":["resnetv22_conv0_fwd"],"input_dimensions":{"input_shapes":[[1,3,224,224],[64,3,7,7]],"output_shapes":[[1,64,112,112]]}},
-{"name":"resnetv22_batchnorm1_gamma","type":"ConstantInput","input_dimensions":{"input_shapes":[[64]],"output_shapes":[[64]]}},
-{"name":"resnetv22_batchnorm1_beta","type":"ConstantInput","input_dimensions":{"input_shapes":[[64]],"output_shapes":[[64]]}},
-{"name":"resnetv22_batchnorm1_running_mean","type":"ConstantInput","input_dimensions":{"input_shapes":[[64]],"output_shapes":[[64]]}},
-{"name":"resnetv22_batchnorm1_running_var","type":"ConstantInput","input_dimensions":{"input_shapes":[[64]],"output_shapes":[[64]]}},
-{"name":"resnetv22_batchnorm1_fwd","type":"BatchNorm","inputs":["resnetv22_conv0_fwd","resnetv22_batchnorm1_gamma","resnetv22_batchnorm1_beta","resnetv22_batchnorm1_running_mean","resnetv22_batchnorm1_running_var"],"outputs":["resnetv22_batchnorm1_fwd"],"input_dimensions":{"input_shapes":[[1,64,112,112],[64],[64],[64],[64]],"output_shapes":[[1,64,112,112],[64],[64],[64],[64]]}},
-{"name":"resnetv22_relu0_fwd","type":"Relu","inputs":["resnetv22_batchnorm1_fwd"],"outputs":["resnetv22_relu0_fwd"],"input_dimensions":{"input_shapes":[[1,64,112,112]],"output_shapes":[[1,64,112,112]]}},
-{"name":"resnetv22_pool0_fwd","type":"Pooling","inputs":["resnetv22_relu0_fwd"],"outputs":["resnetv22_pool0_fwd"],"input_dimensions":{"input_shapes":[[1,64,112,112]],"output_shapes":[[1,64,56,56]]}},
-{"name":"resnetv22_stage1_batchnorm0_gamma","type":"ConstantInput","input_dimensions":{"input_shapes":[[64]],"output_shapes":[[64]]}},
-{"name":"resnetv22_stage1_batchnorm0_beta","type":"ConstantInput","input_dimensions":{"input_shapes":[[64]],"output_shapes":[[64]]}},
-{"name":"resnetv22_stage1_batchnorm0_running_mean","type":"ConstantInput","input_dimensions":{"input_shapes":[[64]],"output_shapes":[[64]]}},
-{"name":"resnetv22_stage1_batchnorm0_running_var","type":"ConstantInput","input_dimensions":{"input_shapes":[[64]],"output_shapes":[[64]]}},
-{"name":"resnetv22_stage1_batchnorm0_fwd","type":"BatchNorm","inputs":["resnetv22_pool0_fwd","resnetv22_stage1_batchnorm0_gamma","resnetv22_stage1_batchnorm0_beta","resnetv22_stage1_batchnorm0_running_mean","resnetv22_stage1_batchnorm0_running_var"],"outputs":["resnetv22_stage1_batchnorm0_fwd"],"input_dimensions":{"input_shapes":[[1,64,56,56],[64],[64],[64],[64]],"output_shapes":[[1,64,56,56],[64],[64],[64],[64]]}},
-{"name":"resnetv22_stage1_activation0","type":"Relu","inputs":["resnetv22_stage1_batchnorm0_fwd"],"outputs":["resnetv22_stage1_activation0"],"input_dimensions":{"input_shapes":[[1,64,56,56]],"output_shapes":[[1,64,56,56]]}},
-{"name":"resnetv22_stage1_conv0_weight","type":"ConstantInput","input_dimensions":{"input_shapes":[[64,64,3,3]],"output_shapes":[[64,64,3,3]]}},
-{"name":"resnetv22_stage1_conv0_fwd","type":"Conv","inputs":["resnetv22_stage1_activation0","resnetv22_stage1_conv0_weight"],"outputs":["resnetv22_stage1_conv0_fwd"],"input_dimensions":{"input_shapes":[[1,64,56,56],[64,64,3,3]],"output_shapes":[[1,64,56,56]]}},
-{"name":"resnetv22_stage1_batchnorm1_gamma","type":"ConstantInput","input_dimensions":{"input_shapes":[[64]],"output_shapes":[[64]]}},
-{"name":"resnetv22_stage1_batchnorm1_beta","type":"ConstantInput","input_dimensions":{"input_shapes":[[64]],"output_shapes":[[64]]}},
-{"name":"resnetv22_stage1_batchnorm1_running_mean","type":"ConstantInput","input_dimensions":{"input_shapes":[[64]],"output_shapes":[[64]]}},
-{"name":"resnetv22_stage1_batchnorm1_running_var","type":"ConstantInput","input_dimensions":{"input_shapes":[[64]],"output_shapes":[[64]]}},
-{"name":"resnetv22_stage1_batchnorm1_fwd","type":"BatchNorm","inputs":["resnetv22_stage1_conv0_fwd","resnetv22_stage1_batchnorm1_gamma","resnetv22_stage1_batchnorm1_beta","resnetv22_stage1_batchnorm1_running_mean","resnetv22_stage1_batchnorm1_running_var"],"outputs":["resnetv22_stage1_batchnorm1_fwd"],"input_dimensions":{"input_shapes":[[1,64,56,56],[64],[64],[64],[64]],"output_shapes":[[1,64,56,56],[64],[64],[64],[64]]}},
-{"name":"resnetv22_stage1_activation1","type":"Relu","inputs":["resnetv22_stage1_batchnorm1_fwd"],"outputs":["resnetv22_stage1_activation1"],"input_dimensions":{"input_shapes":[[1,64,56,56]],"output_shapes":[[1,64,56,56]]}},
-{"name":"resnetv22_stage1_conv1_weight","type":"ConstantInput","input_dimensions":{"input_shapes":[[64,64,3,3]],"output_shapes":[[64,64,3,3]]}},
-{"name":"resnetv22_stage1_conv1_fwd","type":"Conv","inputs":["resnetv22_stage1_activation1","resnetv22_stage1_conv1_weight"],"outputs":["resnetv22_stage1_conv1_fwd"],"input_dimensions":{"input_shapes":[[1,64,56,56],[64,64,3,3]],"output_shapes":[[1,64,56,56]]}},
-{"name":"resnetv22_stage1__plus0","type":"ElementWise","inputs":["resnetv22_stage1_conv1_fwd","resnetv22_pool0_fwd"],"outputs":["resnetv22_stage1__plus0"],"input_dimensions":{"input_shapes":[[1,64,56,56],[1,64,56,56]],"output_shapes":[[1,64,56,56]]}},
-{"name":"resnetv22_stage1_batchnorm2_gamma","type":"ConstantInput","input_dimensions":{"input_shapes":[[64]],"output_shapes":[[64]]}},
-{"name":"resnetv22_stage1_batchnorm2_beta","type":"ConstantInput","input_dimensions":{"input_shapes":[[64]],"output_shapes":[[64]]}},
-{"name":"resnetv22_stage1_batchnorm2_running_mean","type":"ConstantInput","input_dimensions":{"input_shapes":[[64]],"output_shapes":[[64]]}},
-{"name":"resnetv22_stage1_batchnorm2_running_var","type":"ConstantInput","input_dimensions":{"input_shapes":[[64]],"output_shapes":[[64]]}},
-{"name":"resnetv22_stage1_batchnorm2_fwd","type":"BatchNorm","inputs":["resnetv22_stage1__plus0","resnetv22_stage1_batchnorm2_gamma","resnetv22_stage1_batchnorm2_beta","resnetv22_stage1_batchnorm2_running_mean","resnetv22_stage1_batchnorm2_running_var"],"outputs":["resnetv22_stage1_batchnorm2_fwd"],"input_dimensions":{"input_shapes":[[1,64,56,56],[64],[64],[64],[64]],"output_shapes":[[1,64,56,56],[64],[64],[64],[64]]}},
-{"name":"resnetv22_stage1_activation2","type":"Relu","inputs":["resnetv22_stage1_batchnorm2_fwd"],"outputs":["resnetv22_stage1_activation2"],"input_dimensions":{"input_shapes":[[1,64,56,56]],"output_shapes":[[1,64,56,56]]}},
-{"name":"resnetv22_stage1_conv2_weight","type":"ConstantInput","input_dimensions":{"input_shapes":[[64,64,3,3]],"output_shapes":[[64,64,3,3]]}},
-{"name":"resnetv22_stage1_conv2_fwd","type":"Conv","inputs":["resnetv22_stage1_activation2","resnetv22_stage1_conv2_weight"],"outputs":["resnetv22_stage1_conv2_fwd"],"input_dimensions":{"input_shapes":[[1,64,56,56],[64,64,3,3]],"output_shapes":[[1,64,56,56]]}},
-{"name":"resnetv22_stage1_batchnorm3_gamma","type":"ConstantInput","input_dimensions":{"input_shapes":[[64]],"output_shapes":[[64]]}},
-{"name":"resnetv22_stage1_batchnorm3_beta","type":"ConstantInput","input_dimensions":{"input_shapes":[[64]],"output_shapes":[[64]]}},
-{"name":"resnetv22_stage1_batchnorm3_running_mean","type":"ConstantInput","input_dimensions":{"input_shapes":[[64]],"output_shapes":[[64]]}},
-{"name":"resnetv22_stage1_batchnorm3_running_var","type":"ConstantInput","input_dimensions":{"input_shapes":[[64]],"output_shapes":[[64]]}},
-{"name":"resnetv22_stage1_batchnorm3_fwd","type":"BatchNorm","inputs":["resnetv22_stage1_conv2_fwd","resnetv22_stage1_batchnorm3_gamma","resnetv22_stage1_batchnorm3_beta","resnetv22_stage1_batchnorm3_running_mean","resnetv22_stage1_batchnorm3_running_var"],"outputs":["resnetv22_stage1_batchnorm3_fwd"],"input_dimensions":{"input_shapes":[[1,64,56,56],[64],[64],[64],[64]],"output_shapes":[[1,64,56,56],[64],[64],[64],[64]]}},
-{"name":"resnetv22_stage1_activation3","type":"Relu","inputs":["resnetv22_stage1_batchnorm3_fwd"],"outputs":["resnetv22_stage1_activation3"],"input_dimensions":{"input_shapes":[[1,64,56,56]],"output_shapes":[[1,64,56,56]]}},
-{"name":"resnetv22_stage1_conv3_weight","type":"ConstantInput","input_dimensions":{"input_shapes":[[64,64,3,3]],"output_shapes":[[64,64,3,3]]}},
-{"name":"resnetv22_stage1_conv3_fwd","type":"Conv","inputs":["resnetv22_stage1_activation3","resnetv22_stage1_conv3_weight"],"outputs":["resnetv22_stage1_conv3_fwd"],"input_dimensions":{"input_shapes":[[1,64,56,56],[64,64,3,3]],"output_shapes":[[1,64,56,56]]}},
-{"name":"resnetv22_stage1__plus1","type":"ElementWise","inputs":["resnetv22_stage1_conv3_fwd","resnetv22_stage1__plus0"],"outputs":["resnetv22_stage1__plus1"],"input_dimensions":{"input_shapes":[[1,64,56,56],[1,64,56,56]],"output_shapes":[[1,64,56,56]]}},
-{"name":"resnetv22_stage2_batchnorm0_gamma","type":"ConstantInput","input_dimensions":{"input_shapes":[[64]],"output_shapes":[[64]]}},
-{"name":"resnetv22_stage2_batchnorm0_beta","type":"ConstantInput","input_dimensions":{"input_shapes":[[64]],"output_shapes":[[64]]}},
-{"name":"resnetv22_stage2_batchnorm0_running_mean","type":"ConstantInput","input_dimensions":{"input_shapes":[[64]],"output_shapes":[[64]]}},
-{"name":"resnetv22_stage2_batchnorm0_running_var","type":"ConstantInput","input_dimensions":{"input_shapes":[[64]],"output_shapes":[[64]]}},
-{"name":"resnetv22_stage2_batchnorm0_fwd","type":"BatchNorm","inputs":["resnetv22_stage1__plus1","resnetv22_stage2_batchnorm0_gamma","resnetv22_stage2_batchnorm0_beta","resnetv22_stage2_batchnorm0_running_mean","resnetv22_stage2_batchnorm0_running_var"],"outputs":["resnetv22_stage2_batchnorm0_fwd"],"input_dimensions":{"input_shapes":[[1,64,56,56],[64],[64],[64],[64]],"output_shapes":[[1,64,56,56],[64],[64],[64],[64]]}},
-{"name":"resnetv22_stage2_activation0","type":"Relu","inputs":["resnetv22_stage2_batchnorm0_fwd"],"outputs":["resnetv22_stage2_activation0"],"input_dimensions":{"input_shapes":[[1,64,56,56]],"output_shapes":[[1,64,56,56]]}},
-{"name":"resnetv22_stage2_conv0_weight","type":"ConstantInput","input_dimensions":{"input_shapes":[[128,64,3,3]],"output_shapes":[[128,64,3,3]]}},
-{"name":"resnetv22_stage2_conv0_fwd","type":"Conv","inputs":["resnetv22_stage2_activation0","resnetv22_stage2_conv0_weight"],"outputs":["resnetv22_stage2_conv0_fwd"],"input_dimensions":{"input_shapes":[[1,64,56,56],[128,64,3,3]],"output_shapes":[[1,128,28,28]]}},
-{"name":"resnetv22_stage2_batchnorm1_gamma","type":"ConstantInput","input_dimensions":{"input_shapes":[[128]],"output_shapes":[[128]]}},
-{"name":"resnetv22_stage2_batchnorm1_beta","type":"ConstantInput","input_dimensions":{"input_shapes":[[128]],"output_shapes":[[128]]}},
-{"name":"resnetv22_stage2_batchnorm1_running_mean","type":"ConstantInput","input_dimensions":{"input_shapes":[[128]],"output_shapes":[[128]]}},
-{"name":"resnetv22_stage2_batchnorm1_running_var","type":"ConstantInput","input_dimensions":{"input_shapes":[[128]],"output_shapes":[[128]]}},
-{"name":"resnetv22_stage2_batchnorm1_fwd","type":"BatchNorm","inputs":["resnetv22_stage2_conv0_fwd","resnetv22_stage2_batchnorm1_gamma","resnetv22_stage2_batchnorm1_beta","resnetv22_stage2_batchnorm1_running_mean","resnetv22_stage2_batchnorm1_running_var"],"outputs":["resnetv22_stage2_batchnorm1_fwd"],"input_dimensions":{"input_shapes":[[1,128,28,28],[128],[128],[128],[128]],"output_shapes":[[1,128,28,28],[128],[128],[128],[128]]}},
-{"name":"resnetv22_stage2_activation1","type":"Relu","inputs":["resnetv22_stage2_batchnorm1_fwd"],"outputs":["resnetv22_stage2_activation1"],"input_dimensions":{"input_shapes":[[1,128,28,28]],"output_shapes":[[1,128,28,28]]}},
-{"name":"resnetv22_stage2_conv1_weight","type":"ConstantInput","input_dimensions":{"input_shapes":[[128,128,3,3]],"output_shapes":[[128,128,3,3]]}},
-{"name":"resnetv22_stage2_conv1_fwd","type":"Conv","inputs":["resnetv22_stage2_activation1","resnetv22_stage2_conv1_weight"],"outputs":["resnetv22_stage2_conv1_fwd"],"input_dimensions":{"input_shapes":[[1,128,28,28],[128,128,3,3]],"output_shapes":[[1,128,28,28]]}},
-{"name":"resnetv22_stage2_conv2_weight","type":"ConstantInput","input_dimensions":{"input_shapes":[[128,64,1,1]],"output_shapes":[[128,64,1,1]]}},
-{"name":"resnetv22_stage2_conv2_fwd","type":"Conv","inputs":["resnetv22_stage2_activation0","resnetv22_stage2_conv2_weight"],"outputs":["resnetv22_stage2_conv2_fwd"],"input_dimensions":{"input_shapes":[[1,64,56,56],[128,64,1,1]],"output_shapes":[[1,128,28,28]]}},
-{"name":"resnetv22_stage2__plus0","type":"ElementWise","inputs":["resnetv22_stage2_conv1_fwd","resnetv22_stage2_conv2_fwd"],"outputs":["resnetv22_stage2__plus0"],"input_dimensions":{"input_shapes":[[1,128,28,28],[1,128,28,28]],"output_shapes":[[1,128,28,28]]}},
-{"name":"resnetv22_stage2_batchnorm2_gamma","type":"ConstantInput","input_dimensions":{"input_shapes":[[128]],"output_shapes":[[128]]}},
-{"name":"resnetv22_stage2_batchnorm2_beta","type":"ConstantInput","input_dimensions":{"input_shapes":[[128]],"output_shapes":[[128]]}},
-{"name":"resnetv22_stage2_batchnorm2_running_mean","type":"ConstantInput","input_dimensions":{"input_shapes":[[128]],"output_shapes":[[128]]}},
-{"name":"resnetv22_stage2_batchnorm2_running_var","type":"ConstantInput","input_dimensions":{"input_shapes":[[128]],"output_shapes":[[128]]}},
-{"name":"resnetv22_stage2_batchnorm2_fwd","type":"BatchNorm","inputs":["resnetv22_stage2__plus0","resnetv22_stage2_batchnorm2_gamma","resnetv22_stage2_batchnorm2_beta","resnetv22_stage2_batchnorm2_running_mean","resnetv22_stage2_batchnorm2_running_var"],"outputs":["resnetv22_stage2_batchnorm2_fwd"],"input_dimensions":{"input_shapes":[[1,128,28,28],[128],[128],[128],[128]],"output_shapes":[[1,128,28,28],[128],[128],[128],[128]]}},
-{"name":"resnetv22_stage2_activation2","type":"Relu","inputs":["resnetv22_stage2_batchnorm2_fwd"],"outputs":["resnetv22_stage2_activation2"],"input_dimensions":{"input_shapes":[[1,128,28,28]],"output_shapes":[[1,128,28,28]]}},
-{"name":"resnetv22_stage2_conv3_weight","type":"ConstantInput","input_dimensions":{"input_shapes":[[128,128,3,3]],"output_shapes":[[128,128,3,3]]}},
-{"name":"resnetv22_stage2_conv3_fwd","type":"Conv","inputs":["resnetv22_stage2_activation2","resnetv22_stage2_conv3_weight"],"outputs":["resnetv22_stage2_conv3_fwd"],"input_dimensions":{"input_shapes":[[1,128,28,28],[128,128,3,3]],"output_shapes":[[1,128,28,28]]}},
-{"name":"resnetv22_stage2_batchnorm3_gamma","type":"ConstantInput","input_dimensions":{"input_shapes":[[128]],"output_shapes":[[128]]}},
-{"name":"resnetv22_stage2_batchnorm3_beta","type":"ConstantInput","input_dimensions":{"input_shapes":[[128]],"output_shapes":[[128]]}},
-{"name":"resnetv22_stage2_batchnorm3_running_mean","type":"ConstantInput","input_dimensions":{"input_shapes":[[128]],"output_shapes":[[128]]}},
-{"name":"resnetv22_stage2_batchnorm3_running_var","type":"ConstantInput","input_dimensions":{"input_shapes":[[128]],"output_shapes":[[128]]}},
-{"name":"resnetv22_stage2_batchnorm3_fwd","type":"BatchNorm","inputs":["resnetv22_stage2_conv3_fwd","resnetv22_stage2_batchnorm3_gamma","resnetv22_stage2_batchnorm3_beta","resnetv22_stage2_batchnorm3_running_mean","resnetv22_stage2_batchnorm3_running_var"],"outputs":["resnetv22_stage2_batchnorm3_fwd"],"input_dimensions":{"input_shapes":[[1,128,28,28],[128],[128],[128],[128]],"output_shapes":[[1,128,28,28],[128],[128],[128],[128]]}},
-{"name":"resnetv22_stage2_activation3","type":"Relu","inputs":["resnetv22_stage2_batchnorm3_fwd"],"outputs":["resnetv22_stage2_activation3"],"input_dimensions":{"input_shapes":[[1,128,28,28]],"output_shapes":[[1,128,28,28]]}},
-{"name":"resnetv22_stage2_conv4_weight","type":"ConstantInput","input_dimensions":{"input_shapes":[[128,128,3,3]],"output_shapes":[[128,128,3,3]]}},
-{"name":"resnetv22_stage2_conv4_fwd","type":"Conv","inputs":["resnetv22_stage2_activation3","resnetv22_stage2_conv4_weight"],"outputs":["resnetv22_stage2_conv4_fwd"],"input_dimensions":{"input_shapes":[[1,128,28,28],[128,128,3,3]],"output_shapes":[[1,128,28,28]]}},
-{"name":"resnetv22_stage2__plus1","type":"ElementWise","inputs":["resnetv22_stage2_conv4_fwd","resnetv22_stage2__plus0"],"outputs":["resnetv22_stage2__plus1"],"input_dimensions":{"input_shapes":[[1,128,28,28],[1,128,28,28]],"output_shapes":[[1,128,28,28]]}},
-{"name":"resnetv22_stage3_batchnorm0_gamma","type":"ConstantInput","input_dimensions":{"input_shapes":[[128]],"output_shapes":[[128]]}},
-{"name":"resnetv22_stage3_batchnorm0_beta","type":"ConstantInput","input_dimensions":{"input_shapes":[[128]],"output_shapes":[[128]]}},
-{"name":"resnetv22_stage3_batchnorm0_running_mean","type":"ConstantInput","input_dimensions":{"input_shapes":[[128]],"output_shapes":[[128]]}},
-{"name":"resnetv22_stage3_batchnorm0_running_var","type":"ConstantInput","input_dimensions":{"input_shapes":[[128]],"output_shapes":[[128]]}},
-{"name":"resnetv22_stage3_batchnorm0_fwd","type":"BatchNorm","inputs":["resnetv22_stage2__plus1","resnetv22_stage3_batchnorm0_gamma","resnetv22_stage3_batchnorm0_beta","resnetv22_stage3_batchnorm0_running_mean","resnetv22_stage3_batchnorm0_running_var"],"outputs":["resnetv22_stage3_batchnorm0_fwd"],"input_dimensions":{"input_shapes":[[1,128,28,28],[128],[128],[128],[128]],"output_shapes":[[1,128,28,28],[128],[128],[128],[128]]}},
-{"name":"resnetv22_stage3_activation0","type":"Relu","inputs":["resnetv22_stage3_batchnorm0_fwd"],"outputs":["resnetv22_stage3_activation0"],"input_dimensions":{"input_shapes":[[1,128,28,28]],"output_shapes":[[1,128,28,28]]}},
-{"name":"resnetv22_stage3_conv0_weight","type":"ConstantInput","input_dimensions":{"input_shapes":[[256,128,3,3]],"output_shapes":[[256,128,3,3]]}},
-{"name":"resnetv22_stage3_conv0_fwd","type":"Conv","inputs":["resnetv22_stage3_activation0","resnetv22_stage3_conv0_weight"],"outputs":["resnetv22_stage3_conv0_fwd"],"input_dimensions":{"input_shapes":[[1,128,28,28],[256,128,3,3]],"output_shapes":[[1,256,14,14]]}},
-{"name":"resnetv22_stage3_batchnorm1_gamma","type":"ConstantInput","input_dimensions":{"input_shapes":[[256]],"output_shapes":[[256]]}},
-{"name":"resnetv22_stage3_batchnorm1_beta","type":"ConstantInput","input_dimensions":{"input_shapes":[[256]],"output_shapes":[[256]]}},
-{"name":"resnetv22_stage3_batchnorm1_running_mean","type":"ConstantInput","input_dimensions":{"input_shapes":[[256]],"output_shapes":[[256]]}},
-{"name":"resnetv22_stage3_batchnorm1_running_var","type":"ConstantInput","input_dimensions":{"input_shapes":[[256]],"output_shapes":[[256]]}},
-{"name":"resnetv22_stage3_batchnorm1_fwd","type":"BatchNorm","inputs":["resnetv22_stage3_conv0_fwd","resnetv22_stage3_batchnorm1_gamma","resnetv22_stage3_batchnorm1_beta","resnetv22_stage3_batchnorm1_running_mean","resnetv22_stage3_batchnorm1_running_var"],"outputs":["resnetv22_stage3_batchnorm1_fwd"],"input_dimensions":{"input_shapes":[[1,256,14,14],[256],[256],[256],[256]],"output_shapes":[[1,256,14,14],[256],[256],[256],[256]]}},
-{"name":"resnetv22_stage3_activation1","type":"Relu","inputs":["resnetv22_stage3_batchnorm1_fwd"],"outputs":["resnetv22_stage3_activation1"],"input_dimensions":{"input_shapes":[[1,256,14,14]],"output_shapes":[[1,256,14,14]]}},
-{"name":"resnetv22_stage3_conv1_weight","type":"ConstantInput","input_dimensions":{"input_shapes":[[256,256,3,3]],"output_shapes":[[256,256,3,3]]}},
-{"name":"resnetv22_stage3_conv1_fwd","type":"Conv","inputs":["resnetv22_stage3_activation1","resnetv22_stage3_conv1_weight"],"outputs":["resnetv22_stage3_conv1_fwd"],"input_dimensions":{"input_shapes":[[1,256,14,14],[256,256,3,3]],"output_shapes":[[1,256,14,14]]}},
-{"name":"resnetv22_stage3_conv2_weight","type":"ConstantInput","input_dimensions":{"input_shapes":[[256,128,1,1]],"output_shapes":[[256,128,1,1]]}},
-{"name":"resnetv22_stage3_conv2_fwd","type":"Conv","inputs":["resnetv22_stage3_activation0","resnetv22_stage3_conv2_weight"],"outputs":["resnetv22_stage3_conv2_fwd"],"input_dimensions":{"input_shapes":[[1,128,28,28],[256,128,1,1]],"output_shapes":[[1,256,14,14]]}},
-{"name":"resnetv22_stage3__plus0","type":"ElementWise","inputs":["resnetv22_stage3_conv1_fwd","resnetv22_stage3_conv2_fwd"],"outputs":["resnetv22_stage3__plus0"],"input_dimensions":{"input_shapes":[[1,256,14,14],[1,256,14,14]],"output_shapes":[[1,256,14,14]]}},
-{"name":"resnetv22_stage3_batchnorm2_gamma","type":"ConstantInput","input_dimensions":{"input_shapes":[[256]],"output_shapes":[[256]]}},
-{"name":"resnetv22_stage3_batchnorm2_beta","type":"ConstantInput","input_dimensions":{"input_shapes":[[256]],"output_shapes":[[256]]}},
-{"name":"resnetv22_stage3_batchnorm2_running_mean","type":"ConstantInput","input_dimensions":{"input_shapes":[[256]],"output_shapes":[[256]]}},
-{"name":"resnetv22_stage3_batchnorm2_running_var","type":"ConstantInput","input_dimensions":{"input_shapes":[[256]],"output_shapes":[[256]]}},
-{"name":"resnetv22_stage3_batchnorm2_fwd","type":"BatchNorm","inputs":["resnetv22_stage3__plus0","resnetv22_stage3_batchnorm2_gamma","resnetv22_stage3_batchnorm2_beta","resnetv22_stage3_batchnorm2_running_mean","resnetv22_stage3_batchnorm2_running_var"],"outputs":["resnetv22_stage3_batchnorm2_fwd"],"input_dimensions":{"input_shapes":[[1,256,14,14],[256],[256],[256],[256]],"output_shapes":[[1,256,14,14],[256],[256],[256],[256]]}},
-{"name":"resnetv22_stage3_activation2","type":"Relu","inputs":["resnetv22_stage3_batchnorm2_fwd"],"outputs":["resnetv22_stage3_activation2"],"input_dimensions":{"input_shapes":[[1,256,14,14]],"output_shapes":[[1,256,14,14]]}},
-{"name":"resnetv22_stage3_conv3_weight","type":"ConstantInput","input_dimensions":{"input_shapes":[[256,256,3,3]],"output_shapes":[[256,256,3,3]]}},
-{"name":"resnetv22_stage3_conv3_fwd","type":"Conv","inputs":["resnetv22_stage3_activation2","resnetv22_stage3_conv3_weight"],"outputs":["resnetv22_stage3_conv3_fwd"],"input_dimensions":{"input_shapes":[[1,256,14,14],[256,256,3,3]],"output_shapes":[[1,256,14,14]]}},
-{"name":"resnetv22_stage3_batchnorm3_gamma","type":"ConstantInput","input_dimensions":{"input_shapes":[[256]],"output_shapes":[[256]]}},
-{"name":"resnetv22_stage3_batchnorm3_beta","type":"ConstantInput","input_dimensions":{"input_shapes":[[256]],"output_shapes":[[256]]}},
-{"name":"resnetv22_stage3_batchnorm3_running_mean","type":"ConstantInput","input_dimensions":{"input_shapes":[[256]],"output_shapes":[[256]]}},
-{"name":"resnetv22_stage3_batchnorm3_running_var","type":"ConstantInput","input_dimensions":{"input_shapes":[[256]],"output_shapes":[[256]]}},
-{"name":"resnetv22_stage3_batchnorm3_fwd","type":"BatchNorm","inputs":["resnetv22_stage3_conv3_fwd","resnetv22_stage3_batchnorm3_gamma","resnetv22_stage3_batchnorm3_beta","resnetv22_stage3_batchnorm3_running_mean","resnetv22_stage3_batchnorm3_running_var"],"outputs":["resnetv22_stage3_batchnorm3_fwd"],"input_dimensions":{"input_shapes":[[1,256,14,14],[256],[256],[256],[256]],"output_shapes":[[1,256,14,14],[256],[256],[256],[256]]}},
-{"name":"resnetv22_stage3_activation3","type":"Relu","inputs":["resnetv22_stage3_batchnorm3_fwd"],"outputs":["resnetv22_stage3_activation3"],"input_dimensions":{"input_shapes":[[1,256,14,14]],"output_shapes":[[1,256,14,14]]}},
-{"name":"resnetv22_stage3_conv4_weight","type":"ConstantInput","input_dimensions":{"input_shapes":[[256,256,3,3]],"output_shapes":[[256,256,3,3]]}},
-{"name":"resnetv22_stage3_conv4_fwd","type":"Conv","inputs":["resnetv22_stage3_activation3","resnetv22_stage3_conv4_weight"],"outputs":["resnetv22_stage3_conv4_fwd"],"input_dimensions":{"input_shapes":[[1,256,14,14],[256,256,3,3]],"output_shapes":[[1,256,14,14]]}},
-{"name":"resnetv22_stage3__plus1","type":"ElementWise","inputs":["resnetv22_stage3_conv4_fwd","resnetv22_stage3__plus0"],"outputs":["resnetv22_stage3__plus1"],"input_dimensions":{"input_shapes":[[1,256,14,14],[1,256,14,14]],"output_shapes":[[1,256,14,14]]}},
-{"name":"resnetv22_stage4_batchnorm0_gamma","type":"ConstantInput","input_dimensions":{"input_shapes":[[256]],"output_shapes":[[256]]}},
-{"name":"resnetv22_stage4_batchnorm0_beta","type":"ConstantInput","input_dimensions":{"input_shapes":[[256]],"output_shapes":[[256]]}},
-{"name":"resnetv22_stage4_batchnorm0_running_mean","type":"ConstantInput","input_dimensions":{"input_shapes":[[256]],"output_shapes":[[256]]}},
-{"name":"resnetv22_stage4_batchnorm0_running_var","type":"ConstantInput","input_dimensions":{"input_shapes":[[256]],"output_shapes":[[256]]}},
-{"name":"resnetv22_stage4_batchnorm0_fwd","type":"BatchNorm","inputs":["resnetv22_stage3__plus1","resnetv22_stage4_batchnorm0_gamma","resnetv22_stage4_batchnorm0_beta","resnetv22_stage4_batchnorm0_running_mean","resnetv22_stage4_batchnorm0_running_var"],"outputs":["resnetv22_stage4_batchnorm0_fwd"],"input_dimensions":{"input_shapes":[[1,256,14,14],[256],[256],[256],[256]],"output_shapes":[[1,256,14,14],[256],[256],[256],[256]]}},
-{"name":"resnetv22_stage4_activation0","type":"Relu","inputs":["resnetv22_stage4_batchnorm0_fwd"],"outputs":["resnetv22_stage4_activation0"],"input_dimensions":{"input_shapes":[[1,256,14,14]],"output_shapes":[[1,256,14,14]]}},
-{"name":"resnetv22_stage4_conv0_weight","type":"ConstantInput","input_dimensions":{"input_shapes":[[512,256,3,3]],"output_shapes":[[512,256,3,3]]}},
-{"name":"resnetv22_stage4_conv0_fwd","type":"Conv","inputs":["resnetv22_stage4_activation0","resnetv22_stage4_conv0_weight"],"outputs":["resnetv22_stage4_conv0_fwd"],"input_dimensions":{"input_shapes":[[1,256,14,14],[512,256,3,3]],"output_shapes":[[1,512,7,7]]}},
-{"name":"resnetv22_stage4_batchnorm1_gamma","type":"ConstantInput","input_dimensions":{"input_shapes":[[512]],"output_shapes":[[512]]}},
-{"name":"resnetv22_stage4_batchnorm1_beta","type":"ConstantInput","input_dimensions":{"input_shapes":[[512]],"output_shapes":[[512]]}},
-{"name":"resnetv22_stage4_batchnorm1_running_mean","type":"ConstantInput","input_dimensions":{"input_shapes":[[512]],"output_shapes":[[512]]}},
-{"name":"resnetv22_stage4_batchnorm1_running_var","type":"ConstantInput","input_dimensions":{"input_shapes":[[512]],"output_shapes":[[512]]}},
-{"name":"resnetv22_stage4_batchnorm1_fwd","type":"BatchNorm","inputs":["resnetv22_stage4_conv0_fwd","resnetv22_stage4_batchnorm1_gamma","resnetv22_stage4_batchnorm1_beta","resnetv22_stage4_batchnorm1_running_mean","resnetv22_stage4_batchnorm1_running_var"],"outputs":["resnetv22_stage4_batchnorm1_fwd"],"input_dimensions":{"input_shapes":[[1,512,7,7],[512],[512],[512],[512]],"output_shapes":[[1,512,7,7],[512],[512],[512],[512]]}},
-{"name":"resnetv22_stage4_activation1","type":"Relu","inputs":["resnetv22_stage4_batchnorm1_fwd"],"outputs":["resnetv22_stage4_activation1"],"input_dimensions":{"input_shapes":[[1,512,7,7]],"output_shapes":[[1,512,7,7]]}},
-{"name":"resnetv22_stage4_conv1_weight","type":"ConstantInput","input_dimensions":{"input_shapes":[[512,512,3,3]],"output_shapes":[[512,512,3,3]]}},
-{"name":"resnetv22_stage4_conv1_fwd","type":"Conv","inputs":["resnetv22_stage4_activation1","resnetv22_stage4_conv1_weight"],"outputs":["resnetv22_stage4_conv1_fwd"],"input_dimensions":{"input_shapes":[[1,512,7,7],[512,512,3,3]],"output_shapes":[[1,512,7,7]]}},
-{"name":"resnetv22_stage4_conv2_weight","type":"ConstantInput","input_dimensions":{"input_shapes":[[512,256,1,1]],"output_shapes":[[512,256,1,1]]}},
-{"name":"resnetv22_stage4_conv2_fwd","type":"Conv","inputs":["resnetv22_stage4_activation0","resnetv22_stage4_conv2_weight"],"outputs":["resnetv22_stage4_conv2_fwd"],"input_dimensions":{"input_shapes":[[1,256,14,14],[512,256,1,1]],"output_shapes":[[1,512,7,7]]}},
-{"name":"resnetv22_stage4__plus0","type":"ElementWise","inputs":["resnetv22_stage4_conv1_fwd","resnetv22_stage4_conv2_fwd"],"outputs":["resnetv22_stage4__plus0"],"input_dimensions":{"input_shapes":[[1,512,7,7],[1,512,7,7]],"output_shapes":[[1,512,7,7]]}},
-{"name":"resnetv22_stage4_batchnorm2_gamma","type":"ConstantInput","input_dimensions":{"input_shapes":[[512]],"output_shapes":[[512]]}},
-{"name":"resnetv22_stage4_batchnorm2_beta","type":"ConstantInput","input_dimensions":{"input_shapes":[[512]],"output_shapes":[[512]]}},
-{"name":"resnetv22_stage4_batchnorm2_running_mean","type":"ConstantInput","input_dimensions":{"input_shapes":[[512]],"output_shapes":[[512]]}},
-{"name":"resnetv22_stage4_batchnorm2_running_var","type":"ConstantInput","input_dimensions":{"input_shapes":[[512]],"output_shapes":[[512]]}},
-{"name":"resnetv22_stage4_batchnorm2_fwd","type":"BatchNorm","inputs":["resnetv22_stage4__plus0","resnetv22_stage4_batchnorm2_gamma","resnetv22_stage4_batchnorm2_beta","resnetv22_stage4_batchnorm2_running_mean","resnetv22_stage4_batchnorm2_running_var"],"outputs":["resnetv22_stage4_batchnorm2_fwd"],"input_dimensions":{"input_shapes":[[1,512,7,7],[512],[512],[512],[512]],"output_shapes":[[1,512,7,7],[512],[512],[512],[512]]}},
-{"name":"resnetv22_stage4_activation2","type":"Relu","inputs":["resnetv22_stage4_batchnorm2_fwd"],"outputs":["resnetv22_stage4_activation2"],"input_dimensions":{"input_shapes":[[1,512,7,7]],"output_shapes":[[1,512,7,7]]}},
-{"name":"resnetv22_stage4_conv3_weight","type":"ConstantInput","input_dimensions":{"input_shapes":[[512,512,3,3]],"output_shapes":[[512,512,3,3]]}},
-{"name":"resnetv22_stage4_conv3_fwd","type":"Conv","inputs":["resnetv22_stage4_activation2","resnetv22_stage4_conv3_weight"],"outputs":["resnetv22_stage4_conv3_fwd"],"input_dimensions":{"input_shapes":[[1,512,7,7],[512,512,3,3]],"output_shapes":[[1,512,7,7]]}},
-{"name":"resnetv22_stage4_batchnorm3_gamma","type":"ConstantInput","input_dimensions":{"input_shapes":[[512]],"output_shapes":[[512]]}},
-{"name":"resnetv22_stage4_batchnorm3_beta","type":"ConstantInput","input_dimensions":{"input_shapes":[[512]],"output_shapes":[[512]]}},
-{"name":"resnetv22_stage4_batchnorm3_running_mean","type":"ConstantInput","input_dimensions":{"input_shapes":[[512]],"output_shapes":[[512]]}},
-{"name":"resnetv22_stage4_batchnorm3_running_var","type":"ConstantInput","input_dimensions":{"input_shapes":[[512]],"output_shapes":[[512]]}},
-{"name":"resnetv22_stage4_batchnorm3_fwd","type":"BatchNorm","inputs":["resnetv22_stage4_conv3_fwd","resnetv22_stage4_batchnorm3_gamma","resnetv22_stage4_batchnorm3_beta","resnetv22_stage4_batchnorm3_running_mean","resnetv22_stage4_batchnorm3_running_var"],"outputs":["resnetv22_stage4_batchnorm3_fwd"],"input_dimensions":{"input_shapes":[[1,512,7,7],[512],[512],[512],[512]],"output_shapes":[[1,512,7,7],[512],[512],[512],[512]]}},
-{"name":"resnetv22_stage4_activation3","type":"Relu","inputs":["resnetv22_stage4_batchnorm3_fwd"],"outputs":["resnetv22_stage4_activation3"],"input_dimensions":{"input_shapes":[[1,512,7,7]],"output_shapes":[[1,512,7,7]]}},
-{"name":"resnetv22_stage4_conv4_weight","type":"ConstantInput","input_dimensions":{"input_shapes":[[512,512,3,3]],"output_shapes":[[512,512,3,3]]}},
-{"name":"resnetv22_stage4_conv4_fwd","type":"Conv","inputs":["resnetv22_stage4_activation3","resnetv22_stage4_conv4_weight"],"outputs":["resnetv22_stage4_conv4_fwd"],"input_dimensions":{"input_shapes":[[1,512,7,7],[512,512,3,3]],"output_shapes":[[1,512,7,7]]}},
-{"name":"resnetv22_stage4__plus1","type":"ElementWise","inputs":["resnetv22_stage4_conv4_fwd","resnetv22_stage4__plus0"],"outputs":["resnetv22_stage4__plus1"],"input_dimensions":{"input_shapes":[[1,512,7,7],[1,512,7,7]],"output_shapes":[[1,512,7,7]]}},
-{"name":"resnetv22_batchnorm2_gamma","type":"ConstantInput","input_dimensions":{"input_shapes":[[512]],"output_shapes":[[512]]}},
-{"name":"resnetv22_batchnorm2_beta","type":"ConstantInput","input_dimensions":{"input_shapes":[[512]],"output_shapes":[[512]]}},
-{"name":"resnetv22_batchnorm2_running_mean","type":"ConstantInput","input_dimensions":{"input_shapes":[[512]],"output_shapes":[[512]]}},
-{"name":"resnetv22_batchnorm2_running_var","type":"ConstantInput","input_dimensions":{"input_shapes":[[512]],"output_shapes":[[512]]}},
-{"name":"resnetv22_batchnorm2_fwd","type":"BatchNorm","inputs":["resnetv22_stage4__plus1","resnetv22_batchnorm2_gamma","resnetv22_batchnorm2_beta","resnetv22_batchnorm2_running_mean","resnetv22_batchnorm2_running_var"],"outputs":["resnetv22_batchnorm2_fwd"],"input_dimensions":{"input_shapes":[[1,512,7,7],[512],[512],[512],[512]],"output_shapes":[[1,512,7,7],[512],[512],[512],[512]]}},
-{"name":"resnetv22_relu1_fwd","type":"Relu","inputs":["resnetv22_batchnorm2_fwd"],"outputs":["resnetv22_relu1_fwd"],"input_dimensions":{"input_shapes":[[1,512,7,7]],"output_shapes":[[1,512,7,7]]}},
-{"name":"resnetv22_pool1_fwd","type":"GlobalPooling","inputs":["resnetv22_relu1_fwd"],"outputs":["resnetv22_pool1_fwd"],"input_dimensions":{"input_shapes":[[1,512,7,7]],"output_shapes":[[1,512,1,1]]}},
-{"name":"reshape_attr_tensor164","type":"ConstantInput","input_dimensions":{"input_shapes":[[0,-1]],"output_shapes":[[0,-1]]}},
-{"name":"resnetv22_flatten0_reshape0","type":"Reshape","inputs":["resnetv22_pool1_fwd","reshape_attr_tensor164"],"outputs":["resnetv22_flatten0_reshape0"],"input_dimensions":{"input_shapes":[[1,512,1,1],[0,-1]],"output_shapes":[[1,512]]}},
-{"name":"resnetv22_dense0_weight","type":"ConstantInput","input_dimensions":{"input_shapes":[[1000,512]],"output_shapes":[[1000,512]]}},
-{"name":"resnetv22_dense0_bias","type":"ConstantInput","input_dimensions":{"input_shapes":[[1000]],"output_shapes":[[1000]]}},
-{"name":"resnetv22_dense0_fwd","type":"Gemm","inputs":["resnetv22_flatten0_reshape0","resnetv22_dense0_weight","resnetv22_dense0_bias"],"outputs":["resnetv22_dense0_fwd"],"input_dimensions":{"input_shapes":[[1,512],[1000,512],[1000]],"output_shapes":[[1,1000]]}}]
+[{
+  "name": "data",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        3,
+        224,
+        224
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        3,
+        224,
+        224
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_batchnorm0_gamma",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        3
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_batchnorm0_beta",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        3
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_batchnorm0_running_mean",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        3
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_batchnorm0_running_var",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        3
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_batchnorm0_fwd",
+  "type": "BatchNorm",
+  "inputs": [
+    "data",
+    "resnetv22_batchnorm0_gamma",
+    "resnetv22_batchnorm0_beta",
+    "resnetv22_batchnorm0_running_mean",
+    "resnetv22_batchnorm0_running_var"
+  ],
+  "outputs": [
+    "resnetv22_batchnorm0_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        3,
+        224,
+        224
+      ],
+      [
+        3
+      ],
+      [
+        3
+      ],
+      [
+        3
+      ],
+      [
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        3,
+        224,
+        224
+      ],
+      [
+        3
+      ],
+      [
+        3
+      ],
+      [
+        3
+      ],
+      [
+        3
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_conv0_weight",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64,
+        3,
+        7,
+        7
+      ]
+    ],
+    "output_shapes": [
+      [
+        64,
+        3,
+        7,
+        7
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_conv0_fwd",
+  "type": "Conv",
+  "inputs": [
+    "resnetv22_batchnorm0_fwd",
+    "resnetv22_conv0_weight"
+  ],
+  "outputs": [
+    "resnetv22_conv0_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        3,
+        224,
+        224
+      ],
+      [
+        64,
+        3,
+        7,
+        7
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        64,
+        112,
+        112
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_batchnorm1_gamma",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        64
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_batchnorm1_beta",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        64
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_batchnorm1_running_mean",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        64
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_batchnorm1_running_var",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        64
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_batchnorm1_fwd",
+  "type": "BatchNorm",
+  "inputs": [
+    "resnetv22_conv0_fwd",
+    "resnetv22_batchnorm1_gamma",
+    "resnetv22_batchnorm1_beta",
+    "resnetv22_batchnorm1_running_mean",
+    "resnetv22_batchnorm1_running_var"
+  ],
+  "outputs": [
+    "resnetv22_batchnorm1_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        64,
+        112,
+        112
+      ],
+      [
+        64
+      ],
+      [
+        64
+      ],
+      [
+        64
+      ],
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        64,
+        112,
+        112
+      ],
+      [
+        64
+      ],
+      [
+        64
+      ],
+      [
+        64
+      ],
+      [
+        64
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_relu0_fwd",
+  "type": "Relu",
+  "inputs": [
+    "resnetv22_batchnorm1_fwd"
+  ],
+  "outputs": [
+    "resnetv22_relu0_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        64,
+        112,
+        112
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        64,
+        112,
+        112
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_pool0_fwd",
+  "type": "Pooling",
+  "inputs": [
+    "resnetv22_relu0_fwd"
+  ],
+  "outputs": [
+    "resnetv22_pool0_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        64,
+        112,
+        112
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        64,
+        56,
+        56
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage1_batchnorm0_gamma",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        64
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage1_batchnorm0_beta",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        64
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage1_batchnorm0_running_mean",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        64
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage1_batchnorm0_running_var",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        64
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage1_batchnorm0_fwd",
+  "type": "BatchNorm",
+  "inputs": [
+    "resnetv22_pool0_fwd",
+    "resnetv22_stage1_batchnorm0_gamma",
+    "resnetv22_stage1_batchnorm0_beta",
+    "resnetv22_stage1_batchnorm0_running_mean",
+    "resnetv22_stage1_batchnorm0_running_var"
+  ],
+  "outputs": [
+    "resnetv22_stage1_batchnorm0_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        64,
+        56,
+        56
+      ],
+      [
+        64
+      ],
+      [
+        64
+      ],
+      [
+        64
+      ],
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        64,
+        56,
+        56
+      ],
+      [
+        64
+      ],
+      [
+        64
+      ],
+      [
+        64
+      ],
+      [
+        64
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage1_activation0",
+  "type": "Relu",
+  "inputs": [
+    "resnetv22_stage1_batchnorm0_fwd"
+  ],
+  "outputs": [
+    "resnetv22_stage1_activation0"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        64,
+        56,
+        56
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        64,
+        56,
+        56
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage1_conv0_weight",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64,
+        64,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        64,
+        64,
+        3,
+        3
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage1_conv0_fwd",
+  "type": "Conv",
+  "inputs": [
+    "resnetv22_stage1_activation0",
+    "resnetv22_stage1_conv0_weight"
+  ],
+  "outputs": [
+    "resnetv22_stage1_conv0_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        64,
+        56,
+        56
+      ],
+      [
+        64,
+        64,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        64,
+        56,
+        56
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage1_batchnorm1_gamma",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        64
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage1_batchnorm1_beta",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        64
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage1_batchnorm1_running_mean",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        64
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage1_batchnorm1_running_var",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        64
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage1_batchnorm1_fwd",
+  "type": "BatchNorm",
+  "inputs": [
+    "resnetv22_stage1_conv0_fwd",
+    "resnetv22_stage1_batchnorm1_gamma",
+    "resnetv22_stage1_batchnorm1_beta",
+    "resnetv22_stage1_batchnorm1_running_mean",
+    "resnetv22_stage1_batchnorm1_running_var"
+  ],
+  "outputs": [
+    "resnetv22_stage1_batchnorm1_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        64,
+        56,
+        56
+      ],
+      [
+        64
+      ],
+      [
+        64
+      ],
+      [
+        64
+      ],
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        64,
+        56,
+        56
+      ],
+      [
+        64
+      ],
+      [
+        64
+      ],
+      [
+        64
+      ],
+      [
+        64
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage1_activation1",
+  "type": "Relu",
+  "inputs": [
+    "resnetv22_stage1_batchnorm1_fwd"
+  ],
+  "outputs": [
+    "resnetv22_stage1_activation1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        64,
+        56,
+        56
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        64,
+        56,
+        56
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage1_conv1_weight",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64,
+        64,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        64,
+        64,
+        3,
+        3
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage1_conv1_fwd",
+  "type": "Conv",
+  "inputs": [
+    "resnetv22_stage1_activation1",
+    "resnetv22_stage1_conv1_weight"
+  ],
+  "outputs": [
+    "resnetv22_stage1_conv1_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        64,
+        56,
+        56
+      ],
+      [
+        64,
+        64,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        64,
+        56,
+        56
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage1__plus0",
+  "type": "ElementWise",
+  "inputs": [
+    "resnetv22_stage1_conv1_fwd",
+    "resnetv22_pool0_fwd"
+  ],
+  "outputs": [
+    "resnetv22_stage1__plus0"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        64,
+        56,
+        56
+      ],
+      [
+        1,
+        64,
+        56,
+        56
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        64,
+        56,
+        56
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage1_batchnorm2_gamma",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        64
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage1_batchnorm2_beta",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        64
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage1_batchnorm2_running_mean",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        64
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage1_batchnorm2_running_var",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        64
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage1_batchnorm2_fwd",
+  "type": "BatchNorm",
+  "inputs": [
+    "resnetv22_stage1__plus0",
+    "resnetv22_stage1_batchnorm2_gamma",
+    "resnetv22_stage1_batchnorm2_beta",
+    "resnetv22_stage1_batchnorm2_running_mean",
+    "resnetv22_stage1_batchnorm2_running_var"
+  ],
+  "outputs": [
+    "resnetv22_stage1_batchnorm2_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        64,
+        56,
+        56
+      ],
+      [
+        64
+      ],
+      [
+        64
+      ],
+      [
+        64
+      ],
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        64,
+        56,
+        56
+      ],
+      [
+        64
+      ],
+      [
+        64
+      ],
+      [
+        64
+      ],
+      [
+        64
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage1_activation2",
+  "type": "Relu",
+  "inputs": [
+    "resnetv22_stage1_batchnorm2_fwd"
+  ],
+  "outputs": [
+    "resnetv22_stage1_activation2"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        64,
+        56,
+        56
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        64,
+        56,
+        56
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage1_conv2_weight",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64,
+        64,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        64,
+        64,
+        3,
+        3
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage1_conv2_fwd",
+  "type": "Conv",
+  "inputs": [
+    "resnetv22_stage1_activation2",
+    "resnetv22_stage1_conv2_weight"
+  ],
+  "outputs": [
+    "resnetv22_stage1_conv2_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        64,
+        56,
+        56
+      ],
+      [
+        64,
+        64,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        64,
+        56,
+        56
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage1_batchnorm3_gamma",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        64
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage1_batchnorm3_beta",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        64
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage1_batchnorm3_running_mean",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        64
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage1_batchnorm3_running_var",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        64
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage1_batchnorm3_fwd",
+  "type": "BatchNorm",
+  "inputs": [
+    "resnetv22_stage1_conv2_fwd",
+    "resnetv22_stage1_batchnorm3_gamma",
+    "resnetv22_stage1_batchnorm3_beta",
+    "resnetv22_stage1_batchnorm3_running_mean",
+    "resnetv22_stage1_batchnorm3_running_var"
+  ],
+  "outputs": [
+    "resnetv22_stage1_batchnorm3_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        64,
+        56,
+        56
+      ],
+      [
+        64
+      ],
+      [
+        64
+      ],
+      [
+        64
+      ],
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        64,
+        56,
+        56
+      ],
+      [
+        64
+      ],
+      [
+        64
+      ],
+      [
+        64
+      ],
+      [
+        64
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage1_activation3",
+  "type": "Relu",
+  "inputs": [
+    "resnetv22_stage1_batchnorm3_fwd"
+  ],
+  "outputs": [
+    "resnetv22_stage1_activation3"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        64,
+        56,
+        56
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        64,
+        56,
+        56
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage1_conv3_weight",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64,
+        64,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        64,
+        64,
+        3,
+        3
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage1_conv3_fwd",
+  "type": "Conv",
+  "inputs": [
+    "resnetv22_stage1_activation3",
+    "resnetv22_stage1_conv3_weight"
+  ],
+  "outputs": [
+    "resnetv22_stage1_conv3_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        64,
+        56,
+        56
+      ],
+      [
+        64,
+        64,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        64,
+        56,
+        56
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage1__plus1",
+  "type": "ElementWise",
+  "inputs": [
+    "resnetv22_stage1_conv3_fwd",
+    "resnetv22_stage1__plus0"
+  ],
+  "outputs": [
+    "resnetv22_stage1__plus1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        64,
+        56,
+        56
+      ],
+      [
+        1,
+        64,
+        56,
+        56
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        64,
+        56,
+        56
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage2_batchnorm0_gamma",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        64
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage2_batchnorm0_beta",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        64
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage2_batchnorm0_running_mean",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        64
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage2_batchnorm0_running_var",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        64
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage2_batchnorm0_fwd",
+  "type": "BatchNorm",
+  "inputs": [
+    "resnetv22_stage1__plus1",
+    "resnetv22_stage2_batchnorm0_gamma",
+    "resnetv22_stage2_batchnorm0_beta",
+    "resnetv22_stage2_batchnorm0_running_mean",
+    "resnetv22_stage2_batchnorm0_running_var"
+  ],
+  "outputs": [
+    "resnetv22_stage2_batchnorm0_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        64,
+        56,
+        56
+      ],
+      [
+        64
+      ],
+      [
+        64
+      ],
+      [
+        64
+      ],
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        64,
+        56,
+        56
+      ],
+      [
+        64
+      ],
+      [
+        64
+      ],
+      [
+        64
+      ],
+      [
+        64
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage2_activation0",
+  "type": "Relu",
+  "inputs": [
+    "resnetv22_stage2_batchnorm0_fwd"
+  ],
+  "outputs": [
+    "resnetv22_stage2_activation0"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        64,
+        56,
+        56
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        64,
+        56,
+        56
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage2_conv0_weight",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128,
+        64,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        128,
+        64,
+        3,
+        3
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage2_conv0_fwd",
+  "type": "Conv",
+  "inputs": [
+    "resnetv22_stage2_activation0",
+    "resnetv22_stage2_conv0_weight"
+  ],
+  "outputs": [
+    "resnetv22_stage2_conv0_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        64,
+        56,
+        56
+      ],
+      [
+        128,
+        64,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        128,
+        28,
+        28
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage2_batchnorm1_gamma",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        128
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage2_batchnorm1_beta",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        128
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage2_batchnorm1_running_mean",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        128
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage2_batchnorm1_running_var",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        128
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage2_batchnorm1_fwd",
+  "type": "BatchNorm",
+  "inputs": [
+    "resnetv22_stage2_conv0_fwd",
+    "resnetv22_stage2_batchnorm1_gamma",
+    "resnetv22_stage2_batchnorm1_beta",
+    "resnetv22_stage2_batchnorm1_running_mean",
+    "resnetv22_stage2_batchnorm1_running_var"
+  ],
+  "outputs": [
+    "resnetv22_stage2_batchnorm1_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        128,
+        28,
+        28
+      ],
+      [
+        128
+      ],
+      [
+        128
+      ],
+      [
+        128
+      ],
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        128,
+        28,
+        28
+      ],
+      [
+        128
+      ],
+      [
+        128
+      ],
+      [
+        128
+      ],
+      [
+        128
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage2_activation1",
+  "type": "Relu",
+  "inputs": [
+    "resnetv22_stage2_batchnorm1_fwd"
+  ],
+  "outputs": [
+    "resnetv22_stage2_activation1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        128,
+        28,
+        28
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        128,
+        28,
+        28
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage2_conv1_weight",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128,
+        128,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        128,
+        128,
+        3,
+        3
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage2_conv1_fwd",
+  "type": "Conv",
+  "inputs": [
+    "resnetv22_stage2_activation1",
+    "resnetv22_stage2_conv1_weight"
+  ],
+  "outputs": [
+    "resnetv22_stage2_conv1_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        128,
+        28,
+        28
+      ],
+      [
+        128,
+        128,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        128,
+        28,
+        28
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage2_conv2_weight",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128,
+        64,
+        1,
+        1
+      ]
+    ],
+    "output_shapes": [
+      [
+        128,
+        64,
+        1,
+        1
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage2_conv2_fwd",
+  "type": "Conv",
+  "inputs": [
+    "resnetv22_stage2_activation0",
+    "resnetv22_stage2_conv2_weight"
+  ],
+  "outputs": [
+    "resnetv22_stage2_conv2_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        64,
+        56,
+        56
+      ],
+      [
+        128,
+        64,
+        1,
+        1
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        128,
+        28,
+        28
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage2__plus0",
+  "type": "ElementWise",
+  "inputs": [
+    "resnetv22_stage2_conv1_fwd",
+    "resnetv22_stage2_conv2_fwd"
+  ],
+  "outputs": [
+    "resnetv22_stage2__plus0"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        128,
+        28,
+        28
+      ],
+      [
+        1,
+        128,
+        28,
+        28
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        128,
+        28,
+        28
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage2_batchnorm2_gamma",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        128
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage2_batchnorm2_beta",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        128
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage2_batchnorm2_running_mean",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        128
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage2_batchnorm2_running_var",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        128
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage2_batchnorm2_fwd",
+  "type": "BatchNorm",
+  "inputs": [
+    "resnetv22_stage2__plus0",
+    "resnetv22_stage2_batchnorm2_gamma",
+    "resnetv22_stage2_batchnorm2_beta",
+    "resnetv22_stage2_batchnorm2_running_mean",
+    "resnetv22_stage2_batchnorm2_running_var"
+  ],
+  "outputs": [
+    "resnetv22_stage2_batchnorm2_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        128,
+        28,
+        28
+      ],
+      [
+        128
+      ],
+      [
+        128
+      ],
+      [
+        128
+      ],
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        128,
+        28,
+        28
+      ],
+      [
+        128
+      ],
+      [
+        128
+      ],
+      [
+        128
+      ],
+      [
+        128
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage2_activation2",
+  "type": "Relu",
+  "inputs": [
+    "resnetv22_stage2_batchnorm2_fwd"
+  ],
+  "outputs": [
+    "resnetv22_stage2_activation2"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        128,
+        28,
+        28
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        128,
+        28,
+        28
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage2_conv3_weight",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128,
+        128,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        128,
+        128,
+        3,
+        3
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage2_conv3_fwd",
+  "type": "Conv",
+  "inputs": [
+    "resnetv22_stage2_activation2",
+    "resnetv22_stage2_conv3_weight"
+  ],
+  "outputs": [
+    "resnetv22_stage2_conv3_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        128,
+        28,
+        28
+      ],
+      [
+        128,
+        128,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        128,
+        28,
+        28
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage2_batchnorm3_gamma",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        128
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage2_batchnorm3_beta",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        128
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage2_batchnorm3_running_mean",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        128
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage2_batchnorm3_running_var",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        128
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage2_batchnorm3_fwd",
+  "type": "BatchNorm",
+  "inputs": [
+    "resnetv22_stage2_conv3_fwd",
+    "resnetv22_stage2_batchnorm3_gamma",
+    "resnetv22_stage2_batchnorm3_beta",
+    "resnetv22_stage2_batchnorm3_running_mean",
+    "resnetv22_stage2_batchnorm3_running_var"
+  ],
+  "outputs": [
+    "resnetv22_stage2_batchnorm3_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        128,
+        28,
+        28
+      ],
+      [
+        128
+      ],
+      [
+        128
+      ],
+      [
+        128
+      ],
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        128,
+        28,
+        28
+      ],
+      [
+        128
+      ],
+      [
+        128
+      ],
+      [
+        128
+      ],
+      [
+        128
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage2_activation3",
+  "type": "Relu",
+  "inputs": [
+    "resnetv22_stage2_batchnorm3_fwd"
+  ],
+  "outputs": [
+    "resnetv22_stage2_activation3"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        128,
+        28,
+        28
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        128,
+        28,
+        28
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage2_conv4_weight",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128,
+        128,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        128,
+        128,
+        3,
+        3
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage2_conv4_fwd",
+  "type": "Conv",
+  "inputs": [
+    "resnetv22_stage2_activation3",
+    "resnetv22_stage2_conv4_weight"
+  ],
+  "outputs": [
+    "resnetv22_stage2_conv4_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        128,
+        28,
+        28
+      ],
+      [
+        128,
+        128,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        128,
+        28,
+        28
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage2__plus1",
+  "type": "ElementWise",
+  "inputs": [
+    "resnetv22_stage2_conv4_fwd",
+    "resnetv22_stage2__plus0"
+  ],
+  "outputs": [
+    "resnetv22_stage2__plus1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        128,
+        28,
+        28
+      ],
+      [
+        1,
+        128,
+        28,
+        28
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        128,
+        28,
+        28
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage3_batchnorm0_gamma",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        128
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage3_batchnorm0_beta",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        128
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage3_batchnorm0_running_mean",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        128
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage3_batchnorm0_running_var",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        128
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage3_batchnorm0_fwd",
+  "type": "BatchNorm",
+  "inputs": [
+    "resnetv22_stage2__plus1",
+    "resnetv22_stage3_batchnorm0_gamma",
+    "resnetv22_stage3_batchnorm0_beta",
+    "resnetv22_stage3_batchnorm0_running_mean",
+    "resnetv22_stage3_batchnorm0_running_var"
+  ],
+  "outputs": [
+    "resnetv22_stage3_batchnorm0_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        128,
+        28,
+        28
+      ],
+      [
+        128
+      ],
+      [
+        128
+      ],
+      [
+        128
+      ],
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        128,
+        28,
+        28
+      ],
+      [
+        128
+      ],
+      [
+        128
+      ],
+      [
+        128
+      ],
+      [
+        128
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage3_activation0",
+  "type": "Relu",
+  "inputs": [
+    "resnetv22_stage3_batchnorm0_fwd"
+  ],
+  "outputs": [
+    "resnetv22_stage3_activation0"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        128,
+        28,
+        28
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        128,
+        28,
+        28
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage3_conv0_weight",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256,
+        128,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        256,
+        128,
+        3,
+        3
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage3_conv0_fwd",
+  "type": "Conv",
+  "inputs": [
+    "resnetv22_stage3_activation0",
+    "resnetv22_stage3_conv0_weight"
+  ],
+  "outputs": [
+    "resnetv22_stage3_conv0_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        128,
+        28,
+        28
+      ],
+      [
+        256,
+        128,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        256,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage3_batchnorm1_gamma",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        256
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage3_batchnorm1_beta",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        256
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage3_batchnorm1_running_mean",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        256
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage3_batchnorm1_running_var",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        256
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage3_batchnorm1_fwd",
+  "type": "BatchNorm",
+  "inputs": [
+    "resnetv22_stage3_conv0_fwd",
+    "resnetv22_stage3_batchnorm1_gamma",
+    "resnetv22_stage3_batchnorm1_beta",
+    "resnetv22_stage3_batchnorm1_running_mean",
+    "resnetv22_stage3_batchnorm1_running_var"
+  ],
+  "outputs": [
+    "resnetv22_stage3_batchnorm1_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        256,
+        14,
+        14
+      ],
+      [
+        256
+      ],
+      [
+        256
+      ],
+      [
+        256
+      ],
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        256,
+        14,
+        14
+      ],
+      [
+        256
+      ],
+      [
+        256
+      ],
+      [
+        256
+      ],
+      [
+        256
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage3_activation1",
+  "type": "Relu",
+  "inputs": [
+    "resnetv22_stage3_batchnorm1_fwd"
+  ],
+  "outputs": [
+    "resnetv22_stage3_activation1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        256,
+        14,
+        14
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        256,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage3_conv1_weight",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256,
+        256,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        256,
+        256,
+        3,
+        3
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage3_conv1_fwd",
+  "type": "Conv",
+  "inputs": [
+    "resnetv22_stage3_activation1",
+    "resnetv22_stage3_conv1_weight"
+  ],
+  "outputs": [
+    "resnetv22_stage3_conv1_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        256,
+        14,
+        14
+      ],
+      [
+        256,
+        256,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        256,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage3_conv2_weight",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256,
+        128,
+        1,
+        1
+      ]
+    ],
+    "output_shapes": [
+      [
+        256,
+        128,
+        1,
+        1
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage3_conv2_fwd",
+  "type": "Conv",
+  "inputs": [
+    "resnetv22_stage3_activation0",
+    "resnetv22_stage3_conv2_weight"
+  ],
+  "outputs": [
+    "resnetv22_stage3_conv2_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        128,
+        28,
+        28
+      ],
+      [
+        256,
+        128,
+        1,
+        1
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        256,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage3__plus0",
+  "type": "ElementWise",
+  "inputs": [
+    "resnetv22_stage3_conv1_fwd",
+    "resnetv22_stage3_conv2_fwd"
+  ],
+  "outputs": [
+    "resnetv22_stage3__plus0"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        256,
+        14,
+        14
+      ],
+      [
+        1,
+        256,
+        14,
+        14
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        256,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage3_batchnorm2_gamma",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        256
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage3_batchnorm2_beta",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        256
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage3_batchnorm2_running_mean",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        256
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage3_batchnorm2_running_var",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        256
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage3_batchnorm2_fwd",
+  "type": "BatchNorm",
+  "inputs": [
+    "resnetv22_stage3__plus0",
+    "resnetv22_stage3_batchnorm2_gamma",
+    "resnetv22_stage3_batchnorm2_beta",
+    "resnetv22_stage3_batchnorm2_running_mean",
+    "resnetv22_stage3_batchnorm2_running_var"
+  ],
+  "outputs": [
+    "resnetv22_stage3_batchnorm2_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        256,
+        14,
+        14
+      ],
+      [
+        256
+      ],
+      [
+        256
+      ],
+      [
+        256
+      ],
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        256,
+        14,
+        14
+      ],
+      [
+        256
+      ],
+      [
+        256
+      ],
+      [
+        256
+      ],
+      [
+        256
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage3_activation2",
+  "type": "Relu",
+  "inputs": [
+    "resnetv22_stage3_batchnorm2_fwd"
+  ],
+  "outputs": [
+    "resnetv22_stage3_activation2"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        256,
+        14,
+        14
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        256,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage3_conv3_weight",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256,
+        256,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        256,
+        256,
+        3,
+        3
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage3_conv3_fwd",
+  "type": "Conv",
+  "inputs": [
+    "resnetv22_stage3_activation2",
+    "resnetv22_stage3_conv3_weight"
+  ],
+  "outputs": [
+    "resnetv22_stage3_conv3_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        256,
+        14,
+        14
+      ],
+      [
+        256,
+        256,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        256,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage3_batchnorm3_gamma",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        256
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage3_batchnorm3_beta",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        256
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage3_batchnorm3_running_mean",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        256
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage3_batchnorm3_running_var",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        256
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage3_batchnorm3_fwd",
+  "type": "BatchNorm",
+  "inputs": [
+    "resnetv22_stage3_conv3_fwd",
+    "resnetv22_stage3_batchnorm3_gamma",
+    "resnetv22_stage3_batchnorm3_beta",
+    "resnetv22_stage3_batchnorm3_running_mean",
+    "resnetv22_stage3_batchnorm3_running_var"
+  ],
+  "outputs": [
+    "resnetv22_stage3_batchnorm3_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        256,
+        14,
+        14
+      ],
+      [
+        256
+      ],
+      [
+        256
+      ],
+      [
+        256
+      ],
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        256,
+        14,
+        14
+      ],
+      [
+        256
+      ],
+      [
+        256
+      ],
+      [
+        256
+      ],
+      [
+        256
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage3_activation3",
+  "type": "Relu",
+  "inputs": [
+    "resnetv22_stage3_batchnorm3_fwd"
+  ],
+  "outputs": [
+    "resnetv22_stage3_activation3"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        256,
+        14,
+        14
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        256,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage3_conv4_weight",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256,
+        256,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        256,
+        256,
+        3,
+        3
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage3_conv4_fwd",
+  "type": "Conv",
+  "inputs": [
+    "resnetv22_stage3_activation3",
+    "resnetv22_stage3_conv4_weight"
+  ],
+  "outputs": [
+    "resnetv22_stage3_conv4_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        256,
+        14,
+        14
+      ],
+      [
+        256,
+        256,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        256,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage3__plus1",
+  "type": "ElementWise",
+  "inputs": [
+    "resnetv22_stage3_conv4_fwd",
+    "resnetv22_stage3__plus0"
+  ],
+  "outputs": [
+    "resnetv22_stage3__plus1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        256,
+        14,
+        14
+      ],
+      [
+        1,
+        256,
+        14,
+        14
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        256,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage4_batchnorm0_gamma",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        256
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage4_batchnorm0_beta",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        256
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage4_batchnorm0_running_mean",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        256
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage4_batchnorm0_running_var",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        256
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage4_batchnorm0_fwd",
+  "type": "BatchNorm",
+  "inputs": [
+    "resnetv22_stage3__plus1",
+    "resnetv22_stage4_batchnorm0_gamma",
+    "resnetv22_stage4_batchnorm0_beta",
+    "resnetv22_stage4_batchnorm0_running_mean",
+    "resnetv22_stage4_batchnorm0_running_var"
+  ],
+  "outputs": [
+    "resnetv22_stage4_batchnorm0_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        256,
+        14,
+        14
+      ],
+      [
+        256
+      ],
+      [
+        256
+      ],
+      [
+        256
+      ],
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        256,
+        14,
+        14
+      ],
+      [
+        256
+      ],
+      [
+        256
+      ],
+      [
+        256
+      ],
+      [
+        256
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage4_activation0",
+  "type": "Relu",
+  "inputs": [
+    "resnetv22_stage4_batchnorm0_fwd"
+  ],
+  "outputs": [
+    "resnetv22_stage4_activation0"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        256,
+        14,
+        14
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        256,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage4_conv0_weight",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512,
+        256,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        512,
+        256,
+        3,
+        3
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage4_conv0_fwd",
+  "type": "Conv",
+  "inputs": [
+    "resnetv22_stage4_activation0",
+    "resnetv22_stage4_conv0_weight"
+  ],
+  "outputs": [
+    "resnetv22_stage4_conv0_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        256,
+        14,
+        14
+      ],
+      [
+        512,
+        256,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        512,
+        7,
+        7
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage4_batchnorm1_gamma",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage4_batchnorm1_beta",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage4_batchnorm1_running_mean",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage4_batchnorm1_running_var",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage4_batchnorm1_fwd",
+  "type": "BatchNorm",
+  "inputs": [
+    "resnetv22_stage4_conv0_fwd",
+    "resnetv22_stage4_batchnorm1_gamma",
+    "resnetv22_stage4_batchnorm1_beta",
+    "resnetv22_stage4_batchnorm1_running_mean",
+    "resnetv22_stage4_batchnorm1_running_var"
+  ],
+  "outputs": [
+    "resnetv22_stage4_batchnorm1_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        512,
+        7,
+        7
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        512,
+        7,
+        7
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage4_activation1",
+  "type": "Relu",
+  "inputs": [
+    "resnetv22_stage4_batchnorm1_fwd"
+  ],
+  "outputs": [
+    "resnetv22_stage4_activation1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        512,
+        7,
+        7
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        512,
+        7,
+        7
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage4_conv1_weight",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512,
+        512,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        512,
+        512,
+        3,
+        3
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage4_conv1_fwd",
+  "type": "Conv",
+  "inputs": [
+    "resnetv22_stage4_activation1",
+    "resnetv22_stage4_conv1_weight"
+  ],
+  "outputs": [
+    "resnetv22_stage4_conv1_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        512,
+        7,
+        7
+      ],
+      [
+        512,
+        512,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        512,
+        7,
+        7
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage4_conv2_weight",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512,
+        256,
+        1,
+        1
+      ]
+    ],
+    "output_shapes": [
+      [
+        512,
+        256,
+        1,
+        1
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage4_conv2_fwd",
+  "type": "Conv",
+  "inputs": [
+    "resnetv22_stage4_activation0",
+    "resnetv22_stage4_conv2_weight"
+  ],
+  "outputs": [
+    "resnetv22_stage4_conv2_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        256,
+        14,
+        14
+      ],
+      [
+        512,
+        256,
+        1,
+        1
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        512,
+        7,
+        7
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage4__plus0",
+  "type": "ElementWise",
+  "inputs": [
+    "resnetv22_stage4_conv1_fwd",
+    "resnetv22_stage4_conv2_fwd"
+  ],
+  "outputs": [
+    "resnetv22_stage4__plus0"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        512,
+        7,
+        7
+      ],
+      [
+        1,
+        512,
+        7,
+        7
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        512,
+        7,
+        7
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage4_batchnorm2_gamma",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage4_batchnorm2_beta",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage4_batchnorm2_running_mean",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage4_batchnorm2_running_var",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage4_batchnorm2_fwd",
+  "type": "BatchNorm",
+  "inputs": [
+    "resnetv22_stage4__plus0",
+    "resnetv22_stage4_batchnorm2_gamma",
+    "resnetv22_stage4_batchnorm2_beta",
+    "resnetv22_stage4_batchnorm2_running_mean",
+    "resnetv22_stage4_batchnorm2_running_var"
+  ],
+  "outputs": [
+    "resnetv22_stage4_batchnorm2_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        512,
+        7,
+        7
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        512,
+        7,
+        7
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage4_activation2",
+  "type": "Relu",
+  "inputs": [
+    "resnetv22_stage4_batchnorm2_fwd"
+  ],
+  "outputs": [
+    "resnetv22_stage4_activation2"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        512,
+        7,
+        7
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        512,
+        7,
+        7
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage4_conv3_weight",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512,
+        512,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        512,
+        512,
+        3,
+        3
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage4_conv3_fwd",
+  "type": "Conv",
+  "inputs": [
+    "resnetv22_stage4_activation2",
+    "resnetv22_stage4_conv3_weight"
+  ],
+  "outputs": [
+    "resnetv22_stage4_conv3_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        512,
+        7,
+        7
+      ],
+      [
+        512,
+        512,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        512,
+        7,
+        7
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage4_batchnorm3_gamma",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage4_batchnorm3_beta",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage4_batchnorm3_running_mean",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage4_batchnorm3_running_var",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage4_batchnorm3_fwd",
+  "type": "BatchNorm",
+  "inputs": [
+    "resnetv22_stage4_conv3_fwd",
+    "resnetv22_stage4_batchnorm3_gamma",
+    "resnetv22_stage4_batchnorm3_beta",
+    "resnetv22_stage4_batchnorm3_running_mean",
+    "resnetv22_stage4_batchnorm3_running_var"
+  ],
+  "outputs": [
+    "resnetv22_stage4_batchnorm3_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        512,
+        7,
+        7
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        512,
+        7,
+        7
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage4_activation3",
+  "type": "Relu",
+  "inputs": [
+    "resnetv22_stage4_batchnorm3_fwd"
+  ],
+  "outputs": [
+    "resnetv22_stage4_activation3"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        512,
+        7,
+        7
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        512,
+        7,
+        7
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage4_conv4_weight",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512,
+        512,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        512,
+        512,
+        3,
+        3
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage4_conv4_fwd",
+  "type": "Conv",
+  "inputs": [
+    "resnetv22_stage4_activation3",
+    "resnetv22_stage4_conv4_weight"
+  ],
+  "outputs": [
+    "resnetv22_stage4_conv4_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        512,
+        7,
+        7
+      ],
+      [
+        512,
+        512,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        512,
+        7,
+        7
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_stage4__plus1",
+  "type": "ElementWise",
+  "inputs": [
+    "resnetv22_stage4_conv4_fwd",
+    "resnetv22_stage4__plus0"
+  ],
+  "outputs": [
+    "resnetv22_stage4__plus1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        512,
+        7,
+        7
+      ],
+      [
+        1,
+        512,
+        7,
+        7
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        512,
+        7,
+        7
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_batchnorm2_gamma",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_batchnorm2_beta",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_batchnorm2_running_mean",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_batchnorm2_running_var",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_batchnorm2_fwd",
+  "type": "BatchNorm",
+  "inputs": [
+    "resnetv22_stage4__plus1",
+    "resnetv22_batchnorm2_gamma",
+    "resnetv22_batchnorm2_beta",
+    "resnetv22_batchnorm2_running_mean",
+    "resnetv22_batchnorm2_running_var"
+  ],
+  "outputs": [
+    "resnetv22_batchnorm2_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        512,
+        7,
+        7
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        512,
+        7,
+        7
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_relu1_fwd",
+  "type": "Relu",
+  "inputs": [
+    "resnetv22_batchnorm2_fwd"
+  ],
+  "outputs": [
+    "resnetv22_relu1_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        512,
+        7,
+        7
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        512,
+        7,
+        7
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_pool1_fwd",
+  "type": "GlobalPooling",
+  "inputs": [
+    "resnetv22_relu1_fwd"
+  ],
+  "outputs": [
+    "resnetv22_pool1_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        512,
+        7,
+        7
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        512,
+        1,
+        1
+      ]
+    ]
+  }
+},
+{
+  "name": "reshape_attr_tensor164",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        0,
+        -1
+      ]
+    ],
+    "output_shapes": [
+      [
+        0,
+        -1
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_flatten0_reshape0",
+  "type": "Reshape",
+  "inputs": [
+    "resnetv22_pool1_fwd",
+    "reshape_attr_tensor164"
+  ],
+  "outputs": [
+    "resnetv22_flatten0_reshape0"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        512,
+        1,
+        1
+      ],
+      [
+        0,
+        -1
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_dense0_weight",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1000,
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        1000,
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_dense0_bias",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1000
+      ]
+    ],
+    "output_shapes": [
+      [
+        1000
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv22_dense0_fwd",
+  "type": "Gemm",
+  "inputs": [
+    "resnetv22_flatten0_reshape0",
+    "resnetv22_dense0_weight",
+    "resnetv22_dense0_bias"
+  ],
+  "outputs": [
+    "resnetv22_dense0_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        512
+      ],
+      [
+        1000,
+        512
+      ],
+      [
+        1000
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        1000
+      ]
+    ]
+  }
+}]

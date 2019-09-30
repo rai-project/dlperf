@@ -1,172 +1,4471 @@
-[{"name":"data","type":"ConstantInput","input_dimensions":{"input_shapes":[[1,3,224,224]],"output_shapes":[[1,3,224,224]]}},
-{"name":"resnetv15_conv0_weight","type":"ConstantInput","input_dimensions":{"input_shapes":[[64,3,7,7]],"output_shapes":[[64,3,7,7]]}},
-{"name":"resnetv15_conv0_fwd","type":"Conv","inputs":["data","resnetv15_conv0_weight"],"outputs":["resnetv15_conv0_fwd"],"input_dimensions":{"input_shapes":[[1,3,224,224],[64,3,7,7]],"output_shapes":[[1,64,112,112]]}},
-{"name":"resnetv15_batchnorm0_gamma","type":"ConstantInput","input_dimensions":{"input_shapes":[[64]],"output_shapes":[[64]]}},
-{"name":"resnetv15_batchnorm0_beta","type":"ConstantInput","input_dimensions":{"input_shapes":[[64]],"output_shapes":[[64]]}},
-{"name":"resnetv15_batchnorm0_running_mean","type":"ConstantInput","input_dimensions":{"input_shapes":[[64]],"output_shapes":[[64]]}},
-{"name":"resnetv15_batchnorm0_running_var","type":"ConstantInput","input_dimensions":{"input_shapes":[[64]],"output_shapes":[[64]]}},
-{"name":"resnetv15_batchnorm0_fwd","type":"BatchNorm","inputs":["resnetv15_conv0_fwd","resnetv15_batchnorm0_gamma","resnetv15_batchnorm0_beta","resnetv15_batchnorm0_running_mean","resnetv15_batchnorm0_running_var"],"outputs":["resnetv15_batchnorm0_fwd"],"input_dimensions":{"input_shapes":[[1,64,112,112],[64],[64],[64],[64]],"output_shapes":[[1,64,112,112],[64],[64],[64],[64]]}},
-{"name":"resnetv15_relu0_fwd","type":"Relu","inputs":["resnetv15_batchnorm0_fwd"],"outputs":["resnetv15_relu0_fwd"],"input_dimensions":{"input_shapes":[[1,64,112,112]],"output_shapes":[[1,64,112,112]]}},
-{"name":"resnetv15_pool0_fwd","type":"Pooling","inputs":["resnetv15_relu0_fwd"],"outputs":["resnetv15_pool0_fwd"],"input_dimensions":{"input_shapes":[[1,64,112,112]],"output_shapes":[[1,64,56,56]]}},
-{"name":"resnetv15_stage1_conv0_weight","type":"ConstantInput","input_dimensions":{"input_shapes":[[64,64,3,3]],"output_shapes":[[64,64,3,3]]}},
-{"name":"resnetv15_stage1_conv0_fwd","type":"Conv","inputs":["resnetv15_pool0_fwd","resnetv15_stage1_conv0_weight"],"outputs":["resnetv15_stage1_conv0_fwd"],"input_dimensions":{"input_shapes":[[1,64,56,56],[64,64,3,3]],"output_shapes":[[1,64,56,56]]}},
-{"name":"resnetv15_stage1_batchnorm0_gamma","type":"ConstantInput","input_dimensions":{"input_shapes":[[64]],"output_shapes":[[64]]}},
-{"name":"resnetv15_stage1_batchnorm0_beta","type":"ConstantInput","input_dimensions":{"input_shapes":[[64]],"output_shapes":[[64]]}},
-{"name":"resnetv15_stage1_batchnorm0_running_mean","type":"ConstantInput","input_dimensions":{"input_shapes":[[64]],"output_shapes":[[64]]}},
-{"name":"resnetv15_stage1_batchnorm0_running_var","type":"ConstantInput","input_dimensions":{"input_shapes":[[64]],"output_shapes":[[64]]}},
-{"name":"resnetv15_stage1_batchnorm0_fwd","type":"BatchNorm","inputs":["resnetv15_stage1_conv0_fwd","resnetv15_stage1_batchnorm0_gamma","resnetv15_stage1_batchnorm0_beta","resnetv15_stage1_batchnorm0_running_mean","resnetv15_stage1_batchnorm0_running_var"],"outputs":["resnetv15_stage1_batchnorm0_fwd"],"input_dimensions":{"input_shapes":[[1,64,56,56],[64],[64],[64],[64]],"output_shapes":[[1,64,56,56],[64],[64],[64],[64]]}},
-{"name":"resnetv15_stage1_relu0_fwd","type":"Relu","inputs":["resnetv15_stage1_batchnorm0_fwd"],"outputs":["resnetv15_stage1_relu0_fwd"],"input_dimensions":{"input_shapes":[[1,64,56,56]],"output_shapes":[[1,64,56,56]]}},
-{"name":"resnetv15_stage1_conv1_weight","type":"ConstantInput","input_dimensions":{"input_shapes":[[64,64,3,3]],"output_shapes":[[64,64,3,3]]}},
-{"name":"resnetv15_stage1_conv1_fwd","type":"Conv","inputs":["resnetv15_stage1_relu0_fwd","resnetv15_stage1_conv1_weight"],"outputs":["resnetv15_stage1_conv1_fwd"],"input_dimensions":{"input_shapes":[[1,64,56,56],[64,64,3,3]],"output_shapes":[[1,64,56,56]]}},
-{"name":"resnetv15_stage1_batchnorm1_gamma","type":"ConstantInput","input_dimensions":{"input_shapes":[[64]],"output_shapes":[[64]]}},
-{"name":"resnetv15_stage1_batchnorm1_beta","type":"ConstantInput","input_dimensions":{"input_shapes":[[64]],"output_shapes":[[64]]}},
-{"name":"resnetv15_stage1_batchnorm1_running_mean","type":"ConstantInput","input_dimensions":{"input_shapes":[[64]],"output_shapes":[[64]]}},
-{"name":"resnetv15_stage1_batchnorm1_running_var","type":"ConstantInput","input_dimensions":{"input_shapes":[[64]],"output_shapes":[[64]]}},
-{"name":"resnetv15_stage1_batchnorm1_fwd","type":"BatchNorm","inputs":["resnetv15_stage1_conv1_fwd","resnetv15_stage1_batchnorm1_gamma","resnetv15_stage1_batchnorm1_beta","resnetv15_stage1_batchnorm1_running_mean","resnetv15_stage1_batchnorm1_running_var"],"outputs":["resnetv15_stage1_batchnorm1_fwd"],"input_dimensions":{"input_shapes":[[1,64,56,56],[64],[64],[64],[64]],"output_shapes":[[1,64,56,56],[64],[64],[64],[64]]}},
-{"name":"resnetv15_stage1__plus0","type":"ElementWise","inputs":["resnetv15_pool0_fwd","resnetv15_stage1_batchnorm1_fwd"],"outputs":["resnetv15_stage1__plus0"],"input_dimensions":{"input_shapes":[[1,64,56,56],[1,64,56,56]],"output_shapes":[[1,64,56,56]]}},
-{"name":"resnetv15_stage1_activation0","type":"Relu","inputs":["resnetv15_stage1__plus0"],"outputs":["resnetv15_stage1_activation0"],"input_dimensions":{"input_shapes":[[1,64,56,56]],"output_shapes":[[1,64,56,56]]}},
-{"name":"resnetv15_stage1_conv2_weight","type":"ConstantInput","input_dimensions":{"input_shapes":[[64,64,3,3]],"output_shapes":[[64,64,3,3]]}},
-{"name":"resnetv15_stage1_conv2_fwd","type":"Conv","inputs":["resnetv15_stage1_activation0","resnetv15_stage1_conv2_weight"],"outputs":["resnetv15_stage1_conv2_fwd"],"input_dimensions":{"input_shapes":[[1,64,56,56],[64,64,3,3]],"output_shapes":[[1,64,56,56]]}},
-{"name":"resnetv15_stage1_batchnorm2_gamma","type":"ConstantInput","input_dimensions":{"input_shapes":[[64]],"output_shapes":[[64]]}},
-{"name":"resnetv15_stage1_batchnorm2_beta","type":"ConstantInput","input_dimensions":{"input_shapes":[[64]],"output_shapes":[[64]]}},
-{"name":"resnetv15_stage1_batchnorm2_running_mean","type":"ConstantInput","input_dimensions":{"input_shapes":[[64]],"output_shapes":[[64]]}},
-{"name":"resnetv15_stage1_batchnorm2_running_var","type":"ConstantInput","input_dimensions":{"input_shapes":[[64]],"output_shapes":[[64]]}},
-{"name":"resnetv15_stage1_batchnorm2_fwd","type":"BatchNorm","inputs":["resnetv15_stage1_conv2_fwd","resnetv15_stage1_batchnorm2_gamma","resnetv15_stage1_batchnorm2_beta","resnetv15_stage1_batchnorm2_running_mean","resnetv15_stage1_batchnorm2_running_var"],"outputs":["resnetv15_stage1_batchnorm2_fwd"],"input_dimensions":{"input_shapes":[[1,64,56,56],[64],[64],[64],[64]],"output_shapes":[[1,64,56,56],[64],[64],[64],[64]]}},
-{"name":"resnetv15_stage1_relu1_fwd","type":"Relu","inputs":["resnetv15_stage1_batchnorm2_fwd"],"outputs":["resnetv15_stage1_relu1_fwd"],"input_dimensions":{"input_shapes":[[1,64,56,56]],"output_shapes":[[1,64,56,56]]}},
-{"name":"resnetv15_stage1_conv3_weight","type":"ConstantInput","input_dimensions":{"input_shapes":[[64,64,3,3]],"output_shapes":[[64,64,3,3]]}},
-{"name":"resnetv15_stage1_conv3_fwd","type":"Conv","inputs":["resnetv15_stage1_relu1_fwd","resnetv15_stage1_conv3_weight"],"outputs":["resnetv15_stage1_conv3_fwd"],"input_dimensions":{"input_shapes":[[1,64,56,56],[64,64,3,3]],"output_shapes":[[1,64,56,56]]}},
-{"name":"resnetv15_stage1_batchnorm3_gamma","type":"ConstantInput","input_dimensions":{"input_shapes":[[64]],"output_shapes":[[64]]}},
-{"name":"resnetv15_stage1_batchnorm3_beta","type":"ConstantInput","input_dimensions":{"input_shapes":[[64]],"output_shapes":[[64]]}},
-{"name":"resnetv15_stage1_batchnorm3_running_mean","type":"ConstantInput","input_dimensions":{"input_shapes":[[64]],"output_shapes":[[64]]}},
-{"name":"resnetv15_stage1_batchnorm3_running_var","type":"ConstantInput","input_dimensions":{"input_shapes":[[64]],"output_shapes":[[64]]}},
-{"name":"resnetv15_stage1_batchnorm3_fwd","type":"BatchNorm","inputs":["resnetv15_stage1_conv3_fwd","resnetv15_stage1_batchnorm3_gamma","resnetv15_stage1_batchnorm3_beta","resnetv15_stage1_batchnorm3_running_mean","resnetv15_stage1_batchnorm3_running_var"],"outputs":["resnetv15_stage1_batchnorm3_fwd"],"input_dimensions":{"input_shapes":[[1,64,56,56],[64],[64],[64],[64]],"output_shapes":[[1,64,56,56],[64],[64],[64],[64]]}},
-{"name":"resnetv15_stage1__plus1","type":"ElementWise","inputs":["resnetv15_stage1_activation0","resnetv15_stage1_batchnorm3_fwd"],"outputs":["resnetv15_stage1__plus1"],"input_dimensions":{"input_shapes":[[1,64,56,56],[1,64,56,56]],"output_shapes":[[1,64,56,56]]}},
-{"name":"resnetv15_stage1_activation1","type":"Relu","inputs":["resnetv15_stage1__plus1"],"outputs":["resnetv15_stage1_activation1"],"input_dimensions":{"input_shapes":[[1,64,56,56]],"output_shapes":[[1,64,56,56]]}},
-{"name":"resnetv15_stage2_conv2_weight","type":"ConstantInput","input_dimensions":{"input_shapes":[[128,64,1,1]],"output_shapes":[[128,64,1,1]]}},
-{"name":"resnetv15_stage2_conv2_fwd","type":"Conv","inputs":["resnetv15_stage1_activation1","resnetv15_stage2_conv2_weight"],"outputs":["resnetv15_stage2_conv2_fwd"],"input_dimensions":{"input_shapes":[[1,64,56,56],[128,64,1,1]],"output_shapes":[[1,128,28,28]]}},
-{"name":"resnetv15_stage2_batchnorm2_gamma","type":"ConstantInput","input_dimensions":{"input_shapes":[[128]],"output_shapes":[[128]]}},
-{"name":"resnetv15_stage2_batchnorm2_beta","type":"ConstantInput","input_dimensions":{"input_shapes":[[128]],"output_shapes":[[128]]}},
-{"name":"resnetv15_stage2_batchnorm2_running_mean","type":"ConstantInput","input_dimensions":{"input_shapes":[[128]],"output_shapes":[[128]]}},
-{"name":"resnetv15_stage2_batchnorm2_running_var","type":"ConstantInput","input_dimensions":{"input_shapes":[[128]],"output_shapes":[[128]]}},
-{"name":"resnetv15_stage2_batchnorm2_fwd","type":"BatchNorm","inputs":["resnetv15_stage2_conv2_fwd","resnetv15_stage2_batchnorm2_gamma","resnetv15_stage2_batchnorm2_beta","resnetv15_stage2_batchnorm2_running_mean","resnetv15_stage2_batchnorm2_running_var"],"outputs":["resnetv15_stage2_batchnorm2_fwd"],"input_dimensions":{"input_shapes":[[1,128,28,28],[128],[128],[128],[128]],"output_shapes":[[1,128,28,28],[128],[128],[128],[128]]}},
-{"name":"resnetv15_stage2_conv0_weight","type":"ConstantInput","input_dimensions":{"input_shapes":[[128,64,3,3]],"output_shapes":[[128,64,3,3]]}},
-{"name":"resnetv15_stage2_conv0_fwd","type":"Conv","inputs":["resnetv15_stage1_activation1","resnetv15_stage2_conv0_weight"],"outputs":["resnetv15_stage2_conv0_fwd"],"input_dimensions":{"input_shapes":[[1,64,56,56],[128,64,3,3]],"output_shapes":[[1,128,28,28]]}},
-{"name":"resnetv15_stage2_batchnorm0_gamma","type":"ConstantInput","input_dimensions":{"input_shapes":[[128]],"output_shapes":[[128]]}},
-{"name":"resnetv15_stage2_batchnorm0_beta","type":"ConstantInput","input_dimensions":{"input_shapes":[[128]],"output_shapes":[[128]]}},
-{"name":"resnetv15_stage2_batchnorm0_running_mean","type":"ConstantInput","input_dimensions":{"input_shapes":[[128]],"output_shapes":[[128]]}},
-{"name":"resnetv15_stage2_batchnorm0_running_var","type":"ConstantInput","input_dimensions":{"input_shapes":[[128]],"output_shapes":[[128]]}},
-{"name":"resnetv15_stage2_batchnorm0_fwd","type":"BatchNorm","inputs":["resnetv15_stage2_conv0_fwd","resnetv15_stage2_batchnorm0_gamma","resnetv15_stage2_batchnorm0_beta","resnetv15_stage2_batchnorm0_running_mean","resnetv15_stage2_batchnorm0_running_var"],"outputs":["resnetv15_stage2_batchnorm0_fwd"],"input_dimensions":{"input_shapes":[[1,128,28,28],[128],[128],[128],[128]],"output_shapes":[[1,128,28,28],[128],[128],[128],[128]]}},
-{"name":"resnetv15_stage2_relu0_fwd","type":"Relu","inputs":["resnetv15_stage2_batchnorm0_fwd"],"outputs":["resnetv15_stage2_relu0_fwd"],"input_dimensions":{"input_shapes":[[1,128,28,28]],"output_shapes":[[1,128,28,28]]}},
-{"name":"resnetv15_stage2_conv1_weight","type":"ConstantInput","input_dimensions":{"input_shapes":[[128,128,3,3]],"output_shapes":[[128,128,3,3]]}},
-{"name":"resnetv15_stage2_conv1_fwd","type":"Conv","inputs":["resnetv15_stage2_relu0_fwd","resnetv15_stage2_conv1_weight"],"outputs":["resnetv15_stage2_conv1_fwd"],"input_dimensions":{"input_shapes":[[1,128,28,28],[128,128,3,3]],"output_shapes":[[1,128,28,28]]}},
-{"name":"resnetv15_stage2_batchnorm1_gamma","type":"ConstantInput","input_dimensions":{"input_shapes":[[128]],"output_shapes":[[128]]}},
-{"name":"resnetv15_stage2_batchnorm1_beta","type":"ConstantInput","input_dimensions":{"input_shapes":[[128]],"output_shapes":[[128]]}},
-{"name":"resnetv15_stage2_batchnorm1_running_mean","type":"ConstantInput","input_dimensions":{"input_shapes":[[128]],"output_shapes":[[128]]}},
-{"name":"resnetv15_stage2_batchnorm1_running_var","type":"ConstantInput","input_dimensions":{"input_shapes":[[128]],"output_shapes":[[128]]}},
-{"name":"resnetv15_stage2_batchnorm1_fwd","type":"BatchNorm","inputs":["resnetv15_stage2_conv1_fwd","resnetv15_stage2_batchnorm1_gamma","resnetv15_stage2_batchnorm1_beta","resnetv15_stage2_batchnorm1_running_mean","resnetv15_stage2_batchnorm1_running_var"],"outputs":["resnetv15_stage2_batchnorm1_fwd"],"input_dimensions":{"input_shapes":[[1,128,28,28],[128],[128],[128],[128]],"output_shapes":[[1,128,28,28],[128],[128],[128],[128]]}},
-{"name":"resnetv15_stage2__plus0","type":"ElementWise","inputs":["resnetv15_stage2_batchnorm2_fwd","resnetv15_stage2_batchnorm1_fwd"],"outputs":["resnetv15_stage2__plus0"],"input_dimensions":{"input_shapes":[[1,128,28,28],[1,128,28,28]],"output_shapes":[[1,128,28,28]]}},
-{"name":"resnetv15_stage2_activation0","type":"Relu","inputs":["resnetv15_stage2__plus0"],"outputs":["resnetv15_stage2_activation0"],"input_dimensions":{"input_shapes":[[1,128,28,28]],"output_shapes":[[1,128,28,28]]}},
-{"name":"resnetv15_stage2_conv3_weight","type":"ConstantInput","input_dimensions":{"input_shapes":[[128,128,3,3]],"output_shapes":[[128,128,3,3]]}},
-{"name":"resnetv15_stage2_conv3_fwd","type":"Conv","inputs":["resnetv15_stage2_activation0","resnetv15_stage2_conv3_weight"],"outputs":["resnetv15_stage2_conv3_fwd"],"input_dimensions":{"input_shapes":[[1,128,28,28],[128,128,3,3]],"output_shapes":[[1,128,28,28]]}},
-{"name":"resnetv15_stage2_batchnorm3_gamma","type":"ConstantInput","input_dimensions":{"input_shapes":[[128]],"output_shapes":[[128]]}},
-{"name":"resnetv15_stage2_batchnorm3_beta","type":"ConstantInput","input_dimensions":{"input_shapes":[[128]],"output_shapes":[[128]]}},
-{"name":"resnetv15_stage2_batchnorm3_running_mean","type":"ConstantInput","input_dimensions":{"input_shapes":[[128]],"output_shapes":[[128]]}},
-{"name":"resnetv15_stage2_batchnorm3_running_var","type":"ConstantInput","input_dimensions":{"input_shapes":[[128]],"output_shapes":[[128]]}},
-{"name":"resnetv15_stage2_batchnorm3_fwd","type":"BatchNorm","inputs":["resnetv15_stage2_conv3_fwd","resnetv15_stage2_batchnorm3_gamma","resnetv15_stage2_batchnorm3_beta","resnetv15_stage2_batchnorm3_running_mean","resnetv15_stage2_batchnorm3_running_var"],"outputs":["resnetv15_stage2_batchnorm3_fwd"],"input_dimensions":{"input_shapes":[[1,128,28,28],[128],[128],[128],[128]],"output_shapes":[[1,128,28,28],[128],[128],[128],[128]]}},
-{"name":"resnetv15_stage2_relu1_fwd","type":"Relu","inputs":["resnetv15_stage2_batchnorm3_fwd"],"outputs":["resnetv15_stage2_relu1_fwd"],"input_dimensions":{"input_shapes":[[1,128,28,28]],"output_shapes":[[1,128,28,28]]}},
-{"name":"resnetv15_stage2_conv4_weight","type":"ConstantInput","input_dimensions":{"input_shapes":[[128,128,3,3]],"output_shapes":[[128,128,3,3]]}},
-{"name":"resnetv15_stage2_conv4_fwd","type":"Conv","inputs":["resnetv15_stage2_relu1_fwd","resnetv15_stage2_conv4_weight"],"outputs":["resnetv15_stage2_conv4_fwd"],"input_dimensions":{"input_shapes":[[1,128,28,28],[128,128,3,3]],"output_shapes":[[1,128,28,28]]}},
-{"name":"resnetv15_stage2_batchnorm4_gamma","type":"ConstantInput","input_dimensions":{"input_shapes":[[128]],"output_shapes":[[128]]}},
-{"name":"resnetv15_stage2_batchnorm4_beta","type":"ConstantInput","input_dimensions":{"input_shapes":[[128]],"output_shapes":[[128]]}},
-{"name":"resnetv15_stage2_batchnorm4_running_mean","type":"ConstantInput","input_dimensions":{"input_shapes":[[128]],"output_shapes":[[128]]}},
-{"name":"resnetv15_stage2_batchnorm4_running_var","type":"ConstantInput","input_dimensions":{"input_shapes":[[128]],"output_shapes":[[128]]}},
-{"name":"resnetv15_stage2_batchnorm4_fwd","type":"BatchNorm","inputs":["resnetv15_stage2_conv4_fwd","resnetv15_stage2_batchnorm4_gamma","resnetv15_stage2_batchnorm4_beta","resnetv15_stage2_batchnorm4_running_mean","resnetv15_stage2_batchnorm4_running_var"],"outputs":["resnetv15_stage2_batchnorm4_fwd"],"input_dimensions":{"input_shapes":[[1,128,28,28],[128],[128],[128],[128]],"output_shapes":[[1,128,28,28],[128],[128],[128],[128]]}},
-{"name":"resnetv15_stage2__plus1","type":"ElementWise","inputs":["resnetv15_stage2_activation0","resnetv15_stage2_batchnorm4_fwd"],"outputs":["resnetv15_stage2__plus1"],"input_dimensions":{"input_shapes":[[1,128,28,28],[1,128,28,28]],"output_shapes":[[1,128,28,28]]}},
-{"name":"resnetv15_stage2_activation1","type":"Relu","inputs":["resnetv15_stage2__plus1"],"outputs":["resnetv15_stage2_activation1"],"input_dimensions":{"input_shapes":[[1,128,28,28]],"output_shapes":[[1,128,28,28]]}},
-{"name":"resnetv15_stage3_conv2_weight","type":"ConstantInput","input_dimensions":{"input_shapes":[[256,128,1,1]],"output_shapes":[[256,128,1,1]]}},
-{"name":"resnetv15_stage3_conv2_fwd","type":"Conv","inputs":["resnetv15_stage2_activation1","resnetv15_stage3_conv2_weight"],"outputs":["resnetv15_stage3_conv2_fwd"],"input_dimensions":{"input_shapes":[[1,128,28,28],[256,128,1,1]],"output_shapes":[[1,256,14,14]]}},
-{"name":"resnetv15_stage3_batchnorm2_gamma","type":"ConstantInput","input_dimensions":{"input_shapes":[[256]],"output_shapes":[[256]]}},
-{"name":"resnetv15_stage3_batchnorm2_beta","type":"ConstantInput","input_dimensions":{"input_shapes":[[256]],"output_shapes":[[256]]}},
-{"name":"resnetv15_stage3_batchnorm2_running_mean","type":"ConstantInput","input_dimensions":{"input_shapes":[[256]],"output_shapes":[[256]]}},
-{"name":"resnetv15_stage3_batchnorm2_running_var","type":"ConstantInput","input_dimensions":{"input_shapes":[[256]],"output_shapes":[[256]]}},
-{"name":"resnetv15_stage3_batchnorm2_fwd","type":"BatchNorm","inputs":["resnetv15_stage3_conv2_fwd","resnetv15_stage3_batchnorm2_gamma","resnetv15_stage3_batchnorm2_beta","resnetv15_stage3_batchnorm2_running_mean","resnetv15_stage3_batchnorm2_running_var"],"outputs":["resnetv15_stage3_batchnorm2_fwd"],"input_dimensions":{"input_shapes":[[1,256,14,14],[256],[256],[256],[256]],"output_shapes":[[1,256,14,14],[256],[256],[256],[256]]}},
-{"name":"resnetv15_stage3_conv0_weight","type":"ConstantInput","input_dimensions":{"input_shapes":[[256,128,3,3]],"output_shapes":[[256,128,3,3]]}},
-{"name":"resnetv15_stage3_conv0_fwd","type":"Conv","inputs":["resnetv15_stage2_activation1","resnetv15_stage3_conv0_weight"],"outputs":["resnetv15_stage3_conv0_fwd"],"input_dimensions":{"input_shapes":[[1,128,28,28],[256,128,3,3]],"output_shapes":[[1,256,14,14]]}},
-{"name":"resnetv15_stage3_batchnorm0_gamma","type":"ConstantInput","input_dimensions":{"input_shapes":[[256]],"output_shapes":[[256]]}},
-{"name":"resnetv15_stage3_batchnorm0_beta","type":"ConstantInput","input_dimensions":{"input_shapes":[[256]],"output_shapes":[[256]]}},
-{"name":"resnetv15_stage3_batchnorm0_running_mean","type":"ConstantInput","input_dimensions":{"input_shapes":[[256]],"output_shapes":[[256]]}},
-{"name":"resnetv15_stage3_batchnorm0_running_var","type":"ConstantInput","input_dimensions":{"input_shapes":[[256]],"output_shapes":[[256]]}},
-{"name":"resnetv15_stage3_batchnorm0_fwd","type":"BatchNorm","inputs":["resnetv15_stage3_conv0_fwd","resnetv15_stage3_batchnorm0_gamma","resnetv15_stage3_batchnorm0_beta","resnetv15_stage3_batchnorm0_running_mean","resnetv15_stage3_batchnorm0_running_var"],"outputs":["resnetv15_stage3_batchnorm0_fwd"],"input_dimensions":{"input_shapes":[[1,256,14,14],[256],[256],[256],[256]],"output_shapes":[[1,256,14,14],[256],[256],[256],[256]]}},
-{"name":"resnetv15_stage3_relu0_fwd","type":"Relu","inputs":["resnetv15_stage3_batchnorm0_fwd"],"outputs":["resnetv15_stage3_relu0_fwd"],"input_dimensions":{"input_shapes":[[1,256,14,14]],"output_shapes":[[1,256,14,14]]}},
-{"name":"resnetv15_stage3_conv1_weight","type":"ConstantInput","input_dimensions":{"input_shapes":[[256,256,3,3]],"output_shapes":[[256,256,3,3]]}},
-{"name":"resnetv15_stage3_conv1_fwd","type":"Conv","inputs":["resnetv15_stage3_relu0_fwd","resnetv15_stage3_conv1_weight"],"outputs":["resnetv15_stage3_conv1_fwd"],"input_dimensions":{"input_shapes":[[1,256,14,14],[256,256,3,3]],"output_shapes":[[1,256,14,14]]}},
-{"name":"resnetv15_stage3_batchnorm1_gamma","type":"ConstantInput","input_dimensions":{"input_shapes":[[256]],"output_shapes":[[256]]}},
-{"name":"resnetv15_stage3_batchnorm1_beta","type":"ConstantInput","input_dimensions":{"input_shapes":[[256]],"output_shapes":[[256]]}},
-{"name":"resnetv15_stage3_batchnorm1_running_mean","type":"ConstantInput","input_dimensions":{"input_shapes":[[256]],"output_shapes":[[256]]}},
-{"name":"resnetv15_stage3_batchnorm1_running_var","type":"ConstantInput","input_dimensions":{"input_shapes":[[256]],"output_shapes":[[256]]}},
-{"name":"resnetv15_stage3_batchnorm1_fwd","type":"BatchNorm","inputs":["resnetv15_stage3_conv1_fwd","resnetv15_stage3_batchnorm1_gamma","resnetv15_stage3_batchnorm1_beta","resnetv15_stage3_batchnorm1_running_mean","resnetv15_stage3_batchnorm1_running_var"],"outputs":["resnetv15_stage3_batchnorm1_fwd"],"input_dimensions":{"input_shapes":[[1,256,14,14],[256],[256],[256],[256]],"output_shapes":[[1,256,14,14],[256],[256],[256],[256]]}},
-{"name":"resnetv15_stage3__plus0","type":"ElementWise","inputs":["resnetv15_stage3_batchnorm2_fwd","resnetv15_stage3_batchnorm1_fwd"],"outputs":["resnetv15_stage3__plus0"],"input_dimensions":{"input_shapes":[[1,256,14,14],[1,256,14,14]],"output_shapes":[[1,256,14,14]]}},
-{"name":"resnetv15_stage3_activation0","type":"Relu","inputs":["resnetv15_stage3__plus0"],"outputs":["resnetv15_stage3_activation0"],"input_dimensions":{"input_shapes":[[1,256,14,14]],"output_shapes":[[1,256,14,14]]}},
-{"name":"resnetv15_stage3_conv3_weight","type":"ConstantInput","input_dimensions":{"input_shapes":[[256,256,3,3]],"output_shapes":[[256,256,3,3]]}},
-{"name":"resnetv15_stage3_conv3_fwd","type":"Conv","inputs":["resnetv15_stage3_activation0","resnetv15_stage3_conv3_weight"],"outputs":["resnetv15_stage3_conv3_fwd"],"input_dimensions":{"input_shapes":[[1,256,14,14],[256,256,3,3]],"output_shapes":[[1,256,14,14]]}},
-{"name":"resnetv15_stage3_batchnorm3_gamma","type":"ConstantInput","input_dimensions":{"input_shapes":[[256]],"output_shapes":[[256]]}},
-{"name":"resnetv15_stage3_batchnorm3_beta","type":"ConstantInput","input_dimensions":{"input_shapes":[[256]],"output_shapes":[[256]]}},
-{"name":"resnetv15_stage3_batchnorm3_running_mean","type":"ConstantInput","input_dimensions":{"input_shapes":[[256]],"output_shapes":[[256]]}},
-{"name":"resnetv15_stage3_batchnorm3_running_var","type":"ConstantInput","input_dimensions":{"input_shapes":[[256]],"output_shapes":[[256]]}},
-{"name":"resnetv15_stage3_batchnorm3_fwd","type":"BatchNorm","inputs":["resnetv15_stage3_conv3_fwd","resnetv15_stage3_batchnorm3_gamma","resnetv15_stage3_batchnorm3_beta","resnetv15_stage3_batchnorm3_running_mean","resnetv15_stage3_batchnorm3_running_var"],"outputs":["resnetv15_stage3_batchnorm3_fwd"],"input_dimensions":{"input_shapes":[[1,256,14,14],[256],[256],[256],[256]],"output_shapes":[[1,256,14,14],[256],[256],[256],[256]]}},
-{"name":"resnetv15_stage3_relu1_fwd","type":"Relu","inputs":["resnetv15_stage3_batchnorm3_fwd"],"outputs":["resnetv15_stage3_relu1_fwd"],"input_dimensions":{"input_shapes":[[1,256,14,14]],"output_shapes":[[1,256,14,14]]}},
-{"name":"resnetv15_stage3_conv4_weight","type":"ConstantInput","input_dimensions":{"input_shapes":[[256,256,3,3]],"output_shapes":[[256,256,3,3]]}},
-{"name":"resnetv15_stage3_conv4_fwd","type":"Conv","inputs":["resnetv15_stage3_relu1_fwd","resnetv15_stage3_conv4_weight"],"outputs":["resnetv15_stage3_conv4_fwd"],"input_dimensions":{"input_shapes":[[1,256,14,14],[256,256,3,3]],"output_shapes":[[1,256,14,14]]}},
-{"name":"resnetv15_stage3_batchnorm4_gamma","type":"ConstantInput","input_dimensions":{"input_shapes":[[256]],"output_shapes":[[256]]}},
-{"name":"resnetv15_stage3_batchnorm4_beta","type":"ConstantInput","input_dimensions":{"input_shapes":[[256]],"output_shapes":[[256]]}},
-{"name":"resnetv15_stage3_batchnorm4_running_mean","type":"ConstantInput","input_dimensions":{"input_shapes":[[256]],"output_shapes":[[256]]}},
-{"name":"resnetv15_stage3_batchnorm4_running_var","type":"ConstantInput","input_dimensions":{"input_shapes":[[256]],"output_shapes":[[256]]}},
-{"name":"resnetv15_stage3_batchnorm4_fwd","type":"BatchNorm","inputs":["resnetv15_stage3_conv4_fwd","resnetv15_stage3_batchnorm4_gamma","resnetv15_stage3_batchnorm4_beta","resnetv15_stage3_batchnorm4_running_mean","resnetv15_stage3_batchnorm4_running_var"],"outputs":["resnetv15_stage3_batchnorm4_fwd"],"input_dimensions":{"input_shapes":[[1,256,14,14],[256],[256],[256],[256]],"output_shapes":[[1,256,14,14],[256],[256],[256],[256]]}},
-{"name":"resnetv15_stage3__plus1","type":"ElementWise","inputs":["resnetv15_stage3_activation0","resnetv15_stage3_batchnorm4_fwd"],"outputs":["resnetv15_stage3__plus1"],"input_dimensions":{"input_shapes":[[1,256,14,14],[1,256,14,14]],"output_shapes":[[1,256,14,14]]}},
-{"name":"resnetv15_stage3_activation1","type":"Relu","inputs":["resnetv15_stage3__plus1"],"outputs":["resnetv15_stage3_activation1"],"input_dimensions":{"input_shapes":[[1,256,14,14]],"output_shapes":[[1,256,14,14]]}},
-{"name":"resnetv15_stage4_conv2_weight","type":"ConstantInput","input_dimensions":{"input_shapes":[[512,256,1,1]],"output_shapes":[[512,256,1,1]]}},
-{"name":"resnetv15_stage4_conv2_fwd","type":"Conv","inputs":["resnetv15_stage3_activation1","resnetv15_stage4_conv2_weight"],"outputs":["resnetv15_stage4_conv2_fwd"],"input_dimensions":{"input_shapes":[[1,256,14,14],[512,256,1,1]],"output_shapes":[[1,512,7,7]]}},
-{"name":"resnetv15_stage4_batchnorm2_gamma","type":"ConstantInput","input_dimensions":{"input_shapes":[[512]],"output_shapes":[[512]]}},
-{"name":"resnetv15_stage4_batchnorm2_beta","type":"ConstantInput","input_dimensions":{"input_shapes":[[512]],"output_shapes":[[512]]}},
-{"name":"resnetv15_stage4_batchnorm2_running_mean","type":"ConstantInput","input_dimensions":{"input_shapes":[[512]],"output_shapes":[[512]]}},
-{"name":"resnetv15_stage4_batchnorm2_running_var","type":"ConstantInput","input_dimensions":{"input_shapes":[[512]],"output_shapes":[[512]]}},
-{"name":"resnetv15_stage4_batchnorm2_fwd","type":"BatchNorm","inputs":["resnetv15_stage4_conv2_fwd","resnetv15_stage4_batchnorm2_gamma","resnetv15_stage4_batchnorm2_beta","resnetv15_stage4_batchnorm2_running_mean","resnetv15_stage4_batchnorm2_running_var"],"outputs":["resnetv15_stage4_batchnorm2_fwd"],"input_dimensions":{"input_shapes":[[1,512,7,7],[512],[512],[512],[512]],"output_shapes":[[1,512,7,7],[512],[512],[512],[512]]}},
-{"name":"resnetv15_stage4_conv0_weight","type":"ConstantInput","input_dimensions":{"input_shapes":[[512,256,3,3]],"output_shapes":[[512,256,3,3]]}},
-{"name":"resnetv15_stage4_conv0_fwd","type":"Conv","inputs":["resnetv15_stage3_activation1","resnetv15_stage4_conv0_weight"],"outputs":["resnetv15_stage4_conv0_fwd"],"input_dimensions":{"input_shapes":[[1,256,14,14],[512,256,3,3]],"output_shapes":[[1,512,7,7]]}},
-{"name":"resnetv15_stage4_batchnorm0_gamma","type":"ConstantInput","input_dimensions":{"input_shapes":[[512]],"output_shapes":[[512]]}},
-{"name":"resnetv15_stage4_batchnorm0_beta","type":"ConstantInput","input_dimensions":{"input_shapes":[[512]],"output_shapes":[[512]]}},
-{"name":"resnetv15_stage4_batchnorm0_running_mean","type":"ConstantInput","input_dimensions":{"input_shapes":[[512]],"output_shapes":[[512]]}},
-{"name":"resnetv15_stage4_batchnorm0_running_var","type":"ConstantInput","input_dimensions":{"input_shapes":[[512]],"output_shapes":[[512]]}},
-{"name":"resnetv15_stage4_batchnorm0_fwd","type":"BatchNorm","inputs":["resnetv15_stage4_conv0_fwd","resnetv15_stage4_batchnorm0_gamma","resnetv15_stage4_batchnorm0_beta","resnetv15_stage4_batchnorm0_running_mean","resnetv15_stage4_batchnorm0_running_var"],"outputs":["resnetv15_stage4_batchnorm0_fwd"],"input_dimensions":{"input_shapes":[[1,512,7,7],[512],[512],[512],[512]],"output_shapes":[[1,512,7,7],[512],[512],[512],[512]]}},
-{"name":"resnetv15_stage4_relu0_fwd","type":"Relu","inputs":["resnetv15_stage4_batchnorm0_fwd"],"outputs":["resnetv15_stage4_relu0_fwd"],"input_dimensions":{"input_shapes":[[1,512,7,7]],"output_shapes":[[1,512,7,7]]}},
-{"name":"resnetv15_stage4_conv1_weight","type":"ConstantInput","input_dimensions":{"input_shapes":[[512,512,3,3]],"output_shapes":[[512,512,3,3]]}},
-{"name":"resnetv15_stage4_conv1_fwd","type":"Conv","inputs":["resnetv15_stage4_relu0_fwd","resnetv15_stage4_conv1_weight"],"outputs":["resnetv15_stage4_conv1_fwd"],"input_dimensions":{"input_shapes":[[1,512,7,7],[512,512,3,3]],"output_shapes":[[1,512,7,7]]}},
-{"name":"resnetv15_stage4_batchnorm1_gamma","type":"ConstantInput","input_dimensions":{"input_shapes":[[512]],"output_shapes":[[512]]}},
-{"name":"resnetv15_stage4_batchnorm1_beta","type":"ConstantInput","input_dimensions":{"input_shapes":[[512]],"output_shapes":[[512]]}},
-{"name":"resnetv15_stage4_batchnorm1_running_mean","type":"ConstantInput","input_dimensions":{"input_shapes":[[512]],"output_shapes":[[512]]}},
-{"name":"resnetv15_stage4_batchnorm1_running_var","type":"ConstantInput","input_dimensions":{"input_shapes":[[512]],"output_shapes":[[512]]}},
-{"name":"resnetv15_stage4_batchnorm1_fwd","type":"BatchNorm","inputs":["resnetv15_stage4_conv1_fwd","resnetv15_stage4_batchnorm1_gamma","resnetv15_stage4_batchnorm1_beta","resnetv15_stage4_batchnorm1_running_mean","resnetv15_stage4_batchnorm1_running_var"],"outputs":["resnetv15_stage4_batchnorm1_fwd"],"input_dimensions":{"input_shapes":[[1,512,7,7],[512],[512],[512],[512]],"output_shapes":[[1,512,7,7],[512],[512],[512],[512]]}},
-{"name":"resnetv15_stage4__plus0","type":"ElementWise","inputs":["resnetv15_stage4_batchnorm2_fwd","resnetv15_stage4_batchnorm1_fwd"],"outputs":["resnetv15_stage4__plus0"],"input_dimensions":{"input_shapes":[[1,512,7,7],[1,512,7,7]],"output_shapes":[[1,512,7,7]]}},
-{"name":"resnetv15_stage4_activation0","type":"Relu","inputs":["resnetv15_stage4__plus0"],"outputs":["resnetv15_stage4_activation0"],"input_dimensions":{"input_shapes":[[1,512,7,7]],"output_shapes":[[1,512,7,7]]}},
-{"name":"resnetv15_stage4_conv3_weight","type":"ConstantInput","input_dimensions":{"input_shapes":[[512,512,3,3]],"output_shapes":[[512,512,3,3]]}},
-{"name":"resnetv15_stage4_conv3_fwd","type":"Conv","inputs":["resnetv15_stage4_activation0","resnetv15_stage4_conv3_weight"],"outputs":["resnetv15_stage4_conv3_fwd"],"input_dimensions":{"input_shapes":[[1,512,7,7],[512,512,3,3]],"output_shapes":[[1,512,7,7]]}},
-{"name":"resnetv15_stage4_batchnorm3_gamma","type":"ConstantInput","input_dimensions":{"input_shapes":[[512]],"output_shapes":[[512]]}},
-{"name":"resnetv15_stage4_batchnorm3_beta","type":"ConstantInput","input_dimensions":{"input_shapes":[[512]],"output_shapes":[[512]]}},
-{"name":"resnetv15_stage4_batchnorm3_running_mean","type":"ConstantInput","input_dimensions":{"input_shapes":[[512]],"output_shapes":[[512]]}},
-{"name":"resnetv15_stage4_batchnorm3_running_var","type":"ConstantInput","input_dimensions":{"input_shapes":[[512]],"output_shapes":[[512]]}},
-{"name":"resnetv15_stage4_batchnorm3_fwd","type":"BatchNorm","inputs":["resnetv15_stage4_conv3_fwd","resnetv15_stage4_batchnorm3_gamma","resnetv15_stage4_batchnorm3_beta","resnetv15_stage4_batchnorm3_running_mean","resnetv15_stage4_batchnorm3_running_var"],"outputs":["resnetv15_stage4_batchnorm3_fwd"],"input_dimensions":{"input_shapes":[[1,512,7,7],[512],[512],[512],[512]],"output_shapes":[[1,512,7,7],[512],[512],[512],[512]]}},
-{"name":"resnetv15_stage4_relu1_fwd","type":"Relu","inputs":["resnetv15_stage4_batchnorm3_fwd"],"outputs":["resnetv15_stage4_relu1_fwd"],"input_dimensions":{"input_shapes":[[1,512,7,7]],"output_shapes":[[1,512,7,7]]}},
-{"name":"resnetv15_stage4_conv4_weight","type":"ConstantInput","input_dimensions":{"input_shapes":[[512,512,3,3]],"output_shapes":[[512,512,3,3]]}},
-{"name":"resnetv15_stage4_conv4_fwd","type":"Conv","inputs":["resnetv15_stage4_relu1_fwd","resnetv15_stage4_conv4_weight"],"outputs":["resnetv15_stage4_conv4_fwd"],"input_dimensions":{"input_shapes":[[1,512,7,7],[512,512,3,3]],"output_shapes":[[1,512,7,7]]}},
-{"name":"resnetv15_stage4_batchnorm4_gamma","type":"ConstantInput","input_dimensions":{"input_shapes":[[512]],"output_shapes":[[512]]}},
-{"name":"resnetv15_stage4_batchnorm4_beta","type":"ConstantInput","input_dimensions":{"input_shapes":[[512]],"output_shapes":[[512]]}},
-{"name":"resnetv15_stage4_batchnorm4_running_mean","type":"ConstantInput","input_dimensions":{"input_shapes":[[512]],"output_shapes":[[512]]}},
-{"name":"resnetv15_stage4_batchnorm4_running_var","type":"ConstantInput","input_dimensions":{"input_shapes":[[512]],"output_shapes":[[512]]}},
-{"name":"resnetv15_stage4_batchnorm4_fwd","type":"BatchNorm","inputs":["resnetv15_stage4_conv4_fwd","resnetv15_stage4_batchnorm4_gamma","resnetv15_stage4_batchnorm4_beta","resnetv15_stage4_batchnorm4_running_mean","resnetv15_stage4_batchnorm4_running_var"],"outputs":["resnetv15_stage4_batchnorm4_fwd"],"input_dimensions":{"input_shapes":[[1,512,7,7],[512],[512],[512],[512]],"output_shapes":[[1,512,7,7],[512],[512],[512],[512]]}},
-{"name":"resnetv15_stage4__plus1","type":"ElementWise","inputs":["resnetv15_stage4_activation0","resnetv15_stage4_batchnorm4_fwd"],"outputs":["resnetv15_stage4__plus1"],"input_dimensions":{"input_shapes":[[1,512,7,7],[1,512,7,7]],"output_shapes":[[1,512,7,7]]}},
-{"name":"resnetv15_stage4_activation1","type":"Relu","inputs":["resnetv15_stage4__plus1"],"outputs":["resnetv15_stage4_activation1"],"input_dimensions":{"input_shapes":[[1,512,7,7]],"output_shapes":[[1,512,7,7]]}},
-{"name":"resnetv15_pool1_fwd","type":"GlobalPooling","inputs":["resnetv15_stage4_activation1"],"outputs":["resnetv15_pool1_fwd"],"input_dimensions":{"input_shapes":[[1,512,7,7]],"output_shapes":[[1,512,1,1]]}},
-{"name":"flatten_170","type":"Flatten","inputs":["resnetv15_pool1_fwd"],"outputs":["flatten_170"],"input_dimensions":{"input_shapes":[[1,512,1,1]],"output_shapes":[[1,512,1,1]]}},
-{"name":"resnetv15_dense0_weight","type":"ConstantInput","input_dimensions":{"input_shapes":[[1000,512]],"output_shapes":[[1000,512]]}},
-{"name":"resnetv15_dense0_bias","type":"ConstantInput","input_dimensions":{"input_shapes":[[1000]],"output_shapes":[[1000]]}},
-{"name":"resnetv15_dense0_fwd","type":"Gemm","inputs":["flatten_170","resnetv15_dense0_weight","resnetv15_dense0_bias"],"outputs":["resnetv15_dense0_fwd"],"input_dimensions":{"input_shapes":[[1,512,1,1],[1000,512],[1000]],"output_shapes":[[1,1000]]}}]
+[{
+  "name": "data",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        3,
+        224,
+        224
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        3,
+        224,
+        224
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_conv0_weight",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64,
+        3,
+        7,
+        7
+      ]
+    ],
+    "output_shapes": [
+      [
+        64,
+        3,
+        7,
+        7
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_conv0_fwd",
+  "type": "Conv",
+  "inputs": [
+    "data",
+    "resnetv15_conv0_weight"
+  ],
+  "outputs": [
+    "resnetv15_conv0_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        3,
+        224,
+        224
+      ],
+      [
+        64,
+        3,
+        7,
+        7
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        64,
+        112,
+        112
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_batchnorm0_gamma",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        64
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_batchnorm0_beta",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        64
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_batchnorm0_running_mean",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        64
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_batchnorm0_running_var",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        64
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_batchnorm0_fwd",
+  "type": "BatchNorm",
+  "inputs": [
+    "resnetv15_conv0_fwd",
+    "resnetv15_batchnorm0_gamma",
+    "resnetv15_batchnorm0_beta",
+    "resnetv15_batchnorm0_running_mean",
+    "resnetv15_batchnorm0_running_var"
+  ],
+  "outputs": [
+    "resnetv15_batchnorm0_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        64,
+        112,
+        112
+      ],
+      [
+        64
+      ],
+      [
+        64
+      ],
+      [
+        64
+      ],
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        64,
+        112,
+        112
+      ],
+      [
+        64
+      ],
+      [
+        64
+      ],
+      [
+        64
+      ],
+      [
+        64
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_relu0_fwd",
+  "type": "Relu",
+  "inputs": [
+    "resnetv15_batchnorm0_fwd"
+  ],
+  "outputs": [
+    "resnetv15_relu0_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        64,
+        112,
+        112
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        64,
+        112,
+        112
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_pool0_fwd",
+  "type": "Pooling",
+  "inputs": [
+    "resnetv15_relu0_fwd"
+  ],
+  "outputs": [
+    "resnetv15_pool0_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        64,
+        112,
+        112
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        64,
+        56,
+        56
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage1_conv0_weight",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64,
+        64,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        64,
+        64,
+        3,
+        3
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage1_conv0_fwd",
+  "type": "Conv",
+  "inputs": [
+    "resnetv15_pool0_fwd",
+    "resnetv15_stage1_conv0_weight"
+  ],
+  "outputs": [
+    "resnetv15_stage1_conv0_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        64,
+        56,
+        56
+      ],
+      [
+        64,
+        64,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        64,
+        56,
+        56
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage1_batchnorm0_gamma",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        64
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage1_batchnorm0_beta",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        64
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage1_batchnorm0_running_mean",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        64
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage1_batchnorm0_running_var",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        64
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage1_batchnorm0_fwd",
+  "type": "BatchNorm",
+  "inputs": [
+    "resnetv15_stage1_conv0_fwd",
+    "resnetv15_stage1_batchnorm0_gamma",
+    "resnetv15_stage1_batchnorm0_beta",
+    "resnetv15_stage1_batchnorm0_running_mean",
+    "resnetv15_stage1_batchnorm0_running_var"
+  ],
+  "outputs": [
+    "resnetv15_stage1_batchnorm0_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        64,
+        56,
+        56
+      ],
+      [
+        64
+      ],
+      [
+        64
+      ],
+      [
+        64
+      ],
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        64,
+        56,
+        56
+      ],
+      [
+        64
+      ],
+      [
+        64
+      ],
+      [
+        64
+      ],
+      [
+        64
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage1_relu0_fwd",
+  "type": "Relu",
+  "inputs": [
+    "resnetv15_stage1_batchnorm0_fwd"
+  ],
+  "outputs": [
+    "resnetv15_stage1_relu0_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        64,
+        56,
+        56
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        64,
+        56,
+        56
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage1_conv1_weight",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64,
+        64,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        64,
+        64,
+        3,
+        3
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage1_conv1_fwd",
+  "type": "Conv",
+  "inputs": [
+    "resnetv15_stage1_relu0_fwd",
+    "resnetv15_stage1_conv1_weight"
+  ],
+  "outputs": [
+    "resnetv15_stage1_conv1_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        64,
+        56,
+        56
+      ],
+      [
+        64,
+        64,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        64,
+        56,
+        56
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage1_batchnorm1_gamma",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        64
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage1_batchnorm1_beta",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        64
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage1_batchnorm1_running_mean",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        64
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage1_batchnorm1_running_var",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        64
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage1_batchnorm1_fwd",
+  "type": "BatchNorm",
+  "inputs": [
+    "resnetv15_stage1_conv1_fwd",
+    "resnetv15_stage1_batchnorm1_gamma",
+    "resnetv15_stage1_batchnorm1_beta",
+    "resnetv15_stage1_batchnorm1_running_mean",
+    "resnetv15_stage1_batchnorm1_running_var"
+  ],
+  "outputs": [
+    "resnetv15_stage1_batchnorm1_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        64,
+        56,
+        56
+      ],
+      [
+        64
+      ],
+      [
+        64
+      ],
+      [
+        64
+      ],
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        64,
+        56,
+        56
+      ],
+      [
+        64
+      ],
+      [
+        64
+      ],
+      [
+        64
+      ],
+      [
+        64
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage1__plus0",
+  "type": "ElementWise",
+  "inputs": [
+    "resnetv15_pool0_fwd",
+    "resnetv15_stage1_batchnorm1_fwd"
+  ],
+  "outputs": [
+    "resnetv15_stage1__plus0"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        64,
+        56,
+        56
+      ],
+      [
+        1,
+        64,
+        56,
+        56
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        64,
+        56,
+        56
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage1_activation0",
+  "type": "Relu",
+  "inputs": [
+    "resnetv15_stage1__plus0"
+  ],
+  "outputs": [
+    "resnetv15_stage1_activation0"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        64,
+        56,
+        56
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        64,
+        56,
+        56
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage1_conv2_weight",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64,
+        64,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        64,
+        64,
+        3,
+        3
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage1_conv2_fwd",
+  "type": "Conv",
+  "inputs": [
+    "resnetv15_stage1_activation0",
+    "resnetv15_stage1_conv2_weight"
+  ],
+  "outputs": [
+    "resnetv15_stage1_conv2_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        64,
+        56,
+        56
+      ],
+      [
+        64,
+        64,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        64,
+        56,
+        56
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage1_batchnorm2_gamma",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        64
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage1_batchnorm2_beta",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        64
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage1_batchnorm2_running_mean",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        64
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage1_batchnorm2_running_var",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        64
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage1_batchnorm2_fwd",
+  "type": "BatchNorm",
+  "inputs": [
+    "resnetv15_stage1_conv2_fwd",
+    "resnetv15_stage1_batchnorm2_gamma",
+    "resnetv15_stage1_batchnorm2_beta",
+    "resnetv15_stage1_batchnorm2_running_mean",
+    "resnetv15_stage1_batchnorm2_running_var"
+  ],
+  "outputs": [
+    "resnetv15_stage1_batchnorm2_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        64,
+        56,
+        56
+      ],
+      [
+        64
+      ],
+      [
+        64
+      ],
+      [
+        64
+      ],
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        64,
+        56,
+        56
+      ],
+      [
+        64
+      ],
+      [
+        64
+      ],
+      [
+        64
+      ],
+      [
+        64
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage1_relu1_fwd",
+  "type": "Relu",
+  "inputs": [
+    "resnetv15_stage1_batchnorm2_fwd"
+  ],
+  "outputs": [
+    "resnetv15_stage1_relu1_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        64,
+        56,
+        56
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        64,
+        56,
+        56
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage1_conv3_weight",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64,
+        64,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        64,
+        64,
+        3,
+        3
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage1_conv3_fwd",
+  "type": "Conv",
+  "inputs": [
+    "resnetv15_stage1_relu1_fwd",
+    "resnetv15_stage1_conv3_weight"
+  ],
+  "outputs": [
+    "resnetv15_stage1_conv3_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        64,
+        56,
+        56
+      ],
+      [
+        64,
+        64,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        64,
+        56,
+        56
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage1_batchnorm3_gamma",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        64
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage1_batchnorm3_beta",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        64
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage1_batchnorm3_running_mean",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        64
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage1_batchnorm3_running_var",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        64
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage1_batchnorm3_fwd",
+  "type": "BatchNorm",
+  "inputs": [
+    "resnetv15_stage1_conv3_fwd",
+    "resnetv15_stage1_batchnorm3_gamma",
+    "resnetv15_stage1_batchnorm3_beta",
+    "resnetv15_stage1_batchnorm3_running_mean",
+    "resnetv15_stage1_batchnorm3_running_var"
+  ],
+  "outputs": [
+    "resnetv15_stage1_batchnorm3_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        64,
+        56,
+        56
+      ],
+      [
+        64
+      ],
+      [
+        64
+      ],
+      [
+        64
+      ],
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        64,
+        56,
+        56
+      ],
+      [
+        64
+      ],
+      [
+        64
+      ],
+      [
+        64
+      ],
+      [
+        64
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage1__plus1",
+  "type": "ElementWise",
+  "inputs": [
+    "resnetv15_stage1_activation0",
+    "resnetv15_stage1_batchnorm3_fwd"
+  ],
+  "outputs": [
+    "resnetv15_stage1__plus1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        64,
+        56,
+        56
+      ],
+      [
+        1,
+        64,
+        56,
+        56
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        64,
+        56,
+        56
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage1_activation1",
+  "type": "Relu",
+  "inputs": [
+    "resnetv15_stage1__plus1"
+  ],
+  "outputs": [
+    "resnetv15_stage1_activation1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        64,
+        56,
+        56
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        64,
+        56,
+        56
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage2_conv2_weight",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128,
+        64,
+        1,
+        1
+      ]
+    ],
+    "output_shapes": [
+      [
+        128,
+        64,
+        1,
+        1
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage2_conv2_fwd",
+  "type": "Conv",
+  "inputs": [
+    "resnetv15_stage1_activation1",
+    "resnetv15_stage2_conv2_weight"
+  ],
+  "outputs": [
+    "resnetv15_stage2_conv2_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        64,
+        56,
+        56
+      ],
+      [
+        128,
+        64,
+        1,
+        1
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        128,
+        28,
+        28
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage2_batchnorm2_gamma",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        128
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage2_batchnorm2_beta",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        128
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage2_batchnorm2_running_mean",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        128
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage2_batchnorm2_running_var",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        128
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage2_batchnorm2_fwd",
+  "type": "BatchNorm",
+  "inputs": [
+    "resnetv15_stage2_conv2_fwd",
+    "resnetv15_stage2_batchnorm2_gamma",
+    "resnetv15_stage2_batchnorm2_beta",
+    "resnetv15_stage2_batchnorm2_running_mean",
+    "resnetv15_stage2_batchnorm2_running_var"
+  ],
+  "outputs": [
+    "resnetv15_stage2_batchnorm2_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        128,
+        28,
+        28
+      ],
+      [
+        128
+      ],
+      [
+        128
+      ],
+      [
+        128
+      ],
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        128,
+        28,
+        28
+      ],
+      [
+        128
+      ],
+      [
+        128
+      ],
+      [
+        128
+      ],
+      [
+        128
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage2_conv0_weight",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128,
+        64,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        128,
+        64,
+        3,
+        3
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage2_conv0_fwd",
+  "type": "Conv",
+  "inputs": [
+    "resnetv15_stage1_activation1",
+    "resnetv15_stage2_conv0_weight"
+  ],
+  "outputs": [
+    "resnetv15_stage2_conv0_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        64,
+        56,
+        56
+      ],
+      [
+        128,
+        64,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        128,
+        28,
+        28
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage2_batchnorm0_gamma",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        128
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage2_batchnorm0_beta",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        128
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage2_batchnorm0_running_mean",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        128
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage2_batchnorm0_running_var",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        128
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage2_batchnorm0_fwd",
+  "type": "BatchNorm",
+  "inputs": [
+    "resnetv15_stage2_conv0_fwd",
+    "resnetv15_stage2_batchnorm0_gamma",
+    "resnetv15_stage2_batchnorm0_beta",
+    "resnetv15_stage2_batchnorm0_running_mean",
+    "resnetv15_stage2_batchnorm0_running_var"
+  ],
+  "outputs": [
+    "resnetv15_stage2_batchnorm0_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        128,
+        28,
+        28
+      ],
+      [
+        128
+      ],
+      [
+        128
+      ],
+      [
+        128
+      ],
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        128,
+        28,
+        28
+      ],
+      [
+        128
+      ],
+      [
+        128
+      ],
+      [
+        128
+      ],
+      [
+        128
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage2_relu0_fwd",
+  "type": "Relu",
+  "inputs": [
+    "resnetv15_stage2_batchnorm0_fwd"
+  ],
+  "outputs": [
+    "resnetv15_stage2_relu0_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        128,
+        28,
+        28
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        128,
+        28,
+        28
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage2_conv1_weight",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128,
+        128,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        128,
+        128,
+        3,
+        3
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage2_conv1_fwd",
+  "type": "Conv",
+  "inputs": [
+    "resnetv15_stage2_relu0_fwd",
+    "resnetv15_stage2_conv1_weight"
+  ],
+  "outputs": [
+    "resnetv15_stage2_conv1_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        128,
+        28,
+        28
+      ],
+      [
+        128,
+        128,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        128,
+        28,
+        28
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage2_batchnorm1_gamma",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        128
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage2_batchnorm1_beta",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        128
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage2_batchnorm1_running_mean",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        128
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage2_batchnorm1_running_var",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        128
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage2_batchnorm1_fwd",
+  "type": "BatchNorm",
+  "inputs": [
+    "resnetv15_stage2_conv1_fwd",
+    "resnetv15_stage2_batchnorm1_gamma",
+    "resnetv15_stage2_batchnorm1_beta",
+    "resnetv15_stage2_batchnorm1_running_mean",
+    "resnetv15_stage2_batchnorm1_running_var"
+  ],
+  "outputs": [
+    "resnetv15_stage2_batchnorm1_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        128,
+        28,
+        28
+      ],
+      [
+        128
+      ],
+      [
+        128
+      ],
+      [
+        128
+      ],
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        128,
+        28,
+        28
+      ],
+      [
+        128
+      ],
+      [
+        128
+      ],
+      [
+        128
+      ],
+      [
+        128
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage2__plus0",
+  "type": "ElementWise",
+  "inputs": [
+    "resnetv15_stage2_batchnorm2_fwd",
+    "resnetv15_stage2_batchnorm1_fwd"
+  ],
+  "outputs": [
+    "resnetv15_stage2__plus0"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        128,
+        28,
+        28
+      ],
+      [
+        1,
+        128,
+        28,
+        28
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        128,
+        28,
+        28
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage2_activation0",
+  "type": "Relu",
+  "inputs": [
+    "resnetv15_stage2__plus0"
+  ],
+  "outputs": [
+    "resnetv15_stage2_activation0"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        128,
+        28,
+        28
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        128,
+        28,
+        28
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage2_conv3_weight",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128,
+        128,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        128,
+        128,
+        3,
+        3
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage2_conv3_fwd",
+  "type": "Conv",
+  "inputs": [
+    "resnetv15_stage2_activation0",
+    "resnetv15_stage2_conv3_weight"
+  ],
+  "outputs": [
+    "resnetv15_stage2_conv3_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        128,
+        28,
+        28
+      ],
+      [
+        128,
+        128,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        128,
+        28,
+        28
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage2_batchnorm3_gamma",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        128
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage2_batchnorm3_beta",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        128
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage2_batchnorm3_running_mean",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        128
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage2_batchnorm3_running_var",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        128
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage2_batchnorm3_fwd",
+  "type": "BatchNorm",
+  "inputs": [
+    "resnetv15_stage2_conv3_fwd",
+    "resnetv15_stage2_batchnorm3_gamma",
+    "resnetv15_stage2_batchnorm3_beta",
+    "resnetv15_stage2_batchnorm3_running_mean",
+    "resnetv15_stage2_batchnorm3_running_var"
+  ],
+  "outputs": [
+    "resnetv15_stage2_batchnorm3_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        128,
+        28,
+        28
+      ],
+      [
+        128
+      ],
+      [
+        128
+      ],
+      [
+        128
+      ],
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        128,
+        28,
+        28
+      ],
+      [
+        128
+      ],
+      [
+        128
+      ],
+      [
+        128
+      ],
+      [
+        128
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage2_relu1_fwd",
+  "type": "Relu",
+  "inputs": [
+    "resnetv15_stage2_batchnorm3_fwd"
+  ],
+  "outputs": [
+    "resnetv15_stage2_relu1_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        128,
+        28,
+        28
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        128,
+        28,
+        28
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage2_conv4_weight",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128,
+        128,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        128,
+        128,
+        3,
+        3
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage2_conv4_fwd",
+  "type": "Conv",
+  "inputs": [
+    "resnetv15_stage2_relu1_fwd",
+    "resnetv15_stage2_conv4_weight"
+  ],
+  "outputs": [
+    "resnetv15_stage2_conv4_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        128,
+        28,
+        28
+      ],
+      [
+        128,
+        128,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        128,
+        28,
+        28
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage2_batchnorm4_gamma",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        128
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage2_batchnorm4_beta",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        128
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage2_batchnorm4_running_mean",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        128
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage2_batchnorm4_running_var",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        128
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage2_batchnorm4_fwd",
+  "type": "BatchNorm",
+  "inputs": [
+    "resnetv15_stage2_conv4_fwd",
+    "resnetv15_stage2_batchnorm4_gamma",
+    "resnetv15_stage2_batchnorm4_beta",
+    "resnetv15_stage2_batchnorm4_running_mean",
+    "resnetv15_stage2_batchnorm4_running_var"
+  ],
+  "outputs": [
+    "resnetv15_stage2_batchnorm4_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        128,
+        28,
+        28
+      ],
+      [
+        128
+      ],
+      [
+        128
+      ],
+      [
+        128
+      ],
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        128,
+        28,
+        28
+      ],
+      [
+        128
+      ],
+      [
+        128
+      ],
+      [
+        128
+      ],
+      [
+        128
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage2__plus1",
+  "type": "ElementWise",
+  "inputs": [
+    "resnetv15_stage2_activation0",
+    "resnetv15_stage2_batchnorm4_fwd"
+  ],
+  "outputs": [
+    "resnetv15_stage2__plus1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        128,
+        28,
+        28
+      ],
+      [
+        1,
+        128,
+        28,
+        28
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        128,
+        28,
+        28
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage2_activation1",
+  "type": "Relu",
+  "inputs": [
+    "resnetv15_stage2__plus1"
+  ],
+  "outputs": [
+    "resnetv15_stage2_activation1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        128,
+        28,
+        28
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        128,
+        28,
+        28
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage3_conv2_weight",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256,
+        128,
+        1,
+        1
+      ]
+    ],
+    "output_shapes": [
+      [
+        256,
+        128,
+        1,
+        1
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage3_conv2_fwd",
+  "type": "Conv",
+  "inputs": [
+    "resnetv15_stage2_activation1",
+    "resnetv15_stage3_conv2_weight"
+  ],
+  "outputs": [
+    "resnetv15_stage3_conv2_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        128,
+        28,
+        28
+      ],
+      [
+        256,
+        128,
+        1,
+        1
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        256,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage3_batchnorm2_gamma",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        256
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage3_batchnorm2_beta",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        256
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage3_batchnorm2_running_mean",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        256
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage3_batchnorm2_running_var",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        256
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage3_batchnorm2_fwd",
+  "type": "BatchNorm",
+  "inputs": [
+    "resnetv15_stage3_conv2_fwd",
+    "resnetv15_stage3_batchnorm2_gamma",
+    "resnetv15_stage3_batchnorm2_beta",
+    "resnetv15_stage3_batchnorm2_running_mean",
+    "resnetv15_stage3_batchnorm2_running_var"
+  ],
+  "outputs": [
+    "resnetv15_stage3_batchnorm2_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        256,
+        14,
+        14
+      ],
+      [
+        256
+      ],
+      [
+        256
+      ],
+      [
+        256
+      ],
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        256,
+        14,
+        14
+      ],
+      [
+        256
+      ],
+      [
+        256
+      ],
+      [
+        256
+      ],
+      [
+        256
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage3_conv0_weight",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256,
+        128,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        256,
+        128,
+        3,
+        3
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage3_conv0_fwd",
+  "type": "Conv",
+  "inputs": [
+    "resnetv15_stage2_activation1",
+    "resnetv15_stage3_conv0_weight"
+  ],
+  "outputs": [
+    "resnetv15_stage3_conv0_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        128,
+        28,
+        28
+      ],
+      [
+        256,
+        128,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        256,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage3_batchnorm0_gamma",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        256
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage3_batchnorm0_beta",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        256
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage3_batchnorm0_running_mean",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        256
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage3_batchnorm0_running_var",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        256
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage3_batchnorm0_fwd",
+  "type": "BatchNorm",
+  "inputs": [
+    "resnetv15_stage3_conv0_fwd",
+    "resnetv15_stage3_batchnorm0_gamma",
+    "resnetv15_stage3_batchnorm0_beta",
+    "resnetv15_stage3_batchnorm0_running_mean",
+    "resnetv15_stage3_batchnorm0_running_var"
+  ],
+  "outputs": [
+    "resnetv15_stage3_batchnorm0_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        256,
+        14,
+        14
+      ],
+      [
+        256
+      ],
+      [
+        256
+      ],
+      [
+        256
+      ],
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        256,
+        14,
+        14
+      ],
+      [
+        256
+      ],
+      [
+        256
+      ],
+      [
+        256
+      ],
+      [
+        256
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage3_relu0_fwd",
+  "type": "Relu",
+  "inputs": [
+    "resnetv15_stage3_batchnorm0_fwd"
+  ],
+  "outputs": [
+    "resnetv15_stage3_relu0_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        256,
+        14,
+        14
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        256,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage3_conv1_weight",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256,
+        256,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        256,
+        256,
+        3,
+        3
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage3_conv1_fwd",
+  "type": "Conv",
+  "inputs": [
+    "resnetv15_stage3_relu0_fwd",
+    "resnetv15_stage3_conv1_weight"
+  ],
+  "outputs": [
+    "resnetv15_stage3_conv1_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        256,
+        14,
+        14
+      ],
+      [
+        256,
+        256,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        256,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage3_batchnorm1_gamma",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        256
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage3_batchnorm1_beta",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        256
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage3_batchnorm1_running_mean",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        256
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage3_batchnorm1_running_var",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        256
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage3_batchnorm1_fwd",
+  "type": "BatchNorm",
+  "inputs": [
+    "resnetv15_stage3_conv1_fwd",
+    "resnetv15_stage3_batchnorm1_gamma",
+    "resnetv15_stage3_batchnorm1_beta",
+    "resnetv15_stage3_batchnorm1_running_mean",
+    "resnetv15_stage3_batchnorm1_running_var"
+  ],
+  "outputs": [
+    "resnetv15_stage3_batchnorm1_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        256,
+        14,
+        14
+      ],
+      [
+        256
+      ],
+      [
+        256
+      ],
+      [
+        256
+      ],
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        256,
+        14,
+        14
+      ],
+      [
+        256
+      ],
+      [
+        256
+      ],
+      [
+        256
+      ],
+      [
+        256
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage3__plus0",
+  "type": "ElementWise",
+  "inputs": [
+    "resnetv15_stage3_batchnorm2_fwd",
+    "resnetv15_stage3_batchnorm1_fwd"
+  ],
+  "outputs": [
+    "resnetv15_stage3__plus0"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        256,
+        14,
+        14
+      ],
+      [
+        1,
+        256,
+        14,
+        14
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        256,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage3_activation0",
+  "type": "Relu",
+  "inputs": [
+    "resnetv15_stage3__plus0"
+  ],
+  "outputs": [
+    "resnetv15_stage3_activation0"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        256,
+        14,
+        14
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        256,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage3_conv3_weight",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256,
+        256,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        256,
+        256,
+        3,
+        3
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage3_conv3_fwd",
+  "type": "Conv",
+  "inputs": [
+    "resnetv15_stage3_activation0",
+    "resnetv15_stage3_conv3_weight"
+  ],
+  "outputs": [
+    "resnetv15_stage3_conv3_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        256,
+        14,
+        14
+      ],
+      [
+        256,
+        256,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        256,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage3_batchnorm3_gamma",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        256
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage3_batchnorm3_beta",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        256
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage3_batchnorm3_running_mean",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        256
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage3_batchnorm3_running_var",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        256
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage3_batchnorm3_fwd",
+  "type": "BatchNorm",
+  "inputs": [
+    "resnetv15_stage3_conv3_fwd",
+    "resnetv15_stage3_batchnorm3_gamma",
+    "resnetv15_stage3_batchnorm3_beta",
+    "resnetv15_stage3_batchnorm3_running_mean",
+    "resnetv15_stage3_batchnorm3_running_var"
+  ],
+  "outputs": [
+    "resnetv15_stage3_batchnorm3_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        256,
+        14,
+        14
+      ],
+      [
+        256
+      ],
+      [
+        256
+      ],
+      [
+        256
+      ],
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        256,
+        14,
+        14
+      ],
+      [
+        256
+      ],
+      [
+        256
+      ],
+      [
+        256
+      ],
+      [
+        256
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage3_relu1_fwd",
+  "type": "Relu",
+  "inputs": [
+    "resnetv15_stage3_batchnorm3_fwd"
+  ],
+  "outputs": [
+    "resnetv15_stage3_relu1_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        256,
+        14,
+        14
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        256,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage3_conv4_weight",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256,
+        256,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        256,
+        256,
+        3,
+        3
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage3_conv4_fwd",
+  "type": "Conv",
+  "inputs": [
+    "resnetv15_stage3_relu1_fwd",
+    "resnetv15_stage3_conv4_weight"
+  ],
+  "outputs": [
+    "resnetv15_stage3_conv4_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        256,
+        14,
+        14
+      ],
+      [
+        256,
+        256,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        256,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage3_batchnorm4_gamma",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        256
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage3_batchnorm4_beta",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        256
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage3_batchnorm4_running_mean",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        256
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage3_batchnorm4_running_var",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        256
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage3_batchnorm4_fwd",
+  "type": "BatchNorm",
+  "inputs": [
+    "resnetv15_stage3_conv4_fwd",
+    "resnetv15_stage3_batchnorm4_gamma",
+    "resnetv15_stage3_batchnorm4_beta",
+    "resnetv15_stage3_batchnorm4_running_mean",
+    "resnetv15_stage3_batchnorm4_running_var"
+  ],
+  "outputs": [
+    "resnetv15_stage3_batchnorm4_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        256,
+        14,
+        14
+      ],
+      [
+        256
+      ],
+      [
+        256
+      ],
+      [
+        256
+      ],
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        256,
+        14,
+        14
+      ],
+      [
+        256
+      ],
+      [
+        256
+      ],
+      [
+        256
+      ],
+      [
+        256
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage3__plus1",
+  "type": "ElementWise",
+  "inputs": [
+    "resnetv15_stage3_activation0",
+    "resnetv15_stage3_batchnorm4_fwd"
+  ],
+  "outputs": [
+    "resnetv15_stage3__plus1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        256,
+        14,
+        14
+      ],
+      [
+        1,
+        256,
+        14,
+        14
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        256,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage3_activation1",
+  "type": "Relu",
+  "inputs": [
+    "resnetv15_stage3__plus1"
+  ],
+  "outputs": [
+    "resnetv15_stage3_activation1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        256,
+        14,
+        14
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        256,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage4_conv2_weight",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512,
+        256,
+        1,
+        1
+      ]
+    ],
+    "output_shapes": [
+      [
+        512,
+        256,
+        1,
+        1
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage4_conv2_fwd",
+  "type": "Conv",
+  "inputs": [
+    "resnetv15_stage3_activation1",
+    "resnetv15_stage4_conv2_weight"
+  ],
+  "outputs": [
+    "resnetv15_stage4_conv2_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        256,
+        14,
+        14
+      ],
+      [
+        512,
+        256,
+        1,
+        1
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        512,
+        7,
+        7
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage4_batchnorm2_gamma",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage4_batchnorm2_beta",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage4_batchnorm2_running_mean",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage4_batchnorm2_running_var",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage4_batchnorm2_fwd",
+  "type": "BatchNorm",
+  "inputs": [
+    "resnetv15_stage4_conv2_fwd",
+    "resnetv15_stage4_batchnorm2_gamma",
+    "resnetv15_stage4_batchnorm2_beta",
+    "resnetv15_stage4_batchnorm2_running_mean",
+    "resnetv15_stage4_batchnorm2_running_var"
+  ],
+  "outputs": [
+    "resnetv15_stage4_batchnorm2_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        512,
+        7,
+        7
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        512,
+        7,
+        7
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage4_conv0_weight",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512,
+        256,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        512,
+        256,
+        3,
+        3
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage4_conv0_fwd",
+  "type": "Conv",
+  "inputs": [
+    "resnetv15_stage3_activation1",
+    "resnetv15_stage4_conv0_weight"
+  ],
+  "outputs": [
+    "resnetv15_stage4_conv0_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        256,
+        14,
+        14
+      ],
+      [
+        512,
+        256,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        512,
+        7,
+        7
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage4_batchnorm0_gamma",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage4_batchnorm0_beta",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage4_batchnorm0_running_mean",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage4_batchnorm0_running_var",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage4_batchnorm0_fwd",
+  "type": "BatchNorm",
+  "inputs": [
+    "resnetv15_stage4_conv0_fwd",
+    "resnetv15_stage4_batchnorm0_gamma",
+    "resnetv15_stage4_batchnorm0_beta",
+    "resnetv15_stage4_batchnorm0_running_mean",
+    "resnetv15_stage4_batchnorm0_running_var"
+  ],
+  "outputs": [
+    "resnetv15_stage4_batchnorm0_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        512,
+        7,
+        7
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        512,
+        7,
+        7
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage4_relu0_fwd",
+  "type": "Relu",
+  "inputs": [
+    "resnetv15_stage4_batchnorm0_fwd"
+  ],
+  "outputs": [
+    "resnetv15_stage4_relu0_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        512,
+        7,
+        7
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        512,
+        7,
+        7
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage4_conv1_weight",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512,
+        512,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        512,
+        512,
+        3,
+        3
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage4_conv1_fwd",
+  "type": "Conv",
+  "inputs": [
+    "resnetv15_stage4_relu0_fwd",
+    "resnetv15_stage4_conv1_weight"
+  ],
+  "outputs": [
+    "resnetv15_stage4_conv1_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        512,
+        7,
+        7
+      ],
+      [
+        512,
+        512,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        512,
+        7,
+        7
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage4_batchnorm1_gamma",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage4_batchnorm1_beta",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage4_batchnorm1_running_mean",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage4_batchnorm1_running_var",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage4_batchnorm1_fwd",
+  "type": "BatchNorm",
+  "inputs": [
+    "resnetv15_stage4_conv1_fwd",
+    "resnetv15_stage4_batchnorm1_gamma",
+    "resnetv15_stage4_batchnorm1_beta",
+    "resnetv15_stage4_batchnorm1_running_mean",
+    "resnetv15_stage4_batchnorm1_running_var"
+  ],
+  "outputs": [
+    "resnetv15_stage4_batchnorm1_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        512,
+        7,
+        7
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        512,
+        7,
+        7
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage4__plus0",
+  "type": "ElementWise",
+  "inputs": [
+    "resnetv15_stage4_batchnorm2_fwd",
+    "resnetv15_stage4_batchnorm1_fwd"
+  ],
+  "outputs": [
+    "resnetv15_stage4__plus0"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        512,
+        7,
+        7
+      ],
+      [
+        1,
+        512,
+        7,
+        7
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        512,
+        7,
+        7
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage4_activation0",
+  "type": "Relu",
+  "inputs": [
+    "resnetv15_stage4__plus0"
+  ],
+  "outputs": [
+    "resnetv15_stage4_activation0"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        512,
+        7,
+        7
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        512,
+        7,
+        7
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage4_conv3_weight",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512,
+        512,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        512,
+        512,
+        3,
+        3
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage4_conv3_fwd",
+  "type": "Conv",
+  "inputs": [
+    "resnetv15_stage4_activation0",
+    "resnetv15_stage4_conv3_weight"
+  ],
+  "outputs": [
+    "resnetv15_stage4_conv3_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        512,
+        7,
+        7
+      ],
+      [
+        512,
+        512,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        512,
+        7,
+        7
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage4_batchnorm3_gamma",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage4_batchnorm3_beta",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage4_batchnorm3_running_mean",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage4_batchnorm3_running_var",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage4_batchnorm3_fwd",
+  "type": "BatchNorm",
+  "inputs": [
+    "resnetv15_stage4_conv3_fwd",
+    "resnetv15_stage4_batchnorm3_gamma",
+    "resnetv15_stage4_batchnorm3_beta",
+    "resnetv15_stage4_batchnorm3_running_mean",
+    "resnetv15_stage4_batchnorm3_running_var"
+  ],
+  "outputs": [
+    "resnetv15_stage4_batchnorm3_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        512,
+        7,
+        7
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        512,
+        7,
+        7
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage4_relu1_fwd",
+  "type": "Relu",
+  "inputs": [
+    "resnetv15_stage4_batchnorm3_fwd"
+  ],
+  "outputs": [
+    "resnetv15_stage4_relu1_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        512,
+        7,
+        7
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        512,
+        7,
+        7
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage4_conv4_weight",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512,
+        512,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        512,
+        512,
+        3,
+        3
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage4_conv4_fwd",
+  "type": "Conv",
+  "inputs": [
+    "resnetv15_stage4_relu1_fwd",
+    "resnetv15_stage4_conv4_weight"
+  ],
+  "outputs": [
+    "resnetv15_stage4_conv4_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        512,
+        7,
+        7
+      ],
+      [
+        512,
+        512,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        512,
+        7,
+        7
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage4_batchnorm4_gamma",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage4_batchnorm4_beta",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage4_batchnorm4_running_mean",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage4_batchnorm4_running_var",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage4_batchnorm4_fwd",
+  "type": "BatchNorm",
+  "inputs": [
+    "resnetv15_stage4_conv4_fwd",
+    "resnetv15_stage4_batchnorm4_gamma",
+    "resnetv15_stage4_batchnorm4_beta",
+    "resnetv15_stage4_batchnorm4_running_mean",
+    "resnetv15_stage4_batchnorm4_running_var"
+  ],
+  "outputs": [
+    "resnetv15_stage4_batchnorm4_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        512,
+        7,
+        7
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        512,
+        7,
+        7
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage4__plus1",
+  "type": "ElementWise",
+  "inputs": [
+    "resnetv15_stage4_activation0",
+    "resnetv15_stage4_batchnorm4_fwd"
+  ],
+  "outputs": [
+    "resnetv15_stage4__plus1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        512,
+        7,
+        7
+      ],
+      [
+        1,
+        512,
+        7,
+        7
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        512,
+        7,
+        7
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_stage4_activation1",
+  "type": "Relu",
+  "inputs": [
+    "resnetv15_stage4__plus1"
+  ],
+  "outputs": [
+    "resnetv15_stage4_activation1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        512,
+        7,
+        7
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        512,
+        7,
+        7
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_pool1_fwd",
+  "type": "GlobalPooling",
+  "inputs": [
+    "resnetv15_stage4_activation1"
+  ],
+  "outputs": [
+    "resnetv15_pool1_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        512,
+        7,
+        7
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        512,
+        1,
+        1
+      ]
+    ]
+  }
+},
+{
+  "name": "flatten_170",
+  "type": "Flatten",
+  "inputs": [
+    "resnetv15_pool1_fwd"
+  ],
+  "outputs": [
+    "flatten_170"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        512,
+        1,
+        1
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        512,
+        1,
+        1
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_dense0_weight",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1000,
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        1000,
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_dense0_bias",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1000
+      ]
+    ],
+    "output_shapes": [
+      [
+        1000
+      ]
+    ]
+  }
+},
+{
+  "name": "resnetv15_dense0_fwd",
+  "type": "Gemm",
+  "inputs": [
+    "flatten_170",
+    "resnetv15_dense0_weight",
+    "resnetv15_dense0_bias"
+  ],
+  "outputs": [
+    "resnetv15_dense0_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        512,
+        1,
+        1
+      ],
+      [
+        1000,
+        512
+      ],
+      [
+        1000
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        1000
+      ]
+    ]
+  }
+}]

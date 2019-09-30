@@ -1,262 +1,7094 @@
-[{"name":"data_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[1,3,224,224]],"output_shapes":[[1,3,224,224]]}},
-{"name":"conv1/7x7_s2_w_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[64,3,7,7]],"output_shapes":[[64,3,7,7]]}},
-{"name":"conv1/7x7_s2_b_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[64]],"output_shapes":[[64]]}},
-{"name":"conv_1","type":"Conv","inputs":["data_0","conv1/7x7_s2_w_0","conv1/7x7_s2_b_0"],"outputs":["conv1/7x7_s2_1"],"input_dimensions":{"input_shapes":[[1,3,224,224],[64,3,7,7],[64]],"output_shapes":[[1,64,112,112]]}},
-{"name":"relu_1","type":"Relu","inputs":["conv1/7x7_s2_1"],"outputs":["conv1/7x7_s2_2"],"input_dimensions":{"input_shapes":[[1,64,112,112]],"output_shapes":[[1,64,112,112]]}},
-{"name":"maxpool_1","type":"Pooling","inputs":["conv1/7x7_s2_2"],"outputs":["pool1/3x3_s2_1"],"input_dimensions":{"input_shapes":[[1,64,112,112]],"output_shapes":[[1,64,56,56]]}},
-{"name":"lrn_1","type":"LRN","inputs":["pool1/3x3_s2_1"],"outputs":["pool1/norm1_1"],"input_dimensions":{"input_shapes":[[1,64,56,56]],"output_shapes":[[1,64,56,56]]}},
-{"name":"conv2/3x3_reduce_w_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[64,64,1,1]],"output_shapes":[[64,64,1,1]]}},
-{"name":"conv2/3x3_reduce_b_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[64]],"output_shapes":[[64]]}},
-{"name":"conv_2","type":"Conv","inputs":["pool1/norm1_1","conv2/3x3_reduce_w_0","conv2/3x3_reduce_b_0"],"outputs":["conv2/3x3_reduce_1"],"input_dimensions":{"input_shapes":[[1,64,56,56],[64,64,1,1],[64]],"output_shapes":[[1,64,56,56]]}},
-{"name":"relu_2","type":"Relu","inputs":["conv2/3x3_reduce_1"],"outputs":["conv2/3x3_reduce_2"],"input_dimensions":{"input_shapes":[[1,64,56,56]],"output_shapes":[[1,64,56,56]]}},
-{"name":"conv2/3x3_w_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[192,64,3,3]],"output_shapes":[[192,64,3,3]]}},
-{"name":"conv2/3x3_b_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[192]],"output_shapes":[[192]]}},
-{"name":"conv_3","type":"Conv","inputs":["conv2/3x3_reduce_2","conv2/3x3_w_0","conv2/3x3_b_0"],"outputs":["conv2/3x3_1"],"input_dimensions":{"input_shapes":[[1,64,56,56],[192,64,3,3],[192]],"output_shapes":[[1,192,56,56]]}},
-{"name":"relu_3","type":"Relu","inputs":["conv2/3x3_1"],"outputs":["conv2/3x3_2"],"input_dimensions":{"input_shapes":[[1,192,56,56]],"output_shapes":[[1,192,56,56]]}},
-{"name":"lrn_2","type":"LRN","inputs":["conv2/3x3_2"],"outputs":["conv2/norm2_1"],"input_dimensions":{"input_shapes":[[1,192,56,56]],"output_shapes":[[1,192,56,56]]}},
-{"name":"maxpool_2","type":"Pooling","inputs":["conv2/norm2_1"],"outputs":["pool2/3x3_s2_1"],"input_dimensions":{"input_shapes":[[1,192,56,56]],"output_shapes":[[1,192,28,28]]}},
-{"name":"inception_3a/1x1_w_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[64,192,1,1]],"output_shapes":[[64,192,1,1]]}},
-{"name":"inception_3a/1x1_b_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[64]],"output_shapes":[[64]]}},
-{"name":"conv_4","type":"Conv","inputs":["pool2/3x3_s2_1","inception_3a/1x1_w_0","inception_3a/1x1_b_0"],"outputs":["inception_3a/1x1_1"],"input_dimensions":{"input_shapes":[[1,192,28,28],[64,192,1,1],[64]],"output_shapes":[[1,64,28,28]]}},
-{"name":"relu_4","type":"Relu","inputs":["inception_3a/1x1_1"],"outputs":["inception_3a/1x1_2"],"input_dimensions":{"input_shapes":[[1,64,28,28]],"output_shapes":[[1,64,28,28]]}},
-{"name":"inception_3a/3x3_reduce_w_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[96,192,1,1]],"output_shapes":[[96,192,1,1]]}},
-{"name":"inception_3a/3x3_reduce_b_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[96]],"output_shapes":[[96]]}},
-{"name":"conv_5","type":"Conv","inputs":["pool2/3x3_s2_1","inception_3a/3x3_reduce_w_0","inception_3a/3x3_reduce_b_0"],"outputs":["inception_3a/3x3_reduce_1"],"input_dimensions":{"input_shapes":[[1,192,28,28],[96,192,1,1],[96]],"output_shapes":[[1,96,28,28]]}},
-{"name":"relu_5","type":"Relu","inputs":["inception_3a/3x3_reduce_1"],"outputs":["inception_3a/3x3_reduce_2"],"input_dimensions":{"input_shapes":[[1,96,28,28]],"output_shapes":[[1,96,28,28]]}},
-{"name":"inception_3a/3x3_w_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[128,96,3,3]],"output_shapes":[[128,96,3,3]]}},
-{"name":"inception_3a/3x3_b_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[128]],"output_shapes":[[128]]}},
-{"name":"conv_6","type":"Conv","inputs":["inception_3a/3x3_reduce_2","inception_3a/3x3_w_0","inception_3a/3x3_b_0"],"outputs":["inception_3a/3x3_1"],"input_dimensions":{"input_shapes":[[1,96,28,28],[128,96,3,3],[128]],"output_shapes":[[1,128,28,28]]}},
-{"name":"relu_6","type":"Relu","inputs":["inception_3a/3x3_1"],"outputs":["inception_3a/3x3_2"],"input_dimensions":{"input_shapes":[[1,128,28,28]],"output_shapes":[[1,128,28,28]]}},
-{"name":"inception_3a/5x5_reduce_w_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[16,192,1,1]],"output_shapes":[[16,192,1,1]]}},
-{"name":"inception_3a/5x5_reduce_b_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[16]],"output_shapes":[[16]]}},
-{"name":"conv_7","type":"Conv","inputs":["pool2/3x3_s2_1","inception_3a/5x5_reduce_w_0","inception_3a/5x5_reduce_b_0"],"outputs":["inception_3a/5x5_reduce_1"],"input_dimensions":{"input_shapes":[[1,192,28,28],[16,192,1,1],[16]],"output_shapes":[[1,16,28,28]]}},
-{"name":"relu_7","type":"Relu","inputs":["inception_3a/5x5_reduce_1"],"outputs":["inception_3a/5x5_reduce_2"],"input_dimensions":{"input_shapes":[[1,16,28,28]],"output_shapes":[[1,16,28,28]]}},
-{"name":"inception_3a/5x5_w_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[32,16,5,5]],"output_shapes":[[32,16,5,5]]}},
-{"name":"inception_3a/5x5_b_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[32]],"output_shapes":[[32]]}},
-{"name":"conv_8","type":"Conv","inputs":["inception_3a/5x5_reduce_2","inception_3a/5x5_w_0","inception_3a/5x5_b_0"],"outputs":["inception_3a/5x5_1"],"input_dimensions":{"input_shapes":[[1,16,28,28],[32,16,5,5],[32]],"output_shapes":[[1,32,28,28]]}},
-{"name":"relu_8","type":"Relu","inputs":["inception_3a/5x5_1"],"outputs":["inception_3a/5x5_2"],"input_dimensions":{"input_shapes":[[1,32,28,28]],"output_shapes":[[1,32,28,28]]}},
-{"name":"maxpool_3","type":"Pooling","inputs":["pool2/3x3_s2_1"],"outputs":["inception_3a/pool_1"],"input_dimensions":{"input_shapes":[[1,192,28,28]],"output_shapes":[[1,192,28,28]]}},
-{"name":"inception_3a/pool_proj_w_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[32,192,1,1]],"output_shapes":[[32,192,1,1]]}},
-{"name":"inception_3a/pool_proj_b_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[32]],"output_shapes":[[32]]}},
-{"name":"conv_9","type":"Conv","inputs":["inception_3a/pool_1","inception_3a/pool_proj_w_0","inception_3a/pool_proj_b_0"],"outputs":["inception_3a/pool_proj_1"],"input_dimensions":{"input_shapes":[[1,192,28,28],[32,192,1,1],[32]],"output_shapes":[[1,32,28,28]]}},
-{"name":"relu_9","type":"Relu","inputs":["inception_3a/pool_proj_1"],"outputs":["inception_3a/pool_proj_2"],"input_dimensions":{"input_shapes":[[1,32,28,28]],"output_shapes":[[1,32,28,28]]}},
-{"name":"concat_1","type":"Concat","inputs":["inception_3a/1x1_2","inception_3a/3x3_2","inception_3a/5x5_2","inception_3a/pool_proj_2"],"outputs":["inception_3a/output_1"],"input_dimensions":{"input_shapes":[[1,64,28,28],[1,128,28,28],[1,32,28,28],[1,32,28,28]],"output_shapes":[[1,256,28,28]]}},
-{"name":"inception_3b/1x1_w_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[128,256,1,1]],"output_shapes":[[128,256,1,1]]}},
-{"name":"inception_3b/1x1_b_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[128]],"output_shapes":[[128]]}},
-{"name":"conv_10","type":"Conv","inputs":["inception_3a/output_1","inception_3b/1x1_w_0","inception_3b/1x1_b_0"],"outputs":["inception_3b/1x1_1"],"input_dimensions":{"input_shapes":[[1,256,28,28],[128,256,1,1],[128]],"output_shapes":[[1,128,28,28]]}},
-{"name":"relu_10","type":"Relu","inputs":["inception_3b/1x1_1"],"outputs":["inception_3b/1x1_2"],"input_dimensions":{"input_shapes":[[1,128,28,28]],"output_shapes":[[1,128,28,28]]}},
-{"name":"inception_3b/3x3_reduce_w_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[128,256,1,1]],"output_shapes":[[128,256,1,1]]}},
-{"name":"inception_3b/3x3_reduce_b_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[128]],"output_shapes":[[128]]}},
-{"name":"conv_11","type":"Conv","inputs":["inception_3a/output_1","inception_3b/3x3_reduce_w_0","inception_3b/3x3_reduce_b_0"],"outputs":["inception_3b/3x3_reduce_1"],"input_dimensions":{"input_shapes":[[1,256,28,28],[128,256,1,1],[128]],"output_shapes":[[1,128,28,28]]}},
-{"name":"relu_11","type":"Relu","inputs":["inception_3b/3x3_reduce_1"],"outputs":["inception_3b/3x3_reduce_2"],"input_dimensions":{"input_shapes":[[1,128,28,28]],"output_shapes":[[1,128,28,28]]}},
-{"name":"inception_3b/3x3_w_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[192,128,3,3]],"output_shapes":[[192,128,3,3]]}},
-{"name":"inception_3b/3x3_b_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[192]],"output_shapes":[[192]]}},
-{"name":"conv_12","type":"Conv","inputs":["inception_3b/3x3_reduce_2","inception_3b/3x3_w_0","inception_3b/3x3_b_0"],"outputs":["inception_3b/3x3_1"],"input_dimensions":{"input_shapes":[[1,128,28,28],[192,128,3,3],[192]],"output_shapes":[[1,192,28,28]]}},
-{"name":"relu_12","type":"Relu","inputs":["inception_3b/3x3_1"],"outputs":["inception_3b/3x3_2"],"input_dimensions":{"input_shapes":[[1,192,28,28]],"output_shapes":[[1,192,28,28]]}},
-{"name":"inception_3b/5x5_reduce_w_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[32,256,1,1]],"output_shapes":[[32,256,1,1]]}},
-{"name":"inception_3b/5x5_reduce_b_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[32]],"output_shapes":[[32]]}},
-{"name":"conv_13","type":"Conv","inputs":["inception_3a/output_1","inception_3b/5x5_reduce_w_0","inception_3b/5x5_reduce_b_0"],"outputs":["inception_3b/5x5_reduce_1"],"input_dimensions":{"input_shapes":[[1,256,28,28],[32,256,1,1],[32]],"output_shapes":[[1,32,28,28]]}},
-{"name":"relu_13","type":"Relu","inputs":["inception_3b/5x5_reduce_1"],"outputs":["inception_3b/5x5_reduce_2"],"input_dimensions":{"input_shapes":[[1,32,28,28]],"output_shapes":[[1,32,28,28]]}},
-{"name":"inception_3b/5x5_w_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[96,32,5,5]],"output_shapes":[[96,32,5,5]]}},
-{"name":"inception_3b/5x5_b_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[96]],"output_shapes":[[96]]}},
-{"name":"conv_14","type":"Conv","inputs":["inception_3b/5x5_reduce_2","inception_3b/5x5_w_0","inception_3b/5x5_b_0"],"outputs":["inception_3b/5x5_1"],"input_dimensions":{"input_shapes":[[1,32,28,28],[96,32,5,5],[96]],"output_shapes":[[1,96,28,28]]}},
-{"name":"relu_14","type":"Relu","inputs":["inception_3b/5x5_1"],"outputs":["inception_3b/5x5_2"],"input_dimensions":{"input_shapes":[[1,96,28,28]],"output_shapes":[[1,96,28,28]]}},
-{"name":"maxpool_4","type":"Pooling","inputs":["inception_3a/output_1"],"outputs":["inception_3b/pool_1"],"input_dimensions":{"input_shapes":[[1,256,28,28]],"output_shapes":[[1,256,28,28]]}},
-{"name":"inception_3b/pool_proj_w_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[64,256,1,1]],"output_shapes":[[64,256,1,1]]}},
-{"name":"inception_3b/pool_proj_b_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[64]],"output_shapes":[[64]]}},
-{"name":"conv_15","type":"Conv","inputs":["inception_3b/pool_1","inception_3b/pool_proj_w_0","inception_3b/pool_proj_b_0"],"outputs":["inception_3b/pool_proj_1"],"input_dimensions":{"input_shapes":[[1,256,28,28],[64,256,1,1],[64]],"output_shapes":[[1,64,28,28]]}},
-{"name":"relu_15","type":"Relu","inputs":["inception_3b/pool_proj_1"],"outputs":["inception_3b/pool_proj_2"],"input_dimensions":{"input_shapes":[[1,64,28,28]],"output_shapes":[[1,64,28,28]]}},
-{"name":"concat_2","type":"Concat","inputs":["inception_3b/1x1_2","inception_3b/3x3_2","inception_3b/5x5_2","inception_3b/pool_proj_2"],"outputs":["inception_3b/output_1"],"input_dimensions":{"input_shapes":[[1,128,28,28],[1,192,28,28],[1,96,28,28],[1,64,28,28]],"output_shapes":[[1,480,28,28]]}},
-{"name":"maxpool_5","type":"Pooling","inputs":["inception_3b/output_1"],"outputs":["pool3/3x3_s2_1"],"input_dimensions":{"input_shapes":[[1,480,28,28]],"output_shapes":[[1,480,14,14]]}},
-{"name":"inception_4a/1x1_w_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[192,480,1,1]],"output_shapes":[[192,480,1,1]]}},
-{"name":"inception_4a/1x1_b_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[192]],"output_shapes":[[192]]}},
-{"name":"conv_16","type":"Conv","inputs":["pool3/3x3_s2_1","inception_4a/1x1_w_0","inception_4a/1x1_b_0"],"outputs":["inception_4a/1x1_1"],"input_dimensions":{"input_shapes":[[1,480,14,14],[192,480,1,1],[192]],"output_shapes":[[1,192,14,14]]}},
-{"name":"relu_16","type":"Relu","inputs":["inception_4a/1x1_1"],"outputs":["inception_4a/1x1_2"],"input_dimensions":{"input_shapes":[[1,192,14,14]],"output_shapes":[[1,192,14,14]]}},
-{"name":"inception_4a/3x3_reduce_w_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[96,480,1,1]],"output_shapes":[[96,480,1,1]]}},
-{"name":"inception_4a/3x3_reduce_b_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[96]],"output_shapes":[[96]]}},
-{"name":"conv_17","type":"Conv","inputs":["pool3/3x3_s2_1","inception_4a/3x3_reduce_w_0","inception_4a/3x3_reduce_b_0"],"outputs":["inception_4a/3x3_reduce_1"],"input_dimensions":{"input_shapes":[[1,480,14,14],[96,480,1,1],[96]],"output_shapes":[[1,96,14,14]]}},
-{"name":"relu_17","type":"Relu","inputs":["inception_4a/3x3_reduce_1"],"outputs":["inception_4a/3x3_reduce_2"],"input_dimensions":{"input_shapes":[[1,96,14,14]],"output_shapes":[[1,96,14,14]]}},
-{"name":"inception_4a/3x3_w_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[208,96,3,3]],"output_shapes":[[208,96,3,3]]}},
-{"name":"inception_4a/3x3_b_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[208]],"output_shapes":[[208]]}},
-{"name":"conv_18","type":"Conv","inputs":["inception_4a/3x3_reduce_2","inception_4a/3x3_w_0","inception_4a/3x3_b_0"],"outputs":["inception_4a/3x3_1"],"input_dimensions":{"input_shapes":[[1,96,14,14],[208,96,3,3],[208]],"output_shapes":[[1,208,14,14]]}},
-{"name":"relu_18","type":"Relu","inputs":["inception_4a/3x3_1"],"outputs":["inception_4a/3x3_2"],"input_dimensions":{"input_shapes":[[1,208,14,14]],"output_shapes":[[1,208,14,14]]}},
-{"name":"inception_4a/5x5_reduce_w_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[16,480,1,1]],"output_shapes":[[16,480,1,1]]}},
-{"name":"inception_4a/5x5_reduce_b_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[16]],"output_shapes":[[16]]}},
-{"name":"conv_19","type":"Conv","inputs":["pool3/3x3_s2_1","inception_4a/5x5_reduce_w_0","inception_4a/5x5_reduce_b_0"],"outputs":["inception_4a/5x5_reduce_1"],"input_dimensions":{"input_shapes":[[1,480,14,14],[16,480,1,1],[16]],"output_shapes":[[1,16,14,14]]}},
-{"name":"relu_19","type":"Relu","inputs":["inception_4a/5x5_reduce_1"],"outputs":["inception_4a/5x5_reduce_2"],"input_dimensions":{"input_shapes":[[1,16,14,14]],"output_shapes":[[1,16,14,14]]}},
-{"name":"inception_4a/5x5_w_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[48,16,5,5]],"output_shapes":[[48,16,5,5]]}},
-{"name":"inception_4a/5x5_b_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[48]],"output_shapes":[[48]]}},
-{"name":"conv_20","type":"Conv","inputs":["inception_4a/5x5_reduce_2","inception_4a/5x5_w_0","inception_4a/5x5_b_0"],"outputs":["inception_4a/5x5_1"],"input_dimensions":{"input_shapes":[[1,16,14,14],[48,16,5,5],[48]],"output_shapes":[[1,48,14,14]]}},
-{"name":"relu_20","type":"Relu","inputs":["inception_4a/5x5_1"],"outputs":["inception_4a/5x5_2"],"input_dimensions":{"input_shapes":[[1,48,14,14]],"output_shapes":[[1,48,14,14]]}},
-{"name":"maxpool_6","type":"Pooling","inputs":["pool3/3x3_s2_1"],"outputs":["inception_4a/pool_1"],"input_dimensions":{"input_shapes":[[1,480,14,14]],"output_shapes":[[1,480,14,14]]}},
-{"name":"inception_4a/pool_proj_w_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[64,480,1,1]],"output_shapes":[[64,480,1,1]]}},
-{"name":"inception_4a/pool_proj_b_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[64]],"output_shapes":[[64]]}},
-{"name":"conv_21","type":"Conv","inputs":["inception_4a/pool_1","inception_4a/pool_proj_w_0","inception_4a/pool_proj_b_0"],"outputs":["inception_4a/pool_proj_1"],"input_dimensions":{"input_shapes":[[1,480,14,14],[64,480,1,1],[64]],"output_shapes":[[1,64,14,14]]}},
-{"name":"relu_21","type":"Relu","inputs":["inception_4a/pool_proj_1"],"outputs":["inception_4a/pool_proj_2"],"input_dimensions":{"input_shapes":[[1,64,14,14]],"output_shapes":[[1,64,14,14]]}},
-{"name":"concat_3","type":"Concat","inputs":["inception_4a/1x1_2","inception_4a/3x3_2","inception_4a/5x5_2","inception_4a/pool_proj_2"],"outputs":["inception_4a/output_1"],"input_dimensions":{"input_shapes":[[1,192,14,14],[1,208,14,14],[1,48,14,14],[1,64,14,14]],"output_shapes":[[1,512,14,14]]}},
-{"name":"inception_4b/1x1_w_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[160,512,1,1]],"output_shapes":[[160,512,1,1]]}},
-{"name":"inception_4b/1x1_b_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[160]],"output_shapes":[[160]]}},
-{"name":"conv_22","type":"Conv","inputs":["inception_4a/output_1","inception_4b/1x1_w_0","inception_4b/1x1_b_0"],"outputs":["inception_4b/1x1_1"],"input_dimensions":{"input_shapes":[[1,512,14,14],[160,512,1,1],[160]],"output_shapes":[[1,160,14,14]]}},
-{"name":"relu_22","type":"Relu","inputs":["inception_4b/1x1_1"],"outputs":["inception_4b/1x1_2"],"input_dimensions":{"input_shapes":[[1,160,14,14]],"output_shapes":[[1,160,14,14]]}},
-{"name":"inception_4b/3x3_reduce_w_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[112,512,1,1]],"output_shapes":[[112,512,1,1]]}},
-{"name":"inception_4b/3x3_reduce_b_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[112]],"output_shapes":[[112]]}},
-{"name":"conv_23","type":"Conv","inputs":["inception_4a/output_1","inception_4b/3x3_reduce_w_0","inception_4b/3x3_reduce_b_0"],"outputs":["inception_4b/3x3_reduce_1"],"input_dimensions":{"input_shapes":[[1,512,14,14],[112,512,1,1],[112]],"output_shapes":[[1,112,14,14]]}},
-{"name":"relu_23","type":"Relu","inputs":["inception_4b/3x3_reduce_1"],"outputs":["inception_4b/3x3_reduce_2"],"input_dimensions":{"input_shapes":[[1,112,14,14]],"output_shapes":[[1,112,14,14]]}},
-{"name":"inception_4b/3x3_w_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[224,112,3,3]],"output_shapes":[[224,112,3,3]]}},
-{"name":"inception_4b/3x3_b_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[224]],"output_shapes":[[224]]}},
-{"name":"conv_24","type":"Conv","inputs":["inception_4b/3x3_reduce_2","inception_4b/3x3_w_0","inception_4b/3x3_b_0"],"outputs":["inception_4b/3x3_1"],"input_dimensions":{"input_shapes":[[1,112,14,14],[224,112,3,3],[224]],"output_shapes":[[1,224,14,14]]}},
-{"name":"relu_24","type":"Relu","inputs":["inception_4b/3x3_1"],"outputs":["inception_4b/3x3_2"],"input_dimensions":{"input_shapes":[[1,224,14,14]],"output_shapes":[[1,224,14,14]]}},
-{"name":"inception_4b/5x5_reduce_w_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[24,512,1,1]],"output_shapes":[[24,512,1,1]]}},
-{"name":"inception_4b/5x5_reduce_b_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[24]],"output_shapes":[[24]]}},
-{"name":"conv_25","type":"Conv","inputs":["inception_4a/output_1","inception_4b/5x5_reduce_w_0","inception_4b/5x5_reduce_b_0"],"outputs":["inception_4b/5x5_reduce_1"],"input_dimensions":{"input_shapes":[[1,512,14,14],[24,512,1,1],[24]],"output_shapes":[[1,24,14,14]]}},
-{"name":"relu_25","type":"Relu","inputs":["inception_4b/5x5_reduce_1"],"outputs":["inception_4b/5x5_reduce_2"],"input_dimensions":{"input_shapes":[[1,24,14,14]],"output_shapes":[[1,24,14,14]]}},
-{"name":"inception_4b/5x5_w_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[64,24,5,5]],"output_shapes":[[64,24,5,5]]}},
-{"name":"inception_4b/5x5_b_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[64]],"output_shapes":[[64]]}},
-{"name":"conv_26","type":"Conv","inputs":["inception_4b/5x5_reduce_2","inception_4b/5x5_w_0","inception_4b/5x5_b_0"],"outputs":["inception_4b/5x5_1"],"input_dimensions":{"input_shapes":[[1,24,14,14],[64,24,5,5],[64]],"output_shapes":[[1,64,14,14]]}},
-{"name":"relu_26","type":"Relu","inputs":["inception_4b/5x5_1"],"outputs":["inception_4b/5x5_2"],"input_dimensions":{"input_shapes":[[1,64,14,14]],"output_shapes":[[1,64,14,14]]}},
-{"name":"maxpool_7","type":"Pooling","inputs":["inception_4a/output_1"],"outputs":["inception_4b/pool_1"],"input_dimensions":{"input_shapes":[[1,512,14,14]],"output_shapes":[[1,512,14,14]]}},
-{"name":"inception_4b/pool_proj_w_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[64,512,1,1]],"output_shapes":[[64,512,1,1]]}},
-{"name":"inception_4b/pool_proj_b_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[64]],"output_shapes":[[64]]}},
-{"name":"conv_27","type":"Conv","inputs":["inception_4b/pool_1","inception_4b/pool_proj_w_0","inception_4b/pool_proj_b_0"],"outputs":["inception_4b/pool_proj_1"],"input_dimensions":{"input_shapes":[[1,512,14,14],[64,512,1,1],[64]],"output_shapes":[[1,64,14,14]]}},
-{"name":"relu_27","type":"Relu","inputs":["inception_4b/pool_proj_1"],"outputs":["inception_4b/pool_proj_2"],"input_dimensions":{"input_shapes":[[1,64,14,14]],"output_shapes":[[1,64,14,14]]}},
-{"name":"concat_4","type":"Concat","inputs":["inception_4b/1x1_2","inception_4b/3x3_2","inception_4b/5x5_2","inception_4b/pool_proj_2"],"outputs":["inception_4b/output_1"],"input_dimensions":{"input_shapes":[[1,160,14,14],[1,224,14,14],[1,64,14,14],[1,64,14,14]],"output_shapes":[[1,512,14,14]]}},
-{"name":"inception_4c/1x1_w_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[128,512,1,1]],"output_shapes":[[128,512,1,1]]}},
-{"name":"inception_4c/1x1_b_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[128]],"output_shapes":[[128]]}},
-{"name":"conv_28","type":"Conv","inputs":["inception_4b/output_1","inception_4c/1x1_w_0","inception_4c/1x1_b_0"],"outputs":["inception_4c/1x1_1"],"input_dimensions":{"input_shapes":[[1,512,14,14],[128,512,1,1],[128]],"output_shapes":[[1,128,14,14]]}},
-{"name":"relu_28","type":"Relu","inputs":["inception_4c/1x1_1"],"outputs":["inception_4c/1x1_2"],"input_dimensions":{"input_shapes":[[1,128,14,14]],"output_shapes":[[1,128,14,14]]}},
-{"name":"inception_4c/3x3_reduce_w_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[128,512,1,1]],"output_shapes":[[128,512,1,1]]}},
-{"name":"inception_4c/3x3_reduce_b_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[128]],"output_shapes":[[128]]}},
-{"name":"conv_29","type":"Conv","inputs":["inception_4b/output_1","inception_4c/3x3_reduce_w_0","inception_4c/3x3_reduce_b_0"],"outputs":["inception_4c/3x3_reduce_1"],"input_dimensions":{"input_shapes":[[1,512,14,14],[128,512,1,1],[128]],"output_shapes":[[1,128,14,14]]}},
-{"name":"relu_29","type":"Relu","inputs":["inception_4c/3x3_reduce_1"],"outputs":["inception_4c/3x3_reduce_2"],"input_dimensions":{"input_shapes":[[1,128,14,14]],"output_shapes":[[1,128,14,14]]}},
-{"name":"inception_4c/3x3_w_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[256,128,3,3]],"output_shapes":[[256,128,3,3]]}},
-{"name":"inception_4c/3x3_b_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[256]],"output_shapes":[[256]]}},
-{"name":"conv_30","type":"Conv","inputs":["inception_4c/3x3_reduce_2","inception_4c/3x3_w_0","inception_4c/3x3_b_0"],"outputs":["inception_4c/3x3_1"],"input_dimensions":{"input_shapes":[[1,128,14,14],[256,128,3,3],[256]],"output_shapes":[[1,256,14,14]]}},
-{"name":"relu_30","type":"Relu","inputs":["inception_4c/3x3_1"],"outputs":["inception_4c/3x3_2"],"input_dimensions":{"input_shapes":[[1,256,14,14]],"output_shapes":[[1,256,14,14]]}},
-{"name":"inception_4c/5x5_reduce_w_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[24,512,1,1]],"output_shapes":[[24,512,1,1]]}},
-{"name":"inception_4c/5x5_reduce_b_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[24]],"output_shapes":[[24]]}},
-{"name":"conv_31","type":"Conv","inputs":["inception_4b/output_1","inception_4c/5x5_reduce_w_0","inception_4c/5x5_reduce_b_0"],"outputs":["inception_4c/5x5_reduce_1"],"input_dimensions":{"input_shapes":[[1,512,14,14],[24,512,1,1],[24]],"output_shapes":[[1,24,14,14]]}},
-{"name":"relu_31","type":"Relu","inputs":["inception_4c/5x5_reduce_1"],"outputs":["inception_4c/5x5_reduce_2"],"input_dimensions":{"input_shapes":[[1,24,14,14]],"output_shapes":[[1,24,14,14]]}},
-{"name":"inception_4c/5x5_w_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[64,24,5,5]],"output_shapes":[[64,24,5,5]]}},
-{"name":"inception_4c/5x5_b_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[64]],"output_shapes":[[64]]}},
-{"name":"conv_32","type":"Conv","inputs":["inception_4c/5x5_reduce_2","inception_4c/5x5_w_0","inception_4c/5x5_b_0"],"outputs":["inception_4c/5x5_1"],"input_dimensions":{"input_shapes":[[1,24,14,14],[64,24,5,5],[64]],"output_shapes":[[1,64,14,14]]}},
-{"name":"relu_32","type":"Relu","inputs":["inception_4c/5x5_1"],"outputs":["inception_4c/5x5_2"],"input_dimensions":{"input_shapes":[[1,64,14,14]],"output_shapes":[[1,64,14,14]]}},
-{"name":"maxpool_8","type":"Pooling","inputs":["inception_4b/output_1"],"outputs":["inception_4c/pool_1"],"input_dimensions":{"input_shapes":[[1,512,14,14]],"output_shapes":[[1,512,14,14]]}},
-{"name":"inception_4c/pool_proj_w_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[64,512,1,1]],"output_shapes":[[64,512,1,1]]}},
-{"name":"inception_4c/pool_proj_b_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[64]],"output_shapes":[[64]]}},
-{"name":"conv_33","type":"Conv","inputs":["inception_4c/pool_1","inception_4c/pool_proj_w_0","inception_4c/pool_proj_b_0"],"outputs":["inception_4c/pool_proj_1"],"input_dimensions":{"input_shapes":[[1,512,14,14],[64,512,1,1],[64]],"output_shapes":[[1,64,14,14]]}},
-{"name":"relu_33","type":"Relu","inputs":["inception_4c/pool_proj_1"],"outputs":["inception_4c/pool_proj_2"],"input_dimensions":{"input_shapes":[[1,64,14,14]],"output_shapes":[[1,64,14,14]]}},
-{"name":"concat_5","type":"Concat","inputs":["inception_4c/1x1_2","inception_4c/3x3_2","inception_4c/5x5_2","inception_4c/pool_proj_2"],"outputs":["inception_4c/output_1"],"input_dimensions":{"input_shapes":[[1,128,14,14],[1,256,14,14],[1,64,14,14],[1,64,14,14]],"output_shapes":[[1,512,14,14]]}},
-{"name":"inception_4d/1x1_w_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[112,512,1,1]],"output_shapes":[[112,512,1,1]]}},
-{"name":"inception_4d/1x1_b_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[112]],"output_shapes":[[112]]}},
-{"name":"conv_34","type":"Conv","inputs":["inception_4c/output_1","inception_4d/1x1_w_0","inception_4d/1x1_b_0"],"outputs":["inception_4d/1x1_1"],"input_dimensions":{"input_shapes":[[1,512,14,14],[112,512,1,1],[112]],"output_shapes":[[1,112,14,14]]}},
-{"name":"relu_34","type":"Relu","inputs":["inception_4d/1x1_1"],"outputs":["inception_4d/1x1_2"],"input_dimensions":{"input_shapes":[[1,112,14,14]],"output_shapes":[[1,112,14,14]]}},
-{"name":"inception_4d/3x3_reduce_w_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[144,512,1,1]],"output_shapes":[[144,512,1,1]]}},
-{"name":"inception_4d/3x3_reduce_b_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[144]],"output_shapes":[[144]]}},
-{"name":"conv_35","type":"Conv","inputs":["inception_4c/output_1","inception_4d/3x3_reduce_w_0","inception_4d/3x3_reduce_b_0"],"outputs":["inception_4d/3x3_reduce_1"],"input_dimensions":{"input_shapes":[[1,512,14,14],[144,512,1,1],[144]],"output_shapes":[[1,144,14,14]]}},
-{"name":"relu_35","type":"Relu","inputs":["inception_4d/3x3_reduce_1"],"outputs":["inception_4d/3x3_reduce_2"],"input_dimensions":{"input_shapes":[[1,144,14,14]],"output_shapes":[[1,144,14,14]]}},
-{"name":"inception_4d/3x3_w_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[288,144,3,3]],"output_shapes":[[288,144,3,3]]}},
-{"name":"inception_4d/3x3_b_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[288]],"output_shapes":[[288]]}},
-{"name":"conv_36","type":"Conv","inputs":["inception_4d/3x3_reduce_2","inception_4d/3x3_w_0","inception_4d/3x3_b_0"],"outputs":["inception_4d/3x3_1"],"input_dimensions":{"input_shapes":[[1,144,14,14],[288,144,3,3],[288]],"output_shapes":[[1,288,14,14]]}},
-{"name":"relu_36","type":"Relu","inputs":["inception_4d/3x3_1"],"outputs":["inception_4d/3x3_2"],"input_dimensions":{"input_shapes":[[1,288,14,14]],"output_shapes":[[1,288,14,14]]}},
-{"name":"inception_4d/5x5_reduce_w_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[32,512,1,1]],"output_shapes":[[32,512,1,1]]}},
-{"name":"inception_4d/5x5_reduce_b_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[32]],"output_shapes":[[32]]}},
-{"name":"conv_37","type":"Conv","inputs":["inception_4c/output_1","inception_4d/5x5_reduce_w_0","inception_4d/5x5_reduce_b_0"],"outputs":["inception_4d/5x5_reduce_1"],"input_dimensions":{"input_shapes":[[1,512,14,14],[32,512,1,1],[32]],"output_shapes":[[1,32,14,14]]}},
-{"name":"relu_37","type":"Relu","inputs":["inception_4d/5x5_reduce_1"],"outputs":["inception_4d/5x5_reduce_2"],"input_dimensions":{"input_shapes":[[1,32,14,14]],"output_shapes":[[1,32,14,14]]}},
-{"name":"inception_4d/5x5_w_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[64,32,5,5]],"output_shapes":[[64,32,5,5]]}},
-{"name":"inception_4d/5x5_b_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[64]],"output_shapes":[[64]]}},
-{"name":"conv_38","type":"Conv","inputs":["inception_4d/5x5_reduce_2","inception_4d/5x5_w_0","inception_4d/5x5_b_0"],"outputs":["inception_4d/5x5_1"],"input_dimensions":{"input_shapes":[[1,32,14,14],[64,32,5,5],[64]],"output_shapes":[[1,64,14,14]]}},
-{"name":"relu_38","type":"Relu","inputs":["inception_4d/5x5_1"],"outputs":["inception_4d/5x5_2"],"input_dimensions":{"input_shapes":[[1,64,14,14]],"output_shapes":[[1,64,14,14]]}},
-{"name":"maxpool_9","type":"Pooling","inputs":["inception_4c/output_1"],"outputs":["inception_4d/pool_1"],"input_dimensions":{"input_shapes":[[1,512,14,14]],"output_shapes":[[1,512,14,14]]}},
-{"name":"inception_4d/pool_proj_w_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[64,512,1,1]],"output_shapes":[[64,512,1,1]]}},
-{"name":"inception_4d/pool_proj_b_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[64]],"output_shapes":[[64]]}},
-{"name":"conv_39","type":"Conv","inputs":["inception_4d/pool_1","inception_4d/pool_proj_w_0","inception_4d/pool_proj_b_0"],"outputs":["inception_4d/pool_proj_1"],"input_dimensions":{"input_shapes":[[1,512,14,14],[64,512,1,1],[64]],"output_shapes":[[1,64,14,14]]}},
-{"name":"relu_39","type":"Relu","inputs":["inception_4d/pool_proj_1"],"outputs":["inception_4d/pool_proj_2"],"input_dimensions":{"input_shapes":[[1,64,14,14]],"output_shapes":[[1,64,14,14]]}},
-{"name":"concat_6","type":"Concat","inputs":["inception_4d/1x1_2","inception_4d/3x3_2","inception_4d/5x5_2","inception_4d/pool_proj_2"],"outputs":["inception_4d/output_1"],"input_dimensions":{"input_shapes":[[1,112,14,14],[1,288,14,14],[1,64,14,14],[1,64,14,14]],"output_shapes":[[1,528,14,14]]}},
-{"name":"inception_4e/1x1_w_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[256,528,1,1]],"output_shapes":[[256,528,1,1]]}},
-{"name":"inception_4e/1x1_b_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[256]],"output_shapes":[[256]]}},
-{"name":"conv_40","type":"Conv","inputs":["inception_4d/output_1","inception_4e/1x1_w_0","inception_4e/1x1_b_0"],"outputs":["inception_4e/1x1_1"],"input_dimensions":{"input_shapes":[[1,528,14,14],[256,528,1,1],[256]],"output_shapes":[[1,256,14,14]]}},
-{"name":"relu_40","type":"Relu","inputs":["inception_4e/1x1_1"],"outputs":["inception_4e/1x1_2"],"input_dimensions":{"input_shapes":[[1,256,14,14]],"output_shapes":[[1,256,14,14]]}},
-{"name":"inception_4e/3x3_reduce_w_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[160,528,1,1]],"output_shapes":[[160,528,1,1]]}},
-{"name":"inception_4e/3x3_reduce_b_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[160]],"output_shapes":[[160]]}},
-{"name":"conv_41","type":"Conv","inputs":["inception_4d/output_1","inception_4e/3x3_reduce_w_0","inception_4e/3x3_reduce_b_0"],"outputs":["inception_4e/3x3_reduce_1"],"input_dimensions":{"input_shapes":[[1,528,14,14],[160,528,1,1],[160]],"output_shapes":[[1,160,14,14]]}},
-{"name":"relu_41","type":"Relu","inputs":["inception_4e/3x3_reduce_1"],"outputs":["inception_4e/3x3_reduce_2"],"input_dimensions":{"input_shapes":[[1,160,14,14]],"output_shapes":[[1,160,14,14]]}},
-{"name":"inception_4e/3x3_w_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[320,160,3,3]],"output_shapes":[[320,160,3,3]]}},
-{"name":"inception_4e/3x3_b_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[320]],"output_shapes":[[320]]}},
-{"name":"conv_42","type":"Conv","inputs":["inception_4e/3x3_reduce_2","inception_4e/3x3_w_0","inception_4e/3x3_b_0"],"outputs":["inception_4e/3x3_1"],"input_dimensions":{"input_shapes":[[1,160,14,14],[320,160,3,3],[320]],"output_shapes":[[1,320,14,14]]}},
-{"name":"relu_42","type":"Relu","inputs":["inception_4e/3x3_1"],"outputs":["inception_4e/3x3_2"],"input_dimensions":{"input_shapes":[[1,320,14,14]],"output_shapes":[[1,320,14,14]]}},
-{"name":"inception_4e/5x5_reduce_w_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[32,528,1,1]],"output_shapes":[[32,528,1,1]]}},
-{"name":"inception_4e/5x5_reduce_b_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[32]],"output_shapes":[[32]]}},
-{"name":"conv_43","type":"Conv","inputs":["inception_4d/output_1","inception_4e/5x5_reduce_w_0","inception_4e/5x5_reduce_b_0"],"outputs":["inception_4e/5x5_reduce_1"],"input_dimensions":{"input_shapes":[[1,528,14,14],[32,528,1,1],[32]],"output_shapes":[[1,32,14,14]]}},
-{"name":"relu_43","type":"Relu","inputs":["inception_4e/5x5_reduce_1"],"outputs":["inception_4e/5x5_reduce_2"],"input_dimensions":{"input_shapes":[[1,32,14,14]],"output_shapes":[[1,32,14,14]]}},
-{"name":"inception_4e/5x5_w_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[128,32,5,5]],"output_shapes":[[128,32,5,5]]}},
-{"name":"inception_4e/5x5_b_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[128]],"output_shapes":[[128]]}},
-{"name":"conv_44","type":"Conv","inputs":["inception_4e/5x5_reduce_2","inception_4e/5x5_w_0","inception_4e/5x5_b_0"],"outputs":["inception_4e/5x5_1"],"input_dimensions":{"input_shapes":[[1,32,14,14],[128,32,5,5],[128]],"output_shapes":[[1,128,14,14]]}},
-{"name":"relu_44","type":"Relu","inputs":["inception_4e/5x5_1"],"outputs":["inception_4e/5x5_2"],"input_dimensions":{"input_shapes":[[1,128,14,14]],"output_shapes":[[1,128,14,14]]}},
-{"name":"maxpool_10","type":"Pooling","inputs":["inception_4d/output_1"],"outputs":["inception_4e/pool_1"],"input_dimensions":{"input_shapes":[[1,528,14,14]],"output_shapes":[[1,528,14,14]]}},
-{"name":"inception_4e/pool_proj_w_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[128,528,1,1]],"output_shapes":[[128,528,1,1]]}},
-{"name":"inception_4e/pool_proj_b_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[128]],"output_shapes":[[128]]}},
-{"name":"conv_45","type":"Conv","inputs":["inception_4e/pool_1","inception_4e/pool_proj_w_0","inception_4e/pool_proj_b_0"],"outputs":["inception_4e/pool_proj_1"],"input_dimensions":{"input_shapes":[[1,528,14,14],[128,528,1,1],[128]],"output_shapes":[[1,128,14,14]]}},
-{"name":"relu_45","type":"Relu","inputs":["inception_4e/pool_proj_1"],"outputs":["inception_4e/pool_proj_2"],"input_dimensions":{"input_shapes":[[1,128,14,14]],"output_shapes":[[1,128,14,14]]}},
-{"name":"concat_7","type":"Concat","inputs":["inception_4e/1x1_2","inception_4e/3x3_2","inception_4e/5x5_2","inception_4e/pool_proj_2"],"outputs":["inception_4e/output_1"],"input_dimensions":{"input_shapes":[[1,256,14,14],[1,320,14,14],[1,128,14,14],[1,128,14,14]],"output_shapes":[[1,832,14,14]]}},
-{"name":"maxpool_11","type":"Pooling","inputs":["inception_4e/output_1"],"outputs":["pool4/3x3_s2_1"],"input_dimensions":{"input_shapes":[[1,832,14,14]],"output_shapes":[[1,832,7,7]]}},
-{"name":"inception_5a/1x1_w_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[256,832,1,1]],"output_shapes":[[256,832,1,1]]}},
-{"name":"inception_5a/1x1_b_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[256]],"output_shapes":[[256]]}},
-{"name":"conv_46","type":"Conv","inputs":["pool4/3x3_s2_1","inception_5a/1x1_w_0","inception_5a/1x1_b_0"],"outputs":["inception_5a/1x1_1"],"input_dimensions":{"input_shapes":[[1,832,7,7],[256,832,1,1],[256]],"output_shapes":[[1,256,7,7]]}},
-{"name":"relu_46","type":"Relu","inputs":["inception_5a/1x1_1"],"outputs":["inception_5a/1x1_2"],"input_dimensions":{"input_shapes":[[1,256,7,7]],"output_shapes":[[1,256,7,7]]}},
-{"name":"inception_5a/3x3_reduce_w_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[160,832,1,1]],"output_shapes":[[160,832,1,1]]}},
-{"name":"inception_5a/3x3_reduce_b_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[160]],"output_shapes":[[160]]}},
-{"name":"conv_47","type":"Conv","inputs":["pool4/3x3_s2_1","inception_5a/3x3_reduce_w_0","inception_5a/3x3_reduce_b_0"],"outputs":["inception_5a/3x3_reduce_1"],"input_dimensions":{"input_shapes":[[1,832,7,7],[160,832,1,1],[160]],"output_shapes":[[1,160,7,7]]}},
-{"name":"relu_47","type":"Relu","inputs":["inception_5a/3x3_reduce_1"],"outputs":["inception_5a/3x3_reduce_2"],"input_dimensions":{"input_shapes":[[1,160,7,7]],"output_shapes":[[1,160,7,7]]}},
-{"name":"inception_5a/3x3_w_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[320,160,3,3]],"output_shapes":[[320,160,3,3]]}},
-{"name":"inception_5a/3x3_b_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[320]],"output_shapes":[[320]]}},
-{"name":"conv_48","type":"Conv","inputs":["inception_5a/3x3_reduce_2","inception_5a/3x3_w_0","inception_5a/3x3_b_0"],"outputs":["inception_5a/3x3_1"],"input_dimensions":{"input_shapes":[[1,160,7,7],[320,160,3,3],[320]],"output_shapes":[[1,320,7,7]]}},
-{"name":"relu_48","type":"Relu","inputs":["inception_5a/3x3_1"],"outputs":["inception_5a/3x3_2"],"input_dimensions":{"input_shapes":[[1,320,7,7]],"output_shapes":[[1,320,7,7]]}},
-{"name":"inception_5a/5x5_reduce_w_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[32,832,1,1]],"output_shapes":[[32,832,1,1]]}},
-{"name":"inception_5a/5x5_reduce_b_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[32]],"output_shapes":[[32]]}},
-{"name":"conv_49","type":"Conv","inputs":["pool4/3x3_s2_1","inception_5a/5x5_reduce_w_0","inception_5a/5x5_reduce_b_0"],"outputs":["inception_5a/5x5_reduce_1"],"input_dimensions":{"input_shapes":[[1,832,7,7],[32,832,1,1],[32]],"output_shapes":[[1,32,7,7]]}},
-{"name":"relu_49","type":"Relu","inputs":["inception_5a/5x5_reduce_1"],"outputs":["inception_5a/5x5_reduce_2"],"input_dimensions":{"input_shapes":[[1,32,7,7]],"output_shapes":[[1,32,7,7]]}},
-{"name":"inception_5a/5x5_w_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[128,32,5,5]],"output_shapes":[[128,32,5,5]]}},
-{"name":"inception_5a/5x5_b_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[128]],"output_shapes":[[128]]}},
-{"name":"conv_50","type":"Conv","inputs":["inception_5a/5x5_reduce_2","inception_5a/5x5_w_0","inception_5a/5x5_b_0"],"outputs":["inception_5a/5x5_1"],"input_dimensions":{"input_shapes":[[1,32,7,7],[128,32,5,5],[128]],"output_shapes":[[1,128,7,7]]}},
-{"name":"relu_50","type":"Relu","inputs":["inception_5a/5x5_1"],"outputs":["inception_5a/5x5_2"],"input_dimensions":{"input_shapes":[[1,128,7,7]],"output_shapes":[[1,128,7,7]]}},
-{"name":"maxpool_12","type":"Pooling","inputs":["pool4/3x3_s2_1"],"outputs":["inception_5a/pool_1"],"input_dimensions":{"input_shapes":[[1,832,7,7]],"output_shapes":[[1,832,7,7]]}},
-{"name":"inception_5a/pool_proj_w_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[128,832,1,1]],"output_shapes":[[128,832,1,1]]}},
-{"name":"inception_5a/pool_proj_b_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[128]],"output_shapes":[[128]]}},
-{"name":"conv_51","type":"Conv","inputs":["inception_5a/pool_1","inception_5a/pool_proj_w_0","inception_5a/pool_proj_b_0"],"outputs":["inception_5a/pool_proj_1"],"input_dimensions":{"input_shapes":[[1,832,7,7],[128,832,1,1],[128]],"output_shapes":[[1,128,7,7]]}},
-{"name":"relu_51","type":"Relu","inputs":["inception_5a/pool_proj_1"],"outputs":["inception_5a/pool_proj_2"],"input_dimensions":{"input_shapes":[[1,128,7,7]],"output_shapes":[[1,128,7,7]]}},
-{"name":"concat_8","type":"Concat","inputs":["inception_5a/1x1_2","inception_5a/3x3_2","inception_5a/5x5_2","inception_5a/pool_proj_2"],"outputs":["inception_5a/output_1"],"input_dimensions":{"input_shapes":[[1,256,7,7],[1,320,7,7],[1,128,7,7],[1,128,7,7]],"output_shapes":[[1,832,7,7]]}},
-{"name":"inception_5b/1x1_w_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[384,832,1,1]],"output_shapes":[[384,832,1,1]]}},
-{"name":"inception_5b/1x1_b_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[384]],"output_shapes":[[384]]}},
-{"name":"conv_52","type":"Conv","inputs":["inception_5a/output_1","inception_5b/1x1_w_0","inception_5b/1x1_b_0"],"outputs":["inception_5b/1x1_1"],"input_dimensions":{"input_shapes":[[1,832,7,7],[384,832,1,1],[384]],"output_shapes":[[1,384,7,7]]}},
-{"name":"relu_52","type":"Relu","inputs":["inception_5b/1x1_1"],"outputs":["inception_5b/1x1_2"],"input_dimensions":{"input_shapes":[[1,384,7,7]],"output_shapes":[[1,384,7,7]]}},
-{"name":"inception_5b/3x3_reduce_w_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[192,832,1,1]],"output_shapes":[[192,832,1,1]]}},
-{"name":"inception_5b/3x3_reduce_b_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[192]],"output_shapes":[[192]]}},
-{"name":"conv_53","type":"Conv","inputs":["inception_5a/output_1","inception_5b/3x3_reduce_w_0","inception_5b/3x3_reduce_b_0"],"outputs":["inception_5b/3x3_reduce_1"],"input_dimensions":{"input_shapes":[[1,832,7,7],[192,832,1,1],[192]],"output_shapes":[[1,192,7,7]]}},
-{"name":"relu_53","type":"Relu","inputs":["inception_5b/3x3_reduce_1"],"outputs":["inception_5b/3x3_reduce_2"],"input_dimensions":{"input_shapes":[[1,192,7,7]],"output_shapes":[[1,192,7,7]]}},
-{"name":"inception_5b/3x3_w_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[384,192,3,3]],"output_shapes":[[384,192,3,3]]}},
-{"name":"inception_5b/3x3_b_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[384]],"output_shapes":[[384]]}},
-{"name":"conv_54","type":"Conv","inputs":["inception_5b/3x3_reduce_2","inception_5b/3x3_w_0","inception_5b/3x3_b_0"],"outputs":["inception_5b/3x3_1"],"input_dimensions":{"input_shapes":[[1,192,7,7],[384,192,3,3],[384]],"output_shapes":[[1,384,7,7]]}},
-{"name":"relu_54","type":"Relu","inputs":["inception_5b/3x3_1"],"outputs":["inception_5b/3x3_2"],"input_dimensions":{"input_shapes":[[1,384,7,7]],"output_shapes":[[1,384,7,7]]}},
-{"name":"inception_5b/5x5_reduce_w_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[48,832,1,1]],"output_shapes":[[48,832,1,1]]}},
-{"name":"inception_5b/5x5_reduce_b_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[48]],"output_shapes":[[48]]}},
-{"name":"conv_55","type":"Conv","inputs":["inception_5a/output_1","inception_5b/5x5_reduce_w_0","inception_5b/5x5_reduce_b_0"],"outputs":["inception_5b/5x5_reduce_1"],"input_dimensions":{"input_shapes":[[1,832,7,7],[48,832,1,1],[48]],"output_shapes":[[1,48,7,7]]}},
-{"name":"relu_55","type":"Relu","inputs":["inception_5b/5x5_reduce_1"],"outputs":["inception_5b/5x5_reduce_2"],"input_dimensions":{"input_shapes":[[1,48,7,7]],"output_shapes":[[1,48,7,7]]}},
-{"name":"inception_5b/5x5_w_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[128,48,5,5]],"output_shapes":[[128,48,5,5]]}},
-{"name":"inception_5b/5x5_b_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[128]],"output_shapes":[[128]]}},
-{"name":"conv_56","type":"Conv","inputs":["inception_5b/5x5_reduce_2","inception_5b/5x5_w_0","inception_5b/5x5_b_0"],"outputs":["inception_5b/5x5_1"],"input_dimensions":{"input_shapes":[[1,48,7,7],[128,48,5,5],[128]],"output_shapes":[[1,128,7,7]]}},
-{"name":"relu_56","type":"Relu","inputs":["inception_5b/5x5_1"],"outputs":["inception_5b/5x5_2"],"input_dimensions":{"input_shapes":[[1,128,7,7]],"output_shapes":[[1,128,7,7]]}},
-{"name":"maxpool_13","type":"Pooling","inputs":["inception_5a/output_1"],"outputs":["inception_5b/pool_1"],"input_dimensions":{"input_shapes":[[1,832,7,7]],"output_shapes":[[1,832,7,7]]}},
-{"name":"inception_5b/pool_proj_w_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[128,832,1,1]],"output_shapes":[[128,832,1,1]]}},
-{"name":"inception_5b/pool_proj_b_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[128]],"output_shapes":[[128]]}},
-{"name":"conv_57","type":"Conv","inputs":["inception_5b/pool_1","inception_5b/pool_proj_w_0","inception_5b/pool_proj_b_0"],"outputs":["inception_5b/pool_proj_1"],"input_dimensions":{"input_shapes":[[1,832,7,7],[128,832,1,1],[128]],"output_shapes":[[1,128,7,7]]}},
-{"name":"relu_57","type":"Relu","inputs":["inception_5b/pool_proj_1"],"outputs":["inception_5b/pool_proj_2"],"input_dimensions":{"input_shapes":[[1,128,7,7]],"output_shapes":[[1,128,7,7]]}},
-{"name":"concat_9","type":"Concat","inputs":["inception_5b/1x1_2","inception_5b/3x3_2","inception_5b/5x5_2","inception_5b/pool_proj_2"],"outputs":["inception_5b/output_1"],"input_dimensions":{"input_shapes":[[1,384,7,7],[1,384,7,7],[1,128,7,7],[1,128,7,7]],"output_shapes":[[1,1024,7,7]]}},
-{"name":"averagepool_1","type":"Pooling","inputs":["inception_5b/output_1"],"outputs":["pool5/7x7_s1_1"],"input_dimensions":{"input_shapes":[[1,1024,7,7]],"output_shapes":[[1,1024,1,1]]}},
-{"name":"dropout_1","type":"Dropout","inputs":["pool5/7x7_s1_1"],"outputs":["pool5/7x7_s1_2","_pool5/7x7_s1_mask_1"],"input_dimensions":{"input_shapes":[[1,1024,1,1]],"output_shapes":[[1,1024,1,1]]}},
-{"name":"dropout_1","type":"Dropout","inputs":["pool5/7x7_s1_1"],"outputs":["pool5/7x7_s1_2","_pool5/7x7_s1_mask_1"],"input_dimensions":{"input_shapes":[[1,1024,1,1]],"output_shapes":[[1,1024,1,1]]}},
-{"name":"OC2_DUMMY_1","type":"ConstantInput","input_dimensions":{"input_shapes":[[1,1024]],"output_shapes":[[1,1024]]}},
-{"name":"reshape_1","type":"Reshape","inputs":["pool5/7x7_s1_2","OC2_DUMMY_1"],"outputs":["OC2_DUMMY_0"],"input_dimensions":{"input_shapes":[[1,1024,1,1],[1,1024]],"output_shapes":[[1,1024]]}},
-{"name":"loss3/classifier_w_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[1000,1024]],"output_shapes":[[1000,1024]]}},
-{"name":"loss3/classifier_b_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[1000]],"output_shapes":[[1000]]}},
-{"name":"gemm_1","type":"Gemm","inputs":["OC2_DUMMY_0","loss3/classifier_w_0","loss3/classifier_b_0"],"outputs":["loss3/classifier_1"],"input_dimensions":{"input_shapes":[[1,1024],[1000,1024],[1000]],"output_shapes":[[1,1000]]}},
-{"name":"softmax_1","type":"Softmax","inputs":["loss3/classifier_1"],"outputs":["prob_1"],"input_dimensions":{"input_shapes":[[1,1000]],"output_shapes":[[1,1000]]}}]
+[{
+  "name": "data_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        3,
+        224,
+        224
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        3,
+        224,
+        224
+      ]
+    ]
+  }
+},
+{
+  "name": "conv1/7x7_s2_w_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64,
+        3,
+        7,
+        7
+      ]
+    ],
+    "output_shapes": [
+      [
+        64,
+        3,
+        7,
+        7
+      ]
+    ]
+  }
+},
+{
+  "name": "conv1/7x7_s2_b_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        64
+      ]
+    ]
+  }
+},
+{
+  "name": "conv_1",
+  "type": "Conv",
+  "inputs": [
+    "data_0",
+    "conv1/7x7_s2_w_0",
+    "conv1/7x7_s2_b_0"
+  ],
+  "outputs": [
+    "conv1/7x7_s2_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        3,
+        224,
+        224
+      ],
+      [
+        64,
+        3,
+        7,
+        7
+      ],
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        64,
+        112,
+        112
+      ]
+    ]
+  }
+},
+{
+  "name": "relu_1",
+  "type": "Relu",
+  "inputs": [
+    "conv1/7x7_s2_1"
+  ],
+  "outputs": [
+    "conv1/7x7_s2_2"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        64,
+        112,
+        112
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        64,
+        112,
+        112
+      ]
+    ]
+  }
+},
+{
+  "name": "maxpool_1",
+  "type": "Pooling",
+  "inputs": [
+    "conv1/7x7_s2_2"
+  ],
+  "outputs": [
+    "pool1/3x3_s2_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        64,
+        112,
+        112
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        64,
+        56,
+        56
+      ]
+    ]
+  }
+},
+{
+  "name": "lrn_1",
+  "type": "LRN",
+  "inputs": [
+    "pool1/3x3_s2_1"
+  ],
+  "outputs": [
+    "pool1/norm1_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        64,
+        56,
+        56
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        64,
+        56,
+        56
+      ]
+    ]
+  }
+},
+{
+  "name": "conv2/3x3_reduce_w_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64,
+        64,
+        1,
+        1
+      ]
+    ],
+    "output_shapes": [
+      [
+        64,
+        64,
+        1,
+        1
+      ]
+    ]
+  }
+},
+{
+  "name": "conv2/3x3_reduce_b_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        64
+      ]
+    ]
+  }
+},
+{
+  "name": "conv_2",
+  "type": "Conv",
+  "inputs": [
+    "pool1/norm1_1",
+    "conv2/3x3_reduce_w_0",
+    "conv2/3x3_reduce_b_0"
+  ],
+  "outputs": [
+    "conv2/3x3_reduce_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        64,
+        56,
+        56
+      ],
+      [
+        64,
+        64,
+        1,
+        1
+      ],
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        64,
+        56,
+        56
+      ]
+    ]
+  }
+},
+{
+  "name": "relu_2",
+  "type": "Relu",
+  "inputs": [
+    "conv2/3x3_reduce_1"
+  ],
+  "outputs": [
+    "conv2/3x3_reduce_2"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        64,
+        56,
+        56
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        64,
+        56,
+        56
+      ]
+    ]
+  }
+},
+{
+  "name": "conv2/3x3_w_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        192,
+        64,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        192,
+        64,
+        3,
+        3
+      ]
+    ]
+  }
+},
+{
+  "name": "conv2/3x3_b_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        192
+      ]
+    ],
+    "output_shapes": [
+      [
+        192
+      ]
+    ]
+  }
+},
+{
+  "name": "conv_3",
+  "type": "Conv",
+  "inputs": [
+    "conv2/3x3_reduce_2",
+    "conv2/3x3_w_0",
+    "conv2/3x3_b_0"
+  ],
+  "outputs": [
+    "conv2/3x3_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        64,
+        56,
+        56
+      ],
+      [
+        192,
+        64,
+        3,
+        3
+      ],
+      [
+        192
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        192,
+        56,
+        56
+      ]
+    ]
+  }
+},
+{
+  "name": "relu_3",
+  "type": "Relu",
+  "inputs": [
+    "conv2/3x3_1"
+  ],
+  "outputs": [
+    "conv2/3x3_2"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        192,
+        56,
+        56
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        192,
+        56,
+        56
+      ]
+    ]
+  }
+},
+{
+  "name": "lrn_2",
+  "type": "LRN",
+  "inputs": [
+    "conv2/3x3_2"
+  ],
+  "outputs": [
+    "conv2/norm2_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        192,
+        56,
+        56
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        192,
+        56,
+        56
+      ]
+    ]
+  }
+},
+{
+  "name": "maxpool_2",
+  "type": "Pooling",
+  "inputs": [
+    "conv2/norm2_1"
+  ],
+  "outputs": [
+    "pool2/3x3_s2_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        192,
+        56,
+        56
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        192,
+        28,
+        28
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_3a/1x1_w_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64,
+        192,
+        1,
+        1
+      ]
+    ],
+    "output_shapes": [
+      [
+        64,
+        192,
+        1,
+        1
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_3a/1x1_b_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        64
+      ]
+    ]
+  }
+},
+{
+  "name": "conv_4",
+  "type": "Conv",
+  "inputs": [
+    "pool2/3x3_s2_1",
+    "inception_3a/1x1_w_0",
+    "inception_3a/1x1_b_0"
+  ],
+  "outputs": [
+    "inception_3a/1x1_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        192,
+        28,
+        28
+      ],
+      [
+        64,
+        192,
+        1,
+        1
+      ],
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        64,
+        28,
+        28
+      ]
+    ]
+  }
+},
+{
+  "name": "relu_4",
+  "type": "Relu",
+  "inputs": [
+    "inception_3a/1x1_1"
+  ],
+  "outputs": [
+    "inception_3a/1x1_2"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        64,
+        28,
+        28
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        64,
+        28,
+        28
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_3a/3x3_reduce_w_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        96,
+        192,
+        1,
+        1
+      ]
+    ],
+    "output_shapes": [
+      [
+        96,
+        192,
+        1,
+        1
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_3a/3x3_reduce_b_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        96
+      ]
+    ],
+    "output_shapes": [
+      [
+        96
+      ]
+    ]
+  }
+},
+{
+  "name": "conv_5",
+  "type": "Conv",
+  "inputs": [
+    "pool2/3x3_s2_1",
+    "inception_3a/3x3_reduce_w_0",
+    "inception_3a/3x3_reduce_b_0"
+  ],
+  "outputs": [
+    "inception_3a/3x3_reduce_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        192,
+        28,
+        28
+      ],
+      [
+        96,
+        192,
+        1,
+        1
+      ],
+      [
+        96
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        96,
+        28,
+        28
+      ]
+    ]
+  }
+},
+{
+  "name": "relu_5",
+  "type": "Relu",
+  "inputs": [
+    "inception_3a/3x3_reduce_1"
+  ],
+  "outputs": [
+    "inception_3a/3x3_reduce_2"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        96,
+        28,
+        28
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        96,
+        28,
+        28
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_3a/3x3_w_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128,
+        96,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        128,
+        96,
+        3,
+        3
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_3a/3x3_b_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        128
+      ]
+    ]
+  }
+},
+{
+  "name": "conv_6",
+  "type": "Conv",
+  "inputs": [
+    "inception_3a/3x3_reduce_2",
+    "inception_3a/3x3_w_0",
+    "inception_3a/3x3_b_0"
+  ],
+  "outputs": [
+    "inception_3a/3x3_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        96,
+        28,
+        28
+      ],
+      [
+        128,
+        96,
+        3,
+        3
+      ],
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        128,
+        28,
+        28
+      ]
+    ]
+  }
+},
+{
+  "name": "relu_6",
+  "type": "Relu",
+  "inputs": [
+    "inception_3a/3x3_1"
+  ],
+  "outputs": [
+    "inception_3a/3x3_2"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        128,
+        28,
+        28
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        128,
+        28,
+        28
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_3a/5x5_reduce_w_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        16,
+        192,
+        1,
+        1
+      ]
+    ],
+    "output_shapes": [
+      [
+        16,
+        192,
+        1,
+        1
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_3a/5x5_reduce_b_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        16
+      ]
+    ],
+    "output_shapes": [
+      [
+        16
+      ]
+    ]
+  }
+},
+{
+  "name": "conv_7",
+  "type": "Conv",
+  "inputs": [
+    "pool2/3x3_s2_1",
+    "inception_3a/5x5_reduce_w_0",
+    "inception_3a/5x5_reduce_b_0"
+  ],
+  "outputs": [
+    "inception_3a/5x5_reduce_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        192,
+        28,
+        28
+      ],
+      [
+        16,
+        192,
+        1,
+        1
+      ],
+      [
+        16
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        16,
+        28,
+        28
+      ]
+    ]
+  }
+},
+{
+  "name": "relu_7",
+  "type": "Relu",
+  "inputs": [
+    "inception_3a/5x5_reduce_1"
+  ],
+  "outputs": [
+    "inception_3a/5x5_reduce_2"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        16,
+        28,
+        28
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        16,
+        28,
+        28
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_3a/5x5_w_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        32,
+        16,
+        5,
+        5
+      ]
+    ],
+    "output_shapes": [
+      [
+        32,
+        16,
+        5,
+        5
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_3a/5x5_b_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        32
+      ]
+    ],
+    "output_shapes": [
+      [
+        32
+      ]
+    ]
+  }
+},
+{
+  "name": "conv_8",
+  "type": "Conv",
+  "inputs": [
+    "inception_3a/5x5_reduce_2",
+    "inception_3a/5x5_w_0",
+    "inception_3a/5x5_b_0"
+  ],
+  "outputs": [
+    "inception_3a/5x5_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        16,
+        28,
+        28
+      ],
+      [
+        32,
+        16,
+        5,
+        5
+      ],
+      [
+        32
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        32,
+        28,
+        28
+      ]
+    ]
+  }
+},
+{
+  "name": "relu_8",
+  "type": "Relu",
+  "inputs": [
+    "inception_3a/5x5_1"
+  ],
+  "outputs": [
+    "inception_3a/5x5_2"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        32,
+        28,
+        28
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        32,
+        28,
+        28
+      ]
+    ]
+  }
+},
+{
+  "name": "maxpool_3",
+  "type": "Pooling",
+  "inputs": [
+    "pool2/3x3_s2_1"
+  ],
+  "outputs": [
+    "inception_3a/pool_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        192,
+        28,
+        28
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        192,
+        28,
+        28
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_3a/pool_proj_w_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        32,
+        192,
+        1,
+        1
+      ]
+    ],
+    "output_shapes": [
+      [
+        32,
+        192,
+        1,
+        1
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_3a/pool_proj_b_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        32
+      ]
+    ],
+    "output_shapes": [
+      [
+        32
+      ]
+    ]
+  }
+},
+{
+  "name": "conv_9",
+  "type": "Conv",
+  "inputs": [
+    "inception_3a/pool_1",
+    "inception_3a/pool_proj_w_0",
+    "inception_3a/pool_proj_b_0"
+  ],
+  "outputs": [
+    "inception_3a/pool_proj_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        192,
+        28,
+        28
+      ],
+      [
+        32,
+        192,
+        1,
+        1
+      ],
+      [
+        32
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        32,
+        28,
+        28
+      ]
+    ]
+  }
+},
+{
+  "name": "relu_9",
+  "type": "Relu",
+  "inputs": [
+    "inception_3a/pool_proj_1"
+  ],
+  "outputs": [
+    "inception_3a/pool_proj_2"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        32,
+        28,
+        28
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        32,
+        28,
+        28
+      ]
+    ]
+  }
+},
+{
+  "name": "concat_1",
+  "type": "Concat",
+  "inputs": [
+    "inception_3a/1x1_2",
+    "inception_3a/3x3_2",
+    "inception_3a/5x5_2",
+    "inception_3a/pool_proj_2"
+  ],
+  "outputs": [
+    "inception_3a/output_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        64,
+        28,
+        28
+      ],
+      [
+        1,
+        128,
+        28,
+        28
+      ],
+      [
+        1,
+        32,
+        28,
+        28
+      ],
+      [
+        1,
+        32,
+        28,
+        28
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        256,
+        28,
+        28
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_3b/1x1_w_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128,
+        256,
+        1,
+        1
+      ]
+    ],
+    "output_shapes": [
+      [
+        128,
+        256,
+        1,
+        1
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_3b/1x1_b_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        128
+      ]
+    ]
+  }
+},
+{
+  "name": "conv_10",
+  "type": "Conv",
+  "inputs": [
+    "inception_3a/output_1",
+    "inception_3b/1x1_w_0",
+    "inception_3b/1x1_b_0"
+  ],
+  "outputs": [
+    "inception_3b/1x1_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        256,
+        28,
+        28
+      ],
+      [
+        128,
+        256,
+        1,
+        1
+      ],
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        128,
+        28,
+        28
+      ]
+    ]
+  }
+},
+{
+  "name": "relu_10",
+  "type": "Relu",
+  "inputs": [
+    "inception_3b/1x1_1"
+  ],
+  "outputs": [
+    "inception_3b/1x1_2"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        128,
+        28,
+        28
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        128,
+        28,
+        28
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_3b/3x3_reduce_w_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128,
+        256,
+        1,
+        1
+      ]
+    ],
+    "output_shapes": [
+      [
+        128,
+        256,
+        1,
+        1
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_3b/3x3_reduce_b_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        128
+      ]
+    ]
+  }
+},
+{
+  "name": "conv_11",
+  "type": "Conv",
+  "inputs": [
+    "inception_3a/output_1",
+    "inception_3b/3x3_reduce_w_0",
+    "inception_3b/3x3_reduce_b_0"
+  ],
+  "outputs": [
+    "inception_3b/3x3_reduce_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        256,
+        28,
+        28
+      ],
+      [
+        128,
+        256,
+        1,
+        1
+      ],
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        128,
+        28,
+        28
+      ]
+    ]
+  }
+},
+{
+  "name": "relu_11",
+  "type": "Relu",
+  "inputs": [
+    "inception_3b/3x3_reduce_1"
+  ],
+  "outputs": [
+    "inception_3b/3x3_reduce_2"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        128,
+        28,
+        28
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        128,
+        28,
+        28
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_3b/3x3_w_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        192,
+        128,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        192,
+        128,
+        3,
+        3
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_3b/3x3_b_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        192
+      ]
+    ],
+    "output_shapes": [
+      [
+        192
+      ]
+    ]
+  }
+},
+{
+  "name": "conv_12",
+  "type": "Conv",
+  "inputs": [
+    "inception_3b/3x3_reduce_2",
+    "inception_3b/3x3_w_0",
+    "inception_3b/3x3_b_0"
+  ],
+  "outputs": [
+    "inception_3b/3x3_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        128,
+        28,
+        28
+      ],
+      [
+        192,
+        128,
+        3,
+        3
+      ],
+      [
+        192
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        192,
+        28,
+        28
+      ]
+    ]
+  }
+},
+{
+  "name": "relu_12",
+  "type": "Relu",
+  "inputs": [
+    "inception_3b/3x3_1"
+  ],
+  "outputs": [
+    "inception_3b/3x3_2"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        192,
+        28,
+        28
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        192,
+        28,
+        28
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_3b/5x5_reduce_w_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        32,
+        256,
+        1,
+        1
+      ]
+    ],
+    "output_shapes": [
+      [
+        32,
+        256,
+        1,
+        1
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_3b/5x5_reduce_b_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        32
+      ]
+    ],
+    "output_shapes": [
+      [
+        32
+      ]
+    ]
+  }
+},
+{
+  "name": "conv_13",
+  "type": "Conv",
+  "inputs": [
+    "inception_3a/output_1",
+    "inception_3b/5x5_reduce_w_0",
+    "inception_3b/5x5_reduce_b_0"
+  ],
+  "outputs": [
+    "inception_3b/5x5_reduce_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        256,
+        28,
+        28
+      ],
+      [
+        32,
+        256,
+        1,
+        1
+      ],
+      [
+        32
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        32,
+        28,
+        28
+      ]
+    ]
+  }
+},
+{
+  "name": "relu_13",
+  "type": "Relu",
+  "inputs": [
+    "inception_3b/5x5_reduce_1"
+  ],
+  "outputs": [
+    "inception_3b/5x5_reduce_2"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        32,
+        28,
+        28
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        32,
+        28,
+        28
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_3b/5x5_w_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        96,
+        32,
+        5,
+        5
+      ]
+    ],
+    "output_shapes": [
+      [
+        96,
+        32,
+        5,
+        5
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_3b/5x5_b_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        96
+      ]
+    ],
+    "output_shapes": [
+      [
+        96
+      ]
+    ]
+  }
+},
+{
+  "name": "conv_14",
+  "type": "Conv",
+  "inputs": [
+    "inception_3b/5x5_reduce_2",
+    "inception_3b/5x5_w_0",
+    "inception_3b/5x5_b_0"
+  ],
+  "outputs": [
+    "inception_3b/5x5_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        32,
+        28,
+        28
+      ],
+      [
+        96,
+        32,
+        5,
+        5
+      ],
+      [
+        96
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        96,
+        28,
+        28
+      ]
+    ]
+  }
+},
+{
+  "name": "relu_14",
+  "type": "Relu",
+  "inputs": [
+    "inception_3b/5x5_1"
+  ],
+  "outputs": [
+    "inception_3b/5x5_2"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        96,
+        28,
+        28
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        96,
+        28,
+        28
+      ]
+    ]
+  }
+},
+{
+  "name": "maxpool_4",
+  "type": "Pooling",
+  "inputs": [
+    "inception_3a/output_1"
+  ],
+  "outputs": [
+    "inception_3b/pool_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        256,
+        28,
+        28
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        256,
+        28,
+        28
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_3b/pool_proj_w_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64,
+        256,
+        1,
+        1
+      ]
+    ],
+    "output_shapes": [
+      [
+        64,
+        256,
+        1,
+        1
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_3b/pool_proj_b_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        64
+      ]
+    ]
+  }
+},
+{
+  "name": "conv_15",
+  "type": "Conv",
+  "inputs": [
+    "inception_3b/pool_1",
+    "inception_3b/pool_proj_w_0",
+    "inception_3b/pool_proj_b_0"
+  ],
+  "outputs": [
+    "inception_3b/pool_proj_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        256,
+        28,
+        28
+      ],
+      [
+        64,
+        256,
+        1,
+        1
+      ],
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        64,
+        28,
+        28
+      ]
+    ]
+  }
+},
+{
+  "name": "relu_15",
+  "type": "Relu",
+  "inputs": [
+    "inception_3b/pool_proj_1"
+  ],
+  "outputs": [
+    "inception_3b/pool_proj_2"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        64,
+        28,
+        28
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        64,
+        28,
+        28
+      ]
+    ]
+  }
+},
+{
+  "name": "concat_2",
+  "type": "Concat",
+  "inputs": [
+    "inception_3b/1x1_2",
+    "inception_3b/3x3_2",
+    "inception_3b/5x5_2",
+    "inception_3b/pool_proj_2"
+  ],
+  "outputs": [
+    "inception_3b/output_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        128,
+        28,
+        28
+      ],
+      [
+        1,
+        192,
+        28,
+        28
+      ],
+      [
+        1,
+        96,
+        28,
+        28
+      ],
+      [
+        1,
+        64,
+        28,
+        28
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        480,
+        28,
+        28
+      ]
+    ]
+  }
+},
+{
+  "name": "maxpool_5",
+  "type": "Pooling",
+  "inputs": [
+    "inception_3b/output_1"
+  ],
+  "outputs": [
+    "pool3/3x3_s2_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        480,
+        28,
+        28
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        480,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_4a/1x1_w_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        192,
+        480,
+        1,
+        1
+      ]
+    ],
+    "output_shapes": [
+      [
+        192,
+        480,
+        1,
+        1
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_4a/1x1_b_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        192
+      ]
+    ],
+    "output_shapes": [
+      [
+        192
+      ]
+    ]
+  }
+},
+{
+  "name": "conv_16",
+  "type": "Conv",
+  "inputs": [
+    "pool3/3x3_s2_1",
+    "inception_4a/1x1_w_0",
+    "inception_4a/1x1_b_0"
+  ],
+  "outputs": [
+    "inception_4a/1x1_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        480,
+        14,
+        14
+      ],
+      [
+        192,
+        480,
+        1,
+        1
+      ],
+      [
+        192
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        192,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "relu_16",
+  "type": "Relu",
+  "inputs": [
+    "inception_4a/1x1_1"
+  ],
+  "outputs": [
+    "inception_4a/1x1_2"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        192,
+        14,
+        14
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        192,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_4a/3x3_reduce_w_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        96,
+        480,
+        1,
+        1
+      ]
+    ],
+    "output_shapes": [
+      [
+        96,
+        480,
+        1,
+        1
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_4a/3x3_reduce_b_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        96
+      ]
+    ],
+    "output_shapes": [
+      [
+        96
+      ]
+    ]
+  }
+},
+{
+  "name": "conv_17",
+  "type": "Conv",
+  "inputs": [
+    "pool3/3x3_s2_1",
+    "inception_4a/3x3_reduce_w_0",
+    "inception_4a/3x3_reduce_b_0"
+  ],
+  "outputs": [
+    "inception_4a/3x3_reduce_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        480,
+        14,
+        14
+      ],
+      [
+        96,
+        480,
+        1,
+        1
+      ],
+      [
+        96
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        96,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "relu_17",
+  "type": "Relu",
+  "inputs": [
+    "inception_4a/3x3_reduce_1"
+  ],
+  "outputs": [
+    "inception_4a/3x3_reduce_2"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        96,
+        14,
+        14
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        96,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_4a/3x3_w_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        208,
+        96,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        208,
+        96,
+        3,
+        3
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_4a/3x3_b_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        208
+      ]
+    ],
+    "output_shapes": [
+      [
+        208
+      ]
+    ]
+  }
+},
+{
+  "name": "conv_18",
+  "type": "Conv",
+  "inputs": [
+    "inception_4a/3x3_reduce_2",
+    "inception_4a/3x3_w_0",
+    "inception_4a/3x3_b_0"
+  ],
+  "outputs": [
+    "inception_4a/3x3_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        96,
+        14,
+        14
+      ],
+      [
+        208,
+        96,
+        3,
+        3
+      ],
+      [
+        208
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        208,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "relu_18",
+  "type": "Relu",
+  "inputs": [
+    "inception_4a/3x3_1"
+  ],
+  "outputs": [
+    "inception_4a/3x3_2"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        208,
+        14,
+        14
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        208,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_4a/5x5_reduce_w_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        16,
+        480,
+        1,
+        1
+      ]
+    ],
+    "output_shapes": [
+      [
+        16,
+        480,
+        1,
+        1
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_4a/5x5_reduce_b_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        16
+      ]
+    ],
+    "output_shapes": [
+      [
+        16
+      ]
+    ]
+  }
+},
+{
+  "name": "conv_19",
+  "type": "Conv",
+  "inputs": [
+    "pool3/3x3_s2_1",
+    "inception_4a/5x5_reduce_w_0",
+    "inception_4a/5x5_reduce_b_0"
+  ],
+  "outputs": [
+    "inception_4a/5x5_reduce_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        480,
+        14,
+        14
+      ],
+      [
+        16,
+        480,
+        1,
+        1
+      ],
+      [
+        16
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        16,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "relu_19",
+  "type": "Relu",
+  "inputs": [
+    "inception_4a/5x5_reduce_1"
+  ],
+  "outputs": [
+    "inception_4a/5x5_reduce_2"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        16,
+        14,
+        14
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        16,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_4a/5x5_w_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        48,
+        16,
+        5,
+        5
+      ]
+    ],
+    "output_shapes": [
+      [
+        48,
+        16,
+        5,
+        5
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_4a/5x5_b_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        48
+      ]
+    ],
+    "output_shapes": [
+      [
+        48
+      ]
+    ]
+  }
+},
+{
+  "name": "conv_20",
+  "type": "Conv",
+  "inputs": [
+    "inception_4a/5x5_reduce_2",
+    "inception_4a/5x5_w_0",
+    "inception_4a/5x5_b_0"
+  ],
+  "outputs": [
+    "inception_4a/5x5_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        16,
+        14,
+        14
+      ],
+      [
+        48,
+        16,
+        5,
+        5
+      ],
+      [
+        48
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        48,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "relu_20",
+  "type": "Relu",
+  "inputs": [
+    "inception_4a/5x5_1"
+  ],
+  "outputs": [
+    "inception_4a/5x5_2"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        48,
+        14,
+        14
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        48,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "maxpool_6",
+  "type": "Pooling",
+  "inputs": [
+    "pool3/3x3_s2_1"
+  ],
+  "outputs": [
+    "inception_4a/pool_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        480,
+        14,
+        14
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        480,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_4a/pool_proj_w_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64,
+        480,
+        1,
+        1
+      ]
+    ],
+    "output_shapes": [
+      [
+        64,
+        480,
+        1,
+        1
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_4a/pool_proj_b_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        64
+      ]
+    ]
+  }
+},
+{
+  "name": "conv_21",
+  "type": "Conv",
+  "inputs": [
+    "inception_4a/pool_1",
+    "inception_4a/pool_proj_w_0",
+    "inception_4a/pool_proj_b_0"
+  ],
+  "outputs": [
+    "inception_4a/pool_proj_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        480,
+        14,
+        14
+      ],
+      [
+        64,
+        480,
+        1,
+        1
+      ],
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        64,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "relu_21",
+  "type": "Relu",
+  "inputs": [
+    "inception_4a/pool_proj_1"
+  ],
+  "outputs": [
+    "inception_4a/pool_proj_2"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        64,
+        14,
+        14
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        64,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "concat_3",
+  "type": "Concat",
+  "inputs": [
+    "inception_4a/1x1_2",
+    "inception_4a/3x3_2",
+    "inception_4a/5x5_2",
+    "inception_4a/pool_proj_2"
+  ],
+  "outputs": [
+    "inception_4a/output_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        192,
+        14,
+        14
+      ],
+      [
+        1,
+        208,
+        14,
+        14
+      ],
+      [
+        1,
+        48,
+        14,
+        14
+      ],
+      [
+        1,
+        64,
+        14,
+        14
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        512,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_4b/1x1_w_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        160,
+        512,
+        1,
+        1
+      ]
+    ],
+    "output_shapes": [
+      [
+        160,
+        512,
+        1,
+        1
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_4b/1x1_b_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        160
+      ]
+    ],
+    "output_shapes": [
+      [
+        160
+      ]
+    ]
+  }
+},
+{
+  "name": "conv_22",
+  "type": "Conv",
+  "inputs": [
+    "inception_4a/output_1",
+    "inception_4b/1x1_w_0",
+    "inception_4b/1x1_b_0"
+  ],
+  "outputs": [
+    "inception_4b/1x1_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        512,
+        14,
+        14
+      ],
+      [
+        160,
+        512,
+        1,
+        1
+      ],
+      [
+        160
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        160,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "relu_22",
+  "type": "Relu",
+  "inputs": [
+    "inception_4b/1x1_1"
+  ],
+  "outputs": [
+    "inception_4b/1x1_2"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        160,
+        14,
+        14
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        160,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_4b/3x3_reduce_w_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        112,
+        512,
+        1,
+        1
+      ]
+    ],
+    "output_shapes": [
+      [
+        112,
+        512,
+        1,
+        1
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_4b/3x3_reduce_b_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        112
+      ]
+    ],
+    "output_shapes": [
+      [
+        112
+      ]
+    ]
+  }
+},
+{
+  "name": "conv_23",
+  "type": "Conv",
+  "inputs": [
+    "inception_4a/output_1",
+    "inception_4b/3x3_reduce_w_0",
+    "inception_4b/3x3_reduce_b_0"
+  ],
+  "outputs": [
+    "inception_4b/3x3_reduce_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        512,
+        14,
+        14
+      ],
+      [
+        112,
+        512,
+        1,
+        1
+      ],
+      [
+        112
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        112,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "relu_23",
+  "type": "Relu",
+  "inputs": [
+    "inception_4b/3x3_reduce_1"
+  ],
+  "outputs": [
+    "inception_4b/3x3_reduce_2"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        112,
+        14,
+        14
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        112,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_4b/3x3_w_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        224,
+        112,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        224,
+        112,
+        3,
+        3
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_4b/3x3_b_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        224
+      ]
+    ],
+    "output_shapes": [
+      [
+        224
+      ]
+    ]
+  }
+},
+{
+  "name": "conv_24",
+  "type": "Conv",
+  "inputs": [
+    "inception_4b/3x3_reduce_2",
+    "inception_4b/3x3_w_0",
+    "inception_4b/3x3_b_0"
+  ],
+  "outputs": [
+    "inception_4b/3x3_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        112,
+        14,
+        14
+      ],
+      [
+        224,
+        112,
+        3,
+        3
+      ],
+      [
+        224
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        224,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "relu_24",
+  "type": "Relu",
+  "inputs": [
+    "inception_4b/3x3_1"
+  ],
+  "outputs": [
+    "inception_4b/3x3_2"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        224,
+        14,
+        14
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        224,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_4b/5x5_reduce_w_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        24,
+        512,
+        1,
+        1
+      ]
+    ],
+    "output_shapes": [
+      [
+        24,
+        512,
+        1,
+        1
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_4b/5x5_reduce_b_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        24
+      ]
+    ],
+    "output_shapes": [
+      [
+        24
+      ]
+    ]
+  }
+},
+{
+  "name": "conv_25",
+  "type": "Conv",
+  "inputs": [
+    "inception_4a/output_1",
+    "inception_4b/5x5_reduce_w_0",
+    "inception_4b/5x5_reduce_b_0"
+  ],
+  "outputs": [
+    "inception_4b/5x5_reduce_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        512,
+        14,
+        14
+      ],
+      [
+        24,
+        512,
+        1,
+        1
+      ],
+      [
+        24
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        24,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "relu_25",
+  "type": "Relu",
+  "inputs": [
+    "inception_4b/5x5_reduce_1"
+  ],
+  "outputs": [
+    "inception_4b/5x5_reduce_2"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        24,
+        14,
+        14
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        24,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_4b/5x5_w_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64,
+        24,
+        5,
+        5
+      ]
+    ],
+    "output_shapes": [
+      [
+        64,
+        24,
+        5,
+        5
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_4b/5x5_b_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        64
+      ]
+    ]
+  }
+},
+{
+  "name": "conv_26",
+  "type": "Conv",
+  "inputs": [
+    "inception_4b/5x5_reduce_2",
+    "inception_4b/5x5_w_0",
+    "inception_4b/5x5_b_0"
+  ],
+  "outputs": [
+    "inception_4b/5x5_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        24,
+        14,
+        14
+      ],
+      [
+        64,
+        24,
+        5,
+        5
+      ],
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        64,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "relu_26",
+  "type": "Relu",
+  "inputs": [
+    "inception_4b/5x5_1"
+  ],
+  "outputs": [
+    "inception_4b/5x5_2"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        64,
+        14,
+        14
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        64,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "maxpool_7",
+  "type": "Pooling",
+  "inputs": [
+    "inception_4a/output_1"
+  ],
+  "outputs": [
+    "inception_4b/pool_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        512,
+        14,
+        14
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        512,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_4b/pool_proj_w_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64,
+        512,
+        1,
+        1
+      ]
+    ],
+    "output_shapes": [
+      [
+        64,
+        512,
+        1,
+        1
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_4b/pool_proj_b_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        64
+      ]
+    ]
+  }
+},
+{
+  "name": "conv_27",
+  "type": "Conv",
+  "inputs": [
+    "inception_4b/pool_1",
+    "inception_4b/pool_proj_w_0",
+    "inception_4b/pool_proj_b_0"
+  ],
+  "outputs": [
+    "inception_4b/pool_proj_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        512,
+        14,
+        14
+      ],
+      [
+        64,
+        512,
+        1,
+        1
+      ],
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        64,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "relu_27",
+  "type": "Relu",
+  "inputs": [
+    "inception_4b/pool_proj_1"
+  ],
+  "outputs": [
+    "inception_4b/pool_proj_2"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        64,
+        14,
+        14
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        64,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "concat_4",
+  "type": "Concat",
+  "inputs": [
+    "inception_4b/1x1_2",
+    "inception_4b/3x3_2",
+    "inception_4b/5x5_2",
+    "inception_4b/pool_proj_2"
+  ],
+  "outputs": [
+    "inception_4b/output_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        160,
+        14,
+        14
+      ],
+      [
+        1,
+        224,
+        14,
+        14
+      ],
+      [
+        1,
+        64,
+        14,
+        14
+      ],
+      [
+        1,
+        64,
+        14,
+        14
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        512,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_4c/1x1_w_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128,
+        512,
+        1,
+        1
+      ]
+    ],
+    "output_shapes": [
+      [
+        128,
+        512,
+        1,
+        1
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_4c/1x1_b_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        128
+      ]
+    ]
+  }
+},
+{
+  "name": "conv_28",
+  "type": "Conv",
+  "inputs": [
+    "inception_4b/output_1",
+    "inception_4c/1x1_w_0",
+    "inception_4c/1x1_b_0"
+  ],
+  "outputs": [
+    "inception_4c/1x1_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        512,
+        14,
+        14
+      ],
+      [
+        128,
+        512,
+        1,
+        1
+      ],
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        128,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "relu_28",
+  "type": "Relu",
+  "inputs": [
+    "inception_4c/1x1_1"
+  ],
+  "outputs": [
+    "inception_4c/1x1_2"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        128,
+        14,
+        14
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        128,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_4c/3x3_reduce_w_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128,
+        512,
+        1,
+        1
+      ]
+    ],
+    "output_shapes": [
+      [
+        128,
+        512,
+        1,
+        1
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_4c/3x3_reduce_b_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        128
+      ]
+    ]
+  }
+},
+{
+  "name": "conv_29",
+  "type": "Conv",
+  "inputs": [
+    "inception_4b/output_1",
+    "inception_4c/3x3_reduce_w_0",
+    "inception_4c/3x3_reduce_b_0"
+  ],
+  "outputs": [
+    "inception_4c/3x3_reduce_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        512,
+        14,
+        14
+      ],
+      [
+        128,
+        512,
+        1,
+        1
+      ],
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        128,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "relu_29",
+  "type": "Relu",
+  "inputs": [
+    "inception_4c/3x3_reduce_1"
+  ],
+  "outputs": [
+    "inception_4c/3x3_reduce_2"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        128,
+        14,
+        14
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        128,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_4c/3x3_w_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256,
+        128,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        256,
+        128,
+        3,
+        3
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_4c/3x3_b_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        256
+      ]
+    ]
+  }
+},
+{
+  "name": "conv_30",
+  "type": "Conv",
+  "inputs": [
+    "inception_4c/3x3_reduce_2",
+    "inception_4c/3x3_w_0",
+    "inception_4c/3x3_b_0"
+  ],
+  "outputs": [
+    "inception_4c/3x3_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        128,
+        14,
+        14
+      ],
+      [
+        256,
+        128,
+        3,
+        3
+      ],
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        256,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "relu_30",
+  "type": "Relu",
+  "inputs": [
+    "inception_4c/3x3_1"
+  ],
+  "outputs": [
+    "inception_4c/3x3_2"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        256,
+        14,
+        14
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        256,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_4c/5x5_reduce_w_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        24,
+        512,
+        1,
+        1
+      ]
+    ],
+    "output_shapes": [
+      [
+        24,
+        512,
+        1,
+        1
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_4c/5x5_reduce_b_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        24
+      ]
+    ],
+    "output_shapes": [
+      [
+        24
+      ]
+    ]
+  }
+},
+{
+  "name": "conv_31",
+  "type": "Conv",
+  "inputs": [
+    "inception_4b/output_1",
+    "inception_4c/5x5_reduce_w_0",
+    "inception_4c/5x5_reduce_b_0"
+  ],
+  "outputs": [
+    "inception_4c/5x5_reduce_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        512,
+        14,
+        14
+      ],
+      [
+        24,
+        512,
+        1,
+        1
+      ],
+      [
+        24
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        24,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "relu_31",
+  "type": "Relu",
+  "inputs": [
+    "inception_4c/5x5_reduce_1"
+  ],
+  "outputs": [
+    "inception_4c/5x5_reduce_2"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        24,
+        14,
+        14
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        24,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_4c/5x5_w_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64,
+        24,
+        5,
+        5
+      ]
+    ],
+    "output_shapes": [
+      [
+        64,
+        24,
+        5,
+        5
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_4c/5x5_b_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        64
+      ]
+    ]
+  }
+},
+{
+  "name": "conv_32",
+  "type": "Conv",
+  "inputs": [
+    "inception_4c/5x5_reduce_2",
+    "inception_4c/5x5_w_0",
+    "inception_4c/5x5_b_0"
+  ],
+  "outputs": [
+    "inception_4c/5x5_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        24,
+        14,
+        14
+      ],
+      [
+        64,
+        24,
+        5,
+        5
+      ],
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        64,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "relu_32",
+  "type": "Relu",
+  "inputs": [
+    "inception_4c/5x5_1"
+  ],
+  "outputs": [
+    "inception_4c/5x5_2"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        64,
+        14,
+        14
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        64,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "maxpool_8",
+  "type": "Pooling",
+  "inputs": [
+    "inception_4b/output_1"
+  ],
+  "outputs": [
+    "inception_4c/pool_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        512,
+        14,
+        14
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        512,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_4c/pool_proj_w_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64,
+        512,
+        1,
+        1
+      ]
+    ],
+    "output_shapes": [
+      [
+        64,
+        512,
+        1,
+        1
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_4c/pool_proj_b_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        64
+      ]
+    ]
+  }
+},
+{
+  "name": "conv_33",
+  "type": "Conv",
+  "inputs": [
+    "inception_4c/pool_1",
+    "inception_4c/pool_proj_w_0",
+    "inception_4c/pool_proj_b_0"
+  ],
+  "outputs": [
+    "inception_4c/pool_proj_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        512,
+        14,
+        14
+      ],
+      [
+        64,
+        512,
+        1,
+        1
+      ],
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        64,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "relu_33",
+  "type": "Relu",
+  "inputs": [
+    "inception_4c/pool_proj_1"
+  ],
+  "outputs": [
+    "inception_4c/pool_proj_2"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        64,
+        14,
+        14
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        64,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "concat_5",
+  "type": "Concat",
+  "inputs": [
+    "inception_4c/1x1_2",
+    "inception_4c/3x3_2",
+    "inception_4c/5x5_2",
+    "inception_4c/pool_proj_2"
+  ],
+  "outputs": [
+    "inception_4c/output_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        128,
+        14,
+        14
+      ],
+      [
+        1,
+        256,
+        14,
+        14
+      ],
+      [
+        1,
+        64,
+        14,
+        14
+      ],
+      [
+        1,
+        64,
+        14,
+        14
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        512,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_4d/1x1_w_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        112,
+        512,
+        1,
+        1
+      ]
+    ],
+    "output_shapes": [
+      [
+        112,
+        512,
+        1,
+        1
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_4d/1x1_b_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        112
+      ]
+    ],
+    "output_shapes": [
+      [
+        112
+      ]
+    ]
+  }
+},
+{
+  "name": "conv_34",
+  "type": "Conv",
+  "inputs": [
+    "inception_4c/output_1",
+    "inception_4d/1x1_w_0",
+    "inception_4d/1x1_b_0"
+  ],
+  "outputs": [
+    "inception_4d/1x1_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        512,
+        14,
+        14
+      ],
+      [
+        112,
+        512,
+        1,
+        1
+      ],
+      [
+        112
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        112,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "relu_34",
+  "type": "Relu",
+  "inputs": [
+    "inception_4d/1x1_1"
+  ],
+  "outputs": [
+    "inception_4d/1x1_2"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        112,
+        14,
+        14
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        112,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_4d/3x3_reduce_w_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        144,
+        512,
+        1,
+        1
+      ]
+    ],
+    "output_shapes": [
+      [
+        144,
+        512,
+        1,
+        1
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_4d/3x3_reduce_b_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        144
+      ]
+    ],
+    "output_shapes": [
+      [
+        144
+      ]
+    ]
+  }
+},
+{
+  "name": "conv_35",
+  "type": "Conv",
+  "inputs": [
+    "inception_4c/output_1",
+    "inception_4d/3x3_reduce_w_0",
+    "inception_4d/3x3_reduce_b_0"
+  ],
+  "outputs": [
+    "inception_4d/3x3_reduce_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        512,
+        14,
+        14
+      ],
+      [
+        144,
+        512,
+        1,
+        1
+      ],
+      [
+        144
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        144,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "relu_35",
+  "type": "Relu",
+  "inputs": [
+    "inception_4d/3x3_reduce_1"
+  ],
+  "outputs": [
+    "inception_4d/3x3_reduce_2"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        144,
+        14,
+        14
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        144,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_4d/3x3_w_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        288,
+        144,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        288,
+        144,
+        3,
+        3
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_4d/3x3_b_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        288
+      ]
+    ],
+    "output_shapes": [
+      [
+        288
+      ]
+    ]
+  }
+},
+{
+  "name": "conv_36",
+  "type": "Conv",
+  "inputs": [
+    "inception_4d/3x3_reduce_2",
+    "inception_4d/3x3_w_0",
+    "inception_4d/3x3_b_0"
+  ],
+  "outputs": [
+    "inception_4d/3x3_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        144,
+        14,
+        14
+      ],
+      [
+        288,
+        144,
+        3,
+        3
+      ],
+      [
+        288
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        288,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "relu_36",
+  "type": "Relu",
+  "inputs": [
+    "inception_4d/3x3_1"
+  ],
+  "outputs": [
+    "inception_4d/3x3_2"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        288,
+        14,
+        14
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        288,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_4d/5x5_reduce_w_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        32,
+        512,
+        1,
+        1
+      ]
+    ],
+    "output_shapes": [
+      [
+        32,
+        512,
+        1,
+        1
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_4d/5x5_reduce_b_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        32
+      ]
+    ],
+    "output_shapes": [
+      [
+        32
+      ]
+    ]
+  }
+},
+{
+  "name": "conv_37",
+  "type": "Conv",
+  "inputs": [
+    "inception_4c/output_1",
+    "inception_4d/5x5_reduce_w_0",
+    "inception_4d/5x5_reduce_b_0"
+  ],
+  "outputs": [
+    "inception_4d/5x5_reduce_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        512,
+        14,
+        14
+      ],
+      [
+        32,
+        512,
+        1,
+        1
+      ],
+      [
+        32
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        32,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "relu_37",
+  "type": "Relu",
+  "inputs": [
+    "inception_4d/5x5_reduce_1"
+  ],
+  "outputs": [
+    "inception_4d/5x5_reduce_2"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        32,
+        14,
+        14
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        32,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_4d/5x5_w_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64,
+        32,
+        5,
+        5
+      ]
+    ],
+    "output_shapes": [
+      [
+        64,
+        32,
+        5,
+        5
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_4d/5x5_b_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        64
+      ]
+    ]
+  }
+},
+{
+  "name": "conv_38",
+  "type": "Conv",
+  "inputs": [
+    "inception_4d/5x5_reduce_2",
+    "inception_4d/5x5_w_0",
+    "inception_4d/5x5_b_0"
+  ],
+  "outputs": [
+    "inception_4d/5x5_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        32,
+        14,
+        14
+      ],
+      [
+        64,
+        32,
+        5,
+        5
+      ],
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        64,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "relu_38",
+  "type": "Relu",
+  "inputs": [
+    "inception_4d/5x5_1"
+  ],
+  "outputs": [
+    "inception_4d/5x5_2"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        64,
+        14,
+        14
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        64,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "maxpool_9",
+  "type": "Pooling",
+  "inputs": [
+    "inception_4c/output_1"
+  ],
+  "outputs": [
+    "inception_4d/pool_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        512,
+        14,
+        14
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        512,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_4d/pool_proj_w_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64,
+        512,
+        1,
+        1
+      ]
+    ],
+    "output_shapes": [
+      [
+        64,
+        512,
+        1,
+        1
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_4d/pool_proj_b_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        64
+      ]
+    ]
+  }
+},
+{
+  "name": "conv_39",
+  "type": "Conv",
+  "inputs": [
+    "inception_4d/pool_1",
+    "inception_4d/pool_proj_w_0",
+    "inception_4d/pool_proj_b_0"
+  ],
+  "outputs": [
+    "inception_4d/pool_proj_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        512,
+        14,
+        14
+      ],
+      [
+        64,
+        512,
+        1,
+        1
+      ],
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        64,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "relu_39",
+  "type": "Relu",
+  "inputs": [
+    "inception_4d/pool_proj_1"
+  ],
+  "outputs": [
+    "inception_4d/pool_proj_2"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        64,
+        14,
+        14
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        64,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "concat_6",
+  "type": "Concat",
+  "inputs": [
+    "inception_4d/1x1_2",
+    "inception_4d/3x3_2",
+    "inception_4d/5x5_2",
+    "inception_4d/pool_proj_2"
+  ],
+  "outputs": [
+    "inception_4d/output_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        112,
+        14,
+        14
+      ],
+      [
+        1,
+        288,
+        14,
+        14
+      ],
+      [
+        1,
+        64,
+        14,
+        14
+      ],
+      [
+        1,
+        64,
+        14,
+        14
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        528,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_4e/1x1_w_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256,
+        528,
+        1,
+        1
+      ]
+    ],
+    "output_shapes": [
+      [
+        256,
+        528,
+        1,
+        1
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_4e/1x1_b_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        256
+      ]
+    ]
+  }
+},
+{
+  "name": "conv_40",
+  "type": "Conv",
+  "inputs": [
+    "inception_4d/output_1",
+    "inception_4e/1x1_w_0",
+    "inception_4e/1x1_b_0"
+  ],
+  "outputs": [
+    "inception_4e/1x1_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        528,
+        14,
+        14
+      ],
+      [
+        256,
+        528,
+        1,
+        1
+      ],
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        256,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "relu_40",
+  "type": "Relu",
+  "inputs": [
+    "inception_4e/1x1_1"
+  ],
+  "outputs": [
+    "inception_4e/1x1_2"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        256,
+        14,
+        14
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        256,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_4e/3x3_reduce_w_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        160,
+        528,
+        1,
+        1
+      ]
+    ],
+    "output_shapes": [
+      [
+        160,
+        528,
+        1,
+        1
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_4e/3x3_reduce_b_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        160
+      ]
+    ],
+    "output_shapes": [
+      [
+        160
+      ]
+    ]
+  }
+},
+{
+  "name": "conv_41",
+  "type": "Conv",
+  "inputs": [
+    "inception_4d/output_1",
+    "inception_4e/3x3_reduce_w_0",
+    "inception_4e/3x3_reduce_b_0"
+  ],
+  "outputs": [
+    "inception_4e/3x3_reduce_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        528,
+        14,
+        14
+      ],
+      [
+        160,
+        528,
+        1,
+        1
+      ],
+      [
+        160
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        160,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "relu_41",
+  "type": "Relu",
+  "inputs": [
+    "inception_4e/3x3_reduce_1"
+  ],
+  "outputs": [
+    "inception_4e/3x3_reduce_2"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        160,
+        14,
+        14
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        160,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_4e/3x3_w_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        320,
+        160,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        320,
+        160,
+        3,
+        3
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_4e/3x3_b_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        320
+      ]
+    ],
+    "output_shapes": [
+      [
+        320
+      ]
+    ]
+  }
+},
+{
+  "name": "conv_42",
+  "type": "Conv",
+  "inputs": [
+    "inception_4e/3x3_reduce_2",
+    "inception_4e/3x3_w_0",
+    "inception_4e/3x3_b_0"
+  ],
+  "outputs": [
+    "inception_4e/3x3_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        160,
+        14,
+        14
+      ],
+      [
+        320,
+        160,
+        3,
+        3
+      ],
+      [
+        320
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        320,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "relu_42",
+  "type": "Relu",
+  "inputs": [
+    "inception_4e/3x3_1"
+  ],
+  "outputs": [
+    "inception_4e/3x3_2"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        320,
+        14,
+        14
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        320,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_4e/5x5_reduce_w_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        32,
+        528,
+        1,
+        1
+      ]
+    ],
+    "output_shapes": [
+      [
+        32,
+        528,
+        1,
+        1
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_4e/5x5_reduce_b_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        32
+      ]
+    ],
+    "output_shapes": [
+      [
+        32
+      ]
+    ]
+  }
+},
+{
+  "name": "conv_43",
+  "type": "Conv",
+  "inputs": [
+    "inception_4d/output_1",
+    "inception_4e/5x5_reduce_w_0",
+    "inception_4e/5x5_reduce_b_0"
+  ],
+  "outputs": [
+    "inception_4e/5x5_reduce_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        528,
+        14,
+        14
+      ],
+      [
+        32,
+        528,
+        1,
+        1
+      ],
+      [
+        32
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        32,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "relu_43",
+  "type": "Relu",
+  "inputs": [
+    "inception_4e/5x5_reduce_1"
+  ],
+  "outputs": [
+    "inception_4e/5x5_reduce_2"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        32,
+        14,
+        14
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        32,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_4e/5x5_w_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128,
+        32,
+        5,
+        5
+      ]
+    ],
+    "output_shapes": [
+      [
+        128,
+        32,
+        5,
+        5
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_4e/5x5_b_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        128
+      ]
+    ]
+  }
+},
+{
+  "name": "conv_44",
+  "type": "Conv",
+  "inputs": [
+    "inception_4e/5x5_reduce_2",
+    "inception_4e/5x5_w_0",
+    "inception_4e/5x5_b_0"
+  ],
+  "outputs": [
+    "inception_4e/5x5_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        32,
+        14,
+        14
+      ],
+      [
+        128,
+        32,
+        5,
+        5
+      ],
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        128,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "relu_44",
+  "type": "Relu",
+  "inputs": [
+    "inception_4e/5x5_1"
+  ],
+  "outputs": [
+    "inception_4e/5x5_2"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        128,
+        14,
+        14
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        128,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "maxpool_10",
+  "type": "Pooling",
+  "inputs": [
+    "inception_4d/output_1"
+  ],
+  "outputs": [
+    "inception_4e/pool_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        528,
+        14,
+        14
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        528,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_4e/pool_proj_w_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128,
+        528,
+        1,
+        1
+      ]
+    ],
+    "output_shapes": [
+      [
+        128,
+        528,
+        1,
+        1
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_4e/pool_proj_b_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        128
+      ]
+    ]
+  }
+},
+{
+  "name": "conv_45",
+  "type": "Conv",
+  "inputs": [
+    "inception_4e/pool_1",
+    "inception_4e/pool_proj_w_0",
+    "inception_4e/pool_proj_b_0"
+  ],
+  "outputs": [
+    "inception_4e/pool_proj_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        528,
+        14,
+        14
+      ],
+      [
+        128,
+        528,
+        1,
+        1
+      ],
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        128,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "relu_45",
+  "type": "Relu",
+  "inputs": [
+    "inception_4e/pool_proj_1"
+  ],
+  "outputs": [
+    "inception_4e/pool_proj_2"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        128,
+        14,
+        14
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        128,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "concat_7",
+  "type": "Concat",
+  "inputs": [
+    "inception_4e/1x1_2",
+    "inception_4e/3x3_2",
+    "inception_4e/5x5_2",
+    "inception_4e/pool_proj_2"
+  ],
+  "outputs": [
+    "inception_4e/output_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        256,
+        14,
+        14
+      ],
+      [
+        1,
+        320,
+        14,
+        14
+      ],
+      [
+        1,
+        128,
+        14,
+        14
+      ],
+      [
+        1,
+        128,
+        14,
+        14
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        832,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "maxpool_11",
+  "type": "Pooling",
+  "inputs": [
+    "inception_4e/output_1"
+  ],
+  "outputs": [
+    "pool4/3x3_s2_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        832,
+        14,
+        14
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        832,
+        7,
+        7
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_5a/1x1_w_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256,
+        832,
+        1,
+        1
+      ]
+    ],
+    "output_shapes": [
+      [
+        256,
+        832,
+        1,
+        1
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_5a/1x1_b_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        256
+      ]
+    ]
+  }
+},
+{
+  "name": "conv_46",
+  "type": "Conv",
+  "inputs": [
+    "pool4/3x3_s2_1",
+    "inception_5a/1x1_w_0",
+    "inception_5a/1x1_b_0"
+  ],
+  "outputs": [
+    "inception_5a/1x1_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        832,
+        7,
+        7
+      ],
+      [
+        256,
+        832,
+        1,
+        1
+      ],
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        256,
+        7,
+        7
+      ]
+    ]
+  }
+},
+{
+  "name": "relu_46",
+  "type": "Relu",
+  "inputs": [
+    "inception_5a/1x1_1"
+  ],
+  "outputs": [
+    "inception_5a/1x1_2"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        256,
+        7,
+        7
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        256,
+        7,
+        7
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_5a/3x3_reduce_w_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        160,
+        832,
+        1,
+        1
+      ]
+    ],
+    "output_shapes": [
+      [
+        160,
+        832,
+        1,
+        1
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_5a/3x3_reduce_b_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        160
+      ]
+    ],
+    "output_shapes": [
+      [
+        160
+      ]
+    ]
+  }
+},
+{
+  "name": "conv_47",
+  "type": "Conv",
+  "inputs": [
+    "pool4/3x3_s2_1",
+    "inception_5a/3x3_reduce_w_0",
+    "inception_5a/3x3_reduce_b_0"
+  ],
+  "outputs": [
+    "inception_5a/3x3_reduce_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        832,
+        7,
+        7
+      ],
+      [
+        160,
+        832,
+        1,
+        1
+      ],
+      [
+        160
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        160,
+        7,
+        7
+      ]
+    ]
+  }
+},
+{
+  "name": "relu_47",
+  "type": "Relu",
+  "inputs": [
+    "inception_5a/3x3_reduce_1"
+  ],
+  "outputs": [
+    "inception_5a/3x3_reduce_2"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        160,
+        7,
+        7
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        160,
+        7,
+        7
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_5a/3x3_w_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        320,
+        160,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        320,
+        160,
+        3,
+        3
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_5a/3x3_b_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        320
+      ]
+    ],
+    "output_shapes": [
+      [
+        320
+      ]
+    ]
+  }
+},
+{
+  "name": "conv_48",
+  "type": "Conv",
+  "inputs": [
+    "inception_5a/3x3_reduce_2",
+    "inception_5a/3x3_w_0",
+    "inception_5a/3x3_b_0"
+  ],
+  "outputs": [
+    "inception_5a/3x3_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        160,
+        7,
+        7
+      ],
+      [
+        320,
+        160,
+        3,
+        3
+      ],
+      [
+        320
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        320,
+        7,
+        7
+      ]
+    ]
+  }
+},
+{
+  "name": "relu_48",
+  "type": "Relu",
+  "inputs": [
+    "inception_5a/3x3_1"
+  ],
+  "outputs": [
+    "inception_5a/3x3_2"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        320,
+        7,
+        7
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        320,
+        7,
+        7
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_5a/5x5_reduce_w_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        32,
+        832,
+        1,
+        1
+      ]
+    ],
+    "output_shapes": [
+      [
+        32,
+        832,
+        1,
+        1
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_5a/5x5_reduce_b_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        32
+      ]
+    ],
+    "output_shapes": [
+      [
+        32
+      ]
+    ]
+  }
+},
+{
+  "name": "conv_49",
+  "type": "Conv",
+  "inputs": [
+    "pool4/3x3_s2_1",
+    "inception_5a/5x5_reduce_w_0",
+    "inception_5a/5x5_reduce_b_0"
+  ],
+  "outputs": [
+    "inception_5a/5x5_reduce_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        832,
+        7,
+        7
+      ],
+      [
+        32,
+        832,
+        1,
+        1
+      ],
+      [
+        32
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        32,
+        7,
+        7
+      ]
+    ]
+  }
+},
+{
+  "name": "relu_49",
+  "type": "Relu",
+  "inputs": [
+    "inception_5a/5x5_reduce_1"
+  ],
+  "outputs": [
+    "inception_5a/5x5_reduce_2"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        32,
+        7,
+        7
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        32,
+        7,
+        7
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_5a/5x5_w_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128,
+        32,
+        5,
+        5
+      ]
+    ],
+    "output_shapes": [
+      [
+        128,
+        32,
+        5,
+        5
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_5a/5x5_b_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        128
+      ]
+    ]
+  }
+},
+{
+  "name": "conv_50",
+  "type": "Conv",
+  "inputs": [
+    "inception_5a/5x5_reduce_2",
+    "inception_5a/5x5_w_0",
+    "inception_5a/5x5_b_0"
+  ],
+  "outputs": [
+    "inception_5a/5x5_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        32,
+        7,
+        7
+      ],
+      [
+        128,
+        32,
+        5,
+        5
+      ],
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        128,
+        7,
+        7
+      ]
+    ]
+  }
+},
+{
+  "name": "relu_50",
+  "type": "Relu",
+  "inputs": [
+    "inception_5a/5x5_1"
+  ],
+  "outputs": [
+    "inception_5a/5x5_2"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        128,
+        7,
+        7
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        128,
+        7,
+        7
+      ]
+    ]
+  }
+},
+{
+  "name": "maxpool_12",
+  "type": "Pooling",
+  "inputs": [
+    "pool4/3x3_s2_1"
+  ],
+  "outputs": [
+    "inception_5a/pool_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        832,
+        7,
+        7
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        832,
+        7,
+        7
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_5a/pool_proj_w_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128,
+        832,
+        1,
+        1
+      ]
+    ],
+    "output_shapes": [
+      [
+        128,
+        832,
+        1,
+        1
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_5a/pool_proj_b_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        128
+      ]
+    ]
+  }
+},
+{
+  "name": "conv_51",
+  "type": "Conv",
+  "inputs": [
+    "inception_5a/pool_1",
+    "inception_5a/pool_proj_w_0",
+    "inception_5a/pool_proj_b_0"
+  ],
+  "outputs": [
+    "inception_5a/pool_proj_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        832,
+        7,
+        7
+      ],
+      [
+        128,
+        832,
+        1,
+        1
+      ],
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        128,
+        7,
+        7
+      ]
+    ]
+  }
+},
+{
+  "name": "relu_51",
+  "type": "Relu",
+  "inputs": [
+    "inception_5a/pool_proj_1"
+  ],
+  "outputs": [
+    "inception_5a/pool_proj_2"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        128,
+        7,
+        7
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        128,
+        7,
+        7
+      ]
+    ]
+  }
+},
+{
+  "name": "concat_8",
+  "type": "Concat",
+  "inputs": [
+    "inception_5a/1x1_2",
+    "inception_5a/3x3_2",
+    "inception_5a/5x5_2",
+    "inception_5a/pool_proj_2"
+  ],
+  "outputs": [
+    "inception_5a/output_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        256,
+        7,
+        7
+      ],
+      [
+        1,
+        320,
+        7,
+        7
+      ],
+      [
+        1,
+        128,
+        7,
+        7
+      ],
+      [
+        1,
+        128,
+        7,
+        7
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        832,
+        7,
+        7
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_5b/1x1_w_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        384,
+        832,
+        1,
+        1
+      ]
+    ],
+    "output_shapes": [
+      [
+        384,
+        832,
+        1,
+        1
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_5b/1x1_b_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        384
+      ]
+    ],
+    "output_shapes": [
+      [
+        384
+      ]
+    ]
+  }
+},
+{
+  "name": "conv_52",
+  "type": "Conv",
+  "inputs": [
+    "inception_5a/output_1",
+    "inception_5b/1x1_w_0",
+    "inception_5b/1x1_b_0"
+  ],
+  "outputs": [
+    "inception_5b/1x1_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        832,
+        7,
+        7
+      ],
+      [
+        384,
+        832,
+        1,
+        1
+      ],
+      [
+        384
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        384,
+        7,
+        7
+      ]
+    ]
+  }
+},
+{
+  "name": "relu_52",
+  "type": "Relu",
+  "inputs": [
+    "inception_5b/1x1_1"
+  ],
+  "outputs": [
+    "inception_5b/1x1_2"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        384,
+        7,
+        7
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        384,
+        7,
+        7
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_5b/3x3_reduce_w_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        192,
+        832,
+        1,
+        1
+      ]
+    ],
+    "output_shapes": [
+      [
+        192,
+        832,
+        1,
+        1
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_5b/3x3_reduce_b_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        192
+      ]
+    ],
+    "output_shapes": [
+      [
+        192
+      ]
+    ]
+  }
+},
+{
+  "name": "conv_53",
+  "type": "Conv",
+  "inputs": [
+    "inception_5a/output_1",
+    "inception_5b/3x3_reduce_w_0",
+    "inception_5b/3x3_reduce_b_0"
+  ],
+  "outputs": [
+    "inception_5b/3x3_reduce_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        832,
+        7,
+        7
+      ],
+      [
+        192,
+        832,
+        1,
+        1
+      ],
+      [
+        192
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        192,
+        7,
+        7
+      ]
+    ]
+  }
+},
+{
+  "name": "relu_53",
+  "type": "Relu",
+  "inputs": [
+    "inception_5b/3x3_reduce_1"
+  ],
+  "outputs": [
+    "inception_5b/3x3_reduce_2"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        192,
+        7,
+        7
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        192,
+        7,
+        7
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_5b/3x3_w_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        384,
+        192,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        384,
+        192,
+        3,
+        3
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_5b/3x3_b_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        384
+      ]
+    ],
+    "output_shapes": [
+      [
+        384
+      ]
+    ]
+  }
+},
+{
+  "name": "conv_54",
+  "type": "Conv",
+  "inputs": [
+    "inception_5b/3x3_reduce_2",
+    "inception_5b/3x3_w_0",
+    "inception_5b/3x3_b_0"
+  ],
+  "outputs": [
+    "inception_5b/3x3_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        192,
+        7,
+        7
+      ],
+      [
+        384,
+        192,
+        3,
+        3
+      ],
+      [
+        384
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        384,
+        7,
+        7
+      ]
+    ]
+  }
+},
+{
+  "name": "relu_54",
+  "type": "Relu",
+  "inputs": [
+    "inception_5b/3x3_1"
+  ],
+  "outputs": [
+    "inception_5b/3x3_2"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        384,
+        7,
+        7
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        384,
+        7,
+        7
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_5b/5x5_reduce_w_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        48,
+        832,
+        1,
+        1
+      ]
+    ],
+    "output_shapes": [
+      [
+        48,
+        832,
+        1,
+        1
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_5b/5x5_reduce_b_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        48
+      ]
+    ],
+    "output_shapes": [
+      [
+        48
+      ]
+    ]
+  }
+},
+{
+  "name": "conv_55",
+  "type": "Conv",
+  "inputs": [
+    "inception_5a/output_1",
+    "inception_5b/5x5_reduce_w_0",
+    "inception_5b/5x5_reduce_b_0"
+  ],
+  "outputs": [
+    "inception_5b/5x5_reduce_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        832,
+        7,
+        7
+      ],
+      [
+        48,
+        832,
+        1,
+        1
+      ],
+      [
+        48
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        48,
+        7,
+        7
+      ]
+    ]
+  }
+},
+{
+  "name": "relu_55",
+  "type": "Relu",
+  "inputs": [
+    "inception_5b/5x5_reduce_1"
+  ],
+  "outputs": [
+    "inception_5b/5x5_reduce_2"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        48,
+        7,
+        7
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        48,
+        7,
+        7
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_5b/5x5_w_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128,
+        48,
+        5,
+        5
+      ]
+    ],
+    "output_shapes": [
+      [
+        128,
+        48,
+        5,
+        5
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_5b/5x5_b_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        128
+      ]
+    ]
+  }
+},
+{
+  "name": "conv_56",
+  "type": "Conv",
+  "inputs": [
+    "inception_5b/5x5_reduce_2",
+    "inception_5b/5x5_w_0",
+    "inception_5b/5x5_b_0"
+  ],
+  "outputs": [
+    "inception_5b/5x5_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        48,
+        7,
+        7
+      ],
+      [
+        128,
+        48,
+        5,
+        5
+      ],
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        128,
+        7,
+        7
+      ]
+    ]
+  }
+},
+{
+  "name": "relu_56",
+  "type": "Relu",
+  "inputs": [
+    "inception_5b/5x5_1"
+  ],
+  "outputs": [
+    "inception_5b/5x5_2"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        128,
+        7,
+        7
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        128,
+        7,
+        7
+      ]
+    ]
+  }
+},
+{
+  "name": "maxpool_13",
+  "type": "Pooling",
+  "inputs": [
+    "inception_5a/output_1"
+  ],
+  "outputs": [
+    "inception_5b/pool_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        832,
+        7,
+        7
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        832,
+        7,
+        7
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_5b/pool_proj_w_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128,
+        832,
+        1,
+        1
+      ]
+    ],
+    "output_shapes": [
+      [
+        128,
+        832,
+        1,
+        1
+      ]
+    ]
+  }
+},
+{
+  "name": "inception_5b/pool_proj_b_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        128
+      ]
+    ]
+  }
+},
+{
+  "name": "conv_57",
+  "type": "Conv",
+  "inputs": [
+    "inception_5b/pool_1",
+    "inception_5b/pool_proj_w_0",
+    "inception_5b/pool_proj_b_0"
+  ],
+  "outputs": [
+    "inception_5b/pool_proj_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        832,
+        7,
+        7
+      ],
+      [
+        128,
+        832,
+        1,
+        1
+      ],
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        128,
+        7,
+        7
+      ]
+    ]
+  }
+},
+{
+  "name": "relu_57",
+  "type": "Relu",
+  "inputs": [
+    "inception_5b/pool_proj_1"
+  ],
+  "outputs": [
+    "inception_5b/pool_proj_2"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        128,
+        7,
+        7
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        128,
+        7,
+        7
+      ]
+    ]
+  }
+},
+{
+  "name": "concat_9",
+  "type": "Concat",
+  "inputs": [
+    "inception_5b/1x1_2",
+    "inception_5b/3x3_2",
+    "inception_5b/5x5_2",
+    "inception_5b/pool_proj_2"
+  ],
+  "outputs": [
+    "inception_5b/output_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        384,
+        7,
+        7
+      ],
+      [
+        1,
+        384,
+        7,
+        7
+      ],
+      [
+        1,
+        128,
+        7,
+        7
+      ],
+      [
+        1,
+        128,
+        7,
+        7
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        1024,
+        7,
+        7
+      ]
+    ]
+  }
+},
+{
+  "name": "averagepool_1",
+  "type": "Pooling",
+  "inputs": [
+    "inception_5b/output_1"
+  ],
+  "outputs": [
+    "pool5/7x7_s1_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        1024,
+        7,
+        7
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        1024,
+        1,
+        1
+      ]
+    ]
+  }
+},
+{
+  "name": "dropout_1",
+  "type": "Dropout",
+  "inputs": [
+    "pool5/7x7_s1_1"
+  ],
+  "outputs": [
+    "pool5/7x7_s1_2",
+    "_pool5/7x7_s1_mask_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        1024,
+        1,
+        1
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        1024,
+        1,
+        1
+      ]
+    ]
+  }
+},
+{
+  "name": "dropout_1",
+  "type": "Dropout",
+  "inputs": [
+    "pool5/7x7_s1_1"
+  ],
+  "outputs": [
+    "pool5/7x7_s1_2",
+    "_pool5/7x7_s1_mask_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        1024,
+        1,
+        1
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        1024,
+        1,
+        1
+      ]
+    ]
+  }
+},
+{
+  "name": "OC2_DUMMY_1",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        1024
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        1024
+      ]
+    ]
+  }
+},
+{
+  "name": "reshape_1",
+  "type": "Reshape",
+  "inputs": [
+    "pool5/7x7_s1_2",
+    "OC2_DUMMY_1"
+  ],
+  "outputs": [
+    "OC2_DUMMY_0"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        1024,
+        1,
+        1
+      ],
+      [
+        1,
+        1024
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        1024
+      ]
+    ]
+  }
+},
+{
+  "name": "loss3/classifier_w_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1000,
+        1024
+      ]
+    ],
+    "output_shapes": [
+      [
+        1000,
+        1024
+      ]
+    ]
+  }
+},
+{
+  "name": "loss3/classifier_b_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1000
+      ]
+    ],
+    "output_shapes": [
+      [
+        1000
+      ]
+    ]
+  }
+},
+{
+  "name": "gemm_1",
+  "type": "Gemm",
+  "inputs": [
+    "OC2_DUMMY_0",
+    "loss3/classifier_w_0",
+    "loss3/classifier_b_0"
+  ],
+  "outputs": [
+    "loss3/classifier_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        1024
+      ],
+      [
+        1000,
+        1024
+      ],
+      [
+        1000
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        1000
+      ]
+    ]
+  }
+},
+{
+  "name": "softmax_1",
+  "type": "Softmax",
+  "inputs": [
+    "loss3/classifier_1"
+  ],
+  "outputs": [
+    "prob_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        1000
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        1000
+      ]
+    ]
+  }
+}]

@@ -1,21 +1,552 @@
-[{"name":"Parameter193","type":"ConstantInput","input_dimensions":{"input_shapes":[[16,4,4,10]],"output_shapes":[[16,4,4,10]]}},
-{"name":"Parameter193_reshape1_shape","type":"ConstantInput","input_dimensions":{"input_shapes":[[256,10]],"output_shapes":[[256,10]]}},
-{"name":"Times212_reshape1","type":"Reshape","inputs":["Parameter193","Parameter193_reshape1_shape"],"outputs":["Parameter193_reshape1"],"input_dimensions":{"input_shapes":[[16,4,4,10],[256,10]],"output_shapes":[[256,10]]}},
-{"name":"Input3","type":"ConstantInput","input_dimensions":{"input_shapes":[[1,1,28,28]],"output_shapes":[[1,1,28,28]]}},
-{"name":"Parameter5","type":"ConstantInput","input_dimensions":{"input_shapes":[[8,1,5,5]],"output_shapes":[[8,1,5,5]]}},
-{"name":"Convolution28","type":"Conv","inputs":["Input3","Parameter5"],"outputs":["Convolution28_Output_0"],"input_dimensions":{"input_shapes":[[1,1,28,28],[8,1,5,5]],"output_shapes":[[1,8,28,28]]}},
-{"name":"Parameter6","type":"ConstantInput","input_dimensions":{"input_shapes":[[8,1,1]],"output_shapes":[[8,1,1]]}},
-{"name":"Plus30","type":"ElementWise","inputs":["Convolution28_Output_0","Parameter6"],"outputs":["Plus30_Output_0"],"input_dimensions":{"input_shapes":[[1,8,28,28],[8,1,1]],"output_shapes":[[1,8,28,28]]}},
-{"name":"ReLU32","type":"Relu","inputs":["Plus30_Output_0"],"outputs":["ReLU32_Output_0"],"input_dimensions":{"input_shapes":[[1,8,28,28]],"output_shapes":[[1,8,28,28]]}},
-{"name":"Pooling66","type":"Pooling","inputs":["ReLU32_Output_0"],"outputs":["Pooling66_Output_0"],"input_dimensions":{"input_shapes":[[1,8,28,28]],"output_shapes":[[1,8,14,14]]}},
-{"name":"Parameter87","type":"ConstantInput","input_dimensions":{"input_shapes":[[16,8,5,5]],"output_shapes":[[16,8,5,5]]}},
-{"name":"Convolution110","type":"Conv","inputs":["Pooling66_Output_0","Parameter87"],"outputs":["Convolution110_Output_0"],"input_dimensions":{"input_shapes":[[1,8,14,14],[16,8,5,5]],"output_shapes":[[1,16,14,14]]}},
-{"name":"Parameter88","type":"ConstantInput","input_dimensions":{"input_shapes":[[16,1,1]],"output_shapes":[[16,1,1]]}},
-{"name":"Plus112","type":"ElementWise","inputs":["Convolution110_Output_0","Parameter88"],"outputs":["Plus112_Output_0"],"input_dimensions":{"input_shapes":[[1,16,14,14],[16,1,1]],"output_shapes":[[1,16,14,14]]}},
-{"name":"ReLU114","type":"Relu","inputs":["Plus112_Output_0"],"outputs":["ReLU114_Output_0"],"input_dimensions":{"input_shapes":[[1,16,14,14]],"output_shapes":[[1,16,14,14]]}},
-{"name":"Pooling160","type":"Pooling","inputs":["ReLU114_Output_0"],"outputs":["Pooling160_Output_0"],"input_dimensions":{"input_shapes":[[1,16,14,14]],"output_shapes":[[1,16,4,4]]}},
-{"name":"Pooling160_Output_0_reshape0_shape","type":"ConstantInput","input_dimensions":{"input_shapes":[[1,256]],"output_shapes":[[1,256]]}},
-{"name":"Times212_reshape0","type":"Reshape","inputs":["Pooling160_Output_0","Pooling160_Output_0_reshape0_shape"],"outputs":["Pooling160_Output_0_reshape0"],"input_dimensions":{"input_shapes":[[1,16,4,4],[1,256]],"output_shapes":[[1,256]]}},
-{"name":"Times212","type":"Gemm","inputs":["Pooling160_Output_0_reshape0","Parameter193_reshape1"],"outputs":["Times212_Output_0"],"input_dimensions":{"input_shapes":[[1,256],[256,10]],"output_shapes":[[1,10]]}},
-{"name":"Parameter194","type":"ConstantInput","input_dimensions":{"input_shapes":[[1,10]],"output_shapes":[[1,10]]}},
-{"name":"Plus214","type":"ElementWise","inputs":["Times212_Output_0","Parameter194"],"outputs":["Plus214_Output_0"],"input_dimensions":{"input_shapes":[[1,10],[1,10]],"output_shapes":[[1,10]]}}]
+[{
+  "name": "Parameter193",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        16,
+        4,
+        4,
+        10
+      ]
+    ],
+    "output_shapes": [
+      [
+        16,
+        4,
+        4,
+        10
+      ]
+    ]
+  }
+},
+{
+  "name": "Parameter193_reshape1_shape",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256,
+        10
+      ]
+    ],
+    "output_shapes": [
+      [
+        256,
+        10
+      ]
+    ]
+  }
+},
+{
+  "name": "Times212_reshape1",
+  "type": "Reshape",
+  "inputs": [
+    "Parameter193",
+    "Parameter193_reshape1_shape"
+  ],
+  "outputs": [
+    "Parameter193_reshape1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        16,
+        4,
+        4,
+        10
+      ],
+      [
+        256,
+        10
+      ]
+    ],
+    "output_shapes": [
+      [
+        256,
+        10
+      ]
+    ]
+  }
+},
+{
+  "name": "Input3",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        1,
+        28,
+        28
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        1,
+        28,
+        28
+      ]
+    ]
+  }
+},
+{
+  "name": "Parameter5",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        8,
+        1,
+        5,
+        5
+      ]
+    ],
+    "output_shapes": [
+      [
+        8,
+        1,
+        5,
+        5
+      ]
+    ]
+  }
+},
+{
+  "name": "Convolution28",
+  "type": "Conv",
+  "inputs": [
+    "Input3",
+    "Parameter5"
+  ],
+  "outputs": [
+    "Convolution28_Output_0"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        1,
+        28,
+        28
+      ],
+      [
+        8,
+        1,
+        5,
+        5
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        8,
+        28,
+        28
+      ]
+    ]
+  }
+},
+{
+  "name": "Parameter6",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        8,
+        1,
+        1
+      ]
+    ],
+    "output_shapes": [
+      [
+        8,
+        1,
+        1
+      ]
+    ]
+  }
+},
+{
+  "name": "Plus30",
+  "type": "ElementWise",
+  "inputs": [
+    "Convolution28_Output_0",
+    "Parameter6"
+  ],
+  "outputs": [
+    "Plus30_Output_0"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        8,
+        28,
+        28
+      ],
+      [
+        8,
+        1,
+        1
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        8,
+        28,
+        28
+      ]
+    ]
+  }
+},
+{
+  "name": "ReLU32",
+  "type": "Relu",
+  "inputs": [
+    "Plus30_Output_0"
+  ],
+  "outputs": [
+    "ReLU32_Output_0"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        8,
+        28,
+        28
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        8,
+        28,
+        28
+      ]
+    ]
+  }
+},
+{
+  "name": "Pooling66",
+  "type": "Pooling",
+  "inputs": [
+    "ReLU32_Output_0"
+  ],
+  "outputs": [
+    "Pooling66_Output_0"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        8,
+        28,
+        28
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        8,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "Parameter87",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        16,
+        8,
+        5,
+        5
+      ]
+    ],
+    "output_shapes": [
+      [
+        16,
+        8,
+        5,
+        5
+      ]
+    ]
+  }
+},
+{
+  "name": "Convolution110",
+  "type": "Conv",
+  "inputs": [
+    "Pooling66_Output_0",
+    "Parameter87"
+  ],
+  "outputs": [
+    "Convolution110_Output_0"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        8,
+        14,
+        14
+      ],
+      [
+        16,
+        8,
+        5,
+        5
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        16,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "Parameter88",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        16,
+        1,
+        1
+      ]
+    ],
+    "output_shapes": [
+      [
+        16,
+        1,
+        1
+      ]
+    ]
+  }
+},
+{
+  "name": "Plus112",
+  "type": "ElementWise",
+  "inputs": [
+    "Convolution110_Output_0",
+    "Parameter88"
+  ],
+  "outputs": [
+    "Plus112_Output_0"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        16,
+        14,
+        14
+      ],
+      [
+        16,
+        1,
+        1
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        16,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "ReLU114",
+  "type": "Relu",
+  "inputs": [
+    "Plus112_Output_0"
+  ],
+  "outputs": [
+    "ReLU114_Output_0"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        16,
+        14,
+        14
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        16,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "Pooling160",
+  "type": "Pooling",
+  "inputs": [
+    "ReLU114_Output_0"
+  ],
+  "outputs": [
+    "Pooling160_Output_0"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        16,
+        14,
+        14
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        16,
+        4,
+        4
+      ]
+    ]
+  }
+},
+{
+  "name": "Pooling160_Output_0_reshape0_shape",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        256
+      ]
+    ]
+  }
+},
+{
+  "name": "Times212_reshape0",
+  "type": "Reshape",
+  "inputs": [
+    "Pooling160_Output_0",
+    "Pooling160_Output_0_reshape0_shape"
+  ],
+  "outputs": [
+    "Pooling160_Output_0_reshape0"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        16,
+        4,
+        4
+      ],
+      [
+        1,
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        256
+      ]
+    ]
+  }
+},
+{
+  "name": "Times212",
+  "type": "Gemm",
+  "inputs": [
+    "Pooling160_Output_0_reshape0",
+    "Parameter193_reshape1"
+  ],
+  "outputs": [
+    "Times212_Output_0"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        256
+      ],
+      [
+        256,
+        10
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        10
+      ]
+    ]
+  }
+},
+{
+  "name": "Parameter194",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        10
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        10
+      ]
+    ]
+  }
+},
+{
+  "name": "Plus214",
+  "type": "ElementWise",
+  "inputs": [
+    "Times212_Output_0",
+    "Parameter194"
+  ],
+  "outputs": [
+    "Plus214_Output_0"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        10
+      ],
+      [
+        1,
+        10
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        10
+      ]
+    ]
+  }
+}]

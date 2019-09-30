@@ -1,75 +1,1935 @@
-[{"name":"image","type":"ConstantInput","input_dimensions":{"input_shapes":[[1,3,416,416]],"output_shapes":[[1,3,416,416]]}},
-{"name":"scalerPreprocessor","type":"Scale","inputs":["image"],"outputs":["image2"],"input_dimensions":{"input_shapes":[[1,3,416,416]],"output_shapes":[[1,3,416,416]]}},
-{"name":"convolution_W","type":"ConstantInput","input_dimensions":{"input_shapes":[[16,3,3,3]],"output_shapes":[[16,3,3,3]]}},
-{"name":"convolution","type":"Conv","inputs":["image2","convolution_W"],"outputs":["convolution2d_1_output"],"input_dimensions":{"input_shapes":[[1,3,416,416],[16,3,3,3]],"output_shapes":[[1,16,416,416]]}},
-{"name":"BatchNormalization_scale","type":"ConstantInput","input_dimensions":{"input_shapes":[[16]],"output_shapes":[[16]]}},
-{"name":"BatchNormalization_B","type":"ConstantInput","input_dimensions":{"input_shapes":[[16]],"output_shapes":[[16]]}},
-{"name":"BatchNormalization_mean","type":"ConstantInput","input_dimensions":{"input_shapes":[[16]],"output_shapes":[[16]]}},
-{"name":"BatchNormalization_variance","type":"ConstantInput","input_dimensions":{"input_shapes":[[16]],"output_shapes":[[16]]}},
-{"name":"batchnorm","type":"BatchNorm","inputs":["convolution2d_1_output","BatchNormalization_scale","BatchNormalization_B","BatchNormalization_mean","BatchNormalization_variance"],"outputs":["batchnormalization_1_output"],"input_dimensions":{"input_shapes":[[1,16,416,416],[16],[16],[16],[16]],"output_shapes":[[1,16,416,416],[16],[16],[16],[16]]}},
-{"name":"activation","type":"Relu","inputs":["batchnormalization_1_output"],"outputs":["leakyrelu_1_output"],"input_dimensions":{"input_shapes":[[1,16,416,416]],"output_shapes":[[1,16,416,416]]}},
-{"name":"pooling","type":"Pooling","inputs":["leakyrelu_1_output"],"outputs":["maxpooling2d_1_output"],"input_dimensions":{"input_shapes":[[1,16,416,416]],"output_shapes":[[1,16,208,208]]}},
-{"name":"convolution1_W","type":"ConstantInput","input_dimensions":{"input_shapes":[[32,16,3,3]],"output_shapes":[[32,16,3,3]]}},
-{"name":"convolution1","type":"Conv","inputs":["maxpooling2d_1_output","convolution1_W"],"outputs":["convolution2d_2_output"],"input_dimensions":{"input_shapes":[[1,16,208,208],[32,16,3,3]],"output_shapes":[[1,32,208,208]]}},
-{"name":"BatchNormalization_scale1","type":"ConstantInput","input_dimensions":{"input_shapes":[[32]],"output_shapes":[[32]]}},
-{"name":"BatchNormalization_B1","type":"ConstantInput","input_dimensions":{"input_shapes":[[32]],"output_shapes":[[32]]}},
-{"name":"BatchNormalization_mean1","type":"ConstantInput","input_dimensions":{"input_shapes":[[32]],"output_shapes":[[32]]}},
-{"name":"BatchNormalization_variance1","type":"ConstantInput","input_dimensions":{"input_shapes":[[32]],"output_shapes":[[32]]}},
-{"name":"batchnorm1","type":"BatchNorm","inputs":["convolution2d_2_output","BatchNormalization_scale1","BatchNormalization_B1","BatchNormalization_mean1","BatchNormalization_variance1"],"outputs":["batchnormalization_2_output"],"input_dimensions":{"input_shapes":[[1,32,208,208],[32],[32],[32],[32]],"output_shapes":[[1,32,208,208],[32],[32],[32],[32]]}},
-{"name":"activation1","type":"Relu","inputs":["batchnormalization_2_output"],"outputs":["leakyrelu_2_output"],"input_dimensions":{"input_shapes":[[1,32,208,208]],"output_shapes":[[1,32,208,208]]}},
-{"name":"pooling1","type":"Pooling","inputs":["leakyrelu_2_output"],"outputs":["maxpooling2d_2_output"],"input_dimensions":{"input_shapes":[[1,32,208,208]],"output_shapes":[[1,32,104,104]]}},
-{"name":"convolution2_W","type":"ConstantInput","input_dimensions":{"input_shapes":[[64,32,3,3]],"output_shapes":[[64,32,3,3]]}},
-{"name":"convolution2","type":"Conv","inputs":["maxpooling2d_2_output","convolution2_W"],"outputs":["convolution2d_3_output"],"input_dimensions":{"input_shapes":[[1,32,104,104],[64,32,3,3]],"output_shapes":[[1,64,104,104]]}},
-{"name":"BatchNormalization_scale2","type":"ConstantInput","input_dimensions":{"input_shapes":[[64]],"output_shapes":[[64]]}},
-{"name":"BatchNormalization_B2","type":"ConstantInput","input_dimensions":{"input_shapes":[[64]],"output_shapes":[[64]]}},
-{"name":"BatchNormalization_mean2","type":"ConstantInput","input_dimensions":{"input_shapes":[[64]],"output_shapes":[[64]]}},
-{"name":"BatchNormalization_variance2","type":"ConstantInput","input_dimensions":{"input_shapes":[[64]],"output_shapes":[[64]]}},
-{"name":"batchnorm2","type":"BatchNorm","inputs":["convolution2d_3_output","BatchNormalization_scale2","BatchNormalization_B2","BatchNormalization_mean2","BatchNormalization_variance2"],"outputs":["batchnormalization_3_output"],"input_dimensions":{"input_shapes":[[1,64,104,104],[64],[64],[64],[64]],"output_shapes":[[1,64,104,104],[64],[64],[64],[64]]}},
-{"name":"activation2","type":"Relu","inputs":["batchnormalization_3_output"],"outputs":["leakyrelu_3_output"],"input_dimensions":{"input_shapes":[[1,64,104,104]],"output_shapes":[[1,64,104,104]]}},
-{"name":"pooling2","type":"Pooling","inputs":["leakyrelu_3_output"],"outputs":["maxpooling2d_3_output"],"input_dimensions":{"input_shapes":[[1,64,104,104]],"output_shapes":[[1,64,52,52]]}},
-{"name":"convolution3_W","type":"ConstantInput","input_dimensions":{"input_shapes":[[128,64,3,3]],"output_shapes":[[128,64,3,3]]}},
-{"name":"convolution3","type":"Conv","inputs":["maxpooling2d_3_output","convolution3_W"],"outputs":["convolution2d_4_output"],"input_dimensions":{"input_shapes":[[1,64,52,52],[128,64,3,3]],"output_shapes":[[1,128,52,52]]}},
-{"name":"BatchNormalization_scale3","type":"ConstantInput","input_dimensions":{"input_shapes":[[128]],"output_shapes":[[128]]}},
-{"name":"BatchNormalization_B3","type":"ConstantInput","input_dimensions":{"input_shapes":[[128]],"output_shapes":[[128]]}},
-{"name":"BatchNormalization_mean3","type":"ConstantInput","input_dimensions":{"input_shapes":[[128]],"output_shapes":[[128]]}},
-{"name":"BatchNormalization_variance3","type":"ConstantInput","input_dimensions":{"input_shapes":[[128]],"output_shapes":[[128]]}},
-{"name":"batchnorm3","type":"BatchNorm","inputs":["convolution2d_4_output","BatchNormalization_scale3","BatchNormalization_B3","BatchNormalization_mean3","BatchNormalization_variance3"],"outputs":["batchnormalization_4_output"],"input_dimensions":{"input_shapes":[[1,128,52,52],[128],[128],[128],[128]],"output_shapes":[[1,128,52,52],[128],[128],[128],[128]]}},
-{"name":"activation3","type":"Relu","inputs":["batchnormalization_4_output"],"outputs":["leakyrelu_4_output"],"input_dimensions":{"input_shapes":[[1,128,52,52]],"output_shapes":[[1,128,52,52]]}},
-{"name":"pooling3","type":"Pooling","inputs":["leakyrelu_4_output"],"outputs":["maxpooling2d_4_output"],"input_dimensions":{"input_shapes":[[1,128,52,52]],"output_shapes":[[1,128,26,26]]}},
-{"name":"convolution4_W","type":"ConstantInput","input_dimensions":{"input_shapes":[[256,128,3,3]],"output_shapes":[[256,128,3,3]]}},
-{"name":"convolution4","type":"Conv","inputs":["maxpooling2d_4_output","convolution4_W"],"outputs":["convolution2d_5_output"],"input_dimensions":{"input_shapes":[[1,128,26,26],[256,128,3,3]],"output_shapes":[[1,256,26,26]]}},
-{"name":"BatchNormalization_scale4","type":"ConstantInput","input_dimensions":{"input_shapes":[[256]],"output_shapes":[[256]]}},
-{"name":"BatchNormalization_B4","type":"ConstantInput","input_dimensions":{"input_shapes":[[256]],"output_shapes":[[256]]}},
-{"name":"BatchNormalization_mean4","type":"ConstantInput","input_dimensions":{"input_shapes":[[256]],"output_shapes":[[256]]}},
-{"name":"BatchNormalization_variance4","type":"ConstantInput","input_dimensions":{"input_shapes":[[256]],"output_shapes":[[256]]}},
-{"name":"batchnorm4","type":"BatchNorm","inputs":["convolution2d_5_output","BatchNormalization_scale4","BatchNormalization_B4","BatchNormalization_mean4","BatchNormalization_variance4"],"outputs":["batchnormalization_5_output"],"input_dimensions":{"input_shapes":[[1,256,26,26],[256],[256],[256],[256]],"output_shapes":[[1,256,26,26],[256],[256],[256],[256]]}},
-{"name":"activation4","type":"Relu","inputs":["batchnormalization_5_output"],"outputs":["leakyrelu_5_output"],"input_dimensions":{"input_shapes":[[1,256,26,26]],"output_shapes":[[1,256,26,26]]}},
-{"name":"pooling4","type":"Pooling","inputs":["leakyrelu_5_output"],"outputs":["maxpooling2d_5_output"],"input_dimensions":{"input_shapes":[[1,256,26,26]],"output_shapes":[[1,256,13,13]]}},
-{"name":"convolution5_W","type":"ConstantInput","input_dimensions":{"input_shapes":[[512,256,3,3]],"output_shapes":[[512,256,3,3]]}},
-{"name":"convolution5","type":"Conv","inputs":["maxpooling2d_5_output","convolution5_W"],"outputs":["convolution2d_6_output"],"input_dimensions":{"input_shapes":[[1,256,13,13],[512,256,3,3]],"output_shapes":[[1,512,13,13]]}},
-{"name":"BatchNormalization_scale5","type":"ConstantInput","input_dimensions":{"input_shapes":[[512]],"output_shapes":[[512]]}},
-{"name":"BatchNormalization_B5","type":"ConstantInput","input_dimensions":{"input_shapes":[[512]],"output_shapes":[[512]]}},
-{"name":"BatchNormalization_mean5","type":"ConstantInput","input_dimensions":{"input_shapes":[[512]],"output_shapes":[[512]]}},
-{"name":"BatchNormalization_variance5","type":"ConstantInput","input_dimensions":{"input_shapes":[[512]],"output_shapes":[[512]]}},
-{"name":"batchnorm5","type":"BatchNorm","inputs":["convolution2d_6_output","BatchNormalization_scale5","BatchNormalization_B5","BatchNormalization_mean5","BatchNormalization_variance5"],"outputs":["batchnormalization_6_output"],"input_dimensions":{"input_shapes":[[1,512,13,13],[512],[512],[512],[512]],"output_shapes":[[1,512,13,13],[512],[512],[512],[512]]}},
-{"name":"activation5","type":"Relu","inputs":["batchnormalization_6_output"],"outputs":["leakyrelu_6_output"],"input_dimensions":{"input_shapes":[[1,512,13,13]],"output_shapes":[[1,512,13,13]]}},
-{"name":"pooling5","type":"Pooling","inputs":["leakyrelu_6_output"],"outputs":["maxpooling2d_6_output"],"input_dimensions":{"input_shapes":[[1,512,13,13]],"output_shapes":[[1,512,12,12]]}},
-{"name":"convolution6_W","type":"ConstantInput","input_dimensions":{"input_shapes":[[1024,512,3,3]],"output_shapes":[[1024,512,3,3]]}},
-{"name":"convolution6","type":"Conv","inputs":["maxpooling2d_6_output","convolution6_W"],"outputs":["convolution2d_7_output"],"input_dimensions":{"input_shapes":[[1,512,12,12],[1024,512,3,3]],"output_shapes":[[1,1024,12,12]]}},
-{"name":"BatchNormalization_scale6","type":"ConstantInput","input_dimensions":{"input_shapes":[[1024]],"output_shapes":[[1024]]}},
-{"name":"BatchNormalization_B6","type":"ConstantInput","input_dimensions":{"input_shapes":[[1024]],"output_shapes":[[1024]]}},
-{"name":"BatchNormalization_mean6","type":"ConstantInput","input_dimensions":{"input_shapes":[[1024]],"output_shapes":[[1024]]}},
-{"name":"BatchNormalization_variance6","type":"ConstantInput","input_dimensions":{"input_shapes":[[1024]],"output_shapes":[[1024]]}},
-{"name":"batchnorm6","type":"BatchNorm","inputs":["convolution2d_7_output","BatchNormalization_scale6","BatchNormalization_B6","BatchNormalization_mean6","BatchNormalization_variance6"],"outputs":["batchnormalization_7_output"],"input_dimensions":{"input_shapes":[[1,1024,12,12],[1024],[1024],[1024],[1024]],"output_shapes":[[1,1024,12,12],[1024],[1024],[1024],[1024]]}},
-{"name":"activation6","type":"Relu","inputs":["batchnormalization_7_output"],"outputs":["leakyrelu_7_output"],"input_dimensions":{"input_shapes":[[1,1024,12,12]],"output_shapes":[[1,1024,12,12]]}},
-{"name":"convolution7_W","type":"ConstantInput","input_dimensions":{"input_shapes":[[1024,1024,3,3]],"output_shapes":[[1024,1024,3,3]]}},
-{"name":"convolution7","type":"Conv","inputs":["leakyrelu_7_output","convolution7_W"],"outputs":["convolution2d_8_output"],"input_dimensions":{"input_shapes":[[1,1024,12,12],[1024,1024,3,3]],"output_shapes":[[1,1024,12,12]]}},
-{"name":"BatchNormalization_scale7","type":"ConstantInput","input_dimensions":{"input_shapes":[[1024]],"output_shapes":[[1024]]}},
-{"name":"BatchNormalization_B7","type":"ConstantInput","input_dimensions":{"input_shapes":[[1024]],"output_shapes":[[1024]]}},
-{"name":"BatchNormalization_mean7","type":"ConstantInput","input_dimensions":{"input_shapes":[[1024]],"output_shapes":[[1024]]}},
-{"name":"BatchNormalization_variance7","type":"ConstantInput","input_dimensions":{"input_shapes":[[1024]],"output_shapes":[[1024]]}},
-{"name":"batchnorm7","type":"BatchNorm","inputs":["convolution2d_8_output","BatchNormalization_scale7","BatchNormalization_B7","BatchNormalization_mean7","BatchNormalization_variance7"],"outputs":["batchnormalization_8_output"],"input_dimensions":{"input_shapes":[[1,1024,12,12],[1024],[1024],[1024],[1024]],"output_shapes":[[1,1024,12,12],[1024],[1024],[1024],[1024]]}},
-{"name":"activation7","type":"Relu","inputs":["batchnormalization_8_output"],"outputs":["leakyrelu_8_output"],"input_dimensions":{"input_shapes":[[1,1024,12,12]],"output_shapes":[[1,1024,12,12]]}},
-{"name":"convolution8_W","type":"ConstantInput","input_dimensions":{"input_shapes":[[125,1024,1,1]],"output_shapes":[[125,1024,1,1]]}},
-{"name":"convolution8_B","type":"ConstantInput","input_dimensions":{"input_shapes":[[125]],"output_shapes":[[125]]}},
-{"name":"convolution8","type":"Conv","inputs":["leakyrelu_8_output","convolution8_W","convolution8_B"],"outputs":["grid"],"input_dimensions":{"input_shapes":[[1,1024,12,12],[125,1024,1,1],[125]],"output_shapes":[[1,125,12,12]]}}]
+[{
+  "name": "image",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        3,
+        416,
+        416
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        3,
+        416,
+        416
+      ]
+    ]
+  }
+},
+{
+  "name": "scalerPreprocessor",
+  "type": "Scale",
+  "inputs": [
+    "image"
+  ],
+  "outputs": [
+    "image2"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        3,
+        416,
+        416
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        3,
+        416,
+        416
+      ]
+    ]
+  }
+},
+{
+  "name": "convolution_W",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        16,
+        3,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        16,
+        3,
+        3,
+        3
+      ]
+    ]
+  }
+},
+{
+  "name": "convolution",
+  "type": "Conv",
+  "inputs": [
+    "image2",
+    "convolution_W"
+  ],
+  "outputs": [
+    "convolution2d_1_output"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        3,
+        416,
+        416
+      ],
+      [
+        16,
+        3,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        16,
+        416,
+        416
+      ]
+    ]
+  }
+},
+{
+  "name": "BatchNormalization_scale",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        16
+      ]
+    ],
+    "output_shapes": [
+      [
+        16
+      ]
+    ]
+  }
+},
+{
+  "name": "BatchNormalization_B",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        16
+      ]
+    ],
+    "output_shapes": [
+      [
+        16
+      ]
+    ]
+  }
+},
+{
+  "name": "BatchNormalization_mean",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        16
+      ]
+    ],
+    "output_shapes": [
+      [
+        16
+      ]
+    ]
+  }
+},
+{
+  "name": "BatchNormalization_variance",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        16
+      ]
+    ],
+    "output_shapes": [
+      [
+        16
+      ]
+    ]
+  }
+},
+{
+  "name": "batchnorm",
+  "type": "BatchNorm",
+  "inputs": [
+    "convolution2d_1_output",
+    "BatchNormalization_scale",
+    "BatchNormalization_B",
+    "BatchNormalization_mean",
+    "BatchNormalization_variance"
+  ],
+  "outputs": [
+    "batchnormalization_1_output"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        16,
+        416,
+        416
+      ],
+      [
+        16
+      ],
+      [
+        16
+      ],
+      [
+        16
+      ],
+      [
+        16
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        16,
+        416,
+        416
+      ],
+      [
+        16
+      ],
+      [
+        16
+      ],
+      [
+        16
+      ],
+      [
+        16
+      ]
+    ]
+  }
+},
+{
+  "name": "activation",
+  "type": "Relu",
+  "inputs": [
+    "batchnormalization_1_output"
+  ],
+  "outputs": [
+    "leakyrelu_1_output"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        16,
+        416,
+        416
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        16,
+        416,
+        416
+      ]
+    ]
+  }
+},
+{
+  "name": "pooling",
+  "type": "Pooling",
+  "inputs": [
+    "leakyrelu_1_output"
+  ],
+  "outputs": [
+    "maxpooling2d_1_output"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        16,
+        416,
+        416
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        16,
+        208,
+        208
+      ]
+    ]
+  }
+},
+{
+  "name": "convolution1_W",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        32,
+        16,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        32,
+        16,
+        3,
+        3
+      ]
+    ]
+  }
+},
+{
+  "name": "convolution1",
+  "type": "Conv",
+  "inputs": [
+    "maxpooling2d_1_output",
+    "convolution1_W"
+  ],
+  "outputs": [
+    "convolution2d_2_output"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        16,
+        208,
+        208
+      ],
+      [
+        32,
+        16,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        32,
+        208,
+        208
+      ]
+    ]
+  }
+},
+{
+  "name": "BatchNormalization_scale1",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        32
+      ]
+    ],
+    "output_shapes": [
+      [
+        32
+      ]
+    ]
+  }
+},
+{
+  "name": "BatchNormalization_B1",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        32
+      ]
+    ],
+    "output_shapes": [
+      [
+        32
+      ]
+    ]
+  }
+},
+{
+  "name": "BatchNormalization_mean1",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        32
+      ]
+    ],
+    "output_shapes": [
+      [
+        32
+      ]
+    ]
+  }
+},
+{
+  "name": "BatchNormalization_variance1",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        32
+      ]
+    ],
+    "output_shapes": [
+      [
+        32
+      ]
+    ]
+  }
+},
+{
+  "name": "batchnorm1",
+  "type": "BatchNorm",
+  "inputs": [
+    "convolution2d_2_output",
+    "BatchNormalization_scale1",
+    "BatchNormalization_B1",
+    "BatchNormalization_mean1",
+    "BatchNormalization_variance1"
+  ],
+  "outputs": [
+    "batchnormalization_2_output"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        32,
+        208,
+        208
+      ],
+      [
+        32
+      ],
+      [
+        32
+      ],
+      [
+        32
+      ],
+      [
+        32
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        32,
+        208,
+        208
+      ],
+      [
+        32
+      ],
+      [
+        32
+      ],
+      [
+        32
+      ],
+      [
+        32
+      ]
+    ]
+  }
+},
+{
+  "name": "activation1",
+  "type": "Relu",
+  "inputs": [
+    "batchnormalization_2_output"
+  ],
+  "outputs": [
+    "leakyrelu_2_output"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        32,
+        208,
+        208
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        32,
+        208,
+        208
+      ]
+    ]
+  }
+},
+{
+  "name": "pooling1",
+  "type": "Pooling",
+  "inputs": [
+    "leakyrelu_2_output"
+  ],
+  "outputs": [
+    "maxpooling2d_2_output"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        32,
+        208,
+        208
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        32,
+        104,
+        104
+      ]
+    ]
+  }
+},
+{
+  "name": "convolution2_W",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64,
+        32,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        64,
+        32,
+        3,
+        3
+      ]
+    ]
+  }
+},
+{
+  "name": "convolution2",
+  "type": "Conv",
+  "inputs": [
+    "maxpooling2d_2_output",
+    "convolution2_W"
+  ],
+  "outputs": [
+    "convolution2d_3_output"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        32,
+        104,
+        104
+      ],
+      [
+        64,
+        32,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        64,
+        104,
+        104
+      ]
+    ]
+  }
+},
+{
+  "name": "BatchNormalization_scale2",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        64
+      ]
+    ]
+  }
+},
+{
+  "name": "BatchNormalization_B2",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        64
+      ]
+    ]
+  }
+},
+{
+  "name": "BatchNormalization_mean2",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        64
+      ]
+    ]
+  }
+},
+{
+  "name": "BatchNormalization_variance2",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        64
+      ]
+    ]
+  }
+},
+{
+  "name": "batchnorm2",
+  "type": "BatchNorm",
+  "inputs": [
+    "convolution2d_3_output",
+    "BatchNormalization_scale2",
+    "BatchNormalization_B2",
+    "BatchNormalization_mean2",
+    "BatchNormalization_variance2"
+  ],
+  "outputs": [
+    "batchnormalization_3_output"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        64,
+        104,
+        104
+      ],
+      [
+        64
+      ],
+      [
+        64
+      ],
+      [
+        64
+      ],
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        64,
+        104,
+        104
+      ],
+      [
+        64
+      ],
+      [
+        64
+      ],
+      [
+        64
+      ],
+      [
+        64
+      ]
+    ]
+  }
+},
+{
+  "name": "activation2",
+  "type": "Relu",
+  "inputs": [
+    "batchnormalization_3_output"
+  ],
+  "outputs": [
+    "leakyrelu_3_output"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        64,
+        104,
+        104
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        64,
+        104,
+        104
+      ]
+    ]
+  }
+},
+{
+  "name": "pooling2",
+  "type": "Pooling",
+  "inputs": [
+    "leakyrelu_3_output"
+  ],
+  "outputs": [
+    "maxpooling2d_3_output"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        64,
+        104,
+        104
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        64,
+        52,
+        52
+      ]
+    ]
+  }
+},
+{
+  "name": "convolution3_W",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128,
+        64,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        128,
+        64,
+        3,
+        3
+      ]
+    ]
+  }
+},
+{
+  "name": "convolution3",
+  "type": "Conv",
+  "inputs": [
+    "maxpooling2d_3_output",
+    "convolution3_W"
+  ],
+  "outputs": [
+    "convolution2d_4_output"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        64,
+        52,
+        52
+      ],
+      [
+        128,
+        64,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        128,
+        52,
+        52
+      ]
+    ]
+  }
+},
+{
+  "name": "BatchNormalization_scale3",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        128
+      ]
+    ]
+  }
+},
+{
+  "name": "BatchNormalization_B3",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        128
+      ]
+    ]
+  }
+},
+{
+  "name": "BatchNormalization_mean3",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        128
+      ]
+    ]
+  }
+},
+{
+  "name": "BatchNormalization_variance3",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        128
+      ]
+    ]
+  }
+},
+{
+  "name": "batchnorm3",
+  "type": "BatchNorm",
+  "inputs": [
+    "convolution2d_4_output",
+    "BatchNormalization_scale3",
+    "BatchNormalization_B3",
+    "BatchNormalization_mean3",
+    "BatchNormalization_variance3"
+  ],
+  "outputs": [
+    "batchnormalization_4_output"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        128,
+        52,
+        52
+      ],
+      [
+        128
+      ],
+      [
+        128
+      ],
+      [
+        128
+      ],
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        128,
+        52,
+        52
+      ],
+      [
+        128
+      ],
+      [
+        128
+      ],
+      [
+        128
+      ],
+      [
+        128
+      ]
+    ]
+  }
+},
+{
+  "name": "activation3",
+  "type": "Relu",
+  "inputs": [
+    "batchnormalization_4_output"
+  ],
+  "outputs": [
+    "leakyrelu_4_output"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        128,
+        52,
+        52
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        128,
+        52,
+        52
+      ]
+    ]
+  }
+},
+{
+  "name": "pooling3",
+  "type": "Pooling",
+  "inputs": [
+    "leakyrelu_4_output"
+  ],
+  "outputs": [
+    "maxpooling2d_4_output"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        128,
+        52,
+        52
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        128,
+        26,
+        26
+      ]
+    ]
+  }
+},
+{
+  "name": "convolution4_W",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256,
+        128,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        256,
+        128,
+        3,
+        3
+      ]
+    ]
+  }
+},
+{
+  "name": "convolution4",
+  "type": "Conv",
+  "inputs": [
+    "maxpooling2d_4_output",
+    "convolution4_W"
+  ],
+  "outputs": [
+    "convolution2d_5_output"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        128,
+        26,
+        26
+      ],
+      [
+        256,
+        128,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        256,
+        26,
+        26
+      ]
+    ]
+  }
+},
+{
+  "name": "BatchNormalization_scale4",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        256
+      ]
+    ]
+  }
+},
+{
+  "name": "BatchNormalization_B4",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        256
+      ]
+    ]
+  }
+},
+{
+  "name": "BatchNormalization_mean4",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        256
+      ]
+    ]
+  }
+},
+{
+  "name": "BatchNormalization_variance4",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        256
+      ]
+    ]
+  }
+},
+{
+  "name": "batchnorm4",
+  "type": "BatchNorm",
+  "inputs": [
+    "convolution2d_5_output",
+    "BatchNormalization_scale4",
+    "BatchNormalization_B4",
+    "BatchNormalization_mean4",
+    "BatchNormalization_variance4"
+  ],
+  "outputs": [
+    "batchnormalization_5_output"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        256,
+        26,
+        26
+      ],
+      [
+        256
+      ],
+      [
+        256
+      ],
+      [
+        256
+      ],
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        256,
+        26,
+        26
+      ],
+      [
+        256
+      ],
+      [
+        256
+      ],
+      [
+        256
+      ],
+      [
+        256
+      ]
+    ]
+  }
+},
+{
+  "name": "activation4",
+  "type": "Relu",
+  "inputs": [
+    "batchnormalization_5_output"
+  ],
+  "outputs": [
+    "leakyrelu_5_output"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        256,
+        26,
+        26
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        256,
+        26,
+        26
+      ]
+    ]
+  }
+},
+{
+  "name": "pooling4",
+  "type": "Pooling",
+  "inputs": [
+    "leakyrelu_5_output"
+  ],
+  "outputs": [
+    "maxpooling2d_5_output"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        256,
+        26,
+        26
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        256,
+        13,
+        13
+      ]
+    ]
+  }
+},
+{
+  "name": "convolution5_W",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512,
+        256,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        512,
+        256,
+        3,
+        3
+      ]
+    ]
+  }
+},
+{
+  "name": "convolution5",
+  "type": "Conv",
+  "inputs": [
+    "maxpooling2d_5_output",
+    "convolution5_W"
+  ],
+  "outputs": [
+    "convolution2d_6_output"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        256,
+        13,
+        13
+      ],
+      [
+        512,
+        256,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        512,
+        13,
+        13
+      ]
+    ]
+  }
+},
+{
+  "name": "BatchNormalization_scale5",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "BatchNormalization_B5",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "BatchNormalization_mean5",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "BatchNormalization_variance5",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "batchnorm5",
+  "type": "BatchNorm",
+  "inputs": [
+    "convolution2d_6_output",
+    "BatchNormalization_scale5",
+    "BatchNormalization_B5",
+    "BatchNormalization_mean5",
+    "BatchNormalization_variance5"
+  ],
+  "outputs": [
+    "batchnormalization_6_output"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        512,
+        13,
+        13
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        512,
+        13,
+        13
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "activation5",
+  "type": "Relu",
+  "inputs": [
+    "batchnormalization_6_output"
+  ],
+  "outputs": [
+    "leakyrelu_6_output"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        512,
+        13,
+        13
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        512,
+        13,
+        13
+      ]
+    ]
+  }
+},
+{
+  "name": "pooling5",
+  "type": "Pooling",
+  "inputs": [
+    "leakyrelu_6_output"
+  ],
+  "outputs": [
+    "maxpooling2d_6_output"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        512,
+        13,
+        13
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        512,
+        12,
+        12
+      ]
+    ]
+  }
+},
+{
+  "name": "convolution6_W",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1024,
+        512,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        1024,
+        512,
+        3,
+        3
+      ]
+    ]
+  }
+},
+{
+  "name": "convolution6",
+  "type": "Conv",
+  "inputs": [
+    "maxpooling2d_6_output",
+    "convolution6_W"
+  ],
+  "outputs": [
+    "convolution2d_7_output"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        512,
+        12,
+        12
+      ],
+      [
+        1024,
+        512,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        1024,
+        12,
+        12
+      ]
+    ]
+  }
+},
+{
+  "name": "BatchNormalization_scale6",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1024
+      ]
+    ],
+    "output_shapes": [
+      [
+        1024
+      ]
+    ]
+  }
+},
+{
+  "name": "BatchNormalization_B6",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1024
+      ]
+    ],
+    "output_shapes": [
+      [
+        1024
+      ]
+    ]
+  }
+},
+{
+  "name": "BatchNormalization_mean6",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1024
+      ]
+    ],
+    "output_shapes": [
+      [
+        1024
+      ]
+    ]
+  }
+},
+{
+  "name": "BatchNormalization_variance6",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1024
+      ]
+    ],
+    "output_shapes": [
+      [
+        1024
+      ]
+    ]
+  }
+},
+{
+  "name": "batchnorm6",
+  "type": "BatchNorm",
+  "inputs": [
+    "convolution2d_7_output",
+    "BatchNormalization_scale6",
+    "BatchNormalization_B6",
+    "BatchNormalization_mean6",
+    "BatchNormalization_variance6"
+  ],
+  "outputs": [
+    "batchnormalization_7_output"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        1024,
+        12,
+        12
+      ],
+      [
+        1024
+      ],
+      [
+        1024
+      ],
+      [
+        1024
+      ],
+      [
+        1024
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        1024,
+        12,
+        12
+      ],
+      [
+        1024
+      ],
+      [
+        1024
+      ],
+      [
+        1024
+      ],
+      [
+        1024
+      ]
+    ]
+  }
+},
+{
+  "name": "activation6",
+  "type": "Relu",
+  "inputs": [
+    "batchnormalization_7_output"
+  ],
+  "outputs": [
+    "leakyrelu_7_output"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        1024,
+        12,
+        12
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        1024,
+        12,
+        12
+      ]
+    ]
+  }
+},
+{
+  "name": "convolution7_W",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1024,
+        1024,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        1024,
+        1024,
+        3,
+        3
+      ]
+    ]
+  }
+},
+{
+  "name": "convolution7",
+  "type": "Conv",
+  "inputs": [
+    "leakyrelu_7_output",
+    "convolution7_W"
+  ],
+  "outputs": [
+    "convolution2d_8_output"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        1024,
+        12,
+        12
+      ],
+      [
+        1024,
+        1024,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        1024,
+        12,
+        12
+      ]
+    ]
+  }
+},
+{
+  "name": "BatchNormalization_scale7",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1024
+      ]
+    ],
+    "output_shapes": [
+      [
+        1024
+      ]
+    ]
+  }
+},
+{
+  "name": "BatchNormalization_B7",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1024
+      ]
+    ],
+    "output_shapes": [
+      [
+        1024
+      ]
+    ]
+  }
+},
+{
+  "name": "BatchNormalization_mean7",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1024
+      ]
+    ],
+    "output_shapes": [
+      [
+        1024
+      ]
+    ]
+  }
+},
+{
+  "name": "BatchNormalization_variance7",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1024
+      ]
+    ],
+    "output_shapes": [
+      [
+        1024
+      ]
+    ]
+  }
+},
+{
+  "name": "batchnorm7",
+  "type": "BatchNorm",
+  "inputs": [
+    "convolution2d_8_output",
+    "BatchNormalization_scale7",
+    "BatchNormalization_B7",
+    "BatchNormalization_mean7",
+    "BatchNormalization_variance7"
+  ],
+  "outputs": [
+    "batchnormalization_8_output"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        1024,
+        12,
+        12
+      ],
+      [
+        1024
+      ],
+      [
+        1024
+      ],
+      [
+        1024
+      ],
+      [
+        1024
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        1024,
+        12,
+        12
+      ],
+      [
+        1024
+      ],
+      [
+        1024
+      ],
+      [
+        1024
+      ],
+      [
+        1024
+      ]
+    ]
+  }
+},
+{
+  "name": "activation7",
+  "type": "Relu",
+  "inputs": [
+    "batchnormalization_8_output"
+  ],
+  "outputs": [
+    "leakyrelu_8_output"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        1024,
+        12,
+        12
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        1024,
+        12,
+        12
+      ]
+    ]
+  }
+},
+{
+  "name": "convolution8_W",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        125,
+        1024,
+        1,
+        1
+      ]
+    ],
+    "output_shapes": [
+      [
+        125,
+        1024,
+        1,
+        1
+      ]
+    ]
+  }
+},
+{
+  "name": "convolution8_B",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        125
+      ]
+    ],
+    "output_shapes": [
+      [
+        125
+      ]
+    ]
+  }
+},
+{
+  "name": "convolution8",
+  "type": "Conv",
+  "inputs": [
+    "leakyrelu_8_output",
+    "convolution8_W",
+    "convolution8_B"
+  ],
+  "outputs": [
+    "grid"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        1024,
+        12,
+        12
+      ],
+      [
+        125,
+        1024,
+        1,
+        1
+      ],
+      [
+        125
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        125,
+        12,
+        12
+      ]
+    ]
+  }
+}]

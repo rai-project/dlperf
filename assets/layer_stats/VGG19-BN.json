@@ -1,166 +1,4137 @@
-[{"name":"data","type":"ConstantInput","input_dimensions":{"input_shapes":[[1,3,224,224]],"output_shapes":[[1,3,224,224]]}},
-{"name":"vgg0_conv0_weight","type":"ConstantInput","input_dimensions":{"input_shapes":[[64,3,3,3]],"output_shapes":[[64,3,3,3]]}},
-{"name":"vgg0_conv0_bias","type":"ConstantInput","input_dimensions":{"input_shapes":[[64]],"output_shapes":[[64]]}},
-{"name":"vgg0_conv0_fwd","type":"Conv","inputs":["data","vgg0_conv0_weight","vgg0_conv0_bias"],"outputs":["vgg0_conv0_fwd"],"input_dimensions":{"input_shapes":[[1,3,224,224],[64,3,3,3],[64]],"output_shapes":[[1,64,224,224]]}},
-{"name":"vgg0_batchnorm0_gamma","type":"ConstantInput","input_dimensions":{"input_shapes":[[64]],"output_shapes":[[64]]}},
-{"name":"vgg0_batchnorm0_beta","type":"ConstantInput","input_dimensions":{"input_shapes":[[64]],"output_shapes":[[64]]}},
-{"name":"vgg0_batchnorm0_running_mean","type":"ConstantInput","input_dimensions":{"input_shapes":[[64]],"output_shapes":[[64]]}},
-{"name":"vgg0_batchnorm0_running_var","type":"ConstantInput","input_dimensions":{"input_shapes":[[64]],"output_shapes":[[64]]}},
-{"name":"vgg0_batchnorm0_fwd","type":"BatchNorm","inputs":["vgg0_conv0_fwd","vgg0_batchnorm0_gamma","vgg0_batchnorm0_beta","vgg0_batchnorm0_running_mean","vgg0_batchnorm0_running_var"],"outputs":["vgg0_batchnorm0_fwd"],"input_dimensions":{"input_shapes":[[1,64,224,224],[64],[64],[64],[64]],"output_shapes":[[1,64,224,224],[64],[64],[64],[64]]}},
-{"name":"vgg0_relu0_fwd","type":"Relu","inputs":["vgg0_batchnorm0_fwd"],"outputs":["vgg0_relu0_fwd"],"input_dimensions":{"input_shapes":[[1,64,224,224]],"output_shapes":[[1,64,224,224]]}},
-{"name":"vgg0_conv1_weight","type":"ConstantInput","input_dimensions":{"input_shapes":[[64,64,3,3]],"output_shapes":[[64,64,3,3]]}},
-{"name":"vgg0_conv1_bias","type":"ConstantInput","input_dimensions":{"input_shapes":[[64]],"output_shapes":[[64]]}},
-{"name":"vgg0_conv1_fwd","type":"Conv","inputs":["vgg0_relu0_fwd","vgg0_conv1_weight","vgg0_conv1_bias"],"outputs":["vgg0_conv1_fwd"],"input_dimensions":{"input_shapes":[[1,64,224,224],[64,64,3,3],[64]],"output_shapes":[[1,64,224,224]]}},
-{"name":"vgg0_batchnorm1_gamma","type":"ConstantInput","input_dimensions":{"input_shapes":[[64]],"output_shapes":[[64]]}},
-{"name":"vgg0_batchnorm1_beta","type":"ConstantInput","input_dimensions":{"input_shapes":[[64]],"output_shapes":[[64]]}},
-{"name":"vgg0_batchnorm1_running_mean","type":"ConstantInput","input_dimensions":{"input_shapes":[[64]],"output_shapes":[[64]]}},
-{"name":"vgg0_batchnorm1_running_var","type":"ConstantInput","input_dimensions":{"input_shapes":[[64]],"output_shapes":[[64]]}},
-{"name":"vgg0_batchnorm1_fwd","type":"BatchNorm","inputs":["vgg0_conv1_fwd","vgg0_batchnorm1_gamma","vgg0_batchnorm1_beta","vgg0_batchnorm1_running_mean","vgg0_batchnorm1_running_var"],"outputs":["vgg0_batchnorm1_fwd"],"input_dimensions":{"input_shapes":[[1,64,224,224],[64],[64],[64],[64]],"output_shapes":[[1,64,224,224],[64],[64],[64],[64]]}},
-{"name":"vgg0_relu1_fwd","type":"Relu","inputs":["vgg0_batchnorm1_fwd"],"outputs":["vgg0_relu1_fwd"],"input_dimensions":{"input_shapes":[[1,64,224,224]],"output_shapes":[[1,64,224,224]]}},
-{"name":"vgg0_pool0_fwd","type":"Pooling","inputs":["vgg0_relu1_fwd"],"outputs":["vgg0_pool0_fwd"],"input_dimensions":{"input_shapes":[[1,64,224,224]],"output_shapes":[[1,64,112,112]]}},
-{"name":"vgg0_conv2_weight","type":"ConstantInput","input_dimensions":{"input_shapes":[[128,64,3,3]],"output_shapes":[[128,64,3,3]]}},
-{"name":"vgg0_conv2_bias","type":"ConstantInput","input_dimensions":{"input_shapes":[[128]],"output_shapes":[[128]]}},
-{"name":"vgg0_conv2_fwd","type":"Conv","inputs":["vgg0_pool0_fwd","vgg0_conv2_weight","vgg0_conv2_bias"],"outputs":["vgg0_conv2_fwd"],"input_dimensions":{"input_shapes":[[1,64,112,112],[128,64,3,3],[128]],"output_shapes":[[1,128,112,112]]}},
-{"name":"vgg0_batchnorm2_gamma","type":"ConstantInput","input_dimensions":{"input_shapes":[[128]],"output_shapes":[[128]]}},
-{"name":"vgg0_batchnorm2_beta","type":"ConstantInput","input_dimensions":{"input_shapes":[[128]],"output_shapes":[[128]]}},
-{"name":"vgg0_batchnorm2_running_mean","type":"ConstantInput","input_dimensions":{"input_shapes":[[128]],"output_shapes":[[128]]}},
-{"name":"vgg0_batchnorm2_running_var","type":"ConstantInput","input_dimensions":{"input_shapes":[[128]],"output_shapes":[[128]]}},
-{"name":"vgg0_batchnorm2_fwd","type":"BatchNorm","inputs":["vgg0_conv2_fwd","vgg0_batchnorm2_gamma","vgg0_batchnorm2_beta","vgg0_batchnorm2_running_mean","vgg0_batchnorm2_running_var"],"outputs":["vgg0_batchnorm2_fwd"],"input_dimensions":{"input_shapes":[[1,128,112,112],[128],[128],[128],[128]],"output_shapes":[[1,128,112,112],[128],[128],[128],[128]]}},
-{"name":"vgg0_relu2_fwd","type":"Relu","inputs":["vgg0_batchnorm2_fwd"],"outputs":["vgg0_relu2_fwd"],"input_dimensions":{"input_shapes":[[1,128,112,112]],"output_shapes":[[1,128,112,112]]}},
-{"name":"vgg0_conv3_weight","type":"ConstantInput","input_dimensions":{"input_shapes":[[128,128,3,3]],"output_shapes":[[128,128,3,3]]}},
-{"name":"vgg0_conv3_bias","type":"ConstantInput","input_dimensions":{"input_shapes":[[128]],"output_shapes":[[128]]}},
-{"name":"vgg0_conv3_fwd","type":"Conv","inputs":["vgg0_relu2_fwd","vgg0_conv3_weight","vgg0_conv3_bias"],"outputs":["vgg0_conv3_fwd"],"input_dimensions":{"input_shapes":[[1,128,112,112],[128,128,3,3],[128]],"output_shapes":[[1,128,112,112]]}},
-{"name":"vgg0_batchnorm3_gamma","type":"ConstantInput","input_dimensions":{"input_shapes":[[128]],"output_shapes":[[128]]}},
-{"name":"vgg0_batchnorm3_beta","type":"ConstantInput","input_dimensions":{"input_shapes":[[128]],"output_shapes":[[128]]}},
-{"name":"vgg0_batchnorm3_running_mean","type":"ConstantInput","input_dimensions":{"input_shapes":[[128]],"output_shapes":[[128]]}},
-{"name":"vgg0_batchnorm3_running_var","type":"ConstantInput","input_dimensions":{"input_shapes":[[128]],"output_shapes":[[128]]}},
-{"name":"vgg0_batchnorm3_fwd","type":"BatchNorm","inputs":["vgg0_conv3_fwd","vgg0_batchnorm3_gamma","vgg0_batchnorm3_beta","vgg0_batchnorm3_running_mean","vgg0_batchnorm3_running_var"],"outputs":["vgg0_batchnorm3_fwd"],"input_dimensions":{"input_shapes":[[1,128,112,112],[128],[128],[128],[128]],"output_shapes":[[1,128,112,112],[128],[128],[128],[128]]}},
-{"name":"vgg0_relu3_fwd","type":"Relu","inputs":["vgg0_batchnorm3_fwd"],"outputs":["vgg0_relu3_fwd"],"input_dimensions":{"input_shapes":[[1,128,112,112]],"output_shapes":[[1,128,112,112]]}},
-{"name":"vgg0_pool1_fwd","type":"Pooling","inputs":["vgg0_relu3_fwd"],"outputs":["vgg0_pool1_fwd"],"input_dimensions":{"input_shapes":[[1,128,112,112]],"output_shapes":[[1,128,56,56]]}},
-{"name":"vgg0_conv4_weight","type":"ConstantInput","input_dimensions":{"input_shapes":[[256,128,3,3]],"output_shapes":[[256,128,3,3]]}},
-{"name":"vgg0_conv4_bias","type":"ConstantInput","input_dimensions":{"input_shapes":[[256]],"output_shapes":[[256]]}},
-{"name":"vgg0_conv4_fwd","type":"Conv","inputs":["vgg0_pool1_fwd","vgg0_conv4_weight","vgg0_conv4_bias"],"outputs":["vgg0_conv4_fwd"],"input_dimensions":{"input_shapes":[[1,128,56,56],[256,128,3,3],[256]],"output_shapes":[[1,256,56,56]]}},
-{"name":"vgg0_batchnorm4_gamma","type":"ConstantInput","input_dimensions":{"input_shapes":[[256]],"output_shapes":[[256]]}},
-{"name":"vgg0_batchnorm4_beta","type":"ConstantInput","input_dimensions":{"input_shapes":[[256]],"output_shapes":[[256]]}},
-{"name":"vgg0_batchnorm4_running_mean","type":"ConstantInput","input_dimensions":{"input_shapes":[[256]],"output_shapes":[[256]]}},
-{"name":"vgg0_batchnorm4_running_var","type":"ConstantInput","input_dimensions":{"input_shapes":[[256]],"output_shapes":[[256]]}},
-{"name":"vgg0_batchnorm4_fwd","type":"BatchNorm","inputs":["vgg0_conv4_fwd","vgg0_batchnorm4_gamma","vgg0_batchnorm4_beta","vgg0_batchnorm4_running_mean","vgg0_batchnorm4_running_var"],"outputs":["vgg0_batchnorm4_fwd"],"input_dimensions":{"input_shapes":[[1,256,56,56],[256],[256],[256],[256]],"output_shapes":[[1,256,56,56],[256],[256],[256],[256]]}},
-{"name":"vgg0_relu4_fwd","type":"Relu","inputs":["vgg0_batchnorm4_fwd"],"outputs":["vgg0_relu4_fwd"],"input_dimensions":{"input_shapes":[[1,256,56,56]],"output_shapes":[[1,256,56,56]]}},
-{"name":"vgg0_conv5_weight","type":"ConstantInput","input_dimensions":{"input_shapes":[[256,256,3,3]],"output_shapes":[[256,256,3,3]]}},
-{"name":"vgg0_conv5_bias","type":"ConstantInput","input_dimensions":{"input_shapes":[[256]],"output_shapes":[[256]]}},
-{"name":"vgg0_conv5_fwd","type":"Conv","inputs":["vgg0_relu4_fwd","vgg0_conv5_weight","vgg0_conv5_bias"],"outputs":["vgg0_conv5_fwd"],"input_dimensions":{"input_shapes":[[1,256,56,56],[256,256,3,3],[256]],"output_shapes":[[1,256,56,56]]}},
-{"name":"vgg0_batchnorm5_gamma","type":"ConstantInput","input_dimensions":{"input_shapes":[[256]],"output_shapes":[[256]]}},
-{"name":"vgg0_batchnorm5_beta","type":"ConstantInput","input_dimensions":{"input_shapes":[[256]],"output_shapes":[[256]]}},
-{"name":"vgg0_batchnorm5_running_mean","type":"ConstantInput","input_dimensions":{"input_shapes":[[256]],"output_shapes":[[256]]}},
-{"name":"vgg0_batchnorm5_running_var","type":"ConstantInput","input_dimensions":{"input_shapes":[[256]],"output_shapes":[[256]]}},
-{"name":"vgg0_batchnorm5_fwd","type":"BatchNorm","inputs":["vgg0_conv5_fwd","vgg0_batchnorm5_gamma","vgg0_batchnorm5_beta","vgg0_batchnorm5_running_mean","vgg0_batchnorm5_running_var"],"outputs":["vgg0_batchnorm5_fwd"],"input_dimensions":{"input_shapes":[[1,256,56,56],[256],[256],[256],[256]],"output_shapes":[[1,256,56,56],[256],[256],[256],[256]]}},
-{"name":"vgg0_relu5_fwd","type":"Relu","inputs":["vgg0_batchnorm5_fwd"],"outputs":["vgg0_relu5_fwd"],"input_dimensions":{"input_shapes":[[1,256,56,56]],"output_shapes":[[1,256,56,56]]}},
-{"name":"vgg0_conv6_weight","type":"ConstantInput","input_dimensions":{"input_shapes":[[256,256,3,3]],"output_shapes":[[256,256,3,3]]}},
-{"name":"vgg0_conv6_bias","type":"ConstantInput","input_dimensions":{"input_shapes":[[256]],"output_shapes":[[256]]}},
-{"name":"vgg0_conv6_fwd","type":"Conv","inputs":["vgg0_relu5_fwd","vgg0_conv6_weight","vgg0_conv6_bias"],"outputs":["vgg0_conv6_fwd"],"input_dimensions":{"input_shapes":[[1,256,56,56],[256,256,3,3],[256]],"output_shapes":[[1,256,56,56]]}},
-{"name":"vgg0_batchnorm6_gamma","type":"ConstantInput","input_dimensions":{"input_shapes":[[256]],"output_shapes":[[256]]}},
-{"name":"vgg0_batchnorm6_beta","type":"ConstantInput","input_dimensions":{"input_shapes":[[256]],"output_shapes":[[256]]}},
-{"name":"vgg0_batchnorm6_running_mean","type":"ConstantInput","input_dimensions":{"input_shapes":[[256]],"output_shapes":[[256]]}},
-{"name":"vgg0_batchnorm6_running_var","type":"ConstantInput","input_dimensions":{"input_shapes":[[256]],"output_shapes":[[256]]}},
-{"name":"vgg0_batchnorm6_fwd","type":"BatchNorm","inputs":["vgg0_conv6_fwd","vgg0_batchnorm6_gamma","vgg0_batchnorm6_beta","vgg0_batchnorm6_running_mean","vgg0_batchnorm6_running_var"],"outputs":["vgg0_batchnorm6_fwd"],"input_dimensions":{"input_shapes":[[1,256,56,56],[256],[256],[256],[256]],"output_shapes":[[1,256,56,56],[256],[256],[256],[256]]}},
-{"name":"vgg0_relu6_fwd","type":"Relu","inputs":["vgg0_batchnorm6_fwd"],"outputs":["vgg0_relu6_fwd"],"input_dimensions":{"input_shapes":[[1,256,56,56]],"output_shapes":[[1,256,56,56]]}},
-{"name":"vgg0_conv7_weight","type":"ConstantInput","input_dimensions":{"input_shapes":[[256,256,3,3]],"output_shapes":[[256,256,3,3]]}},
-{"name":"vgg0_conv7_bias","type":"ConstantInput","input_dimensions":{"input_shapes":[[256]],"output_shapes":[[256]]}},
-{"name":"vgg0_conv7_fwd","type":"Conv","inputs":["vgg0_relu6_fwd","vgg0_conv7_weight","vgg0_conv7_bias"],"outputs":["vgg0_conv7_fwd"],"input_dimensions":{"input_shapes":[[1,256,56,56],[256,256,3,3],[256]],"output_shapes":[[1,256,56,56]]}},
-{"name":"vgg0_batchnorm7_gamma","type":"ConstantInput","input_dimensions":{"input_shapes":[[256]],"output_shapes":[[256]]}},
-{"name":"vgg0_batchnorm7_beta","type":"ConstantInput","input_dimensions":{"input_shapes":[[256]],"output_shapes":[[256]]}},
-{"name":"vgg0_batchnorm7_running_mean","type":"ConstantInput","input_dimensions":{"input_shapes":[[256]],"output_shapes":[[256]]}},
-{"name":"vgg0_batchnorm7_running_var","type":"ConstantInput","input_dimensions":{"input_shapes":[[256]],"output_shapes":[[256]]}},
-{"name":"vgg0_batchnorm7_fwd","type":"BatchNorm","inputs":["vgg0_conv7_fwd","vgg0_batchnorm7_gamma","vgg0_batchnorm7_beta","vgg0_batchnorm7_running_mean","vgg0_batchnorm7_running_var"],"outputs":["vgg0_batchnorm7_fwd"],"input_dimensions":{"input_shapes":[[1,256,56,56],[256],[256],[256],[256]],"output_shapes":[[1,256,56,56],[256],[256],[256],[256]]}},
-{"name":"vgg0_relu7_fwd","type":"Relu","inputs":["vgg0_batchnorm7_fwd"],"outputs":["vgg0_relu7_fwd"],"input_dimensions":{"input_shapes":[[1,256,56,56]],"output_shapes":[[1,256,56,56]]}},
-{"name":"vgg0_pool2_fwd","type":"Pooling","inputs":["vgg0_relu7_fwd"],"outputs":["vgg0_pool2_fwd"],"input_dimensions":{"input_shapes":[[1,256,56,56]],"output_shapes":[[1,256,28,28]]}},
-{"name":"vgg0_conv8_weight","type":"ConstantInput","input_dimensions":{"input_shapes":[[512,256,3,3]],"output_shapes":[[512,256,3,3]]}},
-{"name":"vgg0_conv8_bias","type":"ConstantInput","input_dimensions":{"input_shapes":[[512]],"output_shapes":[[512]]}},
-{"name":"vgg0_conv8_fwd","type":"Conv","inputs":["vgg0_pool2_fwd","vgg0_conv8_weight","vgg0_conv8_bias"],"outputs":["vgg0_conv8_fwd"],"input_dimensions":{"input_shapes":[[1,256,28,28],[512,256,3,3],[512]],"output_shapes":[[1,512,28,28]]}},
-{"name":"vgg0_batchnorm8_gamma","type":"ConstantInput","input_dimensions":{"input_shapes":[[512]],"output_shapes":[[512]]}},
-{"name":"vgg0_batchnorm8_beta","type":"ConstantInput","input_dimensions":{"input_shapes":[[512]],"output_shapes":[[512]]}},
-{"name":"vgg0_batchnorm8_running_mean","type":"ConstantInput","input_dimensions":{"input_shapes":[[512]],"output_shapes":[[512]]}},
-{"name":"vgg0_batchnorm8_running_var","type":"ConstantInput","input_dimensions":{"input_shapes":[[512]],"output_shapes":[[512]]}},
-{"name":"vgg0_batchnorm8_fwd","type":"BatchNorm","inputs":["vgg0_conv8_fwd","vgg0_batchnorm8_gamma","vgg0_batchnorm8_beta","vgg0_batchnorm8_running_mean","vgg0_batchnorm8_running_var"],"outputs":["vgg0_batchnorm8_fwd"],"input_dimensions":{"input_shapes":[[1,512,28,28],[512],[512],[512],[512]],"output_shapes":[[1,512,28,28],[512],[512],[512],[512]]}},
-{"name":"vgg0_relu8_fwd","type":"Relu","inputs":["vgg0_batchnorm8_fwd"],"outputs":["vgg0_relu8_fwd"],"input_dimensions":{"input_shapes":[[1,512,28,28]],"output_shapes":[[1,512,28,28]]}},
-{"name":"vgg0_conv9_weight","type":"ConstantInput","input_dimensions":{"input_shapes":[[512,512,3,3]],"output_shapes":[[512,512,3,3]]}},
-{"name":"vgg0_conv9_bias","type":"ConstantInput","input_dimensions":{"input_shapes":[[512]],"output_shapes":[[512]]}},
-{"name":"vgg0_conv9_fwd","type":"Conv","inputs":["vgg0_relu8_fwd","vgg0_conv9_weight","vgg0_conv9_bias"],"outputs":["vgg0_conv9_fwd"],"input_dimensions":{"input_shapes":[[1,512,28,28],[512,512,3,3],[512]],"output_shapes":[[1,512,28,28]]}},
-{"name":"vgg0_batchnorm9_gamma","type":"ConstantInput","input_dimensions":{"input_shapes":[[512]],"output_shapes":[[512]]}},
-{"name":"vgg0_batchnorm9_beta","type":"ConstantInput","input_dimensions":{"input_shapes":[[512]],"output_shapes":[[512]]}},
-{"name":"vgg0_batchnorm9_running_mean","type":"ConstantInput","input_dimensions":{"input_shapes":[[512]],"output_shapes":[[512]]}},
-{"name":"vgg0_batchnorm9_running_var","type":"ConstantInput","input_dimensions":{"input_shapes":[[512]],"output_shapes":[[512]]}},
-{"name":"vgg0_batchnorm9_fwd","type":"BatchNorm","inputs":["vgg0_conv9_fwd","vgg0_batchnorm9_gamma","vgg0_batchnorm9_beta","vgg0_batchnorm9_running_mean","vgg0_batchnorm9_running_var"],"outputs":["vgg0_batchnorm9_fwd"],"input_dimensions":{"input_shapes":[[1,512,28,28],[512],[512],[512],[512]],"output_shapes":[[1,512,28,28],[512],[512],[512],[512]]}},
-{"name":"vgg0_relu9_fwd","type":"Relu","inputs":["vgg0_batchnorm9_fwd"],"outputs":["vgg0_relu9_fwd"],"input_dimensions":{"input_shapes":[[1,512,28,28]],"output_shapes":[[1,512,28,28]]}},
-{"name":"vgg0_conv10_weight","type":"ConstantInput","input_dimensions":{"input_shapes":[[512,512,3,3]],"output_shapes":[[512,512,3,3]]}},
-{"name":"vgg0_conv10_bias","type":"ConstantInput","input_dimensions":{"input_shapes":[[512]],"output_shapes":[[512]]}},
-{"name":"vgg0_conv10_fwd","type":"Conv","inputs":["vgg0_relu9_fwd","vgg0_conv10_weight","vgg0_conv10_bias"],"outputs":["vgg0_conv10_fwd"],"input_dimensions":{"input_shapes":[[1,512,28,28],[512,512,3,3],[512]],"output_shapes":[[1,512,28,28]]}},
-{"name":"vgg0_batchnorm10_gamma","type":"ConstantInput","input_dimensions":{"input_shapes":[[512]],"output_shapes":[[512]]}},
-{"name":"vgg0_batchnorm10_beta","type":"ConstantInput","input_dimensions":{"input_shapes":[[512]],"output_shapes":[[512]]}},
-{"name":"vgg0_batchnorm10_running_mean","type":"ConstantInput","input_dimensions":{"input_shapes":[[512]],"output_shapes":[[512]]}},
-{"name":"vgg0_batchnorm10_running_var","type":"ConstantInput","input_dimensions":{"input_shapes":[[512]],"output_shapes":[[512]]}},
-{"name":"vgg0_batchnorm10_fwd","type":"BatchNorm","inputs":["vgg0_conv10_fwd","vgg0_batchnorm10_gamma","vgg0_batchnorm10_beta","vgg0_batchnorm10_running_mean","vgg0_batchnorm10_running_var"],"outputs":["vgg0_batchnorm10_fwd"],"input_dimensions":{"input_shapes":[[1,512,28,28],[512],[512],[512],[512]],"output_shapes":[[1,512,28,28],[512],[512],[512],[512]]}},
-{"name":"vgg0_relu10_fwd","type":"Relu","inputs":["vgg0_batchnorm10_fwd"],"outputs":["vgg0_relu10_fwd"],"input_dimensions":{"input_shapes":[[1,512,28,28]],"output_shapes":[[1,512,28,28]]}},
-{"name":"vgg0_conv11_weight","type":"ConstantInput","input_dimensions":{"input_shapes":[[512,512,3,3]],"output_shapes":[[512,512,3,3]]}},
-{"name":"vgg0_conv11_bias","type":"ConstantInput","input_dimensions":{"input_shapes":[[512]],"output_shapes":[[512]]}},
-{"name":"vgg0_conv11_fwd","type":"Conv","inputs":["vgg0_relu10_fwd","vgg0_conv11_weight","vgg0_conv11_bias"],"outputs":["vgg0_conv11_fwd"],"input_dimensions":{"input_shapes":[[1,512,28,28],[512,512,3,3],[512]],"output_shapes":[[1,512,28,28]]}},
-{"name":"vgg0_batchnorm11_gamma","type":"ConstantInput","input_dimensions":{"input_shapes":[[512]],"output_shapes":[[512]]}},
-{"name":"vgg0_batchnorm11_beta","type":"ConstantInput","input_dimensions":{"input_shapes":[[512]],"output_shapes":[[512]]}},
-{"name":"vgg0_batchnorm11_running_mean","type":"ConstantInput","input_dimensions":{"input_shapes":[[512]],"output_shapes":[[512]]}},
-{"name":"vgg0_batchnorm11_running_var","type":"ConstantInput","input_dimensions":{"input_shapes":[[512]],"output_shapes":[[512]]}},
-{"name":"vgg0_batchnorm11_fwd","type":"BatchNorm","inputs":["vgg0_conv11_fwd","vgg0_batchnorm11_gamma","vgg0_batchnorm11_beta","vgg0_batchnorm11_running_mean","vgg0_batchnorm11_running_var"],"outputs":["vgg0_batchnorm11_fwd"],"input_dimensions":{"input_shapes":[[1,512,28,28],[512],[512],[512],[512]],"output_shapes":[[1,512,28,28],[512],[512],[512],[512]]}},
-{"name":"vgg0_relu11_fwd","type":"Relu","inputs":["vgg0_batchnorm11_fwd"],"outputs":["vgg0_relu11_fwd"],"input_dimensions":{"input_shapes":[[1,512,28,28]],"output_shapes":[[1,512,28,28]]}},
-{"name":"vgg0_pool3_fwd","type":"Pooling","inputs":["vgg0_relu11_fwd"],"outputs":["vgg0_pool3_fwd"],"input_dimensions":{"input_shapes":[[1,512,28,28]],"output_shapes":[[1,512,14,14]]}},
-{"name":"vgg0_conv12_weight","type":"ConstantInput","input_dimensions":{"input_shapes":[[512,512,3,3]],"output_shapes":[[512,512,3,3]]}},
-{"name":"vgg0_conv12_bias","type":"ConstantInput","input_dimensions":{"input_shapes":[[512]],"output_shapes":[[512]]}},
-{"name":"vgg0_conv12_fwd","type":"Conv","inputs":["vgg0_pool3_fwd","vgg0_conv12_weight","vgg0_conv12_bias"],"outputs":["vgg0_conv12_fwd"],"input_dimensions":{"input_shapes":[[1,512,14,14],[512,512,3,3],[512]],"output_shapes":[[1,512,14,14]]}},
-{"name":"vgg0_batchnorm12_gamma","type":"ConstantInput","input_dimensions":{"input_shapes":[[512]],"output_shapes":[[512]]}},
-{"name":"vgg0_batchnorm12_beta","type":"ConstantInput","input_dimensions":{"input_shapes":[[512]],"output_shapes":[[512]]}},
-{"name":"vgg0_batchnorm12_running_mean","type":"ConstantInput","input_dimensions":{"input_shapes":[[512]],"output_shapes":[[512]]}},
-{"name":"vgg0_batchnorm12_running_var","type":"ConstantInput","input_dimensions":{"input_shapes":[[512]],"output_shapes":[[512]]}},
-{"name":"vgg0_batchnorm12_fwd","type":"BatchNorm","inputs":["vgg0_conv12_fwd","vgg0_batchnorm12_gamma","vgg0_batchnorm12_beta","vgg0_batchnorm12_running_mean","vgg0_batchnorm12_running_var"],"outputs":["vgg0_batchnorm12_fwd"],"input_dimensions":{"input_shapes":[[1,512,14,14],[512],[512],[512],[512]],"output_shapes":[[1,512,14,14],[512],[512],[512],[512]]}},
-{"name":"vgg0_relu12_fwd","type":"Relu","inputs":["vgg0_batchnorm12_fwd"],"outputs":["vgg0_relu12_fwd"],"input_dimensions":{"input_shapes":[[1,512,14,14]],"output_shapes":[[1,512,14,14]]}},
-{"name":"vgg0_conv13_weight","type":"ConstantInput","input_dimensions":{"input_shapes":[[512,512,3,3]],"output_shapes":[[512,512,3,3]]}},
-{"name":"vgg0_conv13_bias","type":"ConstantInput","input_dimensions":{"input_shapes":[[512]],"output_shapes":[[512]]}},
-{"name":"vgg0_conv13_fwd","type":"Conv","inputs":["vgg0_relu12_fwd","vgg0_conv13_weight","vgg0_conv13_bias"],"outputs":["vgg0_conv13_fwd"],"input_dimensions":{"input_shapes":[[1,512,14,14],[512,512,3,3],[512]],"output_shapes":[[1,512,14,14]]}},
-{"name":"vgg0_batchnorm13_gamma","type":"ConstantInput","input_dimensions":{"input_shapes":[[512]],"output_shapes":[[512]]}},
-{"name":"vgg0_batchnorm13_beta","type":"ConstantInput","input_dimensions":{"input_shapes":[[512]],"output_shapes":[[512]]}},
-{"name":"vgg0_batchnorm13_running_mean","type":"ConstantInput","input_dimensions":{"input_shapes":[[512]],"output_shapes":[[512]]}},
-{"name":"vgg0_batchnorm13_running_var","type":"ConstantInput","input_dimensions":{"input_shapes":[[512]],"output_shapes":[[512]]}},
-{"name":"vgg0_batchnorm13_fwd","type":"BatchNorm","inputs":["vgg0_conv13_fwd","vgg0_batchnorm13_gamma","vgg0_batchnorm13_beta","vgg0_batchnorm13_running_mean","vgg0_batchnorm13_running_var"],"outputs":["vgg0_batchnorm13_fwd"],"input_dimensions":{"input_shapes":[[1,512,14,14],[512],[512],[512],[512]],"output_shapes":[[1,512,14,14],[512],[512],[512],[512]]}},
-{"name":"vgg0_relu13_fwd","type":"Relu","inputs":["vgg0_batchnorm13_fwd"],"outputs":["vgg0_relu13_fwd"],"input_dimensions":{"input_shapes":[[1,512,14,14]],"output_shapes":[[1,512,14,14]]}},
-{"name":"vgg0_conv14_weight","type":"ConstantInput","input_dimensions":{"input_shapes":[[512,512,3,3]],"output_shapes":[[512,512,3,3]]}},
-{"name":"vgg0_conv14_bias","type":"ConstantInput","input_dimensions":{"input_shapes":[[512]],"output_shapes":[[512]]}},
-{"name":"vgg0_conv14_fwd","type":"Conv","inputs":["vgg0_relu13_fwd","vgg0_conv14_weight","vgg0_conv14_bias"],"outputs":["vgg0_conv14_fwd"],"input_dimensions":{"input_shapes":[[1,512,14,14],[512,512,3,3],[512]],"output_shapes":[[1,512,14,14]]}},
-{"name":"vgg0_batchnorm14_gamma","type":"ConstantInput","input_dimensions":{"input_shapes":[[512]],"output_shapes":[[512]]}},
-{"name":"vgg0_batchnorm14_beta","type":"ConstantInput","input_dimensions":{"input_shapes":[[512]],"output_shapes":[[512]]}},
-{"name":"vgg0_batchnorm14_running_mean","type":"ConstantInput","input_dimensions":{"input_shapes":[[512]],"output_shapes":[[512]]}},
-{"name":"vgg0_batchnorm14_running_var","type":"ConstantInput","input_dimensions":{"input_shapes":[[512]],"output_shapes":[[512]]}},
-{"name":"vgg0_batchnorm14_fwd","type":"BatchNorm","inputs":["vgg0_conv14_fwd","vgg0_batchnorm14_gamma","vgg0_batchnorm14_beta","vgg0_batchnorm14_running_mean","vgg0_batchnorm14_running_var"],"outputs":["vgg0_batchnorm14_fwd"],"input_dimensions":{"input_shapes":[[1,512,14,14],[512],[512],[512],[512]],"output_shapes":[[1,512,14,14],[512],[512],[512],[512]]}},
-{"name":"vgg0_relu14_fwd","type":"Relu","inputs":["vgg0_batchnorm14_fwd"],"outputs":["vgg0_relu14_fwd"],"input_dimensions":{"input_shapes":[[1,512,14,14]],"output_shapes":[[1,512,14,14]]}},
-{"name":"vgg0_conv15_weight","type":"ConstantInput","input_dimensions":{"input_shapes":[[512,512,3,3]],"output_shapes":[[512,512,3,3]]}},
-{"name":"vgg0_conv15_bias","type":"ConstantInput","input_dimensions":{"input_shapes":[[512]],"output_shapes":[[512]]}},
-{"name":"vgg0_conv15_fwd","type":"Conv","inputs":["vgg0_relu14_fwd","vgg0_conv15_weight","vgg0_conv15_bias"],"outputs":["vgg0_conv15_fwd"],"input_dimensions":{"input_shapes":[[1,512,14,14],[512,512,3,3],[512]],"output_shapes":[[1,512,14,14]]}},
-{"name":"vgg0_batchnorm15_gamma","type":"ConstantInput","input_dimensions":{"input_shapes":[[512]],"output_shapes":[[512]]}},
-{"name":"vgg0_batchnorm15_beta","type":"ConstantInput","input_dimensions":{"input_shapes":[[512]],"output_shapes":[[512]]}},
-{"name":"vgg0_batchnorm15_running_mean","type":"ConstantInput","input_dimensions":{"input_shapes":[[512]],"output_shapes":[[512]]}},
-{"name":"vgg0_batchnorm15_running_var","type":"ConstantInput","input_dimensions":{"input_shapes":[[512]],"output_shapes":[[512]]}},
-{"name":"vgg0_batchnorm15_fwd","type":"BatchNorm","inputs":["vgg0_conv15_fwd","vgg0_batchnorm15_gamma","vgg0_batchnorm15_beta","vgg0_batchnorm15_running_mean","vgg0_batchnorm15_running_var"],"outputs":["vgg0_batchnorm15_fwd"],"input_dimensions":{"input_shapes":[[1,512,14,14],[512],[512],[512],[512]],"output_shapes":[[1,512,14,14],[512],[512],[512],[512]]}},
-{"name":"vgg0_relu15_fwd","type":"Relu","inputs":["vgg0_batchnorm15_fwd"],"outputs":["vgg0_relu15_fwd"],"input_dimensions":{"input_shapes":[[1,512,14,14]],"output_shapes":[[1,512,14,14]]}},
-{"name":"vgg0_pool4_fwd","type":"Pooling","inputs":["vgg0_relu15_fwd"],"outputs":["vgg0_pool4_fwd"],"input_dimensions":{"input_shapes":[[1,512,14,14]],"output_shapes":[[1,512,7,7]]}},
-{"name":"flatten_152","type":"Flatten","inputs":["vgg0_pool4_fwd"],"outputs":["flatten_152"],"input_dimensions":{"input_shapes":[[1,512,7,7]],"output_shapes":[[1,512,7,7]]}},
-{"name":"vgg0_dense0_weight","type":"ConstantInput","input_dimensions":{"input_shapes":[[4096,25088]],"output_shapes":[[4096,25088]]}},
-{"name":"vgg0_dense0_bias","type":"ConstantInput","input_dimensions":{"input_shapes":[[4096]],"output_shapes":[[4096]]}},
-{"name":"vgg0_dense0_fwd","type":"Gemm","inputs":["flatten_152","vgg0_dense0_weight","vgg0_dense0_bias"],"outputs":["vgg0_dense0_fwd"],"input_dimensions":{"input_shapes":[[1,512,7,7],[4096,25088],[4096]],"output_shapes":[[1,4096]]}},
-{"name":"vgg0_dense0_relu_fwd","type":"Relu","inputs":["vgg0_dense0_fwd"],"outputs":["vgg0_dense0_relu_fwd"],"input_dimensions":{"input_shapes":[[1,4096]],"output_shapes":[[1,4096]]}},
-{"name":"vgg0_dropout0_fwd","type":"Dropout","inputs":["vgg0_dense0_relu_fwd"],"outputs":["vgg0_dropout0_fwd"],"input_dimensions":{"input_shapes":[[1,4096]],"output_shapes":[[1,4096]]}},
-{"name":"flatten_157","type":"Flatten","inputs":["vgg0_dropout0_fwd"],"outputs":["flatten_157"],"input_dimensions":{"input_shapes":[[1,4096]],"output_shapes":[[1,4096]]}},
-{"name":"vgg0_dense1_weight","type":"ConstantInput","input_dimensions":{"input_shapes":[[4096,4096]],"output_shapes":[[4096,4096]]}},
-{"name":"vgg0_dense1_bias","type":"ConstantInput","input_dimensions":{"input_shapes":[[4096]],"output_shapes":[[4096]]}},
-{"name":"vgg0_dense1_fwd","type":"Gemm","inputs":["flatten_157","vgg0_dense1_weight","vgg0_dense1_bias"],"outputs":["vgg0_dense1_fwd"],"input_dimensions":{"input_shapes":[[1,4096],[4096,4096],[4096]],"output_shapes":[[1,4096]]}},
-{"name":"vgg0_dense1_relu_fwd","type":"Relu","inputs":["vgg0_dense1_fwd"],"outputs":["vgg0_dense1_relu_fwd"],"input_dimensions":{"input_shapes":[[1,4096]],"output_shapes":[[1,4096]]}},
-{"name":"vgg0_dropout1_fwd","type":"Dropout","inputs":["vgg0_dense1_relu_fwd"],"outputs":["vgg0_dropout1_fwd"],"input_dimensions":{"input_shapes":[[1,4096]],"output_shapes":[[1,4096]]}},
-{"name":"flatten_162","type":"Flatten","inputs":["vgg0_dropout1_fwd"],"outputs":["flatten_162"],"input_dimensions":{"input_shapes":[[1,4096]],"output_shapes":[[1,4096]]}},
-{"name":"vgg0_dense2_weight","type":"ConstantInput","input_dimensions":{"input_shapes":[[1000,4096]],"output_shapes":[[1000,4096]]}},
-{"name":"vgg0_dense2_bias","type":"ConstantInput","input_dimensions":{"input_shapes":[[1000]],"output_shapes":[[1000]]}},
-{"name":"vgg0_dense2_fwd","type":"Gemm","inputs":["flatten_162","vgg0_dense2_weight","vgg0_dense2_bias"],"outputs":["vgg0_dense2_fwd"],"input_dimensions":{"input_shapes":[[1,4096],[1000,4096],[1000]],"output_shapes":[[1,1000]]}}]
+[{
+  "name": "data",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        3,
+        224,
+        224
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        3,
+        224,
+        224
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_conv0_weight",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64,
+        3,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        64,
+        3,
+        3,
+        3
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_conv0_bias",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        64
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_conv0_fwd",
+  "type": "Conv",
+  "inputs": [
+    "data",
+    "vgg0_conv0_weight",
+    "vgg0_conv0_bias"
+  ],
+  "outputs": [
+    "vgg0_conv0_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        3,
+        224,
+        224
+      ],
+      [
+        64,
+        3,
+        3,
+        3
+      ],
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        64,
+        224,
+        224
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_batchnorm0_gamma",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        64
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_batchnorm0_beta",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        64
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_batchnorm0_running_mean",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        64
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_batchnorm0_running_var",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        64
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_batchnorm0_fwd",
+  "type": "BatchNorm",
+  "inputs": [
+    "vgg0_conv0_fwd",
+    "vgg0_batchnorm0_gamma",
+    "vgg0_batchnorm0_beta",
+    "vgg0_batchnorm0_running_mean",
+    "vgg0_batchnorm0_running_var"
+  ],
+  "outputs": [
+    "vgg0_batchnorm0_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        64,
+        224,
+        224
+      ],
+      [
+        64
+      ],
+      [
+        64
+      ],
+      [
+        64
+      ],
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        64,
+        224,
+        224
+      ],
+      [
+        64
+      ],
+      [
+        64
+      ],
+      [
+        64
+      ],
+      [
+        64
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_relu0_fwd",
+  "type": "Relu",
+  "inputs": [
+    "vgg0_batchnorm0_fwd"
+  ],
+  "outputs": [
+    "vgg0_relu0_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        64,
+        224,
+        224
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        64,
+        224,
+        224
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_conv1_weight",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64,
+        64,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        64,
+        64,
+        3,
+        3
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_conv1_bias",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        64
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_conv1_fwd",
+  "type": "Conv",
+  "inputs": [
+    "vgg0_relu0_fwd",
+    "vgg0_conv1_weight",
+    "vgg0_conv1_bias"
+  ],
+  "outputs": [
+    "vgg0_conv1_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        64,
+        224,
+        224
+      ],
+      [
+        64,
+        64,
+        3,
+        3
+      ],
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        64,
+        224,
+        224
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_batchnorm1_gamma",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        64
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_batchnorm1_beta",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        64
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_batchnorm1_running_mean",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        64
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_batchnorm1_running_var",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        64
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_batchnorm1_fwd",
+  "type": "BatchNorm",
+  "inputs": [
+    "vgg0_conv1_fwd",
+    "vgg0_batchnorm1_gamma",
+    "vgg0_batchnorm1_beta",
+    "vgg0_batchnorm1_running_mean",
+    "vgg0_batchnorm1_running_var"
+  ],
+  "outputs": [
+    "vgg0_batchnorm1_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        64,
+        224,
+        224
+      ],
+      [
+        64
+      ],
+      [
+        64
+      ],
+      [
+        64
+      ],
+      [
+        64
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        64,
+        224,
+        224
+      ],
+      [
+        64
+      ],
+      [
+        64
+      ],
+      [
+        64
+      ],
+      [
+        64
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_relu1_fwd",
+  "type": "Relu",
+  "inputs": [
+    "vgg0_batchnorm1_fwd"
+  ],
+  "outputs": [
+    "vgg0_relu1_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        64,
+        224,
+        224
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        64,
+        224,
+        224
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_pool0_fwd",
+  "type": "Pooling",
+  "inputs": [
+    "vgg0_relu1_fwd"
+  ],
+  "outputs": [
+    "vgg0_pool0_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        64,
+        224,
+        224
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        64,
+        112,
+        112
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_conv2_weight",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128,
+        64,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        128,
+        64,
+        3,
+        3
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_conv2_bias",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        128
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_conv2_fwd",
+  "type": "Conv",
+  "inputs": [
+    "vgg0_pool0_fwd",
+    "vgg0_conv2_weight",
+    "vgg0_conv2_bias"
+  ],
+  "outputs": [
+    "vgg0_conv2_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        64,
+        112,
+        112
+      ],
+      [
+        128,
+        64,
+        3,
+        3
+      ],
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        128,
+        112,
+        112
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_batchnorm2_gamma",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        128
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_batchnorm2_beta",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        128
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_batchnorm2_running_mean",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        128
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_batchnorm2_running_var",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        128
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_batchnorm2_fwd",
+  "type": "BatchNorm",
+  "inputs": [
+    "vgg0_conv2_fwd",
+    "vgg0_batchnorm2_gamma",
+    "vgg0_batchnorm2_beta",
+    "vgg0_batchnorm2_running_mean",
+    "vgg0_batchnorm2_running_var"
+  ],
+  "outputs": [
+    "vgg0_batchnorm2_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        128,
+        112,
+        112
+      ],
+      [
+        128
+      ],
+      [
+        128
+      ],
+      [
+        128
+      ],
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        128,
+        112,
+        112
+      ],
+      [
+        128
+      ],
+      [
+        128
+      ],
+      [
+        128
+      ],
+      [
+        128
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_relu2_fwd",
+  "type": "Relu",
+  "inputs": [
+    "vgg0_batchnorm2_fwd"
+  ],
+  "outputs": [
+    "vgg0_relu2_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        128,
+        112,
+        112
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        128,
+        112,
+        112
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_conv3_weight",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128,
+        128,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        128,
+        128,
+        3,
+        3
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_conv3_bias",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        128
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_conv3_fwd",
+  "type": "Conv",
+  "inputs": [
+    "vgg0_relu2_fwd",
+    "vgg0_conv3_weight",
+    "vgg0_conv3_bias"
+  ],
+  "outputs": [
+    "vgg0_conv3_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        128,
+        112,
+        112
+      ],
+      [
+        128,
+        128,
+        3,
+        3
+      ],
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        128,
+        112,
+        112
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_batchnorm3_gamma",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        128
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_batchnorm3_beta",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        128
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_batchnorm3_running_mean",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        128
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_batchnorm3_running_var",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        128
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_batchnorm3_fwd",
+  "type": "BatchNorm",
+  "inputs": [
+    "vgg0_conv3_fwd",
+    "vgg0_batchnorm3_gamma",
+    "vgg0_batchnorm3_beta",
+    "vgg0_batchnorm3_running_mean",
+    "vgg0_batchnorm3_running_var"
+  ],
+  "outputs": [
+    "vgg0_batchnorm3_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        128,
+        112,
+        112
+      ],
+      [
+        128
+      ],
+      [
+        128
+      ],
+      [
+        128
+      ],
+      [
+        128
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        128,
+        112,
+        112
+      ],
+      [
+        128
+      ],
+      [
+        128
+      ],
+      [
+        128
+      ],
+      [
+        128
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_relu3_fwd",
+  "type": "Relu",
+  "inputs": [
+    "vgg0_batchnorm3_fwd"
+  ],
+  "outputs": [
+    "vgg0_relu3_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        128,
+        112,
+        112
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        128,
+        112,
+        112
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_pool1_fwd",
+  "type": "Pooling",
+  "inputs": [
+    "vgg0_relu3_fwd"
+  ],
+  "outputs": [
+    "vgg0_pool1_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        128,
+        112,
+        112
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        128,
+        56,
+        56
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_conv4_weight",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256,
+        128,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        256,
+        128,
+        3,
+        3
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_conv4_bias",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        256
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_conv4_fwd",
+  "type": "Conv",
+  "inputs": [
+    "vgg0_pool1_fwd",
+    "vgg0_conv4_weight",
+    "vgg0_conv4_bias"
+  ],
+  "outputs": [
+    "vgg0_conv4_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        128,
+        56,
+        56
+      ],
+      [
+        256,
+        128,
+        3,
+        3
+      ],
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        256,
+        56,
+        56
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_batchnorm4_gamma",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        256
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_batchnorm4_beta",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        256
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_batchnorm4_running_mean",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        256
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_batchnorm4_running_var",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        256
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_batchnorm4_fwd",
+  "type": "BatchNorm",
+  "inputs": [
+    "vgg0_conv4_fwd",
+    "vgg0_batchnorm4_gamma",
+    "vgg0_batchnorm4_beta",
+    "vgg0_batchnorm4_running_mean",
+    "vgg0_batchnorm4_running_var"
+  ],
+  "outputs": [
+    "vgg0_batchnorm4_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        256,
+        56,
+        56
+      ],
+      [
+        256
+      ],
+      [
+        256
+      ],
+      [
+        256
+      ],
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        256,
+        56,
+        56
+      ],
+      [
+        256
+      ],
+      [
+        256
+      ],
+      [
+        256
+      ],
+      [
+        256
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_relu4_fwd",
+  "type": "Relu",
+  "inputs": [
+    "vgg0_batchnorm4_fwd"
+  ],
+  "outputs": [
+    "vgg0_relu4_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        256,
+        56,
+        56
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        256,
+        56,
+        56
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_conv5_weight",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256,
+        256,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        256,
+        256,
+        3,
+        3
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_conv5_bias",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        256
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_conv5_fwd",
+  "type": "Conv",
+  "inputs": [
+    "vgg0_relu4_fwd",
+    "vgg0_conv5_weight",
+    "vgg0_conv5_bias"
+  ],
+  "outputs": [
+    "vgg0_conv5_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        256,
+        56,
+        56
+      ],
+      [
+        256,
+        256,
+        3,
+        3
+      ],
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        256,
+        56,
+        56
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_batchnorm5_gamma",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        256
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_batchnorm5_beta",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        256
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_batchnorm5_running_mean",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        256
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_batchnorm5_running_var",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        256
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_batchnorm5_fwd",
+  "type": "BatchNorm",
+  "inputs": [
+    "vgg0_conv5_fwd",
+    "vgg0_batchnorm5_gamma",
+    "vgg0_batchnorm5_beta",
+    "vgg0_batchnorm5_running_mean",
+    "vgg0_batchnorm5_running_var"
+  ],
+  "outputs": [
+    "vgg0_batchnorm5_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        256,
+        56,
+        56
+      ],
+      [
+        256
+      ],
+      [
+        256
+      ],
+      [
+        256
+      ],
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        256,
+        56,
+        56
+      ],
+      [
+        256
+      ],
+      [
+        256
+      ],
+      [
+        256
+      ],
+      [
+        256
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_relu5_fwd",
+  "type": "Relu",
+  "inputs": [
+    "vgg0_batchnorm5_fwd"
+  ],
+  "outputs": [
+    "vgg0_relu5_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        256,
+        56,
+        56
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        256,
+        56,
+        56
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_conv6_weight",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256,
+        256,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        256,
+        256,
+        3,
+        3
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_conv6_bias",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        256
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_conv6_fwd",
+  "type": "Conv",
+  "inputs": [
+    "vgg0_relu5_fwd",
+    "vgg0_conv6_weight",
+    "vgg0_conv6_bias"
+  ],
+  "outputs": [
+    "vgg0_conv6_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        256,
+        56,
+        56
+      ],
+      [
+        256,
+        256,
+        3,
+        3
+      ],
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        256,
+        56,
+        56
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_batchnorm6_gamma",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        256
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_batchnorm6_beta",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        256
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_batchnorm6_running_mean",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        256
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_batchnorm6_running_var",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        256
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_batchnorm6_fwd",
+  "type": "BatchNorm",
+  "inputs": [
+    "vgg0_conv6_fwd",
+    "vgg0_batchnorm6_gamma",
+    "vgg0_batchnorm6_beta",
+    "vgg0_batchnorm6_running_mean",
+    "vgg0_batchnorm6_running_var"
+  ],
+  "outputs": [
+    "vgg0_batchnorm6_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        256,
+        56,
+        56
+      ],
+      [
+        256
+      ],
+      [
+        256
+      ],
+      [
+        256
+      ],
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        256,
+        56,
+        56
+      ],
+      [
+        256
+      ],
+      [
+        256
+      ],
+      [
+        256
+      ],
+      [
+        256
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_relu6_fwd",
+  "type": "Relu",
+  "inputs": [
+    "vgg0_batchnorm6_fwd"
+  ],
+  "outputs": [
+    "vgg0_relu6_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        256,
+        56,
+        56
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        256,
+        56,
+        56
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_conv7_weight",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256,
+        256,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        256,
+        256,
+        3,
+        3
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_conv7_bias",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        256
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_conv7_fwd",
+  "type": "Conv",
+  "inputs": [
+    "vgg0_relu6_fwd",
+    "vgg0_conv7_weight",
+    "vgg0_conv7_bias"
+  ],
+  "outputs": [
+    "vgg0_conv7_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        256,
+        56,
+        56
+      ],
+      [
+        256,
+        256,
+        3,
+        3
+      ],
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        256,
+        56,
+        56
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_batchnorm7_gamma",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        256
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_batchnorm7_beta",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        256
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_batchnorm7_running_mean",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        256
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_batchnorm7_running_var",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        256
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_batchnorm7_fwd",
+  "type": "BatchNorm",
+  "inputs": [
+    "vgg0_conv7_fwd",
+    "vgg0_batchnorm7_gamma",
+    "vgg0_batchnorm7_beta",
+    "vgg0_batchnorm7_running_mean",
+    "vgg0_batchnorm7_running_var"
+  ],
+  "outputs": [
+    "vgg0_batchnorm7_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        256,
+        56,
+        56
+      ],
+      [
+        256
+      ],
+      [
+        256
+      ],
+      [
+        256
+      ],
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        256,
+        56,
+        56
+      ],
+      [
+        256
+      ],
+      [
+        256
+      ],
+      [
+        256
+      ],
+      [
+        256
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_relu7_fwd",
+  "type": "Relu",
+  "inputs": [
+    "vgg0_batchnorm7_fwd"
+  ],
+  "outputs": [
+    "vgg0_relu7_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        256,
+        56,
+        56
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        256,
+        56,
+        56
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_pool2_fwd",
+  "type": "Pooling",
+  "inputs": [
+    "vgg0_relu7_fwd"
+  ],
+  "outputs": [
+    "vgg0_pool2_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        256,
+        56,
+        56
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        256,
+        28,
+        28
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_conv8_weight",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512,
+        256,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        512,
+        256,
+        3,
+        3
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_conv8_bias",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_conv8_fwd",
+  "type": "Conv",
+  "inputs": [
+    "vgg0_pool2_fwd",
+    "vgg0_conv8_weight",
+    "vgg0_conv8_bias"
+  ],
+  "outputs": [
+    "vgg0_conv8_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        256,
+        28,
+        28
+      ],
+      [
+        512,
+        256,
+        3,
+        3
+      ],
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        512,
+        28,
+        28
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_batchnorm8_gamma",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_batchnorm8_beta",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_batchnorm8_running_mean",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_batchnorm8_running_var",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_batchnorm8_fwd",
+  "type": "BatchNorm",
+  "inputs": [
+    "vgg0_conv8_fwd",
+    "vgg0_batchnorm8_gamma",
+    "vgg0_batchnorm8_beta",
+    "vgg0_batchnorm8_running_mean",
+    "vgg0_batchnorm8_running_var"
+  ],
+  "outputs": [
+    "vgg0_batchnorm8_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        512,
+        28,
+        28
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        512,
+        28,
+        28
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_relu8_fwd",
+  "type": "Relu",
+  "inputs": [
+    "vgg0_batchnorm8_fwd"
+  ],
+  "outputs": [
+    "vgg0_relu8_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        512,
+        28,
+        28
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        512,
+        28,
+        28
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_conv9_weight",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512,
+        512,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        512,
+        512,
+        3,
+        3
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_conv9_bias",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_conv9_fwd",
+  "type": "Conv",
+  "inputs": [
+    "vgg0_relu8_fwd",
+    "vgg0_conv9_weight",
+    "vgg0_conv9_bias"
+  ],
+  "outputs": [
+    "vgg0_conv9_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        512,
+        28,
+        28
+      ],
+      [
+        512,
+        512,
+        3,
+        3
+      ],
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        512,
+        28,
+        28
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_batchnorm9_gamma",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_batchnorm9_beta",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_batchnorm9_running_mean",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_batchnorm9_running_var",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_batchnorm9_fwd",
+  "type": "BatchNorm",
+  "inputs": [
+    "vgg0_conv9_fwd",
+    "vgg0_batchnorm9_gamma",
+    "vgg0_batchnorm9_beta",
+    "vgg0_batchnorm9_running_mean",
+    "vgg0_batchnorm9_running_var"
+  ],
+  "outputs": [
+    "vgg0_batchnorm9_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        512,
+        28,
+        28
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        512,
+        28,
+        28
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_relu9_fwd",
+  "type": "Relu",
+  "inputs": [
+    "vgg0_batchnorm9_fwd"
+  ],
+  "outputs": [
+    "vgg0_relu9_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        512,
+        28,
+        28
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        512,
+        28,
+        28
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_conv10_weight",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512,
+        512,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        512,
+        512,
+        3,
+        3
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_conv10_bias",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_conv10_fwd",
+  "type": "Conv",
+  "inputs": [
+    "vgg0_relu9_fwd",
+    "vgg0_conv10_weight",
+    "vgg0_conv10_bias"
+  ],
+  "outputs": [
+    "vgg0_conv10_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        512,
+        28,
+        28
+      ],
+      [
+        512,
+        512,
+        3,
+        3
+      ],
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        512,
+        28,
+        28
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_batchnorm10_gamma",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_batchnorm10_beta",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_batchnorm10_running_mean",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_batchnorm10_running_var",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_batchnorm10_fwd",
+  "type": "BatchNorm",
+  "inputs": [
+    "vgg0_conv10_fwd",
+    "vgg0_batchnorm10_gamma",
+    "vgg0_batchnorm10_beta",
+    "vgg0_batchnorm10_running_mean",
+    "vgg0_batchnorm10_running_var"
+  ],
+  "outputs": [
+    "vgg0_batchnorm10_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        512,
+        28,
+        28
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        512,
+        28,
+        28
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_relu10_fwd",
+  "type": "Relu",
+  "inputs": [
+    "vgg0_batchnorm10_fwd"
+  ],
+  "outputs": [
+    "vgg0_relu10_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        512,
+        28,
+        28
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        512,
+        28,
+        28
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_conv11_weight",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512,
+        512,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        512,
+        512,
+        3,
+        3
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_conv11_bias",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_conv11_fwd",
+  "type": "Conv",
+  "inputs": [
+    "vgg0_relu10_fwd",
+    "vgg0_conv11_weight",
+    "vgg0_conv11_bias"
+  ],
+  "outputs": [
+    "vgg0_conv11_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        512,
+        28,
+        28
+      ],
+      [
+        512,
+        512,
+        3,
+        3
+      ],
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        512,
+        28,
+        28
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_batchnorm11_gamma",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_batchnorm11_beta",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_batchnorm11_running_mean",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_batchnorm11_running_var",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_batchnorm11_fwd",
+  "type": "BatchNorm",
+  "inputs": [
+    "vgg0_conv11_fwd",
+    "vgg0_batchnorm11_gamma",
+    "vgg0_batchnorm11_beta",
+    "vgg0_batchnorm11_running_mean",
+    "vgg0_batchnorm11_running_var"
+  ],
+  "outputs": [
+    "vgg0_batchnorm11_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        512,
+        28,
+        28
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        512,
+        28,
+        28
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_relu11_fwd",
+  "type": "Relu",
+  "inputs": [
+    "vgg0_batchnorm11_fwd"
+  ],
+  "outputs": [
+    "vgg0_relu11_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        512,
+        28,
+        28
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        512,
+        28,
+        28
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_pool3_fwd",
+  "type": "Pooling",
+  "inputs": [
+    "vgg0_relu11_fwd"
+  ],
+  "outputs": [
+    "vgg0_pool3_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        512,
+        28,
+        28
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        512,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_conv12_weight",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512,
+        512,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        512,
+        512,
+        3,
+        3
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_conv12_bias",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_conv12_fwd",
+  "type": "Conv",
+  "inputs": [
+    "vgg0_pool3_fwd",
+    "vgg0_conv12_weight",
+    "vgg0_conv12_bias"
+  ],
+  "outputs": [
+    "vgg0_conv12_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        512,
+        14,
+        14
+      ],
+      [
+        512,
+        512,
+        3,
+        3
+      ],
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        512,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_batchnorm12_gamma",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_batchnorm12_beta",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_batchnorm12_running_mean",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_batchnorm12_running_var",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_batchnorm12_fwd",
+  "type": "BatchNorm",
+  "inputs": [
+    "vgg0_conv12_fwd",
+    "vgg0_batchnorm12_gamma",
+    "vgg0_batchnorm12_beta",
+    "vgg0_batchnorm12_running_mean",
+    "vgg0_batchnorm12_running_var"
+  ],
+  "outputs": [
+    "vgg0_batchnorm12_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        512,
+        14,
+        14
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        512,
+        14,
+        14
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_relu12_fwd",
+  "type": "Relu",
+  "inputs": [
+    "vgg0_batchnorm12_fwd"
+  ],
+  "outputs": [
+    "vgg0_relu12_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        512,
+        14,
+        14
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        512,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_conv13_weight",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512,
+        512,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        512,
+        512,
+        3,
+        3
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_conv13_bias",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_conv13_fwd",
+  "type": "Conv",
+  "inputs": [
+    "vgg0_relu12_fwd",
+    "vgg0_conv13_weight",
+    "vgg0_conv13_bias"
+  ],
+  "outputs": [
+    "vgg0_conv13_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        512,
+        14,
+        14
+      ],
+      [
+        512,
+        512,
+        3,
+        3
+      ],
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        512,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_batchnorm13_gamma",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_batchnorm13_beta",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_batchnorm13_running_mean",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_batchnorm13_running_var",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_batchnorm13_fwd",
+  "type": "BatchNorm",
+  "inputs": [
+    "vgg0_conv13_fwd",
+    "vgg0_batchnorm13_gamma",
+    "vgg0_batchnorm13_beta",
+    "vgg0_batchnorm13_running_mean",
+    "vgg0_batchnorm13_running_var"
+  ],
+  "outputs": [
+    "vgg0_batchnorm13_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        512,
+        14,
+        14
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        512,
+        14,
+        14
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_relu13_fwd",
+  "type": "Relu",
+  "inputs": [
+    "vgg0_batchnorm13_fwd"
+  ],
+  "outputs": [
+    "vgg0_relu13_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        512,
+        14,
+        14
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        512,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_conv14_weight",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512,
+        512,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        512,
+        512,
+        3,
+        3
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_conv14_bias",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_conv14_fwd",
+  "type": "Conv",
+  "inputs": [
+    "vgg0_relu13_fwd",
+    "vgg0_conv14_weight",
+    "vgg0_conv14_bias"
+  ],
+  "outputs": [
+    "vgg0_conv14_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        512,
+        14,
+        14
+      ],
+      [
+        512,
+        512,
+        3,
+        3
+      ],
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        512,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_batchnorm14_gamma",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_batchnorm14_beta",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_batchnorm14_running_mean",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_batchnorm14_running_var",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_batchnorm14_fwd",
+  "type": "BatchNorm",
+  "inputs": [
+    "vgg0_conv14_fwd",
+    "vgg0_batchnorm14_gamma",
+    "vgg0_batchnorm14_beta",
+    "vgg0_batchnorm14_running_mean",
+    "vgg0_batchnorm14_running_var"
+  ],
+  "outputs": [
+    "vgg0_batchnorm14_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        512,
+        14,
+        14
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        512,
+        14,
+        14
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_relu14_fwd",
+  "type": "Relu",
+  "inputs": [
+    "vgg0_batchnorm14_fwd"
+  ],
+  "outputs": [
+    "vgg0_relu14_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        512,
+        14,
+        14
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        512,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_conv15_weight",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512,
+        512,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        512,
+        512,
+        3,
+        3
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_conv15_bias",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_conv15_fwd",
+  "type": "Conv",
+  "inputs": [
+    "vgg0_relu14_fwd",
+    "vgg0_conv15_weight",
+    "vgg0_conv15_bias"
+  ],
+  "outputs": [
+    "vgg0_conv15_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        512,
+        14,
+        14
+      ],
+      [
+        512,
+        512,
+        3,
+        3
+      ],
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        512,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_batchnorm15_gamma",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_batchnorm15_beta",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_batchnorm15_running_mean",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_batchnorm15_running_var",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_batchnorm15_fwd",
+  "type": "BatchNorm",
+  "inputs": [
+    "vgg0_conv15_fwd",
+    "vgg0_batchnorm15_gamma",
+    "vgg0_batchnorm15_beta",
+    "vgg0_batchnorm15_running_mean",
+    "vgg0_batchnorm15_running_var"
+  ],
+  "outputs": [
+    "vgg0_batchnorm15_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        512,
+        14,
+        14
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        512,
+        14,
+        14
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ],
+      [
+        512
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_relu15_fwd",
+  "type": "Relu",
+  "inputs": [
+    "vgg0_batchnorm15_fwd"
+  ],
+  "outputs": [
+    "vgg0_relu15_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        512,
+        14,
+        14
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        512,
+        14,
+        14
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_pool4_fwd",
+  "type": "Pooling",
+  "inputs": [
+    "vgg0_relu15_fwd"
+  ],
+  "outputs": [
+    "vgg0_pool4_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        512,
+        14,
+        14
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        512,
+        7,
+        7
+      ]
+    ]
+  }
+},
+{
+  "name": "flatten_152",
+  "type": "Flatten",
+  "inputs": [
+    "vgg0_pool4_fwd"
+  ],
+  "outputs": [
+    "flatten_152"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        512,
+        7,
+        7
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        512,
+        7,
+        7
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_dense0_weight",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        4096,
+        25088
+      ]
+    ],
+    "output_shapes": [
+      [
+        4096,
+        25088
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_dense0_bias",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        4096
+      ]
+    ],
+    "output_shapes": [
+      [
+        4096
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_dense0_fwd",
+  "type": "Gemm",
+  "inputs": [
+    "flatten_152",
+    "vgg0_dense0_weight",
+    "vgg0_dense0_bias"
+  ],
+  "outputs": [
+    "vgg0_dense0_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        512,
+        7,
+        7
+      ],
+      [
+        4096,
+        25088
+      ],
+      [
+        4096
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        4096
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_dense0_relu_fwd",
+  "type": "Relu",
+  "inputs": [
+    "vgg0_dense0_fwd"
+  ],
+  "outputs": [
+    "vgg0_dense0_relu_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        4096
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        4096
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_dropout0_fwd",
+  "type": "Dropout",
+  "inputs": [
+    "vgg0_dense0_relu_fwd"
+  ],
+  "outputs": [
+    "vgg0_dropout0_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        4096
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        4096
+      ]
+    ]
+  }
+},
+{
+  "name": "flatten_157",
+  "type": "Flatten",
+  "inputs": [
+    "vgg0_dropout0_fwd"
+  ],
+  "outputs": [
+    "flatten_157"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        4096
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        4096
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_dense1_weight",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        4096,
+        4096
+      ]
+    ],
+    "output_shapes": [
+      [
+        4096,
+        4096
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_dense1_bias",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        4096
+      ]
+    ],
+    "output_shapes": [
+      [
+        4096
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_dense1_fwd",
+  "type": "Gemm",
+  "inputs": [
+    "flatten_157",
+    "vgg0_dense1_weight",
+    "vgg0_dense1_bias"
+  ],
+  "outputs": [
+    "vgg0_dense1_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        4096
+      ],
+      [
+        4096,
+        4096
+      ],
+      [
+        4096
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        4096
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_dense1_relu_fwd",
+  "type": "Relu",
+  "inputs": [
+    "vgg0_dense1_fwd"
+  ],
+  "outputs": [
+    "vgg0_dense1_relu_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        4096
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        4096
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_dropout1_fwd",
+  "type": "Dropout",
+  "inputs": [
+    "vgg0_dense1_relu_fwd"
+  ],
+  "outputs": [
+    "vgg0_dropout1_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        4096
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        4096
+      ]
+    ]
+  }
+},
+{
+  "name": "flatten_162",
+  "type": "Flatten",
+  "inputs": [
+    "vgg0_dropout1_fwd"
+  ],
+  "outputs": [
+    "flatten_162"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        4096
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        4096
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_dense2_weight",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1000,
+        4096
+      ]
+    ],
+    "output_shapes": [
+      [
+        1000,
+        4096
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_dense2_bias",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1000
+      ]
+    ],
+    "output_shapes": [
+      [
+        1000
+      ]
+    ]
+  }
+},
+{
+  "name": "vgg0_dense2_fwd",
+  "type": "Gemm",
+  "inputs": [
+    "flatten_162",
+    "vgg0_dense2_weight",
+    "vgg0_dense2_bias"
+  ],
+  "outputs": [
+    "vgg0_dense2_fwd"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        4096
+      ],
+      [
+        1000,
+        4096
+      ],
+      [
+        1000
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        1000
+      ]
+    ]
+  }
+}]

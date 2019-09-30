@@ -1,43 +1,1085 @@
-[{"name":"data_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[1,3,224,224]],"output_shapes":[[1,3,224,224]]}},
-{"name":"conv1_w_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[96,3,11,11]],"output_shapes":[[96,3,11,11]]}},
-{"name":"conv1_b_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[96]],"output_shapes":[[96]]}},
-{"name":"conv_1","type":"Conv","inputs":["data_0","conv1_w_0","conv1_b_0"],"outputs":["conv1_1"],"input_dimensions":{"input_shapes":[[1,3,224,224],[96,3,11,11],[96]],"output_shapes":[[1,96,54,54]]}},
-{"name":"relu_1","type":"Relu","inputs":["conv1_1"],"outputs":["conv1_2"],"input_dimensions":{"input_shapes":[[1,96,54,54]],"output_shapes":[[1,96,54,54]]}},
-{"name":"maxpool_1","type":"Pooling","inputs":["conv1_2"],"outputs":["pool1_1"],"input_dimensions":{"input_shapes":[[1,96,54,54]],"output_shapes":[[1,96,27,27]]}},
-{"name":"lrn_1","type":"LRN","inputs":["pool1_1"],"outputs":["norm1_1"],"input_dimensions":{"input_shapes":[[1,96,27,27]],"output_shapes":[[1,96,27,27]]}},
-{"name":"conv2_w_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[256,48,5,5]],"output_shapes":[[256,48,5,5]]}},
-{"name":"conv2_b_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[256]],"output_shapes":[[256]]}},
-{"name":"conv2_2","type":"Conv","inputs":["norm1_1","conv2_w_0","conv2_b_0"],"outputs":["conv2_1"],"input_dimensions":{"input_shapes":[[1,96,27,27],[256,48,5,5],[256]],"output_shapes":[[1,256,27,27]]}},
-{"name":"relu_2","type":"Relu","inputs":["conv2_1"],"outputs":["conv2_2"],"input_dimensions":{"input_shapes":[[1,256,27,27]],"output_shapes":[[1,256,27,27]]}},
-{"name":"maxpool_2","type":"Pooling","inputs":["conv2_2"],"outputs":["pool2_1"],"input_dimensions":{"input_shapes":[[1,256,27,27]],"output_shapes":[[1,256,13,13]]}},
-{"name":"lrn_2","type":"LRN","inputs":["pool2_1"],"outputs":["norm2_1"],"input_dimensions":{"input_shapes":[[1,256,13,13]],"output_shapes":[[1,256,13,13]]}},
-{"name":"conv3_w_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[384,256,3,3]],"output_shapes":[[384,256,3,3]]}},
-{"name":"conv3_b_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[384]],"output_shapes":[[384]]}},
-{"name":"conv_3","type":"Conv","inputs":["norm2_1","conv3_w_0","conv3_b_0"],"outputs":["conv3_1"],"input_dimensions":{"input_shapes":[[1,256,13,13],[384,256,3,3],[384]],"output_shapes":[[1,384,13,13]]}},
-{"name":"relu_3","type":"Relu","inputs":["conv3_1"],"outputs":["conv3_2"],"input_dimensions":{"input_shapes":[[1,384,13,13]],"output_shapes":[[1,384,13,13]]}},
-{"name":"conv4_w_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[384,192,3,3]],"output_shapes":[[384,192,3,3]]}},
-{"name":"conv4_b_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[384]],"output_shapes":[[384]]}},
-{"name":"conv4_2","type":"Conv","inputs":["conv3_2","conv4_w_0","conv4_b_0"],"outputs":["conv4_1"],"input_dimensions":{"input_shapes":[[1,384,13,13],[384,192,3,3],[384]],"output_shapes":[[1,384,13,13]]}},
-{"name":"relu_4","type":"Relu","inputs":["conv4_1"],"outputs":["conv4_2"],"input_dimensions":{"input_shapes":[[1,384,13,13]],"output_shapes":[[1,384,13,13]]}},
-{"name":"conv5_w_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[256,192,3,3]],"output_shapes":[[256,192,3,3]]}},
-{"name":"conv5_b_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[256]],"output_shapes":[[256]]}},
-{"name":"conv5_2","type":"Conv","inputs":["conv4_2","conv5_w_0","conv5_b_0"],"outputs":["conv5_1"],"input_dimensions":{"input_shapes":[[1,384,13,13],[256,192,3,3],[256]],"output_shapes":[[1,256,13,13]]}},
-{"name":"relu_5","type":"Relu","inputs":["conv5_1"],"outputs":["conv5_2"],"input_dimensions":{"input_shapes":[[1,256,13,13]],"output_shapes":[[1,256,13,13]]}},
-{"name":"maxpool_3","type":"Pooling","inputs":["conv5_2"],"outputs":["pool5_1"],"input_dimensions":{"input_shapes":[[1,256,13,13]],"output_shapes":[[1,256,6,6]]}},
-{"name":"OC2_DUMMY_1","type":"ConstantInput","input_dimensions":{"input_shapes":[[1,9216]],"output_shapes":[[1,9216]]}},
-{"name":"reshape_1","type":"Reshape","inputs":["pool5_1","OC2_DUMMY_1"],"outputs":["OC2_DUMMY_0"],"input_dimensions":{"input_shapes":[[1,256,6,6],[1,9216]],"output_shapes":[[1,9216]]}},
-{"name":"fc6_w_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[4096,9216]],"output_shapes":[[4096,9216]]}},
-{"name":"fc6_b_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[4096]],"output_shapes":[[4096]]}},
-{"name":"gemm_1","type":"Gemm","inputs":["OC2_DUMMY_0","fc6_w_0","fc6_b_0"],"outputs":["fc6_1"],"input_dimensions":{"input_shapes":[[1,9216],[4096,9216],[4096]],"output_shapes":[[1,4096]]}},
-{"name":"relu_6","type":"Relu","inputs":["fc6_1"],"outputs":["fc6_2"],"input_dimensions":{"input_shapes":[[1,4096]],"output_shapes":[[1,4096]]}},
-{"name":"dropout_1","type":"Dropout","inputs":["fc6_2"],"outputs":["fc6_3","_fc6_mask_1"],"input_dimensions":{"input_shapes":[[1,4096]],"output_shapes":[[1,4096]]}},
-{"name":"dropout_1","type":"Dropout","inputs":["fc6_2"],"outputs":["fc6_3","_fc6_mask_1"],"input_dimensions":{"input_shapes":[[1,4096]],"output_shapes":[[1,4096]]}},
-{"name":"fc7_w_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[4096,4096]],"output_shapes":[[4096,4096]]}},
-{"name":"fc7_b_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[4096]],"output_shapes":[[4096]]}},
-{"name":"gemm_2","type":"Gemm","inputs":["fc6_3","fc7_w_0","fc7_b_0"],"outputs":["fc7_1"],"input_dimensions":{"input_shapes":[[1,4096],[4096,4096],[4096]],"output_shapes":[[1,4096]]}},
-{"name":"relu_7","type":"Relu","inputs":["fc7_1"],"outputs":["fc7_2"],"input_dimensions":{"input_shapes":[[1,4096]],"output_shapes":[[1,4096]]}},
-{"name":"dropout_2","type":"Dropout","inputs":["fc7_2"],"outputs":["fc7_3","_fc7_mask_1"],"input_dimensions":{"input_shapes":[[1,4096]],"output_shapes":[[1,4096]]}},
-{"name":"dropout_2","type":"Dropout","inputs":["fc7_2"],"outputs":["fc7_3","_fc7_mask_1"],"input_dimensions":{"input_shapes":[[1,4096]],"output_shapes":[[1,4096]]}},
-{"name":"fc-rcnn_w_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[200,4096]],"output_shapes":[[200,4096]]}},
-{"name":"fc-rcnn_b_0","type":"ConstantInput","input_dimensions":{"input_shapes":[[200]],"output_shapes":[[200]]}},
-{"name":"gemm_3","type":"Gemm","inputs":["fc7_3","fc-rcnn_w_0","fc-rcnn_b_0"],"outputs":["fc-rcnn_1"],"input_dimensions":{"input_shapes":[[1,4096],[200,4096],[200]],"output_shapes":[[1,200]]}}]
+[{
+  "name": "data_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        3,
+        224,
+        224
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        3,
+        224,
+        224
+      ]
+    ]
+  }
+},
+{
+  "name": "conv1_w_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        96,
+        3,
+        11,
+        11
+      ]
+    ],
+    "output_shapes": [
+      [
+        96,
+        3,
+        11,
+        11
+      ]
+    ]
+  }
+},
+{
+  "name": "conv1_b_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        96
+      ]
+    ],
+    "output_shapes": [
+      [
+        96
+      ]
+    ]
+  }
+},
+{
+  "name": "conv_1",
+  "type": "Conv",
+  "inputs": [
+    "data_0",
+    "conv1_w_0",
+    "conv1_b_0"
+  ],
+  "outputs": [
+    "conv1_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        3,
+        224,
+        224
+      ],
+      [
+        96,
+        3,
+        11,
+        11
+      ],
+      [
+        96
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        96,
+        54,
+        54
+      ]
+    ]
+  }
+},
+{
+  "name": "relu_1",
+  "type": "Relu",
+  "inputs": [
+    "conv1_1"
+  ],
+  "outputs": [
+    "conv1_2"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        96,
+        54,
+        54
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        96,
+        54,
+        54
+      ]
+    ]
+  }
+},
+{
+  "name": "maxpool_1",
+  "type": "Pooling",
+  "inputs": [
+    "conv1_2"
+  ],
+  "outputs": [
+    "pool1_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        96,
+        54,
+        54
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        96,
+        27,
+        27
+      ]
+    ]
+  }
+},
+{
+  "name": "lrn_1",
+  "type": "LRN",
+  "inputs": [
+    "pool1_1"
+  ],
+  "outputs": [
+    "norm1_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        96,
+        27,
+        27
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        96,
+        27,
+        27
+      ]
+    ]
+  }
+},
+{
+  "name": "conv2_w_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256,
+        48,
+        5,
+        5
+      ]
+    ],
+    "output_shapes": [
+      [
+        256,
+        48,
+        5,
+        5
+      ]
+    ]
+  }
+},
+{
+  "name": "conv2_b_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        256
+      ]
+    ]
+  }
+},
+{
+  "name": "conv2_2",
+  "type": "Conv",
+  "inputs": [
+    "norm1_1",
+    "conv2_w_0",
+    "conv2_b_0"
+  ],
+  "outputs": [
+    "conv2_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        96,
+        27,
+        27
+      ],
+      [
+        256,
+        48,
+        5,
+        5
+      ],
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        256,
+        27,
+        27
+      ]
+    ]
+  }
+},
+{
+  "name": "relu_2",
+  "type": "Relu",
+  "inputs": [
+    "conv2_1"
+  ],
+  "outputs": [
+    "conv2_2"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        256,
+        27,
+        27
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        256,
+        27,
+        27
+      ]
+    ]
+  }
+},
+{
+  "name": "maxpool_2",
+  "type": "Pooling",
+  "inputs": [
+    "conv2_2"
+  ],
+  "outputs": [
+    "pool2_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        256,
+        27,
+        27
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        256,
+        13,
+        13
+      ]
+    ]
+  }
+},
+{
+  "name": "lrn_2",
+  "type": "LRN",
+  "inputs": [
+    "pool2_1"
+  ],
+  "outputs": [
+    "norm2_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        256,
+        13,
+        13
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        256,
+        13,
+        13
+      ]
+    ]
+  }
+},
+{
+  "name": "conv3_w_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        384,
+        256,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        384,
+        256,
+        3,
+        3
+      ]
+    ]
+  }
+},
+{
+  "name": "conv3_b_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        384
+      ]
+    ],
+    "output_shapes": [
+      [
+        384
+      ]
+    ]
+  }
+},
+{
+  "name": "conv_3",
+  "type": "Conv",
+  "inputs": [
+    "norm2_1",
+    "conv3_w_0",
+    "conv3_b_0"
+  ],
+  "outputs": [
+    "conv3_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        256,
+        13,
+        13
+      ],
+      [
+        384,
+        256,
+        3,
+        3
+      ],
+      [
+        384
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        384,
+        13,
+        13
+      ]
+    ]
+  }
+},
+{
+  "name": "relu_3",
+  "type": "Relu",
+  "inputs": [
+    "conv3_1"
+  ],
+  "outputs": [
+    "conv3_2"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        384,
+        13,
+        13
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        384,
+        13,
+        13
+      ]
+    ]
+  }
+},
+{
+  "name": "conv4_w_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        384,
+        192,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        384,
+        192,
+        3,
+        3
+      ]
+    ]
+  }
+},
+{
+  "name": "conv4_b_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        384
+      ]
+    ],
+    "output_shapes": [
+      [
+        384
+      ]
+    ]
+  }
+},
+{
+  "name": "conv4_2",
+  "type": "Conv",
+  "inputs": [
+    "conv3_2",
+    "conv4_w_0",
+    "conv4_b_0"
+  ],
+  "outputs": [
+    "conv4_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        384,
+        13,
+        13
+      ],
+      [
+        384,
+        192,
+        3,
+        3
+      ],
+      [
+        384
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        384,
+        13,
+        13
+      ]
+    ]
+  }
+},
+{
+  "name": "relu_4",
+  "type": "Relu",
+  "inputs": [
+    "conv4_1"
+  ],
+  "outputs": [
+    "conv4_2"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        384,
+        13,
+        13
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        384,
+        13,
+        13
+      ]
+    ]
+  }
+},
+{
+  "name": "conv5_w_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256,
+        192,
+        3,
+        3
+      ]
+    ],
+    "output_shapes": [
+      [
+        256,
+        192,
+        3,
+        3
+      ]
+    ]
+  }
+},
+{
+  "name": "conv5_b_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        256
+      ]
+    ]
+  }
+},
+{
+  "name": "conv5_2",
+  "type": "Conv",
+  "inputs": [
+    "conv4_2",
+    "conv5_w_0",
+    "conv5_b_0"
+  ],
+  "outputs": [
+    "conv5_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        384,
+        13,
+        13
+      ],
+      [
+        256,
+        192,
+        3,
+        3
+      ],
+      [
+        256
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        256,
+        13,
+        13
+      ]
+    ]
+  }
+},
+{
+  "name": "relu_5",
+  "type": "Relu",
+  "inputs": [
+    "conv5_1"
+  ],
+  "outputs": [
+    "conv5_2"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        256,
+        13,
+        13
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        256,
+        13,
+        13
+      ]
+    ]
+  }
+},
+{
+  "name": "maxpool_3",
+  "type": "Pooling",
+  "inputs": [
+    "conv5_2"
+  ],
+  "outputs": [
+    "pool5_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        256,
+        13,
+        13
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        256,
+        6,
+        6
+      ]
+    ]
+  }
+},
+{
+  "name": "OC2_DUMMY_1",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        9216
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        9216
+      ]
+    ]
+  }
+},
+{
+  "name": "reshape_1",
+  "type": "Reshape",
+  "inputs": [
+    "pool5_1",
+    "OC2_DUMMY_1"
+  ],
+  "outputs": [
+    "OC2_DUMMY_0"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        256,
+        6,
+        6
+      ],
+      [
+        1,
+        9216
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        9216
+      ]
+    ]
+  }
+},
+{
+  "name": "fc6_w_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        4096,
+        9216
+      ]
+    ],
+    "output_shapes": [
+      [
+        4096,
+        9216
+      ]
+    ]
+  }
+},
+{
+  "name": "fc6_b_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        4096
+      ]
+    ],
+    "output_shapes": [
+      [
+        4096
+      ]
+    ]
+  }
+},
+{
+  "name": "gemm_1",
+  "type": "Gemm",
+  "inputs": [
+    "OC2_DUMMY_0",
+    "fc6_w_0",
+    "fc6_b_0"
+  ],
+  "outputs": [
+    "fc6_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        9216
+      ],
+      [
+        4096,
+        9216
+      ],
+      [
+        4096
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        4096
+      ]
+    ]
+  }
+},
+{
+  "name": "relu_6",
+  "type": "Relu",
+  "inputs": [
+    "fc6_1"
+  ],
+  "outputs": [
+    "fc6_2"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        4096
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        4096
+      ]
+    ]
+  }
+},
+{
+  "name": "dropout_1",
+  "type": "Dropout",
+  "inputs": [
+    "fc6_2"
+  ],
+  "outputs": [
+    "fc6_3",
+    "_fc6_mask_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        4096
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        4096
+      ]
+    ]
+  }
+},
+{
+  "name": "dropout_1",
+  "type": "Dropout",
+  "inputs": [
+    "fc6_2"
+  ],
+  "outputs": [
+    "fc6_3",
+    "_fc6_mask_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        4096
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        4096
+      ]
+    ]
+  }
+},
+{
+  "name": "fc7_w_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        4096,
+        4096
+      ]
+    ],
+    "output_shapes": [
+      [
+        4096,
+        4096
+      ]
+    ]
+  }
+},
+{
+  "name": "fc7_b_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        4096
+      ]
+    ],
+    "output_shapes": [
+      [
+        4096
+      ]
+    ]
+  }
+},
+{
+  "name": "gemm_2",
+  "type": "Gemm",
+  "inputs": [
+    "fc6_3",
+    "fc7_w_0",
+    "fc7_b_0"
+  ],
+  "outputs": [
+    "fc7_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        4096
+      ],
+      [
+        4096,
+        4096
+      ],
+      [
+        4096
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        4096
+      ]
+    ]
+  }
+},
+{
+  "name": "relu_7",
+  "type": "Relu",
+  "inputs": [
+    "fc7_1"
+  ],
+  "outputs": [
+    "fc7_2"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        4096
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        4096
+      ]
+    ]
+  }
+},
+{
+  "name": "dropout_2",
+  "type": "Dropout",
+  "inputs": [
+    "fc7_2"
+  ],
+  "outputs": [
+    "fc7_3",
+    "_fc7_mask_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        4096
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        4096
+      ]
+    ]
+  }
+},
+{
+  "name": "dropout_2",
+  "type": "Dropout",
+  "inputs": [
+    "fc7_2"
+  ],
+  "outputs": [
+    "fc7_3",
+    "_fc7_mask_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        4096
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        4096
+      ]
+    ]
+  }
+},
+{
+  "name": "fc-rcnn_w_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        200,
+        4096
+      ]
+    ],
+    "output_shapes": [
+      [
+        200,
+        4096
+      ]
+    ]
+  }
+},
+{
+  "name": "fc-rcnn_b_0",
+  "type": "ConstantInput",
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        200
+      ]
+    ],
+    "output_shapes": [
+      [
+        200
+      ]
+    ]
+  }
+},
+{
+  "name": "gemm_3",
+  "type": "Gemm",
+  "inputs": [
+    "fc7_3",
+    "fc-rcnn_w_0",
+    "fc-rcnn_b_0"
+  ],
+  "outputs": [
+    "fc-rcnn_1"
+  ],
+  "input_dimensions": {
+    "input_shapes": [
+      [
+        1,
+        4096
+      ],
+      [
+        200,
+        4096
+      ],
+      [
+        200
+      ]
+    ],
+    "output_shapes": [
+      [
+        1,
+        200
+      ]
+    ]
+  }
+}]
