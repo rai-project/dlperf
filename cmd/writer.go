@@ -47,7 +47,7 @@ func NewWriter(rower Rower, iopts ...writer.Option) *Writer {
 	}
 	opts := writer.NewOptions(iopts...)
 	switch opts.Format {
-	case "table":
+	case "table", "md", "markdown":
 		wr.tbl = tablewriter.NewWriter(output)
 		// make it markdown format
 		wr.tbl.SetBorders(tablewriter.Border{Left: true, Top: false, Right: true, Bottom: false})
@@ -68,7 +68,7 @@ func NewWriter(rower Rower, iopts ...writer.Option) *Writer {
 func (w *Writer) Header(rower Rower) error {
 	opts := writer.NewOptions(w.opts...)
 	switch opts.Format {
-	case "table":
+	case "table", "md", "markdown":
 		w.tbl.SetHeader(rower.Header(w.opts...))
 	case "latex", "tex":
 		var r  string
@@ -127,7 +127,7 @@ func texNeedsBackslash(c byte) bool {
 func (w *Writer) Row(rower Rower) error {
 	opts := writer.NewOptions(w.opts...)
 	switch opts.Format {
-	case "table":
+	case "table", "md", "markdown":
 		w.tbl.Append(rower.Row(w.opts...))
 	case "latex", "tex":
 		var r  string
@@ -165,7 +165,7 @@ func (w *Writer) Row(rower Rower) error {
 func (w *Writer) Flush() {
 	opts := writer.NewOptions(w.opts...)
 	switch opts.Format {
-	case "table":
+	case "table", "md", "markdown":
 		w.tbl.Render()
 	case "csv":
 		w.csv.Flush()
