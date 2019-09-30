@@ -3,8 +3,14 @@ package onnx
 import (
 	"encoding/binary"
 	"fmt"
+	"io/ioutil"
+	"path"
+	"path/filepath"
 	"reflect"
+	"strings"
 
+	"github.com/Unknwon/com"
+	"github.com/pkg/errors"
 	dlperf "github.com/rai-project/dlperf/pkg"
 	"github.com/rai-project/onnx"
 	"github.com/spf13/cast"
@@ -141,4 +147,44 @@ func getOutputShapes(layers dlperf.Layers) []dlperf.Shape {
 	}
 
 	return outputShapes
+}
+
+func getModelName(modelPath string) string {
+	return iGetModelName(modelPath, "")
+}
+
+func findModelNameFile(dir string, level int) (string, error) {
+	if level < 0 {
+		return "", errors.New("unable to find model_name file")
+	}
+	pth := filepath.Join(dir, "model_name")
+	if com.IsFile(pth) {
+		bts, err := ioutil.ReadFile(pth)
+		if err != nil {
+			return "", err
+		}
+		return string(bts), err
+	}
+	return findModelNameFile(filepath.Dir(dir), level-1)
+}
+
+func iGetModelName(modelPath, suffix string) string {
+	name, err := findModelNameFile(filepath.Dir(modelPath), 4 /* levels */)
+	if err == nil {
+		return removeSpace(name)
+	}
+	name = strings.TrimSuffix(filepath.Base(modelPath), ".onnx")
+	if name != "model" && name != "model_inferred" {
+		return removeSpace(name + suffix)
+	}
+	if suffix == "" && name == "model_inferred" {
+		suffix = "_inferred"
+	}
+	return iGetModelName(path.Dir(modelPath), suffix)
+}
+
+func removeSpace(s string) string {
+	s = strings.TrimSuffix(s, "\n")
+	s = strings.TrimSpace(s)
+	return s
 }

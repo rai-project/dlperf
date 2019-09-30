@@ -84,7 +84,7 @@ func runLayerStats(cmd *cobra.Command, args []string) error {
 			return err
 		}
 
-		err = com.WriteFile(outputFileName, dotEnc)
+		err = com.WriteFile(outputFileName+".dot", dotEnc)
 		if err != nil {
 			return err
 		}

@@ -316,7 +316,7 @@ func iShortenOpType(ty0 string) string {
 	case "dropout":
 		return "DRP"
 	default:
-		fmt.Println(ty0)
+		// fmt.Println(ty0)
 		return ty0
 	}
 }

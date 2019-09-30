@@ -475,7 +475,15 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 			img, err := dotToImage(dotEnc)
 			if err != nil {
 				return err
-			}
+      }
+      
+
+		err = com.WriteFile(outputFileName+".dot", dotEnc)
+		if err != nil {
+			return err
+		}
+
+			println(outputFileName+".dot")
 
 			println(img)
 		}

@@ -52,10 +52,10 @@ var todotCmd = &cobra.Command{
 			return err
 		}
 
-		err = com.WriteFile(outputFileName, dotEnc)
-		if err != nil {
-			return err
-		}
+		// err = com.WriteFile(outputFileName, dotEnc)
+		// if err != nil {
+		// 	return err
+		// }
 
 		println(img)
 

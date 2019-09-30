@@ -46,6 +46,14 @@ func New(protoFileName string, batchSize int64) (*Onnx, error) {
 		return nil, errors.New("the onnx model has no input")
 	}
 	input0 := graph.Input[0]
+	if name, err := getInputName(protoFileName); err == nil {
+		for _, input := range graph.Input {
+			if input.Name == name {
+				input0 = input
+				break
+			}
+		}
+	}
 	input0Shape := getValueInfoDimensions(input0)
 	if len(input0Shape) != 4 {
 		return nil, errors.New("supports image input")
