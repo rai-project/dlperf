@@ -22,7 +22,6 @@ var (
 	generateForward         bool
 	generateBackward        bool
 	generateRandomize       bool
-	generateOnlyAdd         bool
 	generateRandomizeLength int = 5
 )
 
@@ -86,9 +85,6 @@ var benchgenCmd = &cobra.Command{
 					if generateOnlyFused && lyr.OperatorType() != "Conv" {
 						return nil
 					}
-					if generateOnlyAdd && lyr.OperatorType() != "Conv" {
-						return nil
-					}
 					var b string
 					switch strings.ToLower(lyr.OperatorType()) {
 					case "conv":
@@ -102,14 +98,12 @@ var benchgenCmd = &cobra.Command{
 								)
 								b += "\n"
 							}
-							if !generateOnlyAdd {
-								b = l.FwdBenchmarkGenerator(
-									dlperf.FwdBenchmarkArgsOption.ConvFwdType(dlperf.ConvFwdTypeConv),
-									dlperf.FwdBenchmarkArgsOption.RandomizeConv(generateRandomize),
-									dlperf.FwdBenchmarkArgsOption.RandomizeConvLength(generateRandomizeLength),
-								)
-								b += "\n"
-							}
+							b += l.FwdBenchmarkGenerator(
+								dlperf.FwdBenchmarkArgsOption.ConvFwdType(dlperf.ConvFwdTypeConv),
+								dlperf.FwdBenchmarkArgsOption.RandomizeConv(generateRandomize),
+								dlperf.FwdBenchmarkArgsOption.RandomizeConvLength(generateRandomizeLength),
+							)
+							b += "\n"
 						}
 						if generateFused {
 							b += l.FwdBenchmarkGenerator(
@@ -229,7 +223,6 @@ var benchgenCmd = &cobra.Command{
 
 func init() {
 	benchgenCmd.PersistentFlags().BoolVar(&generateOnlyFused, "only_fused", false, "generate only fused conv layers")
-	benchgenCmd.PersistentFlags().BoolVar(&generateOnlyAdd, "only_add", false, "generate only add bias conv layers")
 	benchgenCmd.PersistentFlags().BoolVar(&generateFused, "fused", false, "generate fused conv layers")
 	benchgenCmd.PersistentFlags().BoolVar(&generateRandomize, "randomize", false, "generate randomized guard suffix to allow for different translation groups")
 	benchgenCmd.PersistentFlags().IntVar(&generateRandomizeLength, "randomize_length", generateRandomizeLength, "number of randomized guard suffix to generate")
