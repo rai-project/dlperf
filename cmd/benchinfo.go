@@ -107,7 +107,7 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 
 	benchmarkInfo := []benchmarkGraphNode{}
 
-	totalTime := time.Duration(0)
+	totalTimeSec := float64(0)
 	totalFlops := dlperf.FlopsInformation{}
 
 	debugPrint := func(val ...interface{}) {
@@ -208,7 +208,7 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 			}
 
 			if len(bs) > 0 {
-				totalTime = totalTime + bs[0].RealTime
+				totalTimeSec = totalTimeSec + bs[0].RealTime.Seconds()
 				totalFlops = totalFlops.Add(flops)
 			}
 			if !benchInfoShort {
@@ -434,7 +434,11 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 			if highlightShortestPath {
 				path, weight := shortestPath.To(lastBenchmark.ID())
 
-				totalTime = timeTransformFunctionInverse(weight)
+        // pp.Println(weight)
+
+        totalTimeSec = timeTransformFunctionInverse(weight).Seconds()
+        
+        // pp.Println(totalTimeSec)
 
 				// pp.Println(path[0])
 				for ii := 1; ii < len(path); ii++ {
@@ -475,15 +479,14 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 			img, err := dotToImage(dotEnc)
 			if err != nil {
 				return err
-      }
-      
+			}
 
-		err = com.WriteFile(outputFileName+".dot", dotEnc)
-		if err != nil {
-			return err
-		}
+			err = com.WriteFile(outputFileName+".dot", dotEnc)
+			if err != nil {
+				return err
+			}
 
-			println(outputFileName+".dot")
+			println(outputFileName + ".dot")
 
 			println(img)
 		}
@@ -497,7 +500,7 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 					&bench{
 						Benchmark: benchmark.Benchmark{
 							Name:     "Total",
-							RealTime: totalTime,
+							RealTime: time.Duration(totalTimeSec * float64(time.Second)),
 						},
 						Flops: totalFlops,
 					},

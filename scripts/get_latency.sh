@@ -22,13 +22,13 @@ declare -a batch_sizes=(
 
 declare -a machines=(
   # Tesla_K80 \
-  Tesla_M60 \
+  # Tesla_M60 \
   # Quadro_RTX_6000 \
   # TITAN_V \
   # TITAN_Xp \
   # Tesla_T4 \
-  # Tesla_V100-SXM2-16GB \
-  GRID_K520 \
+  Tesla_V100-SXM2-16GB \
+  # GRID_K520 \
 )
 
 
