@@ -9,6 +9,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/spf13/cast"
 	sourcepath "github.com/GeertJohan/go-sourcepath"
 	"github.com/Unknwon/com"
 	"github.com/alecthomas/repr"
@@ -45,7 +46,8 @@ var (
 	trimLayerName               bool = true
 	showTotalInformation        bool = true
 	metricFilterString          string
-	metricFilterList            []string
+  metricFilterList            []string
+  chooseCudnnHeuristicsAlgorithm bool
 	defaultTraversalStrategy    = "parallel"
 )
 
@@ -194,21 +196,52 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 		}
 
 		makeLayerInfos := func(bs benchmark.Benchmarks, ty string) *bench {
-			bs.Sort()
+      bs.Sort()
+      
+      chosenBench := bs[0]
+
+      isConv := func(b benchmark.Benchmark) bool {
+        return strings.Contains(b.Name, "CUDNN_CONV_FWD_")
+      }
+
+      if chooseCudnnHeuristicsAlgorithm && isConv(chosenBench) {
+        for _, b := range bs {
+          advised, ok := b.Attributes["advised_convolution_algorithm"];
+          if !ok {
+            continue 
+          }
+          used, ok := b.Attributes["convolution_algorithm"];
+          if !ok {
+            continue 
+          }
+          advisedS, err := cast.ToStringE(advised)
+          if err != nil {
+            continue 
+          }
+          usedS, err := cast.ToStringE(used)
+          if err != nil {
+            continue 
+          }
+          if advisedS == usedS {
+            chosenBench = b 
+            break 
+          }
+        }
+      }
 
 			flops := lyr.Information().Flops()
 			if enableReadFlopsFromDatabase {
-				if bs[0].Flops != nil && *bs[0].Flops != -1 {
+				if chosenBench.Flops != nil && *chosenBench.Flops != -1 {
 					flops = dlperf.FlopsInformation{
-						MultiplyAdds: int64(*bs[0].Flops),
+						MultiplyAdds: int64(*chosenBench.Flops),
 					}
 				} else if config.App.IsDebug {
-					pp.Println("cannot get flops for " + bs[0].Name + " using builtin flops computation")
+					pp.Println("cannot get flops for " + chosenBench.Name + " using builtin flops computation")
 				}
 			}
 
 			if len(bs) > 0 {
-				totalTimeSec = totalTimeSec + bs[0].RealTime.Seconds()
+				totalTimeSec = totalTimeSec + chosenBench.RealTime.Seconds()
 				totalFlops = totalFlops.Add(flops)
 			}
 			if !benchInfoShort {
@@ -217,7 +250,7 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 				// " & ", float64(bs[0].RealTime.Nanoseconds())/float64(time.Microsecond), "&", utils.Flops(uint64(flops.Total())), " \\\\")
 				return &bench{
 					Type:      ty,
-					Benchmark: bs[0],
+					Benchmark: chosenBench,
 					Flops:     flops,
 					Layer:     lyr,
 				}
@@ -564,7 +597,8 @@ func init() {
 	benchinfoCmd.PersistentFlags().StringVar(&metricFilterString, "metric_filter", "", "filter using the command seperated list of metrics")
 	benchinfoCmd.PersistentFlags().BoolVar(&showTotalInformation, "total", true, "show the total information across all layers")
 	benchinfoCmd.PersistentFlags().BoolVar(&fuseLayers, "fused", false, "check for fused layers in the database")
-	benchinfoCmd.PersistentFlags().BoolVar(&trimLayerName, "trim_layer_name", true, "only show the first few characters of a layer")
+  benchinfoCmd.PersistentFlags().BoolVar(&trimLayerName, "trim_layer_name", true, "only show the first few characters of a layer")
+  benchinfoCmd.PersistentFlags().BoolVar(&chooseCudnnHeuristicsAlgorithm, "choose_cudnn_heuristics", false, "choose advised algorithm by cudnn heuristics rather than the fastest")
 	benchinfoCmd.PersistentFlags().BoolVar(&highlightShortestPath, "highlight_fast_path", true, "highlight the path taken when creating the graph visualization")
 	rootCmd.AddCommand(benchinfoCmd)
 }
