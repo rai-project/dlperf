@@ -39,8 +39,9 @@ do
     for machine in "${machines[@]}"
     do
         echo $machine
-        ./dlperf benchinfo --model_path ~/data/carml/dlperf/ --benchmark_database results/${machine}/${batch_size}.json --short=false --batch_size=${batch_size} --human=false --strategy=serial --output_file=./assets/serial_latency/batchsize_${batch_size}/${machine} --total=true --format=csv --trim_layer_name=false
-        ./dlperf benchinfo --model_path ~/data/carml/dlperf/ --benchmark_database results/${machine}/${batch_size}.json --short=false --batch_size=${batch_size} --human=false --strategy=parallel --output_file=./assets/cudnn_advised_latency/batchsize_${batch_size}/${machine} --total=true --format=csv --trim_layer_name=false --choose_cudnn_heuristics
-        ./dlperf benchinfo --model_path ~/data/carml/dlperf/ --benchmark_database results/${machine}/${batch_size}.json --short=false --batch_size=${batch_size} --human=false --strategy=parallel --output_file=./assets/latency/batchsize_${batch_size}/${machine} --total=true --format=csv --trim_layer_name=false
+        ./dlperf benchinfo --model_path ~/data/carml/dlperf/ --benchmark_database results/${machine}/${batch_size}.json --short=false --batch_size=${batch_size} --human=false --strategy=serial --output_file=./assets/cudnn_advised_serial_latency/batchsize_${batch_size}/${machine} --total=true --format=csv --trim_layer_name=false --choose_cudnn_heuristics
+        # ./dlperf benchinfo --model_path ~/data/carml/dlperf/ --benchmark_database results/${machine}/${batch_size}.json --short=false --batch_size=${batch_size} --human=false --strategy=serial --output_file=./assets/serial_latency/batchsize_${batch_size}/${machine} --total=true --format=csv --trim_layer_name=false
+        # ./dlperf benchinfo --model_path ~/data/carml/dlperf/ --benchmark_database results/${machine}/${batch_size}.json --short=false --batch_size=${batch_size} --human=false --strategy=parallel --output_file=./assets/cudnn_advised_latency/batchsize_${batch_size}/${machine} --total=true --format=csv --trim_layer_name=false --choose_cudnn_heuristics
+        # ./dlperf benchinfo --model_path ~/data/carml/dlperf/ --benchmark_database results/${machine}/${batch_size}.json --short=false --batch_size=${batch_size} --human=false --strategy=parallel --output_file=./assets/latency/batchsize_${batch_size}/${machine} --total=true --format=csv --trim_layer_name=false
     done
 done
