@@ -80,8 +80,11 @@ next:
 			}
 
 			if strings.ToLower(k) == "conv_bwd_type" || strings.ToLower(k) == "conv_fwd_type" {
+				if false {
 				filterVal = int(reflect.ValueOf(filterVal).Int())
 				val = cast.ToInt(val)
+				}
+				continue 
 			}
 			
 			if isSameScalar(filterVal, 0) || isSameScalar(val, 0) {
