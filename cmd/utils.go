@@ -274,3 +274,41 @@ func minInt(x, y int) int {
 	}
 	return x
 }
+
+func getDataType(datatype string) (dlperf.DataType, error) {
+	datatype = strings.ToLower(datatype)
+	switch datatype {
+	case "int8", "int8_t":
+		return dlperf.DataTypeInt8, nil
+	case "int16", "int16_t":
+		return dlperf.DataTypeInt16, nil
+	case "int32", "int32_t":
+		return dlperf.DataTypeInt32, nil
+	case "float16", "float16_t":
+		return dlperf.DataTypeTensorCoreHalf, nil
+	case "float32", "float", "float32_t":
+		return dlperf.DataTypeFloat32, nil
+	case "float64", "double", "float64_t":
+		return dlperf.DataTypeFloat64, nil
+	}
+	return dlperf.DataType{}, errors.Errorf("%v is not a valid datatype", datatype)
+}
+
+func setupDLPerfDataType(datatype string) error {
+	if datatype == "" { // default
+		return nil
+	}
+
+	tys := []dlperf.DataType{}
+
+	datatype = strings.ToLower(datatype)
+	for _, dt := range strings.Split(datatype, ",") {
+		ty, err := getDataType(dt)
+		if err != nil {
+			return err
+		}
+		tys = append(tys, ty)
+	}
+	dlperf.AllDataTypes = tys
+	return nil
+}

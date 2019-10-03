@@ -4,9 +4,9 @@ type ConvBwdType int
 
 const (
 	ConvBwdTypeUndefined ConvBwdType = 0
-	ConvBwdTypeData   ConvBwdType = 1
-	ConvBwdTypeFilter ConvBwdType = 2
-	ConvBwdTypeBias   ConvBwdType = 3
+	ConvBwdTypeData      ConvBwdType = 1
+	ConvBwdTypeFilter    ConvBwdType = 2
+	ConvBwdTypeBias      ConvBwdType = 3
 )
 
 type bwdBenchmarkArgsOptions struct {

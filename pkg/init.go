@@ -7,9 +7,9 @@ import (
 )
 
 var (
-	batchSize int64
+	batchSize          int64
 	IgnoreCompareFlops bool
-	log       *logrus.Entry
+	log                *logrus.Entry
 )
 
 func GetBatchSize() int64 {

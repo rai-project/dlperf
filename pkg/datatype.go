@@ -5,29 +5,43 @@ type DataType struct {
 	CType string `json:"ctype"`
 }
 
-var AllDataTypes = []DataType{
-	// DataType{
-	// 	Name:  "Int8",
-	// 	CType: "int8_t",
-	// },
-	// DataType{
-	// 	Name:  "Int32",
-	// 	CType: "int32_t",
-	// },
-	// DataType{
-	// 	Name:  "Float16",
-	// 	CType: "__half",
-	// },
-	// DataType{
-	// 	Name:  "TensorCoreHalf",
-	// 	CType: "__half",
-	// },
-	DataType{
+var (
+	DataTypeInt8 = DataType{
+		Name:  "Int8",
+		CType: "int8_t",
+	}
+	DataTypeInt16 = DataType{
+		Name:  "Int16",
+		CType: "int16_t",
+	}
+	DataTypeInt32 = DataType{
+		Name:  "Int32",
+		CType: "int32_t",
+	}
+	DataTypeFloat16 = DataType{
+		Name:  "Float16",
+		CType: "__half",
+	}
+	DataTypeTensorCoreHalf = DataType{
+		Name:  "TensorCoreHalf",
+		CType: "__half",
+	}
+	DataTypeFloat32 = DataType{
 		Name:  "Float32",
 		CType: "float",
-	},
-	// DataType{
-	// 	Name:  "Float64",
-	// 	CType: "double",
-	// },
+	}
+	DataTypeFloat64 = DataType{
+		Name:  "Float64",
+		CType: "double",
+	}
+)
+
+var AllDataTypes = []DataType{
+	// DataTypeInt8,
+	// DataTypeInt16,
+	// DataTypeInt32,
+	// DataTypeFloat16,
+	// DataTypeTensorCoreHalf,
+	DataTypeFloat32,
+	// DataTypeFloat64,
 }

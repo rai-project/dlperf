@@ -23,7 +23,7 @@ type Writer struct {
 	tbl            *tablewriter.Table
 	csv            *csv.Writer
 	json           []string
-	tex           []string
+	tex            []string
 	opts           []writer.Option
 }
 
@@ -71,14 +71,14 @@ func (w *Writer) Header(rower Rower) error {
 	case "table", "md", "markdown":
 		w.tbl.SetHeader(rower.Header(w.opts...))
 	case "latex", "tex":
-		var r  string
-		header :=  rower.Header(w.opts...)
+		var r string
+		header := rower.Header(w.opts...)
 		for ii, entry := range header {
 			r += `\thead{\textbf{` + texEscape(entry) + `}}`
 			if ii == len(header) {
-				r  += ` \\`
+				r += ` \\`
 			} else {
-				r  += ` & `
+				r += ` & `
 			}
 		}
 		w.tex = append(w.tex, r)
@@ -89,8 +89,7 @@ func (w *Writer) Header(rower Rower) error {
 	return nil
 }
 
-
-func texEscape(str string)string {
+func texEscape(str string) string {
 	text := []byte(str)
 	out := &bytes.Buffer{}
 	for i := 0; i < len(text); i++ {
@@ -111,9 +110,8 @@ func texEscape(str string)string {
 		out.WriteByte('\\')
 		out.WriteByte(text[i])
 	}
-	return string(out.Bytes())	
+	return string(out.Bytes())
 }
-
 
 func texNeedsBackslash(c byte) bool {
 	for _, r := range []byte("_{}%$&\\~") {
@@ -130,14 +128,14 @@ func (w *Writer) Row(rower Rower) error {
 	case "table", "md", "markdown":
 		w.tbl.Append(rower.Row(w.opts...))
 	case "latex", "tex":
-		var r  string
+		var r string
 		row := rower.Row(w.opts...)
 		for ii, entry := range row {
 			r += texEscape(entry)
 			if ii == len(row) {
-				r  += ` \\`
+				r += ` \\`
 			} else {
-				r  += ` & `
+				r += ` & `
 			}
 		}
 		w.tex = append(w.tex, r)

@@ -21,6 +21,7 @@ var (
 	noHeader       bool
 	appendOutput   bool
 	pruneGraph     bool
+	datatype       = "float32"
 	goPath         = com.GetGOPATHs()[0]
 	raiSrcPath     = getSrcPath("github.com/rai-project")
 )
