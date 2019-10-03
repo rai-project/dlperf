@@ -284,7 +284,7 @@ func getDataType(datatype string) (dlperf.DataType, error) {
 		return dlperf.DataTypeInt16, nil
 	case "int32", "int32_t":
 		return dlperf.DataTypeInt32, nil
-	case "float16", "float16_t":
+	case "float16", "float16_t", "half":
 		return dlperf.DataTypeTensorCoreHalf, nil
 	case "float32", "float", "float32_t":
 		return dlperf.DataTypeFloat32, nil
@@ -292,6 +292,15 @@ func getDataType(datatype string) (dlperf.DataType, error) {
 		return dlperf.DataTypeFloat64, nil
 	}
 	return dlperf.DataType{}, errors.Errorf("%v is not a valid datatype", datatype)
+}
+
+
+func getDataTypeName(datatype string) (string, error) {
+	dt, err := getDataType(datatype)
+	if err != nil {
+		return "", err
+	}
+	return dt.Name, nil
 }
 
 func setupDLPerfDataType(datatype string) error {

@@ -231,6 +231,6 @@ func init() {
 	benchgenCmd.PersistentFlags().IntVar(&generateRandomizeLength, "randomize_length", generateRandomizeLength, "number of randomized guard suffix to generate")
 	benchgenCmd.PersistentFlags().BoolVar(&generateBackward, "backward", false, "generate the backward pass")
 	benchgenCmd.PersistentFlags().BoolVar(&generateForward, "forward", true, "generate the forward pass")
-	benchgenCmd.PersistentFlags().StringVar(&datatype, "data_type", "float32", "data type to use (default is float32)")
+	benchgenCmd.PersistentFlags().StringVar(&datatype, "datatype", "float32", "data type to use (default is float32)")
 	rootCmd.AddCommand(benchgenCmd)
 }

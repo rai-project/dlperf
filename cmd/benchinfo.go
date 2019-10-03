@@ -32,7 +32,6 @@ var (
 	benchmarkResultsFolder         string
 	benchInfoTraining              bool
 	benchInfoShort                 bool
-	benchInfoDataType              string
 	enableReadFlopsFromDatabase    bool
 	traversalStrategy              string
 	showBenchInfo                  bool
@@ -58,6 +57,11 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 			pp.Println("[PANIC] while computing bench information " + modelPath + " [error = " + repr.String(r) + "]")
 		}
 	}()
+
+	benchInfoDataType, err := getDataTypeName(datatype)
+	if err != nil {
+		return err
+	}
 
 	if com.IsDir(modelPath) {
 		baseOutputFileName := outputFileName
@@ -682,7 +686,6 @@ func init() {
 	benchmarkResultsFolder = filepath.Join(sourcepath.MustAbsoluteDir(), "..", "results")
 	benchinfoCmd.PersistentFlags().BoolVar(&benchInfoTraining, "training", false, "compute the training information")
 	benchinfoCmd.PersistentFlags().BoolVar(&benchInfoShort, "short", false, "only get info about the total, rather than reporting per-layer information")
-	benchinfoCmd.PersistentFlags().StringVar(&benchInfoDataType, "datatype", "float32", "compute the information for the specified scalar datatype")
 	benchinfoCmd.PersistentFlags().StringVar(&benchmarkResultsFolder, "benchmark_database", benchmarkResultsFolder, "path to the benchmark results folder")
 	benchinfoCmd.PersistentFlags().StringVar(&traversalStrategy, "strategy", defaultTraversalStrategy, "strategy to traverse the graph either can be `parallel` which would find the shortest path or `serial` to get the total time as if each layer is executed serially")
 	benchinfoCmd.PersistentFlags().BoolVar(&showBenchInfo, "show", false, "generate the benchmark info graph (only for parallel for now)")
@@ -697,6 +700,6 @@ func init() {
 	benchinfoCmd.PersistentFlags().BoolVar(&trimLayerName, "trim_layer_name", true, "only show the first few characters of a layer")
 	benchinfoCmd.PersistentFlags().BoolVar(&chooseCudnnHeuristicsAlgorithm, "choose_cudnn_heuristics", false, "choose advised algorithm by cudnn heuristics rather than the fastest")
 	benchinfoCmd.PersistentFlags().BoolVar(&highlightShortestPath, "highlight_fast_path", true, "highlight the path taken when creating the graph visualization")
-	benchinfoCmd.PersistentFlags().StringVar(&datatype, "data_type", "float32", "data type to use (default is float32)")
+	benchinfoCmd.PersistentFlags().StringVar(&datatype, "datatype", "float32", "data type to use (default is float32)")
 	rootCmd.AddCommand(benchinfoCmd)
 }
