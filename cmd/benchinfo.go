@@ -120,11 +120,28 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 
 	for ii := range nds {
 		nd := nds[ii]
-		peekNLayer := func(offset int) dlperf.Layer {
-			if ii+offset >= len(nds) {
+		peekNLayer := func(offset0 int) dlperf.Layer { // skips constant input
+			offset := 0
+			rr := ii
+			for rr < len(nds) {
+				lyr := nds[rr].Layer()
+				rr++
+				if strings.ToLower(lyr.OperatorType()) == "constantinput" {
+					continue
+				}
+				if offset == offset0 {
+					offset = rr - 1
+					break
+				}
+				offset++
+			}
+			if rr >= len(nds) {
 				return nil
 			}
-			return nds[ii+offset].Layer()
+			// pp.Println(ii)
+			// pp.Println(offset0)
+			// pp.Println(offset)
+			return nds[offset].Layer()
 		}
 		peekLayer := func() dlperf.Layer {
 			return peekNLayer(1)
@@ -312,8 +329,18 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 				return nil
 			}
 
+
+      isActivation := func (e dlperf.Layer) bool {
+        op := strings.ToLower(e.OperatorType())
+        switch op {
+        case "relu", "tanh", "sigmoid", "elu":
+          return true
+        }
+        return false
+      }
+
 			// check for conv -> bias -> relu pattern
-			if nextLayer := peekLayer(); l.HasBias() && fuseLayers && nextLayer != nil && strings.ToLower(nextLayer.OperatorType()) == "relu" {
+			if nextLayer := peekLayer(); l.HasBias() && fuseLayers && nextLayer != nil && isActivation(nextLayer) {
 				panic("to do by forcing the use of the relu activation")
 				filter := filterBenchmarks(
 					false,
@@ -327,7 +354,9 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 				}
 				benches = append(benches, makeLayerInfos(bs, "forward"))
 			} else if fuseLayers && l.HasBias() { // fuse conv+bias layer
-				panic("to do by forcing the use of the identity activation")
+				// panic("to do by forcing the use of the identity activation")
+				// nextLayer := peekLayer()
+				// pp.Println(nextLayer.OperatorType())
 				filter := filterBenchmarks(
 					false,
 					benchInfoDataType,
@@ -337,7 +366,7 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 				bs, err := getBenchmarkTime(filter)
 				if err != nil {
 					continue
-				}
+        }
 				benches = append(benches, makeLayerInfos(bs, "forward"))
 			} else {
 				err := getForwardConv()
