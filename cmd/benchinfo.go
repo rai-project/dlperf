@@ -32,7 +32,6 @@ var (
 	benchmarkResultsFolder         string
 	benchInfoTraining              bool
 	benchInfoShort                 bool
-	benchInfoDataType              string
 	enableReadFlopsFromDatabase    bool
 	traversalStrategy              string
 	showBenchInfo                  bool
@@ -58,6 +57,11 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 			pp.Println("[PANIC] while computing bench information " + modelPath + " [error = " + repr.String(r) + "]")
 		}
 	}()
+
+	benchInfoDataType, err := getDataTypeName(datatype)
+	if err != nil {
+		return err
+	}
 
 	if com.IsDir(modelPath) {
 		baseOutputFileName := outputFileName
@@ -118,8 +122,20 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 		}
 	}
 
+	skipNext := 0
+
 	for ii := range nds {
 		nd := nds[ii]
+
+		if strings.ToLower(nd.Layer().OperatorType()) == "constantinput" {
+			continue
+		}
+
+		if skipNext > 0 {
+			// pp.Println(strings.ToLower(nd.Layer().Name()))
+			skipNext--
+			continue
+		}
 		peekNLayer := func(offset0 int) dlperf.Layer { // skips constant input
 			offset := 0
 			rr := ii
@@ -215,6 +231,9 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 		makeLayerInfos := func(bs benchmark.Benchmarks, ty string) *bench {
 			bs.Sort()
 
+			if len(bs) == 0 {
+				return nil
+			}
 			chosenBench := bs[0]
 
 			isConv := func(b benchmark.Benchmark) bool {
@@ -283,7 +302,9 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 			if err != nil {
 				continue
 			}
-			benches = append(benches, makeLayerInfos(bs, "forward"))
+			if info := makeLayerInfos(bs, "forward"); info != nil {
+				benches = append(benches, info)
+			}
 
 			if benchInfoTraining {
 				filter := filterBenchmarks(true, benchInfoDataType, "")
@@ -291,7 +312,9 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 				if err != nil {
 					continue
 				}
-				benches = append(benches, makeLayerInfos(bs, "backward"))
+				if info := makeLayerInfos(bs, "backward"); info != nil {
+					benches = append(benches, info)
+				}
 			}
 
 			benchmarkInfo = append(benchmarkInfo,
@@ -316,7 +339,9 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 				if err != nil {
 					return err
 				}
-				benches = append(benches, makeLayerInfos(bs, "forward"))
+				if info := makeLayerInfos(bs, "forward"); info != nil {
+					benches = append(benches, info)
+				}
 
 				if l.HasBias() {
 					filter := filterBenchmarks(false, benchInfoDataType, "", dlperf.FwdBenchmarkArgsOption.ConvFwdType(dlperf.ConvFwdTypeBias))
@@ -324,20 +349,30 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 					if err != nil {
 						return err
 					}
-					benches = append(benches, makeLayerInfos(bs, "bias"))
+					if info := makeLayerInfos(bs, "bias"); info != nil {
+						benches = append(benches, info)
+					}
 				}
 				return nil
 			}
 
+			isActivation := func(e dlperf.Layer) bool {
+				op := strings.ToLower(e.OperatorType())
+				switch op {
+				case "relu", "tanh", "sigmoid", "elu":
+					return true
+				}
+				return false
+			}
 
-      isActivation := func (e dlperf.Layer) bool {
-        op := strings.ToLower(e.OperatorType())
-        switch op {
-        case "relu", "tanh", "sigmoid", "elu":
-          return true
-        }
-        return false
-      }
+			isBatchNorm := func(e dlperf.Layer) bool {
+				op := strings.ToLower(e.OperatorType())
+				switch op {
+				case "batchnorm", "bn":
+					return true
+				}
+				return false
+			}
 
 			// check for conv -> bias -> relu pattern
 			if nextLayer := peekLayer(); l.HasBias() && fuseLayers && nextLayer != nil && isActivation(nextLayer) {
@@ -352,7 +387,9 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 				if err != nil {
 					continue
 				}
-				benches = append(benches, makeLayerInfos(bs, "forward"))
+				if info := makeLayerInfos(bs, "forward"); info != nil {
+					benches = append(benches, info)
+				}
 			} else if fuseLayers && l.HasBias() { // fuse conv+bias layer
 				// panic("to do by forcing the use of the identity activation")
 				// nextLayer := peekLayer()
@@ -365,9 +402,25 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 				)
 				bs, err := getBenchmarkTime(filter)
 				if err != nil {
-					continue
+					err := getForwardConv()
+					if err != nil {
+						continue
+					}
+				}
+				if info := makeLayerInfos(bs, "forward"); info != nil {
+					benches = append(benches, info)
+				}
+
+				if nextLayer := peekLayer(); fuseLayers && nextLayer != nil && isBatchNorm(nextLayer) {
+					if nextLayer := peekNLayer(2); fuseLayers && nextLayer != nil && isActivation(nextLayer) {
+						skipNext = 2 // we skip the next batch norm and activation since it can be computed using the fused op
+					} else {
+						skipNext = 1 // we skip the next batch norm since it can be computed using the fused op
+					}
+				} else if nextLayer := peekLayer(); fuseLayers && nextLayer != nil && isActivation(nextLayer) {
+          skipNext = 1 // we skip the next activation since it can be computed using the fused op
+
         }
-				benches = append(benches, makeLayerInfos(bs, "forward"))
 			} else {
 				err := getForwardConv()
 				if err != nil {
@@ -382,7 +435,10 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 					pp.Println("unable to get conv data")
 					continue
 				}
-				benches = append(benches, makeLayerInfos(bs, "backward_data"))
+
+				if info := makeLayerInfos(bs, "backward_data"); info != nil {
+					benches = append(benches, info)
+				}
 
 				filter = filterBenchmarks(true, benchInfoDataType, "", dlperf.BwdBenchmarkArgsOption.ConvBwdType(dlperf.ConvBwdTypeFilter))
 				bs, err = getBenchmarkTime(filter)
@@ -390,7 +446,10 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 					pp.Println("unable to get conv filter because of " + err.Error())
 					continue
 				}
-				benches = append(benches, makeLayerInfos(bs, "backward_filter"))
+
+				if info := makeLayerInfos(bs, "backward_filter"); info != nil {
+					benches = append(benches, info)
+				}
 
 				if l.HasBias() {
 					filter = filterBenchmarks(true, benchInfoDataType, "", dlperf.BwdBenchmarkArgsOption.ConvBwdType(dlperf.ConvBwdTypeBias))
@@ -399,7 +458,10 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 						pp.Println("unable to get conv bias")
 						continue
 					}
-					benches = append(benches, makeLayerInfos(bs, "backward_bias"))
+
+					if info := makeLayerInfos(bs, "backward_bias"); info != nil {
+						benches = append(benches, info)
+					}
 				}
 			}
 
@@ -422,7 +484,10 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 			if err != nil {
 				continue
 			}
-			benches = append(benches, makeLayerInfos(bs, "forward"))
+
+			if info := makeLayerInfos(bs, "forward"); info != nil {
+				benches = append(benches, info)
+			}
 
 			if benchInfoTraining {
 				filter := filterBenchmarks(true, benchInfoDataType, "")
@@ -430,7 +495,11 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 				if err != nil {
 					continue
 				}
-				benches = append(benches, makeLayerInfos(bs, "backward"))
+
+				if info := makeLayerInfos(bs, "backward"); info != nil {
+					benches = append(benches, info)
+				}
+
 			}
 
 			benchmarkInfo = append(benchmarkInfo,
@@ -617,7 +686,6 @@ func init() {
 	benchmarkResultsFolder = filepath.Join(sourcepath.MustAbsoluteDir(), "..", "results")
 	benchinfoCmd.PersistentFlags().BoolVar(&benchInfoTraining, "training", false, "compute the training information")
 	benchinfoCmd.PersistentFlags().BoolVar(&benchInfoShort, "short", false, "only get info about the total, rather than reporting per-layer information")
-	benchinfoCmd.PersistentFlags().StringVar(&benchInfoDataType, "datatype", "float32", "compute the information for the specified scalar datatype")
 	benchinfoCmd.PersistentFlags().StringVar(&benchmarkResultsFolder, "benchmark_database", benchmarkResultsFolder, "path to the benchmark results folder")
 	benchinfoCmd.PersistentFlags().StringVar(&traversalStrategy, "strategy", defaultTraversalStrategy, "strategy to traverse the graph either can be `parallel` which would find the shortest path or `serial` to get the total time as if each layer is executed serially")
 	benchinfoCmd.PersistentFlags().BoolVar(&showBenchInfo, "show", false, "generate the benchmark info graph (only for parallel for now)")
@@ -632,6 +700,6 @@ func init() {
 	benchinfoCmd.PersistentFlags().BoolVar(&trimLayerName, "trim_layer_name", true, "only show the first few characters of a layer")
 	benchinfoCmd.PersistentFlags().BoolVar(&chooseCudnnHeuristicsAlgorithm, "choose_cudnn_heuristics", false, "choose advised algorithm by cudnn heuristics rather than the fastest")
 	benchinfoCmd.PersistentFlags().BoolVar(&highlightShortestPath, "highlight_fast_path", true, "highlight the path taken when creating the graph visualization")
-	benchinfoCmd.PersistentFlags().StringVar(&datatype, "data_type", "float32", "data type to use (default is float32)")
+	benchinfoCmd.PersistentFlags().StringVar(&datatype, "datatype", "float32", "data type to use (default is float32)")
 	rootCmd.AddCommand(benchinfoCmd)
 }
