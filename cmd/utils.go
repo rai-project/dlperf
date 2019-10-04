@@ -294,7 +294,6 @@ func getDataType(datatype string) (dlperf.DataType, error) {
 	return dlperf.DataType{}, errors.Errorf("%v is not a valid datatype", datatype)
 }
 
-
 func getDataTypeName(datatype string) (string, error) {
 	dt, err := getDataType(datatype)
 	if err != nil {

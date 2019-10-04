@@ -411,16 +411,17 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 					benches = append(benches, info)
 				}
 
-				if nextLayer := peekLayer(); fuseLayers && nextLayer != nil && isBatchNorm(nextLayer) {
+				if nextLayer := peekLayer(); false && fuseLayers && nextLayer != nil && isBatchNorm(nextLayer) {
 					if nextLayer := peekNLayer(2); fuseLayers && nextLayer != nil && isActivation(nextLayer) {
 						skipNext = 2 // we skip the next batch norm and activation since it can be computed using the fused op
 					} else {
 						skipNext = 1 // we skip the next batch norm since it can be computed using the fused op
 					}
-				} else if nextLayer := peekLayer(); fuseLayers && nextLayer != nil && isActivation(nextLayer) {
-          skipNext = 1 // we skip the next activation since it can be computed using the fused op
+				} else 
+				if nextLayer := peekLayer(); fuseLayers && nextLayer != nil && isActivation(nextLayer) {
+					skipNext = 1 // we skip the next activation since it can be computed using the fused op
 
-        }
+				}
 			} else {
 				err := getForwardConv()
 				if err != nil {
