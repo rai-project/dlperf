@@ -220,8 +220,8 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 				// pp.ColoringEnabled = true
 				// continue
 				// pp.Println(lyr.OperatorType())
-				pp.Println(batchSize)
-				pp.Println(lyr.Name())
+				// pp.Println(batchSize)
+				// pp.Println(lyr.Name())
 				pp.Println(filter)
 				return nil, errors.New("no benchmarks")
 			}
