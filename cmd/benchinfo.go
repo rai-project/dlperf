@@ -222,7 +222,7 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 				// pp.Println(lyr.OperatorType())
 				// pp.Println(batchSize)
 				// pp.Println(lyr.Name())
-				pp.Println(filter)
+				// pp.Println(filter)
 				return nil, errors.New("no benchmarks")
 			}
 			return bs, nil
@@ -384,11 +384,15 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 					dlperf.FwdBenchmarkArgsOption.ConvFwdType(dlperf.ConvFwdTypeConvFusedActivation),
 				)
 				bs, err := getBenchmarkTime(filter)
-				if err != nil {
-					continue
-				}
-				if info := makeLayerInfos(bs, "forward"); info != nil {
-					benches = append(benches, info)
+				if err != nil || len(bs) == 0 {
+					err := getForwardConv()
+					if err != nil {
+						continue
+					}
+				} else {
+					if info := makeLayerInfos(bs, "forward"); info != nil {
+						benches = append(benches, info)
+					}
 				}
 			} else if fuseLayers && l.HasBias() { // fuse conv+bias layer
 				// panic("to do by forcing the use of the identity activation")
@@ -401,26 +405,26 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 					dlperf.FwdBenchmarkArgsOption.ConvFwdType(dlperf.ConvFwdTypeConvFusedActivation),
 				)
 				bs, err := getBenchmarkTime(filter)
-				if err != nil {
+				if err != nil || len(bs) == 0 {
 					err := getForwardConv()
 					if err != nil {
 						continue
 					}
-				}
-				if info := makeLayerInfos(bs, "forward"); info != nil {
-					benches = append(benches, info)
-				}
-
-				if nextLayer := peekLayer(); false && fuseLayers && nextLayer != nil && isBatchNorm(nextLayer) {
-					if nextLayer := peekNLayer(2); fuseLayers && nextLayer != nil && isActivation(nextLayer) {
-						skipNext = 2 // we skip the next batch norm and activation since it can be computed using the fused op
-					} else {
-						skipNext = 1 // we skip the next batch norm since it can be computed using the fused op
+				} else {
+					if info := makeLayerInfos(bs, "forward"); info != nil {
+						benches = append(benches, info)
 					}
-				} else 
-				if nextLayer := peekLayer(); fuseLayers && nextLayer != nil && isActivation(nextLayer) {
-					skipNext = 1 // we skip the next activation since it can be computed using the fused op
 
+					if nextLayer := peekLayer(); false && fuseLayers && nextLayer != nil && isBatchNorm(nextLayer) {
+						if nextLayer := peekNLayer(2); fuseLayers && nextLayer != nil && isActivation(nextLayer) {
+							skipNext = 2 // we skip the next batch norm and activation since it can be computed using the fused op
+						} else {
+							skipNext = 1 // we skip the next batch norm since it can be computed using the fused op
+						}
+					} else if nextLayer := peekLayer(); fuseLayers && nextLayer != nil && isActivation(nextLayer) {
+						skipNext = 1 // we skip the next activation since it can be computed using the fused op
+
+					}
 				}
 			} else {
 				err := getForwardConv()
