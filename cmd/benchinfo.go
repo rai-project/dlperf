@@ -79,7 +79,7 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 			modelPath = path
 			modelName := getModelName(modelPath)
 			outputFileName = filepath.Join(baseOutputFileName, modelName+"."+outputFormat)
-			if true {
+			if IsDebug {
 				pp.Println("processing " + modelName + " from " + modelPath + " to " + outputFileName)
 			}
 			if err := benchinfo(cmd, args); err != nil {
