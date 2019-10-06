@@ -27665,4 +27665,420 @@
       "real_time": 0.0000000000000000e+00,
       "cpu_time": 0.0000000000000000e+00,
       "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_BIAS_ACTIVATION_FWD_4_TENSORCOREHALF__BatchSize_1024__3637275686281657958<CUDNN_CONVOLUTION_FWD_ALGO_GEMM, CUDNN_ACTIVATION_RELU>/input[0]:1024/input[1]:256/input[2]:14/input[3]:14/filter_count:256/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1024/conv_fwd_type:2/conv_bwd_type:0/manual_time",
+      "error_occurred": true,
+      "error_message": "CUDNN/CONV_BIAS_ACTIVATION_FWD failed to launch kernel because of CUDNN_STATUS_NOT_SUPPORTED",
+      "iterations": 1,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_BIAS_ACTIVATION_FWD_4_TENSORCOREHALF__BatchSize_1024__3637275686281657958<CUDNN_CONVOLUTION_FWD_ALGO_GEMM, CUDNN_ACTIVATION_CLIPPED_RELU>/input[0]:1024/input[1]:256/input[2]:14/input[3]:14/filter_count:256/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1024/conv_fwd_type:2/conv_bwd_type:0/manual_time",
+      "error_occurred": true,
+      "error_message": "CUDNN/CONV_BIAS_ACTIVATION_FWD failed to launch kernel because of CUDNN_STATUS_NOT_SUPPORTED",
+      "iterations": 1,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_BIAS_ACTIVATION_FWD_4_TENSORCOREHALF__BatchSize_1024__3637275686281657958<CUDNN_CONVOLUTION_FWD_ALGO_GEMM, CUDNN_ACTIVATION_ELU>/input[0]:1024/input[1]:256/input[2]:14/input[3]:14/filter_count:256/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1024/conv_fwd_type:2/conv_bwd_type:0/manual_time",
+      "error_occurred": true,
+      "error_message": "CUDNN/CONV_BIAS_ACTIVATION_FWD failed to launch kernel because of CUDNN_STATUS_NOT_SUPPORTED",
+      "iterations": 1,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_BIAS_ACTIVATION_FWD_4_TENSORCOREHALF__BatchSize_1024__3637275686281657958<CUDNN_CONVOLUTION_FWD_ALGO_GEMM, CUDNN_ACTIVATION_RELU>/input[0]:1024/input[1]:256/input[2]:14/input[3]:14/filter_count:256/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1024/conv_fwd_type:2/conv_bwd_type:0/manual_time",
+      "error_occurred": true,
+      "error_message": "CUDNN/CONV_BIAS_ACTIVATION_FWD failed to launch kernel because of CUDNN_STATUS_NOT_SUPPORTED",
+      "iterations": 1,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_BIAS_ACTIVATION_FWD_4_TENSORCOREHALF__BatchSize_1024__3637275686281657958<CUDNN_CONVOLUTION_FWD_ALGO_GEMM, CUDNN_ACTIVATION_RELU>/input[0]:1024/input[1]:256/input[2]:14/input[3]:14/filter_count:256/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1024/conv_fwd_type:2/conv_bwd_type:0/manual_time",
+      "error_occurred": true,
+      "error_message": "CUDNN/CONV_BIAS_ACTIVATION_FWD failed to launch kernel because of CUDNN_STATUS_NOT_SUPPORTED",
+      "iterations": 1,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_BIAS_ACTIVATION_FWD_4_TENSORCOREHALF__BatchSize_1024__3637275686281657958<CUDNN_CONVOLUTION_FWD_ALGO_GEMM, CUDNN_ACTIVATION_IDENTITY>/input[0]:1024/input[1]:256/input[2]:14/input[3]:14/filter_count:256/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1024/conv_fwd_type:2/conv_bwd_type:0/manual_time",
+      "error_occurred": true,
+      "error_message": "CUDNN/CONV_BIAS_ACTIVATION_FWD failed to launch kernel because of CUDNN_STATUS_NOT_SUPPORTED",
+      "iterations": 1,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_BIAS_ACTIVATION_FWD_4_TENSORCOREHALF__BatchSize_1024__3637275686281657958<CUDNN_CONVOLUTION_FWD_ALGO_DIRECT, CUDNN_ACTIVATION_SIGMOID>/input[0]:1024/input[1]:256/input[2]:14/input[3]:14/filter_count:256/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1024/conv_fwd_type:2/conv_bwd_type:0/manual_time",
+      "error_occurred": true,
+      "error_message": "CUDNN/CONV_BIAS_ACTIVATION_FWD failed to launch kernel because of CUDNN_STATUS_NOT_SUPPORTED",
+      "iterations": 1,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_BIAS_ACTIVATION_FWD_4_TENSORCOREHALF__BatchSize_1024__3637275686281657958<CUDNN_CONVOLUTION_FWD_ALGO_DIRECT, CUDNN_ACTIVATION_TANH>/input[0]:1024/input[1]:256/input[2]:14/input[3]:14/filter_count:256/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1024/conv_fwd_type:2/conv_bwd_type:0/manual_time",
+      "error_occurred": true,
+      "error_message": "CUDNN/CONV_BIAS_ACTIVATION_FWD failed to launch kernel because of CUDNN_STATUS_NOT_SUPPORTED",
+      "iterations": 1,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_BIAS_ACTIVATION_FWD_4_TENSORCOREHALF__BatchSize_1024__3637275686281657958<CUDNN_CONVOLUTION_FWD_ALGO_DIRECT, CUDNN_ACTIVATION_RELU>/input[0]:1024/input[1]:256/input[2]:14/input[3]:14/filter_count:256/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1024/conv_fwd_type:2/conv_bwd_type:0/manual_time",
+      "error_occurred": true,
+      "error_message": "CUDNN/CONV_BIAS_ACTIVATION_FWD failed to launch kernel because of CUDNN_STATUS_NOT_SUPPORTED",
+      "iterations": 1,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_BIAS_ACTIVATION_FWD_4_TENSORCOREHALF__BatchSize_1024__3637275686281657958<CUDNN_CONVOLUTION_FWD_ALGO_DIRECT, CUDNN_ACTIVATION_CLIPPED_RELU>/input[0]:1024/input[1]:256/input[2]:14/input[3]:14/filter_count:256/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1024/conv_fwd_type:2/conv_bwd_type:0/manual_time",
+      "error_occurred": true,
+      "error_message": "CUDNN/CONV_BIAS_ACTIVATION_FWD failed to launch kernel because of CUDNN_STATUS_NOT_SUPPORTED",
+      "iterations": 1,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_BIAS_ACTIVATION_FWD_4_TENSORCOREHALF__BatchSize_1024__3637275686281657958<CUDNN_CONVOLUTION_FWD_ALGO_DIRECT, CUDNN_ACTIVATION_ELU>/input[0]:1024/input[1]:256/input[2]:14/input[3]:14/filter_count:256/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1024/conv_fwd_type:2/conv_bwd_type:0/manual_time",
+      "error_occurred": true,
+      "error_message": "CUDNN/CONV_BIAS_ACTIVATION_FWD failed to launch kernel because of CUDNN_STATUS_NOT_SUPPORTED",
+      "iterations": 1,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_BIAS_ACTIVATION_FWD_4_TENSORCOREHALF__BatchSize_1024__3637275686281657958<CUDNN_CONVOLUTION_FWD_ALGO_DIRECT, CUDNN_ACTIVATION_RELU>/input[0]:1024/input[1]:256/input[2]:14/input[3]:14/filter_count:256/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1024/conv_fwd_type:2/conv_bwd_type:0/manual_time",
+      "error_occurred": true,
+      "error_message": "CUDNN/CONV_BIAS_ACTIVATION_FWD failed to launch kernel because of CUDNN_STATUS_NOT_SUPPORTED",
+      "iterations": 1,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_BIAS_ACTIVATION_FWD_4_TENSORCOREHALF__BatchSize_1024__3637275686281657958<CUDNN_CONVOLUTION_FWD_ALGO_DIRECT, CUDNN_ACTIVATION_RELU>/input[0]:1024/input[1]:256/input[2]:14/input[3]:14/filter_count:256/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1024/conv_fwd_type:2/conv_bwd_type:0/manual_time",
+      "error_occurred": true,
+      "error_message": "CUDNN/CONV_BIAS_ACTIVATION_FWD failed to launch kernel because of CUDNN_STATUS_NOT_SUPPORTED",
+      "iterations": 1,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_BIAS_ACTIVATION_FWD_4_TENSORCOREHALF__BatchSize_1024__3637275686281657958<CUDNN_CONVOLUTION_FWD_ALGO_DIRECT, CUDNN_ACTIVATION_IDENTITY>/input[0]:1024/input[1]:256/input[2]:14/input[3]:14/filter_count:256/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1024/conv_fwd_type:2/conv_bwd_type:0/manual_time",
+      "error_occurred": true,
+      "error_message": "CUDNN/CONV_BIAS_ACTIVATION_FWD failed to launch kernel because of CUDNN_STATUS_NOT_SUPPORTED",
+      "iterations": 1,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_BIAS_ACTIVATION_FWD_4_TENSORCOREHALF__BatchSize_1024__3637275686281657958<CUDNN_CONVOLUTION_FWD_ALGO_FFT, CUDNN_ACTIVATION_SIGMOID>/input[0]:1024/input[1]:256/input[2]:14/input[3]:14/filter_count:256/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1024/conv_fwd_type:2/conv_bwd_type:0/manual_time",
+      "error_occurred": true,
+      "error_message": "CUDNN/CONV_BIAS_ACTIVATION_FWD failed to launch kernel because of CUDNN_STATUS_NOT_SUPPORTED",
+      "iterations": 1,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_BIAS_ACTIVATION_FWD_4_TENSORCOREHALF__BatchSize_1024__3637275686281657958<CUDNN_CONVOLUTION_FWD_ALGO_FFT, CUDNN_ACTIVATION_TANH>/input[0]:1024/input[1]:256/input[2]:14/input[3]:14/filter_count:256/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1024/conv_fwd_type:2/conv_bwd_type:0/manual_time",
+      "error_occurred": true,
+      "error_message": "CUDNN/CONV_BIAS_ACTIVATION_FWD failed to launch kernel because of CUDNN_STATUS_NOT_SUPPORTED",
+      "iterations": 1,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_BIAS_ACTIVATION_FWD_4_TENSORCOREHALF__BatchSize_1024__3637275686281657958<CUDNN_CONVOLUTION_FWD_ALGO_FFT, CUDNN_ACTIVATION_RELU>/input[0]:1024/input[1]:256/input[2]:14/input[3]:14/filter_count:256/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1024/conv_fwd_type:2/conv_bwd_type:0/manual_time",
+      "error_occurred": true,
+      "error_message": "CUDNN/CONV_BIAS_ACTIVATION_FWD failed to launch kernel because of CUDNN_STATUS_NOT_SUPPORTED",
+      "iterations": 1,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_BIAS_ACTIVATION_FWD_4_TENSORCOREHALF__BatchSize_1024__3637275686281657958<CUDNN_CONVOLUTION_FWD_ALGO_FFT, CUDNN_ACTIVATION_CLIPPED_RELU>/input[0]:1024/input[1]:256/input[2]:14/input[3]:14/filter_count:256/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1024/conv_fwd_type:2/conv_bwd_type:0/manual_time",
+      "error_occurred": true,
+      "error_message": "CUDNN/CONV_BIAS_ACTIVATION_FWD failed to launch kernel because of CUDNN_STATUS_NOT_SUPPORTED",
+      "iterations": 1,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_BIAS_ACTIVATION_FWD_4_TENSORCOREHALF__BatchSize_1024__3637275686281657958<CUDNN_CONVOLUTION_FWD_ALGO_FFT, CUDNN_ACTIVATION_ELU>/input[0]:1024/input[1]:256/input[2]:14/input[3]:14/filter_count:256/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1024/conv_fwd_type:2/conv_bwd_type:0/manual_time",
+      "error_occurred": true,
+      "error_message": "CUDNN/CONV_BIAS_ACTIVATION_FWD failed to launch kernel because of CUDNN_STATUS_NOT_SUPPORTED",
+      "iterations": 1,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_BIAS_ACTIVATION_FWD_4_TENSORCOREHALF__BatchSize_1024__3637275686281657958<CUDNN_CONVOLUTION_FWD_ALGO_FFT, CUDNN_ACTIVATION_RELU>/input[0]:1024/input[1]:256/input[2]:14/input[3]:14/filter_count:256/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1024/conv_fwd_type:2/conv_bwd_type:0/manual_time",
+      "error_occurred": true,
+      "error_message": "CUDNN/CONV_BIAS_ACTIVATION_FWD failed to launch kernel because of CUDNN_STATUS_NOT_SUPPORTED",
+      "iterations": 1,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_BIAS_ACTIVATION_FWD_4_TENSORCOREHALF__BatchSize_1024__3637275686281657958<CUDNN_CONVOLUTION_FWD_ALGO_FFT, CUDNN_ACTIVATION_RELU>/input[0]:1024/input[1]:256/input[2]:14/input[3]:14/filter_count:256/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1024/conv_fwd_type:2/conv_bwd_type:0/manual_time",
+      "error_occurred": true,
+      "error_message": "CUDNN/CONV_BIAS_ACTIVATION_FWD failed to launch kernel because of CUDNN_STATUS_NOT_SUPPORTED",
+      "iterations": 1,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_BIAS_ACTIVATION_FWD_4_TENSORCOREHALF__BatchSize_1024__3637275686281657958<CUDNN_CONVOLUTION_FWD_ALGO_FFT, CUDNN_ACTIVATION_IDENTITY>/input[0]:1024/input[1]:256/input[2]:14/input[3]:14/filter_count:256/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1024/conv_fwd_type:2/conv_bwd_type:0/manual_time",
+      "error_occurred": true,
+      "error_message": "CUDNN/CONV_BIAS_ACTIVATION_FWD failed to launch kernel because of CUDNN_STATUS_NOT_SUPPORTED",
+      "iterations": 1,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_BIAS_ACTIVATION_FWD_4_TENSORCOREHALF__BatchSize_1024__3637275686281657958<CUDNN_CONVOLUTION_FWD_ALGO_FFT_TILING, CUDNN_ACTIVATION_SIGMOID>/input[0]:1024/input[1]:256/input[2]:14/input[3]:14/filter_count:256/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1024/conv_fwd_type:2/conv_bwd_type:0/manual_time",
+      "error_occurred": true,
+      "error_message": "CUDNN/CONV_BIAS_ACTIVATION_FWD failed to launch kernel because of CUDNN_STATUS_NOT_SUPPORTED",
+      "iterations": 1,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_BIAS_ACTIVATION_FWD_4_TENSORCOREHALF__BatchSize_1024__3637275686281657958<CUDNN_CONVOLUTION_FWD_ALGO_FFT_TILING, CUDNN_ACTIVATION_TANH>/input[0]:1024/input[1]:256/input[2]:14/input[3]:14/filter_count:256/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1024/conv_fwd_type:2/conv_bwd_type:0/manual_time",
+      "error_occurred": true,
+      "error_message": "CUDNN/CONV_BIAS_ACTIVATION_FWD failed to launch kernel because of CUDNN_STATUS_NOT_SUPPORTED",
+      "iterations": 1,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_BIAS_ACTIVATION_FWD_4_TENSORCOREHALF__BatchSize_1024__3637275686281657958<CUDNN_CONVOLUTION_FWD_ALGO_FFT_TILING, CUDNN_ACTIVATION_RELU>/input[0]:1024/input[1]:256/input[2]:14/input[3]:14/filter_count:256/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1024/conv_fwd_type:2/conv_bwd_type:0/manual_time",
+      "error_occurred": true,
+      "error_message": "CUDNN/CONV_BIAS_ACTIVATION_FWD failed to launch kernel because of CUDNN_STATUS_NOT_SUPPORTED",
+      "iterations": 1,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_BIAS_ACTIVATION_FWD_4_TENSORCOREHALF__BatchSize_1024__3637275686281657958<CUDNN_CONVOLUTION_FWD_ALGO_FFT_TILING, CUDNN_ACTIVATION_CLIPPED_RELU>/input[0]:1024/input[1]:256/input[2]:14/input[3]:14/filter_count:256/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1024/conv_fwd_type:2/conv_bwd_type:0/manual_time",
+      "error_occurred": true,
+      "error_message": "CUDNN/CONV_BIAS_ACTIVATION_FWD failed to launch kernel because of CUDNN_STATUS_NOT_SUPPORTED",
+      "iterations": 1,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_BIAS_ACTIVATION_FWD_4_TENSORCOREHALF__BatchSize_1024__3637275686281657958<CUDNN_CONVOLUTION_FWD_ALGO_FFT_TILING, CUDNN_ACTIVATION_ELU>/input[0]:1024/input[1]:256/input[2]:14/input[3]:14/filter_count:256/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1024/conv_fwd_type:2/conv_bwd_type:0/manual_time",
+      "error_occurred": true,
+      "error_message": "CUDNN/CONV_BIAS_ACTIVATION_FWD failed to launch kernel because of CUDNN_STATUS_NOT_SUPPORTED",
+      "iterations": 1,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_BIAS_ACTIVATION_FWD_4_TENSORCOREHALF__BatchSize_1024__3637275686281657958<CUDNN_CONVOLUTION_FWD_ALGO_FFT_TILING, CUDNN_ACTIVATION_RELU>/input[0]:1024/input[1]:256/input[2]:14/input[3]:14/filter_count:256/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1024/conv_fwd_type:2/conv_bwd_type:0/manual_time",
+      "error_occurred": true,
+      "error_message": "CUDNN/CONV_BIAS_ACTIVATION_FWD failed to launch kernel because of CUDNN_STATUS_NOT_SUPPORTED",
+      "iterations": 1,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_BIAS_ACTIVATION_FWD_4_TENSORCOREHALF__BatchSize_1024__3637275686281657958<CUDNN_CONVOLUTION_FWD_ALGO_FFT_TILING, CUDNN_ACTIVATION_RELU>/input[0]:1024/input[1]:256/input[2]:14/input[3]:14/filter_count:256/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1024/conv_fwd_type:2/conv_bwd_type:0/manual_time",
+      "error_occurred": true,
+      "error_message": "CUDNN/CONV_BIAS_ACTIVATION_FWD failed to launch kernel because of CUDNN_STATUS_NOT_SUPPORTED",
+      "iterations": 1,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_BIAS_ACTIVATION_FWD_4_TENSORCOREHALF__BatchSize_1024__3637275686281657958<CUDNN_CONVOLUTION_FWD_ALGO_FFT_TILING, CUDNN_ACTIVATION_IDENTITY>/input[0]:1024/input[1]:256/input[2]:14/input[3]:14/filter_count:256/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1024/conv_fwd_type:2/conv_bwd_type:0/manual_time",
+      "error_occurred": true,
+      "error_message": "CUDNN/CONV_BIAS_ACTIVATION_FWD failed to launch kernel because of CUDNN_STATUS_NOT_SUPPORTED",
+      "iterations": 1,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_BIAS_ACTIVATION_FWD_4_TENSORCOREHALF__BatchSize_1024__3637275686281657958<CUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD, CUDNN_ACTIVATION_SIGMOID>/input[0]:1024/input[1]:256/input[2]:14/input[3]:14/filter_count:256/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1024/conv_fwd_type:2/conv_bwd_type:0/manual_time",
+      "error_occurred": true,
+      "error_message": "CUDNN/CONV_BIAS_ACTIVATION_FWD failed to launch kernel because of CUDNN_STATUS_NOT_SUPPORTED",
+      "iterations": 1,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_BIAS_ACTIVATION_FWD_4_TENSORCOREHALF__BatchSize_1024__3637275686281657958<CUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD, CUDNN_ACTIVATION_TANH>/input[0]:1024/input[1]:256/input[2]:14/input[3]:14/filter_count:256/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1024/conv_fwd_type:2/conv_bwd_type:0/manual_time",
+      "error_occurred": true,
+      "error_message": "CUDNN/CONV_BIAS_ACTIVATION_FWD failed to launch kernel because of CUDNN_STATUS_NOT_SUPPORTED",
+      "iterations": 1,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_BIAS_ACTIVATION_FWD_4_TENSORCOREHALF__BatchSize_1024__3637275686281657958<CUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD, CUDNN_ACTIVATION_RELU>/input[0]:1024/input[1]:256/input[2]:14/input[3]:14/filter_count:256/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1024/conv_fwd_type:2/conv_bwd_type:0/manual_time",
+      "error_occurred": true,
+      "error_message": "CUDNN/CONV_BIAS_ACTIVATION_FWD failed to launch kernel because of CUDNN_STATUS_NOT_SUPPORTED",
+      "iterations": 1,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_BIAS_ACTIVATION_FWD_4_TENSORCOREHALF__BatchSize_1024__3637275686281657958<CUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD, CUDNN_ACTIVATION_CLIPPED_RELU>/input[0]:1024/input[1]:256/input[2]:14/input[3]:14/filter_count:256/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1024/conv_fwd_type:2/conv_bwd_type:0/manual_time",
+      "error_occurred": true,
+      "error_message": "CUDNN/CONV_BIAS_ACTIVATION_FWD failed to launch kernel because of CUDNN_STATUS_NOT_SUPPORTED",
+      "iterations": 1,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_BIAS_ACTIVATION_FWD_4_TENSORCOREHALF__BatchSize_1024__3637275686281657958<CUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD, CUDNN_ACTIVATION_ELU>/input[0]:1024/input[1]:256/input[2]:14/input[3]:14/filter_count:256/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1024/conv_fwd_type:2/conv_bwd_type:0/manual_time",
+      "error_occurred": true,
+      "error_message": "CUDNN/CONV_BIAS_ACTIVATION_FWD failed to launch kernel because of CUDNN_STATUS_NOT_SUPPORTED",
+      "iterations": 1,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_BIAS_ACTIVATION_FWD_4_TENSORCOREHALF__BatchSize_1024__3637275686281657958<CUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD, CUDNN_ACTIVATION_RELU>/input[0]:1024/input[1]:256/input[2]:14/input[3]:14/filter_count:256/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1024/conv_fwd_type:2/conv_bwd_type:0/manual_time",
+      "error_occurred": true,
+      "error_message": "CUDNN/CONV_BIAS_ACTIVATION_FWD failed to launch kernel because of CUDNN_STATUS_NOT_SUPPORTED",
+      "iterations": 1,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_BIAS_ACTIVATION_FWD_4_TENSORCOREHALF__BatchSize_1024__3637275686281657958<CUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD, CUDNN_ACTIVATION_RELU>/input[0]:1024/input[1]:256/input[2]:14/input[3]:14/filter_count:256/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1024/conv_fwd_type:2/conv_bwd_type:0/manual_time",
+      "error_occurred": true,
+      "error_message": "CUDNN/CONV_BIAS_ACTIVATION_FWD failed to launch kernel because of CUDNN_STATUS_NOT_SUPPORTED",
+      "iterations": 1,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_BIAS_ACTIVATION_FWD_4_TENSORCOREHALF__BatchSize_1024__3637275686281657958<CUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD, CUDNN_ACTIVATION_IDENTITY>/input[0]:1024/input[1]:256/input[2]:14/input[3]:14/filter_count:256/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1024/conv_fwd_type:2/conv_bwd_type:0/manual_time",
+      "error_occurred": true,
+      "error_message": "CUDNN/CONV_BIAS_ACTIVATION_FWD failed to launch kernel because of CUDNN_STATUS_NOT_SUPPORTED",
+      "iterations": 1,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_BIAS_ACTIVATION_FWD_4_TENSORCOREHALF__BatchSize_1024__3637275686281657958<CUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD_NONFUSED, CUDNN_ACTIVATION_SIGMOID>/input[0]:1024/input[1]:256/input[2]:14/input[3]:14/filter_count:256/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1024/conv_fwd_type:2/conv_bwd_type:0/manual_time",
+      "error_occurred": true,
+      "error_message": "CUDNN/CONV_BIAS_ACTIVATION_FWD failed to launch kernel because of CUDNN_STATUS_NOT_SUPPORTED",
+      "iterations": 1,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_BIAS_ACTIVATION_FWD_4_TENSORCOREHALF__BatchSize_1024__3637275686281657958<CUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD_NONFUSED, CUDNN_ACTIVATION_TANH>/input[0]:1024/input[1]:256/input[2]:14/input[3]:14/filter_count:256/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1024/conv_fwd_type:2/conv_bwd_type:0/manual_time",
+      "error_occurred": true,
+      "error_message": "CUDNN/CONV_BIAS_ACTIVATION_FWD failed to launch kernel because of CUDNN_STATUS_NOT_SUPPORTED",
+      "iterations": 1,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_BIAS_ACTIVATION_FWD_4_TENSORCOREHALF__BatchSize_1024__3637275686281657958<CUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD_NONFUSED, CUDNN_ACTIVATION_RELU>/input[0]:1024/input[1]:256/input[2]:14/input[3]:14/filter_count:256/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1024/conv_fwd_type:2/conv_bwd_type:0/manual_time",
+      "error_occurred": true,
+      "error_message": "CUDNN/CONV_BIAS_ACTIVATION_FWD failed to launch kernel because of CUDNN_STATUS_NOT_SUPPORTED",
+      "iterations": 1,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_BIAS_ACTIVATION_FWD_4_TENSORCOREHALF__BatchSize_1024__3637275686281657958<CUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD_NONFUSED, CUDNN_ACTIVATION_CLIPPED_RELU>/input[0]:1024/input[1]:256/input[2]:14/input[3]:14/filter_count:256/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1024/conv_fwd_type:2/conv_bwd_type:0/manual_time",
+      "error_occurred": true,
+      "error_message": "CUDNN/CONV_BIAS_ACTIVATION_FWD failed to launch kernel because of CUDNN_STATUS_NOT_SUPPORTED",
+      "iterations": 1,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_BIAS_ACTIVATION_FWD_4_TENSORCOREHALF__BatchSize_1024__3637275686281657958<CUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD_NONFUSED, CUDNN_ACTIVATION_ELU>/input[0]:1024/input[1]:256/input[2]:14/input[3]:14/filter_count:256/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1024/conv_fwd_type:2/conv_bwd_type:0/manual_time",
+      "error_occurred": true,
+      "error_message": "CUDNN/CONV_BIAS_ACTIVATION_FWD failed to launch kernel because of CUDNN_STATUS_NOT_SUPPORTED",
+      "iterations": 1,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_BIAS_ACTIVATION_FWD_4_TENSORCOREHALF__BatchSize_1024__3637275686281657958<CUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD_NONFUSED, CUDNN_ACTIVATION_RELU>/input[0]:1024/input[1]:256/input[2]:14/input[3]:14/filter_count:256/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1024/conv_fwd_type:2/conv_bwd_type:0/manual_time",
+      "error_occurred": true,
+      "error_message": "CUDNN/CONV_BIAS_ACTIVATION_FWD failed to launch kernel because of CUDNN_STATUS_NOT_SUPPORTED",
+      "iterations": 1,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_BIAS_ACTIVATION_FWD_4_TENSORCOREHALF__BatchSize_1024__3637275686281657958<CUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD_NONFUSED, CUDNN_ACTIVATION_RELU>/input[0]:1024/input[1]:256/input[2]:14/input[3]:14/filter_count:256/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1024/conv_fwd_type:2/conv_bwd_type:0/manual_time",
+      "error_occurred": true,
+      "error_message": "CUDNN/CONV_BIAS_ACTIVATION_FWD failed to launch kernel because of CUDNN_STATUS_NOT_SUPPORTED",
+      "iterations": 1,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_BIAS_ACTIVATION_FWD_4_TENSORCOREHALF__BatchSize_1024__3637275686281657958<CUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD_NONFUSED, CUDNN_ACTIVATION_IDENTITY>/input[0]:1024/input[1]:256/input[2]:14/input[3]:14/filter_count:256/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1024/conv_fwd_type:2/conv_bwd_type:0/manual_time",
+      "error_occurred": true,
+      "error_message": "CUDNN/CONV_BIAS_ACTIVATION_FWD failed to launch kernel because of CUDNN_STATUS_NOT_SUPPORTED",
+      "iterations": 1,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
     }
+  ]
+}
