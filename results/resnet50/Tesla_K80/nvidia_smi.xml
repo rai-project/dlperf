@@ -1,9 +1,9 @@
 <?xml version="1.0" ?>
 <!DOCTYPE nvidia_smi_log SYSTEM "nvsmi_device_v10.dtd">
 <nvidia_smi_log>
-	<timestamp>Mon Sep 30 11:21:50 2019</timestamp>
-	<driver_version>430.26</driver_version>
-	<cuda_version>10.2</cuda_version>
+	<timestamp>Sun Oct  6 03:17:09 2019</timestamp>
+	<driver_version>418.67</driver_version>
+	<cuda_version>10.1</cuda_version>
 	<attached_gpus>1</attached_gpus>
 	<gpu id="00000000:00:1E.0">
 		<product_name>Tesla K80</product_name>
@@ -17,10 +17,10 @@
 			<current_dm>N/A</current_dm>
 			<pending_dm>N/A</pending_dm>
 		</driver_model>
-		<serial>0320117146882</serial>
-		<uuid>GPU-cf48bf90-6253-de1c-0263-611ae9f9acd7</uuid>
+		<serial>0325116149220</serial>
+		<uuid>GPU-a04f1853-75b3-2faa-0687-35fc27de90bb</uuid>
 		<minor_number>0</minor_number>
-		<vbios_version>80.21.1F.00.01</vbios_version>
+		<vbios_version>80.21.1F.00.02</vbios_version>
 		<multigpu_board>No</multigpu_board>
 		<board_id>0x1e</board_id>
 		<gpu_part_number>900-22080-0000-000</gpu_part_number>
@@ -70,7 +70,7 @@
 		<performance_state>P0</performance_state>
 		<clocks_throttle_reasons>
 			<clocks_throttle_reason_gpu_idle>Not Active</clocks_throttle_reason_gpu_idle>
-			<clocks_throttle_reason_applications_clocks_setting>Active</clocks_throttle_reason_applications_clocks_setting>
+			<clocks_throttle_reason_applications_clocks_setting>Not Active</clocks_throttle_reason_applications_clocks_setting>
 			<clocks_throttle_reason_sw_power_cap>Not Active</clocks_throttle_reason_sw_power_cap>
 			<clocks_throttle_reason_hw_slowdown>Not Active</clocks_throttle_reason_hw_slowdown>
 			<clocks_throttle_reason_hw_thermal_slowdown>N/A</clocks_throttle_reason_hw_thermal_slowdown>
@@ -91,7 +91,7 @@
 		</bar1_memory_usage>
 		<compute_mode>Default</compute_mode>
 		<utilization>
-			<gpu_util>34 %</gpu_util>
+			<gpu_util>0 %</gpu_util>
 			<memory_util>0 %</memory_util>
 			<encoder_util>0 %</encoder_util>
 			<decoder_util>0 %</decoder_util>
@@ -135,24 +135,24 @@
 			</volatile>
 			<aggregate>
 				<single_bit>
-					<device_memory>0</device_memory>
+					<device_memory>2</device_memory>
 					<register_file>0</register_file>
 					<l1_cache>0</l1_cache>
 					<l2_cache>0</l2_cache>
 					<texture_memory>0</texture_memory>
 					<texture_shm>N/A</texture_shm>
 					<cbu>N/A</cbu>
-					<total>0</total>
+					<total>2</total>
 				</single_bit>
 				<double_bit>
-					<device_memory>1</device_memory>
+					<device_memory>2</device_memory>
 					<register_file>0</register_file>
 					<l1_cache>0</l1_cache>
 					<l2_cache>0</l2_cache>
 					<texture_memory>0</texture_memory>
 					<texture_shm>N/A</texture_shm>
 					<cbu>N/A</cbu>
-					<total>1</total>
+					<total>2</total>
 				</double_bit>
 			</aggregate>
 		</ecc_errors>
@@ -166,14 +166,14 @@
 				<retired_count>1</retired_count>
 				<retired_pagelist>
 					<retired_page>
-						<retired_page_address>0x00000000002ce857</retired_page_address>
+						<retired_page_address>0x00000000002ce85d</retired_page_address>
 					</retired_page>
 				</retired_pagelist>
 			</double_bit_retirement>
-			<pending_blacklist>No</pending_blacklist>
+			<pending_retirement>No</pending_retirement>
 		</retired_pages>
 		<temperature>
-			<gpu_temp>67 C</gpu_temp>
+			<gpu_temp>51 C</gpu_temp>
 			<gpu_temp_max_threshold>110 C</gpu_temp_max_threshold>
 			<gpu_temp_slow_threshold>88 C</gpu_temp_slow_threshold>
 			<gpu_temp_max_gpu_threshold>N/A</gpu_temp_max_gpu_threshold>
@@ -183,7 +183,7 @@
 		<power_readings>
 			<power_state>P0</power_state>
 			<power_management>Supported</power_management>
-			<power_draw>62.05 W</power_draw>
+			<power_draw>70.24 W</power_draw>
 			<power_limit>149.00 W</power_limit>
 			<default_power_limit>149.00 W</default_power_limit>
 			<enforced_power_limit>149.00 W</enforced_power_limit>
@@ -191,8 +191,8 @@
 			<max_power_limit>175.00 W</max_power_limit>
 		</power_readings>
 		<clocks>
-			<graphics_clock>562 MHz</graphics_clock>
-			<sm_clock>562 MHz</sm_clock>
+			<graphics_clock>561 MHz</graphics_clock>
+			<sm_clock>561 MHz</sm_clock>
 			<mem_clock>2505 MHz</mem_clock>
 			<video_clock>540 MHz</video_clock>
 		</clocks>
