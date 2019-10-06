@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <!DOCTYPE nvidia_smi_log SYSTEM "nvsmi_device_v10.dtd">
 <nvidia_smi_log>
-	<timestamp>Mon Sep 30 03:02:50 2019</timestamp>
+	<timestamp>Sat Oct  5 15:15:19 2019</timestamp>
 	<driver_version>430.50</driver_version>
 	<cuda_version>10.1</cuda_version>
 	<attached_gpus>1</attached_gpus>
@@ -67,7 +67,7 @@
 			<tx_util>0 KB/s</tx_util>
 			<rx_util>0 KB/s</rx_util>
 		</pci>
-		<fan_speed>41 %</fan_speed>
+		<fan_speed>30 %</fan_speed>
 		<performance_state>P0</performance_state>
 		<clocks_throttle_reasons>
 			<clocks_throttle_reason_gpu_idle>Not Active</clocks_throttle_reason_gpu_idle>
@@ -92,8 +92,8 @@
 		</bar1_memory_usage>
 		<compute_mode>Default</compute_mode>
 		<utilization>
-			<gpu_util>9 %</gpu_util>
-			<memory_util>0 %</memory_util>
+			<gpu_util>43 %</gpu_util>
+			<memory_util>3 %</memory_util>
 			<encoder_util>0 %</encoder_util>
 			<decoder_util>0 %</decoder_util>
 		</utilization>
@@ -170,7 +170,7 @@
 			<pending_retirement>N/A</pending_retirement>
 		</retired_pages>
 		<temperature>
-			<gpu_temp>63 C</gpu_temp>
+			<gpu_temp>49 C</gpu_temp>
 			<gpu_temp_max_threshold>99 C</gpu_temp_max_threshold>
 			<gpu_temp_slow_threshold>96 C</gpu_temp_slow_threshold>
 			<gpu_temp_max_gpu_threshold>N/A</gpu_temp_max_gpu_threshold>
@@ -180,7 +180,7 @@
 		<power_readings>
 			<power_state>P0</power_state>
 			<power_management>Supported</power_management>
-			<power_draw>67.71 W</power_draw>
+			<power_draw>63.84 W</power_draw>
 			<power_limit>250.00 W</power_limit>
 			<default_power_limit>250.00 W</default_power_limit>
 			<enforced_power_limit>250.00 W</enforced_power_limit>
