@@ -1,0 +1,40 @@
+[{
+  "year": 2010,
+  "total": 12,
+  "unique": 11
+},
+{
+  "year": 2012,
+  "total": 561,
+  "unique": 163
+},
+{
+  "year": 2013,
+  "total": 47,
+  "unique": 34
+},
+{
+  "year": 2014,
+  "total": 349,
+  "unique": 129
+},
+{
+  "year": 2015,
+  "total": 1577,
+  "unique": 190
+},
+{
+  "year": 2016,
+  "total": 2286,
+  "unique": 459
+},
+{
+  "year": 2017,
+  "total": 510,
+  "unique": 127
+},
+{
+  "year": 2018,
+  "total": 412,
+  "unique": 45
+}]
