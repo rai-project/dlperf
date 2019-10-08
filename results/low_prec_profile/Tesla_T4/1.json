@@ -1,0 +1,2256 @@
+{
+  "context": {
+    "date": "2019-10-06 18:15:07",
+    "executable": "./scope",
+    "num_cpus": 2,
+    "mhz_per_cpu": 2500,
+    "cpu_scaling_enabled": false,
+    "caches": [
+      {
+        "type": "Data",
+        "level": 1,
+        "size": 32000000,
+        "num_sharing": 1
+      },
+      {
+        "type": "Instruction",
+        "level": 1,
+        "size": 32000000,
+        "num_sharing": 1
+      },
+      {
+        "type": "Unified",
+        "level": 2,
+        "size": 1024000000,
+        "num_sharing": 1
+      },
+      {
+        "type": "Unified",
+        "level": 3,
+        "size": 36608000000,
+        "num_sharing": 2
+      }
+    ],
+    "library_build_type": "release"
+  },
+  "benchmarks": [
+    {
+      "name": "LAYER_CUBLAS_GEMV_FWD_TENSORCOREHALF__BatchSize_1__17753246547002436423/input[0]:1000/input[1]:2048/input[2]:1/input[3]:1/input[4]:1/input[5]:-1/input[6]:0/input[7]:0/batch_size:1/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUBLAS/GEMV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_INSUFFICIENT_PRIVILEGES.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_ACTIVATION_FWD_TENSORCOREHALF__BatchSize_1__16775258244924305809<CUDNN_ACTIVATION_RELU>/input[0]:1/input[1]:128/input[2]:28/input[3]:28/input[4]:-1/input[5]:-1/input[6]:-1/input[7]:-1/batch_size:1/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/ACTIVATION_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_INSUFFICIENT_PRIVILEGES.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_ACTIVATION_FWD_TENSORCOREHALF__BatchSize_1__16775258244924305809<CUDNN_ACTIVATION_CLIPPED_RELU>/input[0]:1/input[1]:128/input[2]:28/input[3]:28/input[4]:-1/input[5]:-1/input[6]:-1/input[7]:-1/batch_size:1/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/ACTIVATION_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_ACTIVATION_FWD_TENSORCOREHALF__BatchSize_1__15858976229690469634<CUDNN_ACTIVATION_RELU>/input[0]:1/input[1]:256/input[2]:56/input[3]:56/input[4]:-1/input[5]:-1/input[6]:-1/input[7]:-1/batch_size:1/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/ACTIVATION_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_ACTIVATION_FWD_TENSORCOREHALF__BatchSize_1__15858976229690469634<CUDNN_ACTIVATION_CLIPPED_RELU>/input[0]:1/input[1]:256/input[2]:56/input[3]:56/input[4]:-1/input[5]:-1/input[6]:-1/input[7]:-1/batch_size:1/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/ACTIVATION_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_ACTIVATION_FWD_TENSORCOREHALF__BatchSize_1__16991234066078307786<CUDNN_ACTIVATION_RELU>/input[0]:1/input[1]:512/input[2]:28/input[3]:28/input[4]:-1/input[5]:-1/input[6]:-1/input[7]:-1/batch_size:1/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/ACTIVATION_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_ACTIVATION_FWD_TENSORCOREHALF__BatchSize_1__16991234066078307786<CUDNN_ACTIVATION_CLIPPED_RELU>/input[0]:1/input[1]:512/input[2]:28/input[3]:28/input[4]:-1/input[5]:-1/input[6]:-1/input[7]:-1/batch_size:1/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/ACTIVATION_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_ACTIVATION_FWD_TENSORCOREHALF__BatchSize_1__16863953778395151918<CUDNN_ACTIVATION_RELU>/input[0]:1/input[1]:64/input[2]:112/input[3]:112/input[4]:-1/input[5]:-1/input[6]:-1/input[7]:-1/batch_size:1/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/ACTIVATION_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_ACTIVATION_FWD_TENSORCOREHALF__BatchSize_1__16863953778395151918<CUDNN_ACTIVATION_CLIPPED_RELU>/input[0]:1/input[1]:64/input[2]:112/input[3]:112/input[4]:-1/input[5]:-1/input[6]:-1/input[7]:-1/batch_size:1/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/ACTIVATION_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_ACTIVATION_FWD_TENSORCOREHALF__BatchSize_1__3386873589382721402<CUDNN_ACTIVATION_RELU>/input[0]:1/input[1]:64/input[2]:56/input[3]:56/input[4]:-1/input[5]:-1/input[6]:-1/input[7]:-1/batch_size:1/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/ACTIVATION_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_ACTIVATION_FWD_TENSORCOREHALF__BatchSize_1__3386873589382721402<CUDNN_ACTIVATION_CLIPPED_RELU>/input[0]:1/input[1]:64/input[2]:56/input[3]:56/input[4]:-1/input[5]:-1/input[6]:-1/input[7]:-1/batch_size:1/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/ACTIVATION_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_ACTIVATION_FWD_TENSORCOREHALF__BatchSize_1__10576016442861330906<CUDNN_ACTIVATION_RELU>/input[0]:1/input[1]:256/input[2]:14/input[3]:14/input[4]:-1/input[5]:-1/input[6]:-1/input[7]:-1/batch_size:1/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/ACTIVATION_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_ACTIVATION_FWD_TENSORCOREHALF__BatchSize_1__10576016442861330906<CUDNN_ACTIVATION_CLIPPED_RELU>/input[0]:1/input[1]:256/input[2]:14/input[3]:14/input[4]:-1/input[5]:-1/input[6]:-1/input[7]:-1/batch_size:1/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/ACTIVATION_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_ACTIVATION_FWD_TENSORCOREHALF__BatchSize_1__5374504972964114622<CUDNN_ACTIVATION_RELU>/input[0]:1/input[1]:512/input[2]:7/input[3]:7/input[4]:-1/input[5]:-1/input[6]:-1/input[7]:-1/batch_size:1/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/ACTIVATION_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_ACTIVATION_FWD_TENSORCOREHALF__BatchSize_1__5374504972964114622<CUDNN_ACTIVATION_CLIPPED_RELU>/input[0]:1/input[1]:512/input[2]:7/input[3]:7/input[4]:-1/input[5]:-1/input[6]:-1/input[7]:-1/batch_size:1/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/ACTIVATION_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_ACTIVATION_FWD_TENSORCOREHALF__BatchSize_1__14512028749954278517<CUDNN_ACTIVATION_RELU>/input[0]:1/input[1]:2048/input[2]:7/input[3]:7/input[4]:-1/input[5]:-1/input[6]:-1/input[7]:-1/batch_size:1/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/ACTIVATION_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_ACTIVATION_FWD_TENSORCOREHALF__BatchSize_1__14512028749954278517<CUDNN_ACTIVATION_CLIPPED_RELU>/input[0]:1/input[1]:2048/input[2]:7/input[3]:7/input[4]:-1/input[5]:-1/input[6]:-1/input[7]:-1/batch_size:1/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/ACTIVATION_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_ACTIVATION_FWD_TENSORCOREHALF__BatchSize_1__12514093818040169078<CUDNN_ACTIVATION_RELU>/input[0]:1/input[1]:1024/input[2]:14/input[3]:14/input[4]:-1/input[5]:-1/input[6]:-1/input[7]:-1/batch_size:1/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/ACTIVATION_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_ACTIVATION_FWD_TENSORCOREHALF__BatchSize_1__12514093818040169078<CUDNN_ACTIVATION_CLIPPED_RELU>/input[0]:1/input[1]:1024/input[2]:14/input[3]:14/input[4]:-1/input[5]:-1/input[6]:-1/input[7]:-1/batch_size:1/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/ACTIVATION_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_ADD_TENSOR_TENSORCOREHALF__BatchSize_1__12094769999321135554/input[0]:1/input[1]:64/input[2]:56/input[3]:56/bias[0]:1/bias[1]:64/bias[2]:1/bias[3]:1/batch_size:1/conv_fwd_type:2/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/ADD_TENSOR/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_ADD_TENSOR_TENSORCOREHALF__BatchSize_1__16000285080544947723/input[0]:1/input[1]:512/input[2]:28/input[3]:28/bias[0]:1/bias[1]:512/bias[2]:1/bias[3]:1/batch_size:1/conv_fwd_type:2/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/ADD_TENSOR/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_ADD_TENSOR_TENSORCOREHALF__BatchSize_1__15786499449780419138/input[0]:1/input[1]:128/input[2]:28/input[3]:28/bias[0]:1/bias[1]:128/bias[2]:1/bias[3]:1/batch_size:1/conv_fwd_type:2/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/ADD_TENSOR/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_ADD_TENSOR_TENSORCOREHALF__BatchSize_1__4685556693761276107/input[0]:1/input[1]:256/input[2]:14/input[3]:14/bias[0]:1/bias[1]:256/bias[2]:1/bias[3]:1/batch_size:1/conv_fwd_type:2/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/ADD_TENSOR/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_ADD_TENSOR_TENSORCOREHALF__BatchSize_1__14099054241538058079/input[0]:1/input[1]:256/input[2]:56/input[3]:56/bias[0]:1/bias[1]:256/bias[2]:1/bias[3]:1/batch_size:1/conv_fwd_type:2/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/ADD_TENSOR/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_ADD_TENSOR_TENSORCOREHALF__BatchSize_1__18013096967139535291/input[0]:1/input[1]:256/input[2]:14/input[3]:14/bias[0]:1/bias[1]:256/bias[2]:1/bias[3]:1/batch_size:1/conv_fwd_type:2/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/ADD_TENSOR/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_ADD_TENSOR_TENSORCOREHALF__BatchSize_1__13392195982396569250/input[0]:1/input[1]:128/input[2]:28/input[3]:28/bias[0]:1/bias[1]:128/bias[2]:1/bias[3]:1/batch_size:1/conv_fwd_type:2/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/ADD_TENSOR/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_ADD_TENSOR_TENSORCOREHALF__BatchSize_1__18032967538312300837/input[0]:1/input[1]:64/input[2]:56/input[3]:56/bias[0]:1/bias[1]:64/bias[2]:1/bias[3]:1/batch_size:1/conv_fwd_type:2/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/ADD_TENSOR/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_ADD_TENSOR_TENSORCOREHALF__BatchSize_1__382440256263321331/input[0]:1/input[1]:512/input[2]:7/input[3]:7/bias[0]:1/bias[1]:512/bias[2]:1/bias[3]:1/batch_size:1/conv_fwd_type:2/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/ADD_TENSOR/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_ADD_TENSOR_TENSORCOREHALF__BatchSize_1__15837389164766185922/input[0]:1/input[1]:2048/input[2]:7/input[3]:7/bias[0]:1/bias[1]:2048/bias[2]:1/bias[3]:1/batch_size:1/conv_fwd_type:2/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/ADD_TENSOR/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_ADD_TENSOR_TENSORCOREHALF__BatchSize_1__5754977146667999008/input[0]:1/input[1]:1024/input[2]:14/input[3]:14/bias[0]:1/bias[1]:1024/bias[2]:1/bias[3]:1/batch_size:1/conv_fwd_type:2/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/ADD_TENSOR/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_ADD_TENSOR_TENSORCOREHALF__BatchSize_1__9807483209985976613/input[0]:1/input[1]:512/input[2]:7/input[3]:7/bias[0]:1/bias[1]:512/bias[2]:1/bias[3]:1/batch_size:1/conv_fwd_type:2/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/ADD_TENSOR/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_BATCHNORM_FWD_INFERENCE_TENSORCOREHALF__BatchSize_1__7804323739089464676<CUDNN_BATCHNORM_PER_ACTIVATION>/input[0]:1/input[1]:64/input[2]:56/input[3]:56/input[4]:-1/input[5]:-1/input[6]:-1/input[7]:-1/batch_size:1/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/BATCHNORM_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_BATCHNORM_FWD_TRAINING_TENSORCOREHALF__BatchSize_1__9500743471016565935<CUDNN_BATCHNORM_PER_ACTIVATION>/input[0]:1/input[1]:64/input[2]:56/input[3]:56/input[4]:-1/input[5]:-1/input[6]:-1/input[7]:-1/batch_size:1/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/BATCHNORM_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_BATCHNORM_FWD_INFERENCE_TENSORCOREHALF__BatchSize_1__12197678664250637360<CUDNN_BATCHNORM_PER_ACTIVATION>/input[0]:1/input[1]:64/input[2]:112/input[3]:112/input[4]:-1/input[5]:-1/input[6]:-1/input[7]:-1/batch_size:1/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/BATCHNORM_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_BATCHNORM_FWD_TRAINING_TENSORCOREHALF__BatchSize_1__5102913524906823163<CUDNN_BATCHNORM_PER_ACTIVATION>/input[0]:1/input[1]:64/input[2]:112/input[3]:112/input[4]:-1/input[5]:-1/input[6]:-1/input[7]:-1/batch_size:1/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/BATCHNORM_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_BATCHNORM_FWD_INFERENCE_TENSORCOREHALF__BatchSize_1__12358898807146787727<CUDNN_BATCHNORM_PER_ACTIVATION>/input[0]:1/input[1]:128/input[2]:28/input[3]:28/input[4]:-1/input[5]:-1/input[6]:-1/input[7]:-1/batch_size:1/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/BATCHNORM_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_BATCHNORM_FWD_TRAINING_TENSORCOREHALF__BatchSize_1__4905629675610767940<CUDNN_BATCHNORM_PER_ACTIVATION>/input[0]:1/input[1]:128/input[2]:28/input[3]:28/input[4]:-1/input[5]:-1/input[6]:-1/input[7]:-1/batch_size:1/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/BATCHNORM_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_BATCHNORM_FWD_INFERENCE_TENSORCOREHALF__BatchSize_1__11482057378880040732<CUDNN_BATCHNORM_PER_ACTIVATION>/input[0]:1/input[1]:256/input[2]:56/input[3]:56/input[4]:-1/input[5]:-1/input[6]:-1/input[7]:-1/batch_size:1/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/BATCHNORM_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_BATCHNORM_FWD_TRAINING_TENSORCOREHALF__BatchSize_1__8128885825863851735<CUDNN_BATCHNORM_PER_ACTIVATION>/input[0]:1/input[1]:256/input[2]:56/input[3]:56/input[4]:-1/input[5]:-1/input[6]:-1/input[7]:-1/batch_size:1/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/BATCHNORM_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_BATCHNORM_FWD_INFERENCE_TENSORCOREHALF__BatchSize_1__15099336349795017668<CUDNN_BATCHNORM_PER_ACTIVATION>/input[0]:1/input[1]:256/input[2]:14/input[3]:14/input[4]:-1/input[5]:-1/input[6]:-1/input[7]:-1/batch_size:1/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/BATCHNORM_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_BATCHNORM_FWD_TRAINING_TENSORCOREHALF__BatchSize_1__4475578195196924431<CUDNN_BATCHNORM_PER_ACTIVATION>/input[0]:1/input[1]:256/input[2]:14/input[3]:14/input[4]:-1/input[5]:-1/input[6]:-1/input[7]:-1/batch_size:1/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/BATCHNORM_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_BATCHNORM_FWD_INFERENCE_TENSORCOREHALF__BatchSize_1__17214145930059477096<CUDNN_BATCHNORM_PER_ACTIVATION>/input[0]:1/input[1]:1024/input[2]:14/input[3]:14/input[4]:-1/input[5]:-1/input[6]:-1/input[7]:-1/batch_size:1/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/BATCHNORM_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_BATCHNORM_FWD_TRAINING_TENSORCOREHALF__BatchSize_1__104429733754749347<CUDNN_BATCHNORM_PER_ACTIVATION>/input[0]:1/input[1]:1024/input[2]:14/input[3]:14/input[4]:-1/input[5]:-1/input[6]:-1/input[7]:-1/batch_size:1/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/BATCHNORM_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_BATCHNORM_FWD_INFERENCE_TENSORCOREHALF__BatchSize_1__12142529085947598804<CUDNN_BATCHNORM_PER_ACTIVATION>/input[0]:1/input[1]:512/input[2]:28/input[3]:28/input[4]:-1/input[5]:-1/input[6]:-1/input[7]:-1/batch_size:1/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/BATCHNORM_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_BATCHNORM_FWD_TRAINING_TENSORCOREHALF__BatchSize_1__5122001320816928287<CUDNN_BATCHNORM_PER_ACTIVATION>/input[0]:1/input[1]:512/input[2]:28/input[3]:28/input[4]:-1/input[5]:-1/input[6]:-1/input[7]:-1/batch_size:1/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/BATCHNORM_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_BATCHNORM_FWD_INFERENCE_TENSORCOREHALF__BatchSize_1__709320577332343456<CUDNN_BATCHNORM_PER_ACTIVATION>/input[0]:1/input[1]:512/input[2]:7/input[3]:7/input[4]:-1/input[5]:-1/input[6]:-1/input[7]:-1/batch_size:1/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/BATCHNORM_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_BATCHNORM_FWD_TRAINING_TENSORCOREHALF__BatchSize_1__16595746486719497067<CUDNN_BATCHNORM_PER_ACTIVATION>/input[0]:1/input[1]:512/input[2]:7/input[3]:7/input[4]:-1/input[5]:-1/input[6]:-1/input[7]:-1/batch_size:1/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/BATCHNORM_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_BATCHNORM_FWD_INFERENCE_TENSORCOREHALF__BatchSize_1__9956057724189648491<CUDNN_BATCHNORM_PER_ACTIVATION>/input[0]:1/input[1]:2048/input[2]:7/input[3]:7/input[4]:-1/input[5]:-1/input[6]:-1/input[7]:-1/batch_size:1/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/BATCHNORM_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_BATCHNORM_FWD_TRAINING_TENSORCOREHALF__BatchSize_1__7330990543365019552<CUDNN_BATCHNORM_PER_ACTIVATION>/input[0]:1/input[1]:2048/input[2]:7/input[3]:7/input[4]:-1/input[5]:-1/input[6]:-1/input[7]:-1/batch_size:1/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/BATCHNORM_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_0_TENSORCOREHALF__BatchSize_1__14195683241631889040<CUDNN_CONVOLUTION_FWD_ALGO_IMPLICIT_GEMM>/input[0]:1/input[1]:256/input[2]:14/input[3]:14/filter_count:256/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_0_TENSORCOREHALF__BatchSize_1__14195683241631889040<CUDNN_CONVOLUTION_FWD_ALGO_IMPLICIT_PRECOMP_GEMM>/input[0]:1/input[1]:256/input[2]:14/input[3]:14/filter_count:256/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_0_TENSORCOREHALF__BatchSize_1__14195683241631889040<CUDNN_CONVOLUTION_FWD_ALGO_GEMM>/input[0]:1/input[1]:256/input[2]:14/input[3]:14/filter_count:256/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_0_TENSORCOREHALF__BatchSize_1__14195683241631889040<CUDNN_CONVOLUTION_FWD_ALGO_DIRECT>/input[0]:1/input[1]:256/input[2]:14/input[3]:14/filter_count:256/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_0_TENSORCOREHALF__BatchSize_1__14195683241631889040<CUDNN_CONVOLUTION_FWD_ALGO_FFT>/input[0]:1/input[1]:256/input[2]:14/input[3]:14/filter_count:256/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_0_TENSORCOREHALF__BatchSize_1__14195683241631889040<CUDNN_CONVOLUTION_FWD_ALGO_FFT_TILING>/input[0]:1/input[1]:256/input[2]:14/input[3]:14/filter_count:256/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_0_TENSORCOREHALF__BatchSize_1__14195683241631889040<CUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD>/input[0]:1/input[1]:256/input[2]:14/input[3]:14/filter_count:256/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_0_TENSORCOREHALF__BatchSize_1__14195683241631889040<CUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD_NONFUSED>/input[0]:1/input[1]:256/input[2]:14/input[3]:14/filter_count:256/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_0_TENSORCOREHALF__BatchSize_1__1033986261736552236<CUDNN_CONVOLUTION_FWD_ALGO_IMPLICIT_GEMM>/input[0]:1/input[1]:512/input[2]:7/input[3]:7/filter_count:512/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_0_TENSORCOREHALF__BatchSize_1__1033986261736552236<CUDNN_CONVOLUTION_FWD_ALGO_IMPLICIT_PRECOMP_GEMM>/input[0]:1/input[1]:512/input[2]:7/input[3]:7/filter_count:512/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_0_TENSORCOREHALF__BatchSize_1__1033986261736552236<CUDNN_CONVOLUTION_FWD_ALGO_GEMM>/input[0]:1/input[1]:512/input[2]:7/input[3]:7/filter_count:512/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_0_TENSORCOREHALF__BatchSize_1__1033986261736552236<CUDNN_CONVOLUTION_FWD_ALGO_DIRECT>/input[0]:1/input[1]:512/input[2]:7/input[3]:7/filter_count:512/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_0_TENSORCOREHALF__BatchSize_1__1033986261736552236<CUDNN_CONVOLUTION_FWD_ALGO_FFT>/input[0]:1/input[1]:512/input[2]:7/input[3]:7/filter_count:512/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_0_TENSORCOREHALF__BatchSize_1__1033986261736552236<CUDNN_CONVOLUTION_FWD_ALGO_FFT_TILING>/input[0]:1/input[1]:512/input[2]:7/input[3]:7/filter_count:512/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_0_TENSORCOREHALF__BatchSize_1__1033986261736552236<CUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD>/input[0]:1/input[1]:512/input[2]:7/input[3]:7/filter_count:512/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_0_TENSORCOREHALF__BatchSize_1__1033986261736552236<CUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD_NONFUSED>/input[0]:1/input[1]:512/input[2]:7/input[3]:7/filter_count:512/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_1_TENSORCOREHALF__BatchSize_1__9302775145701043734<CUDNN_CONVOLUTION_FWD_ALGO_IMPLICIT_GEMM>/input[0]:1/input[1]:64/input[2]:56/input[3]:56/filter_count:64/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_1_TENSORCOREHALF__BatchSize_1__9302775145701043734<CUDNN_CONVOLUTION_FWD_ALGO_IMPLICIT_PRECOMP_GEMM>/input[0]:1/input[1]:64/input[2]:56/input[3]:56/filter_count:64/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_1_TENSORCOREHALF__BatchSize_1__9302775145701043734<CUDNN_CONVOLUTION_FWD_ALGO_GEMM>/input[0]:1/input[1]:64/input[2]:56/input[3]:56/filter_count:64/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_1_TENSORCOREHALF__BatchSize_1__9302775145701043734<CUDNN_CONVOLUTION_FWD_ALGO_DIRECT>/input[0]:1/input[1]:64/input[2]:56/input[3]:56/filter_count:64/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_1_TENSORCOREHALF__BatchSize_1__9302775145701043734<CUDNN_CONVOLUTION_FWD_ALGO_FFT>/input[0]:1/input[1]:64/input[2]:56/input[3]:56/filter_count:64/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_1_TENSORCOREHALF__BatchSize_1__9302775145701043734<CUDNN_CONVOLUTION_FWD_ALGO_FFT_TILING>/input[0]:1/input[1]:64/input[2]:56/input[3]:56/filter_count:64/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_1_TENSORCOREHALF__BatchSize_1__9302775145701043734<CUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD>/input[0]:1/input[1]:64/input[2]:56/input[3]:56/filter_count:64/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_1_TENSORCOREHALF__BatchSize_1__9302775145701043734<CUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD_NONFUSED>/input[0]:1/input[1]:64/input[2]:56/input[3]:56/filter_count:64/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_1_TENSORCOREHALF__BatchSize_1__60179085051500861<CUDNN_CONVOLUTION_FWD_ALGO_IMPLICIT_GEMM>/input[0]:1/input[1]:1024/input[2]:14/input[3]:14/filter_count:256/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_1_TENSORCOREHALF__BatchSize_1__60179085051500861<CUDNN_CONVOLUTION_FWD_ALGO_IMPLICIT_PRECOMP_GEMM>/input[0]:1/input[1]:1024/input[2]:14/input[3]:14/filter_count:256/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_1_TENSORCOREHALF__BatchSize_1__60179085051500861<CUDNN_CONVOLUTION_FWD_ALGO_GEMM>/input[0]:1/input[1]:1024/input[2]:14/input[3]:14/filter_count:256/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_1_TENSORCOREHALF__BatchSize_1__60179085051500861<CUDNN_CONVOLUTION_FWD_ALGO_DIRECT>/input[0]:1/input[1]:1024/input[2]:14/input[3]:14/filter_count:256/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_1_TENSORCOREHALF__BatchSize_1__60179085051500861<CUDNN_CONVOLUTION_FWD_ALGO_FFT>/input[0]:1/input[1]:1024/input[2]:14/input[3]:14/filter_count:256/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_1_TENSORCOREHALF__BatchSize_1__60179085051500861<CUDNN_CONVOLUTION_FWD_ALGO_FFT_TILING>/input[0]:1/input[1]:1024/input[2]:14/input[3]:14/filter_count:256/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_1_TENSORCOREHALF__BatchSize_1__60179085051500861<CUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD>/input[0]:1/input[1]:1024/input[2]:14/input[3]:14/filter_count:256/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_1_TENSORCOREHALF__BatchSize_1__60179085051500861<CUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD_NONFUSED>/input[0]:1/input[1]:1024/input[2]:14/input[3]:14/filter_count:256/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_1_TENSORCOREHALF__BatchSize_1__8102167368599566776<CUDNN_CONVOLUTION_FWD_ALGO_IMPLICIT_GEMM>/input[0]:1/input[1]:512/input[2]:28/input[3]:28/filter_count:128/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_1_TENSORCOREHALF__BatchSize_1__8102167368599566776<CUDNN_CONVOLUTION_FWD_ALGO_IMPLICIT_PRECOMP_GEMM>/input[0]:1/input[1]:512/input[2]:28/input[3]:28/filter_count:128/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_1_TENSORCOREHALF__BatchSize_1__8102167368599566776<CUDNN_CONVOLUTION_FWD_ALGO_GEMM>/input[0]:1/input[1]:512/input[2]:28/input[3]:28/filter_count:128/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_1_TENSORCOREHALF__BatchSize_1__8102167368599566776<CUDNN_CONVOLUTION_FWD_ALGO_DIRECT>/input[0]:1/input[1]:512/input[2]:28/input[3]:28/filter_count:128/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_1_TENSORCOREHALF__BatchSize_1__8102167368599566776<CUDNN_CONVOLUTION_FWD_ALGO_FFT>/input[0]:1/input[1]:512/input[2]:28/input[3]:28/filter_count:128/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_1_TENSORCOREHALF__BatchSize_1__8102167368599566776<CUDNN_CONVOLUTION_FWD_ALGO_FFT_TILING>/input[0]:1/input[1]:512/input[2]:28/input[3]:28/filter_count:128/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_1_TENSORCOREHALF__BatchSize_1__8102167368599566776<CUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD>/input[0]:1/input[1]:512/input[2]:28/input[3]:28/filter_count:128/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_1_TENSORCOREHALF__BatchSize_1__8102167368599566776<CUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD_NONFUSED>/input[0]:1/input[1]:512/input[2]:28/input[3]:28/filter_count:128/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_1_TENSORCOREHALF__BatchSize_1__5714240587630947942<CUDNN_CONVOLUTION_FWD_ALGO_IMPLICIT_GEMM>/input[0]:1/input[1]:128/input[2]:28/input[3]:28/filter_count:128/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_1_TENSORCOREHALF__BatchSize_1__5714240587630947942<CUDNN_CONVOLUTION_FWD_ALGO_IMPLICIT_PRECOMP_GEMM>/input[0]:1/input[1]:128/input[2]:28/input[3]:28/filter_count:128/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_1_TENSORCOREHALF__BatchSize_1__5714240587630947942<CUDNN_CONVOLUTION_FWD_ALGO_GEMM>/input[0]:1/input[1]:128/input[2]:28/input[3]:28/filter_count:128/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_1_TENSORCOREHALF__BatchSize_1__5714240587630947942<CUDNN_CONVOLUTION_FWD_ALGO_DIRECT>/input[0]:1/input[1]:128/input[2]:28/input[3]:28/filter_count:128/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_1_TENSORCOREHALF__BatchSize_1__5714240587630947942<CUDNN_CONVOLUTION_FWD_ALGO_FFT>/input[0]:1/input[1]:128/input[2]:28/input[3]:28/filter_count:128/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_1_TENSORCOREHALF__BatchSize_1__5714240587630947942<CUDNN_CONVOLUTION_FWD_ALGO_FFT_TILING>/input[0]:1/input[1]:128/input[2]:28/input[3]:28/filter_count:128/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_1_TENSORCOREHALF__BatchSize_1__5714240587630947942<CUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD>/input[0]:1/input[1]:128/input[2]:28/input[3]:28/filter_count:128/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_1_TENSORCOREHALF__BatchSize_1__5714240587630947942<CUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD_NONFUSED>/input[0]:1/input[1]:128/input[2]:28/input[3]:28/filter_count:128/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_1_TENSORCOREHALF__BatchSize_1__892017232113592604<CUDNN_CONVOLUTION_FWD_ALGO_IMPLICIT_GEMM>/input[0]:1/input[1]:2048/input[2]:7/input[3]:7/filter_count:512/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_1_TENSORCOREHALF__BatchSize_1__892017232113592604<CUDNN_CONVOLUTION_FWD_ALGO_IMPLICIT_PRECOMP_GEMM>/input[0]:1/input[1]:2048/input[2]:7/input[3]:7/filter_count:512/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_1_TENSORCOREHALF__BatchSize_1__892017232113592604<CUDNN_CONVOLUTION_FWD_ALGO_GEMM>/input[0]:1/input[1]:2048/input[2]:7/input[3]:7/filter_count:512/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_1_TENSORCOREHALF__BatchSize_1__892017232113592604<CUDNN_CONVOLUTION_FWD_ALGO_DIRECT>/input[0]:1/input[1]:2048/input[2]:7/input[3]:7/filter_count:512/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_1_TENSORCOREHALF__BatchSize_1__892017232113592604<CUDNN_CONVOLUTION_FWD_ALGO_FFT>/input[0]:1/input[1]:2048/input[2]:7/input[3]:7/filter_count:512/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_1_TENSORCOREHALF__BatchSize_1__892017232113592604<CUDNN_CONVOLUTION_FWD_ALGO_FFT_TILING>/input[0]:1/input[1]:2048/input[2]:7/input[3]:7/filter_count:512/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_1_TENSORCOREHALF__BatchSize_1__892017232113592604<CUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD>/input[0]:1/input[1]:2048/input[2]:7/input[3]:7/filter_count:512/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_1_TENSORCOREHALF__BatchSize_1__892017232113592604<CUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD_NONFUSED>/input[0]:1/input[1]:2048/input[2]:7/input[3]:7/filter_count:512/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_2_TENSORCOREHALF__BatchSize_1__12829071623551647621<CUDNN_CONVOLUTION_FWD_ALGO_IMPLICIT_GEMM>/input[0]:1/input[1]:3/input[2]:224/input[3]:224/filter_count:64/filter_height:7/filter_width:7/pad_height:3/pad_width:3/stride_height:2/stride_width:2/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_2_TENSORCOREHALF__BatchSize_1__12829071623551647621<CUDNN_CONVOLUTION_FWD_ALGO_IMPLICIT_PRECOMP_GEMM>/input[0]:1/input[1]:3/input[2]:224/input[3]:224/filter_count:64/filter_height:7/filter_width:7/pad_height:3/pad_width:3/stride_height:2/stride_width:2/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_2_TENSORCOREHALF__BatchSize_1__12829071623551647621<CUDNN_CONVOLUTION_FWD_ALGO_GEMM>/input[0]:1/input[1]:3/input[2]:224/input[3]:224/filter_count:64/filter_height:7/filter_width:7/pad_height:3/pad_width:3/stride_height:2/stride_width:2/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_2_TENSORCOREHALF__BatchSize_1__12829071623551647621<CUDNN_CONVOLUTION_FWD_ALGO_DIRECT>/input[0]:1/input[1]:3/input[2]:224/input[3]:224/filter_count:64/filter_height:7/filter_width:7/pad_height:3/pad_width:3/stride_height:2/stride_width:2/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_2_TENSORCOREHALF__BatchSize_1__12829071623551647621<CUDNN_CONVOLUTION_FWD_ALGO_FFT>/input[0]:1/input[1]:3/input[2]:224/input[3]:224/filter_count:64/filter_height:7/filter_width:7/pad_height:3/pad_width:3/stride_height:2/stride_width:2/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_2_TENSORCOREHALF__BatchSize_1__12829071623551647621<CUDNN_CONVOLUTION_FWD_ALGO_FFT_TILING>/input[0]:1/input[1]:3/input[2]:224/input[3]:224/filter_count:64/filter_height:7/filter_width:7/pad_height:3/pad_width:3/stride_height:2/stride_width:2/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_2_TENSORCOREHALF__BatchSize_1__12829071623551647621<CUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD>/input[0]:1/input[1]:3/input[2]:224/input[3]:224/filter_count:64/filter_height:7/filter_width:7/pad_height:3/pad_width:3/stride_height:2/stride_width:2/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_2_TENSORCOREHALF__BatchSize_1__12829071623551647621<CUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD_NONFUSED>/input[0]:1/input[1]:3/input[2]:224/input[3]:224/filter_count:64/filter_height:7/filter_width:7/pad_height:3/pad_width:3/stride_height:2/stride_width:2/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_2_TENSORCOREHALF__BatchSize_1__12249268773778725079<CUDNN_CONVOLUTION_FWD_ALGO_IMPLICIT_GEMM>/input[0]:1/input[1]:256/input[2]:56/input[3]:56/filter_count:512/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:2/stride_width:2/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_2_TENSORCOREHALF__BatchSize_1__12249268773778725079<CUDNN_CONVOLUTION_FWD_ALGO_IMPLICIT_PRECOMP_GEMM>/input[0]:1/input[1]:256/input[2]:56/input[3]:56/filter_count:512/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:2/stride_width:2/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_2_TENSORCOREHALF__BatchSize_1__12249268773778725079<CUDNN_CONVOLUTION_FWD_ALGO_GEMM>/input[0]:1/input[1]:256/input[2]:56/input[3]:56/filter_count:512/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:2/stride_width:2/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_2_TENSORCOREHALF__BatchSize_1__12249268773778725079<CUDNN_CONVOLUTION_FWD_ALGO_DIRECT>/input[0]:1/input[1]:256/input[2]:56/input[3]:56/filter_count:512/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:2/stride_width:2/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_2_TENSORCOREHALF__BatchSize_1__12249268773778725079<CUDNN_CONVOLUTION_FWD_ALGO_FFT>/input[0]:1/input[1]:256/input[2]:56/input[3]:56/filter_count:512/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:2/stride_width:2/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_2_TENSORCOREHALF__BatchSize_1__12249268773778725079<CUDNN_CONVOLUTION_FWD_ALGO_FFT_TILING>/input[0]:1/input[1]:256/input[2]:56/input[3]:56/filter_count:512/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:2/stride_width:2/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_2_TENSORCOREHALF__BatchSize_1__12249268773778725079<CUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD>/input[0]:1/input[1]:256/input[2]:56/input[3]:56/filter_count:512/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:2/stride_width:2/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_2_TENSORCOREHALF__BatchSize_1__12249268773778725079<CUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD_NONFUSED>/input[0]:1/input[1]:256/input[2]:56/input[3]:56/filter_count:512/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:2/stride_width:2/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_2_TENSORCOREHALF__BatchSize_1__515269443989387100<CUDNN_CONVOLUTION_FWD_ALGO_IMPLICIT_GEMM>/input[0]:1/input[1]:512/input[2]:28/input[3]:28/filter_count:1024/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:2/stride_width:2/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_2_TENSORCOREHALF__BatchSize_1__515269443989387100<CUDNN_CONVOLUTION_FWD_ALGO_IMPLICIT_PRECOMP_GEMM>/input[0]:1/input[1]:512/input[2]:28/input[3]:28/filter_count:1024/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:2/stride_width:2/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_2_TENSORCOREHALF__BatchSize_1__515269443989387100<CUDNN_CONVOLUTION_FWD_ALGO_GEMM>/input[0]:1/input[1]:512/input[2]:28/input[3]:28/filter_count:1024/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:2/stride_width:2/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_2_TENSORCOREHALF__BatchSize_1__515269443989387100<CUDNN_CONVOLUTION_FWD_ALGO_DIRECT>/input[0]:1/input[1]:512/input[2]:28/input[3]:28/filter_count:1024/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:2/stride_width:2/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_2_TENSORCOREHALF__BatchSize_1__515269443989387100<CUDNN_CONVOLUTION_FWD_ALGO_FFT>/input[0]:1/input[1]:512/input[2]:28/input[3]:28/filter_count:1024/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:2/stride_width:2/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_2_TENSORCOREHALF__BatchSize_1__515269443989387100<CUDNN_CONVOLUTION_FWD_ALGO_FFT_TILING>/input[0]:1/input[1]:512/input[2]:28/input[3]:28/filter_count:1024/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:2/stride_width:2/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_2_TENSORCOREHALF__BatchSize_1__515269443989387100<CUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD>/input[0]:1/input[1]:512/input[2]:28/input[3]:28/filter_count:1024/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:2/stride_width:2/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_2_TENSORCOREHALF__BatchSize_1__515269443989387100<CUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD_NONFUSED>/input[0]:1/input[1]:512/input[2]:28/input[3]:28/filter_count:1024/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:2/stride_width:2/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_2_TENSORCOREHALF__BatchSize_1__6615252965052431128<CUDNN_CONVOLUTION_FWD_ALGO_IMPLICIT_GEMM>/input[0]:1/input[1]:256/input[2]:56/input[3]:56/filter_count:64/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_2_TENSORCOREHALF__BatchSize_1__6615252965052431128<CUDNN_CONVOLUTION_FWD_ALGO_IMPLICIT_PRECOMP_GEMM>/input[0]:1/input[1]:256/input[2]:56/input[3]:56/filter_count:64/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_2_TENSORCOREHALF__BatchSize_1__6615252965052431128<CUDNN_CONVOLUTION_FWD_ALGO_GEMM>/input[0]:1/input[1]:256/input[2]:56/input[3]:56/filter_count:64/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_2_TENSORCOREHALF__BatchSize_1__6615252965052431128<CUDNN_CONVOLUTION_FWD_ALGO_DIRECT>/input[0]:1/input[1]:256/input[2]:56/input[3]:56/filter_count:64/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_2_TENSORCOREHALF__BatchSize_1__6615252965052431128<CUDNN_CONVOLUTION_FWD_ALGO_FFT>/input[0]:1/input[1]:256/input[2]:56/input[3]:56/filter_count:64/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_2_TENSORCOREHALF__BatchSize_1__6615252965052431128<CUDNN_CONVOLUTION_FWD_ALGO_FFT_TILING>/input[0]:1/input[1]:256/input[2]:56/input[3]:56/filter_count:64/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_2_TENSORCOREHALF__BatchSize_1__6615252965052431128<CUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD>/input[0]:1/input[1]:256/input[2]:56/input[3]:56/filter_count:64/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_2_TENSORCOREHALF__BatchSize_1__6615252965052431128<CUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD_NONFUSED>/input[0]:1/input[1]:256/input[2]:56/input[3]:56/filter_count:64/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_3_TENSORCOREHALF__BatchSize_1__11313808122441963950<CUDNN_CONVOLUTION_FWD_ALGO_IMPLICIT_GEMM>/input[0]:1/input[1]:128/input[2]:28/input[3]:28/filter_count:512/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_3_TENSORCOREHALF__BatchSize_1__11313808122441963950<CUDNN_CONVOLUTION_FWD_ALGO_IMPLICIT_PRECOMP_GEMM>/input[0]:1/input[1]:128/input[2]:28/input[3]:28/filter_count:512/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_3_TENSORCOREHALF__BatchSize_1__11313808122441963950<CUDNN_CONVOLUTION_FWD_ALGO_GEMM>/input[0]:1/input[1]:128/input[2]:28/input[3]:28/filter_count:512/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_3_TENSORCOREHALF__BatchSize_1__11313808122441963950<CUDNN_CONVOLUTION_FWD_ALGO_DIRECT>/input[0]:1/input[1]:128/input[2]:28/input[3]:28/filter_count:512/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_3_TENSORCOREHALF__BatchSize_1__11313808122441963950<CUDNN_CONVOLUTION_FWD_ALGO_FFT>/input[0]:1/input[1]:128/input[2]:28/input[3]:28/filter_count:512/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_3_TENSORCOREHALF__BatchSize_1__11313808122441963950<CUDNN_CONVOLUTION_FWD_ALGO_FFT_TILING>/input[0]:1/input[1]:128/input[2]:28/input[3]:28/filter_count:512/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_3_TENSORCOREHALF__BatchSize_1__11313808122441963950<CUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD>/input[0]:1/input[1]:128/input[2]:28/input[3]:28/filter_count:512/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_3_TENSORCOREHALF__BatchSize_1__11313808122441963950<CUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD_NONFUSED>/input[0]:1/input[1]:128/input[2]:28/input[3]:28/filter_count:512/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_3_TENSORCOREHALF__BatchSize_1__15297300315728453840<CUDNN_CONVOLUTION_FWD_ALGO_IMPLICIT_GEMM>/input[0]:1/input[1]:256/input[2]:56/input[3]:56/filter_count:128/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:2/stride_width:2/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_3_TENSORCOREHALF__BatchSize_1__15297300315728453840<CUDNN_CONVOLUTION_FWD_ALGO_IMPLICIT_PRECOMP_GEMM>/input[0]:1/input[1]:256/input[2]:56/input[3]:56/filter_count:128/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:2/stride_width:2/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_3_TENSORCOREHALF__BatchSize_1__15297300315728453840<CUDNN_CONVOLUTION_FWD_ALGO_GEMM>/input[0]:1/input[1]:256/input[2]:56/input[3]:56/filter_count:128/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:2/stride_width:2/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_3_TENSORCOREHALF__BatchSize_1__15297300315728453840<CUDNN_CONVOLUTION_FWD_ALGO_DIRECT>/input[0]:1/input[1]:256/input[2]:56/input[3]:56/filter_count:128/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:2/stride_width:2/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_3_TENSORCOREHALF__BatchSize_1__15297300315728453840<CUDNN_CONVOLUTION_FWD_ALGO_FFT>/input[0]:1/input[1]:256/input[2]:56/input[3]:56/filter_count:128/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:2/stride_width:2/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_3_TENSORCOREHALF__BatchSize_1__15297300315728453840<CUDNN_CONVOLUTION_FWD_ALGO_FFT_TILING>/input[0]:1/input[1]:256/input[2]:56/input[3]:56/filter_count:128/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:2/stride_width:2/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_3_TENSORCOREHALF__BatchSize_1__15297300315728453840<CUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD>/input[0]:1/input[1]:256/input[2]:56/input[3]:56/filter_count:128/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:2/stride_width:2/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_3_TENSORCOREHALF__BatchSize_1__15297300315728453840<CUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD_NONFUSED>/input[0]:1/input[1]:256/input[2]:56/input[3]:56/filter_count:128/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:2/stride_width:2/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_3_TENSORCOREHALF__BatchSize_1__1259601994504168525<CUDNN_CONVOLUTION_FWD_ALGO_IMPLICIT_GEMM>/input[0]:1/input[1]:64/input[2]:56/input[3]:56/filter_count:256/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_3_TENSORCOREHALF__BatchSize_1__1259601994504168525<CUDNN_CONVOLUTION_FWD_ALGO_IMPLICIT_PRECOMP_GEMM>/input[0]:1/input[1]:64/input[2]:56/input[3]:56/filter_count:256/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_3_TENSORCOREHALF__BatchSize_1__1259601994504168525<CUDNN_CONVOLUTION_FWD_ALGO_GEMM>/input[0]:1/input[1]:64/input[2]:56/input[3]:56/filter_count:256/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_3_TENSORCOREHALF__BatchSize_1__1259601994504168525<CUDNN_CONVOLUTION_FWD_ALGO_DIRECT>/input[0]:1/input[1]:64/input[2]:56/input[3]:56/filter_count:256/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_3_TENSORCOREHALF__BatchSize_1__1259601994504168525<CUDNN_CONVOLUTION_FWD_ALGO_FFT>/input[0]:1/input[1]:64/input[2]:56/input[3]:56/filter_count:256/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_3_TENSORCOREHALF__BatchSize_1__1259601994504168525<CUDNN_CONVOLUTION_FWD_ALGO_FFT_TILING>/input[0]:1/input[1]:64/input[2]:56/input[3]:56/filter_count:256/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_3_TENSORCOREHALF__BatchSize_1__1259601994504168525<CUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD>/input[0]:1/input[1]:64/input[2]:56/input[3]:56/filter_count:256/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_3_TENSORCOREHALF__BatchSize_1__1259601994504168525<CUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD_NONFUSED>/input[0]:1/input[1]:64/input[2]:56/input[3]:56/filter_count:256/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_3_TENSORCOREHALF__BatchSize_1__13706556597894263482<CUDNN_CONVOLUTION_FWD_ALGO_IMPLICIT_GEMM>/input[0]:1/input[1]:512/input[2]:28/input[3]:28/filter_count:256/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:2/stride_width:2/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_3_TENSORCOREHALF__BatchSize_1__13706556597894263482<CUDNN_CONVOLUTION_FWD_ALGO_IMPLICIT_PRECOMP_GEMM>/input[0]:1/input[1]:512/input[2]:28/input[3]:28/filter_count:256/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:2/stride_width:2/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_3_TENSORCOREHALF__BatchSize_1__13706556597894263482<CUDNN_CONVOLUTION_FWD_ALGO_GEMM>/input[0]:1/input[1]:512/input[2]:28/input[3]:28/filter_count:256/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:2/stride_width:2/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_3_TENSORCOREHALF__BatchSize_1__13706556597894263482<CUDNN_CONVOLUTION_FWD_ALGO_DIRECT>/input[0]:1/input[1]:512/input[2]:28/input[3]:28/filter_count:256/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:2/stride_width:2/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_3_TENSORCOREHALF__BatchSize_1__13706556597894263482<CUDNN_CONVOLUTION_FWD_ALGO_FFT>/input[0]:1/input[1]:512/input[2]:28/input[3]:28/filter_count:256/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:2/stride_width:2/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_3_TENSORCOREHALF__BatchSize_1__13706556597894263482<CUDNN_CONVOLUTION_FWD_ALGO_FFT_TILING>/input[0]:1/input[1]:512/input[2]:28/input[3]:28/filter_count:256/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:2/stride_width:2/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_3_TENSORCOREHALF__BatchSize_1__13706556597894263482<CUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD>/input[0]:1/input[1]:512/input[2]:28/input[3]:28/filter_count:256/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:2/stride_width:2/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_3_TENSORCOREHALF__BatchSize_1__13706556597894263482<CUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD_NONFUSED>/input[0]:1/input[1]:512/input[2]:28/input[3]:28/filter_count:256/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:2/stride_width:2/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_3_TENSORCOREHALF__BatchSize_1__9116454853554967563<CUDNN_CONVOLUTION_FWD_ALGO_IMPLICIT_GEMM>/input[0]:1/input[1]:1024/input[2]:14/input[3]:14/filter_count:2048/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:2/stride_width:2/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_3_TENSORCOREHALF__BatchSize_1__9116454853554967563<CUDNN_CONVOLUTION_FWD_ALGO_IMPLICIT_PRECOMP_GEMM>/input[0]:1/input[1]:1024/input[2]:14/input[3]:14/filter_count:2048/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:2/stride_width:2/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_3_TENSORCOREHALF__BatchSize_1__9116454853554967563<CUDNN_CONVOLUTION_FWD_ALGO_GEMM>/input[0]:1/input[1]:1024/input[2]:14/input[3]:14/filter_count:2048/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:2/stride_width:2/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_3_TENSORCOREHALF__BatchSize_1__9116454853554967563<CUDNN_CONVOLUTION_FWD_ALGO_DIRECT>/input[0]:1/input[1]:1024/input[2]:14/input[3]:14/filter_count:2048/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:2/stride_width:2/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_3_TENSORCOREHALF__BatchSize_1__9116454853554967563<CUDNN_CONVOLUTION_FWD_ALGO_FFT>/input[0]:1/input[1]:1024/input[2]:14/input[3]:14/filter_count:2048/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:2/stride_width:2/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_3_TENSORCOREHALF__BatchSize_1__9116454853554967563<CUDNN_CONVOLUTION_FWD_ALGO_FFT_TILING>/input[0]:1/input[1]:1024/input[2]:14/input[3]:14/filter_count:2048/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:2/stride_width:2/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_3_TENSORCOREHALF__BatchSize_1__9116454853554967563<CUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD>/input[0]:1/input[1]:1024/input[2]:14/input[3]:14/filter_count:2048/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:2/stride_width:2/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_3_TENSORCOREHALF__BatchSize_1__9116454853554967563<CUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD_NONFUSED>/input[0]:1/input[1]:1024/input[2]:14/input[3]:14/filter_count:2048/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:2/stride_width:2/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_3_TENSORCOREHALF__BatchSize_1__10251613030338688450<CUDNN_CONVOLUTION_FWD_ALGO_IMPLICIT_GEMM>/input[0]:1/input[1]:512/input[2]:7/input[3]:7/filter_count:2048/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_3_TENSORCOREHALF__BatchSize_1__10251613030338688450<CUDNN_CONVOLUTION_FWD_ALGO_IMPLICIT_PRECOMP_GEMM>/input[0]:1/input[1]:512/input[2]:7/input[3]:7/filter_count:2048/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_3_TENSORCOREHALF__BatchSize_1__10251613030338688450<CUDNN_CONVOLUTION_FWD_ALGO_GEMM>/input[0]:1/input[1]:512/input[2]:7/input[3]:7/filter_count:2048/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_3_TENSORCOREHALF__BatchSize_1__10251613030338688450<CUDNN_CONVOLUTION_FWD_ALGO_DIRECT>/input[0]:1/input[1]:512/input[2]:7/input[3]:7/filter_count:2048/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_3_TENSORCOREHALF__BatchSize_1__10251613030338688450<CUDNN_CONVOLUTION_FWD_ALGO_FFT>/input[0]:1/input[1]:512/input[2]:7/input[3]:7/filter_count:2048/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_3_TENSORCOREHALF__BatchSize_1__10251613030338688450<CUDNN_CONVOLUTION_FWD_ALGO_FFT_TILING>/input[0]:1/input[1]:512/input[2]:7/input[3]:7/filter_count:2048/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_3_TENSORCOREHALF__BatchSize_1__10251613030338688450<CUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD>/input[0]:1/input[1]:512/input[2]:7/input[3]:7/filter_count:2048/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_3_TENSORCOREHALF__BatchSize_1__10251613030338688450<CUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD_NONFUSED>/input[0]:1/input[1]:512/input[2]:7/input[3]:7/filter_count:2048/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_4_TENSORCOREHALF__BatchSize_1__15563875699137753644<CUDNN_CONVOLUTION_FWD_ALGO_IMPLICIT_GEMM>/input[0]:1/input[1]:64/input[2]:56/input[3]:56/filter_count:64/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_4_TENSORCOREHALF__BatchSize_1__15563875699137753644<CUDNN_CONVOLUTION_FWD_ALGO_IMPLICIT_PRECOMP_GEMM>/input[0]:1/input[1]:64/input[2]:56/input[3]:56/filter_count:64/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_4_TENSORCOREHALF__BatchSize_1__15563875699137753644<CUDNN_CONVOLUTION_FWD_ALGO_GEMM>/input[0]:1/input[1]:64/input[2]:56/input[3]:56/filter_count:64/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_4_TENSORCOREHALF__BatchSize_1__15563875699137753644<CUDNN_CONVOLUTION_FWD_ALGO_DIRECT>/input[0]:1/input[1]:64/input[2]:56/input[3]:56/filter_count:64/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_4_TENSORCOREHALF__BatchSize_1__15563875699137753644<CUDNN_CONVOLUTION_FWD_ALGO_FFT>/input[0]:1/input[1]:64/input[2]:56/input[3]:56/filter_count:64/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_4_TENSORCOREHALF__BatchSize_1__15563875699137753644<CUDNN_CONVOLUTION_FWD_ALGO_FFT_TILING>/input[0]:1/input[1]:64/input[2]:56/input[3]:56/filter_count:64/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_4_TENSORCOREHALF__BatchSize_1__15563875699137753644<CUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD>/input[0]:1/input[1]:64/input[2]:56/input[3]:56/filter_count:64/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_4_TENSORCOREHALF__BatchSize_1__15563875699137753644<CUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD_NONFUSED>/input[0]:1/input[1]:64/input[2]:56/input[3]:56/filter_count:64/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_4_TENSORCOREHALF__BatchSize_1__5348670623233915341<CUDNN_CONVOLUTION_FWD_ALGO_IMPLICIT_GEMM>/input[0]:1/input[1]:1024/input[2]:14/input[3]:14/filter_count:512/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:2/stride_width:2/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_4_TENSORCOREHALF__BatchSize_1__5348670623233915341<CUDNN_CONVOLUTION_FWD_ALGO_IMPLICIT_PRECOMP_GEMM>/input[0]:1/input[1]:1024/input[2]:14/input[3]:14/filter_count:512/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:2/stride_width:2/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_4_TENSORCOREHALF__BatchSize_1__5348670623233915341<CUDNN_CONVOLUTION_FWD_ALGO_GEMM>/input[0]:1/input[1]:1024/input[2]:14/input[3]:14/filter_count:512/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:2/stride_width:2/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_4_TENSORCOREHALF__BatchSize_1__5348670623233915341<CUDNN_CONVOLUTION_FWD_ALGO_DIRECT>/input[0]:1/input[1]:1024/input[2]:14/input[3]:14/filter_count:512/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:2/stride_width:2/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_4_TENSORCOREHALF__BatchSize_1__5348670623233915341<CUDNN_CONVOLUTION_FWD_ALGO_FFT>/input[0]:1/input[1]:1024/input[2]:14/input[3]:14/filter_count:512/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:2/stride_width:2/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_4_TENSORCOREHALF__BatchSize_1__5348670623233915341<CUDNN_CONVOLUTION_FWD_ALGO_FFT_TILING>/input[0]:1/input[1]:1024/input[2]:14/input[3]:14/filter_count:512/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:2/stride_width:2/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_4_TENSORCOREHALF__BatchSize_1__5348670623233915341<CUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD>/input[0]:1/input[1]:1024/input[2]:14/input[3]:14/filter_count:512/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:2/stride_width:2/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_4_TENSORCOREHALF__BatchSize_1__5348670623233915341<CUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD_NONFUSED>/input[0]:1/input[1]:1024/input[2]:14/input[3]:14/filter_count:512/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:2/stride_width:2/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_4_TENSORCOREHALF__BatchSize_1__1806217863954122447<CUDNN_CONVOLUTION_FWD_ALGO_IMPLICIT_GEMM>/input[0]:1/input[1]:256/input[2]:14/input[3]:14/filter_count:1024/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_4_TENSORCOREHALF__BatchSize_1__1806217863954122447<CUDNN_CONVOLUTION_FWD_ALGO_IMPLICIT_PRECOMP_GEMM>/input[0]:1/input[1]:256/input[2]:14/input[3]:14/filter_count:1024/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_4_TENSORCOREHALF__BatchSize_1__1806217863954122447<CUDNN_CONVOLUTION_FWD_ALGO_GEMM>/input[0]:1/input[1]:256/input[2]:14/input[3]:14/filter_count:1024/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_4_TENSORCOREHALF__BatchSize_1__1806217863954122447<CUDNN_CONVOLUTION_FWD_ALGO_DIRECT>/input[0]:1/input[1]:256/input[2]:14/input[3]:14/filter_count:1024/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_4_TENSORCOREHALF__BatchSize_1__1806217863954122447<CUDNN_CONVOLUTION_FWD_ALGO_FFT>/input[0]:1/input[1]:256/input[2]:14/input[3]:14/filter_count:1024/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_4_TENSORCOREHALF__BatchSize_1__1806217863954122447<CUDNN_CONVOLUTION_FWD_ALGO_FFT_TILING>/input[0]:1/input[1]:256/input[2]:14/input[3]:14/filter_count:1024/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_4_TENSORCOREHALF__BatchSize_1__1806217863954122447<CUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD>/input[0]:1/input[1]:256/input[2]:14/input[3]:14/filter_count:1024/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_FWD_4_TENSORCOREHALF__BatchSize_1__1806217863954122447<CUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD_NONFUSED>/input[0]:1/input[1]:256/input[2]:14/input[3]:14/filter_count:1024/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:1/stride_width:1/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:1/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_OP_TENSOR_ADD_FWD_TENSORCOREHALF__BatchSize_1__10327455406260473097/input[0]:1/input[1]:512/input[2]:28/input[3]:28/input[4]:-1/input[5]:-1/input[6]:-1/input[7]:-1/batch_size:1/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/OP_TENSOR/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_OP_TENSOR_ADD_FWD_TENSORCOREHALF__BatchSize_1__13297131332407309761/input[0]:1/input[1]:256/input[2]:56/input[3]:56/input[4]:-1/input[5]:-1/input[6]:-1/input[7]:-1/batch_size:1/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/OP_TENSOR/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_OP_TENSOR_ADD_FWD_TENSORCOREHALF__BatchSize_1__14498352343151078069/input[0]:1/input[1]:1024/input[2]:14/input[3]:14/input[4]:-1/input[5]:-1/input[6]:-1/input[7]:-1/batch_size:1/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/OP_TENSOR/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_OP_TENSOR_ADD_FWD_TENSORCOREHALF__BatchSize_1__12536778807296474294/input[0]:1/input[1]:2048/input[2]:7/input[3]:7/input[4]:-1/input[5]:-1/input[6]:-1/input[7]:-1/batch_size:1/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/OP_TENSOR/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_POOLING_FWD_TENSORCOREHALF__BatchSize_1__10979137858762526793<CUDNN_POOLING_MAX>/input[0]:1/input[1]:64/input[2]:112/input[3]:112/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:2/stride_width:2/batch_size:1/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/POOLING_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_POOLING_FWD_TENSORCOREHALF__BatchSize_1__10979137858762526793<CUDNN_POOLING_MAX_DETERMINISTIC>/input[0]:1/input[1]:64/input[2]:112/input[3]:112/filter_height:3/filter_width:3/pad_height:1/pad_width:1/stride_height:2/stride_width:2/batch_size:1/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/POOLING_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_BIAS_ACTIVATION_FWD_0_TENSORCOREHALF__BatchSize_1__9321473627604309713<CUDNN_CONVOLUTION_FWD_ALGO_IMPLICIT_GEMM, CUDNN_ACTIVATION_SIGMOID>/input[0]:1/input[1]:512/input[2]:28/input[3]:28/filter_count:1024/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:2/stride_width:2/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:2/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_BIAS_ACTIVATION_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_BIAS_ACTIVATION_FWD_0_TENSORCOREHALF__BatchSize_1__9321473627604309713<CUDNN_CONVOLUTION_FWD_ALGO_IMPLICIT_GEMM, CUDNN_ACTIVATION_TANH>/input[0]:1/input[1]:512/input[2]:28/input[3]:28/filter_count:1024/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:2/stride_width:2/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:2/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_BIAS_ACTIVATION_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_BIAS_ACTIVATION_FWD_0_TENSORCOREHALF__BatchSize_1__9321473627604309713<CUDNN_CONVOLUTION_FWD_ALGO_IMPLICIT_GEMM, CUDNN_ACTIVATION_RELU>/input[0]:1/input[1]:512/input[2]:28/input[3]:28/filter_count:1024/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:2/stride_width:2/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:2/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_BIAS_ACTIVATION_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_BIAS_ACTIVATION_FWD_0_TENSORCOREHALF__BatchSize_1__9321473627604309713<CUDNN_CONVOLUTION_FWD_ALGO_IMPLICIT_GEMM, CUDNN_ACTIVATION_CLIPPED_RELU>/input[0]:1/input[1]:512/input[2]:28/input[3]:28/filter_count:1024/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:2/stride_width:2/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:2/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_BIAS_ACTIVATION_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_BIAS_ACTIVATION_FWD_0_TENSORCOREHALF__BatchSize_1__9321473627604309713<CUDNN_CONVOLUTION_FWD_ALGO_IMPLICIT_GEMM, CUDNN_ACTIVATION_ELU>/input[0]:1/input[1]:512/input[2]:28/input[3]:28/filter_count:1024/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:2/stride_width:2/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:2/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_BIAS_ACTIVATION_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_BIAS_ACTIVATION_FWD_0_TENSORCOREHALF__BatchSize_1__9321473627604309713<CUDNN_CONVOLUTION_FWD_ALGO_IMPLICIT_GEMM, CUDNN_ACTIVATION_RELU>/input[0]:1/input[1]:512/input[2]:28/input[3]:28/filter_count:1024/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:2/stride_width:2/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:2/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_BIAS_ACTIVATION_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    },
+    {
+      "name": "LAYER_CUDNN_CONV_BIAS_ACTIVATION_FWD_0_TENSORCOREHALF__BatchSize_1__9321473627604309713<CUDNN_CONVOLUTION_FWD_ALGO_IMPLICIT_GEMM, CUDNN_ACTIVATION_RELU>/input[0]:1/input[1]:512/input[2]:28/input[3]:28/filter_count:1024/filter_height:1/filter_width:1/pad_height:0/pad_width:0/stride_height:2/stride_width:2/dilation_height:1/dilation_width:1/group:1/batch_size:1/conv_fwd_type:2/conv_bwd_type:0/iterations:10/manual_time",
+      "error_occurred": true,
+      "error_message": "Exception in CUDNN/CONV_BIAS_ACTIVATION_FWD/home/ubuntu/scope/scopes/cudnn_scope/src/cupti_profiler.hpp:283: error: cupti function cuptiActivityEnable(CUPTI_ACTIVITY_KIND_KERNEL) failed with error CUPTI_ERROR_NOT_INITIALIZED.
+",
+      "iterations": 10,
+      "real_time": 0.0000000000000000e+00,
+      "cpu_time": 0.0000000000000000e+00,
+      "time_unit": "ns"
+    }
