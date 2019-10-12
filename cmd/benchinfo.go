@@ -47,6 +47,7 @@ var (
 	metricFilterString             string
 	metricFilterList               []string
 	chooseCudnnHeuristicsAlgorithm bool
+	infoPadLayersMultiple          int
 	defaultTraversalStrategy       = "parallel"
 )
 
@@ -334,6 +335,8 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 					benchInfoDataType,
 					"",
 					dlperf.FwdBenchmarkArgsOption.ConvFwdType(dlperf.ConvFwdTypeConv),
+					dlperf.FwdBenchmarkArgsOption.PadConv(infoPadLayersMultiple != 0),
+					dlperf.FwdBenchmarkArgsOption.PadConvMultiple(infoPadLayersMultiple),
 				)
 				bs, err := getBenchmarkTime(filter)
 				if err != nil {
@@ -382,6 +385,8 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 					benchInfoDataType,
 					"",
 					dlperf.FwdBenchmarkArgsOption.ConvFwdType(dlperf.ConvFwdTypeConvFusedActivation),
+					dlperf.FwdBenchmarkArgsOption.PadConv(infoPadLayersMultiple != 0),
+					dlperf.FwdBenchmarkArgsOption.PadConvMultiple(infoPadLayersMultiple),
 				)
 				bs, err := getBenchmarkTime(filter)
 				if err != nil || len(bs) == 0 {
@@ -403,6 +408,8 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 					benchInfoDataType,
 					"",
 					dlperf.FwdBenchmarkArgsOption.ConvFwdType(dlperf.ConvFwdTypeConvFusedActivation),
+					dlperf.FwdBenchmarkArgsOption.PadConv(infoPadLayersMultiple != 0),
+					dlperf.FwdBenchmarkArgsOption.PadConvMultiple(infoPadLayersMultiple),
 				)
 				bs, err := getBenchmarkTime(filter)
 				if err != nil || len(bs) == 0 {
@@ -706,5 +713,6 @@ func init() {
 	benchinfoCmd.PersistentFlags().BoolVar(&chooseCudnnHeuristicsAlgorithm, "choose_cudnn_heuristics", false, "choose advised algorithm by cudnn heuristics rather than the fastest")
 	benchinfoCmd.PersistentFlags().BoolVar(&highlightShortestPath, "highlight_fast_path", true, "highlight the path taken when creating the graph visualization")
 	benchinfoCmd.PersistentFlags().StringVar(&datatype, "datatype", "float32", "data type to use (default is float32)")
+	benchinfoCmd.PersistentFlags().IntVar(&infoPadLayersMultiple, "pad_layers_multiple", 0, "padding multiple to use")
 	rootCmd.AddCommand(benchinfoCmd)
 }
