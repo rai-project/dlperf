@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <!DOCTYPE nvidia_smi_log SYSTEM "nvsmi_device_v10.dtd">
 <nvidia_smi_log>
-	<timestamp>Sat Oct 12 20:04:10 2019</timestamp>
+	<timestamp>Sat Oct 12 20:43:11 2019</timestamp>
 	<driver_version>430.26</driver_version>
 	<cuda_version>10.2</cuda_version>
 	<attached_gpus>1</attached_gpus>
@@ -17,8 +17,8 @@
 			<current_dm>N/A</current_dm>
 			<pending_dm>N/A</pending_dm>
 		</driver_model>
-		<serial>0323017115851</serial>
-		<uuid>GPU-2d143bbb-8f5a-a9dc-b1e7-5b698b6a26e2</uuid>
+		<serial>0323617122090</serial>
+		<uuid>GPU-5f43e7ec-e80a-0d03-4996-2f4c9a8be60e</uuid>
 		<minor_number>0</minor_number>
 		<vbios_version>88.00.4F.00.09</vbios_version>
 		<multigpu_board>No</multigpu_board>
@@ -69,7 +69,7 @@
 		<fan_speed>N/A</fan_speed>
 		<performance_state>P0</performance_state>
 		<clocks_throttle_reasons>
-			<clocks_throttle_reason_gpu_idle>Active</clocks_throttle_reason_gpu_idle>
+			<clocks_throttle_reason_gpu_idle>Not Active</clocks_throttle_reason_gpu_idle>
 			<clocks_throttle_reason_applications_clocks_setting>Not Active</clocks_throttle_reason_applications_clocks_setting>
 			<clocks_throttle_reason_sw_power_cap>Not Active</clocks_throttle_reason_sw_power_cap>
 			<clocks_throttle_reason_hw_slowdown>Not Active</clocks_throttle_reason_hw_slowdown>
@@ -91,8 +91,8 @@
 		</bar1_memory_usage>
 		<compute_mode>Default</compute_mode>
 		<utilization>
-			<gpu_util>0 %</gpu_util>
-			<memory_util>0 %</memory_util>
+			<gpu_util>56 %</gpu_util>
+			<memory_util>51 %</memory_util>
 			<encoder_util>0 %</encoder_util>
 			<decoder_util>0 %</decoder_util>
 		</utilization>
@@ -135,14 +135,14 @@
 			</volatile>
 			<aggregate>
 				<single_bit>
-					<device_memory>1</device_memory>
+					<device_memory>6</device_memory>
 					<register_file>0</register_file>
 					<l1_cache>0</l1_cache>
 					<l2_cache>0</l2_cache>
 					<texture_memory>N/A</texture_memory>
 					<texture_shm>N/A</texture_shm>
 					<cbu>N/A</cbu>
-					<total>1</total>
+					<total>6</total>
 				</single_bit>
 				<double_bit>
 					<device_memory>0</device_memory>
@@ -170,17 +170,17 @@
 			<pending_blacklist>No</pending_blacklist>
 		</retired_pages>
 		<temperature>
-			<gpu_temp>35 C</gpu_temp>
+			<gpu_temp>32 C</gpu_temp>
 			<gpu_temp_max_threshold>90 C</gpu_temp_max_threshold>
 			<gpu_temp_slow_threshold>87 C</gpu_temp_slow_threshold>
 			<gpu_temp_max_gpu_threshold>83 C</gpu_temp_max_gpu_threshold>
-			<memory_temp>33 C</memory_temp>
+			<memory_temp>28 C</memory_temp>
 			<gpu_temp_max_mem_threshold>85 C</gpu_temp_max_mem_threshold>
 		</temperature>
 		<power_readings>
 			<power_state>P0</power_state>
 			<power_management>Supported</power_management>
-			<power_draw>24.38 W</power_draw>
+			<power_draw>38.96 W</power_draw>
 			<power_limit>300.00 W</power_limit>
 			<default_power_limit>300.00 W</default_power_limit>
 			<enforced_power_limit>300.00 W</enforced_power_limit>
@@ -188,10 +188,10 @@
 			<max_power_limit>300.00 W</max_power_limit>
 		</power_readings>
 		<clocks>
-			<graphics_clock>135 MHz</graphics_clock>
-			<sm_clock>135 MHz</sm_clock>
+			<graphics_clock>1312 MHz</graphics_clock>
+			<sm_clock>1312 MHz</sm_clock>
 			<mem_clock>877 MHz</mem_clock>
-			<video_clock>555 MHz</video_clock>
+			<video_clock>1177 MHz</video_clock>
 		</clocks>
 		<applications_clocks>
 			<graphics_clock>1312 MHz</graphics_clock>
