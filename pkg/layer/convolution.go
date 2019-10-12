@@ -257,12 +257,12 @@ func (c Conv) FwdBenchmarkArgs(iopts ...dlperf.FwdBenchmarkArgsOptionFunc) inter
 			biasShape = []int64{1, biasShape[0], 1, 1}
 		}
 		e := convBiasBenchmarkArgs{
-			Input0:            padMust(outShapes[0][0]),
+			Input0:            outShapes[0][0],
 			Input1:            padMust(outShapes[0][1]),
-			Input2:            padMust(outShapes[0][2]),
-			Input3:            padMust(outShapes[0][3]),
+			Input2:            outShapes[0][2],
+			Input3:            outShapes[0][3],
 			BiasShape0:        biasShape[0],
-			BiasShape1:        biasShape[1],
+			BiasShape1:        padMust(biasShape[1]),
 			BiasShape2:        biasShape[2],
 			BiasShape3:        biasShape[3],
 			BatchSize:         dlperf.GetBatchSize(),

@@ -103,6 +103,8 @@ var benchgenCmd = &cobra.Command{
 									dlperf.FwdBenchmarkArgsOption.ConvFwdType(dlperf.ConvFwdTypeBias),
 									dlperf.FwdBenchmarkArgsOption.RandomizeConv(generateRandomize),
 									dlperf.FwdBenchmarkArgsOption.RandomizeConvLength(generateRandomizeLength),
+									dlperf.FwdBenchmarkArgsOption.PadConv(generatePadLayers),
+									dlperf.FwdBenchmarkArgsOption.PadConvMultiple(generatePadLayersMultiple),
 								)
 								b += "\n"
 							}

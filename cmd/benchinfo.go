@@ -346,7 +346,14 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 				}
 
 				if l.HasBias() {
-					filter := filterBenchmarks(false, benchInfoDataType, "", dlperf.FwdBenchmarkArgsOption.ConvFwdType(dlperf.ConvFwdTypeBias))
+          filter := filterBenchmarks(
+            false, 
+            benchInfoDataType,
+             "", 
+          dlperf.FwdBenchmarkArgsOption.ConvFwdType(dlperf.ConvFwdTypeBias),
+					dlperf.FwdBenchmarkArgsOption.PadConv(infoPadLayersMultiple != 0),
+          dlperf.FwdBenchmarkArgsOption.PadConvMultiple(infoPadLayersMultiple),
+        )
 					bs, err := getBenchmarkTime(filter)
 					if err != nil {
 						return err
