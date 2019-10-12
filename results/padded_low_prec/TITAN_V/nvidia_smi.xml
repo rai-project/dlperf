@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <!DOCTYPE nvidia_smi_log SYSTEM "nvsmi_device_v10.dtd">
 <nvidia_smi_log>
-	<timestamp>Sat Oct 12 09:50:27 2019</timestamp>
+	<timestamp>Sat Oct 12 10:31:18 2019</timestamp>
 	<driver_version>430.26</driver_version>
 	<cuda_version>10.2</cuda_version>
 	<attached_gpus>2</attached_gpus>
@@ -66,7 +66,7 @@
 			<tx_util>0 KB/s</tx_util>
 			<rx_util>0 KB/s</rx_util>
 		</pci>
-		<fan_speed>28 %</fan_speed>
+		<fan_speed>31 %</fan_speed>
 		<performance_state>P8</performance_state>
 		<clocks_throttle_reasons>
 			<clocks_throttle_reason_gpu_idle>Active</clocks_throttle_reason_gpu_idle>
@@ -168,17 +168,17 @@
 			<pending_blacklist>N/A</pending_blacklist>
 		</retired_pages>
 		<temperature>
-			<gpu_temp>38 C</gpu_temp>
+			<gpu_temp>41 C</gpu_temp>
 			<gpu_temp_max_threshold>100 C</gpu_temp_max_threshold>
 			<gpu_temp_slow_threshold>97 C</gpu_temp_slow_threshold>
 			<gpu_temp_max_gpu_threshold>91 C</gpu_temp_max_gpu_threshold>
-			<memory_temp>37 C</memory_temp>
+			<memory_temp>40 C</memory_temp>
 			<gpu_temp_max_mem_threshold>95 C</gpu_temp_max_mem_threshold>
 		</temperature>
 		<power_readings>
 			<power_state>P8</power_state>
 			<power_management>Supported</power_management>
-			<power_draw>24.99 W</power_draw>
+			<power_draw>25.88 W</power_draw>
 			<power_limit>250.00 W</power_limit>
 			<default_power_limit>250.00 W</default_power_limit>
 			<enforced_power_limit>250.00 W</enforced_power_limit>
@@ -1004,7 +1004,7 @@
 			<tx_util>0 KB/s</tx_util>
 			<rx_util>0 KB/s</rx_util>
 		</pci>
-		<fan_speed>28 %</fan_speed>
+		<fan_speed>29 %</fan_speed>
 		<performance_state>P8</performance_state>
 		<clocks_throttle_reasons>
 			<clocks_throttle_reason_gpu_idle>Active</clocks_throttle_reason_gpu_idle>
@@ -1106,7 +1106,7 @@
 			<pending_blacklist>N/A</pending_blacklist>
 		</retired_pages>
 		<temperature>
-			<gpu_temp>42 C</gpu_temp>
+			<gpu_temp>43 C</gpu_temp>
 			<gpu_temp_max_threshold>100 C</gpu_temp_max_threshold>
 			<gpu_temp_slow_threshold>97 C</gpu_temp_slow_threshold>
 			<gpu_temp_max_gpu_threshold>91 C</gpu_temp_max_gpu_threshold>
@@ -1116,7 +1116,7 @@
 		<power_readings>
 			<power_state>P8</power_state>
 			<power_management>Supported</power_management>
-			<power_draw>28.52 W</power_draw>
+			<power_draw>28.71 W</power_draw>
 			<power_limit>250.00 W</power_limit>
 			<default_power_limit>250.00 W</default_power_limit>
 			<enforced_power_limit>250.00 W</enforced_power_limit>
