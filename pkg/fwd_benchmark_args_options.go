@@ -26,6 +26,8 @@ type fwdBenchmarkArgsOptions struct {
 	ConvFwdType         ConvFwdType
 	RandomizeConv       bool
 	RandomizeConvLength int
+	PadConv             bool
+	PadConvMultiple     int
 	// ElementWiseType ElementWiseType
 }
 
@@ -36,6 +38,8 @@ type fwdBenchmarkArgsOptionHandler struct {
 	ConvFwdType         func(ConvFwdType) FwdBenchmarkArgsOptionFunc
 	RandomizeConv       func(bool) FwdBenchmarkArgsOptionFunc
 	RandomizeConvLength func(int) FwdBenchmarkArgsOptionFunc
+	PadConv             func(bool) FwdBenchmarkArgsOptionFunc
+	PadConvMultiple     func(int) FwdBenchmarkArgsOptionFunc
 }
 
 var FwdBenchmarkArgsOption = fwdBenchmarkArgsOptionHandler{
@@ -57,6 +61,16 @@ var FwdBenchmarkArgsOption = fwdBenchmarkArgsOptionHandler{
 	RandomizeConvLength: func(ln int) FwdBenchmarkArgsOptionFunc {
 		return func(o *fwdBenchmarkArgsOptions) {
 			o.RandomizeConvLength = ln
+		}
+	},
+	PadConv: func(bl bool) FwdBenchmarkArgsOptionFunc {
+		return func(o *fwdBenchmarkArgsOptions) {
+			o.PadConv = bl
+		}
+	},
+	PadConvMultiple: func(ln int) FwdBenchmarkArgsOptionFunc {
+		return func(o *fwdBenchmarkArgsOptions) {
+			o.PadConvMultiple = ln
 		}
 	},
 }

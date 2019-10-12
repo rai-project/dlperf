@@ -16,13 +16,15 @@ import (
 )
 
 var (
-	generateFused           bool
-	generateOnlyFused       bool
-	generateAll             bool
-	generateForward         bool
-	generateBackward        bool
-	generateRandomize       bool
-	generateRandomizeLength int = 5
+	generateFused             bool
+	generateOnlyFused         bool
+	generateAll               bool
+	generateForward           bool
+	generateBackward          bool
+	generateRandomize         bool
+	generateRandomizeLength   int = 5
+	generatePadLayers         bool
+	generatePadLayersMultiple int
 )
 
 var benchgenCmd = &cobra.Command{
@@ -35,6 +37,9 @@ var benchgenCmd = &cobra.Command{
 		}
 		if err := setupDLPerfDataType(datatype); err != nil {
 			return err
+		}
+		if generatePadLayers && generatePadLayersMultiple == 0 {
+			generatePadLayersMultiple = 8
 		}
 		return nil
 	},
@@ -105,6 +110,8 @@ var benchgenCmd = &cobra.Command{
 								dlperf.FwdBenchmarkArgsOption.ConvFwdType(dlperf.ConvFwdTypeConv),
 								dlperf.FwdBenchmarkArgsOption.RandomizeConv(generateRandomize),
 								dlperf.FwdBenchmarkArgsOption.RandomizeConvLength(generateRandomizeLength),
+								dlperf.FwdBenchmarkArgsOption.PadConv(generatePadLayers),
+								dlperf.FwdBenchmarkArgsOption.PadConvMultiple(generatePadLayersMultiple),
 							)
 							b += "\n"
 						}
@@ -113,6 +120,8 @@ var benchgenCmd = &cobra.Command{
 								dlperf.FwdBenchmarkArgsOption.ConvFwdType(dlperf.ConvFwdTypeConvFusedActivation),
 								dlperf.FwdBenchmarkArgsOption.RandomizeConv(generateRandomize),
 								dlperf.FwdBenchmarkArgsOption.RandomizeConvLength(generateRandomizeLength),
+								dlperf.FwdBenchmarkArgsOption.PadConv(generatePadLayers),
+								dlperf.FwdBenchmarkArgsOption.PadConvMultiple(generatePadLayersMultiple),
 							)
 						}
 					case "relu":
@@ -229,6 +238,8 @@ func init() {
 	benchgenCmd.PersistentFlags().BoolVar(&generateFused, "fused", false, "generate fused conv layers")
 	benchgenCmd.PersistentFlags().BoolVar(&generateRandomize, "randomize", false, "generate randomized guard suffix to allow for different translation groups")
 	benchgenCmd.PersistentFlags().IntVar(&generateRandomizeLength, "randomize_length", generateRandomizeLength, "number of randomized guard suffix to generate")
+	benchgenCmd.PersistentFlags().BoolVar(&generatePadLayers, "pad_layers", false, "pad all layers to the nearest pad_layers_multiple")
+	benchgenCmd.PersistentFlags().IntVar(&generatePadLayersMultiple, "pad_layers_multiple", 8, "padding multiple to use")
 	benchgenCmd.PersistentFlags().BoolVar(&generateBackward, "backward", false, "generate the backward pass")
 	benchgenCmd.PersistentFlags().BoolVar(&generateForward, "forward", true, "generate the forward pass")
 	benchgenCmd.PersistentFlags().StringVar(&datatype, "datatype", "float32", "data type to use (default is float32)")

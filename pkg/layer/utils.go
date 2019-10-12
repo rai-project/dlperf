@@ -271,3 +271,25 @@ func outerProductString(as, bs []string) [][]string {
 	}
 	return res
 }
+
+/** round n up to nearest multiple of m */
+func roundUp(n int64, m int64) int64 {
+	if m == 1 {
+		return n
+	}
+	if n >= 0 {
+		return ((n + m - 1) / m) * m
+	}
+	return (n / m) * m
+}
+
+/** round n down to nearest multiple of m */
+func roundDown(n int64, m int64) int64 {
+	if m == 1 {
+		return n
+	}
+	if n >= 0 {
+		return (n / m) * m
+	}
+	return ((n - m + 1) / m) * m
+}
