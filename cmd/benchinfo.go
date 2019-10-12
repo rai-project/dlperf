@@ -219,11 +219,10 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 				// pp.ColoringEnabled = false
 				// log.WithField("filter", pp.Sprint(filter)).Error("unable to find benchmark within benchmark suite")
 				// pp.ColoringEnabled = true
-				// continue
-				// pp.Println(lyr.OperatorType())
-				// pp.Println(batchSize)
-				// pp.Println(lyr.Name())
-				// pp.Println(filter)
+				pp.Println(lyr.OperatorType())
+				pp.Println(batchSize)
+				pp.Println(lyr.Name())
+				pp.Println(filter)
 				return nil, errors.New("no benchmarks")
 			}
 			return bs, nil

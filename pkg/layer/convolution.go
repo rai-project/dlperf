@@ -241,21 +241,26 @@ func (c Conv) FwdBenchmarkArgs(iopts ...dlperf.FwdBenchmarkArgsOptionFunc) inter
 		padMultiple = 1
 	}
 
-	pad := func(n int64) int64 {
+	padMust := func(n int64) int64 {
 		return roundUp(n, int64(padMultiple))
+	}
+
+	padRelaxed := func(n int64) int64 {
+		// return roundUp(n, int64(padMultiple))
+		return n
 	}
 
 	if opts.ConvFwdType == dlperf.ConvFwdTypeBias && c.HasBias() {
 		outShapes := c.OutputShapes()
 		biasShape := inShapes[2]
-		if len(biasShape) == 1 {
+		if len(biasShape) >= 1 {
 			biasShape = []int64{1, biasShape[0], 1, 1}
 		}
 		e := convBiasBenchmarkArgs{
-			Input0:            outShapes[0][0],
-			Input1:            outShapes[0][1],
-			Input2:            outShapes[0][2],
-			Input3:            outShapes[0][3],
+			Input0:            padMust(outShapes[0][0]),
+			Input1:            padMust(outShapes[0][1]),
+			Input2:            padMust(outShapes[0][2]),
+			Input3:            padMust(outShapes[0][3]),
 			BiasShape0:        biasShape[0],
 			BiasShape1:        biasShape[1],
 			BiasShape2:        biasShape[2],
@@ -278,11 +283,11 @@ func (c Conv) FwdBenchmarkArgs(iopts ...dlperf.FwdBenchmarkArgsOptionFunc) inter
 		res = e
 	} else {
 		e := convBenchmarkArgs{
-			Input0:            inShapes[0][0],
-			Input1:            pad(inShapes[0][1]),
-			Input2:            inShapes[0][2],
-			Input3:            inShapes[0][3],
-			FilterCount:       pad(inShapes[1][0]),
+			Input0:            padRelaxed(inShapes[0][0]),
+			Input1:            padMust(inShapes[0][1]),
+			Input2:            padRelaxed(inShapes[0][2]),
+			Input3:            padRelaxed(inShapes[0][3]),
+			FilterCount:       padMust(inShapes[1][0]),
 			FilterHeight:      c.KernelShape[0],
 			FilterWidth:       c.KernelShape[1],
 			PadHeight:         c.Pads[0],
