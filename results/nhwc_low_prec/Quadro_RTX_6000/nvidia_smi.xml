@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <!DOCTYPE nvidia_smi_log SYSTEM "nvsmi_device_v10.dtd">
 <nvidia_smi_log>
-	<timestamp>Sat Oct  5 13:01:39 2019</timestamp>
+	<timestamp>Sat Oct 12 12:27:31 2019</timestamp>
 	<driver_version>430.26</driver_version>
 	<cuda_version>10.2</cuda_version>
 	<attached_gpus>1</attached_gpus>
@@ -66,8 +66,8 @@
 			<tx_util>0 KB/s</tx_util>
 			<rx_util>0 KB/s</rx_util>
 		</pci>
-		<fan_speed>33 %</fan_speed>
-		<performance_state>P2</performance_state>
+		<fan_speed>42 %</fan_speed>
+		<performance_state>P0</performance_state>
 		<clocks_throttle_reasons>
 			<clocks_throttle_reason_gpu_idle>Not Active</clocks_throttle_reason_gpu_idle>
 			<clocks_throttle_reason_applications_clocks_setting>Not Active</clocks_throttle_reason_applications_clocks_setting>
@@ -81,18 +81,18 @@
 		</clocks_throttle_reasons>
 		<fb_memory_usage>
 			<total>24220 MiB</total>
-			<used>298 MiB</used>
-			<free>23922 MiB</free>
+			<used>0 MiB</used>
+			<free>24220 MiB</free>
 		</fb_memory_usage>
 		<bar1_memory_usage>
 			<total>256 MiB</total>
-			<used>8 MiB</used>
-			<free>248 MiB</free>
+			<used>3 MiB</used>
+			<free>253 MiB</free>
 		</bar1_memory_usage>
 		<compute_mode>Default</compute_mode>
 		<utilization>
-			<gpu_util>48 %</gpu_util>
-			<memory_util>9 %</memory_util>
+			<gpu_util>7 %</gpu_util>
+			<memory_util>1 %</memory_util>
 			<encoder_util>0 %</encoder_util>
 			<decoder_util>0 %</decoder_util>
 		</utilization>
@@ -138,7 +138,7 @@
 			<pending_blacklist>No</pending_blacklist>
 		</retired_pages>
 		<temperature>
-			<gpu_temp>55 C</gpu_temp>
+			<gpu_temp>64 C</gpu_temp>
 			<gpu_temp_max_threshold>94 C</gpu_temp_max_threshold>
 			<gpu_temp_slow_threshold>91 C</gpu_temp_slow_threshold>
 			<gpu_temp_max_gpu_threshold>89 C</gpu_temp_max_gpu_threshold>
@@ -146,9 +146,9 @@
 			<gpu_temp_max_mem_threshold>N/A</gpu_temp_max_mem_threshold>
 		</temperature>
 		<power_readings>
-			<power_state>P2</power_state>
+			<power_state>P0</power_state>
 			<power_management>Supported</power_management>
-			<power_draw>66.80 W</power_draw>
+			<power_draw>72.02 W</power_draw>
 			<power_limit>260.00 W</power_limit>
 			<default_power_limit>260.00 W</default_power_limit>
 			<enforced_power_limit>260.00 W</enforced_power_limit>
@@ -158,7 +158,7 @@
 		<clocks>
 			<graphics_clock>1440 MHz</graphics_clock>
 			<sm_clock>1440 MHz</sm_clock>
-			<mem_clock>6500 MHz</mem_clock>
+			<mem_clock>7000 MHz</mem_clock>
 			<video_clock>1335 MHz</video_clock>
 		</clocks>
 		<applications_clocks>
@@ -708,12 +708,6 @@
 			</supported_mem_clock>
 		</supported_clocks>
 		<processes>
-			<process_info>
-				<pid>3199</pid>
-				<type>C</type>
-				<process_name>/usr/lib/libreoffice/program/soffice.bin</process_name>
-				<used_memory>165 MiB</used_memory>
-			</process_info>
 		</processes>
 		<accounted_processes>
 		</accounted_processes>
