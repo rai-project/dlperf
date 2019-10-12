@@ -252,14 +252,14 @@ func (c Conv) FwdBenchmarkArgs(iopts ...dlperf.FwdBenchmarkArgsOptionFunc) inter
 			biasShape = []int64{1, biasShape[0], 1, 1}
 		}
 		e := convBiasBenchmarkArgs{
-			Input0:            pad(outShapes[0][0]),
-			Input1:            pad(outShapes[0][1]),
-			Input2:            pad(outShapes[0][2]),
-			Input3:            pad(outShapes[0][3]),
-			BiasShape0:        pad(biasShape[0]),
-			BiasShape1:        pad(biasShape[1]),
-			BiasShape2:        pad(biasShape[2]),
-			BiasShape3:        pad(biasShape[3]),
+			Input0:            outShapes[0][0],
+			Input1:            outShapes[0][1],
+			Input2:            outShapes[0][2],
+			Input3:            outShapes[0][3],
+			BiasShape0:        biasShape[0],
+			BiasShape1:        biasShape[1],
+			BiasShape2:        biasShape[2],
+			BiasShape3:        biasShape[3],
 			BatchSize:         dlperf.GetBatchSize(),
 			ConvFwdType:       opts.ConvFwdType,
 			BaseBenchmarkArgs: mkBaseBenchmarkFWDArgs(&c, iopts...),
@@ -278,10 +278,10 @@ func (c Conv) FwdBenchmarkArgs(iopts ...dlperf.FwdBenchmarkArgsOptionFunc) inter
 		res = e
 	} else {
 		e := convBenchmarkArgs{
-			Input0:            pad(inShapes[0][0]),
+			Input0:            inShapes[0][0],
 			Input1:            pad(inShapes[0][1]),
-			Input2:            pad(inShapes[0][2]),
-			Input3:            pad(inShapes[0][3]),
+			Input2:            inShapes[0][2],
+			Input3:            inShapes[0][3],
 			FilterCount:       pad(inShapes[1][0]),
 			FilterHeight:      c.KernelShape[0],
 			FilterWidth:       c.KernelShape[1],
