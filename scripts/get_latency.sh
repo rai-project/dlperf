@@ -53,10 +53,10 @@ declare -a machines=(
 
 
 declare -a machines=(
-  Quadro_RTX_6000 \
-  TITAN_V \
+  # Quadro_RTX_6000 \
+  # TITAN_V \
   Tesla_T4 \
-  Tesla_V100-SXM2-16GB \
+  # Tesla_V100-SXM2-16GB \
 )
 
 for batch_size in "${batch_sizes[@]}"
