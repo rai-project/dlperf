@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <!DOCTYPE nvidia_smi_log SYSTEM "nvsmi_device_v10.dtd">
 <nvidia_smi_log>
-	<timestamp>Sun Oct 13 07:05:22 2019</timestamp>
+	<timestamp>Sun Oct 13 13:23:32 2019</timestamp>
 	<driver_version>430.26</driver_version>
 	<cuda_version>10.2</cuda_version>
 	<attached_gpus>1</attached_gpus>
@@ -50,7 +50,7 @@
 			<pci_gpu_link_info>
 				<pcie_gen>
 					<max_link_gen>3</max_link_gen>
-					<current_link_gen>3</current_link_gen>
+					<current_link_gen>1</current_link_gen>
 				</pcie_gen>
 				<link_widths>
 					<max_link_width>16x</max_link_width>
@@ -66,10 +66,10 @@
 			<tx_util>0 KB/s</tx_util>
 			<rx_util>0 KB/s</rx_util>
 		</pci>
-		<fan_speed>39 %</fan_speed>
-		<performance_state>P0</performance_state>
+		<fan_speed>33 %</fan_speed>
+		<performance_state>P8</performance_state>
 		<clocks_throttle_reasons>
-			<clocks_throttle_reason_gpu_idle>Not Active</clocks_throttle_reason_gpu_idle>
+			<clocks_throttle_reason_gpu_idle>Active</clocks_throttle_reason_gpu_idle>
 			<clocks_throttle_reason_applications_clocks_setting>Not Active</clocks_throttle_reason_applications_clocks_setting>
 			<clocks_throttle_reason_sw_power_cap>Not Active</clocks_throttle_reason_sw_power_cap>
 			<clocks_throttle_reason_hw_slowdown>Not Active</clocks_throttle_reason_hw_slowdown>
@@ -91,8 +91,8 @@
 		</bar1_memory_usage>
 		<compute_mode>Default</compute_mode>
 		<utilization>
-			<gpu_util>21 %</gpu_util>
-			<memory_util>7 %</memory_util>
+			<gpu_util>0 %</gpu_util>
+			<memory_util>0 %</memory_util>
 			<encoder_util>0 %</encoder_util>
 			<decoder_util>0 %</decoder_util>
 		</utilization>
@@ -138,7 +138,7 @@
 			<pending_blacklist>No</pending_blacklist>
 		</retired_pages>
 		<temperature>
-			<gpu_temp>64 C</gpu_temp>
+			<gpu_temp>39 C</gpu_temp>
 			<gpu_temp_max_threshold>94 C</gpu_temp_max_threshold>
 			<gpu_temp_slow_threshold>91 C</gpu_temp_slow_threshold>
 			<gpu_temp_max_gpu_threshold>89 C</gpu_temp_max_gpu_threshold>
@@ -146,9 +146,9 @@
 			<gpu_temp_max_mem_threshold>N/A</gpu_temp_max_mem_threshold>
 		</temperature>
 		<power_readings>
-			<power_state>P0</power_state>
+			<power_state>P8</power_state>
 			<power_management>Supported</power_management>
-			<power_draw>72.30 W</power_draw>
+			<power_draw>26.17 W</power_draw>
 			<power_limit>260.00 W</power_limit>
 			<default_power_limit>260.00 W</default_power_limit>
 			<enforced_power_limit>260.00 W</enforced_power_limit>
@@ -156,10 +156,10 @@
 			<max_power_limit>260.00 W</max_power_limit>
 		</power_readings>
 		<clocks>
-			<graphics_clock>1440 MHz</graphics_clock>
-			<sm_clock>1440 MHz</sm_clock>
-			<mem_clock>7000 MHz</mem_clock>
-			<video_clock>1335 MHz</video_clock>
+			<graphics_clock>300 MHz</graphics_clock>
+			<sm_clock>300 MHz</sm_clock>
+			<mem_clock>405 MHz</mem_clock>
+			<video_clock>540 MHz</video_clock>
 		</clocks>
 		<applications_clocks>
 			<graphics_clock>1440 MHz</graphics_clock>
