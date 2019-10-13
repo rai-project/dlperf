@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <!DOCTYPE nvidia_smi_log SYSTEM "nvsmi_device_v10.dtd">
 <nvidia_smi_log>
-	<timestamp>Sat Oct 12 15:41:44 2019</timestamp>
+	<timestamp>Sun Oct 13 06:23:50 2019</timestamp>
 	<driver_version>430.26</driver_version>
 	<cuda_version>10.2</cuda_version>
 	<attached_gpus>1</attached_gpus>
@@ -66,7 +66,7 @@
 			<tx_util>0 KB/s</tx_util>
 			<rx_util>0 KB/s</rx_util>
 		</pci>
-		<fan_speed>40 %</fan_speed>
+		<fan_speed>38 %</fan_speed>
 		<performance_state>P0</performance_state>
 		<clocks_throttle_reasons>
 			<clocks_throttle_reason_gpu_idle>Not Active</clocks_throttle_reason_gpu_idle>
@@ -91,8 +91,8 @@
 		</bar1_memory_usage>
 		<compute_mode>Default</compute_mode>
 		<utilization>
-			<gpu_util>24 %</gpu_util>
-			<memory_util>15 %</memory_util>
+			<gpu_util>8 %</gpu_util>
+			<memory_util>1 %</memory_util>
 			<encoder_util>0 %</encoder_util>
 			<decoder_util>0 %</decoder_util>
 		</utilization>
@@ -148,7 +148,7 @@
 		<power_readings>
 			<power_state>P0</power_state>
 			<power_management>Supported</power_management>
-			<power_draw>71.01 W</power_draw>
+			<power_draw>71.61 W</power_draw>
 			<power_limit>260.00 W</power_limit>
 			<default_power_limit>260.00 W</default_power_limit>
 			<enforced_power_limit>260.00 W</enforced_power_limit>
