@@ -236,8 +236,8 @@ func (c Conv) FwdBenchmarkArgs(iopts ...dlperf.FwdBenchmarkArgsOptionFunc) inter
 	opts := dlperf.CreateFwdBenchmarkArgsOption(iopts...)
 	inShapes := c.InputShapes()
 
-	padMultiple := opts.PadConvMultiple
-	if !opts.PadConv || padMultiple == 0 {
+	padMultiple := opts.PadMultiple
+	if !opts.Pad || padMultiple == 0 {
 		padMultiple = 1
 	}
 
@@ -246,8 +246,8 @@ func (c Conv) FwdBenchmarkArgs(iopts ...dlperf.FwdBenchmarkArgsOptionFunc) inter
 	}
 
 	padRelaxed := func(n int64) int64 {
-		// return roundUp(n, int64(padMultiple))
-		return n
+		return roundUp(n, int64(padMultiple))
+		// return n
 	}
 
 	if opts.ConvFwdType == dlperf.ConvFwdTypeBias && c.HasBias() {

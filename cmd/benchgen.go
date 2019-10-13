@@ -103,8 +103,8 @@ var benchgenCmd = &cobra.Command{
 									dlperf.FwdBenchmarkArgsOption.ConvFwdType(dlperf.ConvFwdTypeBias),
 									dlperf.FwdBenchmarkArgsOption.RandomizeConv(generateRandomize),
 									dlperf.FwdBenchmarkArgsOption.RandomizeConvLength(generateRandomizeLength),
-									dlperf.FwdBenchmarkArgsOption.PadConv(generatePadLayers),
-									dlperf.FwdBenchmarkArgsOption.PadConvMultiple(generatePadLayersMultiple),
+									dlperf.FwdBenchmarkArgsOption.Pad(generatePadLayers),
+									dlperf.FwdBenchmarkArgsOption.PadMultiple(generatePadLayersMultiple),
 								)
 								b += "\n"
 							}
@@ -112,8 +112,8 @@ var benchgenCmd = &cobra.Command{
 								dlperf.FwdBenchmarkArgsOption.ConvFwdType(dlperf.ConvFwdTypeConv),
 								dlperf.FwdBenchmarkArgsOption.RandomizeConv(generateRandomize),
 								dlperf.FwdBenchmarkArgsOption.RandomizeConvLength(generateRandomizeLength),
-								dlperf.FwdBenchmarkArgsOption.PadConv(generatePadLayers),
-								dlperf.FwdBenchmarkArgsOption.PadConvMultiple(generatePadLayersMultiple),
+								dlperf.FwdBenchmarkArgsOption.Pad(generatePadLayers),
+								dlperf.FwdBenchmarkArgsOption.PadMultiple(generatePadLayersMultiple),
 							)
 							b += "\n"
 						}
@@ -122,8 +122,8 @@ var benchgenCmd = &cobra.Command{
 								dlperf.FwdBenchmarkArgsOption.ConvFwdType(dlperf.ConvFwdTypeConvFusedActivation),
 								dlperf.FwdBenchmarkArgsOption.RandomizeConv(generateRandomize),
 								dlperf.FwdBenchmarkArgsOption.RandomizeConvLength(generateRandomizeLength),
-								dlperf.FwdBenchmarkArgsOption.PadConv(generatePadLayers),
-								dlperf.FwdBenchmarkArgsOption.PadConvMultiple(generatePadLayersMultiple),
+								dlperf.FwdBenchmarkArgsOption.Pad(generatePadLayers),
+								dlperf.FwdBenchmarkArgsOption.PadMultiple(generatePadLayersMultiple),
 							)
 						}
 					case "relu":
@@ -145,7 +145,10 @@ var benchgenCmd = &cobra.Command{
 						b = l.FwdBenchmarkGenerator()
 					case "gemm":
 						l := lyr.(*perflayer.Gemm)
-						b = l.FwdBenchmarkGenerator()
+						b = l.FwdBenchmarkGenerator(
+							dlperf.FwdBenchmarkArgsOption.Pad(generatePadLayers),
+							dlperf.FwdBenchmarkArgsOption.PadMultiple(generatePadLayersMultiple),
+						)
 					case "elementwise":
 						l := lyr.(*perflayer.ElementWise)
 						b = l.FwdBenchmarkGenerator()

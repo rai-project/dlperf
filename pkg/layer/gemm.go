@@ -124,24 +124,37 @@ type gemmBenchmarkArgs struct {
 	BatchSize              int64 `json:"batch_size,omitempty"`
 }
 
-func (c Gemm) mkGemmBenchmarkInputArgs() BaseBenchmarkInputArgs {
+func (c Gemm) mkGemmBenchmarkInputArgs(iopts ...dlperf.FwdBenchmarkArgsOptionFunc) BaseBenchmarkInputArgs {
+	opts := dlperf.CreateFwdBenchmarkArgsOption(iopts...)
+
+	padMultiple := opts.PadMultiple
+	if !opts.Pad || padMultiple == 0 {
+		padMultiple = 1
+	}
+
+	pad := func(n int64) int64 {
+		if n == 1 {
+			return n
+		}
+		return roundUp(n, int64(padMultiple))
+	}
 
 	aShape := c.InputShapes()[0]
 	var am, ak int64
 	if c.TransA == 0 {
-		am = aShape[0]
-		ak = aShape[1]
+		am = pad(aShape[0])
+		ak = pad(aShape[1])
 	} else {
-		am = aShape[1]
-		ak = aShape[0]
+		am = pad(aShape[1])
+		ak = pad(aShape[0])
 	}
 
 	bShape := c.InputShapes()[1]
 	var bn int64
 	if c.TransB == 0 {
-		bn = bShape[1]
+		bn = pad(bShape[1])
 	} else {
-		bn = bShape[0]
+		bn = pad(bShape[0])
 	}
 
 	if am == 1 {

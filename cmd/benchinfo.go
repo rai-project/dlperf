@@ -297,7 +297,13 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 		switch strings.ToLower(lyr.OperatorType()) {
 		case "relu", "pooling", "softmax", "dropout", "gemm", "matmul", "elementwise":
 			benches := []*bench{}
-			filter := filterBenchmarks(false, benchInfoDataType, "")
+			filter := filterBenchmarks(
+				false,
+				benchInfoDataType,
+				"",
+				dlperf.FwdBenchmarkArgsOption.Pad(infoPadLayersMultiple != 0),
+				dlperf.FwdBenchmarkArgsOption.PadMultiple(infoPadLayersMultiple),
+			)
 			bs, err := getBenchmarkTime(filter)
 			if err != nil {
 				continue
@@ -334,8 +340,8 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 					benchInfoDataType,
 					"",
 					dlperf.FwdBenchmarkArgsOption.ConvFwdType(dlperf.ConvFwdTypeConv),
-					dlperf.FwdBenchmarkArgsOption.PadConv(infoPadLayersMultiple != 0),
-					dlperf.FwdBenchmarkArgsOption.PadConvMultiple(infoPadLayersMultiple),
+					dlperf.FwdBenchmarkArgsOption.Pad(infoPadLayersMultiple != 0),
+					dlperf.FwdBenchmarkArgsOption.PadMultiple(infoPadLayersMultiple),
 				)
 				bs, err := getBenchmarkTime(filter)
 				if err != nil {
@@ -346,14 +352,14 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 				}
 
 				if l.HasBias() {
-          filter := filterBenchmarks(
-            false, 
-            benchInfoDataType,
-             "", 
-          dlperf.FwdBenchmarkArgsOption.ConvFwdType(dlperf.ConvFwdTypeBias),
-					dlperf.FwdBenchmarkArgsOption.PadConv(infoPadLayersMultiple != 0),
-          dlperf.FwdBenchmarkArgsOption.PadConvMultiple(infoPadLayersMultiple),
-        )
+					filter := filterBenchmarks(
+						false,
+						benchInfoDataType,
+						"",
+						dlperf.FwdBenchmarkArgsOption.ConvFwdType(dlperf.ConvFwdTypeBias),
+						dlperf.FwdBenchmarkArgsOption.Pad(infoPadLayersMultiple != 0),
+						dlperf.FwdBenchmarkArgsOption.PadMultiple(infoPadLayersMultiple),
+					)
 					bs, err := getBenchmarkTime(filter)
 					if err != nil {
 						return err
@@ -391,8 +397,8 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 					benchInfoDataType,
 					"",
 					dlperf.FwdBenchmarkArgsOption.ConvFwdType(dlperf.ConvFwdTypeConvFusedActivation),
-					dlperf.FwdBenchmarkArgsOption.PadConv(infoPadLayersMultiple != 0),
-					dlperf.FwdBenchmarkArgsOption.PadConvMultiple(infoPadLayersMultiple),
+					dlperf.FwdBenchmarkArgsOption.Pad(infoPadLayersMultiple != 0),
+					dlperf.FwdBenchmarkArgsOption.PadMultiple(infoPadLayersMultiple),
 				)
 				bs, err := getBenchmarkTime(filter)
 				if err != nil || len(bs) == 0 {
@@ -414,8 +420,8 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 					benchInfoDataType,
 					"",
 					dlperf.FwdBenchmarkArgsOption.ConvFwdType(dlperf.ConvFwdTypeConvFusedActivation),
-					dlperf.FwdBenchmarkArgsOption.PadConv(infoPadLayersMultiple != 0),
-					dlperf.FwdBenchmarkArgsOption.PadConvMultiple(infoPadLayersMultiple),
+					dlperf.FwdBenchmarkArgsOption.Pad(infoPadLayersMultiple != 0),
+					dlperf.FwdBenchmarkArgsOption.PadMultiple(infoPadLayersMultiple),
 				)
 				bs, err := getBenchmarkTime(filter)
 				if err != nil || len(bs) == 0 {

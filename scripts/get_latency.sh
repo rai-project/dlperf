@@ -7,11 +7,11 @@ go build
 
 declare -a batch_sizes=(
   1 \
-  # 2 \
-  # 4 \
-  # 8 \
-  # 16 \
-  # 32 \
+  2 \
+  4 \
+  8 \
+  16 \
+  32 \
   # 64 \
   # 128 \
   # 256 \
@@ -53,9 +53,9 @@ declare -a machines=(
 
 
 declare -a machines=(
-  # Quadro_RTX_6000 \
-  # TITAN_V \
-  # Tesla_T4 \
+  Quadro_RTX_6000 \
+  TITAN_V \
+  Tesla_T4 \
   Tesla_V100-SXM2-16GB \
 )
 
@@ -65,7 +65,10 @@ do
     for machine in "${machines[@]}"
     do
       echo $machine
-      ./dlperf benchinfo --model_path ~/data/carml/dlperf/ResNet50-v1/ --benchmark_database results/nhwc_padded_low_prec/${machine}/${batch_size}.json --short=false --batch_size=${batch_size} --human=false --strategy=serial --output_file=./assets/serial_nhwc_padded_latency_float16/batchsize_${batch_size}/${machine} --total=true --format=csv --trim_layer_name=false --datatype=float16 --pad_layers_multiple=8
+       ./dlperf benchinfo --model_path ~/data/carml/dlperf/ResNet50-v1/ --benchmark_database results/low_prec/${machine}/${batch_size}.json --short=false --batch_size=${batch_size} --human=false --strategy=parallel --output_file=./assets/latency_float16/batchsize_${batch_size}/${machine} --total=true --format=csv --trim_layer_name=false --datatype=float16
+       ./dlperf benchinfo --model_path ~/data/carml/dlperf/ResNet50-v1/ --benchmark_database results/low_prec/${machine}/${batch_size}.json --short=false --batch_size=${batch_size} --human=false --strategy=serial --output_file=./assets/serial_latency_float16/batchsize_${batch_size}/${machine} --total=true --format=csv --trim_layer_name=false --datatype=float16
+       ./dlperf benchinfo --model_path ~/data/carml/dlperf/ResNet50-v1/ --benchmark_database results/low_prec/${machine}/${batch_size}.json --short=false --batch_size=${batch_size} --human=false --strategy=parallel --output_file=./assets/fused_latency_float16/batchsize_${batch_size}/${machine} --total=true --format=csv --trim_layer_name=false --datatype=float16 --fused
+       ./dlperf benchinfo --model_path ~/data/carml/dlperf/ResNet50-v1/ --benchmark_database results/low_prec/${machine}/${batch_size}.json --short=false --batch_size=${batch_size} --human=false --strategy=serial --output_file=./assets/serial_fused_latency_float16/batchsize_${batch_size}/${machine} --total=true --format=csv --trim_layer_name=false --datatype=float16 --fused
     done
 done
 
@@ -75,13 +78,12 @@ do
     for machine in "${machines[@]}"
     do
       echo $machine
-      #  ./dlperf benchinfo --model_path ~/data/carml/dlperf/ResNet50-v1/ --benchmark_database results/low_prec/${machine}/${batch_size}.json --short=false --batch_size=${batch_size} --human=false --strategy=parallel --output_file=./assets/latency_float16/batchsize_${batch_size}/${machine} --total=true --format=csv --trim_layer_name=false --datatype=float16
-      #  ./dlperf benchinfo --model_path ~/data/carml/dlperf/ResNet50-v1/ --benchmark_database results/low_prec/${machine}/${batch_size}.json --short=false --batch_size=${batch_size} --human=false --strategy=serial --output_file=./assets/serial_latency_float16/batchsize_${batch_size}/${machine} --total=true --format=csv --trim_layer_name=false --datatype=float16
-      #  ./dlperf benchinfo --model_path ~/data/carml/dlperf/ResNet50-v1/ --benchmark_database results/nhwc_low_prec/${machine}/${batch_size}.json --short=false --batch_size=${batch_size} --human=false --strategy=serial --output_file=./assets/serial_nhwc_latency_float16/batchsize_${batch_size}/${machine} --total=true --format=csv --trim_layer_name=false --datatype=float16
-      #  ./dlperf benchinfo --model_path ~/data/carml/dlperf/ResNet50-v1/ --benchmark_database results/low_prec/${machine}/${batch_size}.json --short=false --batch_size=${batch_size} --human=false --strategy=parallel --output_file=./assets/fused_latency_float16/batchsize_${batch_size}/${machine} --total=true --format=csv --trim_layer_name=false --datatype=float16 --fused
-      #  ./dlperf benchinfo --model_path ~/data/carml/dlperf/ResNet50-v1/ --benchmark_database results/low_prec/${machine}/${batch_size}.json --short=false --batch_size=${batch_size} --human=false --strategy=serial --output_file=./assets/serial_fused_latency_float16/batchsize_${batch_size}/${machine} --total=true --format=csv --trim_layer_name=false --datatype=float16 --fused
+      ./dlperf benchinfo --model_path ~/data/carml/dlperf/ResNet50-v1/ --benchmark_database results/padded_low_prec/${machine}/${batch_size}.json --short=false --batch_size=${batch_size} --human=false --strategy=serial --output_file=./assets/serial_padded_latency_float16/batchsize_${batch_size}/${machine} --total=true --format=csv --trim_layer_name=false --datatype=float16 --pad_layers_multiple=8
+      ./dlperf benchinfo --model_path ~/data/carml/dlperf/ResNet50-v1/ --benchmark_database results/nhwc_padded_low_prec/${machine}/${batch_size}.json --short=false --batch_size=${batch_size} --human=false --strategy=serial --output_file=./assets/serial_nhwc_padded_latency_float16/batchsize_${batch_size}/${machine} --total=true --format=csv --trim_layer_name=false --datatype=float16 --pad_layers_multiple=8
+      ./dlperf benchinfo --model_path ~/data/carml/dlperf/ResNet50-v1/ --benchmark_database results/nhwc_low_prec/${machine}/${batch_size}.json --short=false --batch_size=${batch_size} --human=false --strategy=serial --output_file=./assets/serial_nhwc_latency_float16/batchsize_${batch_size}/${machine} --total=true --format=csv --trim_layer_name=false --datatype=float16
     done
 done
+
 
 
 # declare -a machines=(
