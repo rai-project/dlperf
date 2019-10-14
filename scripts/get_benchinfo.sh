@@ -11,11 +11,11 @@ declare -a batch_sizes=(
   8 \
   16 \
   32 \
-  # 64 \
-  # 128 \
-  # 256 \
-  # 512 \
-  # 1024
+  64 \
+  128 \
+  256 \
+  512 \
+  1024
 )
 
 declare -a machines=(
@@ -39,5 +39,6 @@ do
         echo $machine
         ./dlperf benchinfo --model_path ~/data/carml/dlperf/ --benchmark_database results/${machine}/${batch_size}.json --short=false --batch_size=${batch_size} --human=false --strategy=parallel --output_file=./assets/cudnn_advised_benchinfo/batchsize_${batch_size}/${machine} --total=true --format=json --trim_layer_name=false --choose_cudnn_heuristics
         ./dlperf benchinfo --model_path ~/data/carml/dlperf/ --benchmark_database results/${machine}/${batch_size}.json --short=false --batch_size=${batch_size} --human=false --strategy=parallel --output_file=./assets/benchinfo/batchsize_${batch_size}/${machine} --total=true --format=json --trim_layer_name=false
+        ./dlperf benchinfo --model_path ~/data/carml/dlperf/ --benchmark_database results/${machine}/${batch_size}.json --short=false --batch_size=${batch_size} --human=false --strategy=serial --output_file=./assets/serial_benchinfo/batchsize_${batch_size}/${machine} --total=true --format=json --trim_layer_name=false
     done
 done
