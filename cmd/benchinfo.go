@@ -593,6 +593,14 @@ func benchinfo(cmd *cobra.Command, args []string) error {
 
 				totalTimeSec = timeTransformFunctionInverse(weight).Seconds()
 
+				// pp.Println(lastBenchmark)
+				for _, b := range lastBenchmark.Benchmarks {
+					// pp.Println(totalTimeSec)
+					// pp.Println(b.Benchmark.RealTime)
+					t := math.Abs(timeTransformFunction(b.Benchmark.RealTime)) / float64(time.Microsecond)
+					// pp.Println(t)
+					totalTimeSec += t
+				}
 				// pp.Println(totalTimeSec)
 
 				// pp.Println(path[0])
